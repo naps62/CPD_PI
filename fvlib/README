@@ -1,0 +1,21 @@
+
+
+each folder with the "fv_" prefix has a version of the FVLib library. The following versions exist at time of this README:
+
+	default - raw project, with no changes to any code/makefile/etc
+		Should match the zip versions provided at the beginning
+		No write access
+
+	# TODO
+	def_tuned - changes to makefile/compilation process.
+		1. Makefiles tuned to allow better control
+		2. Small code patches to conform with -Wall flag (no structural changes to the code, only things like casting size_t to double)
+		No write access
+
+data folder has all input/output
+	by default it is excluded from git. Only data/default_input is added, but only has read access and has the default input files provided
+	manually add sub-folders to git when necessary (watch out for size)
+
+# TODO
+added a script to handle all the runs.
+	Receives the name of the library version to use "fv_default" for example, and stores all output in a matching folder (data/fv_default)

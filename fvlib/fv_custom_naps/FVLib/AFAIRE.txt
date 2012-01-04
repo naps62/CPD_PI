@@ -1,0 +1,9 @@
+- Partout, faire le constructeur par copy, c'est important pour les vecteur car C++ initialise le premier element par constructeur
+et les suivant par copie.
+- factorization LU avec pivot a verifier
+-  copier un vecteur dans une ligne ou une colonne de matrice pour FVSparceM (ok pour FVDenseM)
+- la class Table ne fonctionne pas
+- faire dans mesh2D un reperarge des vertex du bord+ leur nombre
+- faire dans mesh3D un reperage des vertex du bord + leur nombre (important pour la visu sur les vertex ou bien la reconstruction)
+- dans FVRecons1D2D3D, introduire le parametre  poid and addGeometry (avec 1 par default)
+

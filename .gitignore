@@ -1,0 +1,14 @@
+*.o
+*.a
+*/bin/*
+*/.svn
+*.swp
+*.tmp
+*.log
+*.aux
+*.toc
+doc/doxygen-fv_default
+fvlib/data
+*.xml
+*.msh
+*.geo
