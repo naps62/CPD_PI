@@ -1,5 +1,5 @@
 #! /bin/bash
-prefix=/home/naps62/projects/pi/fvlib/fv_default/FVLib
+prefix=/home/naps62/projects/pi/fvlib/fv_custom_naps/FVLib
 exec_prefix=${prefix}/bin
 libdir=${prefix}/lib
 includedir=${prefix}/include
