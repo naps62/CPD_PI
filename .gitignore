@@ -12,5 +12,7 @@ fvlib/data
 *.xml
 *.msh
 *.geo
-fvlib/*/BIC2012/polu
-fvlib/*/BIC2012/velocity
+fvlib/*/BIC2012/polu*
+fvlib/*/BIC2012/velocity*
+fvlib/*/FVLib/bin/fvcd*
+fvlib/*/FVLib/bin/fvcm*

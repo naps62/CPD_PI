@@ -1,5 +1,5 @@
 #! /bin/bash
-prefix=/home/naps62/projects/pi/fvlib/fv_custom_naps/FVLib
+prefix=/Users/iampfac/.cpd/pi/CPD_PI/fvlib/fv_custom_pfac/FVLib
 exec_prefix=${prefix}/bin
 libdir=${prefix}/lib
 includedir=${prefix}/include

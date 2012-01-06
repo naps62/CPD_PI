@@ -58,20 +58,20 @@ switch(type)
    {
     case FVVERTEX1D:
     x1=((FVVertex1D *)ptr)->coord.x;
-    return(pow(x1-_ref_point.x,alpha));    
+    return(pow(x1-_ref_point.x,(double)alpha));    
     break;
     case FVCELL1D:
     x1=((FVCell1D *)ptr)->firstVertex->coord.x;
     x2=((FVCell1D *)ptr)->secondVertex->coord.x; 
     GP=GPCell.getPoint(5,1);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,1)*pow(x-_ref_point.x,alpha);
+    sum+=GPCell.getWeight(5,1)*pow(x-_ref_point.x,(double)alpha);
     GP=GPCell.getPoint(5,2);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,2)*pow(x-_ref_point.x,alpha);
+    sum+=GPCell.getWeight(5,2)*pow(x-_ref_point.x,(double)alpha);
     GP=GPCell.getPoint(5,3);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,3)*pow(x-_ref_point.x,alpha);
+    sum+=GPCell.getWeight(5,3)*pow(x-_ref_point.x,(double)alpha);
     return(sum);
     break;     
     default:
@@ -283,7 +283,7 @@ for(k=0;k<_Ncoef;k++)
     {
     al=alpha1D(k);   
     alpha1=al.x;  
-    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,alpha1)-(*_M)[k]);
+    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(double)alpha1)-(*_M)[k]);
     //cout<<"coef "<<k<<"="<<(*_coef)[k]<<" alapuissance "<<alpha1<<" et M="<<(*_M)[k]<<endl;
     }
 return(val);
@@ -299,7 +299,7 @@ for(k=0;k<_Ncoef;k++)
     {
     al=alpha1D(k);   
     alpha1=al.x;  
-    val.x+=(*_coef)[k]*alpha1*pow(P.x-_ref_point.x,alpha1-1);
+    val.x+=(*_coef)[k]*alpha1*pow(P.x-_ref_point.x,(double)(alpha1-1));
     //cout<<"coef "<<k<<"="<<alpha1*(*_coef)[k]<<" alapuissance "<<alpha1-1<<" et M="<<(*_M)[k]<<endl;
     }
 return(val);

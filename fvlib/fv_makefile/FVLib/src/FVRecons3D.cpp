@@ -88,20 +88,20 @@ switch(type)
    {
     case FVVERTEX3D:
     P=((FVVertex3D *)ptr)->coord;
-    return(pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3));    
+    return(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3));    
     break;
     case FVEDGE3D:
     P1=((FVEdge3D *)ptr)->firstVertex->coord;
     P2=((FVEdge3D *)ptr)->secondVertex->coord; 
     GPEdge=G1D.getPoint(5,1);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,1)*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3);
+    sum+=G1D.getWeight(5,1)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);
     GPEdge=G1D.getPoint(5,2);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,2)*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3); 
+    sum+=G1D.getWeight(5,2)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3); 
     GPEdge=G1D.getPoint(5,3);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3);    
+    sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);    
     return(sum);
     break;   
     case FVFACE3D:
@@ -120,7 +120,7 @@ switch(type)
              { 
                GPFace=G2D.getPoint(5,i);
                P=GPFace.x*ptr_v1->coord+GPFace.y*ptr_v2->coord+GPFace.z*centroidF;
-               aux+=G2D.getWeight(5,i)*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3);
+               aux+=G2D.getWeight(5,i)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);
              }    
          sum+=aux*S;
          S_global+=S;
@@ -147,7 +147,7 @@ switch(type)
                 { 
                  GPCell=G3D.getPoint(5,i);
                  P=GPCell.x*ptr_v1->coord+GPCell.y*ptr_v2->coord+GPCell.z*centroidF+GPCell.t*centroidC;
-                 aux+=G3D.getWeight(5,i)*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3);
+                 aux+=G3D.getWeight(5,i)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);
                 }    
             sum+=aux*V;
             V_global+=V;
@@ -425,7 +425,7 @@ for(k=0;k<_Ncoef;k++)
     al=alpha3D(k);   
     alpha1=al.x;alpha2=al.y;alpha3=al.z;
     //cout<<"coef["<<alpha1<<","<<alpha2<<","<<alpha3<<"]="<<(*_coef)[k]<<" with M="<<(*_M)[k]<<endl;
-    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3)-(*_M)[k]);
+    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3)-(*_M)[k]);
     }
 return(val);
 }
@@ -444,17 +444,17 @@ for(k=0;k<_Ncoef;k++)
     if(alpha1>0)
         {
         //cout<<"power["<<alpha1<<","<<alpha2<<","<<alpha3<<"]="<<alpha1*(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;  
-        val.x+=alpha1*(*_coef)[k]*pow(P.x-_ref_point.x,alpha1-1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3);
+        val.x+=alpha1*(*_coef)[k]*pow(P.x-_ref_point.x,(double)(alpha1-1))*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);
         }
     if(alpha2>0)        
         {
         //cout<<"power["<<alpha1<<","<<alpha2<<","<<alpha3<<"]="<<alpha2*(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;  
-        val.y+=alpha2*(*_coef)[k]*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2-1)*pow(P.z-_ref_point.z,alpha3);
+        val.y+=alpha2*(*_coef)[k]*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)(alpha2-1))*pow(P.z-_ref_point.z,(double)alpha3);
         }
     if(alpha3>0)        
         {
         //cout<<"power["<<alpha1<<","<<alpha2<<","<<alpha3<<"]="<<alpha3*(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;  
-        val.z+=alpha3*(*_coef)[k]*pow(P.x-_ref_point.x,alpha1)*pow(P.y-_ref_point.y,alpha2)*pow(P.z-_ref_point.z,alpha3-1);
+        val.z+=alpha3*(*_coef)[k]*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)(alpha3-1));
         }        
 
     }
