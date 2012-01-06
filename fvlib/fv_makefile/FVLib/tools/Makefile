@@ -7,17 +7,15 @@ ROOT	=	..
 
 include $(ROOT)/config.mk
 
-EXES	=	fvcd fvcm
+EXE_DIR	=	../bin
+EXES	=	$(EXE_DIR)/fvcd $(EXE_DIR)/fvcm
 OBJS	=	fvcm.o fvcd.o
-
-FVCD_OBJ	=	fvcd.o
-FVCM_OBJ	=	fvcm.o
-FVCD_EXE	=	$(ROOT)/bin/fvcd$(SUFFIX)
-FVCM_EXE	=	$(ROOT)/bin/fvcm$(SUFFIX)
 
 default:	$(EXES)
 
 $(EXES): $(OBJS)
+	@echo
+	@echo --- Building $@
 	$(CXX) $(CXXFLAGS) $@.o -o $@ $(LDFLAGS)
 	mv $@ ../bin/
 #	for exe in $^;	\
@@ -26,4 +24,6 @@ $(EXES): $(OBJS)
 #	done
 
 clean:
+	@echo
+	@echo --- Cleaning tools folder
 	$(RM) *.o

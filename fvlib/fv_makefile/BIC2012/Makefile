@@ -21,4 +21,6 @@ $(EXES): $(OBJS)
 	$(CXX) $(CXXFLAGS) $@.o -o $@ $(LDFLAGS)
 
 clean:
+	@echo 
+	@echo --- Cleaning BIC2012 folder
 	$(RM) *.o polu velocity

@@ -7,11 +7,11 @@ CXX		=	g++
 INC		=	-I $(ROOT)/include
 
 #	Compiler flags
-CXXFLAGS	=	-Wall	\
-				-Wextra	\
-				-Wfatal-errors	\
-				-ansi	\
-				-pedantic	\
+CXXFLAGS	=	-Wall \
+				-Wextra \
+				-Wfatal-errors \
+				-ansi \
+				-pedantic \
 				$(INC)
 ifeq ($(MODE),DBG)
 CXXFLAGS	+=	-g
@@ -25,4 +25,4 @@ SUFFIX=
 endif
 
 #	Linker flags
-LDFLAGS	=	-L$(ROOT)/lib -lFVLib
+LDFLAGS	=	-L $(ROOT)/lib -lFVLib

@@ -9,8 +9,23 @@
 default: src tools
 
 src tools:
-	cd $@; $_ --file="Alternative.Makefile"
+	@echo
+	@echo --------------------
+	@echo --- Entering $@
+	@echo --------------------
+	@cd $@; $_
+	@echo --------------------
+	@echo --- Done with $@
+	@echo --------------------
 
 clean:
-	cd src; $_ --file="Alternative.Makefile" clean
-	cd tools; $_ --file="Alternative.Makefile" clean
+	@echo 
+	@echo --------------------
+	@echo --- Entering src
+	@echo --------------------
+	cd src; $_ clean
+	@echo
+	@echo --------------------
+	@echo --- Entering tools
+	@echo --------------------
+	cd tools; $_ clean

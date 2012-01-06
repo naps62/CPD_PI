@@ -24,8 +24,12 @@ OBJS	=	XML.o	\
 LIB_A	=	../lib/libFVLib.a
 
 default: 	$(OBJS)
+	@echo
+	@echo --- Building $(LIB_A)
 	ar cru $(LIB_A) $(OBJS)
 	ranlib $(LIB_A)
 
 clean:
+	@echo
+	@echo --- Cleaning src folder
 	$(RM) *.o
