@@ -41,7 +41,7 @@ enum FVFile{
            FVWRONGDIM ,
            FVERROR    ,
            VERTEX     ,
-           CELL       ,
+           CELL       
 };
 enum EntityCode{
            NULL_ENTITY=0,
@@ -53,7 +53,7 @@ enum EntityCode{
            FVCELL3D,
            FVEDGE2D,
            FVEDGE3D,
-           FVFACE3D,
+           FVFACE3D
 };
   
 enum BaliseCode{
@@ -64,6 +64,6 @@ enum BaliseCode{
            OkOpenBalise,
            OkCloseBalise,
            NoAttribute,
-           OkAttribute,
+           OkAttribute
 };
 #endif // define _FVLIB_Config
