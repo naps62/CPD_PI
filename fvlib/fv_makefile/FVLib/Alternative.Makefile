@@ -12,5 +12,5 @@ src tools:
 	cd $@; $_ --file="Alternative.Makefile"
 
 clean:
-	cd src; $_ --file="Alternative.Makefilei" clean
+	cd src; $_ --file="Alternative.Makefile" clean
 	cd tools; $_ --file="Alternative.Makefile" clean
