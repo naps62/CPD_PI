@@ -3,43 +3,27 @@
 #
 #include ../FV-config.conf #get the machine parameter and directorie
 
-ifdef ALLOW
+ROOT	=	..
 
-OBJ=fvcm.o fvcd.o
+include $(ROOT)/config.mk
 
-FVCD_OBJ=fvcd.o
-FVCM_OBJ=fvcm.o
-FVCD_EXE=../bin/fvcd$(SUFFIX)
-FVCM_EXE=../bin/fvcm$(SUFFIX)
+EXES	=	fvcd fvcm
+OBJS	=	fvcm.o fvcd.o
 
-#tools: $(OBJ)
-#	$(CCC) $(CFLAGS)  fvcm.o -o fvcm  $(LIBS)
-#	$(CCC) $(CFLAGS)  fvcd.o -o fvcd  $(LIBS)
-#	mv fvcm ../bin/.
-#	mv fvcd ../bin/.
-#clean:  
-#	rm ../bin/fvcm
-#	rm ../bin/fvcd
-#	rm $(OBJ)
+FVCD_OBJ	=	fvcd.o
+FVCM_OBJ	=	fvcm.o
+FVCD_EXE	=	$(ROOT)/bin/fvcd$(SUFFIX)
+FVCM_EXE	=	$(ROOT)/bin/fvcm$(SUFFIX)
 
-#.SUFFIXES: .c .cc .cpp .cxx .o
+default:	$(EXES)
 
-default: $(OBJ)
-	$(CC) $(CFLAGS) $(FVCD_OBJ) -o $(FVCD_EXE) $(LIB)
-	$(CC) $(CFLAGS) $(FVCM_OBJ) -o $(FVCM_EXE) $(LIB)
-
-.cpp.o:
-	$(CC) $(CFLAGS) $(INC) -c $<
-
-else
-
-default:
-	@echo "Please go to ../ and call the top-level Makefile"
-
-endif
+$(EXES): $(OBJS)
+	$(CXX) $(CXXFLAGS) $@.o -o $@ $(LDFLAGS)
+	mv $@ ../bin/
+#	for exe in $^;	\
+#	do	\
+#		mv "$${exe}" "../bin/$${exe}$(SUFFIX)";	\
+#	done
 
 clean:
 	$(RM) *.o
-
-#.cc.o:
-#	$(CCC)  $(CFLAGS) -c  -Wall $<

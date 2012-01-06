@@ -2,9 +2,12 @@
 # Makefile for test
 #
 FVLib_CONFIG=FVLib-config
-FVLib_CXX    =`$(FVLib_CONFIG) --cxx`
-FVLib_CFLAGS  =`$(FVLib_CONFIG) --cflags` -fopenmp -D _DEBUGS -g -pg
-FVLib_LIBS     =`$(FVLib_CONFIG) --libs` 
+#FVLib_CXX    =`$(FVLib_CONFIG) --cxx`
+#FVLib_CFLAGS  =`$(FVLib_CONFIG) --cflags` -fopenmp -D _DEBUGS -g -pg
+#FVLib_LIBS     =`$(FVLib_CONFIG) --libs` 
+FVLib_CXX = g++
+FVLib_CFLAGS=-O3 -I../FVLib/include
+FVLib_LIBS= -L../FVLib/lib -lFVLib
 OBJ_POLU = polu.o 
 OBJ_VELOCITY = velocity.o 
 

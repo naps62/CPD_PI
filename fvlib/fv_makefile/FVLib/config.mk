@@ -4,7 +4,7 @@ MODE	=	RELEASE
 CXX		=	g++
 
 #	Include directories
-INC		=	-I $(ROOT)include
+INC		=	-I $(ROOT)/include
 
 #	Compiler flags
 CXXFLAGS	=	-Wall	\
