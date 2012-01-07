@@ -12,12 +12,17 @@ EXES	=	fvcd fvcm
 OBJS	=	fvcm.o fvcd.o
 
 default:	$(EXES)
+	mv $(EXES) $(EXE_DIR)
 
-%: %.o
-	@echo
-	@echo --- Building $@
-	$(CXX) $(LDFLAGS) -o $@ $^
-	mv $@ $(EXE_DIR)/$@
+$(EXES): $(OBJS)
+	$(CXX) $(CXXFLAGS) $@.o -o $@ $(LDFLAGS)
+
+#%: %.o
+#	@echo
+#	@echo --- Building $@
+#	$(CXX) -o $@ $^ $(LDFLAGS)
+#	mv $@ $(EXE_DIR)/$@
+
 #	for exe in $^;	\
 #	do	\
 #		mv "$${exe}" "../bin/$${exe}$(SUFFIX)";	\

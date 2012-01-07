@@ -274,6 +274,7 @@ _ref_val=X[0];
 
 double FVRecons1D::getValue(FVPoint1D<double> P,size_t d)
 {
+UNUSED(d);
 double val=_ref_val;
 size_t k;
 FVPoint1D<size_t> al;
@@ -291,6 +292,7 @@ return(val);
 // comopute the derivative
 FVPoint1D<double> FVRecons1D::getDerivative(FVPoint1D<double> P, size_t degree) 
 {
+UNUSED(degree);
 FVPoint1D<double> val=0.;
 size_t k;
 FVPoint1D<size_t> al;

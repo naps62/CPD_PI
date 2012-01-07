@@ -73,6 +73,7 @@ f.close();
  // 
 SparseXML::SparseXML(string &xml_string)
 {
+UNUSED(xml_string);
   cout<<"not built"<<endl;
  // I have got the string
 } 

@@ -414,6 +414,7 @@ _ref_val=X[0];
 
 double FVRecons3D::getValue(FVPoint3D<double> P,size_t d)
 {
+UNUSED(d);
 // basic method to replace with horner method
 double val=_ref_val;
 size_t k;
@@ -432,6 +433,7 @@ return(val);
 // compute the gradient
 FVPoint3D<double> FVRecons3D::getDerivative(FVPoint3D<double> P, size_t degree)
 {
+UNUSED(degree);
 // basic method to replace with horner method
 FVPoint3D<double> val=0.;
 size_t k;

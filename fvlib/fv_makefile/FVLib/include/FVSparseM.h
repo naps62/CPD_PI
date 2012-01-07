@@ -247,7 +247,7 @@ void FVSparseM<T_>::Mult(const FVVect<T_> &x, FVVect<T_> &y) const
     if(err) cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"index out of range, error code="<<err<<endl;
 #endif    
     y = static_cast<T_>(0);
-#pragma omp parallel for num_threads(nb_thread)
+//#pragma omp parallel for num_threads(nb_thread)
     for (size_t i=0; i<nb_rows; i++)
         {
         if(!row[i]) continue; // no line i so y[i)=0     

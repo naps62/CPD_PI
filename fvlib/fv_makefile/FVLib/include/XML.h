@@ -13,7 +13,7 @@
 #include <FVLib_config.h>
 using namespace std;
 
-
+#define UNUSED(x) (void)(x)
 
 
 class SparseXML 
