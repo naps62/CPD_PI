@@ -3,12 +3,16 @@ ROOT	=	../FVLib
 include $(ROOT)/config.mk
 
 EXES	=	polu velocity
+OBJS	=	polu.o velocity.o
 
-default: polu
+default: $(EXES)
 
 vim: default
 
-all:	$(EXES)
+.PHONY: $(EXES)
+$(EXES): $(OBJS)
+	$(CXX) $(CXXFLAGS) $@.o -o $@ $(LDFLAGS)
+
 
 clean:
 	@echo 

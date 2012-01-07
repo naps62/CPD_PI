@@ -1,62 +1,7 @@
-
- 1074  ./configure --prefix=$PWD
- 1075  make
- 1076  ls
- 1077  vim FV-config.conf 
- 1078  make
- 1079  cd bin/
- 1080  ls
- 1081  ./FVLib-config
- 1082  ./FVLib-config --libs
- 1083  echo $PATH
- 1084  cd
- 1085  mkdir bin
- 1086  ln -s projects/uminho/mei/CPD/pi/raw/FVLib/bin/FVLib-config bin/FVLib-config
- 1087  cd bin/
- 1088  ls
- 1089  cd ..
- 1090  cd links/pi/raw/FVLib/
- 1091  ls
- 1092  cd ..
- 1093  ls
- 1094  cd BIC2012/
- 1095  ls
- 1096  make
- 1097  export PATH=$PATH:/home/naps62/bin
- 1098  make
- 1099  echo $PATH
- 1100  make
- 1101  ls
- 1102  gmsh foz.geo 
- 1103  ls
- 1104  cd ..
- 1105  cd FVLib/bin/
- 1106  ls
- 1107  ./fvcm ../../BIC2012/foz.msh ../../BIC2012/foz.xml
- 1108  cd ..
- 1109  cd BIC2012/
- 1110  ls
- 1111  ./velocity
- 1112  vim param.xml 
- 1113  ls
- 1114  vim velocity
- 1115  vim velocity.xml 
- 1116  cd ..
- 1117  cd FVLib/bin/
- 1118  ls
- 1119  cd ..
- 1120  ls
- 1121  cd ..
- 1122  ls
- 1123  cd raw/
- 1124  ls
- 1125  cd BIC2012/
- 1126  ../FVLib/bin/fvcd foz.xml velocity.xml velocity.msh -c
- 1127  gmsh velocity.msh 
- 1128  ./polu
- 1129  ls
- 1130  ../FVLib/bin/fvcd foz.xml polution.xml polution.msh -c
- 1131  gmsh polution.msh 
- 1132  thunar .
- 1133  gmsh polution.msh 
- 1134  gmsh velocity.msh 
+gmsh foz.geo 
+./fvcm ../../BIC2012/foz.msh ../../BIC2012/foz.xml
+./velocity
+../FVLib/bin/fvcd foz.xml velocity.xml velocity.msh -c
+./polu
+../FVLib/bin/fvcd foz.xml polution.xml polution.msh -c
+gmsh polution.msh 
