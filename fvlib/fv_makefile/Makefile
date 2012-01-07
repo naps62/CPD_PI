@@ -20,7 +20,8 @@ FVLib BIC2012:
 #	done
 
 symlink:
-	ln -s FVLib/bin/fvcd ../simulations/fvcd
-	ln -s FVLib/bin/fvcm ../simulations/fvcm
-	ln -s BIC2012/polu ../simulations/polu
-	ln -s BIC2012/velocity ../simulations/velocity
+	mkdir -p simulations
+	ln -s FVLib/bin/fvcd simulations/fvcd
+	ln -s FVLib/bin/fvcm simulations/fvcm
+	ln -s BIC2012/polu simulations/polu
+	ln -s BIC2012/velocity simulations/velocity
