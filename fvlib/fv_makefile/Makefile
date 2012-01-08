@@ -23,8 +23,9 @@ clean:
 	cd FVLib; make clean
 	cd BIC2012; make clean
 
-symlink:
-	ln -s FVLib/bin/fvcd ../simulations/fvcd
-	ln -s FVLib/bin/fvcm ../simulations/fvcm
-	ln -s BIC2012/polu ../simulations/polu
-	ln -s BIC2012/velocity ../simulations/velocity
+symlinks:
+	ln -fs FVLib/bin/fvcd ../simulations/fvcd
+	ln -fs FVLib/bin/fvcm ../simulations/fvcm
+	ln -fs BIC2012/polu ../simulations/polu
+	ln -fs BIC2012/velocity ../simulations/velocity
+	echo $(PWD), $(MODE) > ../simulations/MODE
