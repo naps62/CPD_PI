@@ -19,6 +19,10 @@ FVLib BIC2012:
 #		do cd $${dir}; $_ $@; cd ..;	\
 #	done
 
+clean:
+	cd FVLib; make clean
+	cd BIC2012; make clean
+
 symlink:
 	ln -s FVLib/bin/fvcd ../simulations/fvcd
 	ln -s FVLib/bin/fvcm ../simulations/fvcm
