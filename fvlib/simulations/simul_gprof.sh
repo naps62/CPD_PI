@@ -10,6 +10,23 @@ EOF
 	exit 1
 fi
 
+MODE=$(cat MODE)
+REQUIRED="GPROF"
+if [ $MODE != $REQUIRED ]; then
+	echo "requires mode: $REQUIRED"
+	echo "current  mode: $MODE"
+	read -p "recompile? [yn] " yn
+	case $yn in
+		[Yy])
+			(cd $(cat PATH); make clean; make MODE=$REQUIRED)
+			;;
+		*)
+			echo "aborting"
+			exit 1
+	esac
+fi
+
+
 TIMESTAMP=$(date +%m.%d_%H:%M:%S)
 
 ROOT=.
@@ -26,6 +43,7 @@ mkdir $GPROF_DIR -p
 echo " --- Copying data"
 cp -fv $INPUT_DIR/{foz.geo,foz.msh} $OUTPUT_DIR/
 cp -fv $INPUT_DIR/foz.xml $ROOT
+
 
 echo
 echo " --- generating velocity.xml"
