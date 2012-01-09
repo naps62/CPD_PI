@@ -1,15 +1,17 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-	echo "Usage:"
-	echo "	gprof_simul <folder>"
-	echo "	folder - folder name to be created inside simulations to generate input/output"
-	echo "	folder/gprof will also be created to save gprof results"
+if [ $# == "0" ]; then
+	echo <<EOF
+	Usage:
+		simul_callgrind.sh <folder>
+		folder - folder name to be created inside simulations to generate input/output
+		folder/callgrind will also be created to save gprof results
+EOF
 	exit 1
 fi
 
 MODE=$(cat MODE)
-REQUIRED="GPROF"
+REQUIRED="CALLGRIND"
 if [ $MODE != $REQUIRED ]; then
 	echo "requires mode: $REQUIRED"
 	echo "current  mode: $MODE"
@@ -29,13 +31,13 @@ TIMESTAMP=$(date +%m.%d_%H:%M:%S)
 
 ROOT=.
 OUTPUT_DIR=$ROOT/$MODE\_$TIMESTAMP\_$1
-GPROF_DIR=$OUTPUT_DIR/gprof
+CALLGRIND_DIR=$OUTPUT_DIR/callgrind
 INPUT_DIR=$ROOT/default_data
 
-GPROF2DOT=gprof2dot.py
+#GPROF2DOT=gprof2dot.py
 
 # creates folder structure
-mkdir $GPROF_DIR -p
+mkdir $CALLGRIND_DIR -p
 
 # copy input data
 echo " --- Copying data"
@@ -47,10 +49,7 @@ echo
 echo " --- generating velocity.xml"
 $ROOT/velocity
 echo " --- generating polu.xml"
-$ROOT/polu
+valgrind --tool=callgrind $ROOT/polu
 
 mv foz.xml velocity.xml polution.xml $OUTPUT_DIR
-
-echo " --- profiling polu"
-gprof polu > $GPROF_DIR/polu.gprof
-cat $GPROF_DIR/polu.gprof | $GPROF2DOT | dot -Tpng -o $GPROF_DIR/polu.png
+mv -v callgrind.out.* $CALLGRIND_DIR
