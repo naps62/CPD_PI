@@ -17,7 +17,10 @@ ifeq ($(MODE),DBG)
 CXXFLAGS	+=	-g
 SUFFIX=_$(MODE)
 else ifeq ($(MODE),GPROF)
-CXXFLAGS	+=	-g -pg 
+CXXFLAGS	+=	-pg 
+SUFFIX=_$(MODE)
+else ifeq ($(MODE),CALLGRIND)
+CXXFLAGS	+=	-g -O3
 SUFFIX=_$(MODE)
 else
 CXXFLAGS	+=	-O3
