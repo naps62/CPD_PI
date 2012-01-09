@@ -24,8 +24,9 @@ clean:
 	cd BIC2012; make clean
 
 symlinks:
-	ln -fs FVLib/bin/fvcd ../simulations/fvcd
-	ln -fs FVLib/bin/fvcm ../simulations/fvcm
-	ln -fs BIC2012/polu ../simulations/polu
-	ln -fs BIC2012/velocity ../simulations/velocity
-	echo $(PWD), $(MODE) > ../simulations/MODE
+	ln -fs $(PWD)/FVLib/bin/fvcd ../simulations/fvcd
+	ln -fs $(PWD)/FVLib/bin/fvcm ../simulations/fvcm
+	ln -fs $(PWD)/BIC2012/polu ../simulations/polu
+	ln -fs $(PWD)/BIC2012/velocity ../simulations/velocity
+	echo $(PWD) > ../simulations/PATH
+	echo $(MODE) > ../simulations/MODE
