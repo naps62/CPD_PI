@@ -20,7 +20,7 @@ else ifeq ($(MODE),GPROF)
 CXXFLAGS	+=	-g -pg -O3
 SUFFIX=_$(MODE)
 else ifeq ($(MODE),CALLGRIND)
-CXXFLAGS	+=	-g -O3
+CXXFLAGS	+=	-g -O2
 SUFFIX=_$(MODE)
 else
 CXXFLAGS	+=	-O3
