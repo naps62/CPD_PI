@@ -40,6 +40,3 @@ endif
 
 #	Linker flags
 LDFLAGS	=	-L $(ROOTD)/lib
-
-#	Actions
-LINK.o	=	$(CXX) $(LDFLAGS) $(TARGET_ARCH)
