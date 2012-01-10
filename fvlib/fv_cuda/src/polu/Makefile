@@ -1,0 +1,21 @@
+ROOTD	=	../..
+
+include $(ROOTD)/conf/config.mk
+
+#	binary file name
+BIN		=	polu
+
+#	configuration file for this binary
+#		change if has more than one source file
+include $(ROOTD)/conf/simplebin.mk
+
+$(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cpp
+	@if [ ! -d "$(ROOTD)/$(OBJD)/$(BIN)" ];	\
+		then mkdir "$(ROOTD)/$(OBJD)/$(BIN)";	\
+		fi
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+all:	$(OBJS:%=$(ROOTD)/$(OBJD)/$(BIN)/%)
+
+clean:
+	$(RM) $(OBJS:%=$(ROOTD)/$(OBJD)/$(BIN)/%)
