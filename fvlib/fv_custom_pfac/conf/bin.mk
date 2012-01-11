@@ -1,1 +1,1 @@
-BIN		=	$(shell pwd | egrep -o "[[:alnum:]\-_.:]+$$")
+BIN		=	$(shell pwd | egrep -o "[[:alnum:]_.:\-]+$$")
