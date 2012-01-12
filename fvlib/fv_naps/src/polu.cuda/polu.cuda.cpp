@@ -238,25 +238,8 @@ int main()
 	mesh.read( data.filenames.mesh.c_str() );
 
 	// GPU
-	cout << "antes da mesh" << endl;
 	GPU_FVMesh2D gpu_mesh(mesh);
-	cout << "depois da mesh" << endl;
 
-	cout << "num_edges: " << gpu_mesh.num_edges;
-	cout << "num_cells: " << gpu_mesh.num_cells;
-
-	FVEdge2D *edge;
-	for(int i=0; edge = mesh.nextEdge(); ++i) {
-		if (edge->normal.x != gpu_mesh.edge_normals.x.cpu_ptr[i] ||
-			edge->normal.y != gpu_mesh.edge_normals.y.cpu_ptr[i] ||
-			edge->length	!= gpu_mesh.edge_lengths.cpu_ptr[i] ||
-			edge->leftCell->label - 1 != gpu_mesh.edge_left_cells.cpu_ptr[i] ||
-			edge->rightCell->label - 1 != gpu_mesh.edge_right_cells.cpu_ptr[i]) {
-
-			cout << "missmatch on index " << i << endl;
-		}
-	}
-	cout << "happily returning ^^" << endl;
 	return 0;
 
 	FVVect<double> polution( mesh.getNbCell() );

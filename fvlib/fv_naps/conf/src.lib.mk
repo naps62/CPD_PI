@@ -14,6 +14,11 @@ $(ROOTD)/$(OBJD)/lib$(LIB)/%.o:	%.cc
 	fi
 	$(COMPILE.cc) $(OUTPUT_OPTION) $<
 
+default: echo all
+
+echo:
+	@echo $(OBJS)
+
 all:	$(OBJS:%=$(ROOTD)/$(OBJD)/lib$(LIB)/%)
 
 clean:

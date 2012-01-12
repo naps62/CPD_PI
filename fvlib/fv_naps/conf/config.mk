@@ -40,3 +40,9 @@ endif
 
 #	Linker flags
 LDFLAGS	=	-L $(ROOTD)/lib
+
+default: all
+
+vim:
+	cd $(ROOTD); $_
+

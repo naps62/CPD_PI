@@ -1,3 +1,5 @@
+ROOTD=.
+
 include conf/config.mk
 
 default: all symlinks
@@ -26,6 +28,10 @@ clean:
 	@echo "<<<<< $(SRCD)"
 
 symlinks:
-	ln -fs $(PWD)/bin/* ../simulations/*
-	echo $(PWD) > ../simulations/PATH
-	echo $(MODE) > ../simulations/MODE
+	@echo Creating symlinks
+	@for file_name in `ls $(PWD)/bin` ; \
+		do \
+		ln -vfs $(PWD)/bin/$$file_name ../simulations/$$file_name; \
+		done
+	@echo $(PWD) > ../simulations/PATH
+	@echo $(MODE) > ../simulations/MODE

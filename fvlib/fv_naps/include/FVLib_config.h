@@ -2,6 +2,8 @@
 #ifndef _FVLIB_Config 
 #define _FVLIB_Config 
 
+#include "MFVLib_config.h"
+
 #define INF_MIN (-1.E+100)
 #define SUP_MAX (1.E+100)
 #define FVDOUBLE_PRECISION 1.E-17
