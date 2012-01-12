@@ -64,6 +64,7 @@ double compute_flux(
 	int i_right;							//	index of the right face
 	int t;									//	thread number
 	int tc;									//	thread count
+	int pc;									//	processor count
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
 	double v;								//	resulting velocity
@@ -72,8 +73,11 @@ double compute_flux(
 	FVPoint2D<double> v_left;				//	velocity in the left face
 	FVPoint2D<double> v_right;				//	velocity in the right face
 
+	pc = omp_get_num_procs();
+
 	es = mesh.getNbEdge();
-	#pragma omp parallel for
+	#pragma omp parallel for	\
+		num_threads(pc)
 	for ( e = 0; e < es; ++e)
 	{
 		t = omp_get_thread_num();
@@ -105,6 +109,8 @@ double compute_flux(
 	}
 	
 	tc = omp_get_num_threads();
+	cout
+		<< tc	<< '/'	<<	pc	<< endl;
 	v_max = DBL_MIN;
 	for ( t = 0; t < tc; ++t )
 		v_max = ( vs[ t ] > v_max ) ? vs[ t ] : v_max;

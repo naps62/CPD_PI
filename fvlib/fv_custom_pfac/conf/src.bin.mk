@@ -3,7 +3,10 @@ include $(ROOTD)/conf/src.mk
 
 $(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cpp
 	@if [ ! -d "$(@D)" ];	\
-		then mkdir "$(@D)";	\
+		then	\
+			mkdir "$(@D)";	\
+			cd "$(@D)";	\
+			cp "$(ROOTD)/templates/Makefile.obj.bin" Makefile;	\
 	fi
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
