@@ -65,13 +65,13 @@ double compute_flux(
 	unsigned es;							//	total number of edges
 	FVPoint2D<double> v_left;				//	velocity in the left face
 	FVPoint2D<double> v_right;				//	velocity in the right face
-	double v;								//	resulting velocity
+	double v=0;								//	resulting velocity
 	double v_max;							//	maximum computed velocity
 	FVEdge2D *edge;							//	current edge
 
 	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	es = mesh.getNbEdge();
-	#pragma omp parallel for
+	//#pragma omp parallel for
 	for ( e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);
@@ -125,7 +125,7 @@ void update(
 
 	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	int es = mesh.getNbEdge();
-	#pragma omp parallel for
+	//#pragma omp parallel for
 	for (int e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);

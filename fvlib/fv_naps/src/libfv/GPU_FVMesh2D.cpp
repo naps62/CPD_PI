@@ -1,4 +1,5 @@
 #include "GPU_FVMesh2D.h"
+#include "FVLib_config.h"
 
 #include "MFVErr.h"
 
@@ -25,7 +26,6 @@ void GPU_FVMesh2D::init() {
 	logger << "GPU_FVMesh::init()" << endl;
 	num_cells = 0;
 	num_edges = 0;
-	zero_ptrs();
 }
 
 /************************************************
@@ -51,10 +51,13 @@ void GPU_FVMesh2D::import_FVMesh2D(FVMesh2D &msh) {
 		// edge length
 		edge_lengths.cpu_ptr[i] 	= edge->length;
 
-		// edge left and right cells
+		// edge left cell (always exists)
 		edge_left_cells.cpu_ptr[i]	= edge->leftCell->label - 1;
-		edge_right_cells.cpu_ptr[i]	= edge->rightCell->label - 1;
+
+		// edge right cell (need check. if border edge, rightCell is null)
+		edge_right_cells.cpu_ptr[i]	= (edge->rightCell != NULL) ? (edge->rightCell->label - 1) : NO_RIGHT_EDGE; 
 	}
+
 	// copy cell data
 	FVCell2D *cell;
 	i = 0;
@@ -68,26 +71,6 @@ void GPU_FVMesh2D::import_FVMesh2D(FVMesh2D &msh) {
 /************************************************
  * MEMORY MANAGEMENT METHODS
  ***********************************************/
-
-void GPU_FVMesh2D::zero_ptrs() {
-	logger << "zeroing ptrs" << endl;
-
-	// zero edge data
-	zero_dualPtr(edge_normals.x);
-	zero_dualPtr(edge_normals.y);
-	zero_dualPtr(edge_lengths);
-	zero_dualPtr(edge_left_cells);
-	zero_dualPtr(edge_right_cells);
-
-	// zero cell data
-	zero_dualPtr(cell_areas);
-}
-
-void GPU_FVMesh2D::zero_dualPtr(DualPtr &ptr) {
-	ptr.cpu_ptr = NULL;
-	ptr.gpu_ptr = NULL;
-}
-
 void GPU_FVMesh2D::alloc_cpu() {
 	if (num_edges <= 0 || num_cells <= 0) {
 		string msg = "num edges/cells not valid for allocation";
@@ -97,36 +80,24 @@ void GPU_FVMesh2D::alloc_cpu() {
 	logger << "allocating cpu ptrs" << endl;
 
 	// alloc edge info
-	alloc_cpu(edge_normals.x,	num_edges);
-	alloc_cpu(edge_normals.y,	num_edges);
-	alloc_cpu(edge_lengths,		num_edges);
-	alloc_cpu(edge_left_cells,	num_edges);
-	alloc_cpu(edge_right_cells,	num_edges);
+	edge_normals.alloc_cpu(num_edges);
+	edge_lengths.alloc_cpu(num_edges);
+	edge_left_cells.alloc_cpu(num_edges);
+	edge_right_cells.alloc_cpu(num_edges);
 
 	// alloc cell info
-	alloc_cpu(cell_areas,	 	num_cells);
-}
-
-void GPU_FVMesh2D::alloc_cpu(DualPtr &ptr, unsigned int size) {
-	ptr.cpu_ptr = new double[size];
+	cell_areas.alloc_cpu(num_cells);
 }
 
 void GPU_FVMesh2D::delete_cpu() {
 	logger << "deleting cpu ptrs" << endl;
 
 	// delete edge data
-	delete_cpu(edge_normals.x);
-	delete_cpu(edge_normals.y);
-	delete_cpu(edge_lengths);
-	delete_cpu(edge_left_cells);
-	delete_cpu(edge_right_cells);
+	edge_normals.delete_cpu();
+	edge_lengths.delete_cpu();
+	edge_left_cells.delete_cpu();
+	edge_right_cells.delete_cpu();
 
 	// delete cell data
-	delete_cpu(cell_areas);
+	cell_areas.delete_cpu();
 }
-
-void GPU_FVMesh2D::delete_cpu(DualPtr &ptr) {
-	if (ptr.cpu_ptr != NULL)
-		delete ptr.cpu_ptr;
-}
-
