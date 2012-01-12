@@ -56,24 +56,27 @@ double compute_flux(
 	FVVect<double>& flux,
 	double dc)								//	Dirichlet condition
 {
-	double dt;
+	double dt;								//	elapsed time
 	double p_left;							//	polution in the left face
 	double p_right;							//	polution in the right face
+	int i_edge;								//	index of the edge
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
+	int t;									//	thread number
+	int tc;									//	thread count
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
-	FVPoint2D<double> v_left;				//	velocity in the left face
-	FVPoint2D<double> v_right;				//	velocity in the right face
 	double v;								//	resulting velocity
 	double v_max;							//	maximum computed velocity
 	FVEdge2D *edge;							//	current edge
+	FVPoint2D<double> v_left;				//	velocity in the left face
+	FVPoint2D<double> v_right;				//	velocity in the right face
 
-	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	es = mesh.getNbEdge();
 	#pragma omp parallel for
 	for ( e = 0; e < es; ++e)
 	{
+		t = omp_get_thread_num();
 		edge = mesh.getEdge(e);
 		i_left = edge->leftCell->label - 1;
 		v_left = velocity[ i_left ];
@@ -90,24 +93,32 @@ double compute_flux(
 			p_right = dc;
 		} 
 		v = ( v_left + v_right ) * 0.5 * edge->normal; 
-		//TODO: remove this dependence
-		//if ( ( abs(v) * dt ) > 1)
-		//	dt = 1.0 / abs(v);
-		vs[e] = v;
-		//end dependence
+		vs[ t ] = ( v > vs[ t ] ) ? v : vs[ t ];
+		i_edge = edge->label - 1;
+		flux[ i_edge ] = ( v < 0 ) ? v * p_right : v * p_left; 
+		/*
 		if ( v < 0 )
 			flux[ edge->label - 1 ] = v * p_right;
 		else
 			flux[ edge->label - 1 ] = v * p_left;
+		*/
 	}
+	
+	tc = omp_get_num_threads();
+	v_max = DBL_MIN;
+	for ( t = 0; t < tc; ++t )
+		v_max = ( vs[ t ] > v_max ) ? vs[ t ] : v_max;
+
+	/*
 	v_max = DBL_MIN;
 	for ( e = 0; e < es; ++e)
 	{
 		if ( vs[e] > v_max )
 			v_max = vs[e];
 	}
+	*/
 
-	dt = 1.0 / abs(v);
+	dt = 1.0 / abs( v_max );
 		
 	return dt;
 }
@@ -149,7 +160,7 @@ Parameters read_parameters (
 	data.filenames.mesh = para.getString("MeshName");
 	data.filenames.velocity = para.getString("VelocityFile");
 	data.filenames.polution.initial = para.getString("PoluInitFile");
-	data.filenames.polution.output = "polution.openmp.xml";
+	data.filenames.polution.output = para.getString("PoluFile");
 	data.time.final = para.getDouble("FinalTime");
 	data.iterations.jump = para.getInteger("NbJump");
 	data.computation.threshold = para.getDouble("DirichletCondition");
@@ -198,12 +209,13 @@ void main_loop (
 	FVVect<double> polutions,				//	polution values vector
 	FVVect<FVPoint2D<double> > velocities,	//	velocity vectors collection
 	FVVect<double> fluxes,					//	flux values vector
-	double dc)								//	Dirichlet condition
+	double dc,								//	Dirichlet condition
+	string polution_filename)				//	polution file name
 {
 	double t;								//	time elapsed
 	double dt;
 	int i;									//	current iteration
-	FVio polution_file("polution.xml",FVWRITE);
+	FVio polution_file( polution_filename.c_str() , FVWRITE );
 
 	t = 0;
 	i = 0;
@@ -229,8 +241,9 @@ void main_loop (
 
 /*
 	Função Madre
+	@param	parameter_file
 */
-int main()
+int main(int argc, char **argv)
 {  
 	string name;
 	double h;
@@ -239,7 +252,10 @@ int main()
 	Parameters data;
 
 	// read the parameter
-	data = read_parameters( "param.xml" );
+	if ( argc > 1 )
+		data = read_parameters( argv[1] );
+	else
+		data = read_parameters( "param.xml" );
 
 	// read the mesh
 	mesh.read( data.filenames.mesh.c_str() );
@@ -271,6 +287,7 @@ int main()
 		polution,
 		velocity,
 		flux,
-		data.computation.threshold)
+		data.computation.threshold,
+		data.filenames.polution.output)
 	;
 }

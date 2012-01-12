@@ -1,4 +1,7 @@
-include conf/config.mk
+ROOTD	=	.
+include $(ROOTD)/conf/config.mk
+
+DATAD	=	data
 
 all:	\
 	objs	\
@@ -14,6 +17,15 @@ libs bins:
 	@echo ">>>>> $(OBJD)"
 	@cd $(OBJD); $_ $@
 	@echo "<<<<< $(OBJD)"
+
+data:
+	@cd "$(DATAD)"; $_;
+
+profile:
+	@cd "$(DATAD)"; $_ $@;
+
+polu%:
+	@cd bin; ./$@ "../data/xml/param.xml";
 
 clean:
 	@echo ">>>>> $(OBJD)"
