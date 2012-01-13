@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cfloat>
-#include <omp.h>
 #include "FVLib.h"
 
 //	BEGIN TYPES
@@ -66,12 +65,9 @@ double compute_flux(
 	FVPoint2D<double> v_left;				//	velocity in the left face
 	FVPoint2D<double> v_right;				//	velocity in the right face
 	double v;								//	resulting velocity
-	double v_max;							//	maximum computed velocity
 	FVEdge2D *edge;							//	current edge
 
-	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	es = mesh.getNbEdge();
-	#pragma omp parallel for
 	for ( e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);
@@ -90,25 +86,14 @@ double compute_flux(
 			p_right = dc;
 		} 
 		v = ( v_left + v_right ) * 0.5 * edge->normal; 
-		//TODO: remove this dependence
-		//if ( ( abs(v) * dt ) > 1)
-		//	dt = 1.0 / abs(v);
-		vs[e] = v;
-		//end dependence
+		if ( ( abs(v) * dt ) > 1)
+			dt = 1.0 / abs(v);
 		if ( v < 0 )
 			flux[ edge->label - 1 ] = v * p_right;
 		else
 			flux[ edge->label - 1 ] = v * p_left;
 	}
-	v_max = DBL_MIN;
-	for ( e = 0; e < es; ++e)
-	{
-		if ( vs[e] > v_max )
-			v_max = vs[e];
-	}
 
-	dt = 1.0 / abs(v);
-		
 	return dt;
 }
 
@@ -123,9 +108,7 @@ void update(
 {
 	FVEdge2D *edge;
 
-	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	int es = mesh.getNbEdge();
-	#pragma omp parallel for
 	for (int e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);
@@ -170,14 +153,9 @@ double compute_mesh_parameter (
 
 	h = 1.e20;
 	for ( mesh.beginCell(); ( cell = mesh.nextCell() ) ; )
-	//int cs = mesh.getNbCell();
-	//for (int c = 0; c < cs; ++c)
 	{
-		//cell = mesh.getCell(c);
 		S = cell->area;
 		for ( cell->beginEdge(); ( edge = cell->nextEdge() ) ; )
-		//int es = cell->getNbEdge();
-		//for (int e = 0; e < es; ++e)
 		{
 			//edge = cell->getEdge(e);
 			if ( h * edge->length > S )
@@ -230,7 +208,7 @@ void main_loop (
 /*
 	Função Madre
 */
-int main()
+int main(int argc, char** argv)
 {  
 	string name;
 	double h;
@@ -239,7 +217,10 @@ int main()
 	Parameters data;
 
 	// read the parameter
-	data = read_parameters( "param.xml" );
+	if (argc > 1)
+		data = read_parameters( string(argv[1]).c_str() );
+	else
+		data = read_parameters( "param.xml" );
 
 	// read the mesh
 	mesh.read( data.filenames.mesh.c_str() );

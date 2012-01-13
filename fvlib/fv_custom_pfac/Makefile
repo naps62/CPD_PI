@@ -24,8 +24,15 @@ data:
 profile:
 	@cd "$(DATAD)"; $_ $@;
 
-polu%:
-	@cd bin; ./$@ "../data/xml/param.xml";
+polu polu%:
+	@cd bin;	\
+	./$@ "../data/xml/param.xml";	\
+	if [ ! -d "../results" ];	\
+	then	\
+		mkdir "../results";	\
+	fi;	\
+	timestamp=`date "+%m-%d_%H:%M:%S"`;	\
+	cp "polution.xml" "../results/$@.out.$${timestamp}"
 
 clean:
 	@echo ">>>>> $(OBJD)"

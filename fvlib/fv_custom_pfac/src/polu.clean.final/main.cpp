@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cfloat>
-#include <omp.h>
 #include "FVLib.h"
 
 //	BEGIN TYPES
@@ -56,69 +55,45 @@ double compute_flux(
 	FVVect<double>& flux,
 	double dc)								//	Dirichlet condition
 {
-	double dt;								//	elapsed time
-	int t;									//	thread number
-	int tc;									//	thread count
-	int pc;									//	processor count
+	double dt;
+	double p_left;							//	polution in the left face
+	double p_right;							//	polution in the right face
+	int i_left;								//	index of the left face
+	int i_right;							//	index of the right face
+	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
-	double v_max;							//	maximum computed velocity
-
-	pc = omp_get_num_procs();
+	FVPoint2D<double> v_left;				//	velocity in the left face
+	FVPoint2D<double> v_right;				//	velocity in the right face
+	double v;								//	resulting velocity
+	FVEdge2D *edge;							//	current edge
 
 	es = mesh.getNbEdge();
-	#pragma omp parallel	\
-		private(t)
+	for ( e = 0; e < es; ++e)
 	{
-		int i_left;							//	index of the left face
-		int i_right;						//	index of the right face
-		double p_left;						//	polution in the left face
-		double p_right;						//	polution in the right face
-		double v;							//	resulting velocity
-		unsigned e;							//	edge iteration variable
-		FVEdge2D *edge;						//	current edge
-		FVPoint2D<double> v_left;			//	velocity in the left face
-		FVPoint2D<double> v_right;			//	velocity in the right face
-
-		#pragma omp master
-		tc = omp_get_num_threads();
-
-		t = omp_get_thread_num();
-		vs[ t ] = DBL_MIN;
-
-		#pragma omp for	
-		for ( e = 0; e < es; ++e)
+		edge = mesh.getEdge(e);
+		i_left = edge->leftCell->label - 1;
+		v_left = velocity[ i_left ];
+		p_left = polution[ i_left ];
+		if ( edge->rightCell ) 
 		{
-			edge = mesh.getEdge(e);
-			i_left = edge->leftCell->label - 1;
-			v_left = velocity[ i_left ];
-			p_left = polution[ i_left ];
-			if ( edge->rightCell ) 
-			{
-				i_right = edge->rightCell->label - 1;
-				v_right = velocity[ i_right ];
-				p_right = polution[ i_right ];
-			}
-			else
-			{
-				v_right = v_left;
-				p_right = dc;
-			} 
-			v = ( v_left + v_right ) * 0.5 * edge->normal; 
-			vs[ t ] = ( v > vs[ t ] ) ? v : vs[ t ];
-			flux[ e ] = ( v < 0 ) ? (v * p_right) : (v * p_left); 
+			i_right = edge->rightCell->label - 1;
+			v_right = velocity[ i_right ];
+			p_right = polution[ i_right ];
 		}
+		else
+		{
+			v_right = v_left;
+			p_right = dc;
+		} 
+		v = ( v_left + v_right ) * 0.5 * edge->normal; 
+		if ( ( abs(v) * dt ) > 1)
+			dt = 1.0 / abs(v);
+		if ( v < 0 )
+			flux[ edge->label - 1 ] = v * p_right;
+		else
+			flux[ edge->label - 1 ] = v * p_left;
 	}
-	
-	//cout
-	//	<< tc	<< '/'	<<	pc	<< endl;
 
-	v_max = DBL_MIN;
-	//	the master thread already has the minimum t
-	for ( tc += t; t < tc; ++t )
-		v_max = ( vs[ t ] > v_max ) ? vs[ t ] : v_max;
-
-	dt = 1.0 / abs( v_max );
-		
 	return dt;
 }
 
@@ -133,9 +108,7 @@ void update(
 {
 	FVEdge2D *edge;
 
-	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
 	int es = mesh.getNbEdge();
-	#pragma omp parallel for
 	for (int e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);
@@ -159,7 +132,7 @@ Parameters read_parameters (
 	data.filenames.mesh = para.getString("MeshName");
 	data.filenames.velocity = para.getString("VelocityFile");
 	data.filenames.polution.initial = para.getString("PoluInitFile");
-	data.filenames.polution.output = para.getString("PoluFile");
+	data.filenames.polution.output = "polution.openmp.xml";
 	data.time.final = para.getDouble("FinalTime");
 	data.iterations.jump = para.getInteger("NbJump");
 	data.computation.threshold = para.getDouble("DirichletCondition");
@@ -180,14 +153,9 @@ double compute_mesh_parameter (
 
 	h = 1.e20;
 	for ( mesh.beginCell(); ( cell = mesh.nextCell() ) ; )
-	//int cs = mesh.getNbCell();
-	//for (int c = 0; c < cs; ++c)
 	{
-		//cell = mesh.getCell(c);
 		S = cell->area;
 		for ( cell->beginEdge(); ( edge = cell->nextEdge() ) ; )
-		//int es = cell->getNbEdge();
-		//for (int e = 0; e < es; ++e)
 		{
 			//edge = cell->getEdge(e);
 			if ( h * edge->length > S )
@@ -208,50 +176,28 @@ void main_loop (
 	FVVect<double> polutions,				//	polution values vector
 	FVVect<FVPoint2D<double> > velocities,	//	velocity vectors collection
 	FVVect<double> fluxes,					//	flux values vector
-	double dc,								//	Dirichlet condition
-	string polution_filename)				//	polution file name
+	double dc)								//	Dirichlet condition
 {
 	double t;								//	time elapsed
 	double dt;
 	int i;									//	current iteration
-	FVio polution_file( polution_filename.c_str() , FVWRITE );
+	FVio polution_file("polution.xml",FVWRITE);
 
 	t = 0;
 	i = 0;
-	polution_file.put( polutions , t , "polution" ); 
-	cout
-		<< "computing"
-		<< endl;
 	while ( t < final_time )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
 		t += dt;
-		/*
-		cerr
-			<< dt
-			<< " / "
-			<< t
-			<< " / "
-			<< final_time
-			<< endl;
-		++i;
-		if ( i % jump_interval == 0 )
-		{
-			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
-			fflush(NULL);
-		}
-		*/
 	}
 	polution_file.put( polutions , t , "polution" ); 
 }
 
 /*
 	Função Madre
-	@param	parameter_file
 */
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {  
 	string name;
 	double h;
@@ -260,8 +206,8 @@ int main(int argc, char **argv)
 	Parameters data;
 
 	// read the parameter
-	if ( argc > 1 )
-		data = read_parameters( argv[1] );
+	if (argc > 1)
+		data = read_parameters( string(argv[1]).c_str() );
 	else
 		data = read_parameters( "param.xml" );
 
@@ -295,7 +241,6 @@ int main(int argc, char **argv)
 		polution,
 		velocity,
 		flux,
-		data.computation.threshold,
-		data.filenames.polution.output)
+		data.computation.threshold)
 	;
 }
