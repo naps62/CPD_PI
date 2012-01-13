@@ -14,6 +14,7 @@ template<class T_>  class FVVect : public valarray<T_>
     public:
     using valarray<T_>::size;
     using valarray<T_>::resize;   
+    
     FVVect();
     FVVect(const  size_t );
     FVVect(const FVVect<T_>& v);

@@ -13,7 +13,7 @@ CUC		=	nvcc
 #	CUDA compiler flags
 CUFLAGS	=	
 ifeq ($(MODE),DBG)
-CUFLAGS	+=	-g
+CUFLAGS	+=	-g -G
 else ifeq ($(MODE),RLS)
 CUFLAGS	+=	-O3
 endif

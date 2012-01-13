@@ -1,3 +1,12 @@
+/* ---------------------------------------------------------------------------
+** Finite Volume Library
+** 
+** MFVLog.h
+** Logging
+**
+** Author: Miguel Palhas, mpalhas@gmail.com
+** -------------------------------------------------------------------------*/
+
 #ifndef _M_FVLOG
 #define _M_FVLOG
 

@@ -1,3 +1,12 @@
+/* ---------------------------------------------------------------------------
+** Finite Volume Library
+** 
+** MFVErr.h
+** Error handling and logging
+**
+** Author: Miguel Palhas, mpalhas@gmail.com
+** -------------------------------------------------------------------------*/
+
 #ifndef _M_FVERR
 #define _M_FVERR
 
