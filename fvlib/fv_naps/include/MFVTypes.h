@@ -13,11 +13,13 @@ class FV_DualPtr {
 		friend class FV_GPU_Point2D;
 
 	public:
+		unsigned int size;
 		double *cpu_ptr;
 		double *gpu_ptr;
 
 		// basic constructors/destructors
 		FV_DualPtr()						 	{ zero_ptrs(); }
+		FV_DualPtr(int size)					{ zero_ptrs(); alloc_cpu(size); }
 		FV_DualPtr(double *cpu, double *gpu)	{ cpu_ptr = cpu; gpu_ptr = gpu; }
 		FV_DualPtr(FV_DualPtr &p)				{ cpu_ptr = p.cpu_ptr; gpu_ptr = p.gpu_ptr; }
 
@@ -30,6 +32,7 @@ class FV_DualPtr {
 			if (cpu_ptr != NULL)
 				delete_cpu();
 			cpu_ptr = new double[size];
+			this->size = size;
 		}
 
 		/**
@@ -39,6 +42,7 @@ class FV_DualPtr {
 			if (cpu_ptr != NULL) {
 				delete cpu_ptr;
 				cpu_ptr = NULL;
+				size = 0;
 			}
 		}
 
@@ -47,6 +51,7 @@ class FV_DualPtr {
 		 * Sets both pointers to NULL
 		 */
 		void zero_ptrs() {
+			size = 0;
 			cpu_ptr = NULL;
 			gpu_ptr = NULL;
 		}
@@ -64,6 +69,7 @@ class FV_GPU_Point2D {
 
 		// basic constructors/destructors
 		FV_GPU_Point2D()							 	{ zero_ptrs(); }
+		FV_GPU_Point2D(unsigned int size)				{ zero_ptrs(); x.alloc_cpu(size); y.alloc_cpu(size); }
 		FV_GPU_Point2D(FV_DualPtr p1, FV_DualPtr p2)	{ x = FV_DualPtr(p1); y = FV_DualPtr(p2); }
 		FV_GPU_Point2D(FV_GPU_Point2D &p)		{ x = p.x; y = p.y; }
 

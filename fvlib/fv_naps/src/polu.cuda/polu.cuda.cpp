@@ -40,6 +40,7 @@ Parameters;
 //	BEGIN GLOBAL VARIABLES
 
 double *vs;
+FV_DualPtr gpu_vs;
 
 //	END GLOBAL VARIABLES
 
@@ -48,90 +49,68 @@ double *vs;
 /*
 	Computes the resulting flux in every edge
 */
-double compute_flux(
-	FVMesh2D& mesh,
-	FVVect<double>& polution,
-	FVVect<FVPoint2D<double> >& velocity,
-	FVVect<double>& flux,
-	double dc)								//	Dirichlet condition
-{
+double gpu_compute_flux(GPU_FVMesh2D &mesh, FV_DualPtr &polution, FV_GPU_Point2D &velocity, FV_DualPtr flux, double dc) {
 	double dt;
 	double p_left;							//	polution in the left face
 	double p_right;							//	polution in the right face
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
 	unsigned e;								//	edge iteration variable
-	unsigned es;							//	total number of edges
-	FVPoint2D<double> v_left;				//	velocity in the left face
-	FVPoint2D<double> v_right;				//	velocity in the right face
-	double v;								//	resulting velocity
+	double v_left[2];						//	velocity in the left face
+	double v_right[2];						//	velocity in the right face
+	double v=0;								//	resulting velocity
 	double v_max;							//	maximum computed velocity
-	FVEdge2D *edge;							//	current edge
 
-	es = mesh.getNbEdge();
-	for ( e = 0; e < es; ++e)
-	{
-		edge = mesh.getEdge(e);
-		if ( e != ( edge->label - 1) )
-			cout
-				<< "e: "	<< e
-				<< "\tl: "	<< ( edge->label - 1)
-				<< endl;
-		i_left = edge->leftCell->label - 1;
-		v_left = velocity[ i_left ];
-		p_left = polution[ i_left ];
-		if ( edge->rightCell ) 
-		{
-			i_right = edge->rightCell->label - 1;
-			v_right = velocity[ i_right ];
-			p_right = polution[ i_right ];
-		}
-		else
-		{
-			v_right = v_left;
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		i_left = mesh.edge_left_cells.cpu_ptr[i];
+		v_left[0] = velocity.x.cpu_ptr[i_left];
+		v_left[1] = velocity.y.cpu_ptr[i_left];
+		p_left = polution.cpu_ptr[i_left];
+
+		if (mesh.edge_right_cells.cpu_ptr[i] != NO_RIGHT_EDGE) {
+			i_right = mesh.edge_right_cells.cpu_ptr[i];
+			v_right[0] = velocity.x.cpu_ptr[i_right];
+			v_right[1] = velocity.y.cpu_ptr[i_right];
+		} else {
+			v_right[0] = v_left[0];
+			v_right[1] = v_left[1];
 			p_right = dc;
-		} 
-		v = ( v_left + v_right ) * 0.5 * edge->normal; 
-		vs[e] = v;
-		if ( v < 0 )
-			flux[ edge->label - 1 ] = v * p_right;
+		}
+
+		double vx = v_left[0] + v_right[0] * 0.5 + mesh.edge_normals.x.cpu_ptr[i];
+		double vy = v_left[1] + v_right[0] * 0.5 + mesh.edge_normals.y.cpu_ptr[i];
+		v = vx + vy;
+
+		gpu_vs.cpu_ptr[i] = v;
+
+		if (v < 0)
+			flux.cpu_ptr[i] = v * p_right;
 		else
-			flux[ edge->label - 1 ] = v * p_left;
-	}
-	v_max = DBL_MIN;
-	for ( e = 0; e < es; ++e)
-	{
-		if ( vs[e] > v_max )
-			v_max = vs[e];
+			flux.cpu_ptr[i] = v * p_left;
 	}
 
-	dt = 1.0 / abs(v);
-		
+	v_max = std::numeric_limits<double>::min();
+	for(unsigned int i = 0; i < mesh.num_edges; ++e) {
+		if (gpu_vs.cpu_ptr[i] > v_max)
+			v_max = gpu_vs.cpu_ptr[i];
+	}
+
+	dt = 1.0 / abs(v_max);
+
 	return dt;
 }
 
-/*
-	Updates the polution values based on the flux through every edge.
-*/
-void update(
-	FVMesh2D& mesh,
-	FVVect<double>& polution,
-	FVVect<double>& flux,
-	double dt)
-{
-	FVEdge2D *edge;
 
-	int es = mesh.getNbEdge();
-	for (int e = 0; e < es; ++e)
-	{
-		edge = mesh.getEdge(e);
-		polution[ edge->leftCell->label - 1 ] -=
-			dt * flux[ edge->label - 1 ] * edge->length / edge->leftCell->area;
-		if ( edge->rightCell )
-			polution[ edge->rightCell->label - 1 ] +=
-				dt * flux[ edge->label - 1 ] * edge->length / edge->rightCell->area;
+void gpu_update(GPU_FVMesh2D &mesh, FV_DualPtr &polution, FV_DualPtr &flux, double dt) {
+	for (unsigned int i = 0; i < mesh.num_edges; ++i) {
+		
+		polution.cpu_ptr[ (unsigned int) mesh.edge_left_cells.cpu_ptr[i] ] -=
+			dt * flux.cpu_ptr[i] * mesh.edge_lengths.cpu_ptr[i] / mesh.cell_areas.cpu_ptr[ (unsigned int) mesh.edge_left_cells.cpu_ptr[i] ];
+		if (mesh.edge_right_cells.cpu_ptr[i] != NO_RIGHT_EDGE)
+			polution.cpu_ptr[ (unsigned int) mesh.edge_right_cells.cpu_ptr[i] ] +=
+				dt * flux.cpu_ptr[i] * mesh.edge_lengths.cpu_ptr[i] / mesh.cell_areas.cpu_ptr[ (unsigned int) mesh.edge_right_cells.cpu_ptr[i] ];
 	}
-}    
+}
 
 /*
 	Reads the parameters file.
@@ -177,44 +156,44 @@ double compute_mesh_parameter (
 	return h;
 }
 
+//double gpu_compute_mesh_parameter (GPU_FVMesh2D mesh) {
+	//double h, S;
+	//for(unsigned int i = 0; i < mesh.num_cells; ++i) {
+	//	S = mesh.cell_areas.cpu_ptr[i];
+		//TODO continuar aqui. cada Cell precisa da lista de edges correspondentes
+	//}
+//	return 0;
+//}
+
 /*
 	Main loop: calculates the polution spread evolution in the time domain.
 */
-void main_loop (
-	double final_time,						//	time computation limit
-	unsigned jump_interval,					//	iterations output interval
-	FVMesh2D mesh,							//	2D mesh to compute
-	double mesh_parameter,					//	mesh parameter
-	FVVect<double> polutions,				//	polution values vector
-	FVVect<FVPoint2D<double> > velocities,	//	velocity vectors collection
-	FVVect<double> fluxes,					//	flux values vector
-	double dc)								//	Dirichlet condition
-{
-	double t;								//	time elapsed
-	double dt;
-	int i;									//	current iteration
-	FVio polution_file("polution.xml",FVWRITE);
+void gpu_main_loop(double final_time, unsigned jump_interval, GPU_FVMesh2D &mesh, double mesh_parameter, FVVect<double> old_polution, FV_DualPtr &polutions, FV_GPU_Point2D &velocities, FV_DualPtr &flux, double dc) {
+	double t, dt;
+	int i;
+	FVio polution_file("gpu_polution.xml", FVWRITE);
 
 	t = 0;
 	i = 0;
-	polution_file.put( polutions , t , "polution" ); 
-	cout
-		<< "computing"
-		<< endl;
-	while ( t < final_time )
-	{
-		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
-		update( mesh , polutions , fluxes , dt );
+	polution_file.put(old_polution, t, "polution");
+	cout << "computing" << endl;
+	while(t < final_time) {
+		dt = gpu_compute_flux(mesh, polutions, velocities, flux, dc) * mesh_parameter;
+		gpu_update(mesh, polutions, flux, dt);
 		t += dt;
 		++i;
-		if ( i % jump_interval == 0 )
-		{
-			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
+		if (i % jump_interval == 0) {
+			//polution_file.put(polutions, t, "polution");
+			printf("step %d at time %f \r", i, t);
 			fflush(NULL);
 		}
 	}
-	polution_file.put( polutions , t , "polution" ); 
+
+	FVVect<double> polution(mesh.num_cells);
+	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
+		polution[i] = polutions.cpu_ptr[i];
+	}
+	polution_file.put(polution, t, "polution");
 }
 
 /*
@@ -240,8 +219,6 @@ int main()
 	// GPU
 	GPU_FVMesh2D gpu_mesh(mesh);
 
-	return 0;
-
 	FVVect<double> polution( mesh.getNbCell() );
 	FVVect<double> flux( mesh.getNbEdge() );
 	FVVect<FVPoint2D<double> > velocity( mesh.getNbCell() );
@@ -250,25 +227,36 @@ int main()
 	FVio velocity_file( data.filenames.velocity.c_str() , FVREAD );
 	velocity_file.get( velocity , t , name );
 
-	//	read polution
+	// GPU
+	FV_DualPtr gpu_polution(gpu_mesh.num_cells);
+	FV_DualPtr gpu_flux(gpu_mesh.num_edges);
+	FV_GPU_Point2D gpu_velocity(gpu_mesh.num_cells);
+
+	for(unsigned int i = 0; i < gpu_polution.size; ++i) {
+		gpu_polution.cpu_ptr[i] = polution[i];
+		gpu_velocity.x.cpu_ptr[i] = velocity[i].x;
+		gpu_velocity.y.cpu_ptr[i] = velocity[i].y;
+	}
+
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
-	//	prepare velocities array
-	vs = new double[ mesh.getNbEdge() ];
+	gpu_vs = FV_DualPtr(gpu_mesh.num_edges);
 
-	// compute the Mesh parameter
+	// TODO implementar a versao GPU disto
 	h = compute_mesh_parameter( mesh );
+	//h = gpu_compute_mesh_parameter(gpu_mesh);
 
-	// the main loop
-	main_loop(
+	// GPU
+	gpu_main_loop(
 		data.time.final,
 		data.iterations.jump,
-		mesh,
+		gpu_mesh,
 		h,
 		polution,
-		velocity,
-		flux,
-		data.computation.threshold)
-	;
+		gpu_polution,
+		gpu_velocity,
+		gpu_flux,
+		data.computation.threshold);
+	unsigned es;							//	total number of edges
 }
