@@ -19,9 +19,4 @@
 #include "FVRecons2D.h"
 #include "FVRecons3D.h"
 
-#include "MFVTypes.h"
-#include "GPU_FVMesh2D.h"
-#include "MFVLog.h"
-#include "MFVErr.h"
-
 #endif // define _FVLIB_

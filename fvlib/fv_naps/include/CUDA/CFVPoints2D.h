@@ -1,0 +1,51 @@
+/* ---------------------------------------------------------------------------
+ ** Finite Volume Library 
+ **
+ ** CFVPoints2D.h
+ ** CUDA Vector of 2D Points (cuda-optimized storage, struct-of-arrays instead
+ **    of array-of-structs
+ **
+ ** Author: Miguel Palhas, mpalhas@gmail.com
+ ** -------------------------------------------------------------------------*/
+
+#ifndef _CUDA_FVPOINTS2D
+#define _CUDA_FVPOINTS2D
+
+#include "CUDA/CFVVect.h"
+
+namespace CudaFV {
+
+    class CFVPoints2D {
+        public:
+            /**
+             * one array for X coord, another for Y
+             */
+            CFVVect<double> x, y;
+
+            CFVPoints2D()                                   { }
+            CFVPoints2D(const unsigned int size)            { x = CFVVect<double>(size);    y = CFVVect<double>(size); }
+            CFVPoints2D(const CudaFV::CFVPoints2D &copy)    { x = CFVVect<double>(copy.x);  y = CFVVect<double>(copy.y); }
+
+            /**
+             * GETTERS/SETTERS
+             */
+            unsigned int size() {
+                return x.size();
+            }
+
+            /**
+             * ALLOC/DELETE
+             */
+            void alloc(const unsigned int size) {
+                x.alloc(size);
+                y.alloc(size);
+            }
+
+            void dealloc() {
+                x.dealloc();
+                y.dealloc();
+            }
+    };
+}
+
+#endif // _CUDA_FVPOINTS2D

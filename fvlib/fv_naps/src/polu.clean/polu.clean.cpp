@@ -107,7 +107,7 @@ double compute_flux(
 			v_max = vs[e];
 	}
 
-	dt = 1.0 / abs(v);
+	dt = 1.0 / abs(v_max);
 		
 	return dt;
 }
@@ -219,7 +219,7 @@ void main_loop (
 		++i;
 		if ( i % jump_interval == 0 )
 		{
-			polution_file.put( polutions , t , "polution" );    
+			//polution_file.put( polutions , t , "polution" );    
 			printf("step %d  at time %f \r", i, t);
 			fflush(NULL);
 		}
