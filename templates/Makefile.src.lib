@@ -1,0 +1,6 @@
+ROOTD	=	../..
+LIB		=
+include $(ROOTD)/conf/src.lib.mk
+
+#	Dependency example:
+#$(ROOTD)/$(OBJD)/$(BIN):	$(ROOTD)/$(INCD)/dependency.h
