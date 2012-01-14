@@ -17,5 +17,5 @@ $(ROOTD)/$(OBJD)/lib$(LIB)/%.o:	%.cc
 all:	$(OBJS:%=$(ROOTD)/$(OBJD)/lib$(LIB)/%)
 
 clean:
-	$(RM) $(OBJS:%=$(ROOTD)/$(OBJD)/lib$(LIB)/%)
-
+	$(RM) -r "$(ROOTD)/$(OBJD)/lib$(LIB)"
+#	$(RM) $(OBJS:%=$(ROOTD)/$(OBJD)/lib$(LIB)/%)
