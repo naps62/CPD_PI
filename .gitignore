@@ -10,6 +10,7 @@
 *.msh
 *.geo
 bin/*
+original/*
 results/*
 data/xml/*
 data/geo/*

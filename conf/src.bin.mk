@@ -19,5 +19,5 @@ $(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cc
 all:	$(OBJS:%=$(ROOTD)/$(OBJD)/$(BIN)/%)
 
 clean:
-	$(RM) -r "$(ROOTD)/$(OBJD)/$(BIN)"
+	$(RM) $(ROOTD)/$(OBJD)/$(BIN)/*.o
 #	$(RM) $(OBJS:%=$(ROOTD)/$(OBJD)/$(BIN)/%)

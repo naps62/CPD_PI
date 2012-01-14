@@ -4,6 +4,8 @@ timestamp=`date "+%m-%d_%H:%M:%S"`
 
 resultdir="../results"
 
+cd "bin";
+
 for arg in $@
 do
 	case $arg in
