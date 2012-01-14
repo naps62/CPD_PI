@@ -1,5 +1,6 @@
 #include "MFVLog.h"
 
+FVLog FVLog::logger;
 
 FVLog::FVLog() : ofstream(DEF_LOGFILE.c_str(), ofstream::out | ofstream::app ) {
 	initLog();

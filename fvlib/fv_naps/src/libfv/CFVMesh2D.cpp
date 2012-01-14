@@ -10,24 +10,16 @@ namespace CudaFV {
 	 ***********************************************/
 
 	CFVMesh2D::CFVMesh2D() {
-		logger << "CFVMesh2D()" << endl;
-		init();
+		FVLog::logger << "CFVMesh2D()" << endl;
 	}
 
 	CFVMesh2D::CFVMesh2D(FVMesh2D &msh) {
-		logger << "CFVMesh2D(FVMesh2D &)" << endl;
+		FVLog::logger << "CFVMesh2D(FVMesh2D &)" << endl;
 		import_FVMesh2D(msh);
 	}
 
 	CFVMesh2D::~CFVMesh2D() {
-		logger << "~CFVMesh2D" << endl;
-		dealloc();
-	}
-
-	void CFVMesh2D::init() {
-		logger << "CFVMesh::init()" << endl;
-		num_edges = 0;
-		num_cells = 0;
+		FVLog::logger << "~CFVMesh2D" << endl;
 	}
 
 	/************************************************
@@ -35,7 +27,7 @@ namespace CudaFV {
 	 ***********************************************/
 
 	void CFVMesh2D::import_FVMesh2D(FVMesh2D &msh) {
-		logger << "importing FVMesh2D" << endl;
+		FVLog::logger << "importing FVMesh2D" << endl;
 		num_edges = msh.getNbEdge();
 		num_cells = msh.getNbCell();
 
@@ -79,28 +71,14 @@ namespace CudaFV {
 			FVErr::error(msg, -1);
 		}
 
-		logger << "allocating cpu ptrs" << endl;
-
+		FVLog::logger << "allocating cpu ptrs" << endl;
 		// alloc edge info
-		edge_normals.alloc(num_edges);
-		edge_lengths.alloc(num_edges);
-		edge_left_cells.alloc(num_edges);
-		edge_right_cells.alloc(num_edges);
+		edge_normals = CFVPoints2D(num_edges);
+		edge_lengths = CFVVect<double>(num_edges);
+		edge_left_cells  = CFVVect<unsigned int>(num_edges);
+		edge_right_cells = CFVVect<unsigned int>(num_edges);
 
 		// alloc cell info
-		cell_areas.alloc(num_cells);
-	}
-
-	void CFVMesh2D::dealloc() {
-		logger << "deleting cpu ptrs" << endl;
-
-		// delete edge data
-		edge_normals.dealloc();
-		edge_lengths.dealloc();
-		edge_left_cells.dealloc();
-		edge_right_cells.dealloc();
-
-		// delete cell data
-		cell_areas.dealloc();
+		cell_areas = CFVVect<double>(num_cells);
 	}
 }

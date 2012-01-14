@@ -98,7 +98,7 @@ double gpu_compute_flux(
 	}
 
 	v_max = std::numeric_limits<double>::min();
-	for(unsigned int i = 0; i < mesh.num_edges; ++e) {
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		if (gpu_vs[i] > v_max)
 			v_max = gpu_vs[i];
 	}
@@ -111,7 +111,6 @@ double gpu_compute_flux(
 
 void gpu_update(CudaFV::CFVMesh2D &mesh, CudaFV::CFVVect<double> &polution, CudaFV::CFVVect<double> &flux, double dt) {
 	for (unsigned int i = 0; i < mesh.num_edges; ++i) {
-		
 		polution[ (unsigned int) mesh.edge_left_cells[i] ] -=
 			dt * flux[i] * mesh.edge_lengths[i] / mesh.cell_areas[ (unsigned int) mesh.edge_left_cells[i] ];
 		if (mesh.edge_right_cells[i] != NO_RIGHT_EDGE)
@@ -228,7 +227,7 @@ int main()
 
 	// GPU
     CudaFV::CFVMesh2D gpu_mesh(mesh);
-
+	
 	FVVect<double> polution( mesh.getNbCell() );
 	FVVect<double> flux( mesh.getNbEdge() );
 	FVVect<FVPoint2D<double> > velocity( mesh.getNbCell() );

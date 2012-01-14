@@ -22,6 +22,8 @@ using std::endl;
 
 class FVLog : public ofstream {
 	public:
+		static FVLog logger;
+
 		FVLog();
 
 		FVLog(string filename);

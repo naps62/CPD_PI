@@ -219,7 +219,7 @@ void main_loop (
 		++i;
 		if ( i % jump_interval == 0 )
 		{
-			//polution_file.put( polutions , t , "polution" );    
+			polution_file.put( polutions , t , "polution" );    
 			printf("step %d  at time %f \r", i, t);
 			fflush(NULL);
 		}

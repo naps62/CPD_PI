@@ -28,9 +28,6 @@ class Gmsh;
 
 namespace CudaFV {
 	class CFVMesh2D {
-		private:
-			FVLog logger;
-
 		public:
 			/**
 			 * EDGE INFO
@@ -57,11 +54,6 @@ namespace CudaFV {
 			~CFVMesh2D();
 
 		private:
-
-			/**
-			 * used by constructors
-			 */
-			void init();
 
 			/************************************************
 			 * IMPORT/EXPORT

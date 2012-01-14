@@ -32,19 +32,6 @@ namespace CudaFV {
             unsigned int size() {
                 return x.size();
             }
-
-            /**
-             * ALLOC/DELETE
-             */
-            void alloc(const unsigned int size) {
-                x.alloc(size);
-                y.alloc(size);
-            }
-
-            void dealloc() {
-                x.dealloc();
-                y.dealloc();
-            }
     };
 }
 
