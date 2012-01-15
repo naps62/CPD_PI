@@ -1,7 +1,0 @@
-gmsh foz.geo 
-./fvcm ../../BIC2012/foz.msh ../../BIC2012/foz.xml
-./velocity
-../FVLib/bin/fvcd foz.xml velocity.xml velocity.msh -c
-./polu
-../FVLib/bin/fvcd foz.xml polution.xml polution.msh -c
-gmsh polution.msh 
