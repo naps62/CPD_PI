@@ -4,6 +4,7 @@ INCD	=	include
 OBJD	=	obj
 LIBD	=	lib
 BIND	=	bin
+CUDAD	=	/usr/local/cuda
 
 #	Libraries
 LIBS	=	fv
@@ -15,7 +16,7 @@ MODE	=	RLS
 CXX		=	g++
 
 #	Include directories
-INC		=	-I $(ROOTD)/$(INCD)
+INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
 
 #	Compiler flags
 CXXFLAGS	=	-Wall \
