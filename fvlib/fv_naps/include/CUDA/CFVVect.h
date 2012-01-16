@@ -47,6 +47,7 @@ namespace CudaFV {
 				/**
 				 * GETTERS/SETTERS
 				 */
+				T* getArray();
 				unsigned int size() const;
 
 				//T* cudaAlloc();
@@ -109,6 +110,11 @@ namespace CudaFV {
 				arr[i] = copy[i];
 			}
 			return *this;
+		}
+
+	template<class T>
+		T* CFVVect<T>::getArray() {
+			return arr;
 		}
 
 	template<class T>
