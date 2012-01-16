@@ -13,21 +13,19 @@ LIBS	=	fv cuda
 MODE	=	RLS
 
 #	C++ Compil[ator]
-NVCC	=	nvcc
-CXX		=	g++
+CXX	=	nvcc
+#CXX		=	g++
 
 #	Include directories
-INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
+INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include -I $(CUDASDK_DIR)/C/common/inc
 
 #	Compiler flags
-CXXFLAGS	=	-Wall \
-				-Wextra \
-				-Wfatal-errors \
-				-ansi \
-				-pedantic \
-CXXFLAGS	=	$(INC)
+CXXFLAGS	=	-Xcompiler="-fpermissive -Wall -Wextra -Wfatal-errors"
+CXXFLAGS	+=	 $(INC)
+
 ifeq ($(MODE),DBG)
-CXXFLAGS	+=	-g3
+CXXFLAGS	+=	-g
+NVCCFLAGS	+=	-g
 SUFFIX=_$(MODE)
 else ifeq ($(MODE),GPROF)
 CXXFLAGS	+=	-g -pg -O3
@@ -46,4 +44,4 @@ LDFLAGS	=	-L $(ROOTD)/lib
 default: all
 
 vim:
-	cd $(ROOTD); $_
+	@cd $(ROOTD); $_

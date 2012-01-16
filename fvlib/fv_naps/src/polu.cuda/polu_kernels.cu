@@ -18,7 +18,6 @@ __global__ void cuda_reduce(...);
 __global__ void cuda_update(...);
 
 
-
 template<class T>
 __host__ T * cuda_alloc_and_copy(CudaFV::CFVVect<T> &vec) {
 	T* ptr;

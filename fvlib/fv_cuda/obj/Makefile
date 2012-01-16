@@ -17,16 +17,16 @@ libs:	$(LIBS)
 bins:	$(BINS)
 
 $(LIBS) $(BINS):
-	#@echo ">>>>> $@"
+#	@echo ">>>>> $@"
 	@cd $@; $_;
-	#@echo "<<<<< $@"
+#	@echo "<<<<< $@"
 
 clean:
 	@for dir in $(BINS) $(LIBS);	\
 	do	\
-		echo ">>>>> $$dir";	\
+#		echo ">>>>> $$dir";	\
 		cd $$dir;	\
 		$_ clean;	\
 		cd ..;	\
-		echo "<<<<< $$dir";	\
+#		echo "<<<<< $$dir";	\
 	done

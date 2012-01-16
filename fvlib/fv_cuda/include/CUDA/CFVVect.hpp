@@ -1,70 +1,19 @@
 /* ---------------------------------------------------------------------------
  ** Finite Volume Library 
  **
- ** CFVPoints2D.h
- ** CUDA Vector (cuda-optimized storage, struct-of-arrays instead
- **    of array-of-structs
+ ** CFVVect.hpp
+ ** Template declaration for CFVVect.h
  **
  ** Author: Miguel Palhas, mpalhas@gmail.com
  ** -------------------------------------------------------------------------*/
 
-#ifndef _CUDA_FVVECT
-#define _CUDA_FVVECT
+#ifdef _H_CUDA_FVVECT
 
+#include <cuda_runtime_api.h>
 #include <cuda.h>
 #include <cutil.h>
 
-#include "MFVLog.h"
-
 namespace CudaFV {
-
-	template<class T>
-		class CFVVect {
-			private:
-				unsigned int arr_size;
-				T *arr;
-
-				//T *cuda_arr;
-
-			public:
-				/**
-				 * CONSTRUCTORS
-				 */
-				CFVVect();
-				CFVVect(const unsigned int size);
-				CFVVect(const CFVVect<T> &copy);
-				~CFVVect();
-
-				//~CFVVect() { dealloc(); }
-
-				/**
-				 * OPERATORS
-				 */
-				T & 				operator [] (int index);
-				const T & 			operator []	(int index) const;
-				const CFVVect<T> &	operator =	(const CFVVect<T> & copy);
-
-				/**
-				 * GETTERS/SETTERS
-				 */
-				T* getArray();
-				unsigned int size() const;
-
-				//T* cudaAlloc();
-				//T* cudaGetPtr();
-				//void cudaFree();
-				//void cudaCopyToHost();
-				//void cudaCopyToDevice();
-
-			private:
-				void alloc(unsigned int size);
-				void dealloc();
-				void test() {
-				double *x;
-					cudaMalloc(&x, sizeof(double)*2);
-				}
-
-		};
 
 	/**
 	 * CONSTRUCTORS
@@ -116,6 +65,9 @@ namespace CudaFV {
 			return *this;
 		}
 
+	/**
+	 * GETTERS/SETTERS
+	 */
 	template<class T>
 		T* CFVVect<T>::getArray() {
 			return arr;
@@ -129,14 +81,21 @@ namespace CudaFV {
 	/**
 	 * CUDA
 	 */
-	/*template<class T>
-		T* CFVVect<T>::cudaAlloc() {
-			cudaMalloc(&cuda_arr, sizeof(double) * arr_size);
+	template<class T>
+		T* CFVVect<T>::cudaGetArray() {
+			return cuda_arr;
 		}
 
 	template<class T>
-		T* CFVVect<T>::cudaGetPtr() {
-			return cuda_arr;
+		T* CFVVect<T>::cudaMallocAndSave() {
+			this->cudaMalloc();
+			this->cudaSave();
+			return this->cudaGetArray();
+		}
+
+	template<class T>
+		void CFVVect<T>::cudaMalloc() {
+			cudaMalloc((void **)&cuda_arr, sizeof(T) * arr_size);
 		}
 
 	template<class T>
@@ -145,14 +104,14 @@ namespace CudaFV {
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaCopyToHost() {
-			cudaMemcpy(cuda_arr, arr, sizeof(double) * arr_size, cudaMemcpyHostToDevice);
+		void CFVVect<T>::cudaSave() {
+			cudaMemcpy(cuda_arr, arr, sizeof(T) * arr_size, cudaMemcpyHostToDevice);
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaCopyToDevice() {
-			cudaMemcpy(arr, cuda_arr, sizeof(double) * arr_size, cudaMemcpyDeviceToHost);
-		}*/
+		void CFVVect<T>::cudaGet() {
+			cudaMemcpy(arr, cuda_arr, sizeof(T) * arr_size, cudaMemcpyDeviceToHost);
+		}
 
 	/**
 	 * ALLOC/DELETE
@@ -174,4 +133,5 @@ namespace CudaFV {
 			arr_size = 0;
 		}
 }
-#endif // _CUDA_FVVECT
+
+#endif

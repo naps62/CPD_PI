@@ -13,18 +13,18 @@ LIBS	=	fv cuda
 MODE	=	RLS
 
 #	C++ Compil[ator]
-NVCC	=	nvcc
-CXX		=	g++
+CXX		=	nvcc
 
 #	Include directories
 INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
 
 #	Compiler flags
-CXXFLAGS	=	-Wall \
-				-Wextra \
-				-Wfatal-errors \
-				-ansi \
-				-pedantic \
+#CXXFLAGS	=	-Wall \
+#				-Wextra \
+#				-Wfatal-errors \
+#				-ansi \
+#				-pedantic \
+#
 CXXFLAGS	=	$(INC)
 ifeq ($(MODE),DBG)
 CXXFLAGS	+=	-g3
