@@ -55,7 +55,7 @@ double gpu_compute_flux(
 		CudaFV::CFVMesh2D &mesh,
 		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVPoints2D &velocity,
-		CudaFV::CFVVect<double> flux,
+		CudaFV::CFVVect<double> &flux,
 		double dc) {
 	double dt;
 	double p_left;							//	polution in the left face
@@ -85,8 +85,8 @@ double gpu_compute_flux(
 			p_right = dc;
 		}
 
-		double vx = v_left[0] + v_right[0] * 0.5 + mesh.edge_normals.x[i];
-		double vy = v_left[1] + v_right[0] * 0.5 + mesh.edge_normals.y[i];
+		double vx = (v_left[0] + v_right[0]) * 0.5 * mesh.edge_normals.x[i];
+		double vy = (v_left[1] + v_right[1]) * 0.5 * mesh.edge_normals.y[i];
 		v = vx + vy;
 
 		gpu_vs[i] = v;
@@ -95,6 +95,7 @@ double gpu_compute_flux(
 			flux[i] = v * p_right;
 		else
 			flux[i] = v * p_left;
+
 	}
 
 	v_max = std::numeric_limits<double>::min();
@@ -104,7 +105,7 @@ double gpu_compute_flux(
 	}
 
 	dt = 1.0 / abs(v_max);
-
+	cout << flux[2] << endl;
 	return dt;
 }
 
@@ -178,7 +179,7 @@ double compute_mesh_parameter (
 void gpu_main_loop(double final_time, unsigned jump_interval, CudaFV::CFVMesh2D &mesh, double mesh_parameter, FVVect<double> old_polution, CudaFV::CFVVect<double> &polutions, CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<double> &flux, double dc) {
 	double t, dt;
 	int i;
-	FVio polution_file("gpu_polution.xml", FVWRITE);
+	FVio polution_file("polution.xml", FVWRITE);
 
 	t = 0;
 	i = 0;
@@ -186,6 +187,7 @@ void gpu_main_loop(double final_time, unsigned jump_interval, CudaFV::CFVMesh2D 
 	cout << "computing" << endl;
 	while(t < final_time) {
 		dt = gpu_compute_flux(mesh, polutions, velocities, flux, dc) * mesh_parameter;
+	cout << flux[2] << endl;
 		gpu_update(mesh, polutions, flux, dt);
 		t += dt;
 		++i;

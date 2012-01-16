@@ -13,7 +13,7 @@ LIBS	=	fv
 MODE	=	RLS
 
 #	C++ Compil[ator]
-CXX		=	g++
+CXX		=	ccache g++
 
 #	Include directories
 INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
@@ -26,7 +26,7 @@ CXXFLAGS	=	-Wall \
 				-pedantic \
 				$(INC)
 ifeq ($(MODE),DBG)
-CXXFLAGS	+=	-g
+CXXFLAGS	+=	-g3
 SUFFIX=_$(MODE)
 else ifeq ($(MODE),GPROF)
 CXXFLAGS	+=	-g -pg -O3
@@ -46,4 +46,3 @@ default: all
 
 vim:
 	cd $(ROOTD); $_
-

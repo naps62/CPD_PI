@@ -149,7 +149,6 @@ namespace CudaFV {
 	 */
 	template<class T>
 		void CFVVect<T>::alloc(unsigned int size) {
-			FVLog::logger << "CFVVect alloc(" << size << ")" << endl;
 			arr_size = size;
 			if (arr_size > 0) {
 				arr = new T[arr_size];
@@ -158,7 +157,6 @@ namespace CudaFV {
 
 	template<class T>
 		void CFVVect<T>::dealloc() {
-			FVLog::logger << "CFVVect dealloc()" << endl;
 			if (arr != NULL) {
 				delete arr;
 			}

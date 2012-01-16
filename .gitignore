@@ -3,6 +3,7 @@
 */bin/*
 */.svn
 *.swp
+*.swo
 *.tmp
 *.log
 *.aux
@@ -17,3 +18,5 @@ fvlib/*/BIC2012/velocity*
 fvlib/*/FVLib/bin/fvcd*
 fvlib/*/FVLib/bin/fvcm*
 fvlib/simulations
+FVLib.log
+FVLib.err
