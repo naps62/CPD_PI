@@ -1,9 +1,6 @@
 #include <iostream>
 #include <cfloat>
-
 #include "FVLib.h"
-
-#include "papi.h"
 
 //	BEGIN TYPES
 
@@ -44,12 +41,6 @@ Parameters;
 
 double *vs;
 
-int set;
-int eventcount;
-int *events;
-
-//int **events;
-
 //	END GLOBAL VARIABLES
 
 //	BEGIN FUNCTIONS
@@ -69,8 +60,6 @@ double compute_flux(
 	double p_right;							//	polution in the right face
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
-	int t;									//	current thread number
-	int ts;									//	total number of threads used
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
 	FVPoint2D<double> v_left;				//	velocity in the left face
@@ -79,81 +68,31 @@ double compute_flux(
 	FVEdge2D *edge;							//	current edge
 
 	es = mesh.getNbEdge();
-	#pragma omp parallel	\
-		default(shared)	\
-		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v)
+	for ( e = 0; e < es; ++e)
 	{
-		int result;
-		int eventset;
-
-		t = omp_get_thread_num();
-
-		vs[t] = DBL_MIN;
-
-		//	create eventset
-		eventset = PAPI_NULL;
-		result = PAPI_create_evenset( &eventset );
-		if (result != PAPI_OK)
+		edge = mesh.getEdge(e);
+		i_left = edge->leftCell->label - 1;
+		v_left = velocity[ i_left ];
+		p_left = polution[ i_left ];
+		if ( edge->rightCell ) 
 		{
-			cerr
-				<<	'['
-				<<	t
-				<<	"] Error creating eventset!"
-				<<	endl;
+			i_right = edge->rightCell->label - 1;
+			v_right = velocity[ i_right ];
+			p_right = polution[ i_right ];
 		}
-
-		//	add events
-		result = PAPI_add_events( eventset , events , eventcount );
-		if (result != PAPI_OK)
+		else
 		{
-			cerr
-				<<	'['
-				<<	t
-				<<	"] Error adding events!"
-				<<	endl;
-		}
-
-		#pragma omp for
-		for (e = 0; e < es; ++e)
-		{
-			edge = mesh.getEdge(e);
-			i_left = edge->leftCell->label - 1;
-			v_left = velocity[ i_left ];
-			p_left = polution[ i_left ];
-			if ( edge->rightCell ) 
-			{
-				i_right = edge->rightCell->label - 1;
-				v_right = velocity[ i_right ];
-				p_right = polution[ i_right ];
-			}
-			else
-			{
-				v_right = v_left;
-				p_right = dc;
-			} 
-			v = ( v_left + v_right ) * 0.5 * edge->normal; 
-			vs[t] = ( v > vs[t] ) ? v : vs[t];
-//			vs[e] = v;
-//			if ( ( abs(v) * dt ) > 1)
-//				dt = 1.0 / abs(v);
-			if ( v < 0 )
-				flux[ edge->label - 1 ] = v * p_right;
-			else
-				flux[ edge->label - 1 ] = v * p_left;
-		}
-
-		#pragma omp single
-		ts = omp_get_num_threads();
+			v_right = v_left;
+			p_right = dc;
+		} 
+		v = ( v_left + v_right ) * 0.5 * edge->normal; 
+		if ( ( abs(v) * dt ) > 1)
+			dt = 1.0 / abs(v);
+		if ( v < 0 )
+			flux[ edge->label - 1 ] = v * p_right;
+		else
+			flux[ edge->label - 1 ] = v * p_left;
 	}
-
-	double v_max;
-	v_max = DBL_MIN;
-//	for (e = 0; e < es; ++e)
-//		v_max = ( vs[e] > v_max ) ? vs[e] : v_max;
-	for (t = 0; t < ts; ++t)
-		v_max = ( vs[t] > v_max ) ? vs[t] : v_max;
-	
-	dt = 1.0 / abs( v_max );
 
 	return dt;
 }
@@ -275,41 +214,14 @@ int main(int argc, char** argv)
 	string name;
 	double h;
 	double t;
-	int result;
 	FVMesh2D mesh;
 	Parameters data;
 
-	//	PAPI init
-	result = PAPI_library_init(PAPI_VER_CURRENT);
-	if (result != PAPI_VER_CURRENT)
-	{
-		cerr
-			<<	"Error initializing PAPI!"
-			<<	endl;
-		exit(result);
-	}
-
-	//	PAPI init threads
-	result = PAPI_thread_init( omp_get_thread_num );
-	if (result != PAPI_OK )
-	{
-		cerr
-			<<	"Error initializing PAPI thread support!"
-			<<	endl;
-		exit(result);
-	}
-
-	// read the parameter file
+	// read the parameter
 	if (argc > 1)
 		data = read_parameters( string(argv[1]).c_str() );
 	else
 		data = read_parameters( "param.xml" );
-	
-	//	read the set
-	if (argc > 2)
-		set = atoi( argv[2] );
-	else
-		set = 0;
 
 	// read the mesh
 	mesh.read( data.filenames.mesh.c_str() );
@@ -329,18 +241,6 @@ int main(int argc, char** argv)
 	//	prepare velocities array
 	vs = new double[ mesh.getNbEdge() ];
 
-	//	prepare events
-	switch ( set )
-	{
-		case 0:
-		default:
-		eventcount = 3;
-		events = new int[ eventcount ];
-		events[0] = PAPI_TOT_INS;
-		events[1] = PAPI_LD_INS;
-		events[2] = PAPI_SR_INS;
-	}
-
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
 
@@ -356,11 +256,4 @@ int main(int argc, char** argv)
 		data.computation.threshold,
 		data.filenames.polution.output)
 	;
-
-	//	cleanup
-	delete vs;
-
-	PAPI_shutdown();
-
-	return 0;
 }

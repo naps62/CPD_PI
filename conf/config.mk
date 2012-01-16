@@ -11,6 +11,9 @@ LIBS	=	fv
 #	Compile mode
 MODE	=	RLS
 
+#	C Compil[ator]
+CC		=	gcc
+
 #	C++ Compil[ator]
 CXX		=	g++
 
@@ -37,6 +40,7 @@ else
 CXXFLAGS	+=	-O3
 SUFFIX=
 endif
+CFLAGS		=	$(CXXFLAGS)
 
 #	Linker flags
 LDFLAGS	=	-L $(ROOTD)/lib
