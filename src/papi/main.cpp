@@ -33,9 +33,6 @@ int main ()
 			<<	endl;
 	}
 
-	//p.add_event( PAPI_TOT_INS );
-	//p.add_event( PAPI_LD_INS );
-
 	p.start();
 
 	for (i = 0; i < ARRAY_SIZE; ++i)

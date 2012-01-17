@@ -90,11 +90,9 @@ PAPI::PAPI()
 			<<	"Event set created!"
 			<<	endl;
 	
+	reset();
+
 	_values = NULL;
-	time.last = 0;
-	time.total = 0;
-	time.avg = 0;
-	measures = 0;
 }
 
 void PAPI::add_event (int event)
@@ -209,6 +207,11 @@ long long int PAPI::last_time ()
 	return time.last;
 }
 
+long long int PAPI::total_time ()
+{
+	return time.total;
+}
+
 void PAPI::reset ()
 {
 	int result;
@@ -219,10 +222,10 @@ void PAPI::reset ()
 	for ( it = counters.begin(); it != counters.end(); ++it )
 		it->second = 0;
 	
-	measures = 0;
 	time.last = 0;
 	time.total = 0;
 	time.avg = 0;
+	measures = 0;
 }
 
 long long int PAPI::operator[] (int event)
@@ -230,21 +233,30 @@ long long int PAPI::operator[] (int event)
 	return counters[ event ];
 }
 
-//	PAPI_CPI
-PAPI_CPI::PAPI_CPI () : PAPI()
-{
-	(*this).add_event( PAPI_TOT_INS );
-	(*this).add_event( PAPI_TOT_CYC );
-}
-
-void PAPI_CPI::add_event (int event)
+//	PAPI_custom
+void PAPI_custom::add_event (int event)
 {
 	PAPI::add_event( event );
 }
 
-void PAPI_CPI::add_events (int *events_v, int events_c)
+void PAPI_custom::add_events (int *events_v, int events_c)
 {
 	PAPI::add_events( events_v , events_c );
+}
+
+//	PAPI_preset
+PAPI_preset::PAPI_preset () {}
+
+PAPI_preset::PAPI_preset (int *events_v, int events_c) : PAPI ()
+{
+	PAPI::add_events( events_v , events_c );
+}
+
+//	PAPI_CPI
+PAPI_CPI::PAPI_CPI () : PAPI_preset ()
+{
+	(*this).add_event( PAPI_TOT_INS );
+	(*this).add_event( PAPI_TOT_CYC );
 }
 
 double PAPI_CPI::cpi ()
@@ -255,4 +267,26 @@ double PAPI_CPI::cpi ()
 double PAPI_CPI::ipc ()
 {
 	return (double)(*this)[ PAPI_TOT_INS ] / (double)(*this)[ PAPI_TOT_CYC ];
+}
+
+//	PAPI_Flops
+PAPI_Flops::PAPI_Flops () : PAPI_preset ()
+{
+	(*this).add_event( PAPI_TOT_CYC );
+	(*this).add_event( PAPI_FP_OPS );
+}
+
+long long int PAPI_Flops::flops ()
+{
+	return (*this)[ PAPI_FP_OPS ];
+}
+
+double PAPI_Flops::flops_per_cyc ()
+{
+	return (double)(*this)[ PAPI_FP_OPS ] / (double)(*this)[ PAPI_TOT_CYC ];
+}
+
+double PAPI_Flops::flops_per_sec ()
+{
+	return (double)(*this)[ PAPI_FP_OPS ] * 10e9 / (double)total_time();
 }

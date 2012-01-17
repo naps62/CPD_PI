@@ -23,6 +23,10 @@ class PAPI
 	} time;
 	unsigned measures;
 
+	protected:
+	void add_event (int event);
+	void add_events (int *events_v, int events_c);
+
 	public:
 	static void init ();
 #ifdef _OPENMP
@@ -36,29 +40,48 @@ class PAPI
 	PAPI ();
 //	~PAPI ();
 
-	void add_event (int event);
-	void add_events (int *events_v, int events_c);
-
 	void start ();
 	void stop ();
 
 	long long int last_time ();
+	long long int total_time ();
 
 	void reset();
 
 	long long int operator[] (int event);
 };
 
-class PAPI_CPI : public PAPI
+class PAPI_custom : public PAPI
 {
+	public:
 	void add_event (int event);
 	void add_events (int *events_v, int events_c);
+};
 
+class PAPI_preset : public PAPI
+{
+	protected:
+	PAPI_preset ();
+	PAPI_preset (int *events_v, int events_c);
+};
+
+class PAPI_CPI : public PAPI_preset
+{
 	public:
 	PAPI_CPI ();
 
 	double cpi ();
 	double ipc ();
+};
+
+class PAPI_Flops : public PAPI_preset
+{
+	public:
+	PAPI_Flops ();
+
+	long long int flops();
+	double flops_per_cyc();
+	double flops_per_sec();
 };
 
 #endif/*___PAPI_HPP___*/
