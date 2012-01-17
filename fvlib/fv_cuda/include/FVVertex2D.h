@@ -9,7 +9,7 @@ class FVCell2D;
 class FVVertex2D
 {
 public:
-FVPoint2D <double> coord;
+FVPoint2D <fv_float> coord;
 size_t label, code, nb_cell,pos_c;
 FVCell2D* cell[NB_CELL_PER_VERTEX_2D]; 
      FVVertex2D(){label=0;nb_cell=0;}

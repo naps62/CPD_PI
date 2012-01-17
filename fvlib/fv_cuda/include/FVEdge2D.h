@@ -10,12 +10,12 @@ class FVVertex2D;
 class FVEdge2D
 {
 public:
-FVPoint2D<double> centroid;
-double length;
+FVPoint2D<fv_float> centroid;
+fv_float length;
 size_t label, code,nb_vertex,nb_cell;
 FVCell2D *leftCell,*rightCell;  // the two cells
 FVVertex2D *firstVertex,*secondVertex; // the two vertices
-FVPoint2D<double> normal;  // from left to right
+FVPoint2D<fv_float> normal;  // from left to right
      FVEdge2D(){leftCell=NULL;rightCell=NULL;firstVertex=NULL;secondVertex=NULL;label=0;}
     ~FVEdge2D(){;}  
     void setCode2Vertex(size_t val=0)

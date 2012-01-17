@@ -11,13 +11,13 @@ class FVEdge2D;
 class FVCell2D
 {
 public:
-FVPoint2D<double> centroid;
+FVPoint2D<fv_float> centroid;
 size_t label,code,nb_vertex,nb_edge;
 size_t pos_e,pos_v;
-double perimeter,area;
+fv_float perimeter,area;
 FVVertex2D* vertex[NB_VERTEX_PER_CELL_2D] ; // the  vertices
 FVEdge2D* edge[NB_EDGE_PER_CELL_2D];     // the edge
-FVPoint2D<double>  cell2edge[NB_EDGE_PER_CELL_2D]; // normal exterior for each edge
+FVPoint2D<fv_float>  cell2edge[NB_EDGE_PER_CELL_2D]; // normal exterior for each edge
 
 
      FVCell2D(){nb_vertex=0;nb_edge=0;label=0;}
@@ -28,7 +28,7 @@ FVPoint2D<double>  cell2edge[NB_EDGE_PER_CELL_2D]; // normal exterior for each e
      FVVertex2D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  
      FVEdge2D* beginEdge(){pos_e=0;if(pos_e<nb_edge) return(edge[0]);else return(NULL);};
      FVEdge2D* nextEdge(){if(pos_e<nb_edge) return(edge[pos_e++]);else return(NULL);} 
-     FVPoint2D<double> getCell2Edge(){return cell2edge[pos_e-1];}
+     FVPoint2D<fv_float> getCell2Edge(){return cell2edge[pos_e-1];}
      void setCode2Edge(size_t val=0)
          {for(size_t i=0;i<nb_edge;i++) 
           if(edge[i]) edge[i]->code=val;}

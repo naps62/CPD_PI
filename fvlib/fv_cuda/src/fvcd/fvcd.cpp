@@ -9,12 +9,12 @@ if (argc < 4)
         cout<<"PLEASE use Convert data gmsh->xml: fvcd mesh.xml data.xml data.msh (-c/v) "<<endl;
         exit(0);
         }        
-FVVect<double> x=0,y=0,z=0; 
+FVVect<fv_float> x=0,y=0,z=0; 
 string    file_mesh=argv[1];
 string    file_in=argv[2];
 string    file_out=argv[3];    
 string    type_name,name;
-double    time=0;
+fv_float    time=0;
 size_t nbv=0,type=0;
 if(argc==5) type_name=argv[4]; else type_name="-c"; // default data on cell
 if(type_name.compare("-v")) type=CELL; else type=VERTEX;

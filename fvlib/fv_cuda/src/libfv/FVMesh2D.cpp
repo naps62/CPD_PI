@@ -212,8 +212,8 @@ void FVMesh2D::complete_data()
 	{
 		_edge[i].leftCell=NULL;_edge[i].rightCell=NULL;
 		_edge[i].nb_cell=2;
-		_edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*0.5;
-		FVPoint2D<double> u;
+		_edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*(fv_float)0.5;
+		FVPoint2D<fv_float> u;
 		u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
 		_edge[i].length=Norm(u);
 	}
@@ -249,7 +249,7 @@ void FVMesh2D::complete_data()
 		for(size_t j=0;j<_cell[i].nb_edge;j++)
 		{
 			_cell[i].cell2edge[j]= _cell[i].edge[j]->centroid-_cell[i].centroid;      
-			FVPoint2D<double> u,v;  
+			FVPoint2D<fv_float> u,v;  
 			u=_cell[i].edge[j]->firstVertex->coord-_cell[i].centroid; 
 			v=_cell[i].edge[j]->secondVertex->coord-_cell[i].centroid;
 			_cell[i].area+=fabs(Det(u,v))*0.5;
@@ -285,8 +285,8 @@ void FVMesh2D::complete_data()
 	for(size_t i=0;i<_nb_edge;i++) 
 	{
 		//cout<<"edge number "<<i<<endl;   
-		FVPoint2D<double> u,v;  
-		double no;
+		FVPoint2D<fv_float> u,v;  
+		fv_float no;
 		u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
 		no=Norm(u);
 		_edge[i].normal.x=u.y;_edge[i].normal.y=-u.x;

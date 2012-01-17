@@ -254,8 +254,8 @@ for(size_t i=0;i<_nb_vertex;i++)
 // compute the centroid and length of edge
 for(size_t i=0;i<_nb_edge;i++)
     {
-    _edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*0.5;
-    FVPoint3D<double> u;
+    _edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*(fv_float)0.5;
+    FVPoint3D<fv_float> u;
     u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
     _edge[i].length=Norm(u);
     }
@@ -278,7 +278,7 @@ for(size_t i=0;i<_nb_face;i++)
     // compute the area of the face
     for(size_t j=0;j<_face[i].nb_edge;j++)
         {    
-        FVPoint3D<double> u,v,w;  
+        FVPoint3D<fv_float> u,v,w;  
         u=_face[i].edge[j]->firstVertex->coord-_face[i].centroid; 
         v=_face[i].edge[j]->secondVertex->coord-_face[i].centroid;
         w=CrossProduct(u,v);
@@ -329,7 +329,7 @@ for(size_t i=0;i<_nb_cell;i++)
         _cell[i].cell2face[j]= _cell[i].face[j]->centroid-_cell[i].centroid;   
         for(size_t k=0;k<_cell[i].face[j]->nb_edge;k++)
             {
-            FVPoint3D<double> u,v,w;
+            FVPoint3D<fv_float> u,v,w;
             u=_cell[i].cell2face[j];
             v=_cell[i].face[j]->edge[k]->firstVertex->coord-_cell[i].centroid;
             w=_cell[i].face[j]->edge[k]->secondVertex->coord-_cell[i].centroid;   
@@ -370,8 +370,8 @@ for(size_t i=0;i<_nb_face;i++)
     {
     for(size_t j=0;j<_face[i].nb_edge;j++)
         {
-         FVPoint3D<double> u,v,w;  
-         double no;
+         FVPoint3D<fv_float> u,v,w;  
+         fv_float no;
          u=_face[i].edge[j]->firstVertex->coord-_face[i].centroid;
          v=_face[i].edge[j]->secondVertex->coord-_face[i].centroid;       
          w=CrossProduct(u,v);

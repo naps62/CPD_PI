@@ -50,9 +50,12 @@ private:
 //                             ASSOCIATED  FUNCTIONS                         //
 ///////////////////////////////////////////////////////////////////////////////
 
-inline double Det(const FVPoint2D<double> &u,const FVPoint2D<double> &v)
+template <class T_>
+inline T_ Det(const FVPoint2D<T_> &u,const FVPoint2D<T_> &v)
         {return (u.x*v.y-v.x*u.y);}
-inline double Norm(const FVPoint2D<double> &u)
+
+template <class T_>
+inline T_ Norm(const FVPoint2D<T_> &u)
         {return sqrt(u.x*u.x+u.y*u.y);}  
 
 template <class T_>

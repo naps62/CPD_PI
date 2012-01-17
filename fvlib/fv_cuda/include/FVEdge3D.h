@@ -11,8 +11,8 @@ class FVEdge3D
 {
 public:
 public:
-FVPoint3D<double> centroid;
-double length;
+FVPoint3D<fv_float> centroid;
+fv_float length;
 size_t label, code,nb_vertex;
 FVVertex3D *firstVertex,*secondVertex; // the two vertices
      FVEdge3D(){firstVertex=NULL;secondVertex=NULL;nb_vertex=0;label=0;}
