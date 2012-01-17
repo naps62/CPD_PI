@@ -170,6 +170,7 @@ __host__ void cuda_main_loop(
 
 
 		vs.cuda_get();
+		flux.cuda_get();
 		/*mesh.edge_normals.x.cuda_get();
 		mesh.edge_normals.y.cuda_get();
 		mesh.edge_lengths.cuda_get();
@@ -184,7 +185,7 @@ __host__ void cuda_main_loop(
 		//mesh.edge_left_cells.cuda_get();
 
 		for(unsigned int i=0; i < mesh.num_edges; ++i) {
-			cout << "vs= " << vs[i];
+			cout << "flux= " << flux[i];
 			//cout << "tid= " << mesh.edge_left_cells[i] << " vs= " << mesh.edge_normals.x[i] << " custom= " << mesh.edge_normals.y[i];
 			getchar();
 		}
