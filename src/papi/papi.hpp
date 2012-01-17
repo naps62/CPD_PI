@@ -51,6 +51,9 @@ class PAPI
 
 class PAPI_CPI : public PAPI
 {
+	void add_event (int event);
+	void add_events (int *events_v, int events_c);
+
 	public:
 	PAPI_CPI ();
 

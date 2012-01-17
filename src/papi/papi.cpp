@@ -237,6 +237,16 @@ PAPI_CPI::PAPI_CPI () : PAPI()
 	(*this).add_event( PAPI_TOT_CYC );
 }
 
+void PAPI_CPI::add_event (int event)
+{
+	PAPI::add_event( event );
+}
+
+void PAPI_CPI::add_events (int *events_v, int events_c)
+{
+	PAPI::add_events( events_v , events_c );
+}
+
 double PAPI_CPI::cpi ()
 {
 	return (double)(*this)[ PAPI_TOT_CYC ] / (double)(*this)[ PAPI_TOT_INS ];
