@@ -180,7 +180,7 @@ void Gmsh::close()
 
 
 
-void Gmsh::writeVector(FVVect<fv_float> &u, const size_t type, const char *name, fv_float time)
+void Gmsh::writeVector(FVVect<double> &u, const size_t type, const char *name, double time)
 {
 if(!_of_is_open)
     { 
@@ -220,7 +220,7 @@ if(type== CELL)
  
 }
     
-void Gmsh::writeVector(const FVVect<fv_float> &u,const FVVect<fv_float> &v,  const size_t type,const char *name, fv_float time) 
+void Gmsh::writeVector(const FVVect<double> &u,const FVVect<double> &v,  const size_t type,const char *name, double time) 
 {
 if(!_of_is_open)
     { 
@@ -259,7 +259,7 @@ if(type== CELL)
     }    
 }
        
-void Gmsh::writeVector(const FVVect<fv_float> &u,const FVVect<fv_float> &v, const FVVect<fv_float> &w, const size_t type,const char *name, fv_float time)   
+void Gmsh::writeVector(const FVVect<double> &u,const FVVect<double> &v, const FVVect<double> &w, const size_t type,const char *name, double time)   
 {
 if(!_of_is_open)
     { 
@@ -299,7 +299,7 @@ if(type== CELL)
 }
 
 
-void Gmsh::writeVector(FVVect<FVPoint1D<fv_float> >&u, const size_t type, const char *name, fv_float time)
+void Gmsh::writeVector(FVVect<FVPoint1D<double> >&u, const size_t type, const char *name, double time)
 {
 if(!_of_is_open)
     { 
@@ -339,7 +339,7 @@ if(type== CELL)
  
 }
     
-void Gmsh::writeVector(FVVect<FVPoint2D<fv_float> >&u, const size_t type,const char *name, fv_float time) 
+void Gmsh::writeVector(FVVect<FVPoint2D<double> >&u, const size_t type,const char *name, double time) 
 {
 if(!_of_is_open)
     { 
@@ -378,7 +378,7 @@ if(type== CELL)
     }    
 }
        
-void Gmsh::writeVector(FVVect<FVPoint3D<fv_float> >&u, const size_t type,const char *name, fv_float time)   
+void Gmsh::writeVector(FVVect<FVPoint3D<double> >&u, const size_t type,const char *name, double time)   
 {
 if(!_of_is_open)
     { 
@@ -522,9 +522,9 @@ for((ptr_v=m.beginVertex());(ptr_v=m.nextVertex());)
      _node[i-1].coord.z= 0; 
     }
 FVCell2D *ptr_c;
-fv_float order[4],doux;
+double order[4],doux;
 size_t noux;
-FVPoint2D<fv_float> Paux;
+FVPoint2D<double> Paux;
 _nb_element=m.getNbCell();
 _element.resize(_nb_element);
 for((ptr_c=m.beginCell());(ptr_c=m.nextCell());)
@@ -580,8 +580,8 @@ FVVertex3D* ptr_v;
 FVEdge3D* ptr_e;
 FVFace3D* ptr_f;
 FVCell3D *ptr_c;
-FVPoint3D<fv_float> Paux,t1,t2;
-fv_float order[5],doux;
+FVPoint3D<double> Paux,t1,t2;
+double order[5],doux;
 size_t noux;
 size_t it;
 _nb_node=m.getNbVertex();

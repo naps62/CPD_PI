@@ -21,57 +21,57 @@ _Ncoef=rec._Ncoef;
 if(!rec._A) _A=NULL;
 else
     {
-    _A=new   FVDenseM<fv_float>;   
+    _A=new   FVDenseM<double>;   
     _A->resize(_ptr_s->getNbGeometry(),_Ncoef);
     (*_A)=(*rec._A);        
     }   
 if(!rec._Q) _Q=NULL;
 else
     {
-    _Q=new   FVDenseM<fv_float>;
+    _Q=new   FVDenseM<double>;
     _Q->resize(_ptr_s->getNbGeometry());
     (*_Q)=(*rec._Q);   
     } 
 if(!rec._coef) _coef=NULL;
 else
     {
-    _coef= new FVVect<fv_float>;
+    _coef= new FVVect<double>;
     _coef->resize(_Ncoef);    
     (*_coef)=(*rec._coef); 
     } 
 if(!rec._M) _M=NULL;
 else
     {
-    _M=new FVVect<fv_float>;
+    _M=new FVVect<double>;
     _M->resize(_Ncoef);   
     (*_M)=(*rec._M);   
     } 
 }  
              
-fv_float FVRecons1D::_evalMean(void *ptr,size_t type,size_t alpha)
+double FVRecons1D::_evalMean(void *ptr,size_t type,size_t alpha)
 {
-fv_float x1,x2,x,sum;  
+double x1,x2,x,sum;  
 x1=x2=x=sum=0.;
-FVPoint2D<fv_float> GP;
+FVPoint2D<double> GP;
 FVGaussPoint1D GPCell;
 switch(type)
    {
     case FVVERTEX1D:
     x1=((FVVertex1D *)ptr)->coord.x;
-    return(pow(x1-_ref_point.x,(fv_float)alpha));    
+    return(pow(x1-_ref_point.x,(double)alpha));    
     break;
     case FVCELL1D:
     x1=((FVCell1D *)ptr)->firstVertex->coord.x;
     x2=((FVCell1D *)ptr)->secondVertex->coord.x; 
     GP=GPCell.getPoint(5,1);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,1)*pow(x-_ref_point.x,(fv_float)alpha);
+    sum+=GPCell.getWeight(5,1)*pow(x-_ref_point.x,(double)alpha);
     GP=GPCell.getPoint(5,2);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,2)*pow(x-_ref_point.x,(fv_float)alpha);
+    sum+=GPCell.getWeight(5,2)*pow(x-_ref_point.x,(double)alpha);
     GP=GPCell.getPoint(5,3);
     x=GP.x*x1+GP.y*x2;
-    sum+=GPCell.getWeight(5,3)*pow(x-_ref_point.x,(fv_float)alpha);
+    sum+=GPCell.getWeight(5,3)*pow(x-_ref_point.x,(double)alpha);
     return(sum);
     break;     
     default:
@@ -91,11 +91,11 @@ if(_ptr_s->nb_geometry<Ncoef-1)
 #endif
 
          // create the matrix
-_A=new   FVDenseM<fv_float>;
-_Q=new   FVDenseM<fv_float>;
+_A=new   FVDenseM<double>;
+_Q=new   FVDenseM<double>;
 _A->resize(_ptr_s->getNbGeometry(),_Ncoef);
 _Q->resize(_ptr_s->getNbGeometry());
-_M=new FVVect<fv_float>;
+_M=new FVVect<double>;
 _M->resize(_Ncoef); 
 FVPoint1D<size_t> al;
 size_t alpha1;
@@ -124,11 +124,11 @@ if(_ptr_s->nb_geometry<Ncoef)
 #endif
 
          // create the matrix
-_A=new   FVDenseM<fv_float>;
-_Q=new   FVDenseM<fv_float>;
+_A=new   FVDenseM<double>;
+_Q=new   FVDenseM<double>;
 _A->resize(_ptr_s->getNbGeometry(),_Ncoef+1);
 _Q->resize(_ptr_s->getNbGeometry());
-_M=new FVVect<fv_float>;
+_M=new FVVect<double>;
 _M->resize(_Ncoef); 
 FVPoint1D<size_t> al;
 size_t alpha1;
@@ -153,9 +153,9 @@ _A->QRFactorize(*_Q);
 // Polynomial coeffient  with the conservative reference value 
 void FVRecons1D::computeConservativeCoef()
 {
-FVVect<fv_float> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
+FVVect<double> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
 void *ptr;
-fv_float  geo_val=0;
+double  geo_val=0;
 _ref_val=0;
 size_t k;
 switch(_ptr_s->getReferenceType())
@@ -216,16 +216,16 @@ while((ptr=_ptr_s->nextGeometry()))
 _Q->Mult(B, X);
 _A->PartialBackwardSubstitution(X);
 // create the vector
-_coef= new FVVect<fv_float>;
+_coef= new FVVect<double>;
 _coef->resize(_Ncoef);
 for(size_t i=0;i<_Ncoef;i++) (*_coef)[i]=X[i];
 }
 // Polynomial coeffient  without the conservative reference value 
 void FVRecons1D::computeCoef()
 {
-FVVect<fv_float> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
+FVVect<double> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
 void *ptr;
-fv_float  geo_val=0;
+double  geo_val=0;
 _ref_val=0;
 size_t k;
 
@@ -262,7 +262,7 @@ while((ptr=_ptr_s->nextGeometry()))
 _Q->Mult(B, X);
 _A->PartialBackwardSubstitution(X);
 // create the vector
-_coef= new FVVect<fv_float>;
+_coef= new FVVect<double>;
 _coef->resize(_Ncoef);
 for(size_t i=0;i<_Ncoef;i++) (*_coef)[i]=X[i+1];
 _ref_val=X[0];
@@ -272,10 +272,10 @@ _ref_val=X[0];
 
 
 
-fv_float FVRecons1D::getValue(FVPoint1D<fv_float> P,size_t d)
+double FVRecons1D::getValue(FVPoint1D<double> P,size_t d)
 {
 UNUSED(d);
-fv_float val=_ref_val;
+double val=_ref_val;
 size_t k;
 FVPoint1D<size_t> al;
 size_t alpha1;
@@ -284,16 +284,16 @@ for(k=0;k<_Ncoef;k++)
     {
     al=alpha1D(k);   
     alpha1=al.x;  
-    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(fv_float)alpha1)-(*_M)[k]);
+    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(double)alpha1)-(*_M)[k]);
     //cout<<"coef "<<k<<"="<<(*_coef)[k]<<" alapuissance "<<alpha1<<" et M="<<(*_M)[k]<<endl;
     }
 return(val);
 }
 // comopute the derivative
-FVPoint1D<fv_float> FVRecons1D::getDerivative(FVPoint1D<fv_float> P, size_t degree) 
+FVPoint1D<double> FVRecons1D::getDerivative(FVPoint1D<double> P, size_t degree) 
 {
 UNUSED(degree);
-FVPoint1D<fv_float> val=0.;
+FVPoint1D<double> val=0.;
 size_t k;
 FVPoint1D<size_t> al;
 size_t alpha1;
@@ -301,7 +301,7 @@ for(k=0;k<_Ncoef;k++)
     {
     al=alpha1D(k);   
     alpha1=al.x;  
-    val.x+=(*_coef)[k]*alpha1*pow(P.x-_ref_point.x,(fv_float)(alpha1-1));
+    val.x+=(*_coef)[k]*alpha1*pow(P.x-_ref_point.x,(double)(alpha1-1));
     //cout<<"coef "<<k<<"="<<alpha1*(*_coef)[k]<<" alapuissance "<<alpha1-1<<" et M="<<(*_M)[k]<<endl;
     }
 return(val);

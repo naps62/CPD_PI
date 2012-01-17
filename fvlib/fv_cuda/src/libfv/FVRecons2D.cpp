@@ -31,66 +31,66 @@ _Ncoef=rec._Ncoef;
 if(!rec._A) _A=NULL;
 else
     {
-    _A=new   FVDenseM<fv_float>;   
+    _A=new   FVDenseM<double>;   
     _A->resize(_ptr_s->getNbGeometry(),_Ncoef);
     (*_A)=(*rec._A);        
     }   
 if(!rec._Q) _Q=NULL;
 else
     {
-    _Q=new   FVDenseM<fv_float>;
+    _Q=new   FVDenseM<double>;
     _Q->resize(_ptr_s->getNbGeometry());
     (*_Q)=(*rec._Q);   
     } 
 if(!rec._coef) _coef=NULL;
 else
     {
-    _coef= new FVVect<fv_float>;
+    _coef= new FVVect<double>;
     _coef->resize(_Ncoef);    
     (*_coef)=(*rec._coef); 
     } 
 if(!rec._M) _M=NULL;
 else
     {
-    _M=new FVVect<fv_float>;
+    _M=new FVVect<double>;
     _M->resize(_Ncoef);   
     (*_M)=(*rec._M);   
     } 
 }  
 // compute mean value (x-c_x)^alpha1(y-c_y)^alpha2 on the geometrical entity
-fv_float FVRecons2D::_evalMean(void *ptr,size_t type,size_t alpha1,size_t alpha2)
+double FVRecons2D::_evalMean(void *ptr,size_t type,size_t alpha1,size_t alpha2)
 {
-FVPoint2D<fv_float> P1,P2,P;
-fv_float sum,S,S_global,aux;  
+FVPoint2D<double> P1,P2,P;
+double sum,S,S_global,aux;  
 sum=0.;
-FVPoint2D<fv_float> GPEdge;
-FVPoint3D<fv_float> GPCell;
+FVPoint2D<double> GPEdge;
+FVPoint3D<double> GPCell;
 FVGaussPoint1D G1D;
 FVGaussPoint2D G2D;
 // novas variáveis
 FVCell2D *ptr_c;
 FVEdge2D *ptr_e;
 FVVertex2D *ptr_v1,*ptr_v2;
-FVPoint2D<fv_float> centroid;
+FVPoint2D<double> centroid;
 
 switch(type)
    {
     case FVVERTEX2D:
     P=((FVVertex2D *)ptr)->coord;
-    return(pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2));    
+    return(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2));    
     break;
     case FVEDGE2D:
     P1=((FVEdge2D *)ptr)->firstVertex->coord;
     P2=((FVEdge2D *)ptr)->secondVertex->coord; 
     GPEdge=G1D.getPoint(5,1);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,1)*pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2);
+    sum+=G1D.getWeight(5,1)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2);
     GPEdge=G1D.getPoint(5,2);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,2)*pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2);
+    sum+=G1D.getWeight(5,2)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2);
     GPEdge=G1D.getPoint(5,3);
     P=GPEdge.x*P1+GPEdge.y*P2;
-    sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2);    
+    sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2);    
     return(sum); 
     break; 
     //
@@ -110,7 +110,7 @@ switch(type)
              { 
                GPCell=G2D.getPoint(5,i);
                P=GPCell.x*ptr_v1->coord+GPCell.y*ptr_v2->coord+GPCell.z*centroid;
-               aux+=G2D.getWeight(5,i)*pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2);
+               aux+=G2D.getWeight(5,i)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2);
              }    
          sum+=aux*S;
          S_global+=S;
@@ -133,11 +133,11 @@ if(_ptr_s->nb_geometry<Ncoef-1)
          cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"Not enough entities for the reconstruction"<<endl;
 #endif
          // create the matrix
-_A=new   FVDenseM<fv_float>;
-_Q=new   FVDenseM<fv_float>;
+_A=new   FVDenseM<double>;
+_Q=new   FVDenseM<double>;
 _A->resize(_ptr_s->getNbGeometry(),_Ncoef);
 _Q->resize(_ptr_s->getNbGeometry());
-_M=new FVVect<fv_float>;
+_M=new FVVect<double>;
 _M->resize(_Ncoef); 
 FVPoint2D<size_t> al;
 size_t alpha1,alpha2;
@@ -164,11 +164,11 @@ if(_ptr_s->nb_geometry<Ncoef)
          cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"Not enough entities for the reconstruction"<<endl;
 #endif
          // create the matrix
-_A=new   FVDenseM<fv_float>;
-_Q=new   FVDenseM<fv_float>;
+_A=new   FVDenseM<double>;
+_Q=new   FVDenseM<double>;
 _A->resize(_ptr_s->getNbGeometry(),_Ncoef+1);
 _Q->resize(_ptr_s->getNbGeometry());
-_M=new FVVect<fv_float>;
+_M=new FVVect<double>;
 _M->resize(_Ncoef); 
 FVPoint2D<size_t> al;
 size_t alpha1,alpha2;
@@ -195,9 +195,9 @@ _A->QRFactorize(*_Q);
 // Polynomial coeffient  with the conservative reference value 
 void FVRecons2D::computeConservativeCoef()
 {
-FVVect<fv_float> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
+FVVect<double> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
 void *ptr;
-fv_float  geo_val=0;
+double  geo_val=0;
 _ref_val=0;
 size_t k;
 switch(_ptr_s->getReferenceType())
@@ -278,7 +278,7 @@ while((ptr=_ptr_s->nextGeometry()))
 _Q->Mult(B, X);
 _A->PartialBackwardSubstitution(X);
 // create the vector
-_coef= new FVVect<fv_float>;
+_coef= new FVVect<double>;
 _coef->resize(_Ncoef);
 for(size_t i=0;i<_Ncoef;i++) (*_coef)[i]=X[i];
 }
@@ -286,9 +286,9 @@ for(size_t i=0;i<_Ncoef;i++) (*_coef)[i]=X[i];
 // Polynomial coeffient  without the conservative reference value 
 void FVRecons2D::computeCoef()
 {
-FVVect<fv_float> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
+FVVect<double> B(_ptr_s->getNbGeometry()),X(_ptr_s->getNbGeometry()); 
 void *ptr;
-fv_float  geo_val=0;
+double  geo_val=0;
 size_t k;
 
 _ptr_s->beginGeometry();  
@@ -334,7 +334,7 @@ while((ptr=_ptr_s->nextGeometry()))
 _Q->Mult(B, X);
 _A->PartialBackwardSubstitution(X);
 // create the vector
-_coef= new FVVect<fv_float>;
+_coef= new FVVect<double>;
 _coef->resize(_Ncoef);
 for(size_t i=0;i<_Ncoef;i++) (*_coef)[i]=X[i+1];
 _ref_val=X[0];
@@ -342,11 +342,11 @@ _ref_val=X[0];
 
 
 
-fv_float FVRecons2D::getValue(FVPoint2D<fv_float> P,size_t d)
+double FVRecons2D::getValue(FVPoint2D<double> P,size_t d)
 {
 UNUSED(d);
 // basic method to replace with horner method
-fv_float val=_ref_val;
+double val=_ref_val;
 size_t k;
 FVPoint2D<size_t> al; 
 size_t alpha1,alpha2;
@@ -356,16 +356,16 @@ for(k=0;k<_Ncoef;k++)
     al=alpha2D(k);   
     alpha1=al.x;alpha2=al.y;
     //cout<<"coef["<<alpha1<<","<<alpha2<<"]="<<(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;
-    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)alpha2)-(*_M)[k]);
+    val+=(*_coef)[k]*(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)-(*_M)[k]);
     }
 return(val);
 }
 // compute the gradient
-FVPoint2D<fv_float> FVRecons2D::getDerivative(FVPoint2D<fv_float> P, size_t degree) 
+FVPoint2D<double> FVRecons2D::getDerivative(FVPoint2D<double> P, size_t degree) 
 {
 UNUSED(degree);
 // basic method to replace with horner method
-FVPoint2D<fv_float> val=0.;
+FVPoint2D<double> val=0.;
 size_t k;
 FVPoint2D<size_t> al; 
 size_t alpha1,alpha2;
@@ -376,12 +376,12 @@ for(k=0;k<_Ncoef;k++)
     if(alpha1>0)
         {
         //cout<<"power["<<alpha1<<","<<alpha2<<"]="<<alpha1*(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;  
-        val.x+=alpha1*(*_coef)[k]*pow(P.x-_ref_point.x,(fv_float)(alpha1-1))*pow(P.y-_ref_point.y,(fv_float)alpha2);
+        val.x+=alpha1*(*_coef)[k]*pow(P.x-_ref_point.x,(double)(alpha1-1))*pow(P.y-_ref_point.y,(double)alpha2);
         }
     if(alpha2>0)        
         {
         //cout<<"power["<<alpha1<<","<<alpha2<<"]="<<alpha2*(*_coef)[k]<<" com M="<<(*_M)[k]<<endl;  
-        val.y+=alpha2*(*_coef)[k]*pow(P.x-_ref_point.x,(fv_float)alpha1)*pow(P.y-_ref_point.y,(fv_float)(alpha2-1));
+        val.y+=alpha2*(*_coef)[k]*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)(alpha2-1));
         }
     }
 return(val);

@@ -18,8 +18,8 @@ class FVGaussPoint1D{
 public:
 // constructor
     FVGaussPoint1D(){ ; }
-    FVPoint2D<fv_float> getPoint(size_t , size_t );
-    fv_float getWeight(size_t order, size_t no);
+    FVPoint2D<double> getPoint(size_t , size_t );
+    double getWeight(size_t order, size_t no);
     size_t getNbPoint(size_t order);
 
 };
@@ -34,8 +34,8 @@ class FVGaussPoint2D{
 public:
     // constructor
     FVGaussPoint2D() { ; }
-    FVPoint3D<fv_float> getPoint(size_t order, size_t no);
-    fv_float getWeight(size_t order, size_t no);
+    FVPoint3D<double> getPoint(size_t order, size_t no);
+    double getWeight(size_t order, size_t no);
     size_t getNbPoint(size_t order);
 private:
 };
@@ -49,8 +49,8 @@ class FVGaussPoint3D{
 public:
     // constructor
     FVGaussPoint3D() { ; }
-    FVPoint4D<fv_float> getPoint(size_t order, size_t no);
-    fv_float getWeight(size_t order, size_t no);
+    FVPoint4D<double> getPoint(size_t order, size_t no);
+    double getWeight(size_t order, size_t no);
     size_t getNbPoint(size_t order);
 private:
 };

@@ -11,12 +11,12 @@ class FVVertex3D;
 class FVFace3D
 {
 public:
-FVPoint3D<fv_float> centroid;
-fv_float perimeter,area;
+FVPoint3D<double> centroid;
+double perimeter,area;
 size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;
 FVCell3D *leftCell,*rightCell;  // the two cells
 FVVertex3D *vertex[NB_VERTEX_PER_FACE_3D]; // the vertices
-FVPoint3D<fv_float> normal[NB_VERTEX_PER_FACE_3D];  // from left to right
+FVPoint3D<double> normal[NB_VERTEX_PER_FACE_3D];  // from left to right
 FVEdge3D *edge[NB_EDGE_PER_FACE_3D]; // the vertices
 
      FVFace3D(){leftCell=NULL;rightCell=NULL;nb_vertex=0;nb_edge=0;nb_cell=0;label=0;}
@@ -26,7 +26,7 @@ FVEdge3D *edge[NB_EDGE_PER_FACE_3D]; // the vertices
      FVVertex3D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  
      FVEdge3D* beginEdge(){pos_e=0;if(pos_e<nb_edge) return(edge[0]);else return(NULL);};
      FVEdge3D* nextEdge(){if(pos_e<nb_edge) return(edge[pos_e++]);else return(NULL);} 
-     FVPoint3D<fv_float> getNormal(){return normal[pos_e];}
+     FVPoint3D<double> getNormal(){return normal[pos_e];}
      void setCode2Edge(size_t val=0)
          {for(size_t i=0;i<nb_edge;i++) 
           if(edge[i]) edge[i]->code=val;}

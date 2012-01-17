@@ -24,7 +24,7 @@ struct _parameters
 	} filenames;
 	struct
 	{
-		fv_float final;
+		double final;
 	} time;
 	struct
 	{
@@ -32,7 +32,7 @@ struct _parameters
 	} iterations;
 	struct
 	{
-		fv_float threshold;
+		double threshold;
 	} computation;
 }
 Parameters;
@@ -41,8 +41,8 @@ Parameters;
 
 //	BEGIN GLOBAL VARIABLES
 
-fv_float *vs;
-CudaFV::CFVVect<fv_float> gpu_vs;
+double *vs;
+CudaFV::CFVVect<double> gpu_vs;
 
 //	END GLOBAL VARIABLES
 
@@ -51,22 +51,22 @@ CudaFV::CFVVect<fv_float> gpu_vs;
 /*
 	Computes the resulting flux in every edge
 */
-fv_float gpu_compute_flux(
+double gpu_compute_flux(
 		CudaFV::CFVMesh2D &mesh,
-		CudaFV::CFVVect<fv_float> &polution,
+		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVPoints2D &velocity,
-		CudaFV::CFVVect<fv_float> &flux,
-		fv_float dc) {
-	fv_float dt;
-	fv_float p_left;							//	polution in the left face
-	fv_float p_right;							//	polution in the right face
+		CudaFV::CFVVect<double> &flux,
+		double dc) {
+	double dt;
+	double p_left;							//	polution in the left face
+	double p_right;							//	polution in the right face
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
 	unsigned e;								//	edge iteration variable
-	fv_float v_left[2];						//	velocity in the left face
-	fv_float v_right[2];						//	velocity in the right face
-	fv_float v=0;								//	resulting velocity
-	fv_float v_max;							//	maximum computed velocity
+	double v_left[2];						//	velocity in the left face
+	double v_right[2];						//	velocity in the right face
+	double v=0;								//	resulting velocity
+	double v_max;							//	maximum computed velocity
 
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		i_left = mesh.edge_left_cells[i];
@@ -85,8 +85,8 @@ fv_float gpu_compute_flux(
 			p_right = dc;
 		}
 
-		fv_float vx = (v_left[0] + v_right[0]) * 0.5 * mesh.edge_normals.x[i];
-		fv_float vy = (v_left[1] + v_right[1]) * 0.5 * mesh.edge_normals.y[i];
+		double vx = (v_left[0] + v_right[0]) * 0.5 * mesh.edge_normals.x[i];
+		double vy = (v_left[1] + v_right[1]) * 0.5 * mesh.edge_normals.y[i];
 		v = vx + vy;
 
 		gpu_vs[i] = v;
@@ -111,7 +111,7 @@ fv_float gpu_compute_flux(
 }
 
 
-void gpu_update(CudaFV::CFVMesh2D &mesh, CudaFV::CFVVect<fv_float> &polution, CudaFV::CFVVect<fv_float> &flux, fv_float dt) {
+void gpu_update(CudaFV::CFVMesh2D &mesh, CudaFV::CFVVect<double> &polution, CudaFV::CFVVect<double> &flux, double dt) {
 	for (unsigned int i = 0; i < mesh.num_edges; ++i) {
 		polution[ (unsigned int) mesh.edge_left_cells[i] ] -=
 			dt * flux[i] * mesh.edge_lengths[i] / mesh.cell_areas[ (unsigned int) mesh.edge_left_cells[i] ];
@@ -144,11 +144,11 @@ Parameters read_parameters (
 /*
 	Computes the mesh parameter (whatever that is)
 */
-fv_float compute_mesh_parameter (
+double compute_mesh_parameter (
 	FVMesh2D mesh)
 {
-	fv_float h;
-	fv_float S;
+	double h;
+	double S;
 	FVCell2D *cell;
 	FVEdge2D *edge;
 
@@ -165,8 +165,8 @@ fv_float compute_mesh_parameter (
 	return h;
 }
 
-//fv_float gpu_compute_mesh_parameter (GPU_FVMesh2D mesh) {
-	//fv_float h, S;
+//double gpu_compute_mesh_parameter (GPU_FVMesh2D mesh) {
+	//double h, S;
 	//for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 	//	S = mesh.cell_areas.cpu_ptr[i];
 		//TODO continuar aqui. cada Cell precisa da lista de edges correspondentes
@@ -177,8 +177,8 @@ fv_float compute_mesh_parameter (
 /*
 	Main loop: calculates the polution spread evolution in the time domain.
 */
-void gpu_main_loop(fv_float final_time, unsigned jump_interval, CudaFV::CFVMesh2D &mesh, fv_float mesh_parameter, FVVect<fv_float> old_polution, CudaFV::CFVVect<fv_float> &polutions, CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<fv_float> &flux, fv_float dc) {
-	fv_float t, dt;
+void gpu_main_loop(double final_time, unsigned jump_interval, CudaFV::CFVMesh2D &mesh, double mesh_parameter, FVVect<double> old_polution, CudaFV::CFVVect<double> &polutions, CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<double> &flux, double dc) {
+	double t, dt;
 	int i;
 	FVio polution_file("polution.xml", FVWRITE);
 
@@ -208,23 +208,23 @@ void gpu_main_loop(fv_float final_time, unsigned jump_interval, CudaFV::CFVMesh2
 }
 
 void cuda_main_loop(
-		fv_float final_time,
+		double final_time,
 		unsigned jump_interval,
 		CudaFV::CFVMesh2D &mesh,
-		fv_float mesh_parameter,
-		FVVect<fv_float> &old_polution,
-		CudaFV::CFVVect<fv_float> &polution,
+		double mesh_parameter,
+		FVVect<double> &old_polution,
+		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVPoints2D &velocities,
-		CudaFV::CFVVect<fv_float> &flux,
-		fv_float dc);
+		CudaFV::CFVVect<double> &flux,
+		double dc);
 /*
 	Função Madre
 */
 int main()
 {  
 	string name;
-	fv_float h;
-	fv_float t;
+	double h;
+	double t;
 	FVMesh2D mesh;
 
 	// GPU
@@ -240,17 +240,17 @@ int main()
 	// GPU
     CudaFV::CFVMesh2D gpu_mesh(mesh);
 	
-	FVVect<fv_float> polution( mesh.getNbCell() );
-	FVVect<fv_float> flux( mesh.getNbEdge() );
-	FVVect<FVPoint2D<fv_float> > velocity( mesh.getNbCell() );
+	FVVect<double> polution( mesh.getNbCell() );
+	FVVect<double> flux( mesh.getNbEdge() );
+	FVVect<FVPoint2D<double> > velocity( mesh.getNbCell() );
 
 	//	read velocity
 	FVio velocity_file( data.filenames.velocity.c_str() , FVREAD );
 	velocity_file.get( velocity , t , name );
 
 	// GPU
-    CudaFV::CFVVect<fv_float> gpu_polution(gpu_mesh.num_cells);
-    CudaFV::CFVVect<fv_float> gpu_flux(gpu_mesh.num_edges);
+    CudaFV::CFVVect<double> gpu_polution(gpu_mesh.num_cells);
+    CudaFV::CFVVect<double> gpu_flux(gpu_mesh.num_edges);
     CudaFV::CFVPoints2D gpu_velocity(gpu_mesh.num_cells);
 
 	for(unsigned int i = 0; i < gpu_polution.size(); ++i) {
@@ -262,7 +262,7 @@ int main()
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
-	gpu_vs = CudaFV::CFVVect<fv_float>(gpu_mesh.num_edges);
+	gpu_vs = CudaFV::CFVVect<double>(gpu_mesh.num_edges);
 
 	// TODO implementar a versao GPU disto
 	h = compute_mesh_parameter( mesh );

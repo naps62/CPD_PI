@@ -15,13 +15,13 @@
 class FVRecons2D
 {
 private:
-FVPoint2D<fv_float> _ref_point;
-FVVect<fv_float> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  
-FVVect<fv_float> *_coef,*_M;
+FVPoint2D<double> _ref_point;
+FVVect<double> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  
+FVVect<double> *_coef,*_M;
 FVStencil * _ptr_s;
-FVDenseM<fv_float> *_A,*_Q;
-fv_float _evalMean(void *ptr,size_t type,size_t alpha1, size_t alpha2); 
-fv_float _ref_val;
+FVDenseM<double> *_A,*_Q;
+double _evalMean(void *ptr,size_t type,size_t alpha1, size_t alpha2); 
+double _ref_val;
 size_t _degree,_Ncoef;
 public:
 // Constructors and destructors
@@ -75,18 +75,18 @@ void setStencil(FVStencil *ptr_s, size_t degree)
 // others     
 void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=((_degree+2)*(_degree+1))/2-1;}    
 size_t getPolynomialDegree(){return(_degree); } 
-void setReferencePoint(FVPoint2D<fv_float> P){_ref_point=P;}
-void setVectorVertex2D( FVVect<fv_float> & u){_Vertex2DVect=&u;}
-void setVectorEdge2D( FVVect<fv_float> & u)  {_Edge2DVect=&u;}
-void setVectorCell2D( FVVect<fv_float> & u)  {_Cell2DVect=&u;}
+void setReferencePoint(FVPoint2D<double> P){_ref_point=P;}
+void setVectorVertex2D( FVVect<double> & u){_Vertex2DVect=&u;}
+void setVectorEdge2D( FVVect<double> & u)  {_Edge2DVect=&u;}
+void setVectorCell2D( FVVect<double> & u)  {_Cell2DVect=&u;}
 void doConservativeMatrix();
 void computeConservativeCoef(); 
 void doMatrix();
 void computeCoef();
-fv_float getValue(FVPoint2D<fv_float> P, size_t degree );    
-fv_float getValue(FVPoint2D<fv_float> P){return(FVRecons2D::getValue(P,_degree));}    
-FVPoint2D<fv_float> getDerivative(FVPoint2D<fv_float> P, size_t degree);
-FVPoint2D<fv_float> getDerivative(FVPoint2D<fv_float> P){return(FVRecons2D::getDerivative(P,_degree));}
+double getValue(FVPoint2D<double> P, size_t degree );    
+double getValue(FVPoint2D<double> P){return(FVRecons2D::getValue(P,_degree));}    
+FVPoint2D<double> getDerivative(FVPoint2D<double> P, size_t degree);
+FVPoint2D<double> getDerivative(FVPoint2D<double> P){return(FVRecons2D::getDerivative(P,_degree));}
 void clean()
     {
     if(_A) delete(_A); if(_Q) delete(_Q);if(_coef) delete(_coef);if(_M) delete(_M);

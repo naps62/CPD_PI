@@ -13,13 +13,13 @@
 class FVRecons1D
 {
 private:
-FVPoint1D<fv_float> _ref_point;
-FVVect<fv_float> *_Vertex1DVect,*_Cell1DVect;  
-FVVect<fv_float> *_coef,*_M;
+FVPoint1D<double> _ref_point;
+FVVect<double> *_Vertex1DVect,*_Cell1DVect;  
+FVVect<double> *_coef,*_M;
 FVStencil * _ptr_s;
-FVDenseM<fv_float> *_A,*_Q;
-fv_float _evalMean(void *ptr,size_t type,size_t alpha); 
-fv_float _ref_val;
+FVDenseM<double> *_A,*_Q;
+double _evalMean(void *ptr,size_t type,size_t alpha); 
+double _ref_val;
 size_t _degree,_Ncoef;
 
 public:
@@ -69,18 +69,18 @@ void setStencil(FVStencil *ptr_s, size_t degree)
 //others     
 void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=_degree;}    
 size_t getPolynomialDegree(){return(_degree); } 
-void setReferencePoint(fv_float x){_ref_point.x=x;}
-void setReferencePoint(FVPoint1D<fv_float> P){_ref_point=P;}
-void setVectorVertex1D( FVVect<fv_float> & u){_Vertex1DVect=&u;}
-void setVectorCell1D( FVVect<fv_float> & u){_Cell1DVect=&u;}
+void setReferencePoint(double x){_ref_point.x=x;}
+void setReferencePoint(FVPoint1D<double> P){_ref_point=P;}
+void setVectorVertex1D( FVVect<double> & u){_Vertex1DVect=&u;}
+void setVectorCell1D( FVVect<double> & u){_Cell1DVect=&u;}
 void doConservativeMatrix();
 void computeConservativeCoef();
 void doMatrix();
 void computeCoef();
-fv_float getValue(FVPoint1D<fv_float> P, size_t degree); 
-fv_float getValue(FVPoint1D<fv_float> P){return(FVRecons1D::getValue(P,_degree));} 
-FVPoint1D<fv_float> getDerivative(FVPoint1D<fv_float> P, size_t degree);
-FVPoint1D<fv_float> getDerivative(FVPoint1D<fv_float> P){return(FVRecons1D::getDerivative(P,_degree));}
+double getValue(FVPoint1D<double> P, size_t degree); 
+double getValue(FVPoint1D<double> P){return(FVRecons1D::getValue(P,_degree));} 
+FVPoint1D<double> getDerivative(FVPoint1D<double> P, size_t degree);
+FVPoint1D<double> getDerivative(FVPoint1D<double> P){return(FVRecons1D::getDerivative(P,_degree));}
 
 
 void clean()

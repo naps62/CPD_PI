@@ -15,13 +15,13 @@
 class FVRecons3D
 {
 private:
-FVPoint3D<fv_float> _ref_point;
-FVVect<fv_float> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    
-FVVect<fv_float> *_coef,*_M;
+FVPoint3D<double> _ref_point;
+FVVect<double> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    
+FVVect<double> *_coef,*_M;
 FVStencil * _ptr_s;
-FVDenseM<fv_float> *_A,*_Q;
-fv_float _evalMean(void *ptr,size_t type,size_t alpha1, size_t alpha2,size_t alpha3); 
-fv_float _ref_val;
+FVDenseM<double> *_A,*_Q;
+double _evalMean(void *ptr,size_t type,size_t alpha1, size_t alpha2,size_t alpha3); 
+double _ref_val;
 size_t _degree,_Ncoef;
 
 public:
@@ -76,19 +76,19 @@ void setStencil(FVStencil *ptr_s, size_t degree)
 //other    
 void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=((_degree+3)*(_degree)*(_degree+1))/6-1;}    
 size_t getPolynomialDegree(){return(_degree); } 
-void setReferencePoint(FVPoint3D<fv_float> P){_ref_point=P;}
-void setVectorVertex3D( FVVect<fv_float> & u){_Vertex3DVect=&u;}
-void setVectorEdge3D( FVVect<fv_float> & u){_Edge3DVect=&u;}
-void setVectorFace3D( FVVect<fv_float> & u){_Face3DVect=&u;}
-void setVectorCell3D( FVVect<fv_float> & u){_Cell3DVect=&u;}
+void setReferencePoint(FVPoint3D<double> P){_ref_point=P;}
+void setVectorVertex3D( FVVect<double> & u){_Vertex3DVect=&u;}
+void setVectorEdge3D( FVVect<double> & u){_Edge3DVect=&u;}
+void setVectorFace3D( FVVect<double> & u){_Face3DVect=&u;}
+void setVectorCell3D( FVVect<double> & u){_Cell3DVect=&u;}
 void doConservativeMatrix();
 void computeConservativeCoef();
 void doMatrix();
 void computeCoef();
-fv_float getValue(FVPoint3D<fv_float> P, size_t degree );    
-fv_float getValue(FVPoint3D<fv_float> P){return(FVRecons3D::getValue(P,_degree));}    
-FVPoint3D<fv_float> getDerivative(FVPoint3D<fv_float> P, size_t degree);
-FVPoint3D<fv_float> getDerivative(FVPoint3D<fv_float> P){return(FVRecons3D::getDerivative(P,_degree));}
+double getValue(FVPoint3D<double> P, size_t degree );    
+double getValue(FVPoint3D<double> P){return(FVRecons3D::getValue(P,_degree));}    
+FVPoint3D<double> getDerivative(FVPoint3D<double> P, size_t degree);
+FVPoint3D<double> getDerivative(FVPoint3D<double> P){return(FVRecons3D::getDerivative(P,_degree));}
 void clean()
     {
     if(_A) delete(_A); if(_Q) delete(_Q);if(_coef) delete(_coef);if(_M) delete(_M);

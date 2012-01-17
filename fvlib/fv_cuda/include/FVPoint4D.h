@@ -91,12 +91,12 @@ std::ostream & operator<<(std::ostream &s, const FVPoint4D<T_> &a)
 /* ------ associated functions ----*/
 
 
-//inline fv_float Det(const FVPoint4D<fv_float> &u, const FVPoint4D<fv_float> &v, const FVPoint4D<fv_float> &w)
+//inline double Det(const FVPoint4D<double> &u, const FVPoint4D<double> &v, const FVPoint4D<double> &w)
 //{
 //   return (u.x*(v.y*w.z-v.z*w.y)-u.y*(v.x*w.z-v.z*w.x)+u.z*(v.x*w.y-v.y*w.x));
 //}
 
-inline fv_float Norm(const FVPoint4D<fv_float> &u)
+inline double Norm(const FVPoint4D<double> &u)
 {
    return sqrt(u.x*u.x+u.y*u.y+u.z*u.z+u.t*u.t);
 }

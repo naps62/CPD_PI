@@ -34,7 +34,7 @@ namespace CudaFV {
 			 */
 			unsigned int num_edges;
 			CFVPoints2D edge_normals;				// normals for each edge
-			CFVVect<fv_float> edge_lengths;			// length for each edge
+			CFVVect<double> edge_lengths;			// length for each edge
 			CFVVect<unsigned int> edge_left_cells;	// size = num_edges. holds index of the cell left of each edge
 			CFVVect<unsigned int> edge_right_cells;	// size = num_edges. holds index of the cell right of each edge
 
@@ -42,7 +42,7 @@ namespace CudaFV {
 			 * CELL INFO
 			 */
 			unsigned int num_cells;
-			CFVVect<fv_float> cell_areas;	// area of each cell
+			CFVVect<double> cell_areas;	// area of each cell
 
 		public:
 

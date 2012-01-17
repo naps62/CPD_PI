@@ -21,51 +21,51 @@ public:
     FVio();
     FVio(const char *, int );
     ~FVio();
-    void setTime(fv_float &time){_time=time;}
+    void setTime(double &time){_time=time;}
     void setName(string &name){_name=name;} 
     void open(const char *, int );
     void close();
     void showXML(){cout << _xml<<endl;}  // for internal purpose to check the string
-    void put(FVVect <fv_float> &, const fv_float time=0., const string &name="noname");      
-    void put(FVVect <fv_float> &, FVVect <fv_float> &, const fv_float time=0., const string &name="noname");  
-    void put(FVVect <FVPoint2D<fv_float> >&, const fv_float time=0., const string &name="noname");      
-    void put(FVVect <fv_float> &, FVVect <fv_float> &,FVVect <fv_float> &,  const fv_float time=0., const string &name="noname");
-    void put(FVVect <FVPoint3D<fv_float> >&, const fv_float time=0., const string &name="noname");     
+    void put(FVVect <double> &, const double time=0., const string &name="noname");      
+    void put(FVVect <double> &, FVVect <double> &, const double time=0., const string &name="noname");  
+    void put(FVVect <FVPoint2D<double> >&, const double time=0., const string &name="noname");      
+    void put(FVVect <double> &, FVVect <double> &,FVVect <double> &,  const double time=0., const string &name="noname");
+    void put(FVVect <FVPoint3D<double> >&, const double time=0., const string &name="noname");     
     // one vector
-    size_t get(FVVect <fv_float> &u)
+    size_t get(FVVect <double> &u)
          {return(FVio::get(u,_time,_name));}
-    size_t get(FVVect <fv_float> &u,  fv_float &time )
+    size_t get(FVVect <double> &u,  double &time )
          {return(FVio::get(u,time,_name));}    
-    size_t get(FVVect <fv_float> &,  fv_float &, string &);
+    size_t get(FVVect <double> &,  double &, string &);
     // two vectors
-    size_t get(FVVect <fv_float> &u, FVVect <fv_float> &v)
+    size_t get(FVVect <double> &u, FVVect <double> &v)
          {return(FVio::get(u,v,_time,_name));}
-    size_t get(FVVect <fv_float> &u, FVVect <fv_float> &v, fv_float &time)
+    size_t get(FVVect <double> &u, FVVect <double> &v, double &time)
          {return(FVio::get(u,v,time,_name));}  
-    size_t get(FVVect <fv_float> &, FVVect <fv_float> &, fv_float &, string &);
+    size_t get(FVVect <double> &, FVVect <double> &, double &, string &);
           // with FVPOINT2D
-    size_t get(FVVect <FVPoint2D<fv_float> > &u)
+    size_t get(FVVect <FVPoint2D<double> > &u)
          {return(FVio::get(u,_time,_name));}
-    size_t get(FVVect <FVPoint2D<fv_float> >&u, fv_float &time)
+    size_t get(FVVect <FVPoint2D<double> >&u, double &time)
          {return(FVio::get(u,time,_name));}  
-    size_t get(FVVect <FVPoint2D<fv_float> >&, fv_float &, string &);    
+    size_t get(FVVect <FVPoint2D<double> >&, double &, string &);    
     // three vectors
-    size_t get(FVVect <fv_float> &u, FVVect <fv_float> &v, FVVect <fv_float> &w)
+    size_t get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w)
          {return(FVio::get(u,v,w,_time,_name));} 
-    size_t get(FVVect <fv_float> &u, FVVect <fv_float> &v, FVVect <fv_float> &w, fv_float &time)   
+    size_t get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w, double &time)   
          {return(FVio::get(u,v,w,time,_name));}     
-    size_t get(FVVect <fv_float> &, FVVect <fv_float> &, FVVect <fv_float> &, fv_float &, string &);    
+    size_t get(FVVect <double> &, FVVect <double> &, FVVect <double> &, double &, string &);    
            // with FVPOINT3D
-    size_t get(FVVect <FVPoint3D<fv_float> > &u)
+    size_t get(FVVect <FVPoint3D<double> > &u)
          {return(FVio::get(u,_time,_name));}
-    size_t get(FVVect <FVPoint3D<fv_float> >&u, fv_float &time)
+    size_t get(FVVect <FVPoint3D<double> >&u, double &time)
          {return(FVio::get(u,time,_name));}  
-    size_t get(FVVect <FVPoint3D<fv_float> >&, fv_float &, string &);  
+    size_t get(FVVect <FVPoint3D<double> >&, double &, string &);  
     size_t getNbVect(){return(_nbvec);}
 private:
     string _xml,_name;
     SparseXML _spxml;
-    fv_float _time;
+    double _time;
     size_t _nbvec,_sizevec;
     bool _is_open; 
     ofstream        _of;

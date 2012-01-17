@@ -20,11 +20,11 @@ namespace CudaFV {
             /**
              * one array for X coord, another for Y
              */
-            CFVVect<fv_float> x, y;
+            CFVVect<double> x, y;
 
             CFVPoints2D()                                   { }
-            CFVPoints2D(const unsigned int size)            { x = CFVVect<fv_float>(size);    y = CFVVect<fv_float>(size); }
-            CFVPoints2D(const CudaFV::CFVPoints2D &copy)    { x = CFVVect<fv_float>(copy.x);  y = CFVVect<fv_float>(copy.y); }
+            CFVPoints2D(const unsigned int size)            { x = CFVVect<double>(size);    y = CFVVect<double>(size); }
+            CFVPoints2D(const CudaFV::CFVPoints2D &copy)    { x = CFVVect<double>(copy.x);  y = CFVVect<double>(copy.y); }
 
             /**
              * GETTERS/SETTERS

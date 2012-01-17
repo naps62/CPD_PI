@@ -24,7 +24,7 @@ struct _parameters
 	} filenames;
 	struct
 	{
-		fv_float final;
+		double final;
 	} time;
 	struct
 	{
@@ -32,7 +32,7 @@ struct _parameters
 	} iterations;
 	struct
 	{
-		fv_float threshold;
+		double threshold;
 	} computation;
 }
 Parameters;
@@ -41,7 +41,7 @@ Parameters;
 
 //	BEGIN GLOBAL VARIABLES
 
-fv_float *vs;
+double *vs;
 
 //	END GLOBAL VARIABLES
 
@@ -50,24 +50,24 @@ fv_float *vs;
 /*
 	Computes the resulting flux in every edge
 */
-fv_float compute_flux(
+double compute_flux(
 	FVMesh2D& mesh,
-	FVVect<fv_float>& polution,
-	FVVect<FVPoint2D<fv_float> >& velocity,
-	FVVect<fv_float>& flux,
-	fv_float dc)								//	Dirichlet condition
+	FVVect<double>& polution,
+	FVVect<FVPoint2D<double> >& velocity,
+	FVVect<double>& flux,
+	double dc)								//	Dirichlet condition
 {
-	fv_float dt;
-	fv_float p_left;							//	polution in the left face
-	fv_float p_right;							//	polution in the right face
+	double dt;
+	double p_left;							//	polution in the left face
+	double p_right;							//	polution in the right face
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
-	FVPoint2D<fv_float> v_left;				//	velocity in the left face
-	FVPoint2D<fv_float> v_right;				//	velocity in the right face
-	fv_float v=0;								//	resulting velocity
-	fv_float v_max;							//	maximum computed velocity
+	FVPoint2D<double> v_left;				//	velocity in the left face
+	FVPoint2D<double> v_right;				//	velocity in the right face
+	double v=0;								//	resulting velocity
+	double v_max;							//	maximum computed velocity
 	FVEdge2D *edge;							//	current edge
 
 	//for ( mesh.beginEdge(); ( edge = mesh.nextEdge() ) ; )
@@ -91,7 +91,7 @@ fv_float compute_flux(
 			p_right = dc;
 		} 
 
-		FVPoint2D<fv_float> v_sum = v_left + v_right;
+		FVPoint2D<double> v_sum = v_left + v_right;
 		v_sum *= 0.5f;
 		v = v_sum * edge->normal; 
 		//TODO: remove this dependence
@@ -123,9 +123,9 @@ fv_float compute_flux(
 */
 void update(
 	FVMesh2D& mesh,
-	FVVect<fv_float>& polution,
-	FVVect<fv_float>& flux,
-	fv_float dt)
+	FVVect<double>& polution,
+	FVVect<double>& flux,
+	double dt)
 {
 	FVEdge2D *edge;
 
@@ -166,11 +166,11 @@ Parameters read_parameters (
 /*
 	Computes the mesh parameter (whatever that is)
 */
-fv_float compute_mesh_parameter (
+double compute_mesh_parameter (
 	FVMesh2D mesh)
 {
-	fv_float h;
-	fv_float S;
+	double h;
+	double S;
 	FVCell2D *cell;
 	FVEdge2D *edge;
 
@@ -197,17 +197,17 @@ fv_float compute_mesh_parameter (
 	Main loop: calculates the polution spread evolution in the time domain.
 */
 void main_loop (
-	fv_float final_time,						//	time computation limit
+	double final_time,						//	time computation limit
 	unsigned jump_interval,					//	iterations output interval
 	FVMesh2D mesh,							//	2D mesh to compute
-	fv_float mesh_parameter,					//	mesh parameter
-	FVVect<fv_float> polutions,				//	polution values vector
-	FVVect<FVPoint2D<fv_float> > velocities,	//	velocity vectors collection
-	FVVect<fv_float> fluxes,					//	flux values vector
-	fv_float dc)								//	Dirichlet condition
+	double mesh_parameter,					//	mesh parameter
+	FVVect<double> polutions,				//	polution values vector
+	FVVect<FVPoint2D<double> > velocities,	//	velocity vectors collection
+	FVVect<double> fluxes,					//	flux values vector
+	double dc)								//	Dirichlet condition
 {
-	fv_float t;								//	time elapsed
-	fv_float dt;
+	double t;								//	time elapsed
+	double dt;
 	int i;									//	current iteration
 	FVio polution_file("polution.xml",FVWRITE);
 
@@ -241,8 +241,8 @@ void main_loop (
 int main()
 {  
 	string name;
-	fv_float h;
-	fv_float t;
+	double h;
+	double t;
 	FVMesh2D mesh;
 	Parameters data;
 
@@ -252,9 +252,9 @@ int main()
 	// read the mesh
 	mesh.read( data.filenames.mesh.c_str() );
 
-	FVVect<fv_float> polution( mesh.getNbCell() );
-	FVVect<fv_float> flux( mesh.getNbEdge() );
-	FVVect<FVPoint2D<fv_float> > velocity( mesh.getNbCell() );
+	FVVect<double> polution( mesh.getNbCell() );
+	FVVect<double> flux( mesh.getNbEdge() );
+	FVVect<FVPoint2D<double> > velocity( mesh.getNbCell() );
 
 	//	read velocity
 	FVio velocity_file( data.filenames.velocity.c_str() , FVREAD );
@@ -265,7 +265,7 @@ int main()
 	polu_ini_file.get( polution , t , name );
 
 	//	prepare velocities array
-	vs = new fv_float[ mesh.getNbEdge() ];
+	vs = new double[ mesh.getNbEdge() ];
 
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );

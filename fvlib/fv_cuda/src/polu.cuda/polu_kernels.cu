@@ -4,29 +4,29 @@
 #include "FVLib.h"
 
 __host__ void cuda_main_loop(
-		fv_float final_time,
+		double final_time,
 		unsigned jump_interval,
 		CudaFV::CFVMesh2D &mesh,
-		fv_float mesh_parameter,
-		FVVect<fv_float> &old_polution,
-		CudaFV::CFVVect<fv_float> &polutions,
-		CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<fv_float> &flux,
-		fv_float dc);
+		double mesh_parameter,
+		FVVect<double> &old_polution,
+		CudaFV::CFVVect<double> &polutions,
+		CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<double> &flux,
+		double dc);
 
 __global__ void cuda_compute_flux_kernel(
 		unsigned int num_edges,
 		unsigned int num_cells,
-		fv_float *edge_normals_x,
-		fv_float *edge_normals_y,
-		fv_float *edge_lengths,
+		double *edge_normals_x,
+		double *edge_normals_y,
+		double *edge_lengths,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
-		fv_float *polution,
-		fv_float *velocity_x,
-		fv_float *velocity_y,
-		fv_float *flux,
-		fv_float *vs,
-		fv_float dc) {
+		double *polution,
+		double *velocity_x,
+		double *velocity_y,
+		double *flux,
+		double *vs,
+		double dc) {
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -39,8 +39,8 @@ __global__ void cuda_compute_flux_kernel(
 	unsigned int i_left		= edge_left_cells[tid];
 	unsigned int i_right	= edge_right_cells[tid];
 
-	fv_float v_left[2], v_right[2];
-	fv_float p_left, p_right;
+	double v_left[2], v_right[2];
+	double p_left, p_right;
 
 	v_left[0]	= velocity_x[i_left];
 	v_left[1]	= velocity_y[i_left];
@@ -56,7 +56,7 @@ __global__ void cuda_compute_flux_kernel(
 		p_right		= dc;
 	}
 
-	fv_float v	= ((v_left[0] + v_right[0]) * 0.5 * edge_normals_x[tid])
+	double v	= ((v_left[0] + v_right[0]) * 0.5 * edge_normals_x[tid])
 				+ ((v_left[1] + v_right[1]) * 0.5 * edge_normals_y[tid]);
 
 	if (v < 0)
@@ -67,22 +67,22 @@ __global__ void cuda_compute_flux_kernel(
 	vs[tid] = v;
 }
 
-__host__ fv_float cuda_compute_flux(
+__host__ double cuda_compute_flux(
 		unsigned int num_edges,
 		unsigned int num_cells,
-		fv_float *edge_normals_x,
-		fv_float *edge_normals_y,
-		fv_float *edge_lengths,
+		double *edge_normals_x,
+		double *edge_normals_y,
+		double *edge_lengths,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
-		fv_float *polution,
-		fv_float *velocities_x,
-		fv_float *velocities_y,
-		fv_float *flux,
-		fv_float *vs,
-		fv_float dc) {
+		double *polution,
+		double *velocities_x,
+		double *velocities_y,
+		double *flux,
+		double *vs,
+		double dc) {
 
-	//fv_float result_vs;
+	//double result_vs;
 
 
 	dim3 num_blocks(1,1);
@@ -113,24 +113,24 @@ __host__ fv_float cuda_compute_flux(
 		return 1;
 	}
 
-	//cudaMemcpy(&result_vs, vs, sizeof(fv_float), cudaMemcpyDeviceToHost);
+	//cudaMemcpy(&result_vs, vs, sizeof(double), cudaMemcpyDeviceToHost);
 	//return 1.0 / abs(result_vs);
 	return 0;
 }
 
 __host__ void cuda_main_loop(
-		fv_float final_time,
+		double final_time,
 		unsigned jump_interval,
 		CudaFV::CFVMesh2D &mesh,
-		fv_float mesh_parameter,
-		FVVect<fv_float> &old_polution,
-		CudaFV::CFVVect<fv_float> &polution,
+		double mesh_parameter,
+		FVVect<double> &old_polution,
+		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVPoints2D &velocities,
-		CudaFV::CFVVect<fv_float> &flux,
-		fv_float dc) {
+		CudaFV::CFVVect<double> &flux,
+		double dc) {
 
-	fv_float dt;
-	fv_float t = 0;
+	double dt;
+	double t = 0;
 	
 	FVio polution_file("polution.xml", FVWRITE);
 	polution_file.put(old_polution, t, "polution");
@@ -148,7 +148,7 @@ __host__ void cuda_main_loop(
 	flux.cuda_malloc();
 
 	// alloc space for tmp velocity vector
-	CudaFV::CFVVect<fv_float> vs(mesh.num_edges);
+	CudaFV::CFVVect<double> vs(mesh.num_edges);
 	vs.cuda_malloc();
 
 	while(t < final_time) {

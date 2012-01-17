@@ -62,13 +62,13 @@ int main(int argc, char *argv[])
 	Gmsh mg;
 	FVCell2D *ptr_c;
 	FVVertex2D *ptr_v, *ptr_vb;
-	fv_float dist;
+	double dist;
 	//m.read(mesh_filename.c_str());
 	mesh.read( data.filenames.mesh.c_str() );
-	FVVect<fv_float> pot( mesh.getNbVertex() );
-	FVVect<fv_float> pol( mesh.getNbCell() );
-	FVVect<FVPoint2D<fv_float> > V( mesh.getNbCell() );
-	FVPoint2D<fv_float> center;
+	FVVect<double> pot( mesh.getNbVertex() );
+	FVVect<double> pol( mesh.getNbCell() );
+	FVVect<FVPoint2D<double> > V( mesh.getNbCell() );
+	FVPoint2D<double> center;
 
 	
 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 		mesh.beginVertex();
 		while ( ( ptr_vb = mesh.nextVertex() ) )
 		{
-			fv_float aux = Norm( ptr_v->coord-ptr_vb->coord );
+			double aux = Norm( ptr_v->coord-ptr_vb->coord );
 			if ( ( dist > aux )
 			&& (  ( ptr_vb->code == 2 )
 			   || ( ptr_vb->code == 3 )
@@ -92,12 +92,12 @@ int main(int argc, char *argv[])
 	}
 	// compute the velocity    
 
-	FVDenseM<fv_float> M(2);
-	fv_float aux;
+	FVDenseM<double> M(2);
+	double aux;
 	mesh.beginCell();
 	while ( ( ptr_c = mesh.nextCell() ) )
 	{
-		FVPoint2D<fv_float> d1;
+		FVPoint2D<double> d1;
 		d1.x = pot[ ptr_c->vertex[1]->label - 1 ] - pot[ ptr_c->vertex[0]->label - 1 ];
 		d1.y = pot[ ptr_c->vertex[2]->label - 1 ] - pot[ ptr_c->vertex[0]->label - 1 ];
 		aux=ptr_c->vertex[1]->coord.x-ptr_c->vertex[0]->coord.x;

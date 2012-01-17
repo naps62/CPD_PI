@@ -9,7 +9,7 @@ class FVCell3D;
 class FVVertex3D
 {
 public:
-FVPoint3D <fv_float> coord;
+FVPoint3D <double> coord;
 size_t label, code, nb_cell,pos_c;
 FVCell3D* cell[NB_CELL_PER_VERTEX_3D]; 
      FVVertex3D(){label=0;nb_cell=0;}

@@ -54,35 +54,35 @@ size_t nb_cols,nb_rows,length; // row and column
     void TransMult(const FVVect<T_> &, FVVect<T_> &)   ;  
     // resolution method
     // Gauss method with pivot
-    void Gauss(FVVect<fv_float> &) ;
-    void Gauss(FVPoint2D<fv_float> &);
-    void Gauss(FVPoint3D<fv_float> &);   
-    void Gauss(FVPoint4D<fv_float> &);    
+    void Gauss(FVVect<double> &) ;
+    void Gauss(FVPoint2D<double> &);
+    void Gauss(FVPoint3D<double> &);   
+    void Gauss(FVPoint4D<double> &);    
     //L U decomposition, we assume diag(L) are unit  
     void LUFactorize() ;   
-    void ForwardSubstitution(FVVect<fv_float> &) ;// for lower matrix assuming identity on the diagonal 
-    void BackwardSubstitution(FVVect<fv_float> &) ;// for upper matrix
-    void ForwardSubstitution(FVPoint2D<fv_float> &) ;// for lower matrix assuming identity on the diagonal
-    void BackwardSubstitution(FVPoint2D<fv_float> &) ;// for upper matrix
-    void ForwardSubstitution(FVPoint3D<fv_float> &) ;// for lower matrix assuming identity on the diagonal
-    void BackwardSubstitution(FVPoint3D<fv_float> &) ;// for upper matrix    
-    void ForwardSubstitution(FVPoint4D<fv_float> &) ;// for lower matrix assuming identity on the diagonal
-    void BackwardSubstitution(FVPoint4D<fv_float> &) ;// for upper matrix      
+    void ForwardSubstitution(FVVect<double> &) ;// for lower matrix assuming identity on the diagonal 
+    void BackwardSubstitution(FVVect<double> &) ;// for upper matrix
+    void ForwardSubstitution(FVPoint2D<double> &) ;// for lower matrix assuming identity on the diagonal
+    void BackwardSubstitution(FVPoint2D<double> &) ;// for upper matrix
+    void ForwardSubstitution(FVPoint3D<double> &) ;// for lower matrix assuming identity on the diagonal
+    void BackwardSubstitution(FVPoint3D<double> &) ;// for upper matrix    
+    void ForwardSubstitution(FVPoint4D<double> &) ;// for lower matrix assuming identity on the diagonal
+    void BackwardSubstitution(FVPoint4D<double> &) ;// for upper matrix      
     //void decompositionLLtrans() const  ;    //LL^t decomposition,  
     //void decompositionLDLtrans() const  ; 
     void LUFactorizePivoting() ;   //L U decomposition, we assume diag(L) are unit    
-    void ForwardSubstitutionPivoting(FVVect<fv_float> &) ;    
-    void BackwardSubstitutionPivoting(FVVect<fv_float> &) ;    
-    void ForwardSubstitutionPivoting(FVPoint2D<fv_float> &) ;    
-    void BackwardSubstitutionPivoting(FVPoint2D<fv_float> &) ;   
-    void ForwardSubstitutionPivoting(FVPoint3D<fv_float> &) ;     
-    void BackwardSubstitutionPivoting(FVPoint3D<fv_float> &) ;    
-    void ForwardSubstitutionPivoting(FVPoint4D<fv_float> &) ;         
-    void BackwardSubstitutionPivoting(FVPoint4D<fv_float> &) ;    
+    void ForwardSubstitutionPivoting(FVVect<double> &) ;    
+    void BackwardSubstitutionPivoting(FVVect<double> &) ;    
+    void ForwardSubstitutionPivoting(FVPoint2D<double> &) ;    
+    void BackwardSubstitutionPivoting(FVPoint2D<double> &) ;   
+    void ForwardSubstitutionPivoting(FVPoint3D<double> &) ;     
+    void BackwardSubstitutionPivoting(FVPoint3D<double> &) ;    
+    void ForwardSubstitutionPivoting(FVPoint4D<double> &) ;         
+    void BackwardSubstitutionPivoting(FVPoint4D<double> &) ;    
     
     
-    void QRFactorize(FVDenseM<fv_float> &)   ;  //QR decomposition of nrXnc matrix with nr>=nc overdetermine
-    void PartialBackwardSubstitution( FVVect<fv_float> & ); // backward substitution
+    void QRFactorize(FVDenseM<double> &)   ;  //QR decomposition of nrXnc matrix with nr>=nc overdetermine
+    void PartialBackwardSubstitution( FVVect<double> & ); // backward substitution
                                                               // with nr>=nc 
     void show();
     // produit matric matrice
@@ -417,14 +417,14 @@ cout<<"==========================="<<endl;
 /*--------- Matrix resolutions  Gauss ----------*/
 
 template<class T_>
-void  FVDenseM<T_>::Gauss(FVVect<fv_float> &u) 
+void  FVDenseM<T_>::Gauss(FVVect<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_cols);
     if(err) cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"index out of range, error code="<<err<<endl;
 #endif   
 size_t pos;
-fv_float aux,pivot;
+double aux,pivot;
 for(size_t k=0;k<nb_cols;k++)
     {
     // find the pivot 
@@ -465,26 +465,26 @@ for(size_t i=0;i<nb_rows;i++)
     } 
 }
 template<class T_>
-void  FVDenseM<T_>::Gauss(FVPoint2D<fv_float> &u)
+void  FVDenseM<T_>::Gauss(FVPoint2D<double> &u)
 {
-fv_float det=a[0]*a[3]-a[1]*a[2];
+double det=a[0]*a[3]-a[1]*a[2];
 #ifdef _DEBUGS
   if (det==0.0) cout<<" Warning, singular matrix"<<endl; 
 #endif   
-FVPoint2D<fv_float> f(u);
+FVPoint2D<double> f(u);
 u.x=(f.x*a[3]-f.y*a[1])/det;
 u.y=(f.y*a[0]-f.x*a[2])/det;
 }
 template<class T_>
-void  FVDenseM<T_>::Gauss(FVPoint3D<fv_float> &u)
+void  FVDenseM<T_>::Gauss(FVPoint3D<double> &u)
 {
-fv_float det=a[0]*(a[4]*a[8]-a[7]*a[5])-
+double det=a[0]*(a[4]*a[8]-a[7]*a[5])-
            a[3]*(a[1]*a[8]-a[7]*a[2])+
            a[6]*(a[1]*a[5]-a[4]*a[2]);
 #ifdef _DEBUGS
   if (det==0.0) cout<<" Warning, singular matrix"<<endl; 
 #endif 
-FVPoint3D<fv_float> f(u);
+FVPoint3D<double> f(u);
 u.x=f.x*(a[4]*a[8]-a[7]*a[5])-
     f.y*(a[1]*a[8]-a[7]*a[2])+
     f.z*(a[1]*a[5]-a[4]*a[2]);u.x/=det;
@@ -496,9 +496,9 @@ u.z=f.x*(a[3]*a[7]-a[6]*a[4])-
     f.z*(a[0]*a[4]-a[3]*a[1]);u.z/=det;
 }
 template<class T_>
-void  FVDenseM<T_>::Gauss(FVPoint4D<fv_float> &u)
+void  FVDenseM<T_>::Gauss(FVPoint4D<double> &u)
 {
-FVVect<fv_float> f(4);
+FVVect<double> f(4);
 f[0]=u.x;f[1]=u.y;f[2]=u.z;f[3]=u.t;
 FVDenseM<T_>::Gauss(f);
 u.x=f[0];u.y=f[1];u.z=f[2];u.t=f[3];
@@ -512,7 +512,7 @@ u.x=f[0];u.y=f[1];u.z=f[2];u.t=f[3];
   //--------- BASIC VERSION  -----------
 void FVDenseM<T_>::LUFactorize() const 
 {
-register fv_float sum; 
+register double sum; 
 for(size_t k=0;k<nb_rows;k++)
     {
     for(size_t j=0;j<k;j++)
@@ -534,7 +534,7 @@ for(size_t k=0;k<nb_rows;k++)
 template<class T_>
 void FVDenseM<T_>::LUFactorize() 
 {
-register fv_float sum; 
+register double sum; 
 register size_t pos_k;
 for(size_t k=0;k<nb_rows;k++)
     {
@@ -556,9 +556,9 @@ for(size_t k=0;k<nb_rows;k++)
     }    
 }
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitution(FVVect<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitution(FVVect<double> &u) 
 {
-register fv_float sum;    
+register double sum;    
 register size_t pos_i;
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_cols);
@@ -579,7 +579,7 @@ for(size_t i=0;i<nb_rows;i++)
 }
 // forward substitution 
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitution(FVPoint2D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitution(FVPoint2D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=2);
@@ -588,7 +588,7 @@ void FVDenseM<T_>::ForwardSubstitution(FVPoint2D<fv_float> &u)
 u.y-=u.x*a[2];
 }
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitution(FVPoint3D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitution(FVPoint3D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=3);
@@ -597,7 +597,7 @@ void FVDenseM<T_>::ForwardSubstitution(FVPoint3D<fv_float> &u)
 u.y-=u.x*a[3];u.z-=a[6]*u.x+a[7]*u.y;
 }
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitution(FVPoint4D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitution(FVPoint4D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=4);
@@ -607,9 +607,9 @@ u.y-=u.x*a[4];u.z-=a[8]*u.x+a[9]*u.y;u.t-=a[12]*u.x+a[13]*u.y+a[14]*u.z;
 }
 // forward substitution 
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitution(FVVect<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitution(FVVect<double> &u) 
 {
-register fv_float sum;
+register double sum;
 register size_t pos_ii;
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_cols);
@@ -628,7 +628,7 @@ for(size_t i=0;i<nb_rows;i++)
     }
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitution(FVPoint2D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitution(FVPoint2D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=2);
@@ -637,7 +637,7 @@ void FVDenseM<T_>::BackwardSubstitution(FVPoint2D<fv_float> &u)
 u.y/=a[3]; u.x=(u.x-a[1]*u.y)/a[0];
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitution(FVPoint3D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitution(FVPoint3D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=3);
@@ -646,7 +646,7 @@ void FVDenseM<T_>::BackwardSubstitution(FVPoint3D<fv_float> &u)
 u.z/=a[8];u.y=(u.y-a[5]*u.z)/a[4];u.x=(u.x-a[1]*u.y-a[2]*u.z)/a[0];
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitution(FVPoint4D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitution(FVPoint4D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=4);
@@ -660,7 +660,7 @@ u.t/=a[15];u.z=(u.z-a[11]*u.t)/a[10];u.y=(u.y-a[6]*u.z-a[7]*u.t)/a[5];u.x=(u.x-a
 template<class T_>  
 void FVDenseM<T_>::LUFactorizePivoting() 
 {
-register fv_float sum,maxval;
+register double sum,maxval;
 size_t row,permut;
 for(size_t i=0;i<nb_rows;i++) row_perm[i]=i;
 for(size_t k=0;k<nb_rows;k++)
@@ -685,14 +685,14 @@ for(size_t k=0;k<nb_rows;k++)
 }   
 
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitutionPivoting(FVVect<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitutionPivoting(FVVect<double> &u) 
 {
-register fv_float sum;    
+register double sum;    
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_cols);
     if(err) cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"index out of range, error code="<<err<<endl;
 #endif 
-FVVect<fv_float> f(u);    
+FVVect<double> f(u);    
 for(size_t i=0;i<nb_rows;i++)
     {
     sum=0.;
@@ -706,7 +706,7 @@ for(size_t i=0;i<nb_rows;i++)
 }
 // forward substitution 
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint2D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint2D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=2);
@@ -715,7 +715,7 @@ void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint2D<fv_float> &u)
 u.y-=u.x*a[2];
 }
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint3D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint3D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=3);
@@ -724,7 +724,7 @@ void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint3D<fv_float> &u)
 u.y-=u.x*a[3];u.z-=a[6]*u.x+a[7]*u.y;
 }
 template<class T_>
-void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint4D<fv_float> &u) 
+void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint4D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=4);
@@ -734,14 +734,14 @@ u.y-=u.x*a[4];u.z-=a[8]*u.x+a[9]*u.y;u.t-=a[12]*u.x+a[13]*u.y+a[14]*u.z;
 }
 // forward substitution 
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitutionPivoting(FVVect<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitutionPivoting(FVVect<double> &u) 
 {
-register fv_float sum;
+register double sum;
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_cols);
     if(err) cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"index out of range, error code="<<err<<endl;
 #endif 
-FVVect<fv_float> f(u);   
+FVVect<double> f(u);   
 size_t ii;
 for(size_t i=0;i<nb_rows;i++)
     {
@@ -755,7 +755,7 @@ for(size_t i=0;i<nb_rows;i++)
     }
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint2D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint2D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=2);
@@ -764,7 +764,7 @@ void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint2D<fv_float> &u)
 u.y/=a[3]; u.x=(u.x-a[1]*u.y)/a[0];
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint3D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint3D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=3);
@@ -773,7 +773,7 @@ void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint3D<fv_float> &u)
 u.z/=a[8];u.y=(u.y-a[5]*u.z)/a[4];u.x=(u.x-a[1]*u.y-a[2]*u.z)/a[0];
 }
 template<class T_>
-void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint4D<fv_float> &u) 
+void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint4D<double> &u) 
 {
 #ifdef _DEBUGS
     size_t err=(nb_cols!=4);
@@ -788,15 +788,15 @@ u.t/=a[15];u.z=(u.z-a[11]*u.t)/a[10];u.y=(u.y-a[6]*u.z-a[7]*u.t)/a[5];u.x=(u.x-a
 //--------- Matrix resolutions  QR ----------
 //
 template<class T_>
-void FVDenseM<T_>::QRFactorize(FVDenseM<fv_float> &q)   
+void FVDenseM<T_>::QRFactorize(FVDenseM<double> &q)   
 {
     // Caution: q is the Transpose Matrix of the decomposition
  #ifdef _DEBUGS
     size_t err=(q.nb_rows!=nb_rows)+2*(q.nb_cols!=nb_rows);
     if(err) cout<<" in file "<<__FILE__<<", line "<<__LINE__<<"index out of range, error code="<<err<<endl;
 #endif  
-FVVect<fv_float> v(nb_rows);
-register fv_float norm,aux,ps;
+FVVect<double> v(nb_rows);
+register double norm,aux,ps;
 for(size_t k=0;k<q.length;k++) q.a[k]=0;
 for(size_t j=0;j<nb_rows;j++) q.a[j*(nb_rows+1)]=1;
 for(size_t k=0;k<nb_cols;k++)
@@ -824,9 +824,9 @@ for(size_t k=0;k<nb_cols;k++)
 }
 
 template<class T_>
-void FVDenseM<T_>::PartialBackwardSubstitution( FVVect<fv_float> & u)
+void FVDenseM<T_>::PartialBackwardSubstitution( FVVect<double> & u)
 {
-register fv_float sum;
+register double sum;
 register size_t pos_ii;
 #ifdef _DEBUGS
     size_t err=(u.size()!=nb_rows); 

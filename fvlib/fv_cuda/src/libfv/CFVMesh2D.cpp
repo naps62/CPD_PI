@@ -74,12 +74,12 @@ namespace CudaFV {
 		FVLog::logger << "allocating cpu ptrs" << endl;
 		// alloc edge info
 		edge_normals = CFVPoints2D(num_edges);
-		edge_lengths = CFVVect<fv_float>(num_edges);
+		edge_lengths = CFVVect<double>(num_edges);
 		edge_left_cells  = CFVVect<unsigned int>(num_edges);
 		edge_right_cells = CFVVect<unsigned int>(num_edges);
 
 		// alloc cell info
-		cell_areas = CFVVect<fv_float>(num_cells);
+		cell_areas = CFVVect<double>(num_cells);
 	}
 }
 

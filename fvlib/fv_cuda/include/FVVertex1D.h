@@ -7,7 +7,7 @@ class FVCell1D;
 class FVVertex1D
 {
 public:
-FVPoint1D<fv_float> coord, normal;
+FVPoint1D<double> coord, normal;
 size_t label, code;
 FVCell1D *leftCell,*rightCell;
      FVVertex1D(){leftCell=NULL;rightCell=NULL;label=0;coord=0;normal=0;}

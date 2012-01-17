@@ -6,11 +6,11 @@ class FVVertex1D;
 class FVCell1D
 {
 public:
-FVPoint1D<fv_float> centroid;
-fv_float length;
+FVPoint1D<double> centroid;
+double length;
 size_t label,code,nb_vertex;
 FVVertex1D *firstVertex,*secondVertex; // the two vertices
-FVPoint1D<fv_float> first_normal,second_normal; // normal exterior
+FVPoint1D<double> first_normal,second_normal; // normal exterior
 
 
      FVCell1D(){firstVertex=NULL;secondVertex=NULL;label=0;_pos_v=0;}

@@ -92,17 +92,17 @@ std::ostream & operator<<(std::ostream &s, const FVPoint3D<T_> &a)
 /* ------ associated functions ----*/
 
 
-inline FVPoint3D<fv_float> CrossProduct(const FVPoint3D<fv_float> &u, const FVPoint3D<fv_float> &v)
+inline FVPoint3D<double> CrossProduct(const FVPoint3D<double> &u, const FVPoint3D<double> &v)
 {
-   return FVPoint3D<fv_float>(u.y*v.z-u.z*v.y,u.z*v.x-u.x*v.z,u.x*v.y-u.y*v.x);
+   return FVPoint3D<double>(u.y*v.z-u.z*v.y,u.z*v.x-u.x*v.z,u.x*v.y-u.y*v.x);
 }
 
-inline fv_float Det(const FVPoint3D<fv_float> &u, const FVPoint3D<fv_float> &v, const FVPoint3D<fv_float> &w)
+inline double Det(const FVPoint3D<double> &u, const FVPoint3D<double> &v, const FVPoint3D<double> &w)
 {
    return (u.x*(v.y*w.z-v.z*w.y)-u.y*(v.x*w.z-v.z*w.x)+u.z*(v.x*w.y-v.y*w.x));
 }
 
-inline fv_float Norm(const FVPoint3D<fv_float> &u)
+inline double Norm(const FVPoint3D<double> &u)
 {
    return sqrt(u.x*u.x+u.y*u.y+u.z*u.z);
 }

@@ -77,7 +77,7 @@ void FVio::close()
 
 
 /* -------  write 1 vector -------*/
-void FVio::put(FVVect <fv_float> &u, const fv_float time, const string &name)
+void FVio::put(FVVect <double> &u, const double time, const string &name)
 {
 	if(_access!=FVWRITE)
 	{
@@ -95,7 +95,7 @@ void FVio::put(FVVect <fv_float> &u, const fv_float time, const string &name)
 	_of<<"    </FIELD>"<<endl;;    
 }
 /* -------  write 2 vectors -------*/
-void FVio::put(FVVect <fv_float> &u,FVVect <fv_float> &v, const fv_float time, const string &name)
+void FVio::put(FVVect <double> &u,FVVect <double> &v, const double time, const string &name)
 {
 	if(_access!=FVWRITE)
 	{
@@ -117,7 +117,7 @@ void FVio::put(FVVect <fv_float> &u,FVVect <fv_float> &v, const fv_float time, c
 	_of<<"    </FIELD>"<<endl;;    
 }
 // the FVPoint2D version 
-void FVio::put(FVVect <FVPoint2D<fv_float> >&u, const fv_float time,const  string &name)
+void FVio::put(FVVect <FVPoint2D<double> >&u, const double time,const  string &name)
 {
 	if(_access!=FVWRITE)
 	{
@@ -135,7 +135,7 @@ void FVio::put(FVVect <FVPoint2D<fv_float> >&u, const fv_float time,const  strin
 	_of<<"    </FIELD>"<<endl;;    
 }
 /* -------  write 3 vectors -------*/
-void FVio::put(FVVect <fv_float> &u,FVVect <fv_float> &v,FVVect <fv_float> &w, const fv_float time, const string &name)
+void FVio::put(FVVect <double> &u,FVVect <double> &v,FVVect <double> &w, const double time, const string &name)
 {
 	if(_access!=FVWRITE)
 	{
@@ -158,7 +158,7 @@ void FVio::put(FVVect <fv_float> &u,FVVect <fv_float> &v,FVVect <fv_float> &w, c
 }
 
 // the FVPoint3D version 
-void FVio::put(FVVect <FVPoint3D<fv_float> >&u, const fv_float time, const string &name)
+void FVio::put(FVVect <FVPoint3D<double> >&u, const double time, const string &name)
 {
 	if(_access!=FVWRITE)
 	{
@@ -179,7 +179,7 @@ void FVio::put(FVVect <FVPoint3D<fv_float> >&u, const fv_float time, const strin
 
 
 /* -------  read 1 vector -------*/
-size_t FVio::get(FVVect <fv_float> &u,  fv_float &time, string &name)
+size_t FVio::get(FVVect <double> &u,  double &time, string &name)
 {
 	if(_access!=FVREAD)
 	{
@@ -242,12 +242,12 @@ size_t FVio::get(FVVect <fv_float> &u,  fv_float &time, string &name)
 	//for(size_t i=0;i<lengthDATA;i++) cout<<thedata[i]; cout<<endl;
 	ptr=thedata;
 	size_t count=0;
-	fv_float ignore_val;ignore_val=0;ignore_val++;
+	double ignore_val;ignore_val=0;ignore_val++;
 	while(count<_sizevec)// read the data and put it in the valarray
 	{
 		u[count]= strtod(ptr, &ptr);
-		if(_nbvec>=2) ignore_val=strtod(ptr, &ptr); // skip the second fv_float
-		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third fv_float
+		if(_nbvec>=2) ignore_val=strtod(ptr, &ptr); // skip the second double
+		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third double
 		count++; 
 	}
 	// close  Balise   FIELD
@@ -262,7 +262,7 @@ size_t FVio::get(FVVect <fv_float> &u,  fv_float &time, string &name)
 
 
 /* -------  read 2 vectors -------*/    
-size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, fv_float &time, string &name)
+size_t FVio::get(FVVect <double> &u, FVVect <double> &v, double &time, string &name)
 {
 	if(_access!=FVREAD)
 	{
@@ -324,12 +324,12 @@ size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, fv_float &time, str
 	//for(size_t i=0;i<lengthDATA;i++) cout<<thedata[i]; cout<<endl;
 	ptr=thedata;
 	size_t count=0;
-	fv_float ignore_val;ignore_val=0;ignore_val++;
+	double ignore_val;ignore_val=0;ignore_val++;
 	while(count<_sizevec)// read the data and put it in the valarray
 	{
 		u[count]= strtod(ptr, &ptr);
-		if(_nbvec>=2) v[count]=strtod(ptr, &ptr); // take the second fv_float
-		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third fv_float
+		if(_nbvec>=2) v[count]=strtod(ptr, &ptr); // take the second double
+		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third double
 		//cout<<u[count]<<" and "<<v[count];
 		count++; 
 	}
@@ -343,7 +343,7 @@ size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, fv_float &time, str
 
 
 //FVPoint2D version
-size_t FVio::get(FVVect <FVPoint2D<fv_float> >&u, fv_float &time, string &name)
+size_t FVio::get(FVVect <FVPoint2D<double> >&u, double &time, string &name)
 {
 	if(_access!=FVREAD)
 	{
@@ -404,12 +404,12 @@ size_t FVio::get(FVVect <FVPoint2D<fv_float> >&u, fv_float &time, string &name)
 	//for(size_t i=0;i<lengthDATA;i++) cout<<thedata[i]; cout<<endl;
 	ptr=thedata;
 	size_t count=0;
-	fv_float ignore_val;ignore_val=0;ignore_val++;
+	double ignore_val;ignore_val=0;ignore_val++;
 	while(count<_sizevec)// read the data and put it in the valarray
 	{
 		u[count].x= strtod(ptr, &ptr);
-		if(_nbvec>=2) u[count].y=strtod(ptr, &ptr); // take the second fv_float
-		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third fv_float
+		if(_nbvec>=2) u[count].y=strtod(ptr, &ptr); // take the second double
+		if(_nbvec>=3) ignore_val=strtod(ptr, &ptr); // skip the third double
 		//cout<<u[count]<<" and "<<v[count];
 		count++; 
 	}
@@ -423,7 +423,7 @@ size_t FVio::get(FVVect <FVPoint2D<fv_float> >&u, fv_float &time, string &name)
 	return(FVOK);
 } 
 /* -------  read 3 vectors -------*/     
-size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, FVVect <fv_float> &w, fv_float &time, string &name)
+size_t FVio::get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w, double &time, string &name)
 {
 	if(_access!=FVREAD)
 	{
@@ -490,8 +490,8 @@ size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, FVVect <fv_float> &
 	while(count<_sizevec)// read the data and put it in the valarray
 	{
 		u[count]= strtod(ptr, &ptr);
-		if(_nbvec>=2) v[count]=strtod(ptr, &ptr); // take the second fv_float
-		if(_nbvec>=3) w[count]=strtod(ptr, &ptr); // take the third fv_float
+		if(_nbvec>=2) v[count]=strtod(ptr, &ptr); // take the second double
+		if(_nbvec>=3) w[count]=strtod(ptr, &ptr); // take the third double
 		//cout<<u[count]<<" and "<<v[count]<<" et "<<w[count];
 		count++; 
 	}
@@ -506,7 +506,7 @@ size_t FVio::get(FVVect <fv_float> &u, FVVect <fv_float> &v, FVVect <fv_float> &
 }
 
 // the FVPoint3D version
-size_t FVio::get(FVVect <FVPoint3D<fv_float> >&u, fv_float &time, string &name)
+size_t FVio::get(FVVect <FVPoint3D<double> >&u, double &time, string &name)
 {
 	if(_access!=FVREAD)
 	{
@@ -571,8 +571,8 @@ size_t FVio::get(FVVect <FVPoint3D<fv_float> >&u, fv_float &time, string &name)
 	while(count<_sizevec)// read the data and put it in the valarray
 	{
 		u[count].x= strtod(ptr, &ptr);
-		if(_nbvec>=2) u[count].y=strtod(ptr, &ptr); // take the second fv_float
-		if(_nbvec>=3) u[count].z=strtod(ptr, &ptr); // take the third fv_float
+		if(_nbvec>=2) u[count].y=strtod(ptr, &ptr); // take the second double
+		if(_nbvec>=3) u[count].z=strtod(ptr, &ptr); // take the third double
 		//cout<<u[count]<<" and "<<v[count]<<" et "<<w[count];
 		count++; 
 	}
