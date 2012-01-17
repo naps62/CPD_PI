@@ -79,7 +79,6 @@ double compute_flux(
 		i_left = edge->leftCell->label - 1;
 		v_left = velocity[ i_left ];
 		p_left = polution[ i_left ];
-
 		if ( edge->rightCell ) 
 		{
 			i_right = edge->rightCell->label - 1;
@@ -92,7 +91,6 @@ double compute_flux(
 			p_right = dc;
 		} 
 		v = ( v_left + v_right ) * 0.5 * edge->normal; 
-
 		//TODO: remove this dependence
 		//if ( ( abs(v) * dt ) > 1)
 		//	dt = 1.0 / abs(v);
@@ -102,11 +100,12 @@ double compute_flux(
 			flux[ edge->label - 1 ] = v * p_right;
 		else
 			flux[ edge->label - 1 ] = v * p_left;
-
 	}
 	v_max = DBL_MIN;
 	for ( e = 0; e < es; ++e)
 	{
+		cout << e << "vs= " << vs[e];
+		getchar();
 		if ( vs[e] > v_max )
 			v_max = vs[e];
 	}

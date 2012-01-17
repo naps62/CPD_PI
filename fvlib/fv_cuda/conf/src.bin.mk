@@ -7,6 +7,12 @@ $(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cpp
 	fi
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
+$(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cu
+	@if [ ! -d "$(@D)" ];	\
+		then mkdir "$(@D)";	\
+	fi
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
 $(ROOTD)/$(OBJD)/$(BIN)/%.o:	%.cc
 	@if [ ! -d "$(@D)" ];	\
 		then mkdir "$(@D)";	\

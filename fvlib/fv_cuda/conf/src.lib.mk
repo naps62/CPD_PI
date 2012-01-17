@@ -7,6 +7,13 @@ $(ROOTD)/$(OBJD)/lib$(LIB)/%.o:	%.cpp
 	fi
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
+$(ROOTD)/$(OBJD)/lib$(LIB)/%.o:	%.cu
+	@if [ ! -d "$(@D)" ];	\
+	then	\
+		mkdir "$(@D)";	\
+	fi
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
 $(ROOTD)/$(OBJD)/lib$(LIB)/%.o:	%.cc
 	@if [ ! -d "$(@D)" ];	\
 	then	\

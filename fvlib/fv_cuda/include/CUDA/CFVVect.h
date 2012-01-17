@@ -51,12 +51,12 @@ namespace CudaFV {
 				/**
 				 * CUDA
 				 */
-				T* cudaGetArray();
-				T* cudaMallocAndSave();
-				void cudaMalloc();
-				void cudaFree();
-				void cudaSave();
-				void cudaGet();
+				T* cuda_getArray();
+				T* cuda_mallocAndSave();
+				void cuda_malloc();
+				void cuda_free();
+				void cuda_save();
+				void cuda_get();
 
 			private:
 				void alloc(unsigned int size);

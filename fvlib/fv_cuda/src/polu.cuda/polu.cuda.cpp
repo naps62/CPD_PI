@@ -55,7 +55,7 @@ double gpu_compute_flux(
 		CudaFV::CFVMesh2D &mesh,
 		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVPoints2D &velocity,
-		CudaFV::CFVVect<double> flux,
+		CudaFV::CFVVect<double> &flux,
 		double dc) {
 	double dt;
 	double p_left;							//	polution in the left face
@@ -85,8 +85,8 @@ double gpu_compute_flux(
 			p_right = dc;
 		}
 
-		double vx = v_left[0] + v_right[0] * 0.5 + mesh.edge_normals.x[i];
-		double vy = v_left[1] + v_right[0] * 0.5 + mesh.edge_normals.y[i];
+		double vx = (v_left[0] + v_right[0]) * 0.5 + mesh.edge_normals.x[i];
+		double vy = (v_left[1] + v_right[1]) * 0.5 + mesh.edge_normals.y[i];
 		v = vx + vy;
 
 		gpu_vs[i] = v;
@@ -99,6 +99,8 @@ double gpu_compute_flux(
 
 	v_max = std::numeric_limits<double>::min();
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		cout << i << " vs= " << vs[i] << endl;
+		getchar();
 		if (gpu_vs[i] > v_max)
 			v_max = gpu_vs[i];
 	}
@@ -205,6 +207,16 @@ void gpu_main_loop(double final_time, unsigned jump_interval, CudaFV::CFVMesh2D 
 	polution_file.put(old_polution, t, "polution");
 }
 
+void cuda_main_loop(
+		double final_time,
+		unsigned jump_interval,
+		CudaFV::CFVMesh2D &mesh,
+		double mesh_parameter,
+		FVVect<double> &old_polution,
+		CudaFV::CFVVect<double> &polution,
+		CudaFV::CFVPoints2D &velocities,
+		CudaFV::CFVVect<double> &flux,
+		double dc);
 /*
 	Função Madre
 */
@@ -257,7 +269,7 @@ int main()
 	//h = gpu_compute_mesh_parameter(gpu_mesh);
 
 	// GPU
-	gpu_main_loop(
+	cuda_main_loop(
 		data.time.final,
 		data.iterations.jump,
 		gpu_mesh,

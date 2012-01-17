@@ -82,34 +82,34 @@ namespace CudaFV {
 	 * CUDA
 	 */
 	template<class T>
-		T* CFVVect<T>::cudaGetArray() {
+		T* CFVVect<T>::cuda_getArray() {
 			return cuda_arr;
 		}
 
 	template<class T>
-		T* CFVVect<T>::cudaMallocAndSave() {
-			this->cudaMalloc();
-			this->cudaSave();
-			return this->cudaGetArray();
+		T* CFVVect<T>::cuda_mallocAndSave() {
+			this->cuda_malloc();
+			this->cuda_save();
+			return this->cuda_getArray();
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaMalloc() {
+		void CFVVect<T>::cuda_malloc() {
 			cudaMalloc((void **)&cuda_arr, sizeof(T) * arr_size);
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaFree() {
+		void CFVVect<T>::cuda_free() {
 			cudaFree(cuda_arr);
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaSave() {
+		void CFVVect<T>::cuda_save() {
 			cudaMemcpy(cuda_arr, arr, sizeof(T) * arr_size, cudaMemcpyHostToDevice);
 		}
 
 	template<class T>
-		void CFVVect<T>::cudaGet() {
+		void CFVVect<T>::cuda_get() {
 			cudaMemcpy(arr, cuda_arr, sizeof(T) * arr_size, cudaMemcpyDeviceToHost);
 		}
 

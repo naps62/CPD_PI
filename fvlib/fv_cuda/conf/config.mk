@@ -27,6 +27,8 @@ ifeq ($(MODE),DBG)
 CXXFLAGS	+=	-g
 NVCCFLAGS	+=	-g
 SUFFIX=_$(MODE)
+else ifeq ($($MODE),CUBIN)
+CXXFLAGS	+= -cubin
 else ifeq ($(MODE),GPROF)
 CXXFLAGS	+=	-g -pg -O3
 SUFFIX=_$(MODE)
