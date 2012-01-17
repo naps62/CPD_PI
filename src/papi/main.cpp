@@ -26,7 +26,7 @@ int main ()
 	srand( time(NULL) );
 
 	for (i = 0; i < ARRAY_SIZE; ++i)
-		array[i] = rand();
+		array[i] = rand() % ARRAY_SIZE + 1;
 
 	p.add_event( PAPI_TOT_INS );
 	p.add_event( PAPI_LD_INS );
