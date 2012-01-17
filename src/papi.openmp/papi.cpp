@@ -55,7 +55,7 @@ void PAPI::shutdown ()
 
 long long int PAPI::real_nano_seconds ()
 {
-	return PAPI_get_real_nsecs();
+	return PAPI_get_real_nsec();
 }
 
 PAPI::PAPI()
@@ -143,7 +143,7 @@ void PAPI::start ()
 
 	_values = new long long int[ events.size() ];
 
-	time._begin = PAPI::get_nano_seconds();
+	time._begin = PAPI::real_nano_seconds();
 
 	result = PAPI_start( set );
 	if (result != PAPI_OK)
