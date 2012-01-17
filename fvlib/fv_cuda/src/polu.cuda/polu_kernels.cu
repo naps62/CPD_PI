@@ -86,7 +86,7 @@ __host__ double cuda_compute_flux(
 
 
 	dim3 num_blocks(1,1);
-	dim3 num_threads(512,1);
+	dim3 num_threads(16,1);
 	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
 			num_cells,
