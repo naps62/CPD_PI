@@ -7,12 +7,13 @@ BIND	=	bin
 CUDAD	=	/usr/local/cuda
 
 #	Libraries
-LIBS	=	fv
+LIBS	=	fv cuda
 
 #	Compile mode
 MODE	=	RLS
 
 #	C++ Compil[ator]
+NVCC	=	nvcc
 CXX		=	g++
 
 #	Include directories
@@ -24,9 +25,9 @@ CXXFLAGS	=	-Wall \
 				-Wfatal-errors \
 				-ansi \
 				-pedantic \
-				$(INC)
+CXXFLAGS	=	$(INC)
 ifeq ($(MODE),DBG)
-CXXFLAGS	+=	-g
+CXXFLAGS	+=	-g3
 SUFFIX=_$(MODE)
 else ifeq ($(MODE),GPROF)
 CXXFLAGS	+=	-g -pg -O3
@@ -46,4 +47,3 @@ default: all
 
 vim:
 	cd $(ROOTD); $_
-

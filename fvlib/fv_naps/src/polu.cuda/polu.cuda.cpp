@@ -178,7 +178,7 @@ double compute_mesh_parameter (
 void gpu_main_loop(double final_time, unsigned jump_interval, CudaFV::CFVMesh2D &mesh, double mesh_parameter, FVVect<double> old_polution, CudaFV::CFVVect<double> &polutions, CudaFV::CFVPoints2D &velocities, CudaFV::CFVVect<double> &flux, double dc) {
 	double t, dt;
 	int i;
-	FVio polution_file("gpu_polution.xml", FVWRITE);
+	FVio polution_file("polution.xml", FVWRITE);
 
 	t = 0;
 	i = 0;

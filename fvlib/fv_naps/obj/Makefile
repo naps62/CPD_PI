@@ -17,9 +17,9 @@ libs:	$(LIBS)
 bins:	$(BINS)
 
 $(LIBS) $(BINS):
-	@echo ">>>>> $@"
+	#@echo ">>>>> $@"
 	@cd $@; $_;
-	@echo "<<<<< $@"
+	#@echo "<<<<< $@"
 
 clean:
 	@for dir in $(BINS) $(LIBS);	\

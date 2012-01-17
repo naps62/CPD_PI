@@ -3,6 +3,7 @@
 */bin/*
 */.svn
 *.swp
+*.swo
 *.tmp
 *.log
 *.aux
@@ -18,3 +19,5 @@ fvlib/*/FVLib/bin/fvcd*
 fvlib/*/FVLib/bin/fvcm*
 fvlib/simulations
 fvlib/*/bin
+FVLib.log
+Lib.err

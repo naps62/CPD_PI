@@ -29,7 +29,7 @@ clean:
 
 symlinks:
 	@echo Creating symlinks
-	@for file_name in `ls $(PWD)/bin` ; \
+	@for file_name in `ls $(PWD)/bin | grep -v "^core$$\|\.\(xml\|msh\|log\|err\)$$"` ; \
 		do \
 		ln -vfs $(PWD)/bin/$$file_name ../simulations/$$file_name; \
 		done

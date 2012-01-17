@@ -11,8 +11,8 @@
 #ifndef _CUDA_FVVECT
 #define _CUDA_FVVECT
 
-//#include <cuda.h>
-//#include <cutil.h>
+#include <cuda.h>
+#include <cutil.h>
 
 #include "MFVLog.h"
 
@@ -47,6 +47,7 @@ namespace CudaFV {
 				/**
 				 * GETTERS/SETTERS
 				 */
+				T* getArray();
 				unsigned int size() const;
 
 				//T* cudaAlloc();
@@ -58,6 +59,10 @@ namespace CudaFV {
 			private:
 				void alloc(unsigned int size);
 				void dealloc();
+				void test() {
+				double *x;
+					cudaMalloc(&x, sizeof(double)*2);
+				}
 
 		};
 
@@ -112,6 +117,11 @@ namespace CudaFV {
 		}
 
 	template<class T>
+		T* CFVVect<T>::getArray() {
+			return arr;
+		}
+
+	template<class T>
 		unsigned int CFVVect<T>::size() const {
 			return arr_size;
 		}
@@ -149,7 +159,6 @@ namespace CudaFV {
 	 */
 	template<class T>
 		void CFVVect<T>::alloc(unsigned int size) {
-			FVLog::logger << "CFVVect alloc(" << size << ")" << endl;
 			arr_size = size;
 			if (arr_size > 0) {
 				arr = new T[arr_size];
@@ -158,7 +167,6 @@ namespace CudaFV {
 
 	template<class T>
 		void CFVVect<T>::dealloc() {
-			FVLog::logger << "CFVVect dealloc()" << endl;
 			if (arr != NULL) {
 				delete arr;
 			}
