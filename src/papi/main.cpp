@@ -5,7 +5,7 @@
 
 #include "papi.hpp"
 
-#define	ARRAY_SIZE	10000
+#define	ARRAY_SIZE	10
 
 using std::cout;
 using std::endl;
@@ -26,7 +26,12 @@ int main ()
 	srand( time(NULL) );
 
 	for (i = 0; i < ARRAY_SIZE; ++i)
+	{
 		array[i] = rand() % ARRAY_SIZE + 1;
+		cout
+			<<	array[i]
+			<<	endl;
+	}
 
 	p.add_event( PAPI_TOT_INS );
 	p.add_event( PAPI_LD_INS );
@@ -48,7 +53,8 @@ int main ()
 		<<	"prd: "	<<	prd	<<	endl
 		<<	"max: "	<<	max	<<	endl
 		<<	"min: "	<<	min	<<	endl
-		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<< endl;
+		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<< endl
+		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS	]	<<	endl;
 
 	return 0;
 }
