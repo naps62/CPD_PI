@@ -68,3 +68,4 @@ namespace CudaFV {
 #include "CUDA/CFVVect.hpp"
 
 #endif // _CUDA_FVVECT
+

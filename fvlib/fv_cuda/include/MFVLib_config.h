@@ -15,3 +15,4 @@
 #define NO_RIGHT_EDGE	0xffffffff
 
 #endif // _H_M_FVLIB_CONFIG
+

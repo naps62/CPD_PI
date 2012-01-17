@@ -32,3 +32,4 @@ void FVErr::output(MSG_TYPE type, string &msg) {
 	log  << full_msg_str;
 	cerr << full_msg_str;
 }
+

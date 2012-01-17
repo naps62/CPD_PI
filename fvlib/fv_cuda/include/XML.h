@@ -56,3 +56,4 @@ StringMap _attribute;
 };
 
 #endif // define _XML
+

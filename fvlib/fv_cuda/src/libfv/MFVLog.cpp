@@ -19,3 +19,4 @@ string FVLog::timestamp() {
 void FVLog::initLog() {
 	*this << endl << endl << " --- Logger started at " << timestamp() << endl;
 }
+
