@@ -72,17 +72,12 @@ int main ()
 		}
 	}
 
-	sum = 0;
-	prd = 1;
-	min = INT_MAX;
-	max = INT_MIN;
-
 	for (t = 0; t < tc; ++t)
 	{
 		sum += sums[t];
 		prd *= prds[t];
-		min = ( array[i] < min ) ? array[i] : min;
-		max = ( array[i] > max ) ? array[i] : max;
+		min = ( mins[t] < min ) ? mins[t] : min;
+		max = ( maxs[t] > max ) ? maxs[t] : max;
 	}
 	
 	p.stop();
