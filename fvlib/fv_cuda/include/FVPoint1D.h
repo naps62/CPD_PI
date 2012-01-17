@@ -50,7 +50,7 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 
-inline double Norm(const FVPoint1D<double> &u)
+inline fv_float Norm(const FVPoint1D<fv_float> &u)
         {if(u.x<0) return (-u.x); else return(u.x); }  
 
 template <class T_>

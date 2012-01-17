@@ -18,7 +18,7 @@ Parameter(string &){cout<<"under construction"<<endl;} // take the first paramet
         //destructor
 ~Parameter(){;}
   // member  
-double getDouble(const string &key)
+fv_float getDouble(const string &key)
     { 
       string value;
       value=_param[key];
@@ -50,7 +50,7 @@ string getString(const string &key)
            {cout<<key<<" is not a valid key"<<endl;}       
       return( value);
     }
-double getDouble(const char *keyname)
+fv_float getDouble(const char *keyname)
     {
       string key(keyname),value; 
       value=_param[key];

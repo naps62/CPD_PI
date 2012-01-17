@@ -4,9 +4,9 @@
 //  class for 1D Gauss Point
 //
 //
-FVPoint2D<double> FVGaussPoint1D::getPoint(size_t order, size_t no=1)
+FVPoint2D<fv_float> FVGaussPoint1D::getPoint(size_t order, size_t no=1)
 {
-FVPoint2D<double> coord;    
+FVPoint2D<fv_float> coord;    
 switch(order)
     {        
     case 0:
@@ -47,7 +47,7 @@ switch(order)
     }       
 }
 
-double FVGaussPoint1D::getWeight(size_t order, size_t no=1)
+fv_float FVGaussPoint1D::getWeight(size_t order, size_t no=1)
 {
 switch(order)
     {        
@@ -106,11 +106,11 @@ switch(order)
 //
 //
 
-FVPoint3D<double> FVGaussPoint2D::getPoint(size_t order, size_t no=1)
+FVPoint3D<fv_float> FVGaussPoint2D::getPoint(size_t order, size_t no=1)
 {
-FVPoint3D<double> coord;   
-double a1=(6.-sqrt(15.))/21;
-double a2=(6.+sqrt(15.))/21;
+FVPoint3D<fv_float> coord;   
+fv_float a1=(6.-sqrt(15.))/21;
+fv_float a2=(6.+sqrt(15.))/21;
 switch(order)
     {        
     case 0:
@@ -169,7 +169,7 @@ switch(order)
     default:coord.x=coord.y=coord.z=0.;return(coord);
     }       
 }
-double FVGaussPoint2D::getWeight(size_t order, size_t no=1)
+fv_float FVGaussPoint2D::getWeight(size_t order, size_t no=1)
 {
 switch(order)
     {        
@@ -234,10 +234,10 @@ switch(order)
 //
 //
 
-FVPoint4D<double> FVGaussPoint3D::getPoint(size_t order, size_t no=1)
+FVPoint4D<fv_float> FVGaussPoint3D::getPoint(size_t order, size_t no=1)
 {
-FVPoint4D<double> coord;  
-double a=(10.-2*sqrt(15.))/40,a1=(7.-sqrt(15.))/34,a2=(7.+sqrt(15.))/34;
+FVPoint4D<fv_float> coord;  
+fv_float a=(10.-2*sqrt(15.))/40,a1=(7.-sqrt(15.))/34,a2=(7.+sqrt(15.))/34;
 switch(order)
     {        
     case 0:
@@ -323,11 +323,11 @@ switch(order)
     default:coord.x=coord.y=coord.z=coord.t=0.;return(coord);
     }       
 }
-double FVGaussPoint3D::getWeight(size_t order, size_t no=1)
+fv_float FVGaussPoint3D::getWeight(size_t order, size_t no=1)
 {
-double  w=10./189 ;   
-double  w1=(2665.+14*sqrt(15.))/37800;
-double  w2=(2665.-14*sqrt(15.))/37800;
+fv_float  w=10./189 ;   
+fv_float  w1=(2665.+14*sqrt(15.))/37800;
+fv_float  w2=(2665.-14*sqrt(15.))/37800;
 switch(order)
     {        
     case 0:

@@ -11,13 +11,13 @@ class FVFace3D;
 class FVCell3D
 {
 public:
-FVPoint3D<double> centroid;
+FVPoint3D<fv_float> centroid;
 size_t label,code,nb_vertex,nb_face;
 size_t pos_f,pos_v;
-double surface,volume;
+fv_float surface,volume;
 FVVertex3D* vertex[NB_VERTEX_PER_CELL_3D] ; // the  vertices
 FVFace3D* face[NB_FACE_PER_CELL_3D];     // the face
-FVPoint3D<double>  cell2face[NB_FACE_PER_CELL_3D]; // normal exterior for each face
+FVPoint3D<fv_float>  cell2face[NB_FACE_PER_CELL_3D]; // normal exterior for each face
 
 
      FVCell3D(){nb_vertex=0;nb_face=0;label=0;}
@@ -27,7 +27,7 @@ FVPoint3D<double>  cell2face[NB_FACE_PER_CELL_3D]; // normal exterior for each f
      FVVertex3D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  
      FVFace3D* beginFace(){pos_f=0;if(pos_f<nb_face) return(face[0]);else return(NULL);};
      FVFace3D* nextFace(){if(pos_f<nb_face) return(face[pos_f++]);else return(NULL);}     
-     FVPoint3D<double> getCell2Face(){return cell2face[pos_f-1];}
+     FVPoint3D<fv_float> getCell2Face(){return cell2face[pos_f-1];}
      void setCode2Face(size_t val=0)
          {for(size_t i=0;i<nb_face;i++) 
           if(face[i]) face[i]->code=val;}     

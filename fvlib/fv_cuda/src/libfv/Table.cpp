@@ -179,10 +179,10 @@ if (code!=OkCloseBalise)
 }
 /*================ Interpolation section==================*/
 //------ linear interpolation for one variable ----//
-double Table::linearInterpolation(double x1)
+fv_float Table::linearInterpolation(fv_float x1)
 {
   volatile size_t i1;
-  volatile double coef1,OneOverDelta1,tab1m,tab1M;
+  volatile fv_float coef1,OneOverDelta1,tab1m,tab1M;
   if(_nb_pts1<=1) 
       {cout<<"need at leat two elements"<<endl; exit(1);}
   if((x1<_min1) ||(x1>_max1)) 
@@ -194,10 +194,10 @@ double Table::linearInterpolation(double x1)
   return(tab1M*coef1+tab1m*(1.-coef1));
 
 }
-double Table::linearExtrapolation(double x1)
+fv_float Table::linearExtrapolation(fv_float x1)
 {
   volatile size_t i1;
-  volatile double coef1,OneOverDelta1,tab1,tab2;
+  volatile fv_float coef1,OneOverDelta1,tab1,tab2;
   if(_nb_pts1<=1) 
       {cout<<"need at leat two elements"<<endl; exit(1);}
   if(x1<_min1) return _table[0];
@@ -210,11 +210,11 @@ double Table::linearExtrapolation(double x1)
 }
 
 //------ linear interpolation for two variables ----//
-double Table::linearInterpolation(double x1, double x2)
+fv_float Table::linearInterpolation(fv_float x1, fv_float x2)
 {
   volatile size_t i1,i2;
-  volatile double coef1,OneOverDelta1,tab11,tab12;  
-  volatile double coef2,OneOverDelta2,tab21,tab22; 
+  volatile fv_float coef1,OneOverDelta1,tab11,tab12;  
+  volatile fv_float coef2,OneOverDelta2,tab21,tab22; 
 
   if(_nb_pts1<=1||_nb_pts2<=1 ) 
       {cout<<"need at leat two elements for each direction"<<endl; exit(1);}
@@ -233,11 +233,11 @@ double Table::linearInterpolation(double x1, double x2)
   coef2=x2*OneOverDelta2-i2;
   return(tab11+coef1*(tab12-tab11)+coef2*(tab21-tab11)+coef1*coef2*(tab22+tab11-tab12-tab21));
 }
-double Table::linearExtrapolation(double x1, double x2)
+fv_float Table::linearExtrapolation(fv_float x1, fv_float x2)
 {
   volatile size_t i1,i2,inc1,inc2;
-  volatile double coef1,OneOverDelta1,tab11,tab12;  
-  volatile double coef2,OneOverDelta2,tab21,tab22;
+  volatile fv_float coef1,OneOverDelta1,tab11,tab12;  
+  volatile fv_float coef2,OneOverDelta2,tab21,tab22;
 
   if(_nb_pts1<=1||_nb_pts2<=1 ) 
       {cout<<"need at leat two elements for each direction"<<endl; exit(1);}
@@ -261,13 +261,13 @@ double Table::linearExtrapolation(double x1, double x2)
   return(tab11+coef1*(tab12-tab11)+coef2*(tab21-tab11)+coef1*coef2*(tab22+tab11-tab12-tab21)); 
 }
 //------ linear interpolation for three variables ----//
-double Table::linearInterpolation(double x1, double x2, double x3)
+fv_float Table::linearInterpolation(fv_float x1, fv_float x2, fv_float x3)
 {
   volatile size_t i1,i2,i3;
-  volatile double coef1,OneOverDelta1;
-  volatile double coef2,OneOverDelta2; 
-  volatile double coef3,OneOverDelta3; 
-  volatile double tab111,tab112,tab121,tab122,tab211,tab212,tab221,tab222;
+  volatile fv_float coef1,OneOverDelta1;
+  volatile fv_float coef2,OneOverDelta2; 
+  volatile fv_float coef3,OneOverDelta3; 
+  volatile fv_float tab111,tab112,tab121,tab122,tab211,tab212,tab221,tab222;
   
   
   if(_nb_pts1<=1||_nb_pts2<=1||_nb_pts3<=1 ) 
@@ -293,20 +293,20 @@ double Table::linearInterpolation(double x1, double x2, double x3)
   coef1=x1*OneOverDelta1-i1;
   coef2=x2*OneOverDelta2-i2;
   coef3=x3*OneOverDelta3-i3; 
- volatile double alpha=tab111+coef1*(tab211-tab111)+coef2*(tab121-tab111)+coef3*(tab112-tab111);
+ volatile fv_float alpha=tab111+coef1*(tab211-tab111)+coef2*(tab121-tab111)+coef3*(tab112-tab111);
  alpha+=coef1*coef2*(tab111-tab211-tab121+tab221);
  alpha+=coef1*coef3*(tab111-tab211-tab112+tab212);
  alpha+=coef2*coef3*(tab111-tab121-tab112+tab122);
  alpha+=coef1*coef2*coef3*(tab222+tab112+tab121+tab211-tab111-tab221-tab212-tab122);
  return(alpha);
 }
-double Table::linearExtrapolation(double x1, double x2,double x3)
+fv_float Table::linearExtrapolation(fv_float x1, fv_float x2,fv_float x3)
 {
   volatile size_t i1,i2,i3,inc1,inc2,inc3;
-  volatile double coef1,OneOverDelta1;
-  volatile double coef2,OneOverDelta2; 
-  volatile double coef3,OneOverDelta3; 
-  volatile double tab111,tab112,tab121,tab122,tab211,tab212,tab221,tab222;
+  volatile fv_float coef1,OneOverDelta1;
+  volatile fv_float coef2,OneOverDelta2; 
+  volatile fv_float coef3,OneOverDelta3; 
+  volatile fv_float tab111,tab112,tab121,tab122,tab211,tab212,tab221,tab222;
  
   if(_nb_pts1<=1||_nb_pts2<=1||_nb_pts3<=1 ) 
       {cout<<"need at leat two elements for each direction"<<endl; exit(1);}
@@ -337,7 +337,7 @@ double Table::linearExtrapolation(double x1, double x2,double x3)
   coef1=x1*OneOverDelta1-i1;
   coef2=x2*OneOverDelta2-i2;
   coef3=x3*OneOverDelta3-i3; 
- volatile double alpha=tab111+coef1*(tab211-tab111)+coef2*(tab121-tab111)+coef3*(tab112-tab111);
+ volatile fv_float alpha=tab111+coef1*(tab211-tab111)+coef2*(tab121-tab111)+coef3*(tab112-tab111);
  alpha+=coef1*coef2*(tab111-tab211-tab121+tab221);
  alpha+=coef1*coef3*(tab111-tab211-tab112+tab212);
  alpha+=coef2*coef3*(tab111-tab121-tab112+tab122);

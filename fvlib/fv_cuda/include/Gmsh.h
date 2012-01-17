@@ -63,12 +63,12 @@ public:
      GMElement* getElement(const size_t i){return &(_element[i]);}
    
      
-     void writeVector( FVVect<double> &, const size_t type,const char *name, double time);    
-     void writeVector(const FVVect<double> &,const FVVect<double> &,  const size_t type,const char *name, double time);    
-     void writeVector(const FVVect<double> &,const FVVect<double> &, const FVVect<double> &, const size_t type,const char *name, double time);      
-     void writeVector( FVVect<FVPoint1D<double> > &, const size_t type,const char *name, double time);        
-     void writeVector( FVVect<FVPoint2D<double> > &, const size_t type,const char *name, double time);       
-     void writeVector( FVVect<FVPoint3D<double> > &, const size_t type,const char *name, double time);    
+     void writeVector( FVVect<fv_float> &, const size_t type,const char *name, fv_float time);    
+     void writeVector(const FVVect<fv_float> &,const FVVect<fv_float> &,  const size_t type,const char *name, fv_float time);    
+     void writeVector(const FVVect<fv_float> &,const FVVect<fv_float> &, const FVVect<fv_float> &, const size_t type,const char *name, fv_float time);      
+     void writeVector( FVVect<FVPoint1D<fv_float> > &, const size_t type,const char *name, fv_float time);        
+     void writeVector( FVVect<FVPoint2D<fv_float> > &, const size_t type,const char *name, fv_float time);       
+     void writeVector( FVVect<FVPoint3D<fv_float> > &, const size_t type,const char *name, fv_float time);    
 
 private:
     vector<FVVertex3D> _node;
