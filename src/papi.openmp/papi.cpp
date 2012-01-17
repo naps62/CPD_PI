@@ -198,6 +198,11 @@ void PAPI::stop ()
 	_values = NULL;
 }
 
+long long int PAPI::last_time ()
+{
+	return time.last;
+}
+
 void PAPI::reset ()
 {
 	int result;

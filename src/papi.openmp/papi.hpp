@@ -40,6 +40,8 @@ class PAPI
 	void start ();
 	void stop ();
 
+	long long int last_time ();
+
 	void reset();
 
 	long long int operator[] (int event);

@@ -23,6 +23,8 @@ int main ()
 	long long int *sums, *prds;
 	long long int *tot_ins_v, *tot_cyc_v;
 	long long int tot_ins, tot_cyc;
+	long long int *tot_tm_v;
+	long long int tot_tm;
 	unsigned i;
 
 	min = INT_MAX;
@@ -31,6 +33,7 @@ int main ()
 	prd = 1;
 	tot_ins = 0;
 	tot_cyc = 0;
+	tot_tm = 0;
 
 	srand( time(NULL) );
 
@@ -55,6 +58,7 @@ int main ()
 			maxs = new int[ tc ];
 			tot_ins_v = new long long int[ tc ];
 			tot_cyc_v = new long long int[ tc ];
+			tot_tm_v = new long long int[ tc ];
 		}
 
 		PAPI p;
@@ -82,6 +86,7 @@ int main ()
 
 		p.stop();
 
+		tot_tm_v[t] = p.last_time();
 		tot_ins_v[t] = p[ PAPI_TOT_INS ];
 		tot_cyc_v[t] = p[ PAPI_TOT_CYC ];
 
@@ -99,6 +104,9 @@ int main ()
 				<<	endl
 				<<	"\tPAPI_TOT_CYC: "
 				<<	tot_cyc_v[t]
+				<<	endl
+				<<	"\telapsed time: "
+				<<	tot_tm_v[t]
 				<<	endl;
 		}
 	}
@@ -111,6 +119,7 @@ int main ()
 		max = ( maxs[t] > max ) ? maxs[t] : max;
 		tot_ins += tot_ins_v[t];
 		tot_cyc += tot_cyc_v[t];
+		tot_tm += tot_tm_v[t];
 	}
 
 	cout
@@ -119,9 +128,19 @@ int main ()
 		<<	"max: "	<<	max	<<	endl
 		<<	"min: "	<<	min	<<	endl
 		<<	"PAPI_TOT_INS: "	<<	tot_ins	<< endl
-		<<	"PAPI_TOT_CYC: "	<<	tot_cyc	<<	endl;
+		<<	"PAPI_TOT_CYC: "	<<	tot_cyc	<<	endl
+		<<	"total time: "	<<	tot_tm	<<	endl;
 	
+	//	cleanup
 	PAPI::shutdown();
+
+	delete sums;
+	delete prds;
+	delete mins;
+	delete maxs;
+	delete tot_ins_v;
+	delete tot_cyc_v;
+	delete tot_tm_v;
 
 	return 0;
 }
