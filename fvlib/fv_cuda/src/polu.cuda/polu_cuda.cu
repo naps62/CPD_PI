@@ -79,9 +79,9 @@ double cuda_compute_flux(
 	int threads_per_block = 512;
 
 	dim3 num_blocks(num_edges % 512,1,1);
-	dum3 num_threads(threads_per_block,1,1);
+	dim3 num_threads(threads_per_block,1,1);
 	
-	cuda_compute_flux<<<num_blocks, num_threads>>>(
+	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
 			num_cells,
 			edge_normals_x,
