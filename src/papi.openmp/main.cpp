@@ -85,6 +85,8 @@ int main ()
 		tot_ins_v[t] = p[ PAPI_TOT_INS ];
 		tot_cyc_v[t] = p[ PAPI_TOT_CYC ];
 
+		#pragma omp barrier
+
 		#pragma omp critical
 		{
 			cout
