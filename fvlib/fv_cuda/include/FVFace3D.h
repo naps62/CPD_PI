@@ -59,3 +59,4 @@ inline bool isEqual(FVFace3D *f1, FVFace3D *f2)
      }
 
 #endif // define _FVFACE3D
+

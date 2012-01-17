@@ -17,3 +17,4 @@
 #define fv_float double
 
 #endif // _H_M_FVLIB_CONFIG
+

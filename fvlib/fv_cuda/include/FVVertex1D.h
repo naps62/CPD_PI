@@ -22,3 +22,4 @@ inline bool isEqual(FVVertex1D *v1, FVVertex1D *v2)
       if(v1->label==v2->label) return true; else return false;   
      }
 #endif // define _FVVERTEX1D
+

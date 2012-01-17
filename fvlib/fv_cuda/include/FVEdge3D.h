@@ -36,3 +36,4 @@ inline bool isEqual(FVEdge3D *e1, FVEdge3D *e2)
       return(is_equal1 && is_equal2);
      }
 #endif // define _FVEDGE3D
+

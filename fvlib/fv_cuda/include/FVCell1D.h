@@ -39,3 +39,4 @@ inline bool isEqual(FVCell1D *c1, FVCell1D *c2)
      }
 
 #endif // define _FVCELL1D
+

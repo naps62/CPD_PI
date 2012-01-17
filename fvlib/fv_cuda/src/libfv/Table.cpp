@@ -344,3 +344,4 @@ fv_float Table::linearExtrapolation(fv_float x1, fv_float x2,fv_float x3)
  alpha+=coef1*coef2*coef3*(tab222+tab112+tab121+tab211-tab111-tab221-tab212-tab122);
  return(alpha);
 }
+
