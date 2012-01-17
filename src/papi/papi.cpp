@@ -1,4 +1,9 @@
+#include <iostream>
+
 #include "papi.hpp"
+
+using std::cerr;
+using std::endl;
 
 void PAPI::init ()
 {
@@ -49,7 +54,6 @@ PAPI::PAPI()
 		throw( result );
 	}
 	else
-	{
 		cerr
 			<<	"Event set created!"
 			<<	endl;
