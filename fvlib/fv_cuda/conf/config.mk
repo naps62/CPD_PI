@@ -20,7 +20,7 @@ CXX	=	nvcc
 INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include -I $(CUDASDK_DIR)/C/common/inc
 
 #	Compiler flags
-CXXFLAGS	=	-Xcompiler="-fpermissive -Wall -Wextra -Wfatal-errors"
+CXXFLAGS	=	-deviceemu -arch sm_11 -Xcompiler="-fpermissive -Wall -Wextra -Wfatal-errors"
 CXXFLAGS	+=	 $(INC)
 
 ifeq ($(MODE),DBG)
