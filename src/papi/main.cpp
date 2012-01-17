@@ -16,9 +16,10 @@ int main ()
 	int min, max;
 	long long int sum, prd;
 	unsigned i;
-	PAPI_Memory p;
+	//PAPI_Memory p;
 	//PAPI_CPI p;
 	//PAPI_Flops p;
+	PAPI_L1 p;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -52,17 +53,20 @@ int main ()
 		<<	"prd: "	<<	prd	<<	endl
 		<<	"max: "	<<	max	<<	endl
 		<<	"min: "	<<	min	<<	endl
-		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
-		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS ]	<<	endl
-		<<	"PAPI_SR_INS: "	<<	p[ PAPI_SR_INS ]	<<	endl
+//		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
+//		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS ]	<<	endl
+//		<<	"PAPI_SR_INS: "	<<	p[ PAPI_SR_INS ]	<<	endl
 //		<<	"PAPI_TOT_CYC: "	<<	p[ PAPI_TOT_CYC	]	<<	endl
 //		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
+		<<	"PAPI_L1_DCA: "	<<	p[ PAPI_L1_DCA ]	<<	endl
+		<<	"PAPI_L1_DCM: "	<<	p[ PAPI_L1_DCM ]	<<	endl
 		<<	"Total time: "	<<	p.total_time()	<<	endl
 //		<<	"CPI: "	<<	p.cpi()	<<	endl
 //		<<	"IPC: "	<<	p.ipc()	<<	endl
 //		<<	"Flops: "	<<	p.flops()	<<	endl
 //		<<	"Flops/c: "	<<	p.flops_per_cyc()	<<	endl
 //		<<	"Flops/s: "	<<	p.flops_per_sec()	<<	endl
+		<<	"L1 miss rate: "	<<	p.miss_rate()	<<	endl
 	;
 
 	return 0;
