@@ -46,7 +46,7 @@ __global__ void cuda_compute_flux_kernel(
 	v_left[1]	= velocity_y[i_left];
 	p_left		= polution[i_left];
 
-	if (i_right == NO_RIGHT_EDGE) {
+	if (i_right != NO_RIGHT_EDGE) {
 		v_right[0]	= velocity_x[i_right];
 		v_right[1]	= velocity_y[i_right];
 		p_right	 	= polution[i_right];
