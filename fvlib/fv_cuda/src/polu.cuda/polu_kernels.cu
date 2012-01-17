@@ -30,7 +30,6 @@ __global__ void cuda_compute_flux_kernel(
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-
 	edge_left_cells[tid] = tid;
 	edge_normals_x[tid] = edge_normals_y[tid];
 	//polution[tid] = velocity_y[tid];
