@@ -30,7 +30,7 @@ __global__ void cuda_compute_flux_kernel(
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-
+	__syncthreads();
 	vs[tid] = tid;
 	velocity_x[tid] = edge_lengths[tid];
 	return;

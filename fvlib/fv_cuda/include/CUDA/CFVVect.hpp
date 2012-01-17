@@ -11,7 +11,7 @@
 
 #include <cuda_runtime_api.h>
 #include <cuda.h>
-#include <cutil.h>
+//#include <cutil.h>
 
 namespace CudaFV {
 
