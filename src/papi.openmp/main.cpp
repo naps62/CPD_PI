@@ -84,6 +84,21 @@ int main ()
 
 		tot_ins_v[t] = p[ PAPI_TOT_INS ];
 		tot_cyc_v[t] = p[ PAPI_TOT_CYC ];
+
+		#pragma omp critical
+		{
+			cout
+				<<	'<'
+				<<	t
+				<<	'>'
+				<<	endl
+				<<	"\tPAPI_TOT_INS: "
+				<<	tot_ins_v[t]
+				<<	endl
+				<<	"\tPAPI_TOT_CYC: "
+				<<	tot_cyc_v[t]
+				<<	endl;
+		}
 	}
 
 	for (t = 0; t < tc; ++t)
