@@ -107,8 +107,6 @@ double compute_flux(
 	v_max = DBL_MIN;
 	for ( e = 0; e < es; ++e)
 	{
-		cout << e << " flux= " << flux[e];
-		getchar();
 		if ( vs[e] > v_max )
 			v_max = vs[e];
 	}
