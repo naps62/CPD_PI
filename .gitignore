@@ -17,3 +17,4 @@ fvlib/*/BIC2012/velocity*
 fvlib/*/FVLib/bin/fvcd*
 fvlib/*/FVLib/bin/fvcm*
 fvlib/simulations
+fvlib/*/bin
