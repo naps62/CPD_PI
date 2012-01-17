@@ -43,6 +43,7 @@ PAPI::PAPI()
 	if ( ! PAPI_is_initialized() )
 		PAPI::init();
 	
+	set = PAPI_NULL;
 	result = PAPI_create_eventset( &set );
 	if (result != PAPI_OK)
 	{
