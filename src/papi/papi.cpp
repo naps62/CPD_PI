@@ -1,5 +1,11 @@
 #include <iostream>
 
+#ifdef _OPENMP
+#include <omp.h>
+#else
+#warning "Compiler does not present OpenMP support"
+#endif
+
 #include "papi.hpp"
 
 using std::cerr;
@@ -24,16 +30,41 @@ void PAPI::init ()
 			<<	"PAPI initialized!"
 			<<	endl;
 	
-	/*
-	result = PAPI_thread_init( omp_get_thread_num );
-	if ( result != PAPI_OK )
-		throw( result );
-		*/
 }
+
+#ifdef _OPENMP
+void PAPI::init_threads ()
+{
+	int result;
+
+	if ( ! PAPI_is_initialized() )
+		PAPI::init();
+
+	result = PAPI_thread_init( (unsigned long (*)(void)) omp_get_thread_num );
+	if ( result != PAPI_OK )
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error initializing PAPI threads!"
+			<<	endl;
+		throw( result );
+	}
+	else
+		cerr
+			<<	"PAPI threads initialized!"
+			<<	endl;
+}
+#endif
 
 void PAPI::shutdown ()
 {
 	PAPI_shutdown();
+}
+
+long long int PAPI::real_nano_seconds ()
+{
+	return PAPI_get_real_nsec();
 }
 
 PAPI::PAPI()
@@ -60,6 +91,10 @@ PAPI::PAPI()
 			<<	endl;
 	
 	_values = NULL;
+	time.last = 0;
+	time.total = 0;
+	time.avg = 0;
+	measures = 0;
 }
 
 void PAPI::add_event (int event)
@@ -117,6 +152,8 @@ void PAPI::start ()
 
 	_values = new long long int[ events.size() ];
 
+	time._begin = PAPI::real_nano_seconds();
+
 	result = PAPI_start( set );
 	if (result != PAPI_OK)
 	{
@@ -136,6 +173,7 @@ void PAPI::start ()
 void PAPI::stop ()
 {
 	int result;
+	long long int _end;
 	unsigned i;
 
 	result = PAPI_stop( set , _values );
@@ -152,12 +190,23 @@ void PAPI::stop ()
 		cerr
 			<<	"Stopped measure!"
 			<<	endl;
+
+	_end = PAPI::real_nano_seconds();
 	
 	for ( i = 0 ; i < events.size() ; ++i )
 		counters[ events[i] ] = _values[i];
 	
+	time.last = _end - time._begin;
+	time.total += time.last;
+	time.avg = (double) time.total / (double) (++measures);
+
 	delete _values;
 	_values = NULL;
+}
+
+long long int PAPI::last_time ()
+{
+	return time.last;
 }
 
 void PAPI::reset ()
@@ -169,9 +218,31 @@ void PAPI::reset ()
 
 	for ( it = counters.begin(); it != counters.end(); ++it )
 		it->second = 0;
+	
+	measures = 0;
+	time.last = 0;
+	time.total = 0;
+	time.avg = 0;
 }
 
 long long int PAPI::operator[] (int event)
 {
 	return counters[ event ];
+}
+
+//	PAPI_CPI
+PAPI_CPI::PAPI_CPI () : PAPI()
+{
+	(*this).add_event( PAPI_TOT_INS );
+	(*this).add_event( PAPI_TOT_CYC );
+}
+
+double PAPI_CPI::cpi ()
+{
+	return (double)(*this)[ PAPI_TOT_CYC ] / (double)(*this)[ PAPI_TOT_INS ];
+}
+
+double PAPI_CPI::ipc ()
+{
+	return (double)(*this)[ PAPI_TOT_INS ] / (double)(*this)[ PAPI_TOT_CYC ];
 }

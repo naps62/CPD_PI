@@ -16,7 +16,7 @@ int main ()
 	int min, max;
 	long long int sum, prd;
 	unsigned i;
-	PAPI p;
+	PAPI_CPI p;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -33,8 +33,8 @@ int main ()
 			<<	endl;
 	}
 
-	p.add_event( PAPI_TOT_INS );
-	p.add_event( PAPI_LD_INS );
+	//p.add_event( PAPI_TOT_INS );
+	//p.add_event( PAPI_LD_INS );
 
 	p.start();
 
@@ -53,8 +53,11 @@ int main ()
 		<<	"prd: "	<<	prd	<<	endl
 		<<	"max: "	<<	max	<<	endl
 		<<	"min: "	<<	min	<<	endl
-		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<< endl
-		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS	]	<<	endl;
+		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
+		<<	"PAPI_TOT_CYC: "	<<	p[ PAPI_TOT_CYC	]	<<	endl
+		<<	"CPI: "	<<	p.cpi()	<<	endl
+		<<	"IPC: "	<<	p.ipc()	<<	endl
+	;
 
 	return 0;
 }
