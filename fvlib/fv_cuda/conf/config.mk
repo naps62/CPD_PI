@@ -24,8 +24,8 @@ CXXFLAGS	=	-Xcompiler="-fpermissive -Wall -Wextra -Wfatal-errors"
 CXXFLAGS	+=	 $(INC)
 
 ifeq ($(MODE),DBG)
-CXXFLAGS	+=	-g
-NVCCFLAGS	+=	-g
+CXXFLAGS	+=	-g -G
+NVCCFLAGS	+=	-g -G
 SUFFIX=_$(MODE)
 else ifeq ($($MODE),CUBIN)
 CXXFLAGS	+= -cubin

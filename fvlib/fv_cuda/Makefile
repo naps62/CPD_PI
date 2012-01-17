@@ -2,7 +2,7 @@ ROOTD=.
 
 include conf/config.mk
 
-default: all symlinks
+default: all
 
 all: objs libs bins
 

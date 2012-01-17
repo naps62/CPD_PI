@@ -99,7 +99,7 @@ double gpu_compute_flux(
 
 	v_max = std::numeric_limits<double>::min();
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
-		cout << i << " vs= " << gpu_vs[i];
+		cout << i << " vs= " << velocity.x[i];
 		getchar();
 		if (gpu_vs[i] > v_max)
 			v_max = gpu_vs[i];
@@ -269,7 +269,7 @@ int main()
 	//h = gpu_compute_mesh_parameter(gpu_mesh);
 
 	// GPU
-	cuda_main_loop(
+	gpu_main_loop(
 		data.time.final,
 		data.iterations.jump,
 		gpu_mesh,

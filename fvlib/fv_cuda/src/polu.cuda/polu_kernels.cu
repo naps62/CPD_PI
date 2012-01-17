@@ -32,7 +32,9 @@ __global__ void cuda_compute_flux_kernel(
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
-	// 
+	vs[tid] = tid;
+	velocity_x[tid] = edge_lengths[tid];
+	return;
 	if (tid >= num_edges) return;
 
 	unsigned int i_left		= edge_left_cells[tid];
@@ -41,14 +43,14 @@ __global__ void cuda_compute_flux_kernel(
 	double v_left[2], v_right[2];
 	double p_left, p_right;
 
-	v_left[0]	= velocity_x[tid];
-	v_left[1]	= velocity_y[tid];
+	v_left[0]	= velocity_x[i_left];
+	v_left[1]	= velocity_y[i_left];
 	p_left		= polution[i_left];
 
 	if (i_right == NO_RIGHT_EDGE) {
-		v_right[0]	= velocity_x[tid];
-		v_right[1]	= velocity_y[tid];
-		p_right 	= polution[i_right];
+		v_right[0]	= velocity_x[i_right];
+		v_right[1]	= velocity_y[i_right];
+		p_right	 	= polution[i_right];
 	} else {
 		v_right[0]	= v_left[0];
 		v_right[1]	= v_left[1];
@@ -63,7 +65,7 @@ __global__ void cuda_compute_flux_kernel(
 	else
 		flux[tid] = v * p_left;
 
-	vs[tid] = v;
+	vs[tid] = tid;
 }
 
 __host__ double cuda_compute_flux(
@@ -84,8 +86,8 @@ __host__ double cuda_compute_flux(
 	//double result_vs;
 
 
-	dim3 num_blocks = 1;
-	dim3 num_threads = 512;
+	dim3 num_blocks(1,1);
+	dim3 num_threads(512,1);
 	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
 			num_cells,
@@ -100,6 +102,17 @@ __host__ double cuda_compute_flux(
 			flux,
 			vs,
 			dc);
+
+	cudaThreadSynchronize();
+	cudaError_t error = cudaGetLastError();
+	if(error != cudaSuccess) {
+		// something's gone wrong
+		// print out the CUDA error as a string
+		cout << "CUDA Error: " << cudaGetErrorString(error) << endl;
+
+		// we can't recover from the error -- exit the program
+		return 1;
+	}
 
 	//cudaMemcpy(&result_vs, vs, sizeof(double), cudaMemcpyDeviceToHost);
 	//return 1.0 / abs(result_vs);
@@ -157,9 +170,10 @@ __host__ void cuda_main_loop(
 				dc);
 
 		vs.cuda_get();
+		velocities.x.cuda_get();
 
 		for(unsigned int i=0; i < mesh.num_edges; ++i) {
-			cout << i << "vs= " << vs[i];
+			cout << i << "v_x = " << velocities.x[i] << " length= " << mesh.edge_lengths[i];
 			getchar();
 		}
 
