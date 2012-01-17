@@ -1,6 +1,7 @@
+#include <papi.h>
+
 #include "papi.hpp"
 
-static
 void PAPI::init ()
 {
 	int result;
@@ -9,12 +10,13 @@ void PAPI::init ()
 	if ( result != PAPI_VER_CURRENT )
 		throw( result );
 	
+	/*
 	result = PAPI_thread_init( omp_get_thread_num );
 	if ( result != PAPI_OK )
 		throw( result );
+		*/
 }
 
-static
 void PAPI::shutdown ()
 {
 	PAPI_shutdown();
@@ -63,7 +65,7 @@ void PAPI::start ()
 {
 	int result;
 
-	_values = new int[ events.size() ];
+	_values = new long long int[ events.size() ];
 
 	result = PAPI_start( set );
 	if (result != PAPI_OK)
@@ -73,7 +75,7 @@ void PAPI::start ()
 void PAPI::stop ()
 {
 	int result;
-	int i;
+	unsigned i;
 
 	result = PAPI_stop( set , _values );
 	if (result != PAPI_OK)
@@ -87,7 +89,7 @@ void PAPI::stop ()
 
 void PAPI::reset ()
 {
-	int i;
+	unsigned i;
 	int result;
 
 	result = PAPI_reset( set );

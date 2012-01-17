@@ -1,12 +1,16 @@
 #ifndef ___PAPI_HPP___
 #define ___PAPI_HPP___
 
+#include <vector>
+
+using std::vector;
+
 class PAPI
 {
 	int set;
 	vector<int> events;
-	vector<int> values;
-	int* _values;
+	vector<long long int> values;
+	long long int* _values;
 
 	public:
 	static void init ();
@@ -23,7 +27,7 @@ class PAPI
 
 	void reset();
 
-	long long operator[] (int event);
-}
+	long long int operator[] (int event);
+};
 
 #endif/*___PAPI_HPP___*/

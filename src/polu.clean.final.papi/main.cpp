@@ -67,6 +67,7 @@ double compute_flux(
 	double v;								//	resulting velocity
 	FVEdge2D *edge;							//	current edge
 
+	dt = 0;
 	es = mesh.getNbEdge();
 	for ( e = 0; e < es; ++e)
 	{
