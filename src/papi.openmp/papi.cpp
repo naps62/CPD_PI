@@ -32,6 +32,9 @@ void PAPI::init_threads ()
 {
 	int result;
 
+	if ( ! PAPI_is_initialized() )
+		PAPI::init();
+
 	result = PAPI_thread_init( (unsigned long (*)(void)) omp_get_thread_num );
 	if ( result != PAPI_OK )
 	{

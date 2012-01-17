@@ -42,7 +42,7 @@ int main ()
 			<<	endl;
 	}
 
-	PAPI::init();
+	PAPI::init_threads();
 
 	#pragma omp parallel default(shared) private(t)
 	{
