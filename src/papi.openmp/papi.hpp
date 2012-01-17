@@ -15,10 +15,21 @@ class PAPI
 	long long int* _values;
 	map< int , long long int > counters;
 	vector< int > events;
+	struct {
+		long long int _begin;
+		long long int last;
+		long long int total;
+		double avg;
+	} time;
+	unsigned measures;
 
 	public:
 	static void init ();
+	static void init_threads();
 	static void shutdown ();
+	static long long int real_seconds ();
+	static long long int real_micro_seconds ();
+	static long long int real_nano_seconds ();
 
 	PAPI ();
 //	~PAPI ();

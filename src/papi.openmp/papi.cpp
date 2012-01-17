@@ -26,6 +26,12 @@ void PAPI::init ()
 			<<	"PAPI initialized!"
 			<<	endl;
 	
+}
+
+void PAPI::init_threads ()
+{
+	int result;
+
 	result = PAPI_thread_init( (unsigned long (*)(void)) omp_get_thread_num );
 	if ( result != PAPI_OK )
 	{
@@ -45,6 +51,11 @@ void PAPI::init ()
 void PAPI::shutdown ()
 {
 	PAPI_shutdown();
+}
+
+long long int PAPI::real_nano_seconds ()
+{
+	return PAPI_get_real_nsecs();
 }
 
 PAPI::PAPI()
@@ -71,6 +82,10 @@ PAPI::PAPI()
 			<<	endl;
 	
 	_values = NULL;
+	time.last = 0;
+	time.total = 0;
+	time.avg = 0;
+	measures = 0;
 }
 
 void PAPI::add_event (int event)
@@ -128,6 +143,8 @@ void PAPI::start ()
 
 	_values = new long long int[ events.size() ];
 
+	time._begin = PAPI::get_nano_seconds();
+
 	result = PAPI_start( set );
 	if (result != PAPI_OK)
 	{
@@ -147,6 +164,7 @@ void PAPI::start ()
 void PAPI::stop ()
 {
 	int result;
+	long long int _end;
 	unsigned i;
 
 	result = PAPI_stop( set , _values );
@@ -163,10 +181,16 @@ void PAPI::stop ()
 		cerr
 			<<	"Stopped measure!"
 			<<	endl;
+
+	_end = PAPI::real_nano_seconds();
 	
 	for ( i = 0 ; i < events.size() ; ++i )
 		counters[ events[i] ] = _values[i];
 	
+	time.last = _end - time._begin;
+	time.total += time.last;
+	time.avg = (double) time.total / (double) (++measures);
+
 	delete _values;
 	_values = NULL;
 }
@@ -180,6 +204,11 @@ void PAPI::reset ()
 
 	for ( it = counters.begin(); it != counters.end(); ++it )
 		it->second = 0;
+	
+	measures = 0;
+	time.last = 0;
+	time.total = 0;
+	time.avg = 0;
 }
 
 long long int PAPI::operator[] (int event)
