@@ -22,8 +22,6 @@ namespace CudaFV {
 				T *arr;
 				T *cuda_arr;
 
-				//T *cuda_arr;
-
 			public:
 				/**
 				 * CONSTRUCTORS
@@ -32,8 +30,6 @@ namespace CudaFV {
 				CFVVect(const unsigned int size);
 				CFVVect(const CFVVect<T> &copy);
 				~CFVVect();
-
-				//~CFVVect() { dealloc(); }
 
 				/**
 				 * OPERATORS
