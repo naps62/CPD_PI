@@ -6,7 +6,18 @@ void PAPI::init ()
 
 	result = PAPI_library_init( PAPI_VER_CURRENT );
 	if ( result != PAPI_VER_CURRENT )
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error initializing PAPI!"
+			<<	endl;
 		throw( result );
+	}
+	else
+		cerr
+			<<	"PAPI initialized!"
+			<<	endl;
 	
 	/*
 	result = PAPI_thread_init( omp_get_thread_num );
@@ -29,7 +40,19 @@ PAPI::PAPI()
 	
 	result = PAPI_create_eventset( &set );
 	if (result != PAPI_OK)
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error creating event set!"
+			<<	endl;
 		throw( result );
+	}
+	else
+	{
+		cerr
+			<<	"Event set created!"
+			<<	endl;
 	
 	_values = NULL;
 }
@@ -39,7 +62,18 @@ void PAPI::add_event (int event)
 	int result;
 	result = PAPI_add_event( set , event );
 	if (result != PAPI_OK)
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error adding event!"
+			<<	endl;
 		throw( result );
+	}
+	else
+		cerr
+			<<	"Event added!"
+			<<	endl;
 	
 	events.push_back( event );
 	counters[ event ] = 0;
@@ -52,7 +86,18 @@ void PAPI::add_events (int *events_v, int events_c)
 
 	result = PAPI_add_events( set , events_v , events_c );
 	if (result != PAPI_OK)
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error adding events!"
+			<<	endl;
 		throw( result );
+	}
+	else
+		cerr
+			<<	"Events added!"
+			<<	endl;
 	
 	for ( i = 0 ; i < events_c ; ++i )
 	{
@@ -69,7 +114,18 @@ void PAPI::start ()
 
 	result = PAPI_start( set );
 	if (result != PAPI_OK)
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error starting measure!"
+			<<	endl;
 		throw( result );
+	}
+	else
+		cerr
+			<<	"Started measure!"
+			<<	endl;
 }
 
 void PAPI::stop ()
@@ -79,7 +135,18 @@ void PAPI::stop ()
 
 	result = PAPI_stop( set , _values );
 	if (result != PAPI_OK)
+	{
+		cerr
+			<<	'['
+			<<	result
+			<<	"] Error stopping measure!"
+			<<	endl;
 		throw( result );
+	}
+	else
+		cerr
+			<<	"Stopped measure!"
+			<<	endl;
 	
 	for ( i = 0 ; i < events.size() ; ++i )
 		counters[ events[i] ] = _values[i];
