@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <climits>
 #include <ctime>
 
 #include "papi.hpp"
@@ -16,6 +17,11 @@ int main ()
 	long long int sum, prd;
 	unsigned i;
 	PAPI p;
+
+	min = INT_MAX;
+	max = INT_MIN;
+	sum = 0;
+	prd = 1;
 
 	srand( time(NULL) );
 
