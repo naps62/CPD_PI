@@ -1,5 +1,5 @@
 #include <cuda.h>
-#include <cutil.h>
+//#include <cutil.h>
 
 #include "CUDA/CFVLib.h"
 #include "FVLib.h"
