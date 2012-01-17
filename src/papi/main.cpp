@@ -26,14 +26,10 @@ int main ()
 	srand( time(NULL) );
 
 	for (i = 0; i < ARRAY_SIZE; ++i)
-	{
 		array[i] = rand();
-		cout
-			<<	array[i]
-			<<	endl;
-	}
 
 	p.add_event( PAPI_TOT_INS );
+	p.add_event( PAPI_LD_INS );
 
 	p.start();
 
