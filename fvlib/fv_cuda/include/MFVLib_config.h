@@ -14,6 +14,6 @@
 //#define NO_RIGHT_EDGE std::numeric_limits<unsigned int>::max()
 #define NO_RIGHT_EDGE	INT_MAX
 
-#define fv_float float
+#define fv_float double
 
 #endif // _H_M_FVLIB_CONFIG

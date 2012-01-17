@@ -30,10 +30,10 @@ __global__ void cuda_compute_flux_kernel(
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	edge_left_cells[tid] = tid;
-	edge_normals_x[tid] = edge_normals_y[tid];
+	//edge_left_cells[tid] = tid;
+	//edge_normals_x[tid] = edge_normals_y[tid];
 	//polution[tid] = velocity_y[tid];
-	return;
+	//return;
 	if (tid >= num_edges) return;
 
 	unsigned int i_left		= edge_left_cells[tid];
@@ -64,7 +64,7 @@ __global__ void cuda_compute_flux_kernel(
 	else
 		flux[tid] = v * p_left;
 
-	vs[tid] = tid;
+	vs[tid] = v;
 }
 
 __host__ fv_float cuda_compute_flux(
@@ -170,7 +170,7 @@ __host__ void cuda_main_loop(
 
 
 		vs.cuda_get();
-		mesh.edge_normals.x.cuda_get();
+		/*mesh.edge_normals.x.cuda_get();
 		mesh.edge_normals.y.cuda_get();
 		mesh.edge_lengths.cuda_get();
 		mesh.edge_left_cells.cuda_get();
@@ -178,13 +178,14 @@ __host__ void cuda_main_loop(
 		polution.cuda_get();
 		velocities.x.cuda_get();
 		velocities.y.cuda_get();
-		flux.cuda_get();
+		flux.cuda_get();*/
 		//velocities.x.cuda_get();
 		//mesh.edge_lengths.cuda_get();
 		//mesh.edge_left_cells.cuda_get();
 
 		for(unsigned int i=0; i < mesh.num_edges; ++i) {
-			cout << "tid= " << mesh.edge_left_cells[i] << " vs= " << mesh.edge_normals.x[i] << " custom= " << mesh.edge_normals.y[i];
+			cout << "vs= " << vs[i];
+			//cout << "tid= " << mesh.edge_left_cells[i] << " vs= " << mesh.edge_normals.x[i] << " custom= " << mesh.edge_normals.y[i];
 			getchar();
 		}
 
