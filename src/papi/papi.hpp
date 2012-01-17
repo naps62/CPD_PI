@@ -122,6 +122,7 @@ class PAPI_L1 : public PAPI_Cache
 	double miss_rate ();
 };
 
+/*
 class PAPI_L2 : public PAPI_Cache
 {
 	public:
@@ -131,6 +132,7 @@ class PAPI_L2 : public PAPI_Cache
 	long long int misses ();
 	double miss_rate ();
 };
+*/
 
 class PAPI_OpIntensity : public PAPI_Preset
 {

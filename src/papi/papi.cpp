@@ -337,6 +337,7 @@ double PAPI_L1::miss_rate ()
 }
 
 //	PAPI_L2
+/*
 PAPI_L2::PAPI_L2 () : PAPI_Cache ()
 {
 	(*this).add_event( PAPI_L2_DCA );
@@ -357,6 +358,7 @@ double PAPI_L2::miss_rate ()
 {
 	return (double) misses() / (double) accesses();
 }
+*/
 
 //	PAPI_OpIntensity
 PAPI_OpIntensity::PAPI_OpIntensity () : PAPI_Preset ()
