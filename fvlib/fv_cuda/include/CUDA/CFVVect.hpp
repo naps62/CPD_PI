@@ -95,7 +95,6 @@ namespace CudaFV {
 
 	template<class T>
 		void CFVVect<T>::cuda_malloc() {
-			FVLog::logger << "device malloc: " << sizeof(T) << " * " << arr_size << endl;
 			cudaMalloc((void **)&cuda_arr, sizeof(T) * arr_size);
 		}
 
@@ -106,13 +105,11 @@ namespace CudaFV {
 
 	template<class T>
 		void CFVVect<T>::cuda_save() {
-			FVLog::logger << "device save: " << sizeof(T) << " * " << arr_size << endl;
 			cudaMemcpy(cuda_arr, arr, sizeof(T) * arr_size, cudaMemcpyHostToDevice);
 		}
 
 	template<class T>
 		void CFVVect<T>::cuda_get() {
-			FVLog::logger << "device get: " << sizeof(T) << " * " << arr_size << endl;
 			cudaMemcpy(arr, cuda_arr, sizeof(T) * arr_size, cudaMemcpyDeviceToHost);
 		}
 

@@ -199,6 +199,7 @@ void cuda_main_loop(
 		for(int j = 0; j < 30; ++j)
 			FVLog::logger << j << "\t" << vs[j] << "\t" << flux[j] << endl;
 		exit(0);
+
 		if (i % jump_interval == 0) {
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
