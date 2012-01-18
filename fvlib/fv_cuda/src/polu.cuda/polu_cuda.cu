@@ -191,6 +191,9 @@ void cuda_main_loop(
 		flux.cuda_get();
 
 		gpu_update(mesh, polution, flux, dt);
+
+		polution.cuda_save();
+
 		t += dt;
 		++i;
 
