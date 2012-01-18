@@ -77,11 +77,14 @@ double cuda_compute_flux(
 
 
 	int threads_per_block = 512;
+	int blocks = num_edges / threads_per_block;
+	if (num_edges % threads_per_block > 0)
+		blocks++;
 
-	dim3 num_blocks(ceil(num_edges / threads_per_block),1,1);
+	dim3 num_blocks(blocks,1,1);
 	dim3 num_threads(threads_per_block,1,1);
 
-	cout << "running cuda_compute_flux<<< " << num_blocks.x << ", " << num_threads.x << " >>>" << endl;
+	cout << "processing " << num_edges << " edges... running cuda_compute_flux<<< " << num_blocks.x << ", " << num_threads.x << " >>>" << endl;
 	
 	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
