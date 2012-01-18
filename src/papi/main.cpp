@@ -64,8 +64,8 @@ int main ()
 //		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
 //		<<	"PAPI_L1_DCA: "	<<	p[ PAPI_L1_DCA ]	<<	endl
 //		<<	"PAPI_L1_DCM: "	<<	p[ PAPI_L1_DCM ]	<<	endl
-		<<	"PAPI_L2_DCA: "	<<	p[ PAPI_L2_DCA ]	<<	endl
-//		<<	"PAPI_L2_DCM: "	<<	p[ PAPI_L2_DCM ]	<<	endl
+//		<<	"PAPI_L2_DCA: "	<<	p[ PAPI_L2_DCA ]	<<	endl
+		<<	"PAPI_L2_DCM: "	<<	p[ PAPI_L2_DCM ]	<<	endl
 		<<	"Total time: "	<<	p.total_time()	<<	endl
 //		<<	"CPI: "	<<	p.cpi()	<<	endl
 //		<<	"IPC: "	<<	p.ipc()	<<	endl
