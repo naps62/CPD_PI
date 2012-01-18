@@ -1,0 +1,3 @@
+ROOTD	=	../..
+LIB		=
+include $(ROOTD)/conf/obj.lib.mk

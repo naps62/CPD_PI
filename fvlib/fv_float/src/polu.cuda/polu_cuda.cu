@@ -9,17 +9,17 @@ __global__
 void cuda_compute_flux_kernel(
 		unsigned int num_edges,
 		unsigned int num_cells,
-		double *edge_normals_x,
-		double *edge_normals_y,
-		double *edge_lengths,
+		fv_float *edge_normals_x,
+		fv_float *edge_normals_y,
+		fv_float *edge_lengths,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
-		double *polution,
-		double *velocity_x,
-		double *velocity_y,
-		double *flux,
-		double *vs,
-		double dc) {
+		fv_float *polution,
+		fv_float *velocity_x,
+		fv_float *velocity_y,
+		fv_float *flux,
+		fv_float *vs,
+		fv_float dc) {
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -29,8 +29,8 @@ void cuda_compute_flux_kernel(
 	unsigned int i_left		= edge_left_cells[tid];
 	unsigned int i_right	= edge_right_cells[tid];
 
-	double v_left[2], v_right[2];
-	double p_left, p_right;
+	fv_float v_left[2], v_right[2];
+	fv_float p_left, p_right;
 
 	v_left[0]	= velocity_x[i_left];
 	v_left[1]	= velocity_y[i_left];
@@ -46,7 +46,7 @@ void cuda_compute_flux_kernel(
 		p_right		= dc;
 	}
 
-	double v	= ((v_left[0] + v_right[0]) * 0.5 * edge_normals_x[tid])
+	fv_float v	= ((v_left[0] + v_right[0]) * 0.5 * edge_normals_x[tid])
 				+ ((v_left[1] + v_right[1]) * 0.5 * edge_normals_y[tid]);
 
 	if (v < 0)
@@ -58,22 +58,22 @@ void cuda_compute_flux_kernel(
 }
 
 __host__
-double cuda_compute_flux(
+fv_float cuda_compute_flux(
 		unsigned int num_edges,
 		unsigned int num_cells,
-		double *edge_normals_x,
-		double *edge_normals_y,
-		double *edge_lengths,
+		fv_float *edge_normals_x,
+		fv_float *edge_normals_y,
+		fv_float *edge_lengths,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
-		double *polution,
-		double *velocities_x,
-		double *velocities_y,
-		double *flux,
-		CudaFV::CFVVect<double> &vs,
-		double dc) {
+		fv_float *polution,
+		fv_float *velocities_x,
+		fv_float *velocities_y,
+		fv_float *flux,
+		CudaFV::CFVVect<fv_float> &vs,
+		fv_float dc) {
 
-	double result_vs;
+	fv_float result_vs;
 
 
 	int threads_per_block = 512;
@@ -81,7 +81,7 @@ double cuda_compute_flux(
 	dim3 num_blocks(num_edges % 512,1,1);
 	dim3 num_threads(threads_per_block,1,1);
 	
-	cout << "running cuda_compute_flux<<<" << num_blocks.x << ", " << num_threads.x << endl;
+	cout << "running cuda_compute_flux<<<" << num_blocks.x << ", " << num_threads.x << ">>>" << endl;
 	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
 			num_cells,
@@ -120,9 +120,9 @@ double cuda_compute_flux(
 __host__
 void gpu_update(
 		CudaFV::CFVMesh2D &mesh,
-		CudaFV::CFVVect<double> &polution,
-		CudaFV::CFVVect<double> &flux,
-		double dt) {
+		CudaFV::CFVVect<fv_float> &polution,
+		CudaFV::CFVVect<fv_float> &flux,
+		fv_float dt) {
 	for (unsigned int i = 0; i < mesh.num_edges; ++i) {
 		polution[ (unsigned int) mesh.edge_left_cells[i] ] -=
 			dt * flux[i] * mesh.edge_lengths[i] / mesh.cell_areas[ (unsigned int) mesh.edge_left_cells[i] ];
@@ -137,18 +137,18 @@ void gpu_update(
 */
 __host__
 void cuda_main_loop(
-		double final_time,
+		fv_float final_time,
 		unsigned jump_interval,
 		CudaFV::CFVMesh2D &mesh,
-		double mesh_parameter,
-		FVVect<double> &old_polution,
-		CudaFV::CFVVect<double> &polution,
+		fv_float mesh_parameter,
+		FVVect<fv_float> &old_polution,
+		CudaFV::CFVVect<fv_float> &polution,
 		CudaFV::CFVPoints2D &velocities,
-		CudaFV::CFVVect<double> &flux,
-		double dc) {
+		CudaFV::CFVVect<fv_float> &flux,
+		fv_float dc) {
 
-	double dt;
-	double t = 0;
+	fv_float dt;
+	fv_float t = 0;
 	int i = 0;
 	
 	FVio polution_file("polution.xml", FVWRITE);
@@ -167,7 +167,7 @@ void cuda_main_loop(
 	flux.cuda_malloc();
 
 	// alloc space for tmp velocity vector
-	CudaFV::CFVVect<double> vs(mesh.num_edges);
+	CudaFV::CFVVect<fv_float> vs(mesh.num_edges);
 	vs.cuda_malloc();
 
 	while(t < final_time) {
@@ -194,7 +194,12 @@ void cuda_main_loop(
 		gpu_update(mesh, polution, flux, dt);
 		t += dt;
 		++i;
-		cout << i << " " << dt << endl;
+
+		FVLog::logger << "i\t" << "vs\t" << "flux" << endl;
+		for(int j = 0; j < 30; ++j)
+			FVLog::logger << j << "\t" << vs[j] << "\t" << flux[j] << endl;
+		exit(0);
+
 		if (i % jump_interval == 0) {
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
