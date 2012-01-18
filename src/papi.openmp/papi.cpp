@@ -1,11 +1,20 @@
 #include <iostream>
 
+#ifdef _OPENMP
 #include <omp.h>
+#else
+#warning "Compiler does not present OpenMP support"
+#endif
 
 #include "papi.hpp"
 
+#define	max(x,y)	\
+	( (x > y) ? x : y )
+
 using std::cerr;
 using std::endl;
+
+const int PAPI::CACHE_LINE_SIZE = 64;
 
 void PAPI::init ()
 {
@@ -28,6 +37,7 @@ void PAPI::init ()
 	
 }
 
+#ifdef _OPENMP
 void PAPI::init_threads ()
 {
 	int result;
@@ -50,6 +60,7 @@ void PAPI::init_threads ()
 			<<	"PAPI threads initialized!"
 			<<	endl;
 }
+#endif
 
 void PAPI::shutdown ()
 {
@@ -84,11 +95,9 @@ PAPI::PAPI()
 			<<	"Event set created!"
 			<<	endl;
 	
+	reset();
+
 	_values = NULL;
-	time.last = 0;
-	time.total = 0;
-	time.avg = 0;
-	measures = 0;
 }
 
 void PAPI::add_event (int event)
@@ -203,6 +212,11 @@ long long int PAPI::last_time ()
 	return time.last;
 }
 
+long long int PAPI::total_time ()
+{
+	return time.total;
+}
+
 void PAPI::reset ()
 {
 	int result;
@@ -213,13 +227,225 @@ void PAPI::reset ()
 	for ( it = counters.begin(); it != counters.end(); ++it )
 		it->second = 0;
 	
-	measures = 0;
 	time.last = 0;
 	time.total = 0;
 	time.avg = 0;
+	measures = 0;
+}
+
+long long int PAPI::get (int event)
+{
+	return counters[ event ];
 }
 
 long long int PAPI::operator[] (int event)
 {
 	return counters[ event ];
+}
+
+//	PAPI_Custom
+void PAPI_Custom::add_event (int event)
+{
+	PAPI::add_event( event );
+}
+
+void PAPI_Custom::add_events (int *events_v, int events_c)
+{
+	PAPI::add_events( events_v , events_c );
+}
+
+//	PAPI_Preset
+PAPI_Preset::PAPI_Preset () : PAPI () {}
+
+PAPI_Preset::PAPI_Preset (int *events_v, int events_c) : PAPI ()
+{
+	PAPI::add_events( events_v , events_c );
+}
+
+//	PAPI_Memory
+PAPI_Memory::PAPI_Memory () : PAPI_Preset ()
+{
+	(*this).add_event( PAPI_TOT_INS );
+	(*this).add_event( PAPI_LD_INS );
+	(*this).add_event( PAPI_SR_INS );
+}
+
+long long int PAPI_Memory::loads ()
+{
+	return (*this)[ PAPI_LD_INS ];
+}
+
+long long int PAPI_Memory::stores ()
+{
+	return (*this)[ PAPI_SR_INS ];
+}
+
+//	PAPI_CPI
+PAPI_CPI::PAPI_CPI () : PAPI_Preset ()
+{
+	(*this).add_event( PAPI_TOT_INS );
+	(*this).add_event( PAPI_TOT_CYC );
+}
+
+double PAPI_CPI::cpi ()
+{
+	return (double)(*this)[ PAPI_TOT_CYC ] / (double)(*this)[ PAPI_TOT_INS ];
+}
+
+double PAPI_CPI::ipc ()
+{
+	return (double)(*this)[ PAPI_TOT_INS ] / (double)(*this)[ PAPI_TOT_CYC ];
+}
+
+//	PAPI_Flops
+PAPI_Flops::PAPI_Flops () : PAPI_Preset ()
+{
+	(*this).add_event( PAPI_TOT_CYC );
+	(*this).add_event( PAPI_FP_OPS );
+}
+
+long long int PAPI_Flops::flops ()
+{
+	return (*this)[ PAPI_FP_OPS ];
+}
+
+double PAPI_Flops::flops_per_cyc ()
+{
+	return (double)(*this)[ PAPI_FP_OPS ] / (double)(*this)[ PAPI_TOT_CYC ];
+}
+
+double PAPI_Flops::flops_per_sec ()
+{
+	return (double)(*this)[ PAPI_FP_OPS ] * 10e9 / (double)total_time();
+}
+
+//	PAPI_Cache
+PAPI_Cache::PAPI_Cache () : PAPI_Preset () {}
+
+//	PAPI_L1
+PAPI_L1::PAPI_L1 () : PAPI_Cache ()
+{
+	(*this).add_event( PAPI_L1_DCA );
+	(*this).add_event( PAPI_L1_DCM );
+}
+
+long long int PAPI_L1::accesses ()
+{
+	return (*this)[ PAPI_L1_DCA ];
+}
+
+long long int PAPI_L1::misses ()
+{
+	return (*this)[ PAPI_L1_DCM ];
+}
+
+double PAPI_L1::miss_rate ()
+{
+	return (double) misses() / (double) accesses();
+}
+
+//	PAPI_L2
+PAPI_L2::PAPI_L2 () : PAPI_Cache ()
+{
+	(*this).add_event( PAPI_L2_DCA );
+	(*this).add_event( PAPI_L2_DCM );
+}
+
+long long int PAPI_L2::accesses ()
+{
+	return (*this)[ PAPI_L2_DCA ];
+}
+
+long long int PAPI_L2::misses ()
+{
+	return (*this)[ PAPI_L2_DCM ];
+}
+
+double PAPI_L2::miss_rate ()
+{
+	return (double) misses() / (double) accesses();
+}
+
+//	PAPI_OpIntensity
+PAPI_OpIntensity::PAPI_OpIntensity () : PAPI_Preset ()
+{
+	(*this).add_event( PAPI_TOT_CYC );
+	(*this).add_event( PAPI_FP_OPS );
+	(*this).add_event( PAPI_L2_DCM );
+}
+
+long long int PAPI_OpIntensity::ram_accesses ()
+{
+	return (*this)[ PAPI_L2_DCM ];
+}
+
+long long int PAPI_OpIntensity::bytes_accessed ()
+{
+	return ram_accesses() * PAPI::CACHE_LINE_SIZE;
+}
+
+long long int PAPI_OpIntensity::flops ()
+{
+	return (*this)[ PAPI_FP_OPS ];
+}
+
+double PAPI_OpIntensity::intensity ()
+{
+	return flops() / bytes_accessed();
+}
+
+//	PAPI_InstPerByte
+PAPI_InstPerByte::PAPI_InstPerByte ()
+{
+	(*this).add_event( PAPI_TOT_INS );
+	(*this).add_event( PAPI_L2_DCM );
+}
+
+long long int PAPI_InstPerByte::instructions ()
+{
+	return (*this)[ PAPI_TOT_INS ];
+}
+
+long long int PAPI_InstPerByte::bytes_accessed ()
+{
+	return (*this)[ PAPI_L2_DCM ] * PAPI::CACHE_LINE_SIZE;
+}
+
+double PAPI_InstPerByte::inst_per_byte ()
+{
+	return instructions() / max( bytes_accessed() , 1 );
+}
+
+//	PAPI_MulAdd
+PAPI_MulAdd::PAPI_MulAdd ()
+{
+	(*this).add_event( PAPI_FP_INS );
+	(*this).add_event( PAPI_FML_INS );
+	(*this).add_event( PAPI_FDV_INS );
+}
+
+long long int PAPI_MulAdd::mults ()
+{
+	return (*this)[ PAPI_FML_INS ];
+}
+
+long long int PAPI_MulAdd::divs ()
+{
+	return (*this)[ PAPI_FDV_INS ];
+}
+
+long long int PAPI_MulAdd::adds ()
+{
+	return (*this)[ PAPI_FP_INS ] - mults() - divs();
+}
+
+double PAPI_MulAdd::balance ()
+{
+	long long int a;
+	long long int m;
+
+	a = adds();
+	m = mults();
+
+	return (a > m) ? (double) m / (double) a : (double) a / (double) m;
 }
