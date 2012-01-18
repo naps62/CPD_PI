@@ -16,11 +16,12 @@ int main ()
 	int min, max;
 	long long int sum, prd;
 	unsigned i;
-	PAPI_Custom p;
+	//PAPI_Custom p;
 	//PAPI_Memory p;
 	//PAPI_CPI p;
 	//PAPI_Flops p;
 	//PAPI_L1 p;
+	PAPI_OpIntensity p;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -38,7 +39,7 @@ int main ()
 	}
 
 	//p.add_event( PAPI_L2_DCA );
-	p.add_event( PAPI_L2_DCM );
+	//p.add_event( PAPI_L2_DCM );
 
 	p.start();
 
@@ -61,7 +62,7 @@ int main ()
 //		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS ]	<<	endl
 //		<<	"PAPI_SR_INS: "	<<	p[ PAPI_SR_INS ]	<<	endl
 //		<<	"PAPI_TOT_CYC: "	<<	p[ PAPI_TOT_CYC	]	<<	endl
-//		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
+		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
 //		<<	"PAPI_L1_DCA: "	<<	p[ PAPI_L1_DCA ]	<<	endl
 //		<<	"PAPI_L1_DCM: "	<<	p[ PAPI_L1_DCM ]	<<	endl
 //		<<	"PAPI_L2_DCA: "	<<	p[ PAPI_L2_DCA ]	<<	endl
@@ -73,6 +74,7 @@ int main ()
 //		<<	"Flops/c: "	<<	p.flops_per_cyc()	<<	endl
 //		<<	"Flops/s: "	<<	p.flops_per_sec()	<<	endl
 //		<<	"L1 miss rate: "	<<	p.miss_rate()	<<	endl
+		<<	"Op. Intensity: "	<<	p.intensity()	<<	endl
 	;
 
 	return 0;
