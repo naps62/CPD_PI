@@ -193,7 +193,12 @@ void cuda_main_loop(
 		gpu_update(mesh, polution, flux, dt);
 		t += dt;
 		++i;
-		cout << i << " " << dt << endl;
+
+		FVLog::logger << "i = " << i << " dt = " << dt << endl;
+		for(unsigned int j = 0; j < 50; ++j) {
+			FVLog::logger << j << "\t" << flux[j] << "\t" << polution[j] << endl;
+		}
+
 		if (i % jump_interval == 0) {
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];

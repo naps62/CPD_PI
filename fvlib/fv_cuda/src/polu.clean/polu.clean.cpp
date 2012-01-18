@@ -224,7 +224,12 @@ void main_loop (
 		update( mesh , polutions , fluxes , dt );
 		t += dt;
 		++i;
-		cout << i << " " << dt << endl;
+
+		FVLog::logger << "i = " << i << " dt = " << dt << endl;
+		for(unsigned int j = 0; j < 50; ++j) {
+			FVLog::logger << j << "\t" << fluxes[j] << "\t" << polutions[j] << endl;
+		}
+
 		if ( i % jump_interval == 0 )
 		{
 			polution_file.put( polutions , t , "polution" );    
