@@ -21,7 +21,7 @@ int main ()
 	//PAPI_CPI p;
 	//PAPI_Flops p;
 	//PAPI_L1 p;
-	PAPI_OpIntensity p;
+	PAPI_InstPerByte p;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -58,11 +58,11 @@ int main ()
 		<<	"prd: "	<<	prd	<<	endl
 		<<	"max: "	<<	max	<<	endl
 		<<	"min: "	<<	min	<<	endl
-//		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
+		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
 //		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS ]	<<	endl
 //		<<	"PAPI_SR_INS: "	<<	p[ PAPI_SR_INS ]	<<	endl
 //		<<	"PAPI_TOT_CYC: "	<<	p[ PAPI_TOT_CYC	]	<<	endl
-		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
+//		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
 //		<<	"PAPI_L1_DCA: "	<<	p[ PAPI_L1_DCA ]	<<	endl
 //		<<	"PAPI_L1_DCM: "	<<	p[ PAPI_L1_DCM ]	<<	endl
 //		<<	"PAPI_L2_DCA: "	<<	p[ PAPI_L2_DCA ]	<<	endl
@@ -74,7 +74,9 @@ int main ()
 //		<<	"Flops/c: "	<<	p.flops_per_cyc()	<<	endl
 //		<<	"Flops/s: "	<<	p.flops_per_sec()	<<	endl
 //		<<	"L1 miss rate: "	<<	p.miss_rate()	<<	endl
-		<<	"Op. Intensity: "	<<	p.intensity()	<<	endl
+		<<	"Instructions: "	<<	p.instructions()	<<	endl
+		<<	"Bytes accessed: "	<<	p.bytes_accessed()	<<	endl
+		<<	"Intructions / RAM Byte: "	<<	p.inst_per_byte()	<<	endl
 	;
 
 	return 0;

@@ -134,6 +134,7 @@ class PAPI_L2 : public PAPI_Cache
 };
 */
 
+/*
 class PAPI_OpIntensity : public PAPI_Preset
 {
 	public:
@@ -144,6 +145,7 @@ class PAPI_OpIntensity : public PAPI_Preset
 	long long int flops ();
 	double intensity ();
 };
+*/
 
 class PAPI_InstPerByte : public PAPI_Preset
 {
