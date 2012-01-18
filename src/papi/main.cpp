@@ -37,7 +37,8 @@ int main ()
 			<<	endl;
 	}
 
-	p.add_event( PAPI_L2_DCA );
+	//p.add_event( PAPI_L2_DCA );
+	p.add_event( PAPI_L2_DCM );
 
 	p.start();
 
