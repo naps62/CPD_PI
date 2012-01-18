@@ -112,6 +112,11 @@ double compute_flux(
 	}
 
 	dt = 1.0 / abs(v_max);
+
+	FVLog::logger << "i\t" << "vs\t" << "flux" << endl;
+	for(int i = 0; i < 30; ++i)
+		FVLog::logger << i << "\t" << vs[i] << "\t" << flux[i] << endl;
+	exit(0);
 		
 	return dt;
 }

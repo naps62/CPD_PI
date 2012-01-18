@@ -97,7 +97,6 @@ double cuda_compute_flux(
 			vs.cuda_getArray(),
 			dc);
 
-	//cudaThreadSynchronize();
 	cudaError_t error = cudaGetLastError();
 	if(error != cudaSuccess) {
 		// something's gone wrong
@@ -196,6 +195,10 @@ void cuda_main_loop(
 		t += dt;
 		++i;
 
+		FVLog::logger << "i\t" << "vs\t" << "flux" << endl;
+		for(int i = 0; i < 30; ++i)
+			FVLog::logger << i << "\t" << vs[i] << "\t" << flux[i] << endl;
+		exit(0);
 		if (i % jump_interval == 0) {
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
