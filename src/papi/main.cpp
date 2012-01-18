@@ -21,7 +21,8 @@ int main ()
 	//PAPI_CPI p;
 	//PAPI_Flops p;
 	//PAPI_L1 p;
-	PAPI_InstPerByte p;
+	//PAPI_InstPerByte p;
+	PAPI_MulAdd p;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -61,12 +62,15 @@ int main ()
 		<<	"PAPI_TOT_INS: "	<<	p[ PAPI_TOT_INS ]	<<	endl
 //		<<	"PAPI_LD_INS: "	<<	p[ PAPI_LD_INS ]	<<	endl
 //		<<	"PAPI_SR_INS: "	<<	p[ PAPI_SR_INS ]	<<	endl
+		<<	"PAPI_FP_INS: "	<<	p[ PAPI_FP_INS ]	<<	endl
+		<<	"PAPI_FML_INS: "	<<	p[ PAPI_FML_INS ]	<<	endl
+		<<	"PAPI_FDV_INS: "	<<	p[ PAPI_FDV_INS	]	<<	endl
 //		<<	"PAPI_TOT_CYC: "	<<	p[ PAPI_TOT_CYC	]	<<	endl
 //		<<	"PAPI_FP_OPS: "	<<	p[ PAPI_FP_OPS ]	<<	endl
 //		<<	"PAPI_L1_DCA: "	<<	p[ PAPI_L1_DCA ]	<<	endl
 //		<<	"PAPI_L1_DCM: "	<<	p[ PAPI_L1_DCM ]	<<	endl
 //		<<	"PAPI_L2_DCA: "	<<	p[ PAPI_L2_DCA ]	<<	endl
-		<<	"PAPI_L2_DCM: "	<<	p[ PAPI_L2_DCM ]	<<	endl
+//		<<	"PAPI_L2_DCM: "	<<	p[ PAPI_L2_DCM ]	<<	endl
 		<<	"Total time: "	<<	p.total_time()	<<	endl
 //		<<	"CPI: "	<<	p.cpi()	<<	endl
 //		<<	"IPC: "	<<	p.ipc()	<<	endl
@@ -74,9 +78,13 @@ int main ()
 //		<<	"Flops/c: "	<<	p.flops_per_cyc()	<<	endl
 //		<<	"Flops/s: "	<<	p.flops_per_sec()	<<	endl
 //		<<	"L1 miss rate: "	<<	p.miss_rate()	<<	endl
-		<<	"Instructions: "	<<	p.instructions()	<<	endl
-		<<	"Bytes accessed: "	<<	p.bytes_accessed()	<<	endl
-		<<	"Intructions / RAM Byte: "	<<	p.inst_per_byte()	<<	endl
+//		<<	"Instructions: "	<<	p.instructions()	<<	endl
+//		<<	"Bytes accessed: "	<<	p.bytes_accessed()	<<	endl
+//		<<	"Intructions / RAM Byte: "	<<	p.inst_per_byte()	<<	endl
+		<<	"FP multiplications: "	<<	p.mults()	<<	endl
+		<<	"FP divisions: "	<<	p.divs()	<<	endl
+		<<	"FP additions: "	<<	p.adds()	<<	endl
+		<<	"MulAdd balance: "	<<	p.balance()	<<	endl
 	;
 
 	return 0;
