@@ -81,6 +81,7 @@ double cuda_compute_flux(
 	dim3 num_blocks(num_edges % 512,1,1);
 	dim3 num_threads(threads_per_block,1,1);
 	
+	cout << "running cuda_compute_flux<<<" << num_blocks.x << ", " << num_threads.x << endl;
 	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
 			num_edges,
 			num_cells,
@@ -96,7 +97,7 @@ double cuda_compute_flux(
 			vs.cuda_getArray(),
 			dc);
 
-	cudaThreadSynchronize();
+	//cudaThreadSynchronize();
 	cudaError_t error = cudaGetLastError();
 	if(error != cudaSuccess) {
 		// something's gone wrong
@@ -104,7 +105,7 @@ double cuda_compute_flux(
 		cout << "CUDA Error: " << cudaGetErrorString(error) << endl;
 
 		// we can't recover from the error -- exit the program
-		return 1;
+		exit(-1);
 	}
 
 	vs.cuda_get();
