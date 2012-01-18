@@ -188,20 +188,22 @@ void cuda_main_loop(
 
 		dt *= mesh_parameter;
 
+		/**
+		 * update function is not yet implemented in CUDA. To invoke the C++ version, a cudaMemcpy is required before it to copy flux parameter, and after, to update polution value on the GPU
+		 * Due to this, this implementation is not yet efficient compared to the original code
+		 */
 		flux.cuda_get();
-
 		gpu_update(mesh, polution, flux, dt);
-
 		polution.cuda_save();
 
 		t += dt;
 		++i;
 
-		FVLog::logger << "i = " << i << " dt = " << dt << endl;
-		for(unsigned int j = 0; j < 50; ++j) {
-			FVLog::logger << j << "\t" << flux[j] << "\t" << polution[j] << endl;
-		}
-
+		/**
+		 * Every <jump_interval> iterations, current polution values are saved to the output file polution.xml. with a low enough jump_interval, this creates an animated mesh of the polution along the entire time range, but also creates a bottleneck in the calculations
+		 *
+		 * Also, since the FVio class is still the original one (not updated to match the structs used for cuda), we first need to copy data to a structure of the old data types, and only then save it to file. This, again, has a big performance hit but is just temporary while the entire LIB is not CUDA-compatible
+		 */
 		if (i % jump_interval == 0) {
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
