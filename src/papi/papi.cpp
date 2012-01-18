@@ -8,6 +8,9 @@
 
 #include "papi.hpp"
 
+#define	max(x,y)	\
+	( (x > y) ? x : y )
+
 using std::cerr;
 using std::endl;
 
@@ -409,7 +412,7 @@ long long int PAPI_InstPerByte::bytes_accessed ()
 
 double PAPI_InstPerByte::inst_per_byte ()
 {
-	return instructions() / bytes_accessed();
+	return instructions() / max( bytes_accessed() , 1 );
 }
 
 //	PAPI_MulAdd
