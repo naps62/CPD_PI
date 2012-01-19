@@ -58,8 +58,19 @@ int main (int argc, char **argv)
 	max = INT_MIN;
 	sum = 0;
 	prd = 1;
-	tot_ins = 0;
+
 	tot_cyc = 0;
+	tot_ins = 0;
+	ld_ins = 0;
+	sr_ins = 0;
+	fml_ins = 0;
+	fdv_ins = 0;
+	fp_ops = 0;
+	l1_dca = 0;
+	l1_dcm = 0;
+	l2_dca = 0;
+	l2_dcm = 0;
+
 	tot_tm = 0;
 
 	//	read arguments
@@ -147,6 +158,14 @@ int main (int argc, char **argv)
 		PAPI_Flops *pf;
 		PAPI_L1 *pl1;
 		PAPI_InstPerByte *pipb;
+
+		p = NULL;
+		pc = NULL;
+		pm = NULL;
+		pcpi = NULL;
+		pf = NULL;
+		pl1 = NULL;
+		pipb = NULL;
 
 		switch ( mode )
 		{

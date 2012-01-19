@@ -1,3 +1,3 @@
 ROOTD	=	../..
-include $(ROOTD)/conf/obj.bin.fv.mk
+include $(ROOTD)/conf/obj.bin.mk
 LDFLAGS	+=	-lpapi -fopenmp
