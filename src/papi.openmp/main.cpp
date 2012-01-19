@@ -64,7 +64,7 @@ int main (int argc, char **argv)
 
 	//	read arguments
 	if (argc > 1)
-		mode = atoi( argv[0] );
+		mode = atoi( argv[1] );
 	else
 		mode = -1;
 	
@@ -445,6 +445,7 @@ int main (int argc, char **argv)
 			break;
 
 		case 2:
+			//	Flops
 			cout
 				<<	"Total cycles: "
 				<<	tot_cyc
@@ -455,6 +456,7 @@ int main (int argc, char **argv)
 			break;
 
 		case 3:
+			//	L1
 			cout
 				<<	"L1 accesses: "
 				<<	l1_dca
@@ -501,9 +503,14 @@ int main (int argc, char **argv)
 
 		case 1:
 		default:
-		cout
-			<<	"PAPI_TOT_INS: "	<<	tot_ins	<< endl
-			<<	"PAPI_TOT_CYC: "	<<	tot_cyc	<<	endl;
+			//	CPI
+			cout
+				<<	"Total instructions:: "
+				<<	tot_ins
+				<<	endl
+				<<	"Total cycles: "
+				<<	tot_cyc
+				<<	endl;
 	}
 	cout
 		<<	"total time: "	<<	tot_tm	<<	endl;
