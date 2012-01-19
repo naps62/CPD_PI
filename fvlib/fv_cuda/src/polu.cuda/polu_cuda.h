@@ -1,7 +1,13 @@
 #include <cuda.h>
+#include <cmath>
 
 #include "CUDA/CFVLib.h"
 #include "FVLib.h"
+
+#define BLOCK_SIZE_CF	512
+#define BLOCK_SIZE_RED	512
+#define BLOCK_SIZE_UP	512
+#define GRID_SIZE(elems, threads)	(std::ceil((double) elems / threads))
 
 /*
  * Main loop: calculates the polution spread evolution in the time domain.
@@ -18,23 +24,18 @@ void cuda_main_loop(
 		double dc);
 
 /*
- * compute flux (CUDA version)
+ * cuda_min_reduction
+ */
+
+/*
+ * update function (still no CUDA implementation)
  */
 __host__
-double cuda_compute_flux(
-		unsigned int num_edges,
-		unsigned int num_cells,
-		double *edge_normals_x,
-		double *edge_normals_y,
-		double *edge_lengths,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *polution,
-		double *velocities_x,
-		double *velocities_y,
-		double *flux,
-		CudaFV::CFVVect<double> &vs,
-		double dc);
+void gpu_update(
+		CudaFV::CFVMesh2D &mesh,
+		CudaFV::CFVVect<double> &polution,
+		CudaFV::CFVVect<double> &flux,
+		double dt);
 
 /*
  * CUDA kernel for compute flux calc
@@ -55,12 +56,5 @@ void cuda_compute_flux_kernel(
 		double *vs,
 		double dc);
 
-/*
- * update function (still no CUDA implementation)
- */
 __host__
-void gpu_update(
-		CudaFV::CFVMesh2D &mesh,
-		CudaFV::CFVVect<double> &polution,
-		CudaFV::CFVVect<double> &flux,
-		double dt);
+int choseDevice();
