@@ -287,6 +287,16 @@ PAPI_CPI::PAPI_CPI () : PAPI_Preset ()
 	(*this).add_event( PAPI_TOT_CYC );
 }
 
+long long int PAPI_CPI::cycles ()
+{
+	return (*this)[ PAPI_TOT_CYC ];
+}
+
+long long int PAPI_CPI::instructions ()
+{
+	return (*this)[ PAPI_TOT_INS ];
+}
+
 double PAPI_CPI::cpi ()
 {
 	return (double)(*this)[ PAPI_TOT_CYC ] / (double)(*this)[ PAPI_TOT_INS ];
@@ -302,6 +312,11 @@ PAPI_Flops::PAPI_Flops () : PAPI_Preset ()
 {
 	(*this).add_event( PAPI_TOT_CYC );
 	(*this).add_event( PAPI_FP_OPS );
+}
+
+long long int PAPI_Flops::cycles ()
+{
+	return (*this)[ PAPI_TOT_CYC ];
 }
 
 long long int PAPI_Flops::flops ()
@@ -404,6 +419,11 @@ PAPI_InstPerByte::PAPI_InstPerByte ()
 long long int PAPI_InstPerByte::instructions ()
 {
 	return (*this)[ PAPI_TOT_INS ];
+}
+
+long long int PAPI_InstPerByte::ram_accesses ()
+{
+	return (*this)[ PAPI_L2_DCM ];
 }
 
 long long int PAPI_InstPerByte::bytes_accessed ()

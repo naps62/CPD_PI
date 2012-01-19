@@ -83,6 +83,8 @@ class PAPI_CPI : public PAPI_Preset
 	public:
 	PAPI_CPI ();
 
+	long long int instructions ();
+	long long int cycles ();
 	double cpi ();
 	double ipc ();
 };
@@ -93,6 +95,7 @@ class PAPI_Flops : public PAPI_Preset
 	PAPI_Flops ();
 
 	long long int flops();
+	long long int cycles();
 	double flops_per_cyc();
 	double flops_per_sec();
 };
@@ -150,6 +153,7 @@ class PAPI_InstPerByte : public PAPI_Preset
 	PAPI_InstPerByte ();
 
 	long long int instructions ();
+	long long int ram_accesses ();
 	long long int bytes_accessed ();
 	double inst_per_byte ();
 };
