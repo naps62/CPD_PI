@@ -3,7 +3,21 @@
 
 #include "FVLib.h"
 
-#include "papi.h"
+#include "papi.hpp"
+
+//	BEGIN CONSTANTS
+
+/**
+ * OpenMP [f]actor
+ * Used with the number of processors to calculate the number of threads:
+ * pc -> processor count
+ * tc -> thread count
+ * => tc = pc * f
+ * This allows the existence of more threads than the hardware is capable, therefore making possible for some threads to step in while others wait on resources (based on GPU approach).
+ */
+#define	OMP_FCT_CF	1
+
+//	END CONSTANTS
 
 //	BEGIN TYPES
 
@@ -42,13 +56,16 @@ Parameters;
 
 //	BEGIN GLOBAL VARIABLES
 
-double *vs;
+int tc;						//	thread count
+long long int tot_cyc;		//	process total cycles
+long long int tot_ins;		//	process total instructions
+long long int tot_ns;		//	process total time in nano-seconds
 
-int set;
-int eventcount;
-int *events;
-
-//int **events;
+							//	vectors
+double *max_vel_v;			//	threads max velocity vector
+long long int *tot_cyc_v;	//	threads total cycles vector
+long long int *tot_ins_v;	//	threads total instructions vector
+long long int *tot_ns_v;	//	threads total time in nano-seconds
 
 //	END GLOBAL VARIABLES
 
@@ -64,13 +81,12 @@ double compute_flux(
 	FVVect<double>& flux,
 	double dc)								//	Dirichlet condition
 {
-	double dt;
+	double dt;								//	elapsed time
 	double p_left;							//	polution in the left face
 	double p_right;							//	polution in the right face
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
 	int t;									//	current thread number
-	int ts;									//	total number of threads used
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
 	FVPoint2D<double> v_left;				//	velocity in the left face
@@ -78,40 +94,29 @@ double compute_flux(
 	double v;								//	resulting velocity
 	FVEdge2D *edge;							//	current edge
 
+	double max_vel;							//	maximum calculated velocity
+	long long int tot_cyc_s;				//	total cycles (sequential zone)
+	long long int tot_ins_s;				//	total instructions (sequential zone)
+	long long int tot_ns_s;					//	total time in nano-seconds (sequential zone)
+
+	PAPI_CPI *p;							//	PAPI specific eventset
+
 	es = mesh.getNbEdge();
 	#pragma omp parallel	\
 		default(shared)	\
-		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v)
+		num_threads(tc)	\
+		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v,p)
 	{
-		int result;
-		int eventset;
+		p = new PAPI_CPI();
 
 		t = omp_get_thread_num();
 
-		vs[t] = DBL_MIN;
+		max_vel_v[t] = DBL_MIN;
+		tot_cyc_v[t] = 0;
+		tot_ins_v[t] = 0;
 
-		//	create eventset
-		eventset = PAPI_NULL;
-		result = PAPI_create_evenset( &eventset );
-		if (result != PAPI_OK)
-		{
-			cerr
-				<<	'['
-				<<	t
-				<<	"] Error creating eventset!"
-				<<	endl;
-		}
-
-		//	add events
-		result = PAPI_add_events( eventset , events , eventcount );
-		if (result != PAPI_OK)
-		{
-			cerr
-				<<	'['
-				<<	t
-				<<	"] Error adding events!"
-				<<	endl;
-		}
+		//	start measure
+		p->start();
 
 		#pragma omp for
 		for (e = 0; e < es; ++e)
@@ -132,29 +137,59 @@ double compute_flux(
 				p_right = dc;
 			} 
 			v = ( v_left + v_right ) * 0.5 * edge->normal; 
-			vs[t] = ( v > vs[t] ) ? v : vs[t];
-//			vs[e] = v;
-//			if ( ( abs(v) * dt ) > 1)
-//				dt = 1.0 / abs(v);
+			max_vel_v[t] = ( v > max_vel_v[t] ) ? v : max_vel_v[t];
 			if ( v < 0 )
 				flux[ edge->label - 1 ] = v * p_right;
 			else
 				flux[ edge->label - 1 ] = v * p_left;
 		}
 
-		#pragma omp single
-		ts = omp_get_num_threads();
+		//	stop measure
+		p->stop();
+
+		//	get values
+		tot_cyc_v[t] = p->cycles();
+		tot_ins_v[t] = p->instructions();
+		tot_ns_v[t] = p->last_time();
+
+		//	cleanup
+		delete p;
 	}
 
-	double v_max;
-	v_max = DBL_MIN;
-//	for (e = 0; e < es; ++e)
-//		v_max = ( vs[e] > v_max ) ? vs[e] : v_max;
-	for (t = 0; t < ts; ++t)
-		v_max = ( vs[t] > v_max ) ? vs[t] : v_max;
-	
-	dt = 1.0 / abs( v_max );
+	//	set sequential eventset
+	p = new PAPI_CPI();
 
+	//	start sequential measure
+	p->start();
+
+	max_vel = DBL_MIN;
+	for (t = 0; t < tc; ++t)
+		max_vel = ( max_vel_v[t] > max_vel ) ? max_vel_v[t] : max_vel;
+
+	dt = 1.0 / abs( max_vel );
+
+	//	stop sequential measure
+	p->stop();
+
+	//	get sequential values
+	tot_cyc_s = p->cycles();
+	tot_ins_s = p->instructions();
+	tot_ns_s = p->last_time();
+
+	//	cleanup
+	delete p;
+
+	//	gather PAPI results
+	for (t = 0; t < tc; ++t)
+	{
+		tot_cyc += tot_cyc_v[t];
+		tot_ins += tot_ins_v[t];
+		tot_ns += tot_ns_v[t];
+	}
+	tot_cyc += tot_cyc_s;
+	tot_ins += tot_ins_s;
+	tot_ns += tot_ns_s;
+	
 	return dt;
 }
 
@@ -247,10 +282,6 @@ void main_loop (
 
 	t = 0;
 	i = 0;
-//	polution_file.put( polutions , t , "polution" ); 
-	cout
-		<< "computing"
-		<< endl;
 	while ( t < final_time )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
@@ -259,9 +290,8 @@ void main_loop (
 		++i;
 		if ( i % jump_interval == 0 )
 		{
-//			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
-			fflush(NULL);
+//			printf("step %d  at time %f \r", i, t);
+//			fflush(NULL);
 		}
 	}
 	polution_file.put( polutions , t , "polution" ); 
@@ -275,29 +305,11 @@ int main(int argc, char** argv)
 	string name;
 	double h;
 	double t;
-	int result;
 	FVMesh2D mesh;
 	Parameters data;
 
-	//	PAPI init
-	result = PAPI_library_init(PAPI_VER_CURRENT);
-	if (result != PAPI_VER_CURRENT)
-	{
-		cerr
-			<<	"Error initializing PAPI!"
-			<<	endl;
-		exit(result);
-	}
-
-	//	PAPI init threads
-	result = PAPI_thread_init( omp_get_thread_num );
-	if (result != PAPI_OK )
-	{
-		cerr
-			<<	"Error initializing PAPI thread support!"
-			<<	endl;
-		exit(result);
-	}
+	//	init PAPI
+	PAPI::init_threads();
 
 	// read the parameter file
 	if (argc > 1)
@@ -305,12 +317,6 @@ int main(int argc, char** argv)
 	else
 		data = read_parameters( "param.xml" );
 	
-	//	read the set
-	if (argc > 2)
-		set = atoi( argv[2] );
-	else
-		set = 0;
-
 	// read the mesh
 	mesh.read( data.filenames.mesh.c_str() );
 
@@ -326,20 +332,19 @@ int main(int argc, char** argv)
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
-	//	prepare velocities array
-	vs = new double[ mesh.getNbEdge() ];
+	//	OpenMP init
+	tc = omp_get_num_procs() * OMP_FCT_CF;
 
-	//	prepare events
-	switch ( set )
-	{
-		case 0:
-		default:
-		eventcount = 3;
-		events = new int[ eventcount ];
-		events[0] = PAPI_TOT_INS;
-		events[1] = PAPI_LD_INS;
-		events[2] = PAPI_SR_INS;
-	}
+	//	prepare velocities array
+	//vs = new double[ mesh.getNbEdge() ];
+	max_vel_v = new double[ tc ];
+	tot_cyc_v = new long long int[ tc ];
+	tot_ins_v = new long long int[ tc ];
+	tot_ns_v = new long long int[ tc ];
+	
+	tot_cyc = 0;
+	tot_ins = 0;
+	tot_ns = 0;
 
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
@@ -357,10 +362,21 @@ int main(int argc, char** argv)
 		data.filenames.polution.output)
 	;
 
-	//	cleanup
-	delete vs;
+	//	print PAPI results
+	cout
+		<<	"PAPI stats (compute_flux only)"	<<	endl
+		<<	"Total cycles: "	<<	tot_cyc	<<	endl
+		<<	"Total instructions: "	<<	tot_ins	<<	endl
+		<<	"Total time: "	<<	tot_ns	<<	endl
+	;
 
-	PAPI_shutdown();
+	//	cleanup
+	delete max_vel_v;
+	delete tot_cyc_v;
+	delete tot_ins_v;
+	delete tot_ns_v;;
+
+	PAPI::shutdown();
 
 	return 0;
 }

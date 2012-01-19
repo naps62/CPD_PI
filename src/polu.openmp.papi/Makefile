@@ -1,3 +1,4 @@
 ROOTD	=	../..
 include $(ROOTD)/conf/src.bin.mk
-CXXFLAGS	+=	-fopenmp
+noflags	=	-ansi -pedantic
+CXXFLAGS	:=	$(filter-out $(noflags),$(CXXFLAGS)) -fopenmp
