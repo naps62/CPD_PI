@@ -90,7 +90,7 @@ void kernel_velocities_reduction(
 		__syncthreads();
 	}
 
-	if (tid == 0) g_output[blockIdx.x] = tid;
+	if (tid == 0) g_output[blockIdx.x] = blockIdx.x;
 }
 
 __global__
