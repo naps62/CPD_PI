@@ -108,7 +108,7 @@ void cuda_main_loop(
 		 * Reduction of velocities
 		 */
 		vs.cuda_get();
-		for(int x = 0; x < vs.size; x++) {
+		for(int x = 0; x < vs.size(); x++) {
 			cout << vs[x] << "\t";
 			if (x % 5 == 0) cout << endl;
 		}
