@@ -9,37 +9,32 @@
 */
 int main() {
 
-	int test[11];
+	int n = 10;
+	int test[n];
 	int result[3];
 	int *d_test, *d_result;
 
-	for(int i=0; i < 8; ++i)
+	for(int i=0; i < n; ++i)
 		test[i]=i;
-	test[8] = 10;
-	test[9] = 11;
-	test[10] = 12;
 
-	result[0] = 62;
-	result[1] = 25;
-	result[2] = 1;
 
-	dim3 numBlocks=3;
-	dim3 numThreads=4;
+	int blocks, threads;
+	get_reduction_num_blocks_and_threads(n, 0, 256, blocks, threads);
 
 	cudaMalloc(&d_test, sizeof(int)*8);
 	cudaMemcpy(d_test, test, sizeof(int)*8, cudaMemcpyHostToDevice);
 	cudaMalloc(&d_result, sizeof(int)*2);
-	cudaMemcpy(d_result, result, sizeof(int), cudaMemcpyHostToDevice);
 	cout << "before: " << endl;
-	for(int i=0; i < 11; ++i) {
+	for(int i=0; i < n; ++i) {
 		cout << test[i] << endl;
 	}
 
-	kernel_velocities_reduction<<< numBlocks, numThreads >>>(11, d_test, d_result);
+	//kernel_velocities_reduction<<< numBlocks, numThreads >>>(11, d_test, d_result);
+	wrapper_reduce_velocities(n, threads, blocks, d_test, d_result);
 
 	cudaMemcpy(result, d_result, sizeof(int)*2, cudaMemcpyDeviceToHost);
 	cout << "after: " << endl;
-	for(int i=0; i < numBlocks.x; ++i) {
+	for(int i=0; i < blocks; ++i) {
 		cout << result[i] << endl;
 	}
 	exit(0);
