@@ -21,13 +21,13 @@ int main() {
 
 	cudaMalloc(&d_result, sizeof(int)*4);
 	cout << "before: " << endl;
-	for(int i=0; i < numBlocks; ++i) {
+	for(int i=0; i < numBlocks.x; ++i) {
 		cout << result[i] << endl;
 	}
 	kernel_velocities_reduction<<< numBlocks, numThreads >>>(256, test, d_result);
 	cudaMemcpy(result, d_result, sizeof(int)*4, cudaMemcpyDeviceToHost);
 	cout << "after: " << endl;
-	for(int i=0; i < numBlocks; ++i) {
+	for(int i=0; i < numBlocks.x; ++i) {
 		cout << result[i] << endl;
 	}
 	exit(0);
