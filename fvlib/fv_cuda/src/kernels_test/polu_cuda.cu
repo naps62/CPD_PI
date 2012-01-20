@@ -9,25 +9,25 @@
 */
 int main() {
 
-	int test[256];
-	int result[4];
+	int test[8];
+	int result[2];
 	int *d_result;
 
-	for(int i=0; i < 256; ++i)
+	for(int i=0; i < 8; ++i)
 		test[i]=i;
 
-	dim3 numBlocks=4;
-	dim3 numThreads=256/4;
+	dim3 numBlocks=2;
+	dim3 numThreads=4;
 
 	cudaMalloc(&d_result, sizeof(int)*4);
 	cout << "before: " << endl;
-	for(int i=0; i < 4; ++i) {
+	for(int i=0; i < numBlocks; ++i) {
 		cout << result[i] << endl;
 	}
 	kernel_velocities_reduction<<< numBlocks, numThreads >>>(256, test, d_result);
 	cudaMemcpy(result, d_result, sizeof(int)*4, cudaMemcpyDeviceToHost);
 	cout << "after: " << endl;
-	for(int i=0; i < 4; ++i) {
+	for(int i=0; i < numBlocks; ++i) {
 		cout << result[i] << endl;
 	}
 	exit(0);
