@@ -112,6 +112,7 @@ void cuda_main_loop(
 		// reduce final array on cpu
 		cpu_reducibles.cuda_get();
 		max_vs = cpu_reducibles[0];
+		cout << "result: " << endl;
 		for(unsigned int x = 1; x < cpu_reducibles.size(); ++x) {
 			cout << cpu_reducibles[x] << endl;
 			if (cpu_reducibles[x] > max_vs)
