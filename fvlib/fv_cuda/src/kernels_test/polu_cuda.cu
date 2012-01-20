@@ -31,8 +31,8 @@ int main() {
 		cout << result[i] << endl;
 	}
 
-	int smemsize = numThreads * sizeof(int);
-	if (numThreads < 32) smemsize *= 2;
+	int smemsize = numThreads.x * sizeof(int);
+	if (numThreads.x < 32) smemsize *= 2;
 
 	kernel_velocities_reduction<<< numBlocks, numThreads, smemsize >>>(8, test, d_result);
 
