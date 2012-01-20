@@ -30,7 +30,12 @@ int main() {
 	for(int i=0; i < numBlocks.x; ++i) {
 		cout << result[i] << endl;
 	}
-	kernel_velocities_reduction<<< numBlocks, numThreads >>>(8, test, d_result);
+
+	int smemsize = numThreads * sizeof(int);
+	if (numThreads < 32) smemsize *= 2;
+
+	kernel_velocities_reduction<<< numBlocks, numThreads, smemsize >>>(8, test, d_result);
+
 	cudaMemcpy(result, d_result, sizeof(int)*2, cudaMemcpyDeviceToHost);
 	cout << "after: " << endl;
 	for(int i=0; i < numBlocks.x; ++i) {

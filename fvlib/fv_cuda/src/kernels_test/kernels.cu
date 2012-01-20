@@ -73,7 +73,7 @@ void kernel_velocities_reduction(
 		int *g_input,
 		int *g_output) {
 
-	__shared__ int sdata[blockDim.x];
+	int *sdata = SharedMemory();
 
 	unsigned int tid = threadIdx.x;
 	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
