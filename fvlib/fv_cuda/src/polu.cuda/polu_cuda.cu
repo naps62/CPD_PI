@@ -4,116 +4,9 @@
 #include "FVLib.h"
 
 #include "polu_cuda.h"
-
-__global__
-void cuda_compute_flux(
-		double *edge_normals_x,
-		double *edge_normals_y,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *polution,
-		double *velocity_x,
-		double *velocity_y,
-		double *flux,
-		double *vs,
-		double dc) {
-
-	// get thread id
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-
-	if (tid >= num_edges) return;
-
-	unsigned int i_left		= edge_left_cells[tid];
-	unsigned int i_right	= edge_right_cells[tid];
-
-	double v_left[2], v_right[2];
-	double p_left, p_right;
-
-	v_left[0]	= velocity_x[i_left];
-	v_left[1]	= velocity_y[i_left];
-	p_left		= polution[i_left];
-
-	if (i_right != NO_RIGHT_EDGE) {
-		v_right[0]	= velocity_x[i_right];
-		v_right[1]	= velocity_y[i_right];
-		p_right	 	= polution[i_right];
-	} else {
-		v_right[0]	= v_left[0];
-		v_right[1]	= v_left[1];
-		p_right		= dc;
-	}
-
-	double v	= ((v_left[0] + v_right[0]) * 0.5 * edge_normals_x[tid])
-				+ ((v_left[1] + v_right[1]) * 0.5 * edge_normals_y[tid]);
-
-	if (v < 0)
-		flux[tid] = v * p_right;
-	else
-		flux[tid] = v * p_left;
-
-	vs[tid] = v;
-}
-
-__host__
-double cuda_compute_flux(
-		dim3 &grid_size,
-		dim3 &block_size,
-		unsigned int num_edges,
-		unsigned int num_cells,
-		double *edge_normals_x,
-		double *edge_normals_y,
-		double *edge_lengths,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *polution,
-		double *velocities_x,
-		double *velocities_y,
-		double *flux,
-		double *vs,
-		double dc) {
-
-	//double result_vs;
+#include "kernels.cuh"
 
 
-
-	cout << "processing " << num_edges << " edges... running cuda_compute_flux<<< " << num_blocks.x << ", " << num_threads.x << " >>>" << endl;
-	
-	cuda_compute_flux_kernel<<<num_blocks, num_threads>>>(
-			num_edges,
-			num_cells,
-			edge_normals_x,
-			edge_normals_y,
-			edge_lengths,
-			edge_left_cells,
-			edge_right_cells,
-			polution,
-			velocities_x,
-			velocities_y,
-			flux,
-			vs,
-			dc);
-
-	cudaError_t error = cudaGetLastError();
-	if(error != cudaSuccess) {
-		// something's gone wrong
-		// print out the CUDA error as a string
-		cout << "CUDA Error: " << cudaGetErrorString(error) << endl;
-
-		// we can't recover from the error -- exit the program
-		exit(-1);
-	}
-
-	/*vs.cuda_get();
-
-	result_vs = vs[0];
-	for(unsigned int i = 1; i < num_edges; ++i) {
-		if (vs[i] > result_vs)
-			result_vs = vs[i];
-	}
-	return 1.0 / abs(result_vs);*/
-}
-
-__host__
 void gpu_update(
 		CudaFV::CFVMesh2D &mesh,
 		CudaFV::CFVVect<double> &polution,
@@ -131,7 +24,6 @@ void gpu_update(
 /*
 	Main loop: calculates the polution spread evolution in the time domain.
 */
-__host__
 void cuda_main_loop(
 		double final_time,
 		unsigned jump_interval,
@@ -143,9 +35,33 @@ void cuda_main_loop(
 		CudaFV::CFVVect<double> &flux,
 		double dc) {
 
+	// var declaration
 	double dt;
 	double t = 0;
 	int i = 0;
+
+	CudaFV::CFVVect<int> test(256);
+	int *result, *d_result;
+	for(int i=0; i < 256; ++i)
+		test[i]=i;
+
+	test.cuda_mallocAndSave();
+	dim3 numBlocks=4;
+	dim3 numThreads=256/4;
+	result = (int *) malloc(sizeof(int)*4);
+	cudaMalloc(&d_result, sizeof(int)*numBlocks.x);
+	kernel_velocities_reduction<<< numBlocks, numThreads >>>(
+			256,
+			test.cuda_getArray(),
+			result);
+	cudaMemcpy(result, d_result, sizeof(int)*4, cudaMemcpyDeviceToHost);
+	cout << "reduction result: " << endl;
+	for(int i=0; i < 4; ++i) {
+		cout << result[i] << endl;
+	}
+	exit(0);
+
+
 	
 	// open output file
 	FVio polution_file("polution.xml", FVWRITE);
@@ -167,24 +83,28 @@ void cuda_main_loop(
 	vs.cuda_malloc();
 
 	// select grid and block size
-	dim3 grid_size_cf(GRID_SIZE(num_edges, BLOCK_SIZE_CF), 1, 1);
+	dim3 grid_size_cf(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_CF), 1, 1);
 	dim3 block_size_cf(BLOCK_SIZE_CF, 1, 1);
 
-	dim3 grid_size_red(GRID_SIZE(num_edges, BLOCK_SIZE_RED), 1, 1);
+	dim3 grid_size_red(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_RED), 1, 1);
 	dim3 block_size_red(BLOCK_SIZE_RED, 1, 1);
 
-	dim3 grid_size_up(GRID_SIZE(num_edges, BLOCK_SIZE_UP), 1, 1);
+	dim3 grid_size_up(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_UP), 1, 1);
 	dim3 block_size_up(BLOCK_SIZE_UP, 1, 1);
+
+	/**
+	 * Beggining of main loop
+	 */
 	while(t < final_time) {
 		double max_vs;
 
-		// cuda_compute_flux will invoke the kernel and retrieve the calculated dt
-		cuda_compute_flux<<< grid_size_cf, block_size_cf >>>(
+		/**
+		 * Invoke kernel for compute_flux
+		 */
+		kernel_compute_flux<<< grid_size_cf, block_size_cf >>>(
 				mesh.num_edges,
-				mesh.num_cells,
 				mesh.edge_normals.x.cuda_getArray(),
 				mesh.edge_normals.y.cuda_getArray(),
-				mesh.edge_lengths.cuda_getArray(),
 				mesh.edge_left_cells.cuda_getArray(),
 				mesh.edge_right_cells.cuda_getArray(),
 				polution.cuda_getArray(),
@@ -194,21 +114,32 @@ void cuda_main_loop(
 				vs.cuda_getArray(),
 				dc);
 
-		// reduction of velocities
-		cuda_min_reduction<<< grid_size_red, block_size_red >>>(
-				mesh.num_edges,
-				vs.cuda_getArray());
+		cudaError_t error = cudaGetLastError();
+		if(error != cudaSuccess) {
+			// something's gone wrong
+			// print out the CUDA error as a string
+			cout << "CUDA Error: " << cudaGetErrorString(error) << endl;
+			// we can't recover from the error -- exit the program
+			exit(-1);
+		}
 
-		max_vs = cudaMemcpy(&max_vs, vs.cuda_getArray(), cudaMemcpyDeviceToHost);
+		/**
+		 * Reduction of velocities
+		 */
+	/*	kernel_velocities_reduction<<< grid_size_red, block_size_red >>>(
+				mesh.num_edges,
+				vs.cuda_getArray());*/
+
+		max_vs = cudaMemcpy(&max_vs, vs.cuda_getArray(), sizeof(double), cudaMemcpyDeviceToHost);
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
 
-		cuda_update<<< grid_size_up, block_size_up >>>(
+		/*cuda_update<<< grid_size_up, block_size_up >>>(
 				mesh.num_edges,
 				mesh.edge_left_cells.cuda_getArray(),
 				mesh.edge_right_cells.cuda_getArray(),
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
-				dt);
+				dt);*/
 
 
 		/**
@@ -242,6 +173,7 @@ void cuda_main_loop(
 	}
 	polution_file.put(old_polution, t, "polution");
 
+	// release memory on device
 	mesh.edge_normals.x.cuda_free();
 	mesh.edge_normals.y.cuda_free();
 	mesh.edge_lengths.cuda_free();
@@ -261,7 +193,7 @@ void cuda_main_loop(
  * Highest number of SMPs
  * Maximum of 8 GPUs
  */
-__host__
+/*__host__
 int choseDevice(){
 	int count, device = -1,  numSMP = 0, sel[8], flag = 0, flag2;
 	cudaDeviceProp properties[8];
@@ -323,4 +255,4 @@ int choseDevice(){
 	}
 
 	return device;
-}
+}*/
