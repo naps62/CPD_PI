@@ -107,6 +107,11 @@ void cuda_main_loop(
 		/**
 		 * Reduction of velocities
 		 */
+		vs.cuda_get();
+		for(int x = 0; x < vs.size; x++) {
+			cout << vs[x] << "\t";
+			if (x % 5 == 0) cout << endl;
+		}
 		wrapper_reduce_velocities(mesh.num_edges, red_threads, red_blocks, vs.cuda_getArray(), cpu_reducibles.cuda_getArray());
 
 		// reduce final array on cpu
