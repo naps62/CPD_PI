@@ -40,29 +40,6 @@ void cuda_main_loop(
 	double t = 0;
 	int i = 0;
 
-	CudaFV::CFVVect<int> test(256);
-	int *result, *d_result;
-	for(int i=0; i < 256; ++i)
-		test[i]=i;
-
-	test.cuda_mallocAndSave();
-	dim3 numBlocks=4;
-	dim3 numThreads=256/4;
-	result = (int *) malloc(sizeof(int)*4);
-	cudaMalloc(&d_result, sizeof(int)*numBlocks.x);
-	kernel_velocities_reduction<<< numBlocks, numThreads >>>(
-			256,
-			test.cuda_getArray(),
-			result);
-	cudaMemcpy(result, d_result, sizeof(int)*4, cudaMemcpyDeviceToHost);
-	cout << "reduction result: " << endl;
-	for(int i=0; i < 4; ++i) {
-		cout << result[i] << endl;
-	}
-	exit(0);
-
-
-	
 	// open output file
 	FVio polution_file("polution.xml", FVWRITE);
 	polution_file.put(old_polution, t, "polution");
