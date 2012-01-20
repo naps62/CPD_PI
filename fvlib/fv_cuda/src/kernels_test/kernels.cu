@@ -132,7 +132,7 @@ void kernel_velocities_reduction(T *g_idata, T *g_odata, unsigned int n) {
 		g_odata[blockIdx.x] = sdata[0];
 }
 
-bool isPow2(unsigned int x) {
+bool ispow2(unsigned int x) {
 	return ((x & (x-1)) == 0);
 }
 
