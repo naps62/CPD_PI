@@ -9,7 +9,7 @@
 */
 int main() {
 
-	int n = 10;
+	int n = 2048;
 	int test[n];
 	int result[3];
 	int *d_test, *d_result;
