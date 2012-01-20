@@ -122,11 +122,15 @@ void kernel_velocities_reduction(T *g_idata, T *g_odata, unsigned int n) {
 	volatile T* smem = sdata;
 	if (blockSize >= 64)  { if (tid <  32)  { if (smem[tid+ 32] > myMax) { smem[tid]  = myMax = smem[tid+  32]; } __syncthreads(); } }
 	if (blockSize >= 32)  { if (tid <  16)  { if (smem[tid+ 16] > myMax) { smem[tid]  = myMax = smem[tid+  16]; } __syncthreads(); } }
+	if (blockSize >= 32)  { if (tid <  16)  { if (smem[tid+ 16] > myMax) { smem[tid]  = myMax = smem[tid+  16]; } __syncthreads(); } }
+	if (blockSize >= 32)  { if (tid <  16)  { if (smem[tid+ 16] > myMax) { smem[tid]  = myMax = smem[tid+  16]; } __syncthreads(); } }
+	if (blockSize >= 32)  { if (tid <  16)  { if (smem[tid+ 16] > myMax) { smem[tid]  = myMax = smem[tid+  16]; } __syncthreads(); } }
+	if (blockSize >= 32)  { if (tid <  16)  { if (smem[tid+ 16] > myMax) { smem[tid]  = myMax = smem[tid+  16]; } __syncthreads(); } }
 	//if (blockSize >= 32) { if (smem[tid+16] > myMax) { smem[tid] = myMax = smem[tid+16]; } }
-	if (blockSize >= 16) { if (smem[tid+ 8] > myMax) { smem[tid] = myMax = smem[tid+ 8]; } }
-	if (blockSize >=  8) { if (smem[tid+ 4] > myMax) { smem[tid] = myMax = smem[tid+ 4]; } }
-	if (blockSize >=  4) { if (smem[tid+ 2] > myMax) { smem[tid] = myMax = smem[tid+ 2]; } }
-	if (blockSize >=  2) { if (smem[tid+ 1] > myMax) { smem[tid] = myMax = smem[tid+ 1]; } }
+	//if (blockSize >= 16) { if (smem[tid+ 8] > myMax) { smem[tid] = myMax = smem[tid+ 8]; } }
+	//if (blockSize >=  8) { if (smem[tid+ 4] > myMax) { smem[tid] = myMax = smem[tid+ 4]; } }
+	//if (blockSize >=  4) { if (smem[tid+ 2] > myMax) { smem[tid] = myMax = smem[tid+ 2]; } }
+	//if (blockSize >=  2) { if (smem[tid+ 1] > myMax) { smem[tid] = myMax = smem[tid+ 1]; } }
 
 	// write result for this block to global mem
 	if (tid == 0)
@@ -171,6 +175,7 @@ void wrapper_reduce_velocities(int size, int threads, int blocks, T *d_idata, T 
 	// when there is only one warp per block, we need to allocate two warps
 	// worth of shared memory so that we don't index shared memory out of bounds
 	int smemSize = (threads <= 32) ? 2 * threads * sizeof(T) : threads * sizeof(T);
+	cout << "shared size: " << smemSize << endl;
 
 	if (isPow2(size)) {
 		switch(threads) {
