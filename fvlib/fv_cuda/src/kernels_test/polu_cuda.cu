@@ -11,7 +11,6 @@ int main() {
 
 	int n = 2048;
 	int test[n];
-	int result[3];
 	int *d_test, *d_result;
 
 	for(int i=0; i < n; ++i)
@@ -20,6 +19,7 @@ int main() {
 
 	int blocks, threads;
 	get_reduction_num_blocks_and_threads(n, 0, 512, blocks, threads);
+	int result[blocks];
 
 	cudaMalloc(&d_test, sizeof(int)*n);
 	cudaMemcpy(d_test, test, sizeof(int)*n, cudaMemcpyHostToDevice);

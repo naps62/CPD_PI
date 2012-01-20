@@ -116,11 +116,11 @@ void kernel_velocities_reduction(T *g_idata, T *g_odata, unsigned int n) {
 	if (blockSize >= 256) { if (tid < 128) { if (sdata[tid+128] > myMax) { sdata[tid] = myMax = sdata[tid+128]; } __syncthreads(); } }
 	if (blockSize >= 128) { if (tid <  64) { if (sdata[tid+ 64] > myMax) { sdata[tid] = myMax = sdata[tid+ 64]; } __syncthreads(); } }
 
-		// now that we are using warp-synchronous programming (below)
-		// we need to declare our shared memory volatile so that the compiler
-		// doesn't reorder stores to it and indice incorrect behavior.
-		volatile T* smem = sdata;
-	if (blockSize >= 64) { if (smem[tid+32] > myMax) { smem[tid] = myMax = smem[tid+32]; } }
+	// now that we are using warp-synchronous programming (below)
+	// we need to declare our shared memory volatile so that the compiler
+	// doesn't reorder stores to it and indice incorrect behavior.
+	volatile T* smem = sdata;
+	if (blockSize >= 64)  { if (tid <  32)  { if (smem[tid+ 32] > myMax) { smem[tid]  = myMax = smem[tid+  32]; } __syncthreads(); } }
 	if (blockSize >= 32) { if (smem[tid+16] > myMax) { smem[tid] = myMax = smem[tid+16]; } }
 	if (blockSize >= 16) { if (smem[tid+ 8] > myMax) { smem[tid] = myMax = smem[tid+ 8]; } }
 	if (blockSize >=  8) { if (smem[tid+ 4] > myMax) { smem[tid] = myMax = smem[tid+ 4]; } }
