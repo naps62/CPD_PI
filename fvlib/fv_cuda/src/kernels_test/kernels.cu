@@ -146,6 +146,10 @@ unsigned int nextPow2(unsigned int x) {
 	return ++x;
 }
 
+bool isPow2(unsigned int x) {
+	return ((x & (x-1)) == 0);
+}
+
 #ifndef MIN
 #define MIN(x,y) ((x < y) ? x : y)
 #endif
