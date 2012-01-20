@@ -82,12 +82,16 @@ void cuda_main_loop(
 	CudaFV::CFVVect<double> vs(mesh.num_edges);
 	vs.cuda_malloc();
 
-	// select grid and block size
+	// prepare aux vars for reduction kernel
+	int red_blocks, red_threads;
+	get_reduction_num_blocks_and_threads(mesh.num_edges, 0, 512, red_blocks, red_threads);
+	CudaFV::CFVVect<double> cpu_reducibles(red_blocks);
+	cpu_reducibles.cuda_malloc();
+
+
+	// select grid and block size for compute_flux kernel
 	dim3 grid_size_cf(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_CF), 1, 1);
 	dim3 block_size_cf(BLOCK_SIZE_CF, 1, 1);
-
-	dim3 grid_size_red(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_RED), 1, 1);
-	dim3 block_size_red(BLOCK_SIZE_RED, 1, 1);
 
 	dim3 grid_size_up(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_UP), 1, 1);
 	dim3 block_size_up(BLOCK_SIZE_UP, 1, 1);
@@ -126,11 +130,18 @@ void cuda_main_loop(
 		/**
 		 * Reduction of velocities
 		 */
-	/*	kernel_velocities_reduction<<< grid_size_red, block_size_red >>>(
-				mesh.num_edges,
-				vs.cuda_getArray());*/
+		wrapper_reduce_velocities(mesh.num_edges, red_threads, red_blocks, vs.cuda_getArray(), cpu_reducibles.cuda_getArray());
 
-		max_vs = cudaMemcpy(&max_vs, vs.cuda_getArray(), sizeof(double), cudaMemcpyDeviceToHost);
+		// reduce final array on cpu
+		cpu_reducibles.cuda_get();
+		max_vs = cpu_reducibles[0];
+		for(unsigned int x = 1; x < cpu_reducibles.size(); ++x) {
+			cout << cpu_reducibles[x] << endl;
+			if (cpu_reducibles[x] > max_vs)
+				max_vs = cpu_reducibles[x];
+		}
+		exit(0);
+		// based on max_vs, compute time elapsed
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
 
 		/*cuda_update<<< grid_size_up, block_size_up >>>(
