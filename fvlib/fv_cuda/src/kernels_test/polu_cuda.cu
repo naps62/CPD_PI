@@ -21,9 +21,9 @@ int main() {
 	int blocks, threads;
 	get_reduction_num_blocks_and_threads(n, 0, 256, blocks, threads);
 
-	cudaMalloc(&d_test, sizeof(int)*8);
-	cudaMemcpy(d_test, test, sizeof(int)*8, cudaMemcpyHostToDevice);
-	cudaMalloc(&d_result, sizeof(int)*2);
+	cudaMalloc(&d_test, sizeof(int)*n);
+	cudaMemcpy(d_test, test, sizeof(int)*n, cudaMemcpyHostToDevice);
+	cudaMalloc(&d_result, sizeof(int)*blocks);
 	cout << "before: " << endl;
 	for(int i=0; i < n; ++i) {
 		cout << test[i] << endl;
@@ -32,7 +32,7 @@ int main() {
 	//kernel_velocities_reduction<<< numBlocks, numThreads >>>(11, d_test, d_result);
 	wrapper_reduce_velocities(n, threads, blocks, d_test, d_result);
 
-	cudaMemcpy(result, d_result, sizeof(int)*2, cudaMemcpyDeviceToHost);
+	cudaMemcpy(result, d_result, sizeof(int)*blocks, cudaMemcpyDeviceToHost);
 	cout << "after: " << endl;
 	for(int i=0; i < blocks; ++i) {
 		cout << result[i] << endl;
