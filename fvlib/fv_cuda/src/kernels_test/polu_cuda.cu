@@ -16,12 +16,16 @@ int main() {
 	for(int i=0; i < 8; ++i)
 		test[i]=i;
 
+	result[0] = 62;
+	result[1] = 25;
+
 	dim3 numBlocks=2;
 	dim3 numThreads=4;
 
 	cudaMalloc(&d_test, sizeof(int)*8);
 	cudaMemcpy(d_test, test, sizeof(int)*8, cudaMemcpyHostToDevice);
 	cudaMalloc(&d_result, sizeof(int)*2);
+	cudaMemcpy(d_result, result, sizeof(int), cudaMemcpyHostToDevice);
 	cout << "before: " << endl;
 	for(int i=0; i < numBlocks.x; ++i) {
 		cout << result[i] << endl;
