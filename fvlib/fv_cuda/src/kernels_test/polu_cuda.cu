@@ -9,12 +9,15 @@
 */
 int main() {
 
-	int test[8];
+	int test[11];
 	int result[2];
 	int *d_test, *d_result;
 
 	for(int i=0; i < 8; ++i)
 		test[i]=i;
+	test[8] = 10;
+	test[9] = 11;
+	test[10] = 12;
 
 	result[0] = 62;
 	result[1] = 25;

@@ -78,6 +78,8 @@ void kernel_velocities_reduction(
 	unsigned int tid = threadIdx.x;
 	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
 
+	if (i >= n) return;
+
 	__syncthreads();
 
 	for(unsigned int s=1; s < blockDim.x; s*=2) {
