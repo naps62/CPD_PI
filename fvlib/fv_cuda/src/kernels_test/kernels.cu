@@ -73,9 +73,7 @@ void kernel_velocities_reduction(
 		int *g_input,
 		int *g_output) {
 
-	g_output[0] = 5;
-	return;
-	/*int *sdata = SharedMemory();
+	int *sdata = SharedMemory();
 
 	unsigned int tid = threadIdx.x;
 	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -92,7 +90,7 @@ void kernel_velocities_reduction(
 		__syncthreads();
 	}
 
-	if (tid == 0) g_output[blockIdx.x] = tid;*/
+	if (tid == 0) g_output[blockIdx.x] = tid;
 }
 
 __global__
