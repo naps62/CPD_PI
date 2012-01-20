@@ -19,7 +19,7 @@ int main() {
 
 
 	int blocks, threads;
-	get_reduction_num_blocks_and_threads(n, 0, 256, blocks, threads);
+	get_reduction_num_blocks_and_threads(n, 0, 512, blocks, threads);
 
 	cudaMalloc(&d_test, sizeof(int)*n);
 	cudaMemcpy(d_test, test, sizeof(int)*n, cudaMemcpyHostToDevice);
