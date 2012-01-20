@@ -175,7 +175,7 @@ void wrapper_reduce_velocities(int size, int threads, int blocks, T *d_idata, T 
 	// when there is only one warp per block, we need to allocate two warps
 	// worth of shared memory so that we don't index shared memory out of bounds
 	int smemSize = (threads <= 32) ? 2 * threads * sizeof(T) : threads * sizeof(T);
-	cout << "shared size: " << smemSize << endl;
+	//cout << "shared size: " << smemSize << endl;
 
 	if (isPow2(size)) {
 		switch(threads) {
