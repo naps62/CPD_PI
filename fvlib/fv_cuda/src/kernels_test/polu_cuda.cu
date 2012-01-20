@@ -21,6 +21,7 @@ int main() {
 
 	result[0] = 62;
 	result[1] = 25;
+	result[2] = 1;
 
 	dim3 numBlocks=3;
 	dim3 numThreads=4;
