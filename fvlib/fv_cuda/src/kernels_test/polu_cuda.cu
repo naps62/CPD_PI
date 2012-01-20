@@ -19,7 +19,7 @@ int main() {
 	dim3 numBlocks=2;
 	dim3 numThreads=4;
 
-	cudaMalloc(&d_test, test, sizeof(int)*8);
+	cudaMalloc(&d_test, sizeof(int)*8);
 	cudaMemcpy(d_test, test, sizeof(int)*8, cudaMemcpyHostToDevice);
 	cudaMalloc(&d_result, sizeof(int)*2);
 	cout << "before: " << endl;
