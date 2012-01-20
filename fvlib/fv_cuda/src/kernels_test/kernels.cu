@@ -89,6 +89,7 @@ void kernel_velocities_reduction(
 		}
 		__syncthreads();
 	}
+	__syncthreads();
 
 	if (tid == 0) g_output[blockIdx.x] = g_input[i];
 }
