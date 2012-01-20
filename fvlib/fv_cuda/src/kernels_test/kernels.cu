@@ -82,13 +82,13 @@ void kernel_velocities_reduction(
 
 	for(unsigned int s=1; s < blockDim.x; s*=2) {
 		if ((tid % (2*s)) == 0) {
-			if (g_output[i + s] > g_output[i])
-			g_output[i] = g_output[i + s];
+			if (g_input[i + s] > g_input[i])
+			g_input[i] = g_input[i + s];
 		}
 		__syncthreads();
 	}
 
-	if (tid == 0) g_output[blockIdx.x] = g_output[i];
+	if (tid == 0) g_output[blockIdx.x] = g_input[i];
 }
 
 __global__
