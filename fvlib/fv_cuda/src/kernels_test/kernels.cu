@@ -73,22 +73,17 @@ void kernel_velocities_reduction(
 		int *g_input,
 		int *g_output) {
 
-	int *sdata = SharedMemory();
+	//int *sdata = SharedMemory();
 
 	unsigned int tid = threadIdx.x;
 	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
-
-	sdata[tid] =
-		(i < n) ?
-		g_input[i] :
-		0;
 
 	__syncthreads();
 
 	for(unsigned int s=1; s < blockDim.x; s*=2) {
 		if ((tid % (2*s)) == 0) {
-			if (g_output[tid + s] > sdata[tid])
-			sdata[tid] = sdata[tid + s];
+			if (g_output[tid + s] > g_output[tid])
+			g_output[tid] = g_output[tid + s];
 		}
 		__syncthreads();
 	}
