@@ -275,11 +275,11 @@ void kernel_update(
 
 		//double aux_polution = dt;//dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
 		if (edge_left_cells[edge] == tid) {
-			new_polution += 1;
+			new_polution += 0.5;
 		//}// else if (edge_right_cells[edge] == tid){ //otherwise, this cell is obviosly to the right of the edge
 		//	new_polution += aux_polution;
 		} else {
-			new_polution += dt;
+			new_polution += 0.05;
 		}
 	}
 
