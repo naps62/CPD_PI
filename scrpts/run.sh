@@ -6,16 +6,13 @@ resultdir="../results"
 
 cd "bin";
 
-for arg in $@
+for arg in $@;
 do
 	case $arg in
 	polu*)
 		case $arg in
-		*.cpi|
-		*.mem|
-		*.flops|
-		*.l1)
-			outfile = "${resultdir}/${arg}.log"
+		*.cpi|*.mem|*.flops|*.l1)
+			outfile="${resultdir}/${arg}.log"
 			;;
 		esac
 		if [ ! -d "$resultdir" ];
