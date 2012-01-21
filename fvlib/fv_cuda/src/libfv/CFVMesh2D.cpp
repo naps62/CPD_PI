@@ -89,6 +89,7 @@ namespace CudaFV {
 			for(j = 0; j < cell_edges_count[i]; ++j) {
 				cout << cell_edges[ cell_edges_index[i] + j ] << "     ";
 			}
+			cout << endl;
 		}
 		exit(0);
 	}
