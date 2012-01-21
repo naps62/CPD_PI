@@ -278,9 +278,11 @@ void kernel_update(
 			new_polution -= aux_polution;
 		} else if (edge_right_cells[edge] == tid){ //otherwise, this cell is obviosly to the right of the edge
 			new_polution += aux_polution;
+		} else {
+			new_polution = 50;
 		}
 	}
 
 	// update global value
-	polution[tid] += dt;
+	polution[tid] += new_polution;
 }
