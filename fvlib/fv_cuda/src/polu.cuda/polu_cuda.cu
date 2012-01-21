@@ -115,26 +115,20 @@ void cuda_main_loop(
 		/**
 		 * Reduction of velocities
 		 */
-		vs.cuda_get();
-		for(int x = 0; x < vs.size(); x++) {
-			cout << vs[x] << "\t";
-			if (x % 5 == 0) cout << endl;
-		}
 		wrapper_reduce_velocities(mesh.num_edges, red_threads, red_blocks, vs.cuda_getArray(), cpu_reducibles.cuda_getArray());
 
 		// reduce final array on cpu
 		cpu_reducibles.cuda_get();
 		max_vs = cpu_reducibles[0];
-		cout << "result [" << cpu_reducibles.size() << endl;
-		cout << max_vs << endl;
+		cout << "max_vs = " << max_vs << endl;
 		for(unsigned int x = 1; x < cpu_reducibles.size(); ++x) {
-			cout << cpu_reducibles[x] << endl;
 			if (cpu_reducibles[x] > max_vs)
 				max_vs = cpu_reducibles[x];
 		}
 
 		// based on max_vs, compute time elapsed
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
+		cout << "dt = " << dt << endl;
 
 
 		/**
@@ -157,7 +151,7 @@ void cuda_main_loop(
 		polution.cuda_get();
 
 		for(unsigned int x = 0; x < polution.size(); ++x) {
-			cout << x << "\t" << polution[x] << endl;
+			//cout << x << "\t" << polution[x] << endl;
 		}
 		exit(0);
 

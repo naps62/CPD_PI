@@ -217,6 +217,7 @@ void main_loop (
 	while ( t < final_time )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
+		cout << "dt = " << dt << endl;
 		update( mesh , polutions , fluxes , dt );
 		for(int x = 0; x < polutions.size(); ++x) {
 			cout << x << "\t" << polutions[x] << endl;
