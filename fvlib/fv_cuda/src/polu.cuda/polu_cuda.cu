@@ -120,7 +120,6 @@ void cuda_main_loop(
 		// reduce final array on cpu
 		cpu_reducibles.cuda_get();
 		max_vs = cpu_reducibles[0];
-		cout << "max_vs = " << max_vs << endl;
 		for(unsigned int x = 1; x < cpu_reducibles.size(); ++x) {
 			if (cpu_reducibles[x] > max_vs)
 				max_vs = cpu_reducibles[x];
@@ -128,8 +127,6 @@ void cuda_main_loop(
 
 		// based on max_vs, compute time elapsed
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
-		cout << "dt = " << dt << endl;
-
 
 		/**
 		 * Update polution values based on computed flux
@@ -147,17 +144,6 @@ void cuda_main_loop(
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
-		
-		/*for(unsigned int x = 0; x < polution.size(); ++x) {
-			//cout << x << "\t" << polution[x] << endl;
-		}
-		polution.cuda_get();
-		flux.cuda_get();
-
-		for(unsigned int x = 0; x < polution.size(); ++x) {
-			cout << x << "\t" << polution[x] << endl;
-		}
-		exit(0);*/
 
 		t += dt;
 		++i;
