@@ -7,6 +7,6 @@
            <parameter VelocityFile="velocity.xml" PotentialFile="potential.xml" FactorNorm="1"/>
            <parameter PoluInitFile="concentration_ini.xml" PoluFile="concentration.xml"/>           
            <parameter ConcentrationMax="1" DirichletCondition="1" />
-           <parameter FinalTime="8" NbJump="5"/>
+           <parameter FinalTime="20" NbJump="10000"/>
     </PARAMETER>
 </FVLIB>  

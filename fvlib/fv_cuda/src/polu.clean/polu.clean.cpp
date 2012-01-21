@@ -218,19 +218,18 @@ void main_loop (
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
-		for(int x = 0; x < polutions.size(); ++x)
-			cout << x << "\t" << fluxes[x] << "\t" << polutions[x] << endl;
-
-		exit(0);
 		t += dt;
 		++i;
 		if ( i % jump_interval == 0 )
 		{
+			cout << "writing to file" << endl;
 			polution_file.put( polutions , t , "polution" );    
 			printf("step %d  at time %f \r", i, t);
 			fflush(NULL);
 		}
 	}
+
+	cout << "total iterations: " << i << endl;
 	polution_file.put( polutions , t , "polution" ); 
 }
 
@@ -269,6 +268,8 @@ int main()
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
 
+	cout << "computing " << mesh.getNbCell() << " cells, " << mesh.getNbEdge() << " edges" << endl;
+	cout << "simulation duration: " << data.time.final << endl;
 	// the main loop
 	main_loop(
 		data.time.final,

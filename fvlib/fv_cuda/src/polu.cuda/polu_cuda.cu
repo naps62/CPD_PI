@@ -168,6 +168,7 @@ void cuda_main_loop(
 		 * Also, since the FVio class is still the original one (not updated to match the structs used for cuda), we first need to copy data to a structure of the old data types, and only then save it to file. This, again, has a big performance hit but is just temporary while the entire LIB is not CUDA-compatible
 		 */
 		if (i % jump_interval == 0) {
+			cout << "writing to file" << endl;
 			polution.cuda_get();
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
@@ -177,6 +178,8 @@ void cuda_main_loop(
 			fflush(NULL);
 		}
 	}
+
+	cout << "total iterations: " << i << endl;
 
 	polution.cuda_get();
 	for(unsigned int x = 0; x < mesh.num_cells; ++x) {

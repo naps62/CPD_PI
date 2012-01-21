@@ -10,16 +10,13 @@ namespace CudaFV {
 	 ***********************************************/
 
 	CFVMesh2D::CFVMesh2D() {
-		FVLog::logger << "CFVMesh2D()" << endl;
 	}
 
 	CFVMesh2D::CFVMesh2D(FVMesh2D &msh) {
-		FVLog::logger << "CFVMesh2D(FVMesh2D &)" << endl;
 		import_FVMesh2D(msh);
 	}
 
 	CFVMesh2D::~CFVMesh2D() {
-		FVLog::logger << "~CFVMesh2D" << endl;
 	}
 
 	/************************************************
@@ -27,9 +24,10 @@ namespace CudaFV {
 	 ***********************************************/
 
 	void CFVMesh2D::import_FVMesh2D(FVMesh2D &msh) {
-		FVLog::logger << "importing FVMesh2D" << endl;
 		num_edges = msh.getNbEdge();
 		num_cells = msh.getNbCell();
+
+		FVLog::logger << "Importing mesh: " << num_cells << " cells, " << num_edges << " edges" << endl;
 		
 		// allocs space for all needed data
 		alloc();
