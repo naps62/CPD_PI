@@ -151,18 +151,10 @@ void cuda_main_loop(
 		polution.cuda_get();
 		flux.cuda_get();
 
-		/*for(unsigned int x = 0; x < flux.size(); ++x) {
-			cout << x << "\t" << flux[x] << endl;
+		for(unsigned int x = 0; x < polution.size(); ++x) {
+			cout << x << "\t" << polution[x] << endl;
 		}
-		exit(0);*/
-
-		/**
-		 * update function is not yet implemented in CUDA. To invoke the C++ version, a cudaMemcpy is required before it to copy flux parameter, and after, to update polution value on the GPU
-		 * Due to this, this implementation is not yet efficient compared to the original code
-		 */
-		//flux.cuda_get();
-		//gpu_update(mesh, polution, flux, dt);
-		//polution.cuda_save();
+		exit(0);
 
 		t += dt;
 		++i;
