@@ -48,11 +48,9 @@ int main() {
 
 	for(unsigned int i = 0; i < gpu_polution.size(); ++i) {
 		gpu_polution[i] = polution[i];
-		cout << i << "\t" << polution[i] << endl;
 		gpu_velocity.x[i] = velocity[i].x;
 		gpu_velocity.y[i] = velocity[i].y;
 	}
-	exit(0);
 
 	h = compute_mesh_parameters( mesh );
 
