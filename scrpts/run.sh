@@ -11,9 +11,9 @@ do
 	case $arg in
 	polu*)
 		case $arg in
-		*.cpi)
-		*.mem)
-		*.flops)
+		*.cpi|
+		*.mem|
+		*.flops|
 		*.l1)
 			outfile = "${resultdir}/${arg}.log"
 			;;
