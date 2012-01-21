@@ -271,7 +271,7 @@ void kernel_update(
 	// for each edge of this cell
 	for(unsigned int i = edge_index; i < edge_limit; ++i) {
 		// if this cell is at the left of the edge
-		new_polution = edge_limit;
+		new_polution += 1;
 		if (edge_left_cells[i] == tid) {
 			new_polution += dt * flux[i] * edge_lengths[i] / cell_areas[tid];
 			new_polution = 1;
