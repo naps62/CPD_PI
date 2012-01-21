@@ -146,7 +146,7 @@ void cuda_main_loop(
 				mesh.cell_edges_count.cuda_getArray(),
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
-				2.0f);
+				dt);
 		
 		for(unsigned int x = 0; x < polution.size(); ++x) {
 			//cout << x << "\t" << polution[x] << endl;
