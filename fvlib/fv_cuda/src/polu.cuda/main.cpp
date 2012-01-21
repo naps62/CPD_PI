@@ -54,7 +54,6 @@ int main() {
 	}
 	exit(0);
 
-
 	h = compute_mesh_parameters( mesh );
 
 	// GPU
