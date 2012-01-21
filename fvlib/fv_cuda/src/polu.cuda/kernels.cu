@@ -274,8 +274,10 @@ void kernel_update(
 		// if this cell is at the left of the edge
 		if (edge_left_cells[edge] == tid) {
 			new_polution += dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
+			new_polution = 1;
 		} else if (edge_right_cells[edge] == tid){ //otherwise, this cell is obviosly to the right of the edge
 			new_polution -= dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
+			new_polution = 2;
 		}
 	}
 
