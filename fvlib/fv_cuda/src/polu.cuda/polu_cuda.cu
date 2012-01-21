@@ -151,18 +151,18 @@ void cuda_main_loop(
 		polution.cuda_get();
 		flux.cuda_get();
 
-		for(unsigned int x = 0; x < flux.size(); ++x) {
+		/*for(unsigned int x = 0; x < flux.size(); ++x) {
 			cout << x << "\t" << flux[x] << endl;
 		}
-		exit(0);
+		exit(0);*/
 
 		/**
 		 * update function is not yet implemented in CUDA. To invoke the C++ version, a cudaMemcpy is required before it to copy flux parameter, and after, to update polution value on the GPU
 		 * Due to this, this implementation is not yet efficient compared to the original code
 		 */
-		flux.cuda_get();
-		gpu_update(mesh, polution, flux, dt);
-		polution.cuda_save();
+		//flux.cuda_get();
+		//gpu_update(mesh, polution, flux, dt);
+		//polution.cuda_save();
 
 		t += dt;
 		++i;
@@ -173,6 +173,7 @@ void cuda_main_loop(
 		 * Also, since the FVio class is still the original one (not updated to match the structs used for cuda), we first need to copy data to a structure of the old data types, and only then save it to file. This, again, has a big performance hit but is just temporary while the entire LIB is not CUDA-compatible
 		 */
 		if (i % jump_interval == 0) {
+			polution.cuda_get();
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 				old_polution[x] = polution[x];
 			}
@@ -182,6 +183,7 @@ void cuda_main_loop(
 		}
 	}
 
+	polution.cuda_get();
 	for(unsigned int x = 0; x < mesh.num_cells; ++x) {
 		old_polution[x] = polution[x];
 	}
@@ -193,6 +195,10 @@ void cuda_main_loop(
 	mesh.edge_lengths.cuda_free();
 	mesh.edge_left_cells.cuda_free();
 	mesh.edge_right_cells.cuda_free();
+	mesh.cell_areas.cuda_free();
+	mesh.cell_edges.cuda_free();
+	mesh.cell_edges_index.cuda_free();
+	mesh.cell_edges_count.cuda_free();
 
 	polution.cuda_free();
 	velocities.x.cuda_free();
