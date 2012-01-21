@@ -81,6 +81,16 @@ namespace CudaFV {
 				cell_edges[i] = edge->label - 1;
 			}
 		}
+
+		cout << "num_total_edges = "<< num_total_edges << endl;
+		int j = 0;
+		for(i = 0; i < num_cells; ++i) {
+			cout << "cell " << i << " at " << j << " with " << cell_edges_count[i] << "edges:\t";
+			for(j = 0; j < cell_edges_count[i]; ++j) {
+				cout << cell_edges[ cell_edges_index[i] + j ] << "     ";
+			}
+		}
+		exit(0);
 	}
 
 

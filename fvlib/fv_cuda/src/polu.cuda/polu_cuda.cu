@@ -151,7 +151,7 @@ void cuda_main_loop(
 		polution.cuda_get();
 
 		for(unsigned int x = 0; x < polution.size(); ++x) {
-			cout << x << "\t" << polution[x] << endl;
+			//cout << x << "\t" << polution[x] << endl;
 		}
 		exit(0);
 
