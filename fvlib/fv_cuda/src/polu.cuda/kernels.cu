@@ -266,7 +266,7 @@ void kernel_update(
 	unsigned int edge_limit = edge_index + cell_edges_count[tid];
 
 	// get current polution value for this cell
-	unsigned int new_polution	= 0;
+	unsigned int new_polution	= edge_index;
 
 	// for each edge of this cell
 	for(unsigned int i = edge_index; i < edge_limit; ++i) {
