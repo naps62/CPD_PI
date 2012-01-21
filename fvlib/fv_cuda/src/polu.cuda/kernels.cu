@@ -280,5 +280,5 @@ void kernel_update(
 	}
 
 	// update global value
-	polution[tid] = new_polution;
+	polution[tid] += new_polution;
 }
