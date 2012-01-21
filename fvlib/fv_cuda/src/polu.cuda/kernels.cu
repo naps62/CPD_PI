@@ -273,13 +273,12 @@ void kernel_update(
 		unsigned int edge = cell_edges[i];
 		// if this cell is at the left of the edge
 
+		// amount of polution transfered through the edge
 		double aux = dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
 
+		// if this cell is on the left or the right of the edge
 		if (edge_left_cells[edge] == tid) {
 			new_polution -= aux;
-
-		//}// else if (edge_right_cells[edge] == tid){ //otherwise, this cell is obviosly to the right of the edge
-		//	new_polution += aux_polution;
 		} else {
 			new_polution += aux;
 		}

@@ -148,7 +148,7 @@ void cuda_main_loop(
 				flux.cuda_getArray(),
 				dt);
 		
-		for(unsigned int x = 0; x < polution.size(); ++x) {
+		/*for(unsigned int x = 0; x < polution.size(); ++x) {
 			//cout << x << "\t" << polution[x] << endl;
 		}
 		polution.cuda_get();
@@ -157,7 +157,7 @@ void cuda_main_loop(
 		for(unsigned int x = 0; x < polution.size(); ++x) {
 			cout << x << "\t" << polution[x] << endl;
 		}
-		exit(0);
+		exit(0);*/
 
 		t += dt;
 		++i;
