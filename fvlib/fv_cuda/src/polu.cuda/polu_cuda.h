@@ -7,7 +7,7 @@
 #define BLOCK_SIZE_CF	512
 #define BLOCK_SIZE_RED	512
 #define BLOCK_SIZE_UP	512
-#define GRID_SIZE(elems, threads)	(std::ceil((double) elems / threads))
+#define GRID_SIZE(elems, threads)	((int) std::ceil((double) elems / threads))
 
 /*
  * Main loop: calculates the polution spread evolution in the time domain.
