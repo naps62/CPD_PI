@@ -38,6 +38,9 @@ int main() {
 	FVio velocity_file( data.filenames.velocity.c_str() , FVREAD );
 	velocity_file.get( velocity , t , name );
 
+	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
+	polu_ini_file.get( polution , t , name );
+
 	// GPU
 	CudaFV::CFVVect<double> gpu_polution(gpu_mesh.num_cells);
 	CudaFV::CFVVect<double> gpu_flux(gpu_mesh.num_edges);
@@ -51,8 +54,6 @@ int main() {
 	}
 	exit(0);
 
-	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
-	polu_ini_file.get( polution , t , name );
 
 	h = compute_mesh_parameters( mesh );
 
