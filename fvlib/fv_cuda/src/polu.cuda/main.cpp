@@ -49,6 +49,7 @@ int main() {
 		gpu_velocity.x[i] = velocity[i].x;
 		gpu_velocity.y[i] = velocity[i].y;
 	}
+	exit(0);
 
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
