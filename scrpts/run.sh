@@ -10,10 +10,30 @@ for arg in $@
 do
 	case $arg in
 	polu*)
-		./$arg "../data/xml/param.xml";
+		case $arg in
+		*.cpi)
+		*.mem)
+		*.flops)
+		*.l1)
+			outfile = "${resultdir}/${arg}.log"
+			;;
+		esac
 		if [ ! -d "$resultdir" ];
 		then
 			mkdir "$resultdir";
+		fi;
+		if [ $outfile ];
+		then
+			if [ -f "$outfile" ];
+			then
+				echo >> "$outfile";
+			else
+				touch "$outfile";
+			fi;
+			echo "<<==::  ${timestamp}  ::==>>" >> "$outfile";
+			./$arg "../data/xml/param.xml" >> "$outfile";
+		else
+			./$arg "../data/xml/param.xml";
 		fi;
 		mv "../data/xml/polution.xml" "${resultdir}/${arg}.out.${timestamp}"
 		;;
