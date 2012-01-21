@@ -211,32 +211,11 @@ void wrapper_reduce_velocities(int size, int threads, int blocks, T *d_idata, T 
 template void wrapper_reduce_velocities<double>(int size, int threads, int blocks, double *d_idata, double *d_odata);
 template void wrapper_reduce_velocities<float> (int size, int threads, int blocks, float  *d_idata, float  *d_odata);
 template void wrapper_reduce_velocities<int>   (int size, int threads, int blocks, int    *d_idata, int    *d_odata);
-/*void kernel_velocities_reduction(
-		unsigned int n,
-		int *g_input,
-		int *g_output) {
 
-	//int *sdata = SharedMemory();
 
-	unsigned int tid = threadIdx.x;
-	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
-
-	if (i >= n) return;
-
-	__syncthreads();
-
-	for(unsigned int s=1; s < blockDim.x && i + s < n; s*=2) {
-		if ((tid % (2*s)) == 0) {
-			if (g_input[i + s] > g_input[i])
-			g_input[i] = g_input[i + s];
-		}
-		__syncthreads();
-	}
-	__syncthreads();
-
-	if (tid == 0) g_output[blockIdx.x] = g_input[i];
-}*/
-
+/**
+ * Update kernel
+ */
 __global__
 void kernel_update(
 		unsigned int num_edges,
@@ -262,4 +241,44 @@ void kernel_update(
 
 	polution[right] =
 		dt * flux[tid] * lengths[tid] / areas[right];
+}
+
+__global__
+void kernel_update(
+		unsigned int num_cells,
+		unsigned int num_total_edges,
+		unsigned int *edge_left_cells,
+		unsigned int *edge_right_cells,
+		double *edge_lengths,
+		double *cell_areas,
+		unsigned int *cell_edges,
+		unsigned int *cell_edges_index,
+		unsigned int *cell_edges_count,
+		double *polution,
+		double *flux,
+		double dt) {
+
+	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
+	if (tid > num_cells) return;
+
+	// define start and end of neighbor edges
+	unsigned int edge_index = cell_edges_index[tid];
+	unsigned int edge_limit = cell_edges_count[tid];
+
+	// get current polution value for this cell
+	unsigned int new_polution	= polution[tid];
+	unsigned int cell_area		= cell_areas[tid];
+
+	// for each edge of this cell
+	for(unsigned int i = edge_index; i < edge_limit; ++i) {
+		// if this cell is at the left of the edge
+		if (edge_left_cells[i] == tid) {
+			new_polution += dt * flux[i] * edge_lengths[i] / cell_area;
+		} else { //otherwise, this cell is obviosly to the right of the edge
+			new_polution -= dt * flux[i] * edge_lengths[i] / cell_area;
+		}
+	}
+
+	// update global value
+	polution[tid] = new_polution;
 }

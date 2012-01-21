@@ -12,6 +12,9 @@ void gpu_update(
 		CudaFV::CFVVect<double> &polution,
 		CudaFV::CFVVect<double> &flux,
 		double dt) {
+
+	// PARA CADA EDGE
+	// 		POLUTION DA CELL A ESQUERDA: 
 	for (unsigned int i = 0; i < mesh.num_edges; ++i) {
 		polution[ (unsigned int) mesh.edge_left_cells[i] ] -=
 			dt * flux[i] * mesh.edge_lengths[i] / mesh.cell_areas[ (unsigned int) mesh.edge_left_cells[i] ];
@@ -50,6 +53,11 @@ void cuda_main_loop(
 	mesh.edge_lengths.cuda_mallocAndSave();
 	mesh.edge_left_cells.cuda_mallocAndSave();
 	mesh.edge_right_cells.cuda_mallocAndSave();
+	mesh.cell_areas.cuda_mallocAndSave();
+	mesh.cell_edges.cuda_mallocAndSave();
+	mesh.cell_edges_index.cuda_mallocAndSave();
+	mesh.cell_edges_count.cuda_mallocAndSave();
+
 	polution.cuda_mallocAndSave();
 	velocities.x.cuda_mallocAndSave();
 	velocities.y.cuda_mallocAndSave();
@@ -124,18 +132,34 @@ void cuda_main_loop(
 			if (cpu_reducibles[x] > max_vs)
 				max_vs = cpu_reducibles[x];
 		}
-		exit(0);
+
 		// based on max_vs, compute time elapsed
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
 
-		/*cuda_update<<< grid_size_up, block_size_up >>>(
-				mesh.num_edges,
+
+		/**
+		 * Update polution values based on computed flux
+		 */
+		kernel_update<<< grid_size_up, block_size_up >>>(
+				mesh.num_cells,
+				mesh.num_total_edges,
 				mesh.edge_left_cells.cuda_getArray(),
 				mesh.edge_right_cells.cuda_getArray(),
+				mesh.edge_lengths.cuda_getArray(),
+				mesh.cell_areas.cuda_getArray(),
+				mesh.cell_edges.cuda_getArray(),
+				mesh.cell_edges_index.cuda_getArray(),
+				mesh.cell_edges_count.cuda_getArray(),
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
-				dt);*/
+				dt);
+		
+		polution.cuda_get();
 
+		for(unsigned int x = 0; x < polution.size(); ++x) {
+			cout << x << "\t" << polution[x] << endl;
+		}
+		exit(0);
 
 		/**
 		 * update function is not yet implemented in CUDA. To invoke the C++ version, a cudaMemcpy is required before it to copy flux parameter, and after, to update polution value on the GPU

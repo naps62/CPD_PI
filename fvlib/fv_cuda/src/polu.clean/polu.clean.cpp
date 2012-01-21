@@ -90,10 +90,7 @@ double compute_flux(
 			v_right = v_left;
 			p_right = dc;
 		} 
-
-		FVPoint2D<double> v_sum = v_left + v_right;
-		v_sum *= 0.5f;
-		v = v_sum * edge->normal; 
+		v = ( v_left + v_right ) * 0.5 * edge->normal; 
 		//TODO: remove this dependence
 		//if ( ( abs(v) * dt ) > 1)
 		//	dt = 1.0 / abs(v);
@@ -112,8 +109,7 @@ double compute_flux(
 	}
 
 	dt = 1.0 / abs(v_max);
-
-	
+		
 	return dt;
 }
 
@@ -222,14 +218,12 @@ void main_loop (
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
+		for(int x = 0; x < polutions.size(); ++x) {
+			cout << x << "\t" << polutions[x] << endl;
+		}
+		exit(0);
 		t += dt;
 		++i;
-
-		FVLog::logger << "i = " << i << " dt = " << dt << endl;
-		for(unsigned int j = 0; j < 50; ++j) {
-			FVLog::logger << j << "\t" << fluxes[j] << "\t" << polutions[j] << endl;
-		}
-
 		if ( i % jump_interval == 0 )
 		{
 			polution_file.put( polutions , t , "polution" );    
@@ -287,4 +281,3 @@ int main()
 		data.computation.threshold)
 	;
 }
-

@@ -45,4 +45,19 @@ void wrapper_reduce_velocities(int size, int threads, int blocks, T *d_idata, T 
  		double *flux,
  		double dt);
 
+__global__
+void kernel_update(
+		unsigned int num_cells,
+		unsigned int num_total_edges,
+		unsigned int *edge_left_cells,
+		unsigned int *edge_right_cells,
+		double *edge_lengths,
+		double *cell_areas,
+		unsigned int *cell_edges,
+		unsigned int *cell_edges_index,
+		unsigned int *cell_edges_coutn,
+		double *polution,
+		double *flux,
+		double dt);
+
 #endif // _CUH_KERNELS_

@@ -42,7 +42,11 @@ namespace CudaFV {
 			 * CELL INFO
 			 */
 			unsigned int num_cells;
-			CFVVect<double> cell_areas;	// area of each cell
+			unsigned int num_total_edges;
+			CFVVect<double> cell_areas;					// area of each cell
+			CFVVect<unsigned int> cell_edges;			// list of edges for all cells
+			CFVVect<unsigned int> cell_edges_index;		// for each cell, index of it's edge list on cell_edges
+			CFVVect<unsigned int> cell_edges_count;		// number of edges of each cell (to index cell_edges)
 
 		public:
 

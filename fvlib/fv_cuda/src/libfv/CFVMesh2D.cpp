@@ -30,9 +30,10 @@ namespace CudaFV {
 		FVLog::logger << "importing FVMesh2D" << endl;
 		num_edges = msh.getNbEdge();
 		num_cells = msh.getNbCell();
-
+		
 		// allocs space for all needed data
 		alloc();
+
 
 		// copy edge data
 		FVEdge2D *edge;
@@ -53,11 +54,32 @@ namespace CudaFV {
 		}
 
 		// copy cell data
+		// caso nao haja disponibilidade da sua partei = 0;
 		FVCell2D *cell;
 		i = 0;
+		num_total_edges = 0;
 		for(msh.beginCell(); (cell = msh.nextCell()); ++i) {
 			// cell area
 			cell_areas[i]	= cell->area;
+
+			// index at which edges for this cell start
+			cell_edges_index[i] = num_total_edges;
+			// count of edges for this cell
+			cell_edges_count[i] = cell->nb_edge;
+
+			// total count of edges for cell_edges array
+			num_total_edges += cell->nb_edge;
+		}
+
+		// finally create data for cell_edges array
+		// this is not in alloc() func since it depends on values calculated on previous loop
+
+		cell_edges = CFVVect<unsigned int>(num_total_edges);
+		i = 0;
+		for(msh.beginCell(); (cell = msh.nextCell()); ) {
+			for(cell->beginEdge(); (edge = cell->nextEdge()); ++i) {
+				cell_edges[i] = edge->label - 1;
+			}
 		}
 	}
 
@@ -73,13 +95,15 @@ namespace CudaFV {
 
 		FVLog::logger << "allocating cpu ptrs" << endl;
 		// alloc edge info
-		edge_normals = CFVPoints2D(num_edges);
-		edge_lengths = CFVVect<double>(num_edges);
-		edge_left_cells  = CFVVect<unsigned int>(num_edges);
-		edge_right_cells = CFVVect<unsigned int>(num_edges);
+		edge_normals		= CFVPoints2D(num_edges);
+		edge_lengths		= CFVVect<double>(num_edges);
+		edge_left_cells		= CFVVect<unsigned int>(num_edges);
+		edge_right_cells	= CFVVect<unsigned int>(num_edges);
 
 		// alloc cell info
-		cell_areas = CFVVect<double>(num_cells);
+		cell_areas			= CFVVect<double>(num_cells);
+		cell_edges_index	= CFVVect<unsigned int>(num_cells);
+		cell_edges_count	= CFVVect<unsigned int>(num_cells);
 	}
 }
 
