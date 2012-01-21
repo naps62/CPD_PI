@@ -266,20 +266,22 @@ void kernel_update(
 	unsigned int edge_limit = edge_index + cell_edges_count[tid];
 
 	// get current polution value for this cell
-	unsigned int new_polution	= 0;
+	double new_polution	= 0;
 
 	// for each edge of this cell
 	for(unsigned int i = edge_index; i < edge_limit; ++i) {
 		unsigned int edge = cell_edges[i];
 		// if this cell is at the left of the edge
 
-		//double aux_polution = dt;//dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
+		double aux = dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
+
 		if (edge_left_cells[edge] == tid) {
-			new_polution += 0.5;
+			new_polution -= aux;
+
 		//}// else if (edge_right_cells[edge] == tid){ //otherwise, this cell is obviosly to the right of the edge
 		//	new_polution += aux_polution;
 		} else {
-			new_polution += 0.05;
+			new_polution += aux;
 		}
 	}
 
