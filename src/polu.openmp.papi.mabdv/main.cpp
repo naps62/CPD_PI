@@ -57,14 +57,12 @@ Parameters;
 //	BEGIN GLOBAL VARIABLES
 
 int tc;						//	thread count
-long long int tot_cyc;		//	process total cycles
-long long int tot_ins;		//	process total instructions
+long long int fdv_ins;		//	process total FP division instructions
 long long int tot_ns;		//	process total time in nano-seconds
 
 							//	vectors
 double *max_vel_v;			//	threads max velocity vector
-long long int *tot_cyc_v;	//	threads total cycles vector
-long long int *tot_ins_v;	//	threads total instructions vector
+long long int *fdv_ins_v;	//	threads FP division instructions
 long long int *tot_ns_v;	//	threads total time in nano-seconds
 
 //	END GLOBAL VARIABLES
@@ -95,11 +93,10 @@ double compute_flux(
 	FVEdge2D *edge;							//	current edge
 
 	double max_vel;							//	maximum calculated velocity
-	long long int tot_cyc_s;				//	total cycles (sequential zone)
-	long long int tot_ins_s;				//	total instructions (sequential zone)
+	long long int fdv_ins_s;				//	FP division instructions (sequential zone)
 	long long int tot_ns_s;					//	total time in nano-seconds (sequential zone)
 
-	PAPI_CPI *p;							//	PAPI specific eventset
+	PAPI_Custom *p;							//	PAPI specific eventset
 
 	es = mesh.getNbEdge();
 	#pragma omp parallel	\
@@ -107,13 +104,12 @@ double compute_flux(
 		num_threads(tc)	\
 		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v,p)
 	{
-		p = new PAPI_CPI();
+		p = new PAPI_Custom();
+		p->add_event( PAPI_FDV_INS );
 
 		t = omp_get_thread_num();
 
 		max_vel_v[t] = DBL_MIN;
-		tot_cyc_v[t] = 0;
-		tot_ins_v[t] = 0;
 
 		//	start measure
 		p->start();
@@ -148,8 +144,7 @@ double compute_flux(
 		p->stop();
 
 		//	get values
-		tot_cyc_v[t] = p->cycles();
-		tot_ins_v[t] = p->instructions();
+		fdv_ins_v[t] = p->get( PAPI_FDV_INS );
 		tot_ns_v[t] = p->last_time();
 
 		//	cleanup
@@ -157,7 +152,8 @@ double compute_flux(
 	}
 
 	//	set sequential eventset
-	p = new PAPI_CPI();
+	p = new PAPI_Custom();
+	p->add_event( PAPI_FDV_INS );
 
 	//	start sequential measure
 	p->start();
@@ -172,8 +168,7 @@ double compute_flux(
 	p->stop();
 
 	//	get sequential values
-	tot_cyc_s = p->cycles();
-	tot_ins_s = p->instructions();
+	fdv_ins_s = p->get( PAPI_FDV_INS );
 	tot_ns_s = p->last_time();
 
 	//	cleanup
@@ -182,12 +177,10 @@ double compute_flux(
 	//	gather PAPI results
 	for (t = 0; t < tc; ++t)
 	{
-		tot_cyc += tot_cyc_v[t];
-		tot_ins += tot_ins_v[t];
+		fdv_ins += fdv_ins_v[t];
 		tot_ns += tot_ns_v[t];
 	}
-	tot_cyc += tot_cyc_s;
-	tot_ins += tot_ins_s;
+	fdv_ins += fdv_ins_s;
 	tot_ns += tot_ns_s;
 	
 	return dt;
@@ -338,12 +331,10 @@ int main(int argc, char** argv)
 	//	prepare velocities array
 	//vs = new double[ mesh.getNbEdge() ];
 	max_vel_v = new double[ tc ];
-	tot_cyc_v = new long long int[ tc ];
-	tot_ins_v = new long long int[ tc ];
+	fdv_ins_v = new long long int[ tc ];
 	tot_ns_v = new long long int[ tc ];
 	
-	tot_cyc = 0;
-	tot_ins = 0;
+	fdv_ins = 0;
 	tot_ns = 0;
 
 	// compute the Mesh parameter
@@ -365,15 +356,13 @@ int main(int argc, char** argv)
 	//	print PAPI results
 	cout
 		<<	"PAPI stats (compute_flux only)"	<<	endl
-		<<	"Total cycles: "	<<	tot_cyc	<<	endl
-		<<	"Total instructions: "	<<	tot_ins	<<	endl
+		<<	"FP divisions: "	<<	fdv_ins	<<	endl
 		<<	"Total time: "	<<	tot_ns	<<	endl
 	;
 
 	//	cleanup
 	delete max_vel_v;
-	delete tot_cyc_v;
-	delete tot_ins_v;
+	delete fdv_ins_v;
 	delete tot_ns_v;;
 
 	PAPI::shutdown();
