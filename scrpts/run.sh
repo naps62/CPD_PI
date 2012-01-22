@@ -11,7 +11,7 @@ do
 	case $arg in
 	polu*)
 		case $arg in
-		*.cpi|*.mem|*.flops|*.l1)
+		*.cpi|*.mem|*.flops|*.l1|*.l2dca|*.ipb|*.mabml|*.mabdv)
 			outfile="${resultdir}/${arg}.log"
 			;;
 		esac

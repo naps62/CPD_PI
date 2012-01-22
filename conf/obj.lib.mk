@@ -1,13 +1,13 @@
 include $(ROOTD)/conf/obj.mk
 
-$(ROOTD)/$(LIBD)/lib$(LIB).a:	$(OBJS)
+$(LIBD)/$(DIR).a:	$(OBJS)
 	@if [ ! -d "$(@D)" ];	\
 	then	\
 		mkdir "$(@D)";	\
 	fi
 	$(AR) $(ARFLAGS) $@ $(OBJS)
 	
-all:	$(ROOTD)/$(LIBD)/lib$(LIB).a	
+all:	$(LIBD)/$(DIR).a	
 
 clean:
-	$(RM) $(ROOTD)/$(LIBD)/lib$(LIB).a
+	$(RM) $(LIBD)/$(DIR).a

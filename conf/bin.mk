@@ -1,1 +1,2 @@
-BIN		=	$(shell pwd | egrep -o "[[:alnum:]_.:\-]+$$")
+include $(ROOTD)/conf/config.mk
+BIN		=	DIR

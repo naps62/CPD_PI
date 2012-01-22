@@ -1,23 +1,6 @@
 ROOTD	=	.
 include $(ROOTD)/conf/config.mk
 
-DATAD	=	data
-
-all:	\
-	objs	\
-	libs	\
-	bins
-
-objs:
-	@echo ">>>>> $(SRCD)"
-	@cd $(SRCD); $_
-	@echo "<<<<< $(SRCD)"
-
-libs bins:
-	@echo ">>>>> $(OBJD)"
-	@cd $(OBJD); $_ $@
-	@echo "<<<<< $(OBJD)"
-
 %:
 	@echo "<<==::    $@    ::==>>"
 	@echo ">>>>> $(SRCD)"
@@ -26,3 +9,10 @@ libs bins:
 	@echo ">>>>> $(OBJD)"
 	@cd $(OBJD); $_ $@
 	@echo "<<<<< $(OBJD)"
+all:
+	$_ $@
+
+objs:
+	@echo ">>>>> $(SRCD)"
+	@cd $(SRCD); $_
+	@echo "<<<<< $(SRCD)"
