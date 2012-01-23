@@ -28,11 +28,11 @@ double dt=1.e20;
         polR=para.getDouble("DirichletCondition");
         } 
      v=((VL+VR)*0.5)*(ptr_e->normal); 
-     cout << v;
-     getchar();
+     cout << v << endl;
      if (abs(v)*dt>1) dt=1./abs(v);
      if (v<0) flux[ptr_e->label-1]=v*polR; else flux[ptr_e->label-1]=v*polL;
      }
+ exit(0);
 return(dt);
 }
 

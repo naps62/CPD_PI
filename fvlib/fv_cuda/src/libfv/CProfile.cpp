@@ -1,39 +1,39 @@
-#include "CProfile.h"
+#include "CUDA/CProfile.h"
 
 namespace CudaFV {
 
-	CProfile(string msg) {
+	CProfile::CProfile(string msg) {
 		init(msg, DEF_PROFILE);
 	}
 
-	CProfile(string msg, string filename) {
+	CProfile::CProfile(string msg, string filename) {
 		init(msg, filename);
 	}
 
-	~CProfile() {
+	CProfile::~CProfile() {
 		delete stream;
 		cudaEventDestroy(start_t);
 		cudaEventDestroy(stop_t);
 	}
 
-	void start() {
+	void CProfile::start() {
 		cudaEventRecord(start_t, 0);
 	}
 
-	void stop() {
+	void CProfile::stop() {
 		cudaEventRecord(stop_t, 0);
 		cudaEventSynchronize(stop_t);
 		cudaEventElapsedTime(&time, start_t, stop_t);
 		*stream << time << endl;
 	}
 
-	void getTime() {
+	float CProfile::getTime() {
 		return time;
 	}
 
-	void init(string msg, string filename) {
+	void CProfile::init(string msg, string filename) {
 		stream = new FVLog(DEF_PROFILE);
-		*stream << "EVENT: " << msg ": ";
+		*stream << "EVENT: " << msg << ": ";
 		cudaEventCreate(&start_t);
 		cudaEventCreate(&stop_t);
 	}

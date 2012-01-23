@@ -85,7 +85,7 @@ double compute_flux(
 			v_right = v_left;
 			p_right = dc;
 		} 
-		v = ( v_left + v_right ) * 0.5 * edge->normal; 
+		v = ( v_left + v_right ) * 0.5 * edge->normal;
 		if ( ( abs(v) * dt ) > 1)
 			dt = 1.0 / abs(v);
 		if ( v < 0 )
@@ -93,7 +93,9 @@ double compute_flux(
 		else
 			flux[ edge->label - 1 ] = v * p_left;
 	}
+	cout << v << " " << dt << endl;
 
+	exit(0);
 	return dt;
 }
 
