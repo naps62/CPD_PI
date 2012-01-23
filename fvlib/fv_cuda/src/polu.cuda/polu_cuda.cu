@@ -165,7 +165,7 @@ void cuda_main_loop(
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
-		PROF_STOP(p_udpate);
+		PROF_STOP(p_update);
 
 		t += dt;
 		++i;
