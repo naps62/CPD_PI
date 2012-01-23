@@ -18,7 +18,7 @@
 #define DEF_ERRFILE string("FVLib.err")
 #define DEF_PROFILE string("FVLib.prof")
 
-#define PROFILE 1
+#define _PROFILE_ 1
 #if (_PROFILE_ == 0)
 #define PROF_START(x)
 #define PROF_STOP(x)

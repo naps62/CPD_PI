@@ -11,7 +11,7 @@ namespace CudaFV {
 
 	class CProfile {
 		private:
-		FVLog *stream;
+		static FVLog *stream;
 
 		public:
 		cudaEvent_t start_t, stop_t;
