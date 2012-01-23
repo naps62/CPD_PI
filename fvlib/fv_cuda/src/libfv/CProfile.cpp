@@ -2,7 +2,7 @@
 
 namespace CudaFV {
 
-	FVLog CProfile::*stream(DEF_PROFILE);
+	FVLog *CProfile::stream(DEF_PROFILE);
 
 	CProfile::CProfile(string msg) {
 		init(msg, DEF_PROFILE);
