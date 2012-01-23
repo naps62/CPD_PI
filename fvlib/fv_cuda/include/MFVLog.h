@@ -6,8 +6,7 @@
 **
 ** Author: Miguel Palhas, mpalhas@gmail.com
 ** -------------------------------------------------------------------------*/
-
-#ifndef _H_M_FVLOG
+#pragma once
 #define _H_M_FVLOG
 
 #include <ctime>
@@ -17,8 +16,7 @@ using std::string;
 using std::ofstream;
 using std::endl;
 
-#define DEF_LOGFILE string("FVLib.log")
-#define DEF_ERRFILE string("FVLib.err")
+#include "MFVLib_config.h"
 
 class FVLog : public ofstream {
 	public:
@@ -33,6 +31,3 @@ class FVLog : public ofstream {
 
 		void initLog();
 };
-
-#endif // _H_M_FVLOG
-

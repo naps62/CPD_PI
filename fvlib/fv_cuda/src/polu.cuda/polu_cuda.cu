@@ -2,6 +2,7 @@
 
 #include "CUDA/CFVLib.h"
 #include "FVLib.h"
+#include "CProfile.h"
 
 #include "polu_cuda.h"
 #include "kernels.cuh"
@@ -38,6 +39,16 @@ void cuda_main_loop(
 		CudaFV::CFVVect<double> &flux,
 		double dc) {
 
+	CProfile p_full_func("cuda_full_func");
+	CProfile p_malloc("cuda_mallocs");
+	CProfile p_main_loop("main_loop");
+	CProfile p_compute_flux("compute_flux");
+	CProfile p_reduction("reduction");
+	CProfile p_update("update");
+	CProfile p_output("file_output");
+
+	PROFILE_START(p_full_func);
+
 	// var declaration
 	double dt;
 	double t = 0;
@@ -47,6 +58,8 @@ void cuda_main_loop(
 	FVio polution_file("polution.xml", FVWRITE);
 	polution_file.put(old_polution, t, "polution");
 	
+	PROFILE_START(p_malloc);
+
 	// alloc space on device and copy data
 	mesh.edge_normals.x.cuda_mallocAndSave();
 	mesh.edge_normals.y.cuda_mallocAndSave();
@@ -73,6 +86,7 @@ void cuda_main_loop(
 	CudaFV::CFVVect<double> cpu_reducibles(red_blocks);
 	cpu_reducibles.cuda_malloc();
 
+	PROFILE_STOP(p_malloc);
 
 	// select grid and block size for compute_flux kernel
 	dim3 grid_size_cf(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_CF), 1, 1);
@@ -84,12 +98,14 @@ void cuda_main_loop(
 	/**
 	 * Beggining of main loop
 	 */
+	PROFILE_START(p_main_loop);
 	while(t < final_time) {
 		double max_vs;
 
 		/**
 		 * Invoke kernel for compute_flux
 		 */
+		PROFILE_START(p_compute_flux);
 		kernel_compute_flux<<< grid_size_cf, block_size_cf >>>(
 				mesh.num_edges,
 				mesh.edge_normals.x.cuda_getArray(),
@@ -102,6 +118,7 @@ void cuda_main_loop(
 				flux.cuda_getArray(),
 				vs.cuda_getArray(),
 				dc);
+		PROFILE_STOP(p_compute_flux);
 
 		cudaError_t error = cudaGetLastError();
 		if(error != cudaSuccess) {
@@ -115,6 +132,7 @@ void cuda_main_loop(
 		/**
 		 * Reduction of velocities
 		 */
+		PROFILE_START(p_reduction);
 		wrapper_reduce_velocities(mesh.num_edges, red_threads, red_blocks, vs.cuda_getArray(), cpu_reducibles.cuda_getArray());
 
 		// reduce final array on cpu
@@ -128,9 +146,12 @@ void cuda_main_loop(
 		// based on max_vs, compute time elapsed
 		dt = 1.0 / abs(max_vs) * mesh_parameter;
 
+		PROFILE_STOP(p_reduction);
+
 		/**
 		 * Update polution values based on computed flux
 		 */
+		PROFILE_START(p_update);
 		kernel_update<<< grid_size_up, block_size_up >>>(
 				mesh.num_cells,
 				mesh.num_total_edges,
@@ -144,6 +165,7 @@ void cuda_main_loop(
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
+		PROFILE_STOP(p_udpate);
 
 		t += dt;
 		++i;
@@ -154,6 +176,7 @@ void cuda_main_loop(
 		 * Also, since the FVio class is still the original one (not updated to match the structs used for cuda), we first need to copy data to a structure of the old data types, and only then save it to file. This, again, has a big performance hit but is just temporary while the entire LIB is not CUDA-compatible
 		 */
 		if (i % jump_interval == 0) {
+			PROFILE_START(p_output);
 			cout << "writing to file" << endl;
 			polution.cuda_get();
 			for(unsigned int x = 0; x < mesh.num_cells; ++x) {
@@ -162,8 +185,10 @@ void cuda_main_loop(
 			polution_file.put(old_polution, t, "polution");
 			cout << "step " << i << " at time " << t << "\r";
 			fflush(NULL);
+			PROFILE_STOP(p_output);
 		}
 	}
+	PROFILE_STOP(p_main_loop);
 
 	cout << "total iterations: " << i << endl;
 
@@ -188,6 +213,8 @@ void cuda_main_loop(
 	velocities.x.cuda_free();
 	velocities.y.cuda_free();
 	flux.cuda_free();
+
+	PROFILE_STOP(p_full_func);
 }
 
 /**
