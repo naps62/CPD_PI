@@ -22,7 +22,7 @@ namespace CudaFV {
 		cudaEventRecord(stop_t, 0);
 		cudaEventSynchronize(stop_t);
 		cudaEventElapsedTime(&time, start_t, stop_t);
-		*stream << time << endl;
+		//*stream << time << endl;
 	}
 
 	float CProfile::getTime() {
@@ -31,7 +31,7 @@ namespace CudaFV {
 
 	void CProfile::init(string msg, string filename) {
 		stream = new FVLog(DEF_PROFILE);
-		*stream << "EVENT: " << msg << ": ";
+		//*stream << "EVENT: " << msg << ": ";
 		cudaEventCreate(&start_t);
 		cudaEventCreate(&stop_t);
 	}
