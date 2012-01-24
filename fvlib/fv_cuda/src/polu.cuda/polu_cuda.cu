@@ -83,7 +83,7 @@ void cuda_main_loop(
 	cudaStream_t stream;
 	cudaStreamCreate(&stream);
 
-	mesh.edge_normals.x.cuda_saveAsync();
+	mesh.edge_normals.x.cuda_saveAsync(stream);
 	mesh.edge_normals.y.cuda_saveAsync(stream);
 	mesh.edge_lengths.cuda_saveAsync(stream);
 	mesh.edge_left_cells.cuda_saveAsync(stream);
