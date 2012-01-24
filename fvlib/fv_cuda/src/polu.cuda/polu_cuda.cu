@@ -80,20 +80,27 @@ void cuda_main_loop(
 	PROF_STOP(p_malloc);
 
 	PROF_START(p_memcpy);
-	mesh.edge_normals.x.cuda_save();
-	mesh.edge_normals.y.cuda_save();
-	mesh.edge_lengths.cuda_save();
-	mesh.edge_left_cells.cuda_save();
-	mesh.edge_right_cells.cuda_save();
-	mesh.cell_areas.cuda_save();
-	mesh.cell_edges.cuda_save();
-	mesh.cell_edges_index.cuda_save();
-	mesh.cell_edges_count.cuda_save();
+	cudaStream_t stream;
+	cudaStreamCreate(&stream);
 
-	polution.cuda_save();
-	velocities.x.cuda_save();
-	velocities.y.cuda_save();
+	mesh.edge_normals.x.cuda_saveAsync();
+	mesh.edge_normals.y.cuda_saveAsync(stream);
+	mesh.edge_lengths.cuda_saveAsync(stream);
+	mesh.edge_left_cells.cuda_saveAsync(stream);
+	mesh.edge_right_cells.cuda_saveAsync(stream);
+	mesh.cell_areas.cuda_saveAsync(stream);
+	mesh.cell_edges.cuda_saveAsync(stream);
+	mesh.cell_edges_index.cuda_saveAsync(stream);
+	mesh.cell_edges_count.cuda_saveAsync(stream);
+
+	polution.cuda_saveAsync(stream);
+	velocities.x.cuda_saveAsync(stream);
+	velocities.y.cuda_saveAsync(stream);
+
+	cudaStreamSynchronize(stream);
 	PROF_STOP(p_memcpy);
+
+	cudaStreamDestroy(stream);
 
 	_DEBUG {
 		unsigned int _d_copied_data_size =

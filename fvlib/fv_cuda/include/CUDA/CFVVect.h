@@ -52,6 +52,7 @@ namespace CudaFV {
 				void cuda_malloc();
 				void cuda_free();
 				void cuda_save();
+				void cuda_saveAsync(cudaStream_t &stream);
 				void cuda_get();
 
 			private:
