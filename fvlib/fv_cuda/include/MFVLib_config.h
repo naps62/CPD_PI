@@ -18,11 +18,26 @@
 #define DEF_ERRFILE string("FVLib.err")
 #define DEF_PROFILE string("FVLib.prof")
 
+#define _DEBUG_	1
+
+#if (_DEBUG_ == 0)
+#define _DEBUG
+#define _D
+#else
+#define _DEBUG	if (_DEBUG_)
+#define _D(x)	(x)
+#endif
+
 #define _PROFILE_ 1
+
 #if (_PROFILE_ == 0)
 #define PROF_START(x)
 #define PROF_STOP(x)
+#define PROF_START_ONCE(i,x)
+#define PROF_STOP_ONCE(i,x)
 #else
-#define PROF_START(x)	(x.start())
-#define PROF_STOP(x)	(x.stop())
+#define PROF_START(x)			(x.start())
+#define PROF_STOP(x)			(x.stop())
+#define PROF_START_ONCE(i,x) 	(if (i == 0) PROF_START(x))
+#define PROF_STOP_ONCE(i,x)		(if (i == 0) PROF_STOP(x))
 #endif

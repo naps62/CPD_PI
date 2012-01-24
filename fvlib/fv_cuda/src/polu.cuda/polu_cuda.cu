@@ -2,7 +2,7 @@
 
 #include "CUDA/CFVLib.h"
 #include "FVLib.h"
-#include "CUDA/CProfile.h"
+#include "CUDA/CFVProfile.h"
 
 #include "polu_cuda.h"
 #include "kernels.cuh"
@@ -39,13 +39,13 @@ void cuda_main_loop(
 		CudaFV::CFVVect<double> &flux,
 		double dc) {
 
-	CudaFV::CProfile p_full_func("cuda_full_func");
-	CudaFV::CProfile p_malloc("cuda_mallocs");
-	CudaFV::CProfile p_main_loop("main_loop");
-	CudaFV::CProfile p_compute_flux("compute_flux");
-	CudaFV::CProfile p_reduction("reduction");
-	CudaFV::CProfile p_update("update");
-	CudaFV::CProfile p_output("file_output");
+	CudaFV::CFVProfile p_full_func("cuda_full_func");
+	CudaFV::CFVProfile p_malloc("cuda_mallocs");
+	CudaFV::CFVProfile p_main_loop("main_loop");
+	CudaFV::CFVProfile p_compute_flux("compute_flux");
+	CudaFV::CFVProfile p_reduction("reduction");
+	CudaFV::CFVProfile p_update("update");
+	CudaFV::CFVProfile p_output("file_output");
 
 	PROF_START(p_full_func);
 
@@ -76,9 +76,42 @@ void cuda_main_loop(
 	velocities.y.cuda_mallocAndSave();
 	flux.cuda_malloc();
 
+	PROF_STOP(p_malloc);
+
 	// alloc space for tmp velocity vector
 	CudaFV::CFVVect<double> vs(mesh.num_edges);
 	vs.cuda_malloc();
+
+	_DEBUG {
+		unsigned int _d_copied_data_size =
+				sizeof(double) * (
+					mesh.edge_normals.x.size() + 
+					mesh.edge_normals.y.size() +
+					mesh.edge_lengths.size() +
+					mesh.cell_areas.size() +
+					polution.size() +
+					velocities.x.size() +
+					velocities.y.size() +
+					flux.size()) +
+				sizeof(unsigned int) * (
+					mesh.edge_left_cells.size() +
+					mesh.edge_right_cells.size() +
+					mesh.cell_edges.size() +
+					mesh.cell_edges_index.size() +
+					mesh.cell_edges_count.size());
+				
+		unsigned int _d_full_data_size =
+			_d_copied_data_size + sizeof(double) * (vs.size() + flux.size());
+
+		float _d_transfer_rate =
+			1000 * ((float) _d_copied_data_size / 1024 / p_malloc.getTime());
+		
+		CudaFV::CFVProfile::stream
+			<< "Copied data size: " << (float) _d_copied_data_size / 1024 << " KB" << endl
+			<< "Full data set size: " << (float) _d_full_data_size / 1024 << " KB" << endl
+			<< "Data transfer rate: " << _d_transfer_rate << "KB/s" << endl;
+	}
+
 
 	// prepare aux vars for reduction kernel
 	int red_blocks, red_threads;
@@ -86,7 +119,6 @@ void cuda_main_loop(
 	CudaFV::CFVVect<double> cpu_reducibles(red_blocks);
 	cpu_reducibles.cuda_malloc();
 
-	PROF_STOP(p_malloc);
 
 	// select grid and block size for compute_flux kernel
 	dim3 grid_size_cf(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_CF), 1, 1);
