@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
 			if ( ( dist > aux )
 			&& (  ( ptr_vb->code == 2 )
 			   || ( ptr_vb->code == 3 )
+			   || ( ptr_vb->code == 0 ) // TODO isto foi adicionado para testar o msh_gen
 			   )
 			)
 				dist = aux;

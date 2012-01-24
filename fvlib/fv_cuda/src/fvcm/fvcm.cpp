@@ -235,8 +235,8 @@ void xml2msh (string filename_in, string filename_out)
 	FVMesh3D m3;
 	Gmsh mg;
 
-	if ( m3.read( filename_in.c_str() ) == FVOK )
-		mg.FVMesh2Gmsh(m3);
+	//if ( m3.read( filename_in.c_str() ) == FVOK )
+	//	mg.FVMesh2Gmsh(m3);
 	if ( m2.read( filename_in.c_str() ) == FVOK )
 		mg.FVMesh2Gmsh(m2);      
 	if ( m1.read( filename_in.c_str() ) == FVOK )

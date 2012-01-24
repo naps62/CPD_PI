@@ -11,6 +11,9 @@
 #ifndef _H_CUDA_FVVECT
 #define _H_CUDA_FVVECT
 
+#include <cuda.h>
+#include <cuda_runtime.h>
+
 #include "MFVLog.h"
 
 namespace CudaFV {
