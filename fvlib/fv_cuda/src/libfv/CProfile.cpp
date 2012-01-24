@@ -9,7 +9,7 @@ namespace CudaFV {
 	}
 
 	CProfile::~CProfile() {
-		delete stream;
+		//delete stream;
 		cudaEventDestroy(start_t);
 		cudaEventDestroy(stop_t);
 	}
