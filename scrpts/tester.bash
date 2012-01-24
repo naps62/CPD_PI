@@ -8,20 +8,11 @@ result_d="results"
 
 #	parse arguments
 i=0;
-o_flg=false;
 n_flg=false;
 t_flg=false;
 for arg;
 do
-	i=$(( $i + 1 ));
-	if [ -z "$exe" ];
-	then
-		exe="$arg";
-	fi;
 	case $arg in
-	"-o")
-		o_flg=true;
-		;;
 	"-n")
 		n_flg=true;
 		;;
@@ -29,11 +20,7 @@ do
 		t_flg=true;
 		;;
 	*)
-		if $o_flg;
-		then
-			output="$arg";
-			o_flg=false;
-		elif $n_flg;
+		if $n_flg;
 		then
 			RUNS="$arg";
 			n_flg=false;
@@ -43,16 +30,11 @@ do
 			t_flg=false;
 		else
 			command[$i]="$arg";
+			i=$(( $i + 1 ));
 		fi;
 		;;
 	esac;
 done;
-
-#	output file
-if [ -z "$output" ];
-then
-	output="${result_d}/${exe}_${timestamp}.log";
-fi;
 
 #	number of runs
 if [ -z "$RUNS" ];
