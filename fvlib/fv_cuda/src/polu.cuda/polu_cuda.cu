@@ -122,7 +122,7 @@ void cuda_main_loop(
 		CudaFV::CFVProfile::stream
 			<< "Copied data size: " << (float) _d_copied_data_size / 1024 << " KB" << endl
 			<< "Full data set size: " << (float) _d_full_data_size / 1024 << " KB" << endl
-			<< "Data transfer rate: " << _d_transfer_rate << "KB/s" << endl;
+			<< "Data transfer rate: " << _d_transfer_rate << " KB/s" << endl;
 	}
 
 

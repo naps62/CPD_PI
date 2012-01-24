@@ -2,11 +2,11 @@
 
 FVLog FVLog::logger;
 
-FVLog::FVLog() : ofstream(DEF_LOGFILE.c_str(), ofstream::out | ofstream::app ) {
+FVLog::FVLog() : ofstream(DEF_LOGFILE.c_str(), ofstream::out | LOG_MODE ) {
 	initLog();
 }
 
-FVLog::FVLog(string filename) : ofstream(filename.c_str(), ofstream::out | ofstream::app ) {
+FVLog::FVLog(string filename) : ofstream(filename.c_str(), ofstream::out | LOG_MODE ) {
 	initLog();
 }
 

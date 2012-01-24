@@ -11,13 +11,29 @@
 #define _H_M_FVLIB_CONFIG
 
 #include <climits>
+#include <fstream>
+
+/**
+ * Utilities
+ */
 //#define NO_RIGHT_EDGE std::numeric_limits<unsigned int>::max()
 #define NO_RIGHT_EDGE	INT_MAX
+
+/**
+ * Logging options
+ */
+#define LOG_MODE_APPEND ofstream::app
+#define LOG_MODE_WRITE 	0
+
+#define LOG_MODE LOG_MODE_APPEND
 
 #define DEF_LOGFILE string("FVlib.log")
 #define DEF_ERRFILE string("FVLib.err")
 #define DEF_PROFILE string("FVLib.prof")
 
+/**
+ * Debug options
+ */
 #define _DEBUG_	1
 
 #if (_DEBUG_ == 0)
@@ -28,6 +44,9 @@
 #define _D(x)	(x)
 #endif
 
+/**
+ * Profiling options
+ */
 #define _PROFILE_ 1
 
 #if (_PROFILE_ == 0)
