@@ -109,7 +109,7 @@ namespace CudaFV {
 		}
 
 	template<class T>
-		void cuda_saveAsync(cudaStream_t &stream) {
+		void CFVVect<T>::cuda_saveAsync(cudaStream_t &stream) {
 			cudaMemcpyAsync(cuda_arr, arr, sizeof(T) * arr_size, cudaMemcpyHostToDevice, stream);
 		}
 
