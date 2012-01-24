@@ -41,6 +41,7 @@ void cuda_main_loop(
 
 	CudaFV::CFVProfile p_full_func("cuda_full_func");
 	CudaFV::CFVProfile p_malloc("cuda_mallocs");
+	CudaFV::CFVProfile p_memcpy("cuda_memcpy");
 	CudaFV::CFVProfile p_main_loop("main_loop");
 	CudaFV::CFVProfile p_compute_flux("compute_flux");
 	CudaFV::CFVProfile p_reduction("reduction");
@@ -59,28 +60,40 @@ void cuda_main_loop(
 	polution_file.put(old_polution, t, "polution");
 	
 	PROF_START(p_malloc);
-
-	// alloc space on device and copy data
-	mesh.edge_normals.x.cuda_mallocAndSave();
-	mesh.edge_normals.y.cuda_mallocAndSave();
-	mesh.edge_lengths.cuda_mallocAndSave();
-	mesh.edge_left_cells.cuda_mallocAndSave();
-	mesh.edge_right_cells.cuda_mallocAndSave();
-	mesh.cell_areas.cuda_mallocAndSave();
-	mesh.cell_edges.cuda_mallocAndSave();
-	mesh.cell_edges_index.cuda_mallocAndSave();
-	mesh.cell_edges_count.cuda_mallocAndSave();
-
-	polution.cuda_mallocAndSave();
-	velocities.x.cuda_mallocAndSave();
-	velocities.y.cuda_mallocAndSave();
+	// alloc space on device
+	mesh.edge_normals.x.cuda_malloc();
+	mesh.edge_normals.y.cuda_malloc();
+	mesh.edge_lengths.cuda_malloc();
+	mesh.edge_left_cells.cuda_malloc();
+	mesh.edge_right_cells.cuda_malloc();
+	mesh.cell_areas.cuda_malloc();
+	mesh.cell_edges.cuda_malloc();
+	mesh.cell_edges_index.cuda_malloc();
+	mesh.cell_edges_count.cuda_malloc();
+	polution.cuda_malloc();
+	velocities.x.cuda_malloc();
+	velocities.y.cuda_malloc();
 	flux.cuda_malloc();
-
-	PROF_STOP(p_malloc);
-
 	// alloc space for tmp velocity vector
 	CudaFV::CFVVect<double> vs(mesh.num_edges);
 	vs.cuda_malloc();
+	PROF_STOP(p_malloc);
+
+	PROF_START(p_memcpy);
+	mesh.edge_normals.x.cuda_save();
+	mesh.edge_normals.y.cuda_save();
+	mesh.edge_lengths.cuda_save();
+	mesh.edge_left_cells.cuda_save();
+	mesh.edge_right_cells.cuda_save();
+	mesh.cell_areas.cuda_save();
+	mesh.cell_edges.cuda_save();
+	mesh.cell_edges_index.cuda_save();
+	mesh.cell_edges_count.cuda_save();
+
+	polution.cuda_save();
+	velocities.x.cuda_save();
+	velocities.y.cuda_save();
+	PROF_STOP(p_memcpy);
 
 	_DEBUG {
 		unsigned int _d_copied_data_size =
