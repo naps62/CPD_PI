@@ -20,7 +20,7 @@ CXX	=	nvcc
 INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
 
 #	Compiler flags
-CXXFLAGS	=	-arch sm_20 -Xcompiler="-fpermissive -Wall -O3"
+CXXFLAGS	=	-arch sm_20 -Xcompiler="-fpermissive -Wall"
 CXXFLAGS	+=	 $(INC)
 
 ifeq ($(MODE),DBG)

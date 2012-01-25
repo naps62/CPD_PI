@@ -97,9 +97,9 @@ int main(int argc, char **argv) {
 	unsigned int i_cell		= 1;
 
 	unsigned int x, y;
-	// create first line of vertexes
+	// create first line of vertexes (edge vertex)
 	for(x = 0; x <= Lx; ++x) {
-		vertex_stream << Vertex(i_vertex++, 0, x * Wx, 0);
+		vertex_stream << Vertex(i_vertex++, 2, x * Wx, 0);
 	}
 
 	// create first line of edges
@@ -111,10 +111,13 @@ int main(int argc, char **argv) {
 	}
 
 	for(y = 0; y < Ly; ++y) {
-		// Next line of vertex
-		for(x = 0; x <= Lx; ++x) {
-			vertex_stream << Vertex(i_vertex++, 0, x * Wx, (y+1) * Wy);
+		// Next line of vertex (first and last are tagged as edge vertexes
+		vertex_stream << Vertex(i_vertex++, 2, 0, (y+1) * Wy);
+		int edge_type = (y == Ly - 1) ? 2 : 0;
+		for(x = 1; x < Lx; ++x) {
+			vertex_stream << Vertex(i_vertex++, edge_type, x * Wx, (y+1) * Wy);
 		}
+		vertex_stream << Vertex(i_vertex++, 2, Lx * Wx, (y+1) * Wy);
 
 		// Vertical edges
 		for(x = 0; x <= Lx; ++x) {
@@ -127,6 +130,7 @@ int main(int argc, char **argv) {
 		}
 
 		// y'th line of horizontal edges (not counting top one) and cells
+		// (last line of vertex is edge-type)
 		for(x = 1; x <= Lx; ++x) {
 			// edge
 			unsigned int v1 = (Lx + 1) * (y + 1) + x;
@@ -134,7 +138,7 @@ int main(int argc, char **argv) {
 			vector<unsigned int> vertex_list;
 			vertex_list.push_back(v1);
 			vertex_list.push_back(v2);
-			edge_stream << Edge(i_edge++, 0, vertex_list);
+			edge_stream << Edge(i_edge++, 1, vertex_list);
 
 			// cell
 			unsigned int e1 = y * Lx + y * (Lx + 1) + x;
