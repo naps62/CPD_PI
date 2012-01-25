@@ -82,6 +82,10 @@ This reported% values values
 \label{sec:optm&para}
 As determined in \autoref{sec:initprof}, the best targets for optimization and/or parallelization are the \texttt{compute\_flux} and \texttt{update} functions, which will be the primary and secondary goals for this project, respectively (each parallelized version will be focusing on these functions by this order).
 
+The first optimization possible in the \texttt{compute\_flux} function is the removal of the \texttt{Parameter.getDouble()} call. This was meant to retrieve the Dirichlet condition value from the parameter file, but being this a constant throughout the program execution, the value can be loaded in an early preparation stage and sent as an argument to \texttt{compute\_flux}. Additionally, moving this argument to a global variable can reduce the function call overhead.
+
+Excessive dereferencing may be common problem on both functions and is directly related to the FVLib library. Although the usage of pointers in classes may greatly improve code readability, the multiple memory accesses caused by deep levels of dereferencing tend to aggravate effects of any memory bottlenecks. With some adjustments to the library internal structures, the same or better readability could be achieved with fewer pointers and lower reference depth.
+
 \subsection{Dependecies}
 In the \texttt{compute\_flux} function code one can easily find a data dependency which prevents parallelization. This dependency is found in the calculation of $\Delta t_{i}$ (the final value $\Delta t_{n}$ is returned by the function) and causes each iteration to depend on the previous one (the first iteration uses a preset value $\Delta t_{0}$).
 
