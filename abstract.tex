@@ -15,12 +15,14 @@
 
 \usepackage{hyperref}
 
-%	title page
+%%%%%%%%%%%%%%%%
+%  title page  %
+%%%%%%%%%%%%%%%%
 \titlehead{Universidade do Minho \hfill Parallel and Distributed Computing\\	Master's Degree in Informatics Engineering}
 
 \title{Profiling + CUDA}
 
-\subtitle{Finite Volumes\\(Extended Abstract)}%	TODO ó Naps, diz lá o nome desta merda!!
+\subtitle{Finite Volume Method\\(Extended Abstract)}%	TODO ó Naps, diz lá o nome desta merda!!
 
 \author{Miguel Palhas \hfill--- \texttt{\smaller pg19808@alunos.uminho.pt}\\Pedro Costa \hfill--- \texttt{\smaller pg19830@alunos.uminho.pt}}
 
@@ -28,7 +30,69 @@
 
 \subject{Integrated Project}
 
+
+%%%%%%%%%%%
+%  Hacks  %
+%%%%%%%%%%%
+
+%	Paragraph with linebreak
+\newcommand{\paragraphh}[1]{\paragraph{#1\hfill}\hfill
+
+}
+
+
 \begin{document}
 \maketitle
+
+\section{Introduction}
+\subsection{Contextualization}
+The Finite Volumes Method (FVM) is one of the three classical choices for solving PDEs\footnote{Partial Differential Equations: equations involving functions with more than one variable and their partial derivatives.} numerically, together with the Finite Difference Method (FDM) and the Finite Element Method (FEM).
+
+The FDM is the oldest method and is based in the classical formal definition of a function's derivative in order to a parameter $x$ as the limit of that function's average rate as the difference between the two points tends towards zero ($\Delta x \rightarrow 0$).
+
+$${\left . u_{x} \right |}_{i} = u_{x} \left ( x_{i} \right ) = \lim_{\Delta x \rightarrow 0}{\frac{u \left ( x_{i} + \Delta x \right ) - u \left ( x_{i} \right )}{\Delta x}}$$
+
+Even if $\Delta x$ is not constant throughout the mesh, this forces the need for it to be structured on the FDM. The FEM and FVM overcome this by discretizing based on the integral form of the governing equations, therefore being able to handle complex geometries in multi-dimensional problems.
+
+%TODO: FEM
+
+%TODO: FVM
+
+%TODO: fluids mechanics & pollution spreading
+
+\subsection{Motivation}% what we intend to achieve
+
+\subsection{Goals}% what will we do (list of actions)
+
+\subsection{Structure}% report structure presentation
+
+\section{Initial Profiling}% why did we choose compute_flux & update to mess with
+
+\section{Parallelization}
+\subsection{Dependecies}
+
+\section{OpenMP}
+\subsection{Implementation}
+\subsubsection{Flux Computation}
+\paragraphh{\texttt{max} reduction}
+coisas
+\subsection{Profiling}
+\subsubsection{PAPI framework}% why doesn't PAPI have class in the source FFS
+\subsubsection{Methodology}% scripts are cool, talk about them
+
+\section{CUDA}
+\subsection{Data Structures}
+\subsection{Implementation}
+\subsubsection{Flux Computation}
+\paragraphh{\texttt{max} reduction}
+\subsubsection{Mesh Update}
+
+\section{Conclusion}
+\subsection{Future Work}
+%	OpenMP:	update, structures
+%	remake FVLib as a proper programmer with a brain would know how
+
+
+%	Side Notes: OpenFVM.sourceforge.net
 
 \end{document}
