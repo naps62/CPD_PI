@@ -73,7 +73,8 @@ int main(int argc, char *argv[])
 	
 
 	// compute the potential
-	for (size_t i=0; i < mesh.getNbVertex(); ++i)
+	unsigned int max = mesh.getNbVertex();
+	for (size_t i=0; i < max; ++i)
 	{
 		dist = 1.e20;   
 		ptr_v = mesh.getVertex(i);

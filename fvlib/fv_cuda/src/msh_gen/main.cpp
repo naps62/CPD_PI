@@ -111,6 +111,7 @@ int main(int argc, char **argv) {
 	}
 
 	for(y = 0; y < Ly; ++y) {
+		cout << "Generating line " << y << endl;
 		// Next line of vertex (first and last are tagged as edge vertexes
 		vertex_stream << Vertex(i_vertex++, 2, 0, (y+1) * Wy);
 		int edge_type = (y == Ly - 1) ? 2 : 0;
