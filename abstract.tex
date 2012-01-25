@@ -128,7 +128,7 @@ The following sets are predefined: CPI (total instructions and cycles), Memory (
 \subsubsection{Methodology}% scripts are cool, talk about them
 To perform measurements in the parallel code the PAPI library requires some adaptation. Although the library initialization and cleanup can (and should) be performed in the same places as the sequential code, each thread in a parallel zone must handle it's own event set. Additionally, when initializing the library, the thread support must be explicitly activated.
 
-Once in the parallel zone, each thread is responsible for creating it's own event set (either predefined or custom), starting it before the loop begins, stopping it after while collecting the results (which are stored in a shared array, like the local maxima), and removing the event set before the parallel zone ends. Outside, the global maximum computation is measured in the same way, and the final results are gathered sequentially.
+Once in the parallel zone, each thread is responsible for creating it's own event set (either predefined or custom), starting it before the loop begins, stopping it after while collecting the results (which are stored in a shared array, like the local maxima), and removing the event set before the parallel zone ends. Outside, the global maximum computation is measured in the same way, and the final	 results are gathered sequentially.
 
 
 \section{CUDA}
@@ -146,5 +146,20 @@ Once in the parallel zone, each thread is responsible for creating it's own even
 
 
 %	Side Notes: OpenFVM.sourceforge.net
+
+\begin{thebibliography}{12345}
+
+\bibitem[FVM]{finite}
+	Joaquim Peiró and Spencer Sherwin	\\
+	\textit{Finite Difference, Finite Element and Finite Volume Methods for Partial Differential Equations}	\\
+	Department of Aeronautics, Imperial College, London, UK	\\
+	\texttt{\smaller http://multiscale.emsl.pnl.gov/docs/finite.pdf}
+
+\bibitem[OMP]{openmp}
+	\textit{OpenMP Application Program Interface}	\\
+	OpenMP Architecture Review Board	\\
+	Version 3.1, July 2011
+
+\end{thebibliography}
 
 \end{document}
