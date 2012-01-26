@@ -141,10 +141,18 @@ Once in the parallel zone, each thread is responsible for creating it's own even
 \section{CUDA}
 \label{sec:cuda}
 \subsection{Data Structures}
+For a GPU implementation, all the data structures had to be converted to a suitable format (using sequential memory positions instead of dereferencing). Since this was required from the start, it was also a chance to optimize memory for GPU computing, by using a structure of arrays instead of an array of structures, to take advantage of the GPU's coallesced memory accesses.
+
 \subsection{Implementation}
+
+A total of 3 CUDA kernels were written for the CUDA implementation. The first one was to replace the \texttt{compute\_flux} function. This is a very straight-forward implementation, with no major changes to the original algorithm, aside from the fact that each CUDA thread handles a single element, instead of looping through the mesh.
+
 \subsubsection{Flux Computation}
 \paragraphh{\texttt{max} reduction}
+As previously explained, a reduction calculation was also required to allow for parallelization of the \textt{compute\_flux} function. This is a widely used example in CUDA, and was implemented with the help of the NVidia samples.
+
 \subsubsection{Mesh Update}
+The \texttt{update} function was also converted to CUDA. This was not as interesting to parallelize in the OpenMP version, since it doesn't occupy the majority of the time. However, using the original CPU implementation would mean that for every iteration of the main loop, flux and polution data had to be copied back from the GPU to execute the update, and then copied again to GPU for the next iteration. This would eliminate any advantage of GPU parallelization, so this function had to be re-written, taking into consideration the data races of the original one.
 
 \section{Conclusion}
 \subsection{Future Work}
