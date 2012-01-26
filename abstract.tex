@@ -48,14 +48,16 @@
 \maketitle
 
 \section{Introduction}
-\subsection{Contextualization}
-The Finite Volumes Method (FVM) is one of the three classical choices for solving PDEs\footnote{Partial Differential Equations: equations involving functions with more than one variable and their partial derivatives.} numerically, together with the Finite Difference Method (FDM) and the Finite Element Method (FEM).
+%\subsection{Contextualization}
+%The Finite Volumes Method (FVM) is one of the three classical choices for solving PDEs\footnote{Partial Differential Equations: equations involving functions with more than one variable and their partial derivatives.} numerically, together with the Finite Difference Method (FDM) and the Finite Element Method (FEM).
 
-The FDM is the oldest method and is based in the classical formal definition of a function's derivative in order to a parameter $x$ as the limit of that function's average rate as the difference between the two points tends towards zero ($\Delta x \rightarrow 0$).
+%Although the FDM is the oldest, it requires a structured mesh, whilst that's not true for the other two, which rely on the integral form discretizations. In comparison with the FEM, the FVM can conserve the variables on a coarse mesh easily.
+
+%The FDM is the oldest method and is based in the classical formal definition of a function's derivative in order to a parameter $x$ as the limit of that function's average rate as the difference between the two points tends towards zero ($\Delta x \rightarrow 0$).
 
 %$${\left . u_{x} \right |}_{i} = u_{x} \left ( x_{i} \right ) = \lim_{\Delta x \rightarrow 0}{\frac{u \left ( x_{i} + \Delta x \right ) - u \left ( x_{i} \right )}{\Delta x}}$$
 
-Even if $\Delta x$ is not constant throughout the mesh, this forces the need for it to be structured on the FDM. The FEM and FVM overcome this by discretizing based on the integral form of the governing equations, therefore being able to handle complex geometries in multi-dimensional problems.
+%Even if $\Delta x$ is not constant throughout the mesh, this forces the need for it to be structured on the FDM. The FEM and FVM overcome this by discretizing based on the integral form of the governing equations, therefore being able to handle complex geometries in multi-dimensional problems.
 
 %TODO: FEM
 
@@ -63,14 +65,19 @@ Even if $\Delta x$ is not constant throughout the mesh, this forces the need for
 
 %TODO: fluids mechanics & pollution spreading
 
-\subsection{Motivation}% what we intend to achieve
+
+%\subsection{Motivation}% what we intend to achieve
 This document analyzes an application which computes the evolution of a pollutant in a given environment, studying possibilities of optimization and/or parallelization.
+
+The application calculates the pollutant spread area at variable moments during a given time interval. This pollutant spreads according to a partial differential equation which is solved using the Finite Volume Method.
+
+The algorithm used by the program loops until the specified time interval is reached. At each iteration of this main loop, the flux of pollution is calculated in each edge (performed by a function named \texttt{compute\_flux}) and the mesh pollution levels are updated (performed by the \texttt{update} function).
 
 Two attempts of parallelization are intended: one using shared memory on a multiprocessor system and one using a GPU.
 
 The final aim is to have a qualitative and quantitive comparison of both versions against each other and the original sequential code, and an evaluation of possible bottlenecks and/or optimizable code parts.
 
-\subsection{Structure}% what will we do (list of actions), a.k.a. structure
+%\subsection{Structure}% what will we do (list of actions), a.k.a. structure
 The initial profiling of the application, including the methodology and conclusions, is presented in \autoref{sec:initprof}. In \autoref{sec:optm&para}, the initial profiling information is used to identify the parts of the algorithm/code which are better suited for optimization and/or parallelization. The implementation of a shared memory parallel version and a GPU version are explained in \autoref{sec:openmp}  and \autoref{sec:cuda}, respectively.
 
 \section{Sequential}% why did we choose compute_flux & update to mess with
