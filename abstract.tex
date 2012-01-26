@@ -160,15 +160,15 @@ A total of 3 CUDA kernels were written for the implementation. The first one was
 The \texttt{update} function was also converted to CUDA. This was not as interesting to parallelize in the OpenMP version, since it doesn't occupy the majority of the time. However, using the original CPU implementation would mean that for every iteration of the main loop, flux and polution data had to be copied back from the GPU to execute the update, and then copied again to GPU for the next iteration. This would eliminate any advantage of GPU parallelization, so this function had to be re-written, taking into consideration the data races of the original one.
 
 \section{Conclusion}
-In this document the original application code was analyzed and studied. The two key functions in the program execution were identified using the application callgraph. Also, a major bottleneck was identified in the animation generation, which invalidated any computation optimization effort when activated.
+In this document the original application code was analyzed and studied. The two key functions in the program execution were identified using the program's callgraph. Also, a major bottleneck was identified in the animation generation, which invalidated any computation optimization effort when activated.
 
 Several problems were easily detected in early stages, along with parallelization obstacles. These problems were mostly related with the program's memory usage, and some even prevented parallelization. The identified obstacles, namely data dependences, were solved by manipulating the original code, only possible due to an increasingly better understanding of the algorithm. 
 
 Two parallel versions of the application were implemented. The first version implemented the same code using the OpenMP directives to parallelize the most critical part of the program. The second version adapted the original code to perform all the required computations in a GPU using CUDA.
 
-All versions still lack a formal profiling which would allow to identify bottlenecks and compare efficiency. Despite that, the implemented parallel versions both showed a small but consistent speedup in multiple executions. While this shows that the application can be improved with parallelization, the differences classify the algorithm as non-scalable.
+All versions still lack a formal profiling which would allow to identify bottlenecks and compare efficiency. Despite that, both of the implemented parallel versions showed a small but consistent speedup in multiple executions. While this shows that the application can be improved with parallelization, the differences classify the algorithm as non-scalable.
 
-Further optimization efforts can be done to improve the obtained results. For the OpenMP implementation, these include extending the parallelization to the \texttt{update} function and changing the data structures. For both implementations, changing how the FVLib library works, specifically how the data is accessed, could greatly improve the program efficiency specially with the animation generation.
+Further optimization efforts can be done to improve the obtained results. For the OpenMP implementation, these include extending the parallelization to the \texttt{update} function and changing the data structures. For the CUDA implementation, a revision of memory access efficency might be useful, as well as the usage of CUDA Streams to minimize idle time of the GPU. Also, for both implementations, changing how the FVLib library works, specifically how the data is accessed, could greatly improve the program efficiency specially with the animation generation.
 
 
 %	Side Notes: OpenFVM.sourceforge.net
