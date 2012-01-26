@@ -128,18 +128,18 @@ To parallelize this function, a \texttt{parallel for} OpenMP directive is placed
 %
 %To solve this question without compromising the parallelization, the \texttt{max} function is performed by each thread on it's iterations, storing the values in a common array (prepared at the beginning of the program). After the loop, this local maxima array is sequentially scanned to find the global maximum computed velocity. Although this imposes a limit on the number of threads (which would cause the scan to take longer), it represents a fair compromise.
 
-\subsection{Profiling}
-%\subsubsection{PAPI framework}% why doesn't PAPI have class in the source FFS
-%To profile the resulting code with some detail, a framework was implemented to take advantage of C++ features (such as exceptions and objects) when using the PAPI library.
+%\subsection{Profiling}
+%%\subsubsection{PAPI framework}% why doesn't PAPI have class in the source FFS
+%%To profile the resulting code with some detail, a framework was implemented to take advantage of C++ features (such as exceptions and objects) when using the PAPI library.
+%%
+%%This framework allows to group several events into predefined sets, as long as creating custom sets on the go. Given the changes required to profile OpenMP code, this framework greatly facilitates the library error handling, improving robustness and readability.
+%%
+%%The following sets are predefined: CPI (total instructions and cycles), Memory (load and store instructions), Flops/s (floating point operations and total cycles), L1 (first level cache accesses and misses), L2 (same for second level cache), Operational Intensity (RAM bytes accessed and Flops), Instructions Per Byte (RAM bytes accessed and total instructions), Multiplication/Addition Balance (FP total, multiplication and division instructions).
 %
-%This framework allows to group several events into predefined sets, as long as creating custom sets on the go. Given the changes required to profile OpenMP code, this framework greatly facilitates the library error handling, improving robustness and readability.
+%%\subsubsection{Methodology}% scripts are cool, talk about them
+%To perform measurements in the parallel code the PAPI library requires some adaptation. Although the library initialization and cleanup can (and should) be performed in the same places as the sequential code, each thread in a parallel zone must handle it's own event set. Additionally, when initializing the library, the thread support must be explicitly activated.
 %
-%The following sets are predefined: CPI (total instructions and cycles), Memory (load and store instructions), Flops/s (floating point operations and total cycles), L1 (first level cache accesses and misses), L2 (same for second level cache), Operational Intensity (RAM bytes accessed and Flops), Instructions Per Byte (RAM bytes accessed and total instructions), Multiplication/Addition Balance (FP total, multiplication and division instructions).
-
-%\subsubsection{Methodology}% scripts are cool, talk about them
-To perform measurements in the parallel code the PAPI library requires some adaptation. Although the library initialization and cleanup can (and should) be performed in the same places as the sequential code, each thread in a parallel zone must handle it's own event set. Additionally, when initializing the library, the thread support must be explicitly activated.
-
-Once in the parallel zone, each thread is responsible for creating it's own event set (either predefined or custom), starting it before the loop begins, stopping it after while collecting the results (which are stored in a shared array, like the local maxima), and removing the event set before the parallel zone ends. Outside, the global maximum computation is measured in the same way, and the final	 results are gathered sequentially.
+%Once in the parallel zone, each thread is responsible for creating it's own event set (either predefined or custom), starting it before the loop begins, stopping it after while collecting the results (which are stored in a shared array, like the local maxima), and removing the event set before the parallel zone ends. Outside, the global maximum computation is measured in the same way, and the final	 results are gathered sequentially.
 
 
 \section{CUDA}
@@ -160,18 +160,15 @@ A total of 3 CUDA kernels were written for the implementation. The first one was
 The \texttt{update} function was also converted to CUDA. This was not as interesting to parallelize in the OpenMP version, since it doesn't occupy the majority of the time. However, using the original CPU implementation would mean that for every iteration of the main loop, flux and polution data had to be copied back from the GPU to execute the update, and then copied again to GPU for the next iteration. This would eliminate any advantage of GPU parallelization, so this function had to be re-written, taking into consideration the data races of the original one.
 
 \section{Conclusion}
-In this document the original application code was analyzed and studied. The two key functions in the program execution were identified using the application callgraph. Also, a major bottleneck was identified in the animation generation.% which invalidated any computation optimization effort when activated.
+In this document the original application code was analyzed and studied. The two key functions in the program execution were identified using the application callgraph. Also, a major bottleneck was identified in the animation generation, which invalidated any computation optimization effort when activated.
 
 Several problems were easily detected in early stages, along with parallelization obstacles. These problems were mostly related with the program's memory usage, and some even prevented parallelization. The identified obstacles, namely data dependences, were solved by manipulating the original code, only possible due to an increasingly better understanding of the algorithm. 
 
 Two parallel versions of the application were implemented. The first version implemented the same code using the OpenMP directives to parallelize the most critical part of the program. The second version adapted the original code to perform all the required computations in a GPU using CUDA.
 
-The implemented parallel versions showed a speedup of 20\% and \% for shared memory and GPU, respectively. Despite showing that the application can be improved with parallelization, these values classify the algorithm as non-scalable.
+All versions still lack a formal profiling which would allow to identify bottlenecks and compare efficiency. Despite that, the implemented parallel versions both showed a small but consistent speedup in multiple executions. While this shows that the application can be improved with parallelization, the differences classify the algorithm as non-scalable.
 
 Further optimization efforts can be done to improve the obtained results. For the OpenMP implementation, these include extending the parallelization to the \texttt{update} function and changing the data structures. For both implementations, changing how the FVLib library works, specifically how the data is accessed, could greatly improve the program efficiency specially with the animation generation.
-
-%	OpenMP:	update, structures
-%	remake FVLib as a proper programmer with a brain would know how
 
 
 %	Side Notes: OpenFVM.sourceforge.net
