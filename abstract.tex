@@ -116,7 +116,7 @@ It's possible to remove this dependency by changing the loop itself to iterate o
 \subsection{Implementation}
 The main feature about OpenMP that makes it so interesting to create shared memory parallel code is that the program itself is almost equal to the sequential version, with the addition of the required directives and adaptation tweaks (mainly to solve concurrency problems).
 
-Because there are no nested parallelizable loops in this code, the number of threads to be issued are set by default to the maximum number of threads supported by the hardware to be executing at any given time. Despite that, this number is multiplied by a factor (1 by default) to allow experiences to be easily conducted using more threads. The goal of this approach is to achieve an effect similar to the one in GPUs: theoretically, issuing more threads than those the hardware can execute in parallel may improve efficiency by allowing any thread to step in while another is stalled on any resource.
+Because there are no nested parallelizable loops in this code, the number of threads to be issued are set by default to the maximum number of threads supported by the hardware to be executing at any given time. %Despite that, this number is multiplied by a factor (1 by default) to allow experiences to be easily conducted using more threads. The goal of this approach is to achieve an effect similar to the one in GPUs: theoretically, issuing more threads than those the hardware can execute in parallel may improve efficiency by allowing any thread to step in while another is stalled on any resource.
 
 \subsubsection{Flux Computation}
 %As expected, the parallelization of the \texttt{compute\_flux} function is very straight-forward with the exception of the maximum computed velocity computation. This problem is discussed next, and is therefore ignored here.
@@ -169,11 +169,11 @@ The \texttt{update} function was also converted to CUDA. This was not as interes
 
 \begin{thebibliography}{12345}
 
-\bibitem[FVM]{finite}
-	Joaquim Peiró and Spencer Sherwin	\\
-	\textit{Finite Difference, Finite Element and Finite Volume Methods for Partial Differential Equations}	\\
-	Department of Aeronautics, Imperial College, London, UK	\\
-	\texttt{\smaller http://multiscale.emsl.pnl.gov/docs/finite.pdf}
+%\bibitem[FVM]{finite}
+%	Joaquim Peiró and Spencer Sherwin	\\
+%	\textit{Finite Difference, Finite Element and Finite Volume Methods for Partial Differential Equations}	\\
+%	Department of Aeronautics, Imperial College, London, UK	\\
+%	\texttt{\smaller http://multiscale.emsl.pnl.gov/docs/finite.pdf}
 
 \bibitem[OMP]{openmp}
 	\textit{OpenMP Application Program Interface}	\\
