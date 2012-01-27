@@ -100,6 +100,8 @@ double compute_flux(
 			flux[ edge->label - 1 ] = v * p_right;
 		else
 			flux[ edge->label - 1 ] = v * p_left;
+
+		cout << "flux" << flux[edge->label -1] << endl;
 	}
 	v_max = DBL_MIN;
 	for ( e = 0; e < es; ++e)
@@ -220,6 +222,7 @@ void main_loop (
 		update( mesh , polutions , fluxes , dt );
 		t += dt;
 		++i;
+		cout << i << " " << dt << endl;
 		if ( i % jump_interval == 0 )
 		{
 			cout << "writing to file" << endl;
@@ -261,6 +264,13 @@ int main()
 	//	read polution
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
+
+	int count = 0;
+	for (int i = 0; i < polution.size(); ++i)
+		if (polution[i] != 0)
+			count++;
+
+	cout << "count: " << count;
 
 	//	prepare velocities array
 	vs = new double[ mesh.getNbEdge() ];
