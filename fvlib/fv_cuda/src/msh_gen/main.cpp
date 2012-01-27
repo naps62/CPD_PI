@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <stdlib.h>
+#include <cstdlib>
 using namespace std;
 
 // TODO for now only SQUARE IS IMPLEMENTED
@@ -21,11 +21,11 @@ enum MESH_TYPE {
 class Vertex {
 	unsigned int id;
 	unsigned int type;
-	unsigned int x;
-	unsigned int y;
+	double x;
+	double y;
 
 	public:
-	Vertex(unsigned int newid, int newtype, int newx, int newy)
+	Vertex(unsigned int newid, int newtype, double newx, double newy)
 		{  id=newid; type=newtype; x=newx; y=newy; }
 
 	friend ostream& operator << (ostream &stream, const Vertex &v);
@@ -78,10 +78,10 @@ int main(int argc, char **argv) {
 
 	// argument read
 	string name 	= string(argv[1]);
-	unsigned int Lx = atoi(argv[2]);
-	unsigned int Ly = atoi(argv[3]);
-	unsigned int Wx = atoi(argv[4]);
-	unsigned int Wy = atoi(argv[5]);
+	double Lx = strtod(argv[2], NULL);
+	double Ly = strtod(argv[3], NULL);
+	double Wx = strtod(argv[4], NULL);
+	double Wy = strtod(argv[5], NULL);
 
 	unsigned int num_vertex	= (Lx +1) * (Ly + 1);
 	unsigned int num_edges	= (Lx * Ly * 2) + Lx + Ly;

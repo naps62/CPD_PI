@@ -265,13 +265,6 @@ int main()
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
-	int count = 0;
-	for (int i = 0; i < polution.size(); ++i)
-		if (polution[i] != 0)
-			count++;
-
-	cout << "count: " << count;
-
 	//	prepare velocities array
 	vs = new double[ mesh.getNbEdge() ];
 
