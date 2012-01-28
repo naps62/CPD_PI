@@ -30,7 +30,7 @@ function profile {
 		logger "profiling for $NAME$.i started at `date`"
 	
 		# get input
-		INPUT_DIR=../../input_samples/$NAME
+		INPUT_DIR=input_samples/$NAME
 		logsave "copying input from $INPUT_DIR"
 		cp -f $INPUT_DIR/foz.xml $INPUT_DIR/velocity.xml $INPUT_DIR/potential.xml .
 	
