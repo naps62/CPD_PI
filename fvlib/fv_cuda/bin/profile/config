@@ -16,13 +16,6 @@ gst_request
 divergent_branch
 branch
 sm_cta_launched
-gld_incoherent
-gld_coherent
-gst_incoherent
-gst_coherent
-instructions
-warp_serialize
-cta_launched
 shared_load
 shared_store
 inst_issued
