@@ -8,3 +8,5 @@ papi_hpp	=	main
 TEMPLATE	=	polu.openmp.papi.Makefile
 
 include $(ROOTD)/conf/src.papipcc.mk
+
+CXXFLAGS	+=	-DPAPI_MEASURE_CPI
