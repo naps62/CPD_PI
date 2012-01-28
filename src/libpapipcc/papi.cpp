@@ -440,3 +440,37 @@ double PAPI_MulAdd::balance ()
 
 	return (a > m) ? (double) m / (double) a : (double) a / (double) m;
 }
+
+//	PAPI_Stopwatch
+PAPI_Stopwatch::PAPI_Stopwatch() : _running(false) , _total(0)
+{
+	if ( ! PAPI_is_initialized() )
+		PAPI::init();
+}
+
+void PAPI_Stopwatch::start()
+{
+	if ( ! _running )
+	{
+		_partial = 0;
+		_running = ! _running;
+		_begin = PAPI::real_nano_seconds();
+	}
+}
+
+void PAPI_Stopwatch::stop()
+{
+	if ( _running )
+	{
+		_end = PAPI::real_nano_seconds();
+		_running = ! _running;
+		_partial = _end - _begin;
+		_total += _partial;
+	}
+}
+
+void PAPI_Stopwatch::reset()
+{
+	if ( ! _running )
+		_total = 0;
+}

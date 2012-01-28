@@ -9,4 +9,4 @@ TEMPLATE	=	polu.openmp.papi.Makefile
 
 include $(ROOTD)/conf/src.papipcc.mk
 
-CXXFLAGS	+=	-DPAPI_MEASURE_MEM
+CXXFLAGS	+=	-DPAPI_MEASURE_MEMORY

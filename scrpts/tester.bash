@@ -1,4 +1,6 @@
 #!/bin/bash
+#	-n N	minimum N runs
+#	-t T	trust degree
 
 declare -a command;
 declare -a runs;

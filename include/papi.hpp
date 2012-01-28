@@ -169,4 +169,26 @@ class PAPI_MulAdd : public PAPI_Preset
 	double balance ();
 };
 
+//	Stopwatch
+class PAPI_Stopwatch
+{
+	bool _running;
+	long long int _begin;
+	long long int _end;
+	long long int _partial;
+	unsigned long long int _total;
+
+	public:
+	PAPI_Stopwatch();
+
+	void start();
+	void stop();
+	void reset();
+
+	//	getters
+	bool running() const { return _running; }
+	long long int partial() const { return _partial; }
+	unsigned long long int total() const { return _total; }
+};
+
 #endif/*___PAPI_HPP___*/
