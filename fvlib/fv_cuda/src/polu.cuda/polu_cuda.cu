@@ -43,6 +43,7 @@ void cuda_main_loop(
 	CudaFV::CFVProfile p_malloc("cuda_mallocs");
 	CudaFV::CFVProfile p_memcpy("cuda_memcpy");
 	CudaFV::CFVProfile p_main_loop("main_loop");
+	CudaFV::CFVProfile p_loop_iter("main_loop_iteration");
 	CudaFV::CFVProfile p_compute_flux("compute_flux");
 	CudaFV::CFVProfile p_reduction("reduction");
 	CudaFV::CFVProfile p_update("update");
@@ -152,6 +153,8 @@ void cuda_main_loop(
 	 */
 	PROF_START(p_main_loop);
 	while(t < final_time) {
+		PROF_START(p_loop_iter);
+
 		double max_vs;
 
 		/**
@@ -239,6 +242,8 @@ void cuda_main_loop(
 			fflush(NULL);
 			PROF_STOP(p_output);
 		}
+
+		PROF_STOP(p_loop_iter);
 	}
 	PROF_STOP(p_main_loop);
 
