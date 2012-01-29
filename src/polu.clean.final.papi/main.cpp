@@ -20,6 +20,10 @@
 #define PAPI_MEASURE
 #endif//	PAPI_MEASURE_ANY
 
+#ifdef	PAPI_MEASURE
+#include "papi.hpp"
+#endif
+
 //	END CONSTANTS
 
 //	BEGIN TYPES
@@ -127,6 +131,10 @@ double compute_flux(
 
 											//	PAPI specific measurer
 #ifdef	PAPI_MEASURE
+
+	unsigned
+	long long int cf_ns;					//	current call useful time
+
 #ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	PAPI_CPI p;
@@ -155,8 +163,6 @@ double compute_flux(
 
 #else//	no counter set
 	
-	unsigned
-	long long int cf_ns;					//	current call useful time
 	PAPI_Stopwatch sw;						//	a proper time measurer
 
 	sw.start();
@@ -359,6 +365,9 @@ int main(int argc, char** argv)
 #ifdef	PAPI_MEASURE
 											//	last minute
 	double cf_avg_ns;
+
+	unsigned
+	long long int tot_ns;					//	process total useful time
 
 	//	init PAPI
 	PAPI::init();

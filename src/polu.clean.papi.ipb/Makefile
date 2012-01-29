@@ -9,4 +9,4 @@ TEMPLATE	=	polu.clean.papi.Makefile
 
 include $(ROOTD)/conf/src.papipcc.mk
 
-CXXFLAGS	+=	-DPAPI_MEASURE
+CXXFLAGS	+=	-DPAPI_MEASURE_IPB
