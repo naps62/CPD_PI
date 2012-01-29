@@ -27,7 +27,7 @@ namespace CudaFV {
 		num_edges = msh.getNbEdge();
 		num_cells = msh.getNbCell();
 
-		cout << "Importing mesh: " << num_cells << " cells, " << num_edges << " edges" << endl;
+		//cout << "Importing mesh: " << num_cells << " cells, " << num_edges << " edges" << endl;
 		
 		// allocs space for all needed data
 		alloc();
