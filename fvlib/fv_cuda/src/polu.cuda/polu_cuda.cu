@@ -125,7 +125,7 @@ void cuda_main_loop(
 			_d_copied_data_size + sizeof(double) * (vs.size() + flux.size());
 
 		float _d_transfer_rate =
-			1000 * ((float) _d_copied_data_size / 1024 / p_malloc.getTime());
+			1000 * ((float) _d_copied_data_size / 1024 / p_memcpy.getTime());
 		
 		CudaFV::CFVProfile::stream
 			<< "Copied data size: " << (float) _d_copied_data_size / 1024 << " KB" << endl
