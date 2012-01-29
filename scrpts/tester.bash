@@ -76,10 +76,10 @@ rc=${#runs[@]}
 while ! $flag;
 do
 	run=`${command[@]}`;
-	rns=`echo "$run" | grep -o "ns:[0-9]\+" | grep -o "[0-9]\+"`;
+	rns=`echo "$run" | grep -o "time:[0-9]\+" | grep -o "[0-9]\+"`;
 	for (( i = 0 ; i < $rc ; ++i ));
 	do
-		rnsi=`echo "${runs[$i]}" | grep -o "ns:[0-9]\+" | grep -o "[0-9]\+"`;
+		rnsi=`echo "${runs[$i]}" | grep -o "time:[0-9]\+" | grep -o "[0-9]\+"`;
 		if [ "$rns" -lt "$rnsi" ];
 		then
 			runi=${runs[$i]};

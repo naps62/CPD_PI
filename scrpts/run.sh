@@ -18,13 +18,14 @@ do
 		mv "../data/xml/polution.xml" "../${resultdir}/${arg}.out.${timestamp}"
 		;;
 	polu*_tiny)
-		if [ ! -d "$resultdir" ];
-		then
-			mkdir "$resultdir";
-		fi;
-		timestamp=`date "+%y-%m-%d_%H:%M:%S"`
-		./$arg "../data/xml/tiny.param.xml";
-		mv "../data/xml/polution.xml" "../${resultdir}/${arg}.out.${timestamp}"
+		echo "Running tiny" > /dev/stderr;
+#		if [ ! -d "$resultdir" ];
+#		then
+#			mkdir "$resultdir";
+#		fi;
+#		timestamp=`date "+%y-%m-%d_%H:%M:%S"`
+#		./$arg "../data/xml/tiny.param.xml";
+#		mv "../data/xml/polution.xml" "../${resultdir}/${arg}.out.${timestamp}"
 		;;
 	*)
 		./$arg
