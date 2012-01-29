@@ -11,7 +11,7 @@ do
 	do
 		timestamp=`date "+%y-%m-%d_%H:%M:%S"`
 		echo "${c} - ${counter}";
-		bin/polu.openmp.papi.${counter} data/xml/${c}.param.xml > results/${c}.${counter}.${timestamp}.hammer";
+		bin/polu.openmp.papi.${counter} data/xml/${c}.param.xml > "results/${c}.${counter}.${timestamp}.hammer";
 	done;
 done;
 
