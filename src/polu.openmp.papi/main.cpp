@@ -19,6 +19,7 @@
  /**
   * PAPI
   */
+ 
 #if defined	(PAPI_MEASURE_CPI)	\
  || defined	(PAPI_MEASURE_MEMORY)	\
  || defined	(PAPI_MEASURE_FLOPS)	\
@@ -27,9 +28,9 @@
  ||	defined	(PAPI_MEASURE_IPB)	\
  ||	defined	(PAPI_MEASURE_MBAML)	\
  ||	defined	(PAPI_MEASURE_MBADV)
+#define	PAPI_MEASURE_SET
 #define	PAPI_MEASURE
-#define PAPI_MEASURE_TIME
-#endif
+#endif//	PAPI_MEASURE_anymode
 
 #ifdef	PAPI_MEASURE
 #include "papi.hpp"
@@ -75,6 +76,9 @@ Parameters;
 //	BEGIN GLOBAL VARIABLES
 
 int tc;						//	thread count
+
+#ifdef	PAPI_MEASURE
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 long long int tot_cyc;		//	process total cycles
 long long int tot_ins;		//	process total instructions
@@ -98,12 +102,9 @@ long long int fml_ins;		//	process total FP multiplication instructions
 #elif defined	(PAPI_MEASURE_MBADV)
 long long int fp_ins;		//	process total FP instructions
 long long int fdv_ins;		//	process total FP division instructions
-#endif
-#ifdef	PAPI_MEASURE
-long long int tot_ns;		//	process total time in nano-seconds
-#endif//	PAPI_MEASURE
+#endif//	PAPI_MEASURE_anymode
+#endif//	PAPI_MEASURE_SET
 
-#ifdef	PAPI_MEASURE_TIME
 							//	compute_flux
 unsigned
 long long int cf_tot_ns;	//	compute_flux total useful time (nano seconds)
@@ -113,10 +114,11 @@ unsigned
 long long int cf_min_ns;	//	compute_flux minimum useful time
 unsigned
 long int cf_count;			//	compute_flux call count
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
 
 							//	vectors
 double *max_vel_v;			//	threads max velocity vector
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 long long int *tot_cyc_v;	//	threads total cycles vector
 long long int *tot_ins_v;	//	threads total instructions vector
@@ -140,10 +142,8 @@ long long int *fml_ins_v;	//	threads FP multiplication instructions
 #elif defined	(PAPI_MEASURE_MBADV)
 long long int *fp_ins_v;	//	threads FP total instructions
 long long int *fdv_ins_v;	//	threads FP division instructions
-#endif
-#ifdef	PAPI_MEASURE
-long long int *tot_ns_v;	//	threads total time in nano-seconds
-#endif
+#endif//	PAPI_MEASURE_anymode
+#endif//	PAPI_MEASURE_SET
 
 //	END GLOBAL VARIABLES
 
@@ -174,6 +174,8 @@ double compute_flux(
 
 	double max_vel;							//	maximum calculated velocity
 #ifdef	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	long long int tot_cyc_s;				//	total cycles (sequential zone)
 	long long int tot_ins_s;				//	total instructions (sequential zone)
@@ -198,12 +200,14 @@ double compute_flux(
 	long long int fp_ins_s;					//	FP total instructions (sequential)
 	long long int fdv_ins_s;				//	FP division instructions (sequential)
 #endif
-	long long int tot_ns_s;					//	total time in nano-seconds (sequential zone)
-#endif//	PAPI_MEASURE
-#if defined		(PAPI_MEASURE_TIME)
+#endif//	PAPI_MEASURE_SET
+
+	unsigned
+	long long int cf_ns;					//	current call useful duration
 	PAPI_Stopwatch sw;						//	a proper time measurer
-#endif
+
 											//	PAPI specific eventset
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	PAPI_CPI *p;							
 #elif defined	(PAPI_MEASURE_MEMORY)
@@ -221,27 +225,32 @@ double compute_flux(
 #elif defined	(PAPI_MEASURE_MBADV)
 	PAPI_Custom *p;
 #endif
+#endif//	PAPI_MEASURE_SET
 
-#ifdef	PAPI_MEASURE_TIME
 	sw.start();
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
+
 	es = mesh.getNbEdge();
-#ifdef	PAPI_MEASURE_TIME
-	sw.stop();
-#endif//	PAPI_MEASURE_TIME
 
 #ifdef	PAPI_MEASURE
+	sw.stop();
+#endif//	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 	#pragma omp parallel	\
 		default(shared)	\
 		num_threads(tc)	\
 		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v,p)
-#else//		PAPI_MEASURE
+#else//		PAPI_MEASURE_SET
 	#pragma omp parallel	\
 		default(shared)	\
 		num_threads(tc)	\
 		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v)
-#endif//	PAPI_MEASURE
+#endif//	PAPI_MEASURE_SET
 	{
+#ifdef	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 		p = new PAPI_CPI();
 #elif defined		(PAPI_MEASURE_MEMORY)
@@ -264,21 +273,31 @@ double compute_flux(
 		p->add_event( PAPI_FP_INS );
 		p->add_event( PAPI_FDV_INS );
 #endif
+#endif//	PAPI_MEASURE_SET
+
+#pragma omp barrier
+#pragma omp master
+		sw.start();
+#endif//	PAPI_MEASURE
 
 		t = omp_get_thread_num();
 
 		max_vel_v[t] = numeric_limits<double>::min();
 
-#ifdef	PAPI_MEASURE_TIME
+		//	start measure
+#ifdef	PAPI_MEASURE_SET
+
+#pragma omp barrier
+#pragma omp master
+		sw.stop();
+
+		p->start();
+
 #pragma omp barrier
 #pragma omp master
 		sw.start();
-#endif//	PAPI_MEASURE_TIME
 
-		//	start measure
-#ifdef	PAPI_MEASURE
-		p->start();
-#endif
+#endif//	PAPI_MEASURE_SET
 
 		#pragma omp for
 		for (e = 0; e < es; ++e)
@@ -308,14 +327,13 @@ double compute_flux(
 
 		//	stop measure
 #ifdef	PAPI_MEASURE
-		p->stop();
-#endif
 
-#ifdef	PAPI_MEASURE_TIME
 #pragma omp barrier
 #pragma omp master
 		sw.stop();
-#endif//	PAPI_MEASURE_TIME
+
+#ifdef	PAPI_MEASURE_SET
+		p->stop();
 
 		//	get values
 #if defined		(PAPI_MEASURE_CPI)
@@ -342,15 +360,17 @@ double compute_flux(
 		fp_ins_v[t] = p->get( PAPI_FP_INS );
 		fdv_ins_v[t] = p->get( PAPI_FDV_INS );
 #endif
-#ifdef	PAPI_MEASURE
-		tot_ns_v[t] = p->last_time();
 
 		//	cleanup
 		delete p;
-#endif
+#endif//	PAPI_MEASURE_SET
+#endif//	PAPI_MEASURE
 	}
 
 	//	set sequential eventset
+#ifdef	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	p = new PAPI_CPI();
 #elif defined	(PAPI_MEASURE_MEMORY)
@@ -374,15 +394,13 @@ double compute_flux(
 	p->add_event( PAPI_FDV_INS );
 #endif
 
-
-#ifdef	PAPI_MEASURE_TIME
-	sw.start();
-#endif
-
 	//	start sequential measure
-#ifdef	PAPI_MEASURE
 	p->start();
-#endif
+	
+#endif//	PAPI_MEASURE_SET
+
+	sw.start();
+#endif//	PAPI_MEASURE
 
 	max_vel = numeric_limits<double>::min();
 	for (t = 0; t < tc; ++t)
@@ -392,12 +410,10 @@ double compute_flux(
 
 	//	stop sequential measure
 #ifdef	PAPI_MEASURE
-	p->stop();
-#endif
-
-#ifdef	PAPI_MEASURE_TIME
 	sw.stop();
-#endif//	PAPI_MEASURE_TIME
+
+#ifdef	PAPI_MEASURE_SET
+	p->stop();
 
 	//	get sequential values
 #if defined		(PAPI_MEASURE_CPI)
@@ -424,15 +440,11 @@ double compute_flux(
 	fp_ins_s = p->get( PAPI_FP_INS );
 	fdv_ins_s = p->get( PAPI_FDV_INS );
 #endif
-#ifdef	PAPI_MEASURE
-	tot_ns_s = p->last_time();
 
 	//	cleanup
 	delete p;
-#endif
 
 	//	gather PAPI results
-#ifdef	PAPI_MEASURE
 	for (t = 0; t < tc; ++t)
 	{
 #if defined			(PAPI_MEASURE_CPI)
@@ -459,7 +471,6 @@ double compute_flux(
 		fp_ins += fp_ins_v[t];
 		fdv_ins += fdv_ins_v[t];
 #endif
-		tot_ns += tot_ns_v[t];
 	}
 #if defined		(PAPI_MEASURE_CPI)
 	tot_cyc += tot_cyc_s;
@@ -485,16 +496,14 @@ double compute_flux(
 	fp_ins += fp_ins_s;
 	fdv_ins += fdv_ins_s;
 #endif
-	tot_ns += tot_ns_s;
-#endif//	PAPI_MEASURE
+#endif//	PAPI_MEASURE_SET
 
-#ifdef	PAPI_MEASURE_TIME
 	cf_ns = sw.total();
 	cf_tot_ns += cf_ns;
 	cf_max_ns = ( cf_ns > cf_max_ns ) ? cf_ns : cf_max_ns;
 	cf_min_ns = ( cf_ns < cf_min_ns ) ? cf_ns : cf_min_ns;
 	cf_count += 1;
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
 	
 	return dt;
 }
@@ -613,14 +622,17 @@ int main(int argc, char** argv)
 	double t;
 	FVMesh2D mesh;
 	Parameters data;
-#ifdef	PAPI_MEASURE_TIME
+#ifdef	PAPI_MEASURE
 												//	last minute
 	double cf_avg_ns;
-#endif//	PAPI_MEASURE_TIME
 
-#ifdef	PAPI_MEASURE
 	//	init PAPI
+#ifdef	PAPI_MEASURE_SET
 	PAPI::init_threads();
+#else
+	PAPI::init();
+#endif//	PAPI_MEASURE_SET
+
 #endif//	PAPI_MEASURE
 
 	// read the parameter file
@@ -651,66 +663,55 @@ int main(int argc, char** argv)
 	//vs = new double[ mesh.getNbEdge() ];
 	max_vel_v = new double[ tc ];
 #ifdef	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	tot_cyc_v = new long long int[ tc ];
 	tot_ins_v = new long long int[ tc ];
+	tot_cyc = 0;
+	tot_ins = 0;
 #elif defined		(PAPI_MEASURE_MEMORY)
 	ld_ins_v = new long long int[ tc ];
 	sr_ins_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_FLOPS)
-	tot_cyc_v = new long long int[ tc ];
-	fp_ops_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_L1)
-	l1_dca_v = new long long int[ tc ];
-	l1_dcm_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_L2DCA)
-	l2_dca_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_IPB)
-	tot_ins_v = new long long int[ tc ];
-	l2_dcm_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_MBAML)
-	fp_ins_v = new long long int[ tc ];
-	fml_ins_v = new long long int[ tc ];
-#elif defined	(PAPI_MEASURE_MBADV)
-	fp_ins_v = new long long int[ tc ];
-	fdv_ins_v = new long long int[ tc ];
-#endif
-	tot_ns_v = new long long int[ tc ];
-	
-#if defined		(PAPI_MEASURE_CPI)
-	tot_cyc = 0;
-	tot_ins = 0;
-#elif defined	(PAPI_MEASURE_MEMORY)
 	ld_ins = 0;
 	sr_ins = 0;
 #elif defined	(PAPI_MEASURE_FLOPS)
+	tot_cyc_v = new long long int[ tc ];
+	fp_ops_v = new long long int[ tc ];
 	tot_cyc = 0;
 	fp_ops = 0;
 #elif defined	(PAPI_MEASURE_L1)
+	l1_dca_v = new long long int[ tc ];
+	l1_dcm_v = new long long int[ tc ];
 	l1_dca = 0;
 	l1_dcm = 0;
 #elif defined	(PAPI_MEASURE_L2DCA)
+	l2_dca_v = new long long int[ tc ];
 	l2_dca = 0;
 #elif defined	(PAPI_MEASURE_IPB)
+	tot_ins_v = new long long int[ tc ];
+	l2_dcm_v = new long long int[ tc ];
 	tot_ins = 0;
 	l2_dcm = 0;
 #elif defined	(PAPI_MEASURE_MBAML)
+	fp_ins_v = new long long int[ tc ];
+	fml_ins_v = new long long int[ tc ];
 	fp_ins = 0;
 	fml_ins = 0;
 #elif defined	(PAPI_MEASURE_MBADV)
+	fp_ins_v = new long long int[ tc ];
+	fdv_ins_v = new long long int[ tc ];
 	fp_ins = 0;
 	fdv_ins = 0;
 #endif
-	tot_ns = 0;
-#endif//	PAPI_MEASURE
-
-#ifdef	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE_SET
+	
 											//	compute_flux
 	cf_tot_ns = 0;
 	cf_max_ns = numeric_limits<unsigned long long int>::min();
 	cf_min_ns = numeric_limits<unsigned long long int>::max();
 	cf_count = 0;
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
 
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
@@ -728,15 +729,17 @@ int main(int argc, char** argv)
 		data.filenames.polution.output)
 	;
 
-#ifdef	PAPI_MEASURE_TIME
+#ifdef	PAPI_MEASURE
 	//	last minute results
 	cf_avg_ns = (double) cf_tot_ns / (double) cf_count;
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
 
 	//	print PAPI results
 	cout
 		<<	"running:"	<<	argv[0]	<<	endl
 #ifdef	PAPI_MEASURE
+	
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 		<<	"totcyc:"	<<	tot_cyc	<<	endl
 		<<	"totins:"	<<	tot_ins	<<	endl
@@ -761,19 +764,20 @@ int main(int argc, char** argv)
 		<<	"fpins:"	<<	fp_ins	<<	endl
 		<<	"fdvins:"	<<	fdv_ins	<<	endl
 #endif
-		<<	"totns:"	<<	tot_ns	<<	endl
-#endif//	PAPI_MEASURE
-#ifdef	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE_SET
+
 		<<	"cftotns:"	<<	cf_tot_ns	<<	endl
 		<<	"cfmaxns:"	<<	cf_max_ns	<<	endl
 		<<	"cfminns:"	<<	cf_min_ns	<<	endl
 		<<	"cfavgns:"	<<	cf_avg_ns	<<	endl
-#endif//	PAPI_MEASURE_TIME
+#endif//	PAPI_MEASURE
 	;
 
 	//	cleanup
 	delete max_vel_v;
 #ifdef	PAPI_MEASURE
+
+#ifdef	PAPI_MEASURE_SET
 #if defined		(PAPI_MEASURE_CPI)
 	delete tot_cyc_v;
 	delete tot_ins_v;
@@ -798,7 +802,7 @@ int main(int argc, char** argv)
 	delete fp_ins_v;
 	delete fdv_ins_v;
 #endif
-	delete tot_ns_v;
+#endif//	PAPI_MEASURE_SET
 
 	PAPI::shutdown();
 #endif//	PAPI_MEASURE
