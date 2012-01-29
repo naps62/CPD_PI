@@ -776,7 +776,7 @@ int main(int argc, char** argv)
 		<<	"cfminns:"	<<	cf_min_ns	<<	endl
 		<<	"cfavgns:"	<<	cf_avg_ns	<<	endl
 
-		<<	"totns:"	<<	tot_ns		<<	endl
+		<<	"ns:"	<<	tot_ns		<<	endl
 
 #endif//	PAPI_MEASURE
 	;

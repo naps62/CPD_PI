@@ -17,6 +17,15 @@ do
 		./$arg "../data/xml/param.xml";
 		mv "../data/xml/polution.xml" "../${resultdir}/${arg}.out.${timestamp}"
 		;;
+	polu*_tiny)
+		if [ ! -d "$resultdir" ];
+		then
+			mkdir "$resultdir";
+		fi;
+		timestamp=`date "+%y-%m-%d_%H:%M:%S"`
+		./$arg "../data/xml/tiny.param.xml";
+		mv "../data/xml/polution.xml" "../${resultdir}/${arg}.out.${timestamp}"
+		;;
 	*)
 		./$arg
 		;;

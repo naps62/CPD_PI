@@ -8,12 +8,13 @@
 #	-t	TRUST		trust degree (tester)
 
 usage () {
-	echo "$0 [-o <OUTPUT>] [-nr <#RUNS>] [-ns <#SAMPLES>] [-t <TRUST>] command [arg0 ...]";
+	echo "$0 [-c <CASE>] [-o <OUTPUT>] [-nr <#RUNS>] [-ns <#SAMPLES>] [-t <TRUST>] command [arg0 ...]";
 	echo "where"
-	echo "\tOUTPUT:\tsamples output file name";
-	echo "\tRUNS:\tminimal number of runs (see tester)";
-	echo "\tSAMPLES:\tnumber of samples to gather";
-	echo "\tTRUST:\ttrust degree (percent, integer value)";
+	echo -e "\tCASE:\tname to give to append to this case output file";
+	echo -e "\tOUTPUT:\tsamples output file name";
+	echo -e "\tRUNS:\tminimal number of runs (see tester)";
+	echo -e "\tSAMPLES:\tnumber of samples to gather";
+	echo -e "\tTRUST:\ttrust degree (percent, integer value)";
 	echo;
 }
 
@@ -22,6 +23,7 @@ RESULT_D="../results";
 
 #	parse arguments
 i=0;
+c_flg=false;
 o_flg=false;
 nr_flg=false;
 ns_flg=false;
@@ -29,6 +31,9 @@ t_flg=false;
 for arg;
 do
 	case $arg in
+	"-c")
+		c_flg=true;
+		;;
 	"-o")
 		o_flg=true;
 		;;
@@ -42,7 +47,11 @@ do
 		t_flg=true;
 		;;
 	*)
-		if $o_flg;
+		if $c_flg;
+		then
+			CASE="$arg";
+			c_flg=false;
+		elif $o_flg;
 		then
 			OUTPUT="$arg";
 			o_flg=false;
@@ -111,7 +120,12 @@ then
 	then
 		RESULT_D=".";
 	fi;
-	OUTPUT="${SOURCE_D}/${RESULT_D}/${command[0]}.samples";
+	if [ ! -z "$CASE" ];
+	then
+		OUTPUT="${SOURCE_D}/${RESULT_D}/${command[0]}_${CASE}.samples";
+	else
+		OUTPUT="${SOURCE_D}/${RESULT_D}/${command[0]}.samples";
+	fi;
 fi;
 
 #	prepare output file
