@@ -4,5 +4,3 @@ gld_request
 gst_request
 shared_load
 shared_store
-l1_global_load_hit
-l1_global_load_miss
