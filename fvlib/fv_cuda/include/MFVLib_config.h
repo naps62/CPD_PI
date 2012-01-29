@@ -27,7 +27,7 @@
 
 #define LOG_MODE LOG_MODE_APPEND
 
-#define DEF_LOGFILE string("FVlib.log")
+#define DEF_LOGFILE string("FVLib.log")
 #define DEF_ERRFILE string("FVLib.err")
 #define DEF_PROFILE string("FVLib.prof")
 
