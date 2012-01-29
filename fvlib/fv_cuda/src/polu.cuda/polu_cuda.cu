@@ -104,7 +104,7 @@ void cuda_main_loop(
 	cudaStreamDestroy(stream);
 
 	_DEBUG {
-		unsigned int _d_copied_data_size =
+		float _d_copied_data_bytes =
 				sizeof(double) * (
 					mesh.edge_normals.x.size() + 
 					mesh.edge_normals.y.size() +
@@ -120,9 +120,15 @@ void cuda_main_loop(
 					mesh.cell_edges.size() +
 					mesh.cell_edges_index.size() +
 					mesh.cell_edges_count.size());
+
+		float _d_copied_data_size=
+			_d_copied_data_bytes / (float) 1024;
 				
+		float _d_full_data_bytes =
+			_d_copied_data_bytes + sizeof(double) * (vs.size() + flux.size());
+
 		float _d_full_data_size =
-			(_d_copied_data_size + sizeof(double) * (vs.size() + flux.size())) / (float) 1024;
+			_d_full_data_bytes / (float) 1024;
 
 		float _d_transfer_rate =
 			((float) _d_copied_data_size) * 1000 / p_memcpy.getTime();
