@@ -347,7 +347,7 @@ double compute_flux(
 		fp_ops_v[t] = p->flops();
 #elif defined	(PAPI_MEASURE_L1)
 		l1_dca_v[t] = p->accesses();
-		l1_dca_v[t] = p->misses();
+		l1_dcm_v[t] = p->misses();
 #elif defined	(PAPI_MEASURE_L2DCA)
 		l2_dca_v[t] = p->get( PAPI_L2_DCA );
 #elif defined	(PAPI_MEASURE_IPB)
@@ -625,6 +625,8 @@ int main(int argc, char** argv)
 #ifdef	PAPI_MEASURE
 												//	last minute
 	double cf_avg_ns;
+	unsigned
+	long long int tot_ns;						//	process total useful measured time
 
 	//	init PAPI
 #ifdef	PAPI_MEASURE_SET
@@ -732,6 +734,9 @@ int main(int argc, char** argv)
 #ifdef	PAPI_MEASURE
 	//	last minute results
 	cf_avg_ns = (double) cf_tot_ns / (double) cf_count;
+
+	tot_ns = cf_tot_ns;
+
 #endif//	PAPI_MEASURE
 
 	//	print PAPI results
@@ -770,6 +775,9 @@ int main(int argc, char** argv)
 		<<	"cfmaxns:"	<<	cf_max_ns	<<	endl
 		<<	"cfminns:"	<<	cf_min_ns	<<	endl
 		<<	"cfavgns:"	<<	cf_avg_ns	<<	endl
+
+		<<	"totns:"	<<	tot_ns		<<	endl
+
 #endif//	PAPI_MEASURE
 	;
 
