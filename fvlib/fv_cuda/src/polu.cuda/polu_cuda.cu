@@ -175,15 +175,6 @@ void cuda_main_loop(
 				dc);
 		PROF_STOP(p_compute_flux);
 
-		cudaError_t error = cudaGetLastError();
-		if(error != cudaSuccess) {
-			// something's gone wrong
-			// print out the CUDA error as a string
-			cout << "CUDA Error: " << cudaGetErrorString(error) << endl;
-			// we can't recover from the error -- exit the program
-			exit(-1);
-		}
-
 		/**
 		 * Reduction of velocities
 		 */
@@ -247,7 +238,7 @@ void cuda_main_loop(
 	}
 	PROF_STOP(p_main_loop);
 
-	cout << "total iterations: " << i << endl;
+	FVLog::logger << "total iterations: " << i << endl;
 
 	polution.cuda_get();
 	for(unsigned int x = 0; x < mesh.num_cells; ++x) {

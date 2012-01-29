@@ -102,7 +102,6 @@ namespace CudaFV {
 			FVErr::error(msg, -1);
 		}
 
-		FVLog::logger << "allocating cpu ptrs" << endl;
 		// alloc edge info
 		edge_normals		= CFVPoints2D(num_edges);
 		edge_lengths		= CFVVect<double>(num_edges);
