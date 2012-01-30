@@ -1,15 +1,15 @@
 #!/bin/bash
 #
 #	SeARCH Job Script
-#	Runs OpenMP on the 24 core with 64GB RAM AMD Opt 6174 (group 511)
+#	Runs OpenMP on the 8 core with 8GB RAM Xeon E5420 (group 311)
 #
-#PBS -l nodes=1:r511
-#PBS -l walltime=1:00:00
+#PBS -l nodes=1:r311
+#PBS -l walltime=2:00:00
 #
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
-#PBS -e out/openmp.511.err
-#PBS -o out/openmp.511.out
+#PBS -e out/openmp.311.err
+#PBS -o out/openmp.311.out
 #
 CASES=( tiny small medium big huge original )
 EXE="polu.openmp"
