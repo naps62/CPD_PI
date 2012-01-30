@@ -4,7 +4,7 @@
 #	Runs sequential code on the 8 core with 8GB RAM Xeon E5420 (group 311)
 #
 #PBS -l nodes=1:r311
-#PBS -l walltime=2:00:00
+#PBS -l walltime=3:00:00
 #
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
@@ -12,7 +12,7 @@
 #PBS -o out/seq.311.out
 #
 CASES=( tiny small medium big huge original )
-EXE="polu.openmp"
+EXE="polu"
 
 cd "$PBS_O_WORKDIR"
 

@@ -1,2 +1,5 @@
 ROOTD	=	../..
-include $(ROOTD)/conf/src.bin.mk
+
+TEMPLATE	=	polu.fv.Makefile
+
+include $(ROOTD)/conf/src.mk
