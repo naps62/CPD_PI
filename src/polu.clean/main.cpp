@@ -39,8 +39,6 @@ Parameters;
 
 //	BEGIN GLOBAL VARIABLES
 
-double *vs;
-
 //	END GLOBAL VARIABLES
 
 //	BEGIN FUNCTIONS
@@ -170,7 +168,7 @@ double compute_mesh_parameter (
 */
 void main_loop (
 	double final_time,						//	time computation limit
-	unsigned jump_interval,					//	iterations output interval
+//	unsigned jump_interval,					//	iterations output interval
 	FVMesh2D mesh,							//	2D mesh to compute
 	double mesh_parameter,					//	mesh parameter
 	FVVect<double> polutions,				//	polution values vector
@@ -180,27 +178,27 @@ void main_loop (
 {
 	double t;								//	time elapsed
 	double dt;
-	int i;									//	current iteration
+//	int i;									//	current iteration
 	FVio polution_file("polution.xml",FVWRITE);
 
 	t = 0;
-	i = 0;
-	polution_file.put( polutions , t , "polution" ); 
-	cout
-		<< "computing"
-		<< endl;
+//	i = 0;
+//	polution_file.put( polutions , t , "polution" ); 
+//	cout
+//		<< "computing"
+//		<< endl;
 	while ( t < final_time )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
 		t += dt;
-		++i;
-		if ( i % jump_interval == 0 )
-		{
-			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
-			fflush(NULL);
-		}
+//		++i;
+//		if ( i % jump_interval == 0 )
+//		{
+//			polution_file.put( polutions , t , "polution" );    
+//			printf("step %d  at time %f \r", i, t);
+//			fflush(NULL);
+//		}
 	}
 	polution_file.put( polutions , t , "polution" ); 
 }
@@ -237,16 +235,13 @@ int main(int argc, char** argv)
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
-	//	prepare velocities array
-	vs = new double[ mesh.getNbEdge() ];
-
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
 
 	// the main loop
 	main_loop(
 		data.time.final,
-		data.iterations.jump,
+//		data.iterations.jump,
 		mesh,
 		h,
 		polution,

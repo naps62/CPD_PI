@@ -12,7 +12,7 @@
 #PBS -o out/seq.311.out
 #
 CASES=( tiny small medium big huge original )
-EXE="polu"
+EXE="polu.clean"
 
 cd "$PBS_O_WORKDIR"
 
