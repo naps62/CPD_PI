@@ -20,6 +20,6 @@ echo "$PWD"
 for c in ${CASES[@]};
 do
 	echo "#####    ${c}    #####";
-	bin/${EXE} "data/xml/${c}.params.xml";
+	bin/${EXE} "data/xml/${c}.param.xml";
 	echo;
 done;
