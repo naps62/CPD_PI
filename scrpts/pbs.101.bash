@@ -6,7 +6,7 @@
 #PBS -l nodes=1:r101
 #PBS -l walltime=1:00:00
 #
-#PBS -M pdrcosta@gmail.com
+#PBS -M pdrcosta90@gmail.com
 #PBS -m bea
 #PBS -e out/openmp.101.out
 #PBS -o out/openmp.101.err
