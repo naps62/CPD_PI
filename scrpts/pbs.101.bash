@@ -14,7 +14,7 @@
 CASES=( tiny small medium huge original )
 EXE="polu.openmp"
 
-cd "$PBS_O_WORKDIR"
+cd $PBS_O_WORKDIR
 
 for c in ${CASES[@]};
 do
