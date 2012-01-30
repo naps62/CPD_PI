@@ -14,12 +14,11 @@
 CASES=( tiny small medium huge original )
 EXE="polu.openmp"
 
-cd $PBS_O_WORKDIR
-echo "$PWD"
+cd "$PBS_O_WORKDIR"
 
 for c in ${CASES[@]};
 do
 	echo "#####    ${c}    #####";
-	bin/${EXE} "data/xml/${c}.param.xml";
+	time bin/${EXE} "data/xml/${c}.param.xml";
 	echo;
 done;
