@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cfloat>
+#include <limits>
 #include "FVLib.h"
 
 //	BEGIN TYPES
@@ -63,9 +63,11 @@ double compute_flux(
 	FVPoint2D<double> v_left;				//	velocity in the left face
 	FVPoint2D<double> v_right;				//	velocity in the right face
 	double v;								//	resulting velocity
+	double v_max;							//	maximum computed velocity
 	FVEdge2D *edge;							//	current edge
 
 	es = mesh.getNbEdge();
+	v_max = numeric_limits<double>::min();
 	for ( e = 0; e < es; ++e)
 	{
 		edge = mesh.getEdge(e);
@@ -84,13 +86,14 @@ double compute_flux(
 			p_right = dc;
 		} 
 		v = ( v_left + v_right ) * 0.5 * edge->normal; 
-		if ( ( abs(v) * dt ) > 1)
-			dt = 1.0 / abs(v);
+		v_max = ( v > v_max ) ? v : v_max;
 		if ( v < 0 )
 			flux[ edge->label - 1 ] = v * p_right;
 		else
 			flux[ edge->label - 1 ] = v * p_left;
 	}
+
+	dt = 1.0 / abs(v);
 
 	return dt;
 }
