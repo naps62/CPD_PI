@@ -3,8 +3,8 @@
 #	SeARCH Job Script
 #	Runs sequential code on the 24 core with 64GB RAM AMD Opt 6174 (group 311)
 #
-#PBS -l nodes=1:r511
-#PBS -l walltime=3:00:00
+#PBS -l nodes=1:r511:ppn=24
+#PBS -l walltime=5:00:00
 #
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
