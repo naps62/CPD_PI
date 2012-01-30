@@ -40,6 +40,7 @@
 	%\end{multicol}
 \end{frame}
 
+\section{Data Structures}
 \begin{frame}
 	\frametitle{Data structures}
 
@@ -50,14 +51,37 @@
 	\end{itemize}
 \end{frame}
 
-
+\section{Implementation}
 \begin{frame}
 	\frametitle{Implementation}
 
+	\begin{itemize}
+		\item[] No improvement when only parallelizing \texttt{compute\_flux}
+		\begin{itemize}
+			\item[] Requires a memcpy every iteration
+		\end{itemize}
+		\item[] Full parallelization of the main loop required
+	\end{itemize}
 
-	One kernel for each of the primary functions: \texttt{compute\_flux}, \texttt{reduction}, \texttt{update}
-
+	Kernels required:
+	\begin{itemize}
+		\item \texttt{compute\_flux} \\
+			Similar to original implementation
+		\item \texttt{reduction} \\
+			Reduces final velocity value
+		\item \texttt{update}
+	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Update}
+
+	\begin{itemize}
+		\item[] Original update function computes new polution value for the cells by looping through the edges. When parallelizing, multiple threads might be updating the same vcell, creating data races
+		\item[] The new kernel was written to iterate through the cells, not the edges, eliminating the race.
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Dependencies}
@@ -75,9 +99,9 @@
 		\item Full node requested
 		\item Multiple config files for profiler
 		\item Kernel times measured with Cuda Events, and profiling disabled
-		%\begin{itemize}
-		%	\item All kernels become synchronous when profiler is enabled
-		%\end{itemize}
+		\begin{itemize}
+			\item All kernels become synchronous when profiler is enabled
+		\end{itemize}
 		\item All values used are averages of the results for each iteration
 	\end{itemize}
 \end{frame}
