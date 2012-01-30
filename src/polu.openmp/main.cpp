@@ -1,6 +1,20 @@
 #include <iostream>
-#include <cfloat>
+#include <limits>
 #include "FVLib.h"
+
+//	BEGIN CONSTANTS
+
+/**
+ * OpenMP [f]actor
+ * Used with the number of processors to calculate the number of threads
+ * pc -> processor count
+ * tc -> thread count
+ * => tc = pc * f
+ * This allows the existence of more threads than the hardware is capable, therefore making possible for some threads to step in while others wait on resources (based on GPU approach).
+ */
+#define	OMP_FCT_ALL	1
+
+//	END CONSTANTS
 
 //	BEGIN TYPES
 
@@ -39,7 +53,8 @@ Parameters;
 
 //	BEGIN GLOBAL VARIABLES
 
-double *vs;
+int tc;										//	thread count
+double *max_vel_v;							//	thread maximum computed velocity vector
 
 //	END GLOBAL VARIABLES
 
@@ -58,10 +73,10 @@ double compute_flux(
 	double dt;
 	double p_left;							//	polution in the left face
 	double p_right;							//	polution in the right face
+	double v_max;							//	maximum computed velocity
 	int i_left;								//	index of the left face
 	int i_right;							//	index of the right face
 	int t;									//	current thread number
-	int ts;									//	total number of threads used
 	unsigned e;								//	edge iteration variable
 	unsigned es;							//	total number of edges
 	FVPoint2D<double> v_left;				//	velocity in the left face
@@ -72,11 +87,12 @@ double compute_flux(
 	es = mesh.getNbEdge();
 	#pragma omp parallel	\
 		default(shared)	\
+		num_threads(tc)	\
 		private(t,e,edge,i_left,v_left,p_left,i_right,v_right,p_right,v)
 	{
 		t = omp_get_thread_num();
 
-		vs[t] = DBL_MIN;
+		max_vel_v[t] = numeric_limits<double>::min();
 
 		#pragma omp for
 		for (e = 0; e < es; ++e)
@@ -97,26 +113,17 @@ double compute_flux(
 				p_right = dc;
 			} 
 			v = ( v_left + v_right ) * 0.5 * edge->normal; 
-			vs[t] = ( v > vs[t] ) ? v : vs[t];
-//			vs[e] = v;
-//			if ( ( abs(v) * dt ) > 1)
-//				dt = 1.0 / abs(v);
+			max_vel_v[t] = ( v > max_vel_v[t] ) ? v : max_vel_v[t];
 			if ( v < 0 )
 				flux[ edge->label - 1 ] = v * p_right;
 			else
 				flux[ edge->label - 1 ] = v * p_left;
 		}
-
-		#pragma omp single
-		ts = omp_get_num_threads();
 	}
 
-	double v_max;
-	v_max = DBL_MIN;
-//	for (e = 0; e < es; ++e)
-//		v_max = ( vs[e] > v_max ) ? vs[e] : v_max;
-	for (t = 0; t < ts; ++t)
-		v_max = ( vs[t] > v_max ) ? vs[t] : v_max;
+	v_max = numeric_limits<double>::min();
+	for (t = 0; t < tc; ++t)
+		v_max = ( max_vel_v[t] > v_max ) ? max_vel_v[t] : v_max;
 	
 	dt = 1.0 / abs( v_max );
 
@@ -196,7 +203,7 @@ double compute_mesh_parameter (
 */
 void main_loop (
 	double final_time,						//	time computation limit
-	unsigned jump_interval,					//	iterations output interval
+//	unsigned jump_interval,					//	iterations output interval
 	FVMesh2D mesh,							//	2D mesh to compute
 	double mesh_parameter,					//	mesh parameter
 	FVVect<double> polutions,				//	polution values vector
@@ -207,27 +214,12 @@ void main_loop (
 {
 	double t;								//	time elapsed
 	double dt;
-	int i;									//	current iteration
 	FVio polution_file( output_filename.c_str() ,FVWRITE);
 
-	t = 0;
-	i = 0;
-//	polution_file.put( polutions , t , "polution" ); 
-	cout
-		<< "computing"
-		<< endl;
-	while ( t < final_time )
+	for ( t = 0 ; t < final_time ; t += dt )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
-		t += dt;
-		++i;
-		if ( i % jump_interval == 0 )
-		{
-//			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
-			fflush(NULL);
-		}
 	}
 	polution_file.put( polutions , t , "polution" ); 
 }
@@ -264,8 +256,11 @@ int main(int argc, char** argv)
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
+	//	OpenMP init
+	tc = omp_get_num_procs() * OMP_FCT_ALL;
+
 	//	prepare velocities array
-	vs = new double[ mesh.getNbEdge() ];
+	max_vel_v = new double[ tc ];
 
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
@@ -273,7 +268,7 @@ int main(int argc, char** argv)
 	// the main loop
 	main_loop(
 		data.time.final,
-		data.iterations.jump,
+//		data.iterations.jump,
 		mesh,
 		h,
 		polution,
@@ -283,7 +278,7 @@ int main(int argc, char** argv)
 		data.filenames.polution.output)
 	;
 
-	delete vs;
+	delete max_vel_v;
 
 	return 0;
 }

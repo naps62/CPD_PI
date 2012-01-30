@@ -1,3 +1,5 @@
 ROOTD	=	../..
-include $(ROOTD)/conf/src.bin.mk
-CXXFLAGS	+=	-fopenmp
+
+TEMPLATE	=	polu.omp.fv.Makefile
+
+include $(ROOTD)/conf/src.omp.mk
