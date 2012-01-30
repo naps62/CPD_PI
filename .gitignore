@@ -5,3 +5,7 @@
 *.aux
 *.log
 *.swp
+*.nav
+*.snm
+*.toc
+*.swo
