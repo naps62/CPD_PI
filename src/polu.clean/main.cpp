@@ -186,7 +186,7 @@ void main_loop (
 
 	t = 0;
 //	i = 0;
-//	polution_file.put( polutions , t , "polution" ); 
+	polution_file.put( polutions , t , "polution" ); 
 //	cout
 //		<< "computing"
 //		<< endl;
@@ -203,7 +203,7 @@ void main_loop (
 //			fflush(NULL);
 //		}
 	}
-	polution_file.put( polutions , t , "polution" ); 
+//	polution_file.put( polutions , t , "polution" ); 
 }
 
 /*

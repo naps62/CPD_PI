@@ -81,7 +81,7 @@ double compute_flux(
 //	double v;								//	resulting velocity
 //	FVEdge2D *edge;							//	current edge
 
-	#pragma omp parallel	\
+//	#pragma omp parallel	\
 		default(shared)	\
 		private(t)
 	{
@@ -99,7 +99,7 @@ double compute_flux(
 
 		t = omp_get_thread_num();
 
-		#pragma omp for
+//		#pragma omp for
 		for (e = 0; e < edgec; ++e)
 		{
 			Edge &edge = edges[e];
@@ -114,16 +114,16 @@ double compute_flux(
 			i_r = edge.right;
 			if ( i_r == numeric_limits<unsigned>::max() )
 			{
+				v_r[0] = v_l[0];
+				v_r[1] = v_l[1];
+				p_r = dirichlet;
+			}
+			else
+			{
 				Cell &cell_r = cells[i_r];
 				v_r[0] = cell_r.velocity[0];
 				v_r[1] = cell_r.velocity[1];
 				p_r = cell_r.polution;
-			}
-			else
-			{
-				v_r[0] = v_l[0];
-				v_r[1] = v_l[1];
-				p_r = dirichlet;
 			}
 
 			v = (v_l[0] + v_r[0]) * 0.5 * edge.normal[0]
@@ -247,18 +247,24 @@ void main_loop (
 	double t;								//	time elapsed
 	double dt;								//	instant duration
 
+	FVio polution_file( output_filename.c_str() ,FVWRITE);
+											//	output file
+
+	FVVect<double> polution( cellc );
+	for ( unsigned c = 0 ; c < cellc ; ++c )
+		polution[c] =  cells[c].polution;
+
+
+	polution_file.put( polution , t , "polution" ); 
+
 	for ( t = 0 ; t < final_time ; t += dt )
 	{
 		dt = compute_flux(edges,edgec,cells,dirichlet) * mesh_parameter;
 		update(cells,cellc,edges,dt);
 	}
 
-	FVVect<double> polution( cellc );
-	for ( unsigned c = 0 ; c < cellc ; ++c )
-		polution[c] =  cells[c].polution;
 
-	FVio polution_file( output_filename.c_str() ,FVWRITE);
-	polution_file.put( polution , t , "polution" ); 
+//	polution_file.put( polution , t , "polution" ); 
 }
 
 /*
@@ -293,6 +299,18 @@ int main(int argc, char** argv)
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
 
+	using std::cout;
+	using std::endl;
+
+	/*
+	unsigned cellc = mesh.getNbCell();
+	cout
+		<<	"Read "	<<	cellc	<<	" cells"	<<	endl;
+	for ( unsigned c = 0 ; c < cellc ; ++c )
+		cout
+			<<	c	<<	'/'	<<	cellc	<<	endl;
+	*/
+
 
 
 	//	OpenMP init
@@ -303,38 +321,31 @@ int main(int argc, char** argv)
 	//		cells
 	unsigned cellc = mesh.getNbCell();
 	Cell *cells = new Cell[cellc];
-	for (unsigned i = 0; i < cellc; ++i)
+	for (unsigned c = 0; c < cellc; ++c)
 	{
-		Cell &cell = cells[i];
-		//	velocity
-		cell.velocity[0] = velocity[i].x;
-		cell.velocity[1] = velocity[i].y;
-		//	pollution
-		cell.polution = polution[i];
-		//	area
-		FVCell2D *fv_cell = mesh.getCell(i);
+		Cell &cell = cells[c];
+		cell.velocity[0] = velocity[c].x;
+		cell.velocity[1] = velocity[c].y;
+		cell.polution = polution[c];
+		FVCell2D *fv_cell = mesh.getCell(c);
 		cell.area = fv_cell->area;
-		//	edges
 		cell.init( fv_cell->nb_edge );
-		for (unsigned j = 0 ; j < cell.edgec ; ++j )
-			cell.edges[j] = fv_cell->edge[j]->label - 1;
+		for (unsigned e = 0 ; e < cell.edgec ; ++e )
+			cell.edges[e] = fv_cell->edge[e]->label - 1;
 	}
-	//		edges
+
 	unsigned edgec = mesh.getNbEdge();
-	Edge *edges = new Edge[edgec];
-	for (unsigned i = 0 ; i < edgec ; ++i )
+	Edge *edges = new Edge[ edgec ];
+	for ( unsigned e = 0 ; e < edgec ; ++e )
 	{
-		Edge &edge = edges[i];
-		//	flux
-		edge.flux = flux[i];
-		//	edge
-		FVEdge2D *fv_edge = mesh.getEdge(i);
+		Edge &edge = edges[ e ];
+		edge.flux = flux[ e ];
+		FVEdge2D *fv_edge = mesh.getEdge( e );
 		edge.left = fv_edge->leftCell->label - 1;
 		if (fv_edge->rightCell)
 			edge.right = fv_edge->rightCell->label - 1;
 		else
 			edge.right = numeric_limits<unsigned>::max();
-		//	length
 		edge.length = fv_edge->length;
 	}
 		
@@ -368,9 +379,9 @@ int main(int argc, char** argv)
 		data.filenames.polution.output)
 	;
 
-	delete max_vel_v;
-	delete cells;
-	delete edges;
+	delete[] max_vel_v;
+	delete[] cells;
+	delete[] edges;
 
 	return 0;
 }
