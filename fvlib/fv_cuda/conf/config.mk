@@ -20,16 +20,19 @@ CXX	=	nvcc
 INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
 
 #	Compiler flags
-CXXFLAGS	=	-arch sm_20 -Xcompiler="-fpermissive -Wall -O3"
+XCOMPFLAGS	=	-Wall -Wextra
+CXXFLAGS	=	-arch sm_20
 CXXFLAGS	+=	 $(INC)
 
 ifeq ($(MODE),DBG)
+XCOMPFLAGS	+=	-g
 CXXFLAGS	+=	-g -G
-SUFFIX=_$(MODE)
 else
+XCOMPFLAGS	+=	-O3
 CXXFLAGS	+=	-O3
-SUFFIX=
 endif
+
+CXXFLAGS	+= -Xcompiler="$(XCOMPFLAGS)"
 
 #	Linker flags
 LDFLAGS	=	-L $(ROOTD)/lib
