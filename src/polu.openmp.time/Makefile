@@ -1,3 +1,2 @@
 ROOTD	=	../..
-include $(ROOTD)/conf/src.bin.mk
-CXXFLAGS	+=	-fopenmp
+include $(ROOTD)/conf/src.omp.mk
