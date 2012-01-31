@@ -3,7 +3,7 @@
 #	SeARCH Job Script
 #	Runs sequential code on the 8 core with 8GB RAM Xeon E5420 (group 311)
 #
-#PBS -l nodes=1:r311:ppn=8
+#PBS -l nodes=1:r311:ppn=1
 #PBS -l walltime=5:00:00
 #
 #PBS -M pdrcosta90@gmail.com

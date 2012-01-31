@@ -1,11 +1,11 @@
-#include "stopwatch.hpp"
+#include <tk/stopwatch.hpp>
 
 #include <sys/time.h>
 
 #define	NANOS_PER_SEC	1000000000
 
 //	BEGIN CLASS
-timespec Stopwatch::add( const timespec& time1 , const timespec& time2 )
+timespec Stopwatch::add(timespec const &time1, timespec const &time2)
 {
 	timespec sum;
 	long dnsec = time1.tv_nsec + time2.tv_nsec;
@@ -22,7 +22,7 @@ timespec Stopwatch::add( const timespec& time1 , const timespec& time2 )
 	return sum;
 }
 
-timespec Stopwatch::diff( const timespec& start , const timespec& end )
+timespec Stopwatch::diff(timespec const &start, timespec const &end)
 {
 	timespec diff;
 	long dnsec = end.tv_nsec - start.tv_nsec;
@@ -39,15 +39,17 @@ timespec Stopwatch::diff( const timespec& start , const timespec& end )
 	return diff;
 }
 
-void Stopwatch::reset( timespec& time )
+void Stopwatch::reset(timespec &time)
 {
 	time.tv_sec = 0;
 	time.tv_nsec = 0;
 }
 
 //	BEGIN INSTANCE
-Stopwatch::Stopwatch() : _total(0) , _running(0)
-{}
+Stopwatch::Stopwatch() : _running(false)
+{
+	Stopwatch::reset( _total );	
+}
 
 void Stopwatch::start()
 {
@@ -89,28 +91,24 @@ timespec Stopwatch::total()
 	return _total;
 }
 
+unsigned long long int Stopwatch::total_ns()
+{
+	return _total.tv_sec * NANOS_PER_SEC + _total.tv_nsec;
+}
+
 double Stopwatch::total_s()
 {
 	return this->total_ns() / 1e9;
-
-time_t Stopwatch::total_s()
-{
-	return _total.tv_sec;
 }
 
-long long int Stopwatch::total_ns()
+double Stopwatch::total_ms()
 {
-	return _total.tv_sec * NANOS_PER_SEC + _total.tv_nsec;
+	return this->total_ns() / 1e6;
 }
 
 double Stopwatch::total_us()
 {
 	return this->total_ns() / 1e3;
-}
-
-long long int Stopwatch::total_us()
-{
-	return this->total_ns() / 1000;
 }
 
 timespec Stopwatch::partial()

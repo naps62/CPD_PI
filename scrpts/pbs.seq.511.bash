@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #	SeARCH Job Script
-#	Runs sequential code on the 24 core with 64GB RAM AMD Opt 6174 (group 311)
+#	Runs sequential code on the 24 core with 64GB RAM AMD Opt 6174 (group 511)
 #
 #PBS -l nodes=1:r511:ppn=24
 #PBS -l walltime=5:00:00
