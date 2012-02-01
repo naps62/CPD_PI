@@ -13,9 +13,9 @@ namespace fv
 			this->init(0);
 		}
 
-		Cell::Cell(int edgec) : edges(NULL)
+		Cell::Cell(int edge_count) : edges(NULL)
 		{
-			this->init(edgec);
+			this->init(edge_count);
 		}
 
 		Cell::~Cell()
@@ -26,13 +26,13 @@ namespace fv
 		//	private methods
 
 		void Cell::init(
-			int edgec)
+			int edge_count)
 		{
-			this->edgec = edgec;
+			this->edge_count = edge_count;
 			if (this->edges)
-				delete this->edges;
-			if (edgec)
-				this->edges = new unsigned[edgec];
+				delete[] this->edges;
+			if (edge_count)
+				this->edges = new unsigned[ edge_count ];
 			else
 				this->edges = NULL;
 		}

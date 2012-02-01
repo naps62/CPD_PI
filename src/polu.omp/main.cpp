@@ -1,15 +1,21 @@
 #include <iostream>
 #include "FVLib.h"
 
+#include <fv/cpu/cell.hpp>
 #include <fv/cpu/edge.hpp>
 
 #define PI 3.141592653
 #define BIG 10e+30
 
+using fv::cpu::Cell;
 using fv::cpu::Edge;
 
 //---------
-double compute_flux(FVMesh2D &m,FVVect<double> &pol,FVVect<FVPoint2D<double> > &V,FVVect<double> &flux, Edge *edges, unsigned edge_count, double dirichlet)
+double compute_flux(
+//	FVMesh2D &m,FVVect<double> &pol,FVVect<FVPoint2D<double> > &V,
+//	FVVect<double> &flux,
+	Edge *edges, unsigned edge_count, Cell *cells,
+	double dirichlet)
 {
 	double dt=1.e20;
 	FVPoint2D<double> VL,VR;
@@ -20,17 +26,25 @@ double compute_flux(FVMesh2D &m,FVVect<double> &pol,FVVect<FVPoint2D<double> > &
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
-//		VL=V[ptr_e->leftCell->label-1];
-		VL = V[ edge.left ];
-//		polL=pol[ptr_e->leftCell->label-1];
-		polL = pol[ edge.left ];
-//		if(ptr_e->rightCell) 
+////		VL=V[ptr_e->leftCell->label-1];
+//		VL = V[ edge.left ];
+		Cell &cell_left = cells[ edge.left ];
+		VL.x = cell_left.velocity[0];
+		VL.y = cell_left.velocity[1];
+////		polL=pol[ptr_e->leftCell->label-1];
+//		polL = pol[ edge.left ];
+		polL = cell_left.polution;
+////		if(ptr_e->rightCell) 
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
-//			VR=V[ptr_e->rightCell->label-1];
-			VR = V[ edge.right ];
-//			polR=pol[ptr_e->rightCell->label-1];
-			polR = pol[ edge.right ];
+////			VR=V[ptr_e->rightCell->label-1];
+//			VR = V[ edge.right ];
+			Cell &cell_right = cells[ edge.right ];
+			VR.x = cell_right.velocity[0];
+			VR.y = cell_right.velocity[1];
+////			polR=pol[ptr_e->rightCell->label-1];
+//			polR = pol[ edge.right ];
+			polR = cell_right.polution;
 		}
 		else
 		{
@@ -42,19 +56,32 @@ double compute_flux(FVMesh2D &m,FVVect<double> &pol,FVVect<FVPoint2D<double> > &
 		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
 		if (abs(v)*dt>1) dt=1./abs(v);
 //		if (v<0) flux[ptr_e->label-1]=v*polR; else flux[ptr_e->label-1]=v*polL;
-		flux[ e ] = ( v < 0 ) ? ( v * polR ) : ( v * polL );
+		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 	}
 	return dt;
 }
 
-void    update(FVMesh2D &m,FVVect<double> &pol,FVVect<double> &flux, double dt)
+void    update(FVMesh2D &m,FVVect<double> &pol,FVVect<double> &flux,
+	Cell *cells,
+	Edge *edges,
+	unsigned edge_count,
+	double dt)
 {
-	FVEdge2D *ptr_e;
-	m.beginEdge();
-	while((ptr_e=m.nextEdge()))
+//	FVEdge2D *ptr_e;
+//	m.beginEdge();
+//	while((ptr_e=m.nextEdge()))
+	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
-		pol[ptr_e->leftCell->label-1]-=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->leftCell->area;
-		if(ptr_e->rightCell) pol[ptr_e->rightCell->label-1]+=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->rightCell->area;
+		Edge &edge = edges[ e ];
+		Cell &cell_left = cells[ edge.left ];
+//		pol[ptr_e->leftCell->label-1]-=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->leftCell->area;
+		cell_left.polution -= dt * edge.flux * edge.length / cell_left.area;
+//		if(ptr_e->rightCell) pol[ptr_e->rightCell->label-1]+=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->rightCell->area;
+		if ( edge.right < numeric_limits<unsigned>::max() )
+		{
+			Cell &cell_right = cells[ edge.right ];
+			cell_right.polution += dt * edge.flux * edge.length / cell_right.area;
+		}
 	}
 }    
 //
@@ -134,6 +161,25 @@ int main(int argc, char *argv[])
 
 
 
+	unsigned cell_count = m.getNbCell();
+	Cell *cells = new Cell[ cell_count ];
+	for ( unsigned c = 0 ; c < cell_count ; ++c )
+	{
+		Cell &cell = cells[ c ];
+		FVCell2D *fv_cell = m.getCell( c );
+
+		cell.velocity[0] = V[ c ].x;
+		cell.velocity[1] = V[ c ].y;
+		cell.polution = pol[ c ];
+		cell.area = fv_cell->area;
+		cell.init( fv_cell->nb_edge );
+		for ( unsigned e = 0 ; e < cell.edge_count ; ++e )
+			cell.edges[ e ] = fv_cell->edge[ e ]->label - 1;
+	}
+
+
+
+
 
 	// the main loop
 	time=0.;nbiter=0;
@@ -141,9 +187,14 @@ int main(int argc, char *argv[])
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	//while(time<final_time)
-	//    {
-	dt=compute_flux(m,pol,V,flux,edges,edge_count,dirichlet)*h;
-	//    update(m,pol,flux,dt);
+	for ( int i = 0 ; i < 10 ; ++i )
+	{
+		dt = compute_flux( m , pol , V ,
+//			flux,
+			edges , edge_count , cells , dirichlet ) * h;
+		update(m,pol,flux,
+			cells,edges,edge_count,
+			dt);
 	//    time+=dt;
 	//    nbiter++;
 	//    if(nbiter%nbjump==0)
@@ -152,15 +203,17 @@ int main(int argc, char *argv[])
 	//        printf("step %d  at time %f \r",(int)nbiter,time); fflush(NULL);
 	//        }
 	// 
-	//    }
+		{
+			using std::cout;
+			using std::endl;
+			for ( int j = 0 ; j < 10 ; ++j )
+				cout
+					<<	'['	<<	j	<<	"]:"	<<	cells[j].polution	<<	endl;
+			getchar();
+		}
+	}
 
 	//pol_file.put(pol,time,"polution"); 
 
-	{
-		using std::cout;
-		using std::endl;
-		cout
-			<<	"dt:"	<<	dt	<<	endl;
-	}
 
 }

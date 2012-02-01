@@ -11,14 +11,14 @@ namespace fv
 			double velocity[2];
 			double polution;
 			double area;
-			unsigned edgec;
+			unsigned edge_count;
 			unsigned *edges;
 
 			Cell();
-			Cell(int edgec);
+			Cell(int edge_count);
 			~Cell();
 
-			void init(int edgec);
+			void init(int edge_count);
 		};
 	}
 }

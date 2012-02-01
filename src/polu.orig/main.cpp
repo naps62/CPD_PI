@@ -103,9 +103,10 @@ FVio pol_file("polution.xml",FVWRITE);
 //pol_file.put(pol,time,"polution"); 
 //cout<<"computing"<<endl;
 //while(time<final_time)
-//    {
+for ( int i = 0 ; i < 10 ; ++i )
+{
     dt=compute_flux(m,pol,V,flux,para)*h;
-//    update(m,pol,flux,dt);
+    update(m,pol,flux,dt);
 //    time+=dt;
 //    nbiter++;
 //    if(nbiter%nbjump==0)
@@ -114,15 +115,17 @@ FVio pol_file("polution.xml",FVWRITE);
 //        printf("step %d  at time %f \r",(int)nbiter,time); fflush(NULL);
 //        }
 // 
-//    }
+	{
+		using std::cout;
+		using std::endl;
+		for ( int j = 0 ; j < 10 ; ++j )
+			cout
+				<<	'['	<<	j	<<	"]:"	<<	pol[ j ]	<<	endl;
+		getchar();
+	}
+}
 
 //pol_file.put(pol,time,"polution"); 
 
-{
-	using std::cout;
-	using std::endl;
-	cout
-		<<	"dt:"	<<	dt	<<	endl;
-}
 
 }
