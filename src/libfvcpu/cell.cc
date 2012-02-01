@@ -8,12 +8,12 @@ namespace fv
 	{
 		class Edge;
 
-		Cell::Cell()
+		Cell::Cell() : edges(NULL)
 		{
 			this->init(0);
 		}
 
-		Cell::Cell(int edgec)
+		Cell::Cell(int edgec) : edges(NULL)
 		{
 			this->init(edgec);
 		}

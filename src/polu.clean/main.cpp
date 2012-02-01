@@ -93,7 +93,7 @@ double compute_flux(
 			flux[ edge->label - 1 ] = v * p_left;
 	}
 
-	dt = 1.0 / abs(v);
+	dt = 1.0 / abs(v_max);
 
 	return dt;
 }
@@ -182,19 +182,19 @@ void main_loop (
 	double t;								//	time elapsed
 	double dt;
 //	int i;									//	current iteration
-	FVio polution_file("polution.xml",FVWRITE);
-
-	t = 0;
+//	FVio polution_file("polution.xml",FVWRITE);
+//
+//	t = 0;
 //	i = 0;
-	polution_file.put( polutions , t , "polution" ); 
+//	polution_file.put( polutions , t , "polution" ); 
 //	cout
 //		<< "computing"
 //		<< endl;
-	while ( t < final_time )
-	{
+//	while ( t < final_time )
+//	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
-		update( mesh , polutions , fluxes , dt );
-		t += dt;
+//		update( mesh , polutions , fluxes , dt );
+//		t += dt;
 //		++i;
 //		if ( i % jump_interval == 0 )
 //		{
@@ -202,7 +202,15 @@ void main_loop (
 //			printf("step %d  at time %f \r", i, t);
 //			fflush(NULL);
 //		}
+//	}
+
+	{
+		using std::cout;
+		using std::endl;
+		cout
+			<<	"dt: "	<<	dt	<<	endl;
 	}
+
 //	polution_file.put( polutions , t , "polution" ); 
 }
 

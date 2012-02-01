@@ -63,9 +63,9 @@ int tc;
 	Computes the resulting flux in every edge
 */
 double compute_flux(
-	Edge *edges,						//	edges vector
+	Edge *edges,							//	edges vector
 	unsigned edgec,							//	number of edges in the vector
-	Cell *cells,						//	cells vector
+	Cell *cells,							//	cells vector
 	double dirichlet)						//	Dirichlet condition
 {
 	double dt;
@@ -81,7 +81,7 @@ double compute_flux(
 //	double v;								//	resulting velocity
 //	FVEdge2D *edge;							//	current edge
 
-//	#pragma omp parallel	\
+	#pragma omp parallel	\
 		default(shared)	\
 		private(t)
 	{
@@ -99,7 +99,7 @@ double compute_flux(
 
 		t = omp_get_thread_num();
 
-//		#pragma omp for
+		#pragma omp for
 		for (e = 0; e < edgec; ++e)
 		{
 			Edge &edge = edges[e];
@@ -244,27 +244,49 @@ void main_loop (
 	double dirichlet,						//	Dirichlet condition
 	string output_filename)					//	output file name
 {
-	double t;								//	time elapsed
+	double t = 0;							//	time elapsed
 	double dt;								//	instant duration
 
-	FVio polution_file( output_filename.c_str() ,FVWRITE);
+
+
+
+
+
+//	FVio polution_file( output_filename.c_str() ,FVWRITE);
 											//	output file
 
-	FVVect<double> polution( cellc );
-	for ( unsigned c = 0 ; c < cellc ; ++c )
-		polution[c] =  cells[c].polution;
 
 
-	polution_file.put( polution , t , "polution" ); 
 
-	for ( t = 0 ; t < final_time ; t += dt )
-	{
+	
+
+
+
+	//for ( t = 0 ; t < final_time ; t += dt )
+	//{
 		dt = compute_flux(edges,edgec,cells,dirichlet) * mesh_parameter;
-		update(cells,cellc,edges,dt);
+	//	update(cells,cellc,edges,dt);
+	//}
+
+
+	{
+		using std::cout;
+		using std::endl;
+		cout
+			<<	"dt: "	<<	dt	<<	endl;
 	}
 
 
+//	FVVect<double> polution( cellc );
+//	for ( unsigned c = 0 ; c < cellc ; ++c )
+//		polution[c] =  cells[c].polution;
+//
+//
+//
 //	polution_file.put( polution , t , "polution" ); 
+
+
+
 }
 
 /*
@@ -298,18 +320,6 @@ int main(int argc, char** argv)
 	//	read polution
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( polution , t , name );
-
-	using std::cout;
-	using std::endl;
-
-	/*
-	unsigned cellc = mesh.getNbCell();
-	cout
-		<<	"Read "	<<	cellc	<<	" cells"	<<	endl;
-	for ( unsigned c = 0 ; c < cellc ; ++c )
-		cout
-			<<	c	<<	'/'	<<	cellc	<<	endl;
-	*/
 
 
 
