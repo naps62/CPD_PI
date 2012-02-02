@@ -47,23 +47,29 @@ double compute_flux(
 
 void    update(
 	Cell *cells,
+	unsigned cell_count,
 	Edge *edges,
 	unsigned edge_count,
 	double dt)
 {
-	for ( unsigned e = 0 ; e < edge_count ; ++e )
+	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
-		Edge &edge = edges[ e ];
-		Cell &cell_left = cells[ edge.left ];
-		cell_left.polution -= dt * edge.flux * edge.length / cell_left.area;
-		if ( edge.right < numeric_limits<unsigned>::max() )
+		Cell &cell = cells[ c ];
+		double cdp = 0;
+
+		for ( unsigned e = 0 ; e < cell.edge_count ; ++e )
 		{
-			Cell &cell_right = cells[ edge.right ];
-			cell_right.polution += dt * edge.flux * edge.length / cell_right.area;
+			Edge &edge = edges[ cell.edges[ e ] ];
+			double edp = dt * edge.flux * edge.length / cell.area;
+			if ( c == edge.left )
+				cdp -= edp;
+			else
+				cdp += edp;
 		}
+
+		cell.polution += cdp;
 	}
 }    
-//
 
 
 
@@ -160,6 +166,8 @@ int main(int argc, char *argv[])
 
 
 
+
+
 	// the main loop
 	time=0.;nbiter=0;
 	FVio pol_file("polution.omp.xml",FVWRITE);
@@ -171,7 +179,10 @@ int main(int argc, char *argv[])
 		dt = compute_flux(
 			edges , edge_count , cells , dirichlet ) * h;
 		update(
-			cells,edges,edge_count,
+			cells,
+			cell_count,
+			edges,
+			edge_count,
 			dt);
 		time+=dt;
 	//    nbiter++;
