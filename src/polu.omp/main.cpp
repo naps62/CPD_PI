@@ -16,35 +16,39 @@ void compute_flux(
 	Edge *edges, unsigned edge_count, Cell *cells,
 	double dirichlet)
 {
-	double dt=1.e20;
-	FVPoint2D<double> VL,VR;
-	double polL,polR,v;
+//	double dt=1.e20;
+//	FVPoint2D<double> VL,VR;
+//	double polL,polR,v;
+
+
+#pragma omp parallel for
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
 		Cell &cell_left = cells[ edge.left ];
 //		VL.x = cell_left.velocity[0];
 //		VL.y = cell_left.velocity[1];
-		polL = cell_left.polution;
+		double p_left = cell_left.polution;
+		double p_right;
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
 			Cell &cell_right = cells[ edge.right ];
 //			VR.x = cell_right.velocity[0];
 //			VR.y = cell_right.velocity[1];
-			polR = cell_right.polution;
+			p_right = cell_right.polution;
 		}
 		else
 		{
 //			VR=VL;
-			polR= dirichlet;
+			p_right = dirichlet;
 		} 
 //		v = ( VL.x + VR.x ) * 0.5 * edge.normal[0]
 //		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
 //		if (abs(v)*dt>1) dt=1./abs(v);
 //		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 		edge.flux = ( edge.velocity < 0 )
-				  ? ( edge.velocity * polR )
-				  : ( edge.velocity * polL );
+				  ? ( edge.velocity * p_right )
+				  : ( edge.velocity * p_left );
 	}
 //	return dt;
 }
@@ -56,6 +60,9 @@ void    update(
 //	unsigned edge_count,
 	double dt)
 {
+
+
+#pragma omp parallel for
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];
