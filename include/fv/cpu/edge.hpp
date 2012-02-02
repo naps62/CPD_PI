@@ -9,7 +9,8 @@ namespace fv
 		{
 			double flux;
 			double length;
-			double normal[2];
+			//double normal[2];
+			double velocity;
 			unsigned left;
 			unsigned right;
 		};

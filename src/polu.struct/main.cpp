@@ -11,8 +11,7 @@ using fv::cpu::Cell;
 using fv::cpu::Edge;
 
 //---------
-//double compute_flux(
-void compute_flux(
+double compute_flux(
 	Edge *edges, unsigned edge_count, Cell *cells,
 	double dirichlet)
 {
@@ -23,57 +22,63 @@ void compute_flux(
 	{
 		Edge &edge = edges[e];
 		Cell &cell_left = cells[ edge.left ];
-//		VL.x = cell_left.velocity[0];
-//		VL.y = cell_left.velocity[1];
+		VL.x = cell_left.velocity[0];
+		VL.y = cell_left.velocity[1];
 		polL = cell_left.polution;
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
 			Cell &cell_right = cells[ edge.right ];
-//			VR.x = cell_right.velocity[0];
-//			VR.y = cell_right.velocity[1];
+			VR.x = cell_right.velocity[0];
+			VR.y = cell_right.velocity[1];
 			polR = cell_right.polution;
 		}
 		else
 		{
-//			VR=VL;
+			VR=VL;
 			polR= dirichlet;
 		} 
-//		v = ( VL.x + VR.x ) * 0.5 * edge.normal[0]
-//		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
-//		if (abs(v)*dt>1) dt=1./abs(v);
-//		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
-		edge.flux = ( edge.velocity < 0 )
-				  ? ( edge.velocity * polR )
-				  : ( edge.velocity * polL );
+		v = ( VL.x + VR.x ) * 0.5 * edge.normal[0]
+		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
+		if (abs(v)*dt>1) dt=1./abs(v);
+		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 	}
-//	return dt;
+	return dt;
 }
 
 void    update(
 	Cell *cells,
 	unsigned cell_count,
 	Edge *edges,
-//	unsigned edge_count,
+	unsigned edge_count,
 	double dt)
 {
-	for ( unsigned c = 0 ; c < cell_count ; ++c )
+	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
-		Cell &cell = cells[ c ];
-		double cdp = 0;
-
-		for ( unsigned e = 0 ; e < cell.edge_count ; ++e )
+		Edge &edge = edges[ e ];
+		Cell &cell_left = cells[ edge.left ];
+		cell_left.polution -= dt * edge.flux * edge.length / cell_left.area;
+		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
-			Edge &edge = edges[ cell.edges[ e ] ];
-			double edp = dt * edge.flux * edge.length / cell.area;
-			if ( c == edge.left )
-				cdp -= edp;
-			else
-				cdp += edp;
+			Cell &cell_right = cells[ edge.right ];
+			cell_right.polution += dt * edge.flux * edge.length / cell_right.area;
 		}
-
-		cell.polution += cdp;
 	}
+
+//	for ( unsigned c = 0 ; c < cell_count ; ++c )
+//	{
+//		Cell &cell = cells[ c ];
+//		for ( unsigned e = 0 ; e < cell.edge_count ; ++e )
+//		{
+//			Edge &edge = edges[ e ];
+//			double dp = dt * edge.flux * edge.length / cell.area;
+//			if ( c == edge.left )
+//				cell.polution -= dp;
+//			else
+//				cell.polution += dp;
+//		}
+//	}
 }    
+//
 
 
 
@@ -132,7 +137,6 @@ int main(int argc, char *argv[])
 
 
 	unsigned edge_count = m.getNbEdge();
-	double max_vel = numeric_limits<double>::min();
 	Edge *edges = new Edge[ edge_count ];
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
@@ -141,42 +145,13 @@ int main(int argc, char *argv[])
 
 		edge.flux = flux[ e ];
 		edge.length = fv_edge->length;
-//		edge.normal[0] = fv_edge->normal.x;
-//		edge.normal[1] = fv_edge->normal.y;
+		edge.normal[0] = fv_edge->normal.x;
+		edge.normal[1] = fv_edge->normal.y;
 		edge.left = fv_edge->leftCell->label - 1;
 		edge.right = ( fv_edge->rightCell )
 					 ? fv_edge->rightCell->label - 1
 					 : numeric_limits<unsigned>::max();
-
-		double normal[2];
-		normal[0] = fv_edge->normal.x;
-		normal[1] = fv_edge->normal.y;
-		double v_left[2];
-		v_left[0] = V[ edge.left ].x;
-		v_left[1] = V[ edge.left ].y;
-		double v_right[2];
-		if ( edge.right < numeric_limits<unsigned>::max() )
-		{
-			v_right[0] = V[ edge.right ].x;
-			v_right[1] = V[ edge.right ].y;
-		}
-		else
-		{
-			v_right[0] = v_left[0];
-			v_right[1] = v_left[1];
-		}
-
-		edge.velocity = ( v_left[0] + v_right[0] ) * 0.5 * normal[0]
-					  + ( v_left[1] + v_right[1] ) * 0.5 * normal[1];
-
-		max_vel = ( edge.velocity > max_vel )
-				? edge.velocity
-				: max_vel
-				;
 	}
-
-
-	dt = h / abs( max_vel );
 
 
 
@@ -210,21 +185,15 @@ int main(int argc, char *argv[])
 	while(time<final_time)
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
-//		dt = compute_flux(
-		compute_flux(
-			edges,
-			edge_count,
-			cells,
-			dirichlet)
-		;
-//		* h;
+		dt = compute_flux(
+			edges , edge_count , cells , dirichlet ) * h;
 		update(
 			cells,
 			cell_count,
 			edges,
-//			edge_count,
+			edge_count,
 			dt);
-		time += dt;
+		time+=dt;
 	//    nbiter++;
 	//    if(nbiter%nbjump==0)
 	//        {
