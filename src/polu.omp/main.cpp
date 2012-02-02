@@ -12,38 +12,24 @@ using fv::cpu::Edge;
 
 //---------
 double compute_flux(
-//	FVMesh2D &m,FVVect<double> &pol,FVVect<FVPoint2D<double> > &V,
-//	FVVect<double> &flux,
 	Edge *edges, unsigned edge_count, Cell *cells,
 	double dirichlet)
 {
 	double dt=1.e20;
 	FVPoint2D<double> VL,VR;
 	double polL,polR,v;
-//	FVEdge2D *ptr_e;
-//	m.beginEdge();
-//	while((ptr_e=m.nextEdge()))
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
-////		VL=V[ptr_e->leftCell->label-1];
-//		VL = V[ edge.left ];
 		Cell &cell_left = cells[ edge.left ];
 		VL.x = cell_left.velocity[0];
 		VL.y = cell_left.velocity[1];
-////		polL=pol[ptr_e->leftCell->label-1];
-//		polL = pol[ edge.left ];
 		polL = cell_left.polution;
-////		if(ptr_e->rightCell) 
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
-////			VR=V[ptr_e->rightCell->label-1];
-//			VR = V[ edge.right ];
 			Cell &cell_right = cells[ edge.right ];
 			VR.x = cell_right.velocity[0];
 			VR.y = cell_right.velocity[1];
-////			polR=pol[ptr_e->rightCell->label-1];
-//			polR = pol[ edge.right ];
 			polR = cell_right.polution;
 		}
 		else
@@ -51,33 +37,25 @@ double compute_flux(
 			VR=VL;
 			polR= dirichlet;
 		} 
-//		v=((VL+VR)*0.5)*(ptr_e->normal); 
 		v = ( VL.x + VR.x ) * 0.5 * edge.normal[0]
 		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
 		if (abs(v)*dt>1) dt=1./abs(v);
-//		if (v<0) flux[ptr_e->label-1]=v*polR; else flux[ptr_e->label-1]=v*polL;
 		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 	}
 	return dt;
 }
 
 void    update(
-//	FVMesh2D &m,FVVect<double> &pol,FVVect<double> &flux,
 	Cell *cells,
 	Edge *edges,
 	unsigned edge_count,
 	double dt)
 {
-//	FVEdge2D *ptr_e;
-//	m.beginEdge();
-//	while((ptr_e=m.nextEdge()))
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[ e ];
 		Cell &cell_left = cells[ edge.left ];
-//		pol[ptr_e->leftCell->label-1]-=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->leftCell->area;
 		cell_left.polution -= dt * edge.flux * edge.length / cell_left.area;
-//		if(ptr_e->rightCell) pol[ptr_e->rightCell->label-1]+=dt*flux[ptr_e->label-1]*ptr_e->length/ptr_e->rightCell->area;
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
 			Cell &cell_right = cells[ edge.right ];
@@ -191,11 +169,8 @@ int main(int argc, char *argv[])
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
 		dt = compute_flux(
-//			m , pol , V ,
-//			flux,
 			edges , edge_count , cells , dirichlet ) * h;
 		update(
-//			m,pol,flux,
 			cells,edges,edge_count,
 			dt);
 		time+=dt;
