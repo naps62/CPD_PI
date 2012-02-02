@@ -61,7 +61,8 @@ double compute_flux(
 	return dt;
 }
 
-void    update(FVMesh2D &m,FVVect<double> &pol,FVVect<double> &flux,
+void    update(
+//	FVMesh2D &m,FVVect<double> &pol,FVVect<double> &flux,
 	Cell *cells,
 	Edge *edges,
 	unsigned edge_count,
@@ -183,19 +184,21 @@ int main(int argc, char *argv[])
 
 	// the main loop
 	time=0.;nbiter=0;
-	FVio pol_file("polution.xml",FVWRITE);
+	FVio pol_file("polution.omp.xml",FVWRITE);
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
-	//while(time<final_time)
-	for ( int i = 0 ; i < 10 ; ++i )
+	while(time<final_time)
+//	for ( int i = 0 ; i < 10 ; ++i )
 	{
-		dt = compute_flux( m , pol , V ,
+		dt = compute_flux(
+//			m , pol , V ,
 //			flux,
 			edges , edge_count , cells , dirichlet ) * h;
-		update(m,pol,flux,
+		update(
+//			m,pol,flux,
 			cells,edges,edge_count,
 			dt);
-	//    time+=dt;
+		time+=dt;
 	//    nbiter++;
 	//    if(nbiter%nbjump==0)
 	//        {
@@ -204,16 +207,19 @@ int main(int argc, char *argv[])
 	//        }
 	// 
 		{
-			using std::cout;
-			using std::endl;
-			for ( int j = 0 ; j < 10 ; ++j )
-				cout
-					<<	'['	<<	j	<<	"]:"	<<	cells[j].polution	<<	endl;
-			getchar();
+//			using std::cout;
+//			using std::endl;
+//			for ( int j = 0 ; j < cell_count ; ++j )
+//				cout
+//					<<	'['	<<	j	<<	"]:"	<<	cells[j].polution	<<	endl;
+//			getchar();
 		}
 	}
 
-	//pol_file.put(pol,time,"polution"); 
+	for ( unsigned c = 0; c < cell_count ; ++c )
+		pol[ c ] = cells[ c ].polution;
+
+	pol_file.put(pol,time,"polution"); 
 
 
 }
