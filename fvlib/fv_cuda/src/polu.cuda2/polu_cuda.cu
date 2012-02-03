@@ -105,12 +105,12 @@ int main() {
 		unsigned int left	= mesh.edge_left_cells[i];
 		unsigned int right	= mesh.edge_right_cells[i];
 
-		if (right != NO_RIGHT_EDGE) {
+		if (right == NO_RIGHT_EDGE) {
 			right = left;
 		}
 
-		double v	= ((old_velocity[left+1].x + old_velocity[right+1].x) * 0.5 * mesh.edge_normals.x[i])
-					+ ((old_velocity[left+1].y + old_velocity[right+1].y) * 0.5 * mesh.edge_normals.y[i]);
+		double v	= ((old_velocity[left].x + old_velocity[right].x) * 0.5 * mesh.edge_normals.x[i])
+					+ ((old_velocity[left].y + old_velocity[right].y) * 0.5 * mesh.edge_normals.y[i]);
 
 		cout << v << endl;
 		if (abs(v) > v_max || i == 0)
