@@ -169,14 +169,14 @@ int main(int argc, char *argv[])
 		edge.velocity = ( v_left[0] + v_right[0] ) * 0.5 * normal[0]
 					  + ( v_left[1] + v_right[1] ) * 0.5 * normal[1];
 
-		max_vel = ( edge.velocity > max_vel )
-				? edge.velocity
+		max_vel = ( abs( edge.velocity ) > max_vel )
+				? abs( edge.velocity )
 				: max_vel
 				;
 	}
 
 
-	dt = h / abs( max_vel );
+	dt = h / max_vel;
 
 
 
