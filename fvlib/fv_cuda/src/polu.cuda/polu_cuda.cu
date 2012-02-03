@@ -1,9 +1,10 @@
 #include <cuda.h>
 
+#include "FVLib.h"
 #include "CUDA/CFVLib.h"
 #include "FVLib.h"
-#include "CUDA/CFVProfile.h"
 
+#include "parameters.h"
 #include "polu_cuda.h"
 #include "kernels.cuh"
 
@@ -25,19 +26,27 @@ void gpu_update(
 	}
 }
 
+double compute_mesh_parameters (FVMesh2D mesh) {
+	double h;
+	double S;
+	FVCell2D *cell;
+	FVEdge2D *edge;
+
+	h = 1.e20;
+	for ( mesh.beginCell(); (cell = mesh.nextCell()) != NULL ; ) {
+		S = cell->area;
+		for ( cell->beginEdge(); (edge = cell->nextEdge()) != NULL; ) {
+			if ( h * edge->length > S )
+				h = S / edge->length;
+		}
+	}
+	return h;
+}
+
 /*
 	Main loop: calculates the polution spread evolution in the time domain.
 */
-void cuda_main_loop(
-		double final_time,
-		unsigned jump_interval,
-		CudaFV::CFVMesh2D &mesh,
-		double mesh_parameter,
-		FVVect<double> &old_polution,
-		CudaFV::CFVVect<double> &polution,
-		CudaFV::CFVPoints2D &velocities,
-		CudaFV::CFVVect<double> &flux,
-		double dc) {
+int main() {
 
 	CudaFV::CFVProfile p_full_func("cuda_full_func");
 	CudaFV::CFVProfile p_malloc("cuda_mallocs");
@@ -51,9 +60,46 @@ void cuda_main_loop(
 
 	PROF_START(p_full_func);
 
+	string name;
+	double h;
+	double t;
+	FVMesh2D old_mesh;
+
+	Parameters data;
+	data = read_parameters( "param.xml" );
+
+	// read the mesh
+	old_mesh.read( data.filenames.mesh.c_str() );
+
+	// GPU
+	CudaFV::CFVMesh2D mesh(mesh);
+
+	FVVect<double> old_polution( old_mesh.getNbCell() );
+	FVVect<double> old_flux( old_mesh.getNbEdge() );
+	FVVect<FVPoint2D<double> > old_velocity( old_mesh.getNbCell() );
+
+	//	read veloci
+	FVio velocity_file( data.filenames.velocity.c_str() , FVREAD );
+	velocity_file.get( old_velocity , t , name );
+
+	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
+	polu_ini_file.get( old_polution , t , name );
+
+	// GPU
+	CudaFV::CFVVect<double> polution(mesh.num_cells);
+	CudaFV::CFVVect<double> flux(mesh.num_edges);
+	CudaFV::CFVPoints2D velocity(mesh.num_cells);
+
+	for(unsigned int i = 0; i < polution.size(); ++i) {
+		polution[i] = old_polution[i];
+		velocity.x[i] = old_velocity[i].x;
+		velocity.y[i] = old_velocity[i].y;
+	}
+
+	h = compute_mesh_parameters( old_mesh );
+
 	// var declaration
 	double dt;
-	double t = 0;
 	int i = 0;
 
 	// open output file
@@ -72,8 +118,8 @@ void cuda_main_loop(
 	mesh.cell_edges_index.cuda_malloc();
 	mesh.cell_edges_count.cuda_malloc();
 	polution.cuda_malloc();
-	velocities.x.cuda_malloc();
-	velocities.y.cuda_malloc();
+	velocity.x.cuda_malloc();
+	velocity.y.cuda_malloc();
 	flux.cuda_malloc();
 	// alloc space for tmp velocity vector
 	CudaFV::CFVVect<double> vs(mesh.num_edges);
@@ -95,8 +141,8 @@ void cuda_main_loop(
 	mesh.cell_edges_count.cuda_saveAsync(stream);
 
 	polution.cuda_saveAsync(stream);
-	velocities.x.cuda_saveAsync(stream);
-	velocities.y.cuda_saveAsync(stream);
+	velocity.x.cuda_saveAsync(stream);
+	velocity.y.cuda_saveAsync(stream);
 
 	cudaStreamSynchronize(stream);
 	PROF_STOP(p_memcpy);
@@ -111,8 +157,8 @@ void cuda_main_loop(
 					mesh.edge_lengths.size() +
 					mesh.cell_areas.size() +
 					polution.size() +
-					velocities.x.size() +
-					velocities.y.size() +
+					velocity.x.size() +
+					velocity.y.size() +
 					flux.size()) +
 				sizeof(unsigned int) * (
 					mesh.edge_left_cells.size() +
@@ -157,6 +203,8 @@ void cuda_main_loop(
 	/**
 	 * Beggining of main loop
 	 */
+	double final_time = data.time.final;
+	double dc = data.computation.threshold;
 	PROF_START(p_main_loop);
 	while(t < final_time) {
 		PROF_START(p_loop_iter);
@@ -174,8 +222,8 @@ void cuda_main_loop(
 				mesh.edge_left_cells.cuda_getArray(),
 				mesh.edge_right_cells.cuda_getArray(),
 				polution.cuda_getArray(),
-				velocities.x.cuda_getArray(),
-				velocities.y.cuda_getArray(),
+				velocity.x.cuda_getArray(),
+				velocity.y.cuda_getArray(),
 				flux.cuda_getArray(),
 				vs.cuda_getArray(),
 				dc);
@@ -196,7 +244,7 @@ void cuda_main_loop(
 		}
 
 		// based on max_vs, compute time elapsed
-		dt = 1.0 / abs(max_vs) * mesh_parameter;
+		dt = 1.0 / abs(max_vs) * h;
 
 		PROF_STOP(p_reduction);
 
@@ -264,80 +312,12 @@ void cuda_main_loop(
 	mesh.cell_edges_count.cuda_free();
 
 	polution.cuda_free();
-	velocities.x.cuda_free();
-	velocities.y.cuda_free();
+	velocity.x.cuda_free();
+	velocity.y.cuda_free();
 	flux.cuda_free();
 
 	PROF_STOP(p_full_func);
+
+	return 0;
 }
 
-/**
- *
- * CUDA version must be higher than 1.3 (needs double-precision support)
- * Enough memory to run the kernels
- * Highest number of SMPs
- * Maximum of 8 GPUs
- */
-/*__host__
-int choseDevice(){
-	int count, device = -1,  numSMP = 0, sel[8], flag = 0, flag2;
-	cudaDeviceProp properties[8];
-	// assumir doubles - ainda nao sei aquilo dos floats
-	long int globMem = (30 + 16 * BLOCK_SIZE*GRID_SIZE + BLOCK_SIZE*GRID_SIZE)*8;
-
-	cudaGetDeviceCount(&count);
-	
-	for(int i = 0; i < count && i < 8; i++){
-		cudaGetDeviceProperties( &properties[i], i);
-		if(properties[i].major >= 2){
-			sel[i] = 1;
-			flag++;
-		}
-		else
-			sel[i] = 0;
-		
-		if(flag == 0){
-			fprintf(flog, "There is no GPUs capable of running this program on your system.\n");
-			return device;
-		}
-
-		fprintf(flog, "\nNumber of CUDA capable devices: %d\n", count);
-
-		flag = 1;
-		for(i = 0; i < count && i < 8; i++){
-			if(sel[i]){
-				if(properties[i].totalGlobalMem > globMem && properties[i].totalGlobalMem < 8000000000){
-					sel[i] += flag;
-					flag++;
-					globMem = properties[i].totalGlobalMem;
-				}
-			}
-		}
-		
-		flag2 = 1;
-
-		for(i = 0; i < count && i < 8; i++){
-			if(sel[i] == flag){
-				if(properties[i].multiProcessorCount > numSMP){
-					sel[i] += flag2;
-					flag2++;
-					numSMP = properties[i].multiProcessorCount;
-				}
-			}
-		}
-
-		for(i = 0; i < count && i < 8; i++){
-			if(sel[i] == flag + flag2 - 1){
-				cudaChooseDevice(&i, &properties[i]);
-				cudaSetDevice(i);
-				fprintf(flog, "\n%s GPU chosen\n", properties[i].name);
-				fprintf(flog, "ID: %d\n", i);
-				fprintf(flog, "Global Memory: %ld bytes\n", globMem);
-				fprintf(flog, "Number of SMP: %d\n\n", numSMP);
-				return i;
-			}
-		}
-	}
-
-	return device;
-}*/

@@ -15,6 +15,7 @@
 
 #include "MFVLib_config.h"
 
+#include "CUDA/CFVProfile.h"
 #include "CUDA/CFVVect.h"
 #include "CUDA/CFVPoints2D.h"
 #include "CUDA/CFVMesh2D.h"
