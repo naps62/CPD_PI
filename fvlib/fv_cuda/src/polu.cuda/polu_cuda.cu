@@ -72,7 +72,7 @@ int main() {
 	old_mesh.read( data.filenames.mesh.c_str() );
 
 	// GPU
-	CudaFV::CFVMesh2D mesh(mesh);
+	CudaFV::CFVMesh2D mesh(old_mesh);
 
 	FVVect<double> old_polution( old_mesh.getNbCell() );
 	FVVect<double> old_flux( old_mesh.getNbEdge() );
