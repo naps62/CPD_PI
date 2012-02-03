@@ -232,6 +232,13 @@ int main() {
 		/**
 		 * Reduction of velocities
 		 */
+
+		vs.cuda_get();
+		for(int i = 0; i vs.size(); ++i) {
+			cout << vs[i] << endl;
+		}
+		exit(0);
+
 		PROF_START(p_reduction);
 		wrapper_reduce_velocities(mesh.num_edges, red_threads, red_blocks, vs.cuda_getArray(), cpu_reducibles.cuda_getArray());
 
