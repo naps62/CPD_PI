@@ -112,11 +112,9 @@ int main() {
 		double v	= ((old_velocity[left].x + old_velocity[right].x) * 0.5 * mesh.edge_normals.x[i])
 					+ ((old_velocity[left].y + old_velocity[right].y) * 0.5 * mesh.edge_normals.y[i]);
 
-		cout << v << endl;
 		if (abs(v) > v_max || i == 0)
 			v_max = abs(v);
 	}
-	exit(0);
 
 	h = compute_mesh_parameters( old_mesh );
 	dt = 1.0 / v_max * h;
