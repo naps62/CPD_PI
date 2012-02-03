@@ -234,7 +234,7 @@ int main() {
 		 */
 
 		vs.cuda_get();
-		for(int i = 0; i vs.size(); ++i) {
+		for(unsigned int i = 0; i < vs.size(); ++i) {
 			cout << vs[i] << endl;
 		}
 		exit(0);
