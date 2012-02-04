@@ -1,23 +1,20 @@
-<<<<<<< HEAD
 *.o
 *.a
 */.svn
 *.swp
 *.tmp
 *.log
-=======
 .DS_Store
 *.out
+*.err
 *.pdf
 *.synctex.gz
->>>>>>> 5fa9e66da717a40e8db32d04fe65451258590879
 *.aux
 *.log
 *.swp
 *.nav
 *.snm
 *.toc
-<<<<<<< HEAD
 *.xml
 *.msh
 *.geo
@@ -28,6 +25,5 @@ results/*
 data/xml/*
 data/geo/*
 data/msh/*
-=======
+data/out/*
 *.swo
->>>>>>> 5fa9e66da717a40e8db32d04fe65451258590879

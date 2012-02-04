@@ -1,16 +1,18 @@
 #!/bin/bash
 #
 #	SeARCH Job Script
-#	Runs OpenMP on the 24 core with 64GB RAM AMD Opt 6174 (group 511)
+#	Runs OpenMP on the 4 core with 4GB RAM Intel Xeon 5130 (group 201)
+#	(Halved)
 #
-#PBS -l nodes=1:r511:ppn=24
-#PBS -l walltime=5:00:00
+#PBS -l nodes=1:r201:ppn=2
+#PBS -l walltime=10:00:00
 #
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
-#PBS -e out/omp.511.err
-#PBS -o out/omp.511.out
+#PBS -e out/omp.201.2.err
+#PBS -o out/omp.201.2.out
 #
+RUNS=10
 CASES=( "tiny" "small" "medium" "big" "huge" "original" )
 TIMERS=( "main" "iteration" "functions" )
 EXE="polu.omp.time"
@@ -22,7 +24,12 @@ do
 	echo "#####    ${c}    #####";
 	for t in ${TIMERS[@]}
 	do
-		bin/${EXE}.${t} "data/xml/${c}.param.xml";
+		echo ">>>>> ${t}";
+		for i in 1 .. ${RUNS}
+		do
+			bin/${EXE}.${t} "data/xml/${c}.param.xml";
+		done;
+		echo "<<<<< ${t}";
 	done;
 	echo;
 done;
