@@ -22,32 +22,49 @@ namespace tk
 	//
 	//	Time class
 	//
-	timespec Time::timespec_now()
+//	timespec Time::timespec_now()
+//	{
+//		timespec now;
+//		timespec_now( now );
+//		return now;
+//	}
+	timeval Time::timernow()
 	{
-		timespec now;
-		timespec_now( now );
-		return now;
+		timeval now;
+		return timernow( now );
 	}
 
-	timespec& Time::timespec_now( timespec& time )
+//	timespec& Time::timespec_now( timespec& time )
+	timeval& Time::timernow( timeval& time )
 	{
-		if ( clock_gettime( CLOCK_REALTIME , &time ) )
-			cerr
-				<<	"Error getting current timestamp."
-				<<	endl;
+//		if ( clock_gettime( CLOCK_REALTIME , &time ) )
+//			cerr
+//				<<	"Error getting current timestamp."
+//				<<	endl;
+		gettimeofday( &time , NULL );
 		return time;
 	}
 
-	void Time::set( const timespec& time )
+//	void Time::set( const timespec& time )
+//	{
+//		_seconds = time.tv_sec;
+//		_nanoseconds = time.tv_nsec;
+//	}
+	void Time::set( const timeval& time )
 	{
-		_seconds = time.tv_sec;
-		_nanoseconds = time.tv_nsec;
+		this->tv_sec = time.tv_sec;
+		this->tv_usec = time.tv_usec;
 	}
 
-	void Time::set( time_t seconds , long nanoseconds )
+//	void Time::set( time_t seconds , long nanoseconds )
+//	{
+//		_seconds = seconds;
+//		_nanoseconds = nanoseconds;
+//	}
+	void Time::set( time_t seconds , suseconds_t microseconds )
 	{
-		_seconds = seconds;
-		_nanoseconds = nanoseconds;
+		this->tv_sec = seconds;
+		this->tv_usec = microseconds;
 	}
 
 	Time::Time()
@@ -55,50 +72,72 @@ namespace tk
 		this->now();
 	}
 
-	Time::Time( const Time& original ):
-		_seconds( original.get_seconds() ),
-		_nanoseconds( original.get_nanoseconds() )
-	{}
+//	Time::Time( const Time& original ):
+//		_seconds( original.get_seconds() ),
+//		_nanoseconds( original.get_nanoseconds() )
+//	{}
+	Time::Time( const Time& original )
+	{
+		this->set( original );
+	}
 
 	void Time::now()
 	{
-		this->set( Time::timespec_now() );
+//		this->set( Time::timespec_now() );
+		this->set( Time::timernow() );
 	}
 
 	void Time::reset()
 	{
-		this->set( 0 , 0 );
+//		this->set( 0 , 0 );
+		timerclear( this );
 	}
 
 	//	getters
 	time_t Time::get_seconds() const
 	{
-		return _seconds;
+		return this->tv_sec;
 	}
 
-	long Time::get_nanoseconds() const
+//	long Time::get_nanoseconds() const
+//	{
+//		return _nanoseconds;
+//	}
+	suseconds_t Time::get_microseconds() const
 	{
-		return _nanoseconds;
+		return this->tv_usec;
 	}
 
-	long long int Time::nanoseconds() const
+//	long long int Time::nanoseconds() const
+//	{
+//		return _seconds * NANOS_PER_SEC + _nanoseconds;
+//	}
+
+//	double Time::microseconds() const
+//	{
+//		return _seconds * 1000000 + _nanoseconds * 1e-3;
+//	}
+	long long int Time::microseconds() const
 	{
-		return _seconds * NANOS_PER_SEC + _nanoseconds;
+		return this->tv_sec * 1000000 + this->tv_usec;
 	}
 
-	double Time::microseconds() const
-	{
-		return _seconds * 1000000 + _nanoseconds * 1e-3;
-	}
-
+//	double Time::miliseconds() const
+//	{
+//		return _seconds * 1000 + _nanoseconds * 1e-6;
+//	}
 	double Time::miliseconds() const
 	{
-		return _seconds * 1000 + _nanoseconds * 1e-6;
+		return this->tv_sec * 1000 + this->tv_usec * 1e-3;
 	}
 
+//	double Time::seconds() const
+//	{
+//		return _seconds + _nanoseconds * 1e-9;
+//	}
 	double Time::seconds() const
 	{
-		return _seconds + _nanoseconds * 1e-9;
+		return this->tv_sec + this->tv_usec * 1e-6;
 	}
 
 	double Time::minutes() const
@@ -114,38 +153,53 @@ namespace tk
 	//	operators
 	Time& Time::operator=( const Time& time )
 	{
-		_seconds = time.get_seconds();
-		_nanoseconds = time.get_nanoseconds();
+//		_seconds = time.get_seconds();
+//		_nanoseconds = time.get_nanoseconds();
+		this->set( time );
 		return *this;
 	}
 
+//	Time& Time::operator+=( const Time& time )
+//	{
+//		_nanoseconds += time.get_nanoseconds();
+//		if ( _nanoseconds > NANOS_PER_SEC )
+//		{
+//			_seconds += time.get_seconds() + 1;
+//			_nanoseconds -= NANOS_PER_SEC;
+//		}
+//		else
+//		{
+//			_seconds += time.get_seconds();
+//		}
+//		return *this;
+//	}
 	Time& Time::operator+=( const Time& time )
 	{
-		_nanoseconds += time.get_nanoseconds();
-		if ( _nanoseconds > NANOS_PER_SEC )
-		{
-			_seconds += time.get_seconds() + 1;
-			_nanoseconds -= NANOS_PER_SEC;
-		}
-		else
-		{
-			_seconds += time.get_seconds();
-		}
+		timeval s;
+		timeradd(this,&time,&s);
+		this->set(s);
 		return *this;
 	}
 
+//	Time& Time::operator-=( const Time& time )
+//	{
+//		_nanoseconds -= time.get_nanoseconds();
+//		if ( _nanoseconds < 0 )
+//		{
+//			_seconds -= (time.get_seconds() + 1);
+//			_nanoseconds += NANOS_PER_SEC;
+//		}
+//		else
+//		{
+//			_seconds -= time.get_seconds();
+//		}
+//		return *this;
+//	}
 	Time& Time::operator-=( const Time& time )
 	{
-		_nanoseconds -= time.get_nanoseconds();
-		if ( _nanoseconds < 0 )
-		{
-			_seconds -= time.get_seconds() - 1;
-			_nanoseconds += NANOS_PER_SEC;
-		}
-		else
-		{
-			_seconds -= time.get_seconds();
-		}
+		timeval s;
+		timersub(this,&time,&s);
+		this->set(s);
 		return *this;
 	}
 
@@ -169,7 +223,8 @@ namespace tk
 			<<	'['
 			<<	time.get_seconds()
 			<<	'+'
-			<<	time.get_nanoseconds()
+//			<<	time.get_nanoseconds()
+			<<	time.get_microseconds()
 			<<	']';
 		return out;
 	}

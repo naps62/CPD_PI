@@ -17,7 +17,7 @@ int main()
 		Time total = program.total();
 		cout
 			<<	total	<<	endl
-			<<	total.nanoseconds()	<<	" ns"	<<	endl
+//			<<	total.nanoseconds()	<<	" ns"	<<	endl
 			<<	total.microseconds()	<<	" us"	<<	endl
 			<<	total.miliseconds()	<<	" ms"	<<	endl
 			<<	total.seconds()	<<	" s"	<<	endl

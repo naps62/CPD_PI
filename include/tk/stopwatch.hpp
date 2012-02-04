@@ -8,18 +8,24 @@ using std::ostream;
 
 namespace tk
 {
-	class Time : timespec
+//	class Time : timespec
+	class Time : public timeval
 	{
-		static timespec timespec_now();
-		static timespec& timespec_now( timespec& time );
+//		static timespec timespec_now();
+//		static timespec& timespec_now( timespec& time );
+		static timeval timernow();
+		static timeval& timernow( timeval& time );
 
 
 		//	instance
-		time_t _seconds;
-		long _nanoseconds;
+//		time_t _seconds;
+//		long _nanoseconds;
+//		suseconds_t _microseconds;
 
-		void set( const timespec& now );
-		void set( time_t seconds, long nanoseconds );
+//		void set( const timespec& now );
+//		void set( time_t seconds, long nanoseconds );
+		void set( const timeval& time );
+		void set( const time_t seconds, const suseconds_t _microseconds );
 
 
 		//	friends
@@ -36,14 +42,16 @@ namespace tk
 		//	getters
 		//		pure
 		time_t get_seconds() const;
-		long get_nanoseconds() const;
+//		long get_nanoseconds() const;
+		long get_microseconds() const;
 		//		worked
 		double hours() const;
 		double minutes() const;
 		double seconds() const;
-		double microseconds() const;
 		double miliseconds() const;
-		long long int nanoseconds() const;
+		long long int microseconds() const;
+//		double microseconds() const;
+//		long long int nanoseconds() const;
 
 		//	operators
 		Time& operator=( const Time& time );
@@ -57,13 +65,6 @@ namespace tk
 
 	class Stopwatch
 	{
-//		static Time now();
-//		static Time & now(Time &time);
-//		static Time add(Time const &time1, Time const &time2);
-//		static Time diff(Time const &time1, Time const &time2);
-//		static void reset(Time &time);
-
-
 		//	instance
 		bool _running;
 		Time _control;
@@ -88,12 +89,6 @@ namespace tk
 		//		pure
 		Time total();
 		Time partial();
-
-		//		worked
-//		double total_s();
-//		double total_ms();
-//		double total_us();
-//		unsigned long long int total_ns();
 	};
 }
 

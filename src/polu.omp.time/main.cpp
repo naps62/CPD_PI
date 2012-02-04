@@ -119,6 +119,7 @@ void compute_flux(
 {
 
 #ifdef	TIME_FUNCTIONS
+	#pragma omp master
 	times.functions.compute_flux.timer.start();
 #endif
 
@@ -146,22 +147,25 @@ void compute_flux(
 
 
 #ifdef	TIME_FUNCTIONS
-	times.functions.compute_flux.timer.stop();
+	#pragma omp master
 	{
-		Time total = times.functions.compute_flux.timer.total();
-		double miliseconds = total.miliseconds();
-		times.functions.compute_flux.miliseconds.total += miliseconds;
-		times.functions.compute_flux.miliseconds.min =
-			( miliseconds < times.functions.compute_flux.miliseconds.min )
-			? miliseconds
-			: times.functions.compute_flux.miliseconds.min
-			;
-		times.functions.compute_flux.miliseconds.max =
-			( miliseconds > times.functions.compute_flux.miliseconds.max )
-			? miliseconds
-			: times.functions.compute_flux.miliseconds.max
-			;
-		times.functions.compute_flux.count += 1;
+		times.functions.compute_flux.timer.stop();
+		{
+			Time total = times.functions.compute_flux.timer.total();
+			double miliseconds = total.miliseconds();
+			times.functions.compute_flux.miliseconds.total += miliseconds;
+			times.functions.compute_flux.miliseconds.min =
+				( miliseconds < times.functions.compute_flux.miliseconds.min )
+				? miliseconds
+				: times.functions.compute_flux.miliseconds.min
+				;
+			times.functions.compute_flux.miliseconds.max =
+				( miliseconds > times.functions.compute_flux.miliseconds.max )
+				? miliseconds
+				: times.functions.compute_flux.miliseconds.max
+				;
+			times.functions.compute_flux.count += 1;
+		}
 	}
 #endif
 
@@ -431,9 +435,10 @@ int main(int argc, char *argv[])
 
 #ifdef	TIME_MAIN
 	times.main.timer.stop();
+	Time total = times.main.timer.total();
 	cout
 		<<	"<main>"	<<	endl
-		<<	"total: "	<<	times.main.timer.total().miliseconds()
+		<<	"total: "	<<	total.miliseconds()
 						<<	endl
 		<<	"</main>"	<<	endl
 		;
