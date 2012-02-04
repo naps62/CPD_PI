@@ -243,7 +243,7 @@ int main(int argc, char *argv[])
 
 	string parameter_filename;
 	if ( argc > 1 )
-		parameter_filename = string( argv[0] );
+		parameter_filename = string( argv[1] );
 	else
 		parameter_filename = "param.xml";
 
