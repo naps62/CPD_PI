@@ -86,7 +86,6 @@ struct ProgramTimeInfo
 #endif
 }
 times;
-#endif
 
 TimeStats::TimeStats() :
 	min( numeric_limits<double>::max() ),
@@ -105,6 +104,7 @@ ostream& operator<<(ostream& out, const TimeStats& ts)
 Timer::Timer() :
 	count(0)
 {}
+#endif
 
 //
 //	END GLOBALS
@@ -365,6 +365,7 @@ int main(int argc, char *argv[])
 	// the main loop
 	time=0.;nbiter=0;
 //	FVio pol_file("polution.omp.xml",FVWRITE);
+	FVio pol_file( out_fname.c_str() , FVWRITE );
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	while(time<final_time)
