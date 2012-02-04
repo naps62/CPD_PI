@@ -34,8 +34,16 @@ namespace tk
 		void reset();
 
 		//	getters
-		time_t seconds() const;
-		long nanoseconds() const;
+		//		pure
+		time_t get_seconds() const;
+		long get_nanoseconds() const;
+		//		worked
+		double hours() const;
+		double minutes() const;
+		double seconds() const;
+		double microseconds() const;
+		double miliseconds() const;
+		long long int nanoseconds() const;
 
 		//	operators
 		Time& operator=( const Time& time );

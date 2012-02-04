@@ -33,9 +33,6 @@ namespace tk
 	{
 		if ( clock_gettime( CLOCK_REALTIME , &time ) )
 			cerr
-				<<	__FILE__
-				<<	':'
-				<<	__LINE__
 				<<	"Error getting current timestamp."
 				<<	endl;
 		return time;
@@ -59,8 +56,8 @@ namespace tk
 	}
 
 	Time::Time( const Time& original ):
-		_seconds( original.seconds() ),
-		_nanoseconds( original.nanoseconds() )
+		_seconds( original.get_seconds() ),
+		_nanoseconds( original.get_nanoseconds() )
 	{}
 
 	void Time::now()
@@ -74,49 +71,80 @@ namespace tk
 	}
 
 	//	getters
-	time_t Time::seconds() const
+	time_t Time::get_seconds() const
 	{
 		return _seconds;
 	}
 
-	long Time::nanoseconds() const
+	long Time::get_nanoseconds() const
 	{
 		return _nanoseconds;
 	}
 
+	long long int Time::nanoseconds() const
+	{
+		return _seconds * NANOS_PER_SEC + _nanoseconds;
+	}
+
+	double Time::microseconds() const
+	{
+		return _seconds * 1000000 + _nanoseconds * 1e-3;
+	}
+
+	double Time::miliseconds() const
+	{
+		return _seconds * 1000 + _nanoseconds * 1e-6;
+	}
+
+	double Time::seconds() const
+	{
+		return _seconds + _nanoseconds * 1e-9;
+	}
+
+	double Time::minutes() const
+	{
+		return this->seconds() / 60;
+	}
+
+	double Time::hours() const
+	{
+		return this->seconds() / 3600;
+	}
+
+	//	operators
 	Time& Time::operator=( const Time& time )
 	{
-		_seconds = time.seconds();
-		_nanoseconds = time.nanoseconds();
+		_seconds = time.get_seconds();
+		_nanoseconds = time.get_nanoseconds();
 		return *this;
 	}
 
 	Time& Time::operator+=( const Time& time )
 	{
-		_nanoseconds += time.nanoseconds();
+		_nanoseconds += time.get_nanoseconds();
 		if ( _nanoseconds > NANOS_PER_SEC )
 		{
-			_seconds += time.seconds() + 1;
+			_seconds += time.get_seconds() + 1;
 			_nanoseconds -= NANOS_PER_SEC;
 		}
 		else
 		{
-			_seconds += time.seconds();
+			_seconds += time.get_seconds();
 		}
 		return *this;
 	}
 
 	Time& Time::operator-=( const Time& time )
 	{
-		_nanoseconds -= time.nanoseconds();
+		_nanoseconds -= time.get_nanoseconds();
 		if ( _nanoseconds < 0 )
 		{
-			_seconds -= time.seconds() - 1;
+			_seconds -= time.get_seconds() - 1;
 			_nanoseconds += NANOS_PER_SEC;
 		}
 		else
 		{
-			_seconds -= time.seconds();
+			_seconds -= time.get_seconds();
 		}
 		return *this;
 	}
@@ -139,9 +167,9 @@ namespace tk
 	{
 		out
 			<<	'['
-			<<	time.seconds()
+			<<	time.get_seconds()
 			<<	'+'
-			<<	time.nanoseconds()
+			<<	time.get_nanoseconds()
 			<<	']';
 		return out;
 	}
@@ -151,74 +179,8 @@ namespace tk
 	//
 	//	Stopwatch class
 	//
-//	Time Stopwatch::add(Time const &time1, Time const &time2)
-//	{
-//		Time sum;
-//		long dnsec = time1.tv_nsec + time2.tv_nsec;
-//		if ( dnsec > NANOS_PER_SEC )
-//		{
-//			sum.tv_sec = time1.tv_sec + time2.tv_sec + 1;
-//			sum.tv_nsec = dnsec - NANOS_PER_SEC;
-//		}
-//		else
-//		{
-//			sum.tv_sec = time1.tv_sec + time2.tv_sec;
-//			sum.tv_nsec = dnsec;
-//		}
-//		{
-//			cerr
-//				<<	time1
-//				<<	'+'
-//				<<	time2
-//				<<	'='
-//				<<	sum
-//				<<	endl;
-//		}
-//		return sum;
-//	}
-
-//	Time Stopwatch::diff(Time const &start, Time const &end)
-//	{
-//		Time diff;
-//		long dnsec = end.tv_nsec - start.tv_nsec;
-//		if ( dnsec < 0 )
-//		{
-//			diff.tv_sec = end.tv_sec - start.tv_sec - 1;
-//			diff.tv_nsec = NANOS_PER_SEC + dnsec;
-//		}
-//		else
-//		{
-//			diff.tv_sec = end.tv_sec - start.tv_sec;
-//			diff.tv_nsec = dnsec;
-//		}
-//		{
-//			cerr
-//				<<	end
-//				<<	'-'
-//				<<	start
-//				<<	'='
-//				<<	diff
-//				<<	endl;
-//		}
-//		return diff;
-//	}
-
-//	void Stopwatch::reset(Time &time)
-//	{
-//		time.tv_sec = 0;
-//		time.tv_nsec = 0;
-//		{
-//			cerr
-//				<<	"Resetting time: "
-//				<<	time
-//				<<	endl;
-//		}
-//	}
-
-	//	BEGIN INSTANCE
 	Stopwatch::Stopwatch() : _running(false)
 	{
-//		Stopwatch::reset( _total );	
 		_total.reset();
 		_control.reset();
 		this->start();
@@ -231,71 +193,35 @@ namespace tk
 	{
 		if ( ! _running )
 		{
-//			Stopwatch::reset( _partial );
 			_partial.reset();
 			_running = ( ! _running );
-//			Stopwatch::now( _begin );
-//			_begin = Stopwatch::now();
 			_begin.now();
-			{
-				cerr
-					<<	"Starting"
-					<<	endl;
-			}
 		}
 	}
 
 	void Stopwatch::stop()
 	{
-//		Stopwatch::now( _end );
-//		_end = Stopwatch::now();
 		_end.now();
 		if ( _running )
 		{
 			_running = ( ! _running );
-//			_partial = Stopwatch::diff( _begin , _end );
 			_partial = _end - _begin;
 			_partial -= _control;
-//			_total = Stopwatch::add( _total , _partial );
 			_total += _partial;
-			{
-				cerr
-					<<	"Stopping"
-					<<	endl;
-			}
 		}
 	}
 
 	void Stopwatch::reset()
 	{
-//		Stopwatch::reset( _partial );
 		_partial.reset();
-		{
-			cerr
-				<<	"Resetting partial"
-				<<	endl;
-		}
 		if ( ! _running )
-		{
-//			Stopwatch::reset( _total );
 			_total.reset();
-			{
-				cerr
-					<<	"Resetting total"
-					<<	endl;
-			}
-		}
 	}
 
 	void Stopwatch::finish()
 	{
 		this->stop();
 		this->reset();
-		{
-			cerr
-				<<	"Finished"
-				<<	endl;
-		}
 	}
 
 	void Stopwatch::toggle()
@@ -304,11 +230,6 @@ namespace tk
 			this->stop();
 		else
 			this->start();
-		{
-			cerr
-				<<	"Toggled"
-				<<	endl;
-		}
 	}
 
 	//	getters
@@ -316,26 +237,6 @@ namespace tk
 	{
 		return _total;
 	}
-
-//	unsigned long long int Stopwatch::total_ns()
-//	{
-//		return _total.tv_sec * NANOS_PER_SEC + _total.tv_nsec;
-//	}
-//
-//	double Stopwatch::total_s()
-//	{
-//		return this->total_ns() / 1e9;
-//	}
-//
-//	double Stopwatch::total_ms()
-//	{
-//		return this->total_ns() / 1e6;
-//	}
-//
-//	double Stopwatch::total_us()
-//	{
-//		return this->total_ns() / 1e3;
-//	}
 
 	Time Stopwatch::partial()
 	{
