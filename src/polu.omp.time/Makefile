@@ -25,3 +25,9 @@ endif#	ITERATION
 endif#	MAIN
 endif#	ALL
 endif#	TIME
+
+ifdef	OMP_FCT_ALL
+CXXFLAGS	+=	-DOMP_FCT_ALL=$(OMP_FCT_ALL)
+else
+CXXFLAGS	+=	-DOMP_FCT_ALL=1
+endif

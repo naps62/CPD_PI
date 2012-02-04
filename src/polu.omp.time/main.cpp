@@ -1,5 +1,8 @@
 #include <iostream>
 #include <limits>
+
+#include <omp.h>
+
 #include "FVLib.h"
 
 #include <fv/cpu/cell.hpp>
@@ -38,24 +41,38 @@ using tk::Time;
 //	BEGIN GLOBALS
 //
 
+int tc;
+
 #ifdef	TIME
 struct TimeStats
 {
 	double total;
 	double min;
 	double max;
+
+	friend ostream& operator<<(ostream& out, const TimeStats& ts);
+
+	TimeStats();
 };
 
 struct Timer
 {
 	Stopwatch timer;
 	TimeStats miliseconds;
+	unsigned count;
+
+	Timer();
 };
 
 struct ProgramTimeInfo
 {
 #ifdef	TIME_MAIN
-	Timer main;
+	struct
+	{
+		Stopwatch timer;
+		double total;
+	}
+	main;
 #endif
 #ifdef	TIME_ITERATION
 	Timer iteration;
@@ -72,6 +89,26 @@ struct ProgramTimeInfo
 times;
 #endif
 
+TimeStats::TimeStats() :
+	total(0),
+	min( numeric_limits<double>::max() ),
+	max( numeric_limits<double>::min() )
+{}
+
+ostream& operator<<(ostream& out, const TimeStats& ts)
+{
+	out
+		<<	"total: "	<<	ts.total	<<	endl
+		<<	"min:   "	<<	ts.min		<<	endl
+		<<	"max:	"	<<	ts.max		<<	endl
+		;
+	return out;
+}
+
+Timer::Timer() :
+	count(0)
+{}
+
 //
 //	END GLOBALS
 //
@@ -86,7 +123,7 @@ void compute_flux(
 #endif
 
 
-#pragma omp parallel for
+#pragma omp parallel for num_threads(tc)
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
@@ -124,6 +161,7 @@ void compute_flux(
 			? miliseconds
 			: times.functions.compute_flux.miliseconds.max
 			;
+		times.functions.compute_flux.count += 1;
 	}
 #endif
 
@@ -141,7 +179,7 @@ void update(
 #endif
 
 
-#pragma omp parallel for
+#pragma omp parallel for num_threads(tc)
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];
@@ -177,6 +215,7 @@ void update(
 			? miliseconds
 			: times.functions.update.miliseconds.max
 			;
+		times.functions.update.count += 1;
 	}
 #endif
 
@@ -258,8 +297,6 @@ int main(int argc, char *argv[])
 
 		edge.flux = flux[ e ];
 		edge.length = fv_edge->length;
-//		edge.normal[0] = fv_edge->normal.x;
-//		edge.normal[1] = fv_edge->normal.y;
 		edge.left = fv_edge->leftCell->label - 1;
 		edge.right = ( fv_edge->rightCell )
 					 ? fv_edge->rightCell->label - 1
@@ -314,6 +351,10 @@ int main(int argc, char *argv[])
 	}
 
 
+	//
+	//	OpenMP init
+	//
+	tc = omp_get_num_procs() * OMP_FCT_ALL; 
 
 
 
@@ -325,7 +366,6 @@ int main(int argc, char *argv[])
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	while(time<final_time)
-//	for ( int i = 0 ; i < 10 ; ++i )
 	{
 #ifdef	TIME_ITERATION
 		times.iteration.timer.start();
@@ -376,6 +416,7 @@ int main(int argc, char *argv[])
 				? miliseconds
 				: times.iteration.miliseconds.max
 				;
+			times.iteration.count += 1;
 		}
 #endif
 	}
@@ -390,20 +431,38 @@ int main(int argc, char *argv[])
 
 #ifdef	TIME_MAIN
 	times.main.timer.stop();
-	{
-		Time total = times.main.timer.total();
-		double miliseconds = total.miliseconds();
-		times.main.miliseconds.total += miliseconds;
-		times.main.miliseconds.min =
-			( miliseconds < times.main.miliseconds.min )
-			? miliseconds
-			: times.main.miliseconds.min
-			;
-		times.main.miliseconds.max =
-			( miliseconds > times.main.miliseconds.max )
-			? miliseconds
-			: times.main.miliseconds.max
-			;
-	}
+	cout
+		<<	"<main>"	<<	endl
+		<<	"total: "	<<	times.main.timer.total().miliseconds()
+						<<	endl
+		<<	"</main>"	<<	endl
+		;
+#endif
+#ifdef	TIME_ITERATION
+	cout
+		<<	"<iteration>"	<<	endl
+		<<	"total: "	<<	times.iteration.miliseconds.total	<<	endl
+		<<	"min: "		<<	times.iteration.miliseconds.min		<<	endl
+		<<	"max: "		<<	times.iteration.miliseconds.max		<<	endl
+		<<	"count: "	<<	times.iteration.count	<<	endl
+		<<	"</iteration>"	<<	endl
+		;
+#endif
+#ifdef	TIME_FUNCTIONS
+	cout
+		<<	"<functions>"	<<	endl
+		<<	"<compute_flux>"	<<	endl
+		<<	"total: "	<<	times.functions.compute_flux.miliseconds.total	<<	endl
+		<<	"min: "		<<	times.functions.compute_flux.miliseconds.min	<<	endl
+		<<	"max: "		<<	times.functions.compute_flux.miliseconds.max	<<	endl
+		<<	"count: "	<<	times.functions.compute_flux.count	<<	endl
+		<<	"</compute_flux>"	<<	endl
+		<<	"<update>"	<<	endl
+		<<	"total: "	<<	times.functions.update.miliseconds.total	<<	endl
+		<<	"min: "		<<	times.functions.update.miliseconds.min		<<	endl
+		<<	"max: "		<<	times.functions.update.miliseconds.max		<<	endl
+		<<	"count: "	<<	times.functions.update.count	<<	endl
+		<<	"</update>"	<<	endl
+		;
 #endif
 }

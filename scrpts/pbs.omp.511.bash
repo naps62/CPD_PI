@@ -11,14 +11,18 @@
 #PBS -e out/omp.511.err
 #PBS -o out/omp.511.out
 #
-CASES=( tiny small medium big huge original )
-EXE="polu.openmp"
+CASES=( "tiny" "small" "medium" "big" "huge" "original" )
+TIMERS=( "main" "iteration" "functions" )
+EXE="polu.omp.time"
 
 cd "$PBS_O_WORKDIR"
 
 for c in ${CASES[@]};
 do
 	echo "#####    ${c}    #####";
-	time bin/${EXE} "data/xml/${c}.param.xml";
+	for t in ${TIMERS[@]}
+	do
+		bin/${EXE}.${t} "data/xml/${c}.param.xml";
+	done;
 	echo;
 done;
