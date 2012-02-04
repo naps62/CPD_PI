@@ -46,7 +46,6 @@ int tc;
 #ifdef	TIME
 struct TimeStats
 {
-	double total;
 	double min;
 	double max;
 
@@ -90,7 +89,6 @@ times;
 #endif
 
 TimeStats::TimeStats() :
-	total(0),
 	min( numeric_limits<double>::max() ),
 	max( numeric_limits<double>::min() )
 {}
@@ -98,7 +96,6 @@ TimeStats::TimeStats() :
 ostream& operator<<(ostream& out, const TimeStats& ts)
 {
 	out
-		<<	"total: "	<<	ts.total	<<	endl
 		<<	"min:   "	<<	ts.min		<<	endl
 		<<	"max:	"	<<	ts.max		<<	endl
 		;
@@ -119,7 +116,6 @@ void compute_flux(
 {
 
 #ifdef	TIME_FUNCTIONS
-	#pragma omp master
 	times.functions.compute_flux.timer.start();
 #endif
 
@@ -147,25 +143,24 @@ void compute_flux(
 
 
 #ifdef	TIME_FUNCTIONS
-	#pragma omp master
+	times.functions.compute_flux.timer.stop();
 	{
-		times.functions.compute_flux.timer.stop();
-		{
-			Time total = times.functions.compute_flux.timer.total();
-			double miliseconds = total.miliseconds();
-			times.functions.compute_flux.miliseconds.total += miliseconds;
-			times.functions.compute_flux.miliseconds.min =
-				( miliseconds < times.functions.compute_flux.miliseconds.min )
-				? miliseconds
-				: times.functions.compute_flux.miliseconds.min
-				;
-			times.functions.compute_flux.miliseconds.max =
-				( miliseconds > times.functions.compute_flux.miliseconds.max )
-				? miliseconds
-				: times.functions.compute_flux.miliseconds.max
-				;
-			times.functions.compute_flux.count += 1;
-		}
+//		Time total = times.functions.compute_flux.timer.total();
+//		double miliseconds = total.miliseconds();
+//		times.functions.compute_flux.miliseconds.total += miliseconds;
+		Time partial = times.functions.compute_flux.timer.partial();
+		double miliseconds = partial.miliseconds();
+		times.functions.compute_flux.miliseconds.min =
+			( miliseconds < times.functions.compute_flux.miliseconds.min )
+			? miliseconds
+			: times.functions.compute_flux.miliseconds.min
+			;
+		times.functions.compute_flux.miliseconds.max =
+			( miliseconds > times.functions.compute_flux.miliseconds.max )
+			? miliseconds
+			: times.functions.compute_flux.miliseconds.max
+			;
+		times.functions.compute_flux.count += 1;
 	}
 #endif
 
@@ -206,9 +201,11 @@ void update(
 #ifdef	TIME_FUNCTIONS
 	times.functions.update.timer.stop();
 	{
-		Time total = times.functions.update.timer.total();
-		double miliseconds = total.miliseconds();
-		times.functions.update.miliseconds.total += miliseconds;
+//		Time total = times.functions.update.timer.total();
+//		double miliseconds = total.miliseconds();
+//		times.functions.update.miliseconds.total += miliseconds;
+		Time partial = times.functions.update.timer.partial();
+		double miliseconds = partial.miliseconds();
 		times.functions.update.miliseconds.min =
 			( miliseconds < times.functions.update.miliseconds.min )
 			? miliseconds
@@ -407,9 +404,11 @@ int main(int argc, char *argv[])
 #ifdef	TIME_ITERATION
 		times.iteration.timer.stop();
 		{
-			Time total = times.iteration.timer.total();
-			double miliseconds = total.miliseconds();
-			times.iteration.miliseconds.total += miliseconds;
+//			Time total = times.iteration.timer.total();
+//			double miliseconds = total.miliseconds();
+//			times.iteration.miliseconds.total += miliseconds;
+			Time partial = times.iteration.timer.partial();
+			double miliseconds = partial.miliseconds();
 			times.iteration.miliseconds.min =
 				( miliseconds < times.iteration.miliseconds.min )
 				? miliseconds
@@ -435,39 +434,51 @@ int main(int argc, char *argv[])
 
 #ifdef	TIME_MAIN
 	times.main.timer.stop();
-	Time total = times.main.timer.total();
-	cout
-		<<	"<main>"	<<	endl
-		<<	"total: "	<<	total.miliseconds()
-						<<	endl
-		<<	"</main>"	<<	endl
-		;
+	{
+		Time total = times.main.timer.total();
+		cout
+			<<	"<main>"	<<	endl
+			<<	"total: "	<<	total.miliseconds()
+							<<	endl
+			<<	"</main>"	<<	endl
+			;
+	}
 #endif
 #ifdef	TIME_ITERATION
-	cout
-		<<	"<iteration>"	<<	endl
-		<<	"total: "	<<	times.iteration.miliseconds.total	<<	endl
-		<<	"min: "		<<	times.iteration.miliseconds.min		<<	endl
-		<<	"max: "		<<	times.iteration.miliseconds.max		<<	endl
-		<<	"count: "	<<	times.iteration.count	<<	endl
-		<<	"</iteration>"	<<	endl
-		;
+	{
+		Time total = times.iteration.timer.total();
+		cout
+			<<	"<iteration>"	<<	endl
+			<<	"total: "	<<	total.miliseconds()	<<	endl
+			<<	"min: "		<<	times.iteration.miliseconds.min		<<	endl
+			<<	"max: "		<<	times.iteration.miliseconds.max		<<	endl
+			<<	"count: "	<<	times.iteration.count	<<	endl
+			<<	"</iteration>"	<<	endl
+			;
+	}
 #endif
 #ifdef	TIME_FUNCTIONS
-	cout
-		<<	"<functions>"	<<	endl
-		<<	"<compute_flux>"	<<	endl
-		<<	"total: "	<<	times.functions.compute_flux.miliseconds.total	<<	endl
-		<<	"min: "		<<	times.functions.compute_flux.miliseconds.min	<<	endl
-		<<	"max: "		<<	times.functions.compute_flux.miliseconds.max	<<	endl
-		<<	"count: "	<<	times.functions.compute_flux.count	<<	endl
-		<<	"</compute_flux>"	<<	endl
-		<<	"<update>"	<<	endl
-		<<	"total: "	<<	times.functions.update.miliseconds.total	<<	endl
-		<<	"min: "		<<	times.functions.update.miliseconds.min		<<	endl
-		<<	"max: "		<<	times.functions.update.miliseconds.max		<<	endl
-		<<	"count: "	<<	times.functions.update.count	<<	endl
-		<<	"</update>"	<<	endl
-		;
+	{
+		Time total[2];
+		total[0] = times.functions.compute_flux.timer.total();
+		total[1] = times.functions.update.timer.total();
+		cout
+			<<	"<functions>"	<<	endl
+			<<	"<compute_flux>"	<<	endl
+	//		<<	"total: "	<<	times.functions.compute_flux.miliseconds.total	<<	endl
+			<<	"total: "	<<	total[0].miliseconds()	<<	endl
+			<<	"min: "		<<	times.functions.compute_flux.miliseconds.min	<<	endl
+			<<	"max: "		<<	times.functions.compute_flux.miliseconds.max	<<	endl
+			<<	"count: "	<<	times.functions.compute_flux.count	<<	endl
+			<<	"</compute_flux>"	<<	endl
+			<<	"<update>"	<<	endl
+	//		<<	"total: "	<<	times.functions.update.miliseconds.total	<<	endl
+			<<	"total: "	<<	total[1].miliseconds()	<<	endl
+			<<	"min: "		<<	times.functions.update.miliseconds.min		<<	endl
+			<<	"max: "		<<	times.functions.update.miliseconds.max		<<	endl
+			<<	"count: "	<<	times.functions.update.count	<<	endl
+			<<	"</update>"	<<	endl
+			;
+	}
 #endif
 }

@@ -43,7 +43,7 @@ namespace tk
 		//		pure
 		time_t get_seconds() const;
 //		long get_nanoseconds() const;
-		long get_microseconds() const;
+		suseconds_t get_microseconds() const;
 		//		worked
 		double hours() const;
 		double minutes() const;
