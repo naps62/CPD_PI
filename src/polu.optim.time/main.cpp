@@ -1,15 +1,10 @@
 #include <iostream>
-#include <limits>
-
-#include <omp.h>
-
 #include "FVLib.h"
 
 #include <fv/cpu/cell.hpp>
 #include <fv/cpu/edge.hpp>
 
 #include <tk/stopwatch.hpp>
-
 
 using fv::cpu::Cell;
 using fv::cpu::Edge;
@@ -40,8 +35,6 @@ using tk::Time;
 //
 //	BEGIN GLOBALS
 //
-
-int tc;
 
 #ifdef	TIME
 struct TimeStats
@@ -110,37 +103,36 @@ Timer::Timer() :
 //	END GLOBALS
 //
 
+
+//---------
 void compute_flux(
 	Edge *edges, unsigned edge_count, Cell *cells,
 	double dirichlet)
 {
+	double polL,polR;
 
 #ifdef	TIME_FUNCTIONS
 	times.functions.compute_flux.timer.start();
 #endif
 
-
-#pragma omp parallel for num_threads(tc)
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
 		Cell &cell_left = cells[ edge.left ];
-		double p_left = cell_left.polution;
-		double p_right;
+		polL = cell_left.polution;
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
 			Cell &cell_right = cells[ edge.right ];
-			p_right = cell_right.polution;
+			polR = cell_right.polution;
 		}
 		else
 		{
-			p_right = dirichlet;
+			polR= dirichlet;
 		} 
 		edge.flux = ( edge.velocity < 0 )
-				  ? ( edge.velocity * p_right )
-				  : ( edge.velocity * p_left );
+				  ? ( edge.velocity * polR )
+				  : ( edge.velocity * polL );
 	}
-
 
 #ifdef	TIME_FUNCTIONS
 	times.functions.compute_flux.timer.stop();
@@ -163,20 +155,19 @@ void compute_flux(
 
 }
 
-void update(
+void    update(
 	Cell *cells,
 	unsigned cell_count,
 	Edge *edges,
+//	unsigned edge_count,
 	double dt)
 {
-
+	
 #ifdef	TIME_FUNCTIONS
 	times.functions.update.timer.start();
 #endif
 
-
-#pragma omp parallel for num_threads(tc)
-	for ( unsigned c = 0 ; c < cell_count ; ++c )
+for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];
 		double cdp = 0;
@@ -193,7 +184,6 @@ void update(
 
 		cell.polution += cdp;
 	}
-
 
 #ifdef	TIME_FUNCTIONS
 	times.functions.update.timer.stop();
@@ -231,8 +221,8 @@ void update(
 
 
 int main(int argc, char *argv[])
-{
-
+{  
+	
 #ifdef	TIME_MAIN
 	times.main.timer.start();
 #endif
@@ -294,6 +284,8 @@ int main(int argc, char *argv[])
 
 		edge.flux = flux[ e ];
 		edge.length = fv_edge->length;
+//		edge.normal[0] = fv_edge->normal.x;
+//		edge.normal[1] = fv_edge->normal.y;
 		edge.left = fv_edge->leftCell->label - 1;
 		edge.right = ( fv_edge->rightCell )
 					 ? fv_edge->rightCell->label - 1
@@ -348,10 +340,6 @@ int main(int argc, char *argv[])
 	}
 
 
-	//
-	//	OpenMP init
-	//
-	tc = omp_get_num_procs() * OMP_FCT_ALL; 
 
 
 
@@ -381,6 +369,7 @@ int main(int argc, char *argv[])
 			dt);
 		time += dt;
 
+
 #ifdef	TIME_ITERATION
 		times.iteration.timer.stop();
 		{
@@ -406,6 +395,7 @@ int main(int argc, char *argv[])
 		pol[ c ] = cells[ c ].polution;
 
 	pol_file.put(pol,time,"polution"); 
+
 
 	delete[] cells;
 	delete[] edges;
