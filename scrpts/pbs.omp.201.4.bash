@@ -4,14 +4,14 @@
 #	Runs OpenMP on the 4 core with 4GB RAM Intel Xeon 5130 (group 201)
 #
 #PBS -l nodes=1:r201:ppn=4
-#PBS -l walltime=10:00:00
+#PBS -l walltime=2:00:00
 #
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
 #PBS -e out/omp.201.4.err
 #PBS -o out/omp.201.4.out
 #
-CASES=( "tiny" "small" "medium" "big" "huge" "original" )
+CASES=( "tiny" "small" "medium" "big" "huge" )
 TIMERS=( "main" "iteration" "functions" )
 EXE="polu.omp.time"
 
@@ -23,10 +23,7 @@ do
 	for t in ${TIMERS[@]}
 	do
 		echo ">>>>> ${t}";
-		for i in {1..10}
-		do
-			bin/${EXE}.${t} "data/xml/${c}.param.xml";
-		done;
+		bin/${EXE}.${t} "data/xml/${c}.param.xml";
 		echo "<<<<< ${t}";
 	done;
 	echo;

@@ -12,7 +12,7 @@
 #PBS -e out/omp.511.6.err
 #PBS -o out/omp.511.6.out
 #
-CASES=( "tiny" "small" "medium" "big" "huge" "original" )
+CASES=( "tiny" "small" "medium" "big" "huge" )
 TIMERS=( "main" "iteration" "functions" )
 EXE="polu.omp.time"
 
@@ -24,10 +24,7 @@ do
 	for t in ${TIMERS[@]}
 	do
 		echo ">>>>> ${t}";
-		for i in {1..10}
-		do
-			bin/${EXE}.${t} "data/xml/${c}.param.xml";
-		done;
+		bin/${EXE}.${t} "data/xml/${c}.param.xml";
 		echo "<<<<< ${t}";
 	done;
 	echo;
