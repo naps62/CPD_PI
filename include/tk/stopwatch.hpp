@@ -8,22 +8,13 @@ using std::ostream;
 
 namespace tk
 {
-//	class Time : timespec
 	class Time : public timeval
 	{
-//		static timespec timespec_now();
-//		static timespec& timespec_now( timespec& time );
 		static timeval timernow();
 		static timeval& timernow( timeval& time );
 
 
 		//	instance
-//		time_t _seconds;
-//		long _nanoseconds;
-//		suseconds_t _microseconds;
-
-//		void set( const timespec& now );
-//		void set( time_t seconds, long nanoseconds );
 		void set( const timeval& time );
 		void set( const time_t seconds, const suseconds_t _microseconds );
 
@@ -42,7 +33,6 @@ namespace tk
 		//	getters
 		//		pure
 		time_t get_seconds() const;
-//		long get_nanoseconds() const;
 		suseconds_t get_microseconds() const;
 		//		worked
 		double hours() const;
@@ -50,8 +40,6 @@ namespace tk
 		double seconds() const;
 		double miliseconds() const;
 		long long int microseconds() const;
-//		double microseconds() const;
-//		long long int nanoseconds() const;
 
 		//	operators
 		Time& operator=( const Time& time );
