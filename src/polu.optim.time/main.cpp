@@ -167,7 +167,7 @@ void    update(
 	times.functions.update.timer.start();
 #endif
 
-for ( unsigned c = 0 ; c < cell_count ; ++c )
+	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];
 		double cdp = 0;
