@@ -351,21 +351,6 @@ int main(int argc, char *argv[])
 			edges,
 			dt);
 		time+=dt;
-	//    nbiter++;
-	//    if(nbiter%nbjump==0)
-	//        {
-	//        pol_file.put(pol,time,"polution");    
-	//        printf("step %d  at time %f \r",(int)nbiter,time); fflush(NULL);
-	//        }
-	// 
-		{
-//			using std::cout;
-//			using std::endl;
-//			for ( int j = 0 ; j < cell_count ; ++j )
-//				cout
-//					<<	'['	<<	j	<<	"]:"	<<	cells[j].polution	<<	endl;
-//			getchar();
-		}
 
 #ifdef	TIME_ITERATION
 		times.iteration.timer.stop();

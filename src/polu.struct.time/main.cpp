@@ -142,16 +142,46 @@ double compute_flux(
 		if (abs(v)*dt>1) dt=1./abs(v);
 		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 	}
+
+#ifdef	TIME_FUNCTIONS
+	times.functions.compute_flux.timer.stop();
+	{
+		Time partial = times.functions.compute_flux.timer.partial();
+		double miliseconds = partial.miliseconds();
+		times.functions.compute_flux.miliseconds.min =
+			( miliseconds < times.functions.compute_flux.miliseconds.min )
+			? miliseconds
+			: times.functions.compute_flux.miliseconds.min
+			;
+		times.functions.compute_flux.miliseconds.max =
+			( miliseconds > times.functions.compute_flux.miliseconds.max )
+			? miliseconds
+			: times.functions.compute_flux.miliseconds.max
+			;
+		times.functions.compute_flux.count += 1;
+	}
+#endif
+
 	return dt;
 }
 
+
+
+
+
+
+
 void    update(
 	Cell *cells,
-	unsigned cell_count,
 	Edge *edges,
 	unsigned edge_count,
 	double dt)
 {
+
+#ifdef	TIME_FUNCTIONS
+	times.functions.update.timer.start();
+#endif
+
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[ e ];
@@ -164,19 +194,25 @@ void    update(
 		}
 	}
 
-//	for ( unsigned c = 0 ; c < cell_count ; ++c )
-//	{
-//		Cell &cell = cells[ c ];
-//		for ( unsigned e = 0 ; e < cell.edge_count ; ++e )
-//		{
-//			Edge &edge = edges[ e ];
-//			double dp = dt * edge.flux * edge.length / cell.area;
-//			if ( c == edge.left )
-//				cell.polution -= dp;
-//			else
-//				cell.polution += dp;
-//		}
-//	}
+#ifdef	TIME_FUNCTIONS
+	times.functions.update.timer.stop();
+	{
+		Time partial = times.functions.update.timer.partial();
+		double miliseconds = partial.miliseconds();
+		times.functions.update.miliseconds.min =
+			( miliseconds < times.functions.update.miliseconds.min )
+			? miliseconds
+			: times.functions.update.miliseconds.min
+			;
+		times.functions.update.miliseconds.max =
+			( miliseconds > times.functions.update.miliseconds.max )
+			? miliseconds
+			: times.functions.update.miliseconds.max
+			;
+		times.functions.update.count += 1;
+	}
+#endif
+
 }    
 //
 
@@ -195,14 +231,26 @@ void    update(
 
 
 int main(int argc, char *argv[])
-{  
-	string parameter_filename="param.xml", mesh_filename,velo_filename,pol_filename,pol_ini_filename;
+{
+
+#ifdef	TIME_MAIN
+	times.main.timer.start();
+#endif
+
+	string parameter_filename;
+	if ( argc > 1 )
+		parameter_filename = string( argv[1] );
+	else
+		parameter_filename = "param.xml";
+
+	string mesh_filename,velo_filename,pol_filename,pol_ini_filename;
 	string name;
 	// read the parameter
 	Parameter para(parameter_filename.c_str());
 	mesh_filename=para.getString("MeshName");
 	velo_filename=para.getString("VelocityFile");
 	pol_ini_filename=para.getString("PoluInitFile");
+	string out_fname = para.getString("PoluFile");
 
 	double dirichlet = para.getDouble("DirichletCondition");
 
@@ -279,42 +327,104 @@ int main(int argc, char *argv[])
 
 	// the main loop
 	time=0.;nbiter=0;
-	FVio pol_file("polution.omp.xml",FVWRITE);
+//	FVio pol_file("polution.omp.xml",FVWRITE);
+	FVio pol_file( out_fname.c_str() , FVWRITE );
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	while(time<final_time)
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
+
+#ifdef	TIME_ITERATION
+		times.iteration.timer.start();
+#endif
+
 		dt = compute_flux(
 			edges , edge_count , cells , dirichlet ) * h;
 		update(
 			cells,
-			cell_count,
 			edges,
 			edge_count,
 			dt);
 		time+=dt;
-	//    nbiter++;
-	//    if(nbiter%nbjump==0)
-	//        {
-	//        pol_file.put(pol,time,"polution");    
-	//        printf("step %d  at time %f \r",(int)nbiter,time); fflush(NULL);
-	//        }
-	// 
+
+#ifdef	TIME_ITERATION
+		times.iteration.timer.stop();
 		{
-//			using std::cout;
-//			using std::endl;
-//			for ( int j = 0 ; j < cell_count ; ++j )
-//				cout
-//					<<	'['	<<	j	<<	"]:"	<<	cells[j].polution	<<	endl;
-//			getchar();
+			Time partial = times.iteration.timer.partial();
+			double miliseconds = partial.miliseconds();
+			times.iteration.miliseconds.min =
+				( miliseconds < times.iteration.miliseconds.min )
+				? miliseconds
+				: times.iteration.miliseconds.min
+				;
+			times.iteration.miliseconds.max =
+				( miliseconds > times.iteration.miliseconds.max )
+				? miliseconds
+				: times.iteration.miliseconds.max
+				;
+			times.iteration.count += 1;
 		}
+#endif
+
 	}
 
 	for ( unsigned c = 0; c < cell_count ; ++c )
 		pol[ c ] = cells[ c ].polution;
 
 	pol_file.put(pol,time,"polution"); 
+
+
+	delete[] cells;
+	delete[] edges;
+
+#ifdef	TIME_MAIN
+	times.main.timer.stop();
+	{
+		Time total = times.main.timer.total();
+		cout
+			<<	"<main>"	<<	endl
+			<<	"total: "	<<	total.miliseconds()
+							<<	endl
+			<<	"</main>"	<<	endl
+			;
+	}
+#endif
+#ifdef	TIME_ITERATION
+	{
+		Time total = times.iteration.timer.total();
+		cout
+			<<	"<iteration>"	<<	endl
+			<<	"total: "	<<	total.miliseconds()	<<	endl
+			<<	"min: "		<<	times.iteration.miliseconds.min		<<	endl
+			<<	"max: "		<<	times.iteration.miliseconds.max		<<	endl
+			<<	"count: "	<<	times.iteration.count	<<	endl
+			<<	"</iteration>"	<<	endl
+			;
+	}
+#endif
+#ifdef	TIME_FUNCTIONS
+	{
+		Time total[2];
+		total[0] = times.functions.compute_flux.timer.total();
+		total[1] = times.functions.update.timer.total();
+		cout
+			<<	"<functions>"	<<	endl
+			<<	"<compute_flux>"	<<	endl
+			<<	"total: "	<<	total[0].miliseconds()	<<	endl
+			<<	"min: "		<<	times.functions.compute_flux.miliseconds.min	<<	endl
+			<<	"max: "		<<	times.functions.compute_flux.miliseconds.max	<<	endl
+			<<	"count: "	<<	times.functions.compute_flux.count	<<	endl
+			<<	"</compute_flux>"	<<	endl
+			<<	"<update>"	<<	endl
+			<<	"total: "	<<	total[1].miliseconds()	<<	endl
+			<<	"min: "		<<	times.functions.update.miliseconds.min		<<	endl
+			<<	"max: "		<<	times.functions.update.miliseconds.max		<<	endl
+			<<	"count: "	<<	times.functions.update.count	<<	endl
+			<<	"</update>"	<<	endl
+			;
+	}
+#endif
 
 
 }
