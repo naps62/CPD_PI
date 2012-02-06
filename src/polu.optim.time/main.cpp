@@ -162,7 +162,7 @@ void    update(
 //	unsigned edge_count,
 	double dt)
 {
-	
+
 #ifdef	TIME_FUNCTIONS
 	times.functions.update.timer.start();
 #endif
@@ -222,7 +222,7 @@ void    update(
 
 int main(int argc, char *argv[])
 {  
-	
+
 #ifdef	TIME_MAIN
 	times.main.timer.start();
 #endif
@@ -368,7 +368,6 @@ int main(int argc, char *argv[])
 			edges,
 			dt);
 		time += dt;
-
 
 #ifdef	TIME_ITERATION
 		times.iteration.timer.stop();
