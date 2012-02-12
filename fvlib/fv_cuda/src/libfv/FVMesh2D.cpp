@@ -213,6 +213,7 @@ void FVMesh2D::complete_data()
 		_edge[i].leftCell=NULL;_edge[i].rightCell=NULL;
 		_edge[i].nb_cell=2;
 		_edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*(double)0.5;
+
 		FVPoint2D<double> u;
 		u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
 		_edge[i].length=Norm(u);

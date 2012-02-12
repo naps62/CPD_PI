@@ -194,9 +194,9 @@ namespace CudaFV {
 			v2.y = vertex_coords.y[v2_i];
 
 			// calc centroid of edge
-			FVPoint2D<double> centroid;
-			edge_centroids.x[i] = centroid.x;
-			edge_centroids.y[i] = centroid.y;
+			//FVPoint2D<double> centroid;
+			edge_centroids.x[i] = (vertex_coords.x[ edge_fst_vertex[i] ] + vertex_coords.x[ edge_snd_vertex[i] ]) * 0.5;
+			edge_centroids.y[i] = (vertex_coords.y[ edge_fst_vertex[i] ] + vertex_coords.y[ edge_snd_vertex[i] ]) * 0.5;
 
 			// calc edge length
 			FVPoint2D<double> u;

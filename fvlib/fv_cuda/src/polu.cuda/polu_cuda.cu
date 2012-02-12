@@ -74,6 +74,11 @@ int main() {
 	// GPU
 	CudaFV::CFVMesh2D mesh(old_mesh);
 
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		cout << mesh.edge_normals.x[i] << " " << mesh.edge_normals.y[i] << " " << mesh.edge_lengths[i] << endl;
+	}
+	exit(0);
+
 	FVVect<double> old_polution( old_mesh.getNbCell() );
 	FVVect<double> old_flux( old_mesh.getNbEdge() );
 	FVVect<FVPoint2D<double> > old_velocity( old_mesh.getNbCell() );

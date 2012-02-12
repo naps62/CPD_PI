@@ -60,6 +60,10 @@ int main() {
 
 	// GPU
 	CudaFV::CFVMesh2D mesh(data.filenames.mesh);
+
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		cout << mesh.edge_normals.x[i] << " " << mesh.edge_normals.y[i] << " " << mesh.edge_lengths[i] << endl;	
+	}
 	exit(0);
 	//CudaFV::CFVMesh2D mesh(old_mesh);
 
@@ -73,8 +77,6 @@ int main() {
 
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVREAD );
 	polu_ini_file.get( old_polution , t , name );
-
-
 	
 	return 0;
 }
