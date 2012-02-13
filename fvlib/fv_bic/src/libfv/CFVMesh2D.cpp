@@ -1,17 +1,18 @@
 #include <fstream>
 #include <string>
 
-#include "CUDA/CFVMesh2D.h"
+#include "FVL/CUDA/CFVMesh2D.h"
 #include "FVLib_config.h"
 #include "FVPoint2D.h"
 
 #include "rapidxml/rapidxml.hpp"
-#include "MFVio.h"
-#include "MFVErr.h"
+#include "FVL/FVio.h"
+#include "FVL/FVXMLReader.h"
+#include "FVL/FVErr.h"
 
 using namespace rapidxml;
 
-namespace CudaFV {
+namespace FVL {
 
 	/************************************************
 	 * CONSTRUCTORS
@@ -105,10 +106,12 @@ namespace CudaFV {
 	}
 
 	void CFVMesh2D::read_mesh_file(const string &filename) {
-		xml_document<> mesh;
-		vector<char> xml;
-		string file(filename);
-		MFVio::parse_xml(mesh, xml, file);
+		//xml_document<> mesh;
+		//vector<char> xml;
+		//string file(filename);
+		//FVio::parse_xml(mesh, xml, file);
+		FVXMLReader mesh(filename);
+		// TODO testar esta alteração (acima)
 
 		// get reference for each element list
 		cout << mesh.first_node()->name() << endl;
@@ -118,9 +121,9 @@ namespace CudaFV {
 		cout << vertex->first_attribute()->name() << endl;
 
 		// get count of each element
-		MFVio::str_cast<unsigned int>(num_vertex, vertex->first_attribute("nbvertex")->value());
-		MFVio::str_cast<unsigned int>(num_edges, edge->first_attribute("nbedge")->value());
-		MFVio::str_cast<unsigned int>(num_cells, cell->first_attribute("nbcell")->value());
+		FVio::str_cast<unsigned int>(num_vertex, vertex->first_attribute("nbvertex")->value());
+		FVio::str_cast<unsigned int>(num_edges, edge->first_attribute("nbedge")->value());
+		FVio::str_cast<unsigned int>(num_cells, cell->first_attribute("nbcell")->value());
 
 		// alloc cpu memory for all data
 		alloc();

@@ -1,11 +1,11 @@
-#include "CUDA/CFVProfile.h"
+#include "FVL/CUDA/CFVProfile.h"
 
-namespace CudaFV {
+namespace FVL {
 
-	FVLog CFVProfile::stream(DEF_PROFILE);
+	FVLog CFVProfile::stream(FV_PROFILE);
 
 	CFVProfile::CFVProfile(string msg) {
-		init(msg, DEF_PROFILE);
+		init(msg, FV_PROFILE);
 	}
 
 	CFVProfile::~CFVProfile() {

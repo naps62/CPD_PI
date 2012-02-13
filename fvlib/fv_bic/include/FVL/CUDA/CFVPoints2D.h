@@ -11,9 +11,9 @@
 #ifndef _H_CUDA_FVPOINTS2D
 #define _H_CUDA_FVPOINTS2D
 
-#include "CUDA/CFVVect.h"
+#include "FVL/CUDA/CFVVect.h"
 
-namespace CudaFV {
+namespace FVL {
 
     class CFVPoints2D {
         public:
@@ -24,7 +24,7 @@ namespace CudaFV {
 
             CFVPoints2D()                                   { }
             CFVPoints2D(const unsigned int size)            { x = CFVVect<double>(size);    y = CFVVect<double>(size); }
-            CFVPoints2D(const CudaFV::CFVPoints2D &copy)    { x = CFVVect<double>(copy.x);  y = CFVVect<double>(copy.y); }
+            CFVPoints2D(const FVL::CFVPoints2D &copy)    { x = CFVVect<double>(copy.x);  y = CFVVect<double>(copy.y); }
 
             /**
              * GETTERS/SETTERS

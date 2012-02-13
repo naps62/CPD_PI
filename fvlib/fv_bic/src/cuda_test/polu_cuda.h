@@ -1,7 +1,7 @@
 #include <cuda.h>
 #include <cmath>
 
-#include "CUDA/CFVLib.h"
+#include "FVL/CUDA/CFVLib.h"
 #include "FVLib.h"
 
 #define BLOCK_SIZE_CF	512
@@ -15,12 +15,12 @@
 void cuda_main_loop(
 		double final_time,
 		unsigned jump_interval,
-		CudaFV::CFVMesh2D &mesh,
+		FVL::CFVMesh2D &mesh,
 		double mesh_parameter,
 		FVVect<double> &old_polution,
-		CudaFV::CFVVect<double> &polutions,
-		CudaFV::CFVPoints2D &velocities,
-		CudaFV::CFVVect<double> &flux,
+		FVL::CFVVect<double> &polutions,
+		FVL::CFVPoints2D &velocities,
+		FVL::CFVVect<double> &flux,
 		double dc);
 
 /*
@@ -31,9 +31,9 @@ void cuda_main_loop(
  * update function (still no CUDA implementation)
  */
 void gpu_update(
-		CudaFV::CFVMesh2D &mesh,
-		CudaFV::CFVVect<double> &polution,
-		CudaFV::CFVVect<double> &flux,
+		FVL::CFVMesh2D &mesh,
+		FVL::CFVVect<double> &polution,
+		FVL::CFVVect<double> &flux,
 		double dt);
 
 

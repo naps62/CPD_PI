@@ -1,8 +1,7 @@
 #include <cuda.h>
 
 #include "FVLib.h"
-#include "CUDA/CFVLib.h"
-#include "FVLib.h"
+#include "FVL/CUDA/CFVLib.h"
 
 #include "parameters.h"
 #include "polu_cuda.h"
@@ -10,9 +9,9 @@
 
 
 void gpu_update(
-		CudaFV::CFVMesh2D &mesh,
-		CudaFV::CFVVect<double> &polution,
-		CudaFV::CFVVect<double> &flux,
+		FVL::CFVMesh2D &mesh,
+		FVL::CFVVect<double> &polution,
+		FVL::CFVVect<double> &flux,
 		double dt) {
 
 	// PARA CADA EDGE
@@ -59,13 +58,13 @@ int main() {
 	old_mesh.read( data.filenames.mesh.c_str() );
 
 	// GPU
-	CudaFV::CFVMesh2D mesh(data.filenames.mesh);
+	FVL::CFVMesh2D mesh(data.filenames.mesh);
 
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		cout << mesh.edge_normals.x[i] << " " << mesh.edge_normals.y[i] << " " << mesh.edge_lengths[i] << endl;	
 	}
 	exit(0);
-	//CudaFV::CFVMesh2D mesh(old_mesh);
+	//FVL::CFVMesh2D mesh(old_mesh);
 
 	FVVect<double> old_polution( old_mesh.getNbCell() );
 	FVVect<double> old_flux( old_mesh.getNbEdge() );

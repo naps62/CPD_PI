@@ -7,11 +7,12 @@
 ** Author: Miguel Palhas, mpalhas@gmail.com
 ** -------------------------------------------------------------------------*/
 
-#pragma once
-#define _H_M_FVLIB_CONFIG
+#ifndef _H_FVGLOBAL
+#define _H_FVGLOBAL
 
 #include <climits>
 #include <fstream>
+#include <string>
 
 /**
  * Utilities
@@ -22,36 +23,41 @@
 #define MAX_EDGES_PER_CELL 3
 
 /**
+ * Stream manipulation values
+ */
+#define FV_PRECISION	12
+#define FV_CHAMP		20
+
+/**
  * Logging options
  */
-#define LOG_MODE_APPEND ofstream::app
-#define LOG_MODE_WRITE 	0
+#define FV_LOGMODE_APPEND	ofstream::app
+#define FV_LOGMODE_WRITE 	0
+#define FV_LOGMODE			FV_LOGMODE_APPEND
 
-#define LOG_MODE LOG_MODE_APPEND
-
-#define DEF_LOGFILE string("FVLib.log")
-#define DEF_ERRFILE string("FVLib.err")
-#define DEF_PROFILE string("FVLib.prof")
+#define FV_LOGFILE string("FVLib.log")
+#define FV_ERRFILE string("FVLib.err")
+#define FV_PROFILE string("FVLib.prof")
 
 /**
  * Debug options
  */
-#define _DEBUG_	1
+#define FV_DEBUG	1
 
-#if (_DEBUG_ == 0)
-#define _DEBUG
+#define _DEBUG	if (FV_DEBUG)
+
+#if (FV_DEBUG == 0)
 #define _D
 #else
-#define _DEBUG	if (_DEBUG_)
 #define _D(x)	(x)
 #endif
 
 /**
  * Profiling options
  */
-#define _PROFILE_ 1
+#define FV_PROF 1
 
-#if (_PROFILE_ == 0)
+#if (FV_PROF == 0)
 #define PROF_START(x)
 #define PROF_STOP(x)
 #define PROF_START_ONCE(i,x)
@@ -62,3 +68,5 @@
 #define PROF_START_ONCE(i,x) 	(if (i == 0) PROF_START(x))
 #define PROF_STOP_ONCE(i,x)		(if (i == 0) PROF_STOP(x))
 #endif
+
+#endif // _H_FVGLOBAL

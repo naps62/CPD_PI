@@ -13,7 +13,7 @@
 #include <cuda.h>
 //#include <cutil.h>
 
-namespace CudaFV {
+namespace FVL {
 
 	/**
 	 * CONSTRUCTORS

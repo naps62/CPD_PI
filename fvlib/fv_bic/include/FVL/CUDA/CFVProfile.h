@@ -4,10 +4,10 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#include "MFVLib_config.h"
-#include "MFVLog.h"
+#include "FVL/FVGlobal.h"
+#include "FVL/FVLog.h"
 
-namespace CudaFV {
+namespace FVL {
 
 	class CFVProfile {
 		private:

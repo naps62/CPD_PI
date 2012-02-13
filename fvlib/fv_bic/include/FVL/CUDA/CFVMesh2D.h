@@ -12,21 +12,17 @@
 
 #include <string>
 #include <vector>
-#include "FVVertex2D.h"
-#include "FVCell2D.h"
-#include "FVEdge2D.h"
 
-#include "MFVLib_config.h"
+#include "FVL/FVGlobal.h"
 #include "FVMesh2D.h"
-#include "XML.h"
-#include "MFVLog.h"
-#include "CFVVect.h"
-#include "CFVPoints2D.h"
+#include "FVL/FVLog.h"
+#include "FVL/CUDA/CFVVect.h"
+#include "FVL/CUDA/CFVPoints2D.h"
 
 using namespace std;
 class Gmsh;
 
-namespace CudaFV {
+namespace FVL {
 	class CFVMesh2D {
 		public:
 			/**

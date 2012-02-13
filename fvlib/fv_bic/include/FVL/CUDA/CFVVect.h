@@ -14,9 +14,9 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#include "MFVLog.h"
+#include "FVL/FVLog.h"
 
-namespace CudaFV {
+namespace FVL {
 
 	template<class T>
 		class CFVVect {
@@ -65,7 +65,7 @@ namespace CudaFV {
 
 }
 
-#include "CUDA/CFVVect.hpp"
+#include "FVL/CUDA/CFVVect.hpp"
 
 #endif // _CUDA_FVVECT
 

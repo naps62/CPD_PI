@@ -5,7 +5,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "MFVio.h"
+#include "FVL/FVio.h"
+#include "FVL/FVXMLReader.h"
 #include "rapidxml/rapidxml.hpp"
 #include "rapidxml/rapidxml_print.hpp"
 using namespace std;
@@ -13,6 +14,20 @@ using namespace rapidxml;
 
 
 int main() {
+	FVL::FVXMLReader reader("xml_samples/foz.xml");
+
+	xml_node<>* vertex = reader.first_node()->first_node()->first_node();
+	cout << "vertex node: " << vertex->name() << endl;
+	exit(0);
+
+	/*xml_document<> doc;
+	vector<char> vec;
+	string filename("xml_samples/foz.xml");
+	FVL::FVio::parse_xml(doc, vec, filename);
+	xml_node<> *vertex = doc.first_node();
+	cout << "vertex node: " << vertex->name() << endl;*/
+	
+
 	/*ifstream mesh_file("xml_samples/foz.xml");
 	string mesh_xml;
 	string line;
@@ -25,7 +40,7 @@ int main() {
 	xml_copy.push_back('\0');
 
 	*/
-	xml_document<> mesh;
+/*	xml_document<> mesh;
 	vector<char> xml;
 	//mesh.parse<0>(&xml_copy[0]);
 	string file("xml_samples/foz.xml");
@@ -68,5 +83,5 @@ int main() {
 		ss >> right_cell;
 
 		//cout << id << " " << type << " " << cell_count << " " << left_cell << " " << right_cell << endl;
-	}
+	}*/
 }

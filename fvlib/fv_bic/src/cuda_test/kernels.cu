@@ -1,6 +1,6 @@
 #include "kernels.cuh"
 
-#include "CUDA/CFVLib.h"
+#include "FVL/CUDA/CFVLib.h"
 
 __global__
 void kernel_compute_flux(
