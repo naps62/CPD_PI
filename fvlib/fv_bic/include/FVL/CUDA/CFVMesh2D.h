@@ -16,7 +16,7 @@
 #include "FVL/FVGlobal.h"
 #include "FVMesh2D.h"
 #include "FVL/FVLog.h"
-#include "FVL/CUDA/CFVVect.h"
+#include "FVL/CFVVect.h"
 #include "FVL/CUDA/CFVPoints2D.h"
 
 using namespace std;

@@ -26,7 +26,7 @@ namespace FVL {
 
 	class FVXMLReader : public xml_document<> {
 			
-		private
+		private:
 			vector<char> xml_data;
 
 		public:

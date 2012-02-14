@@ -7,11 +7,14 @@
  ** Author: Miguel Palhas, mpalhas@gmail.com
  ** -------------------------------------------------------------------------*/
 
-#ifdef _H_CUDA_FVVECT
+#ifdef _H_CFVVECT
+
+#ifndef _HPP_CFVVECT
+#define _HPP_CFVVECT
+
 
 #include <cuda_runtime_api.h>
 #include <cuda.h>
-//#include <cutil.h>
 
 namespace FVL {
 
@@ -139,5 +142,6 @@ namespace FVL {
 		}
 }
 
-#endif
+#endif // _HPP_CFVVECT
+#endif // _H_CFVVECT
 

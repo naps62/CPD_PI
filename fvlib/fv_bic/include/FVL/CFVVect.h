@@ -8,8 +8,8 @@
  ** Author: Miguel Palhas, mpalhas@gmail.com
  ** -------------------------------------------------------------------------*/
 
-#ifndef _H_CUDA_FVVECT
-#define _H_CUDA_FVVECT
+#ifndef _H_CFVVECT
+#define _H_CFVVECT
 
 #include <cuda.h>
 #include <cuda_runtime.h>
@@ -20,7 +20,7 @@ namespace FVL {
 
 	template<class T>
 		class CFVVect {
-			private:
+			public:
 				unsigned int arr_size;
 				T *arr;
 				T *cuda_arr;
@@ -58,14 +58,14 @@ namespace FVL {
 				void cuda_saveAsync(cudaStream_t &stream);
 				void cuda_get();
 
-			private:
+			protected:
 				void alloc(unsigned int size);
 				void dealloc();
 		};
 
 }
 
-#include "FVL/CUDA/CFVVect.hpp"
+#include "FVL/CFVVect.hpp"
 
-#endif // _CUDA_FVVECT
+#endif // _H_CFVVECT
 

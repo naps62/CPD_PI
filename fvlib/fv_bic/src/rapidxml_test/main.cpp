@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include "FVL/FVio.h"
+#include "FVL/CFVVect.h"
+#include "FVL/FVXMLWriter.h"
 #include "FVL/FVXMLReader.h"
 #include "rapidxml/rapidxml.hpp"
 #include "rapidxml/rapidxml_print.hpp"
@@ -14,11 +16,18 @@ using namespace rapidxml;
 
 
 int main() {
-	FVL::FVXMLReader reader("xml_samples/foz.xml");
+
+	FVL::FVXMLWriter writer;
+	FVL::CFVVect<double> vec(10);
+	for(int i = 0; i < 10; i++)
+		vec[i] = i*2;
+	writer.append(vec);
+	cout << writer << endl;
+/*	FVL::FVXMLReader reader("xml_samples/foz.xml");
 
 	xml_node<>* vertex = reader.first_node()->first_node()->first_node();
 	cout << "vertex node: " << vertex->name() << endl;
-	exit(0);
+	exit(0);*/
 
 	/*xml_document<> doc;
 	vector<char> vec;

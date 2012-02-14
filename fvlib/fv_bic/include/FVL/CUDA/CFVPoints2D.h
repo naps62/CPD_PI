@@ -11,7 +11,7 @@
 #ifndef _H_CUDA_FVPOINTS2D
 #define _H_CUDA_FVPOINTS2D
 
-#include "FVL/CUDA/CFVVect.h"
+#include "FVL/CFVVect.h"
 
 namespace FVL {
 
