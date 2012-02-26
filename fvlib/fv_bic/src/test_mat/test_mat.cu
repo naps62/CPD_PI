@@ -10,14 +10,14 @@ using std::cout;
 __global__ void kernel_sum(int **X, int **Y, int **R, int w, int h) {
 	unsigned int tidX = blockIdx.x * blockDim.x + threadIdx.x;
 	unsigned int tidY = blockIdx.y * blockDim.y + threadIdx.y;
-	unsigned int tidR = blockIdx.z + blockDim.z + threadIdx.z;
+	unsigned int tidR = blockIdx.z * blockDim.z + threadIdx.z;
 
 	int elem = tidY * w + tidX;
 	int* matX = X[elem];
 	int* matY = Y[elem];
 	int* matR = R[elem];
 
-	matX[tidR] = 0;//matX[tidR] + matY[tidR];
+	matX[tidR] = matX[tidR] + matY[tidR];
 }
 
 int main() {
