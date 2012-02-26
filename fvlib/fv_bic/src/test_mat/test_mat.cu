@@ -44,12 +44,13 @@ int main() {
 			matX.width(),
 			matY.height());
 
+	matX.cuda_get();
 	matR.cuda_get();
 	for(unsigned int y = 0; y < 2; ++y) {
 		for(unsigned int x = 0; x < 2; ++x) {
 			cout << "coord: (" << x << ", " << y << ")";
 			for(unsigned int i = 0; i < 5; ++i)
-				cout << " " << matR.elem(x, y, i);
+				cout << " " << matX.elem(x, y, i);
 			cout << endl;
 		}
 	}
