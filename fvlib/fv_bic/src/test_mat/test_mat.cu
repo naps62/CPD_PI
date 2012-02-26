@@ -17,7 +17,7 @@ __global__ void kernel_sum(int **X, int **Y, int **R, int w, int h) {
 	int* matY = Y[elem];
 	int* matR = R[elem];
 
-	matR[tidR] = matX[tidR] + matY[tidR];
+	matR[tidR] = 0;//matX[tidR] + matY[tidR];
 }
 
 int main() {
