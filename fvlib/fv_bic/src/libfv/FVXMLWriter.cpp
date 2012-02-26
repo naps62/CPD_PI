@@ -31,7 +31,7 @@ namespace FVL {
 		this->append_node(decl);
 
 		// initial FVLIB node
-		xml_node<> *root = this->allocate_node(node_element, "FVLIB");
+		root = this->allocate_node(node_element, "FVLIB");
 		this->append_node(root);
 	}
 

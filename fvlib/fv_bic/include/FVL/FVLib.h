@@ -21,6 +21,8 @@
 #include "FVL/FVLog.h"
 #include "FVL/FVio.h"
 
+#include "CFVLib.h"
+
 // TODO keep adding stuff here
 
 #endif // _H_FVLIB

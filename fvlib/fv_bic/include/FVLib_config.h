@@ -2,6 +2,7 @@
 #ifndef _FVLIB_Config 
 #define _FVLIB_Config 
 
+
 #define INF_MIN (-1.E+100)
 #define SUP_MAX (1.E+100)
 #define FVDOUBLE_PRECISION 1.E-17

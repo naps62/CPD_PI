@@ -6,6 +6,7 @@
  **    of array-of-structs
  **
  ** Author: Miguel Palhas, mpalhas@gmail.com
+ ** TODO: allow for device-only allocation
  ** -------------------------------------------------------------------------*/
 
 #ifndef _H_CFVVECT
@@ -52,20 +53,20 @@ namespace FVL {
 				 */
 				T* cuda_getArray();
 				T* cuda_mallocAndSave();
-				void cuda_malloc();
+				T* cuda_malloc();
 				void cuda_free();
 				void cuda_save();
 				void cuda_saveAsync(cudaStream_t &stream);
 				void cuda_get();
 
-			protected:
+			private:
 				void alloc(unsigned int size);
 				void dealloc();
 		};
 
 }
 
-#include "FVL/CFVVect.hpp"
+#include "FVL/templates/CFVVect.hpp"
 
 #endif // _H_CFVVECT
 

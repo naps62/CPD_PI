@@ -1,4 +1,4 @@
-#include "FVL/CUDA/CFVProfile.h"
+#include "FVL/CFVProfile.h"
 
 namespace FVL {
 
@@ -29,7 +29,7 @@ namespace FVL {
 		return time;
 	}
 
-	void CFVProfile::init(string msg, string filename) {
+	void CFVProfile::init(string msg, string) {
 		this->msg = msg;
 		cudaEventCreate(&start_t);
 		cudaEventCreate(&stop_t);

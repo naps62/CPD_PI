@@ -1,7 +1,7 @@
 #include <fstream>
 #include <string>
 
-#include "FVL/CUDA/CFVMesh2D.h"
+#include "FVL/CFVMesh2D.h"
 #include "FVLib_config.h"
 #include "FVPoint2D.h"
 
