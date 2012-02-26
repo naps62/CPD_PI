@@ -26,7 +26,7 @@ namespace FVL {
 	template<class T>
 	T** CFVMat<T>::cuda_malloc() {
 		// alloc an array of pointers to each elem
-		cudaMalloc((void **)&cuda_mat, sizeof(T*) * w * h);
+		//cudaMalloc((void **)&cuda_mat, sizeof(T*) * w * h);
 		for(unsigned int y = 0; y < h; ++y) {
 			for(unsigned int x = 0; x < w; ++x) {
 				cuda_mat[y * w + x] = mat[y * w + x].cuda_malloc();
