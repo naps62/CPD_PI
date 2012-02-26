@@ -17,7 +17,7 @@ __global__ void kernel_sum(int **X, int **Y, int **R, int w, int h) {
 	int* matY = Y[elem];
 	int* matR = R[elem];
 
-	matR[tidR] = 0;//matX[tidR] + matY[tidR];
+	matX[tidR] = 0;//matX[tidR] + matY[tidR];
 }
 
 int main() {
@@ -54,6 +54,7 @@ int main() {
 			cout << endl;
 		}
 	}
+	cout << endl;
 	for(unsigned int y = 0; y < 2; ++y) {
 		for(unsigned int x = 0; x < 2; ++x) {
 			cout << "coord: (" << x << ", " << y << ")";
@@ -62,6 +63,7 @@ int main() {
 			cout << endl;
 		}
 	}
+	cout << endl;
 	for(unsigned int y = 0; y < 2; ++y) {
 		for(unsigned int x = 0; x < 2; ++x) {
 			cout << "coord: (" << x << ", " << y << ")";
