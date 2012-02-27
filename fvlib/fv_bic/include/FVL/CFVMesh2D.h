@@ -17,6 +17,7 @@
 #include "FVMesh2D.h"
 #include "FVL/FVLog.h"
 #include "FVL/CFVVect.h"
+#include "FVL/CFVMat.h"
 #include "FVL/CFVPoints2D.h"
 
 using namespace std;
@@ -54,8 +55,13 @@ namespace FVL {
 			//CFVVect<unsigned int> cell_edges;			// list of edges for all cells
 			//CFVVect<unsigned int> cell_edges_index;		// for each cell, index of it's edge list on cell_edges
 			CFVVect<unsigned int> cell_edges_count;		// number of edges of each cell (to index cell_edges)
-			vector<CFVVect<unsigned int> > cell_edges;	// index of edges for each cella
-			vector<CFVPoints2D> cell2edges;				// distance of each cell to each edge
+			CFVMat<unsigned int> cell_edges;			// index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
+			//vector<CFVVect<unsigned int> > cell_edges;	// index of edges for each cell
+			CFVMat<double> cell_edges_distance;	// distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
+			//vector<CFVPoints2D> cell2edges;				// distance of each cell to each edge
+
+			//TODO: find a way to pass cell_edges & cell2edges info better to cuda (i.e. array of pointers for each one)
+			//maybe do something similar to what is done with CFVMat
 
 		public:
 
@@ -67,6 +73,14 @@ namespace FVL {
 			CFVMesh2D(const string &filename);
 			~CFVMesh2D();
 
+			/************************************************
+			 * MEM MANAGEMENT
+			 ***********************************************/
+			// store all mesh data to cuda
+			void cuda_malloc();
+
+			// free all cuda storage of this mesh
+			void cuda_free();
 		private:
 
 			/************************************************

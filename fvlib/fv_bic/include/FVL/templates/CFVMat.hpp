@@ -49,7 +49,7 @@ namespace FVL {
 		cuda_mat.cuda_free();
 		for(unsigned int y = 0; y < h; ++y)
 			for(unsigned int x = 0; x < w; ++x)
-				cuda_mat[y * w + x].cuda_free();
+				mat[y * w + x].cuda_free();
 	}
 
 	template<class T>

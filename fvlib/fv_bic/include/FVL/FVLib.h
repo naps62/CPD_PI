@@ -14,12 +14,13 @@
 
 #include "FVL/FVGlobal.h"
 
-#include "FVL/FVPoint2D.h"
-#include "FVL/FVMesh2D.h"
+#include "FVL/CFVPoints2D.h"
+#include "FVL/CFVMesh2D.h"
 
 #include "FVL/FVErr.h"
 #include "FVL/FVLog.h"
-#include "FVL/FVio.h"
+#include "FVL/FVXMLReader.h"
+#include "FVL/FVXMLWriter.h"
 
 #include "CFVLib.h"
 

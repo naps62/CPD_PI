@@ -89,7 +89,7 @@ namespace FVL {
 		i = 0;
 		for(msh.beginCell(); (cell = msh.nextCell()); ) {
 			for(cell->beginEdge(); (edge = cell->nextEdge()); ++i) {
-				cell_edges[i] = edge->label - 1;
+				//cell_edges[i] = edge->label - 1;
 			}
 		}
 
@@ -171,8 +171,8 @@ namespace FVL {
 			}
 
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
-				cell_ss >> cell_edges[e][i];	// reads e'th edge of cell i
-				cell_edges[e][i]--;				// change to 0-based index
+				cell_ss >> cell_edges.elem(e, 0, i);	// reads e'th edge of cell i
+				cell_edges.elem(e, 0, i)--;				// change to 0-based index
 			}
 		}
 
@@ -215,7 +215,7 @@ namespace FVL {
 			cell_centroids.y[i] = 0;
 
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
-				unsigned int edge = cell_edges[e][i];
+				unsigned int edge = cell_edges.elem(e, 0, i);
 
 				cell_perimeters[i] += edge_lengths[edge];
 				
@@ -233,10 +233,14 @@ namespace FVL {
 
 			// compute area of each cell
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
-				unsigned int edge = cell_edges[e][i];
+				unsigned int edge = cell_edges.elem(e, 0, i);
 
-				cell2edges[e].x[i] = edge_centroids.x[edge] - cell_centroids.x[i];
-				cell2edges[e].y[i] = edge_centroids.y[edge] - cell_centroids.y[i];
+				// 1 is x coord
+				cell_edges_distance.elem(e, 0, i) = edge_centroids.x[edge] - cell_centroids.x[i];
+				// 2 is y coord
+				cell_edges_distance.elem(e, 1, i) = edge_centroids.y[edge] - cell_centroids.x[i];
+				//cell2edges[e].x[i] = edge_centroids.x[edge] - cell_centroids.x[i];
+				//cell2edges[e].y[i] = edge_centroids.y[edge] - cell_centroids.y[i];
 
 				FVPoint2D<double> u, v;
 				u.x = vertex_coords.x[ edge_fst_vertex[edge] ] - cell_centroids.x[i];
@@ -286,6 +290,56 @@ namespace FVL {
 	/************************************************
 	 * MEMORY MANAGEMENT METHODS
 	 ***********************************************/
+	void CFVMesh2D::cuda_malloc() {
+		// vertex info
+		vertex_coords.x.cuda_malloc();
+		vertex_coords.y.cuda_malloc();
+
+		// edge info
+		edge_normals.x.cuda_malloc();
+		edge_normals.y.cuda_malloc();
+		edge_centroids.x.cuda_malloc();
+		edge_centroids.y.cuda_malloc();
+		edge_lengths.cuda_malloc();
+		edge_fst_vertex.cuda_malloc();
+		edge_snd_vertex.cuda_malloc();
+		edge_right_cells.cuda_malloc();
+
+		// cell info
+		cell_centroids.x.cuda_malloc();
+		cell_centroids.y.cuda_malloc();
+		cell_perimeters.cuda_malloc();
+		cell_areas.cuda_malloc();
+		cell_edges_count.cuda_malloc();
+		cell_edges.cuda_malloc();
+		cell_edges_distance.cuda_malloc();
+	}
+
+	void CFVMesh2D::cuda_free() {
+		// vertex info
+		vertex_coords.x.cuda_free();
+		vertex_coords.y.cuda_free();
+
+		// edge info
+		edge_normals.x.cuda_free();
+		edge_normals.y.cuda_free();
+		edge_centroids.x.cuda_free();
+		edge_centroids.y.cuda_free();
+		edge_lengths.cuda_free();
+		edge_fst_vertex.cuda_free();
+		edge_snd_vertex.cuda_free();
+		edge_right_cells.cuda_free();
+
+		// cell info
+		cell_centroids.x.cuda_free();
+		cell_centroids.y.cuda_free();
+		cell_perimeters.cuda_free();
+		cell_areas.cuda_free();
+		cell_edges_count.cuda_free();
+		cell_edges.cuda_free();
+		cell_edges_distance.cuda_free();
+	}
+
 	void CFVMesh2D::alloc() {
 		if (num_vertex <= 0 || num_edges <= 0 || num_cells <= 0) {
 			string msg = "num edges/cells not valid for allocation";
@@ -311,8 +365,10 @@ namespace FVL {
 		//cell_edges_index	= CFVVect<unsigned int>(num_cells);
 		cell_edges_count	= CFVVect<unsigned int>(num_cells);
 		for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
-			cell_edges.push_back(CFVVect<unsigned int>(num_cells));
-			cell2edges.push_back(CFVPoints2D(num_cells));
+			cell_edges = CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
+			cell_edges_distance = CFVMat<double>(MAX_EDGES_PER_CELL, 2, num_cells);
+			//cell_edges.push_back(CFVVect<unsigned int>(num_cells));
+			//cell2edges.push_back(CFVPoints2D(num_cells));
 		}
 	}
 }

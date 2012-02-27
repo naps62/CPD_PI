@@ -36,6 +36,7 @@ namespace FVL {
 			/**
 			 * CONSTRUCTORS
 			 */
+			CFVMat() { alloc(0, 0, 0); }
 			CFVMat(unsigned int w, unsigned int h, unsigned int size) { alloc(w, h, size);}
 			~CFVMat() { dealloc(); }
 

@@ -15,10 +15,10 @@
 #include "FVL/FVLog.h"
 #include "FVL/FVErr.h"
 
-#include "FVL/CUDA/CFVProfile.h"
-#include "FVL/CUDA/CFVVect.h"
-#include "FVL/CUDA/CFVPoints2D.h"
-#include "FVL/CUDA/CFVMesh2D.h"
+#include "FVL/CFVProfile.h"
+#include "FVL/CFVVect.h"
+#include "FVL/CFVPoints2D.h"
+#include "FVL/CFVMesh2D.h"
 
 #endif // _CUDA_FVLIB
 
