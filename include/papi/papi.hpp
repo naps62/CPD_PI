@@ -136,17 +136,6 @@ class PAPI_L2 : public PAPI_Cache
 	double miss_rate ();
 };
 
-class PAPI_OpIntensity : public PAPI_Preset
-{
-	public:
-	PAPI_OpIntensity ();
-
-	long long int ram_accesses ();
-	long long int bytes_accessed ();
-	long long int flops ();
-	double intensity ();
-};
-
 class PAPI_InstPerByte : public PAPI_Preset
 {
 	public:

@@ -6,7 +6,7 @@
 #warning "Compiler does not present OpenMP support"
 #endif
 
-#include "papi.hpp"
+#include <papi/papi.hpp>
 
 #define	max(x,y)	\
 	( (x > y) ? x : y )
@@ -353,6 +353,7 @@ double PAPI_L2::miss_rate ()
 }
 
 //	PAPI_OpIntensity
+/*
 PAPI_OpIntensity::PAPI_OpIntensity () : PAPI_Preset ()
 {
 	(*this).add_event( PAPI_TOT_CYC );
@@ -372,13 +373,14 @@ long long int PAPI_OpIntensity::bytes_accessed ()
 
 long long int PAPI_OpIntensity::flops ()
 {
-	return (*this)[ PAPI_FP_OPS ];
+	return (*this)[ FP_COMP_OPS_EXE ];
 }
 
 double PAPI_OpIntensity::intensity ()
 {
 	return flops() / bytes_accessed();
 }
+*/
 
 //	PAPI_InstPerByte
 PAPI_InstPerByte::PAPI_InstPerByte ()

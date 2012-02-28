@@ -1,2 +1,2 @@
 include $(ROOTD)/conf/src.papi.mk
-CXXFLAGS	+=	-fopenmp
+#CXXFLAGS	+=	-fopenmp
