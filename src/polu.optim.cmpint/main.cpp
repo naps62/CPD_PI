@@ -10,8 +10,13 @@
 
 PAPI_ComputationalIntensity *p;
 
-unsigned pc;
-double pt;
+long long int ci_insts;
+long long int ci_bytes;
+long long int tmin[2];
+long long int tmax[2];
+long long int ttot[2];
+unsigned tcount;
+
 
 
 #define PI 3.141592653
@@ -63,8 +68,16 @@ void compute_flux(
 	}
 
 	p->stop();
-	++pc;
-	pt += p->intensity();
+
+	ci_insts += p->instructions();
+	ci_bytes += p->bytes_accessed();
+
+	{
+		long long int dt = p->last_time();
+		tmax[0] = ( dt > tmax[0] ) ? dt : tmax[0];
+		tmin[0] = ( dt < tmin[0] ) ? dt : tmin[0];
+		ttot[0] += dt;
+	}
 
 //	return dt;
 }
@@ -97,8 +110,17 @@ void    update(
 	}
 
 	p->stop();
-	++pc;
-	pt += p->intensity();
+
+	ci_insts += p->instructions();
+	ci_bytes += p->bytes_accessed();
+
+	{
+		long long int dt = p->last_time();
+		tmax[1] = ( dt > tmax[1] ) ? dt : tmax[1];
+		tmin[1] = ( dt < tmin[1] ) ? dt : tmin[1];
+		ttot[1] += dt;
+	}
+
 }    
 
 
@@ -163,8 +185,9 @@ int main(int argc, char *argv[])
 	}
 
 
-	pt = 0.0;
-	pc = 0;
+	tmin[0] = tmin[1] = numeric_limits<long long int>::max();
+	tmax[0] = tmax[1] = numeric_limits<long long int>::min();
+	ci_insts = ci_bytes = tcount = 0;
 
 
 	unsigned edge_count = m.getNbEdge();
@@ -261,6 +284,9 @@ int main(int argc, char *argv[])
 //			edge_count,
 			dt);
 		time += dt;
+
+		++tcount;
+
 	//    nbiter++;
 	//    if(nbiter%nbjump==0)
 	//        {
@@ -284,8 +310,22 @@ int main(int argc, char *argv[])
 	pol_file.put(pol,time,"polution"); 
 
 
+	double ci = (double) ci_insts / (double) ci_bytes;
+	double tavg[2];
+	tavg[0] = (double) ttot[0] / tcount;
+	tavg[1] = (double) ttot[1] / tcount;
 	cout
 		<<	"Computational Intensity"	<<	endl
-		<<	"\tavg:\t"	<<	pt / pc		<<	endl
+		<<	"\t:\t"	<<	ci	<<	endl
+		<<	"Time:"	<<	endl
+		<<	" compute_flux"	<<	endl
+		<<	"\tmin:\t"	<<	tmin[0]	<<	endl
+		<<	"\tmax:\t"	<<	tmax[0]	<<	endl
+		<<	"\tavg:\t"	<<	tavg[0]	<<	endl
+		<<	endl
+		<<	" update"	<<	endl
+		<<	"\tmin:\t"	<<	tmin[1]	<<	endl
+		<<	"\tmax:\t"	<<	tmax[1]	<<	endl
+		<<	"\tavg:\t"	<<	tavg[1]	<<	endl
 		;
 }
