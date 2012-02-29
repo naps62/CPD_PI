@@ -5,8 +5,11 @@
 
 PAPI_ComputationalIntensity::PAPI_ComputationalIntensity () : PAPI_Preset ()
 {
-	this->add_event( BUS_TRANS_MEM );
-	this->add_event( INST_RETIRED_OTHER );
+	int event;
+	PAPI_event_name_to_code( "BUS_TRANS_MEM" , &event );
+	this->add_event( event );
+	PAPI_event_name_to_code( "INST_RETIRED:OTHER" , &event );
+	this->add_event( event );
 }
 
 long long int PAPI_ComputationalIntensity::ram_accesses ()
