@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-
+	p = new PAPI_ComputationalIntensity();
 	tmin[0] = tmin[1] = numeric_limits<long long int>::max();
 	tmax[0] = tmax[1] = numeric_limits<long long int>::min();
 	ci_insts = ci_bytes = tcount = 0;
@@ -309,6 +309,7 @@ int main(int argc, char *argv[])
 
 	pol_file.put(pol,time,"polution"); 
 
+	delete p;
 
 	double ci = (double) ci_insts / (double) ci_bytes;
 	double tavg[2];
