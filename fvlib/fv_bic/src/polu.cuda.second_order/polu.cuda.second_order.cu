@@ -22,7 +22,7 @@ typedef struct _parameters {
 	double comp_threshold;
 } Parameters;
 
-/* TODO: interface decente para paremetros xml */
+// TODO: interface decente para paremetros xml
 Parameters read_parameters (string parameters_filename) {
 	Parameters data;
 	Parameter para(parameters_filename.c_str());
@@ -57,8 +57,10 @@ double compute_mesh_parameter(FVMesh2D mesh) {
 }
 
 int main(int argc, char **argv) {
-	if (argc != 2)
+	if (argc != 2) {
 		cerr << "Arg error: requires 1 argument (xml param filename)" << endl;
+		exit(-1);
+	}
 
 	// var declaration
 	int i = 0;
