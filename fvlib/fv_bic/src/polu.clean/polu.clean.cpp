@@ -2,7 +2,7 @@
 #include <cfloat>
 #include <omp.h>
 #include "FVLib.h"
-#include "MFVLog.h"
+#include "FVL/FVLog.h"
 
 //	BEGIN TYPES
 
@@ -101,7 +101,7 @@ double compute_flux(
 		else
 			flux[ edge->label - 1 ] = v * p_left;
 
-		cout << "flux" << flux[edge->label -1] << endl;
+		//cout << "pright " << p_left << endl;
 	}
 	v_max = DBL_MIN;
 	for ( e = 0; e < es; ++e)
@@ -213,26 +213,34 @@ void main_loop (
 	polution_file.put( polutions , t , "polution" ); 
 
 
-	cout
+	/*cout
 		<< "computing"
-		<< endl;
+		<< endl;*/
 	while ( t < final_time )
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
+		/*for(int x = 0; x < 10; ++x) {
+			cout << mesh.getCell(x)->area << endl;
+		}
+		exit(0);*/
 		update( mesh , polutions , fluxes , dt );
+
+		//for(int i = 0; i < 10; ++i)
+		//	cout << i << "\t" << fluxes[i] << endl;
+		//exit(0);
 		t += dt;
 		++i;
-		cout << i << " " << dt << endl;
+		//cout << i << " " << dt << endl;
 		if ( i % jump_interval == 0 )
 		{
-			cout << "writing to file" << endl;
+			//cout << "writing to file" << endl;
 			polution_file.put( polutions , t , "polution" );    
-			printf("step %d  at time %f \r", i, t);
+			//printf("step %d  at time %f \r", i, t);
 			fflush(NULL);
 		}
 	}
 
-	cout << "total iterations: " << i << endl;
+	//cout << "total iterations: " << i << endl;
 	polution_file.put( polutions , t , "polution" ); 
 }
 
@@ -271,8 +279,8 @@ int main()
 	// compute the Mesh parameter
 	h = compute_mesh_parameter( mesh );
 
-	cout << "computing " << mesh.getNbCell() << " cells, " << mesh.getNbEdge() << " edges" << endl;
-	cout << "simulation duration: " << data.time.final << endl;
+	//cout << "computing " << mesh.getNbCell() << " cells, " << mesh.getNbEdge() << " edges" << endl;
+	//cout << "simulation duration: " << data.time.final << endl;
 	// the main loop
 	main_loop(
 		data.time.final,

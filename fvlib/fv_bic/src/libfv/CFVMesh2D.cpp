@@ -114,11 +114,9 @@ namespace FVL {
 		// TODO testar esta alteração (acima)
 
 		// get reference for each element list
-		cout << mesh.first_node()->name() << endl;
 		xml_node<> *vertex	= mesh.first_node()->first_node()->first_node();
 		xml_node<> *edge	= vertex->next_sibling();
 		xml_node<> *cell	= edge->next_sibling();
-		cout << vertex->first_attribute()->name() << endl;
 
 		// get count of each element
 		FVio::str_cast<unsigned int>(num_vertex, vertex->first_attribute("nbvertex")->value());
@@ -220,8 +218,8 @@ namespace FVL {
 				cell_perimeters[i] += edge_lengths[edge];
 				
 				// add to centroid
-				cell_centroids.x[i] += edge_centroids.x[edge] * edge_lengths[i];
-				cell_centroids.y[i] += edge_centroids.y[edge] * edge_lengths[i];
+				cell_centroids.x[i] += edge_centroids.x[edge] * edge_lengths[edge];
+				cell_centroids.y[i] += edge_centroids.y[edge] * edge_lengths[edge];
 
 				if (edge_left_cells[edge] == NO_EDGE)
 					edge_left_cells[edge] = i;
@@ -235,10 +233,10 @@ namespace FVL {
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
 				unsigned int edge = cell_edges.elem(e, 0, i);
 
-				// 1 is x coord
-				cell_edges_distance.elem(e, 0, i) = edge_centroids.x[edge] - cell_centroids.x[i];
-				// 2 is y coord
-				cell_edges_distance.elem(e, 1, i) = edge_centroids.y[edge] - cell_centroids.x[i];
+				// 0 is x coord
+				cell_edges_normal.elem(e, 0, i) = edge_centroids.x[edge] - cell_centroids.x[i];
+				// 1 is y coord
+				cell_edges_normal.elem(e, 1, i) = edge_centroids.y[edge] - cell_centroids.y[i];
 				//cell2edges[e].x[i] = edge_centroids.x[edge] - cell_centroids.x[i];
 				//cell2edges[e].y[i] = edge_centroids.y[edge] - cell_centroids.y[i];
 
@@ -312,7 +310,7 @@ namespace FVL {
 		cell_areas.cuda_malloc();
 		cell_edges_count.cuda_malloc();
 		cell_edges.cuda_malloc();
-		cell_edges_distance.cuda_malloc();
+		cell_edges_normal.cuda_malloc();
 	}
 
 	void CFVMesh2D::cuda_free() {
@@ -337,7 +335,7 @@ namespace FVL {
 		cell_areas.cuda_free();
 		cell_edges_count.cuda_free();
 		cell_edges.cuda_free();
-		cell_edges_distance.cuda_free();
+		cell_edges_normal.cuda_free();
 	}
 
 	void CFVMesh2D::alloc() {
@@ -366,7 +364,7 @@ namespace FVL {
 		cell_edges_count	= CFVVect<unsigned int>(num_cells);
 		for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 			cell_edges = CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
-			cell_edges_distance = CFVMat<double>(MAX_EDGES_PER_CELL, 2, num_cells);
+			cell_edges_normal = CFVMat<double>(MAX_EDGES_PER_CELL, 2, num_cells);
 			//cell_edges.push_back(CFVVect<unsigned int>(num_cells));
 			//cell2edges.push_back(CFVPoints2D(num_cells));
 		}

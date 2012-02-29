@@ -48,17 +48,12 @@ namespace FVL {
 			 * CELL INFO
 			 */
 			unsigned int num_cells;
-			//unsigned int num_total_edges;
 			CFVPoints2D cell_centroids;					// centroid of each cell
 			CFVVect<double> cell_perimeters;			// perimeter of each cell
 			CFVVect<double> cell_areas;					// area of each cell
-			//CFVVect<unsigned int> cell_edges;			// list of edges for all cells
-			//CFVVect<unsigned int> cell_edges_index;		// for each cell, index of it's edge list on cell_edges
 			CFVVect<unsigned int> cell_edges_count;		// number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;			// index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
-			//vector<CFVVect<unsigned int> > cell_edges;	// index of edges for each cell
-			CFVMat<double> cell_edges_distance;	// distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
-			//vector<CFVPoints2D> cell2edges;				// distance of each cell to each edge
+			CFVMat<double> cell_edges_normal;	// distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 2, num_cells)
 
 			//TODO: find a way to pass cell_edges & cell2edges info better to cuda (i.e. array of pointers for each one)
 			//maybe do something similar to what is done with CFVMat

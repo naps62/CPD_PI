@@ -1,7 +1,6 @@
 #include "kernels.cuh"
 
-#include "FVL/CFVLib.h"
-
+#ifndef NO_CUDA
 __global__
 void kernel_compute_flux(
 		unsigned int num_edges,
@@ -44,7 +43,39 @@ void kernel_compute_flux(
 
 	//vs[tid] = v;
 }
+#else
+void kernel_compute_flux(
+		CFVMesh2D &mesh,
+		CFVVect<double> &polution,
+		CFVVect<double> &velocity,
+		CFVVect<double> &flux,
+		double dc) {
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		unsigned int i_left		= mesh.edge_left_cells[i];
+		unsigned int i_right	= mesh.edge_right_cells[i];
 
+		double p_left, p_right;
+		double v;
+
+		p_left	= polution[i_left];
+		v		= velocity[i];
+
+		if (i_right != NO_RIGHT_EDGE) {
+			p_right	= polution[i_right];
+		} else {
+			p_right = dc;
+		}
+
+		if (v < 0)
+			flux[i] = v * p_right;
+		else
+			flux[i] = v * p_left;
+
+	};
+}
+#endif
+
+#ifndef NO_CUDA
 __global__
 void kernel_update(
 		unsigned int num_cells,
@@ -89,6 +120,30 @@ void kernel_update(
 	// update global value
 	polution[tid] += new_polution;
 }
+#else
+void kernel_update(
+		CFVMesh2D &mesh,
+		CFVVect<double> &polution,
+		CFVVect<double> &flux,
+		double dt) {
+
+	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
+		unsigned int edge_limit = mesh.cell_edges_count[i];
+		for(unsigned int e = 0; e < edge_limit; ++e) {
+			unsigned int edge = mesh.cell_edges.elem(e, 0, i);
+
+			double aux = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[i];
+
+			if (mesh.edge_left_cells[edge] == i) {
+				polution[i] -= aux;
+			} else {
+				polution[i] += aux;
+			}
+		}
+	}
+}
+#endif
+
 
 template<class T>
 struct SharedMemory {

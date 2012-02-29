@@ -1,6 +1,5 @@
 #include <cuda.h>
 
-//#include "FVL/FVLib.h"
 #include "FVL/CFVLib.h"
 #include "FVVect.h"
 #include "FVio.h"
@@ -89,8 +88,11 @@ int main(int argc, char **argv) {
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
 	// TODO: remove this dependency
-	for(unsigned int i = 0; i < polution.size(); ++i)
+	for(unsigned int i = 0; i < polution.size(); ++i) {
 		polution[i] = old_polution[i];
+		//vs.x[i] = old_velocity[i].x;
+		//vs.y[i] = old_velocity[i].y;
+	}
 
 	// compute velocity vector
 	// TODO: Convert to CUDA
@@ -104,8 +106,11 @@ int main(int argc, char **argv) {
 		double v	= ((old_velocity[left].x + old_velocity[right].x) * 0.5 * mesh.edge_normals.x[i])
 					+ ((old_velocity[left].y + old_velocity[right].y) * 0.5 * mesh.edge_normals.y[i]);
 
+		vs[i] = v;
+
 		if (abs(v) > v_max || i == 0)
 			v_max = abs(v);
+
 	}
 
 	// TODO: convert to cuda && remove dependency
@@ -144,8 +149,8 @@ int main(int argc, char **argv) {
 	mesh.cell_edges_count.cuda_saveAsync(stream);
 	for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 		mesh.cell_edges.cuda_saveAsync(stream);
-		mesh.cell_edges_distance.cuda_saveAsync(stream);
-		mesh.cell_edges_distance.cuda_saveAsync(stream);
+		mesh.cell_edges_normal.cuda_saveAsync(stream);
+		mesh.cell_edges_normal.cuda_saveAsync(stream);
 	}
 
 	// sizes of each kernel
@@ -157,6 +162,14 @@ int main(int argc, char **argv) {
 
 	while(t < data.final_time) {
 		/* compute flux */
+#ifdef NO_CUDA
+		kernel_compute_flux(
+					mesh,
+					polution,
+					vs,
+					flux,
+					data.comp_threshold);
+#else
 		kernel_compute_flux<<< grid_flux, block_flux >>>(
 					mesh.num_edges,
 					mesh.edge_left_cells.cuda_getArray(),
@@ -165,8 +178,21 @@ int main(int argc, char **argv) {
 					vs.cuda_getArray(),
 					flux.cuda_getArray(),
 					data.comp_threshold);
+#endif
+
+		/*for(int x = 0; x < 10; ++x) {
+			cout << mesh.cell_areas[x] << "\n";
+		}
+		exit(0);*/
 
 		/* update */
+#ifdef NO_CUDA
+		kernel_update(
+				mesh,
+				polution,
+				flux,
+				dt);
+#else
 		kernel_update<<< grid_update, block_update >>>(
 				mesh.num_cells,
 				//mesh.num_total_edges,
@@ -180,13 +206,28 @@ int main(int argc, char **argv) {
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
+#endif
 
 		t += dt;
 		++i;
+
+
+#ifndef NO_CUDA
+	polution.cuda_get();
+#endif
+	if (i % data.anim_jump == 0) {
+		for(unsigned int x = 0; x < mesh.num_cells; ++x)
+			old_polution[x] = polution[x];
+		
+		polution_file.put(old_polution, t, "polution");
 	}
 
+}
+
 	// dump final iteration
+#ifndef NO_CUDA
 	polution.cuda_get();
+#endif
 	for(unsigned int x = 0; x < mesh.num_cells; ++x)
 		old_polution[x] = polution[x];
 
