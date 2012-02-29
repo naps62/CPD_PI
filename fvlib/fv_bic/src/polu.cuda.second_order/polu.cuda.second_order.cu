@@ -30,7 +30,7 @@ Parameters read_parameters (string parameters_filename) {
 	data.mesh_file		= para.getString("MeshName");
 	data.velocity_file	= para.getString("VelocityFile");
 	data.initial_file	= para.getString("PoluInitFile");
-	data.output_file	= "polution.xml";
+	data.output_file	= para.getString("OutputFile");
 	data.final_time		= para.getDouble("FinalTime");
 	data.anim_jump		= para.getInteger("NbJump");
 	data.comp_threshold	= para.getDouble("DirichletCondition");
