@@ -180,10 +180,11 @@ int main(int argc, char **argv) {
 					data.comp_threshold);
 #endif
 
-		/*for(int x = 0; x < 10; ++x) {
-			cout << mesh.cell_areas[x] << "\n";
+		flux.cuda_get();
+		for(int x = 0; x < 10; ++x) {
+			cout << flux[x] << "\n";
 		}
-		exit(0);*/
+		exit(0);
 
 		/* update */
 #ifdef NO_CUDA
@@ -208,20 +209,19 @@ int main(int argc, char **argv) {
 				dt);
 #endif
 
-		t += dt;
-		++i;
 
-
-#ifndef NO_CUDA
-	polution.cuda_get();
-#endif
 	if (i % data.anim_jump == 0) {
+#ifndef NO_CUDA
+		polution.cuda_get();
+#endif
 		for(unsigned int x = 0; x < mesh.num_cells; ++x)
 			old_polution[x] = polution[x];
 		
 		polution_file.put(old_polution, t, "polution");
 	}
 
+	t += dt;
+	++i;
 }
 
 	// dump final iteration
