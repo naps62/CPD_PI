@@ -10,7 +10,7 @@ CUDAD	=	/usr/local/cuda
 LIBS	=	fv cuda
 
 #	Compile mode
-MODE	=	RLS
+MODE	=	DBG
 
 #	C++ Compil[ator]
 CXX	=	nvcc
