@@ -24,6 +24,11 @@ XCOMPFLAGS	=	-Wall -Wextra
 CXXFLAGS	=	-arch sm_20
 CXXFLAGS	+=	 $(INC)
 
+HOST	= $(shell hostname)
+ifeq ($(MODE),naps62crunch)
+CXXFLAGS	+=	-DNO_CUDA=1
+endif
+
 ifeq ($(MODE),DBG)
 XCOMPFLAGS	+=	-g
 CXXFLAGS	+=	-g -G

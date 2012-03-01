@@ -1,8 +1,6 @@
 #ifndef _CUH_KERNELS_
 #define _CUH_KERNELS_
 
-#define NO_CUDA 1
-
 #include "FVL/CFVMesh2D.h"
 #include "FVL/CFVVect.h"
 using namespace FVL;
