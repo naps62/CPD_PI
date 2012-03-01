@@ -58,6 +58,7 @@ double compute_mesh_parameter(FVMesh2D mesh) {
 int main(int argc, char **argv) {
 #ifdef NO_CUDA
 	cout << "Running in NO_CUDA mode" << endl;
+#endif
 
 	if (argc != 2) {
 		cerr << "Arg error: requires 1 argument (xml param filename)" << endl;
