@@ -180,9 +180,11 @@ int main(int argc, char **argv) {
 					data.comp_threshold);
 #endif
 
+#ifndef NO_CUDA
 		flux.cuda_get();
+#endif
 		for(int x = 0; x < 10; ++x) {
-			cout << flux[x] << "\n";
+			cout << mesh.cell_areas[x] << "\n";
 		}
 		exit(0);
 
