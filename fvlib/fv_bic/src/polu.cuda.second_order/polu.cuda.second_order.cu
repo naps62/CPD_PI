@@ -56,6 +56,9 @@ double compute_mesh_parameter(FVMesh2D mesh) {
 }
 
 int main(int argc, char **argv) {
+#ifdef NO_CUDA
+	cout << "Running in NO_CUDA mode" << endl;
+
 	if (argc != 2) {
 		cerr << "Arg error: requires 1 argument (xml param filename)" << endl;
 		exit(-1);
@@ -181,12 +184,12 @@ int main(int argc, char **argv) {
 #endif
 
 #ifndef NO_CUDA
-		flux.cuda_get();
+		//flux.cuda_get();
 #endif
-		for(int x = 0; x < 10; ++x) {
-			cout << mesh.cell_areas[x] << "\n";
-		}
-		exit(0);
+		//for(int x = 0; x < 10; ++x) {
+		//	cout << mesh.cell_areas[x] << "\n";
+		//}
+		//exit(0);
 
 		/* update */
 #ifdef NO_CUDA
