@@ -25,7 +25,7 @@ CXXFLAGS	=	-arch sm_20
 CXXFLAGS	+=	 $(INC)
 
 HOST	= $(shell hostname)
-ifeq ($(MODE),naps62crunch)
+ifeq ($(HOST),naps62crunch)
 CXXFLAGS	+=	-DNO_CUDA=1
 endif
 
