@@ -65,7 +65,7 @@ void cudaSafe(cudaError_t error, const string msg) {
 void cudaCheckError(const string msg) {
 	cudaError_t error = cudaGetLastError();
 	if (error != cudaSuccess) {
-		cerr << "Error: " << msg << " : " cudaGetErrorString(error) << endl;
+		cerr << "Error: " << msg << " : " << cudaGetErrorString(error) << endl;
 		exit(-1);
 	}
 }
