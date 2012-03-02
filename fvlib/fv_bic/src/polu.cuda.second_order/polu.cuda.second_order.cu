@@ -106,6 +106,8 @@ int main(int argc, char **argv) {
 	FVL::CFVVect<double> flux(mesh.num_edges);
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
+	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
+
 	// TODO: remove this dependency
 	for(unsigned int i = 0; i < polution.size(); ++i) {
 		polution[i] = old_polution[i];
@@ -146,6 +148,7 @@ int main(int argc, char **argv) {
 	polution.cuda_malloc();
 	flux.cuda_malloc();
 	vs.cuda_malloc();
+	matA.cuda_malloc();
 
 	// data copy
 	cudaStream_t stream;
@@ -174,18 +177,35 @@ int main(int argc, char **argv) {
 	}
 	polution.cuda_saveAsync(stream);
 	vs.cuda_saveAsync(stream);
+	//matA.cuda_saveAsyn(stream);
+	
 
 	// sizes of each kernel
+	// TODO: mudar BLOCK_SIZE_FLUX para MAT_A
+	dim3 grid_matA(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
+	dim3 block_matA(BLOCK_SIZE_FLUX, 1, 1);
+
 	dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
 	dim3 block_flux(BLOCK_SIZE_FLUX, 1, 1);
 
 	dim3 grid_update(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_UPDATE), 1, 1);
 	dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
 
+#ifdef NO_CUDA
+	/*cpu_compute_reverseA(
+			mesh,
+			matA);*/
+#else
+	kernel_compute_reverseA(
+			
+			);
+#endif
+
+
 	while(t < data.final_time) {
 		/* compute flux */
 #ifdef NO_CUDA
-				kernel_compute_flux(
+		kernel_compute_flux(
 					mesh,
 					polution,
 					vs,
@@ -208,16 +228,6 @@ int main(int argc, char **argv) {
 			cudaCheckError(ss.str());
 		}
 #endif
-
-/*
-#ifndef NO_CUDA
-		flux.cuda_get();
-#endif
-
-		for(int x = 0; x < 10; ++x)
-			if (flux[x] != 0)
-			cout << x << "\t" << flux[x] << "\n";
-		exit(0);*/
 
 		/* update */
 #ifdef NO_CUDA
@@ -275,6 +285,7 @@ int main(int argc, char **argv) {
 	polution.cuda_free();
 	flux.cuda_free();
 	vs.cuda_free();
+	matA.cuda_free();
 	mesh.cuda_free();
 }
 

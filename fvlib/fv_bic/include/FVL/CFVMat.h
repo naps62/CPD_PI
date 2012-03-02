@@ -8,7 +8,7 @@
  ** Intended to store an array of matrixes (but as s-o-a instead of a-o-s. e.g., store a matrix for each cell of a mesh
  **
  ** Author: Miguel Palhas, mpalhas@gmail.com
- ** TODO: allow for device-only allocation
+ ** TODO: allow for device-only allocation; alloc single block for whole matrix (allow single mem access instead of 2)
  ** -------------------------------------------------------------------------*/
 
 #ifndef _H_CFVMAT
