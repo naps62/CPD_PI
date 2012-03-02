@@ -198,7 +198,12 @@ int main(int argc, char **argv) {
 					vs.cuda_getArray(),
 					flux.cuda_getArray(),
 					data.comp_threshold);
-		cudaCheckError(string("cuda[compute_flux]"));
+
+		_DEBUG {
+			stringstream ss;
+			ss << "cuda[compute_flux] i=" << i;
+			cudaCheckError(ss.str());
+		}
 #endif
 
 #ifndef NO_CUDA
@@ -230,7 +235,12 @@ int main(int argc, char **argv) {
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
-		cudaCheckError(string("cuda[update]"));
+
+		_DEBUG {
+			stringstream ss;
+			ss << "cuda[update] i=" << i;
+			cudaCheckError(ss.str());
+		}
 #endif
 
 
