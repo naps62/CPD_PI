@@ -301,6 +301,7 @@ namespace FVL {
 		edge_lengths.cuda_malloc();
 		edge_fst_vertex.cuda_malloc();
 		edge_snd_vertex.cuda_malloc();
+		edge_left_cells.cuda_malloc();
 		edge_right_cells.cuda_malloc();
 
 		// cell info
@@ -326,6 +327,7 @@ namespace FVL {
 		edge_lengths.cuda_free();
 		edge_fst_vertex.cuda_free();
 		edge_snd_vertex.cuda_free();
+		edge_left_cells.cuda_free();
 		edge_right_cells.cuda_free();
 
 		// cell info

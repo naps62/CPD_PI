@@ -160,6 +160,7 @@ int main(int argc, char **argv) {
 	mesh.edge_lengths.cuda_saveAsync(stream);
 	mesh.edge_fst_vertex.cuda_saveAsync(stream);
 	mesh.edge_snd_vertex.cuda_saveAsync(stream);
+	mesh.edge_left_cells.cuda_saveAsync(stream);
 	mesh.edge_right_cells.cuda_saveAsync(stream);
 	mesh.cell_centroids.x.cuda_saveAsync(stream);
 	mesh.cell_centroids.y.cuda_saveAsync(stream);
