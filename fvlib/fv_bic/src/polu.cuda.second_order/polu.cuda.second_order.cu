@@ -209,7 +209,7 @@ int main(int argc, char **argv) {
 		}
 #endif
 
-
+/*
 #ifndef NO_CUDA
 		flux.cuda_get();
 #endif
@@ -217,7 +217,7 @@ int main(int argc, char **argv) {
 		for(int x = 0; x < 10; ++x)
 			if (flux[x] != 0)
 			cout << x << "\t" << flux[x] << "\n";
-		exit(0);
+		exit(0);*/
 
 		/* update */
 #ifdef NO_CUDA
