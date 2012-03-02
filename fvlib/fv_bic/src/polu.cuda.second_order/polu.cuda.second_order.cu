@@ -55,6 +55,13 @@ double compute_mesh_parameter(FVMesh2D mesh) {
 	return h;
 }
 
+void cudaSafe(cudaError_t error, char *message) {
+	if (error != cudaSuccess) {
+		cerr << "Error: " << message << " : " << error << endl;
+		exit(-1);
+	}
+}
+
 int main(int argc, char **argv) {
 #ifdef NO_CUDA
 	cout << "Running in NO_CUDA mode" << endl;
@@ -167,21 +174,24 @@ int main(int argc, char **argv) {
 	while(t < data.final_time) {
 		/* compute flux */
 #ifdef NO_CUDA
-		kernel_compute_flux(
+				kernel_compute_flux(
 					mesh,
 					polution,
 					vs,
 					flux,
-					data.comp_threshold);
+					data.comp_threshold),
+
 #else
-		kernel_compute_flux<<< grid_flux, block_flux >>>(
+		cudaSafe(
+			kernel_compute_flux<<< grid_flux, block_flux >>>(
 					mesh.num_edges,
 					mesh.edge_left_cells.cuda_getArray(),
 					mesh.edge_right_cells.cuda_getArray(),
 					polution.cuda_getArray(),
 					vs.cuda_getArray(),
 					flux.cuda_getArray(),
-					data.comp_threshold);
+					data.comp_threshold),
+				"cuda[compute_flux]");
 #endif
 
 #ifndef NO_CUDA
@@ -200,7 +210,8 @@ int main(int argc, char **argv) {
 				flux,
 				dt);
 #else
-		kernel_update<<< grid_update, block_update >>>(
+		cudaSafe(
+			kernel_update<<< grid_update, block_update >>>(
 				mesh.num_cells,
 				//mesh.num_total_edges,
 				mesh.edge_left_cells.cuda_getArray(),
@@ -212,7 +223,8 @@ int main(int argc, char **argv) {
 				mesh.cell_edges_count.cuda_getArray(),
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
-				dt);
+				dt),
+			"cuda[update]");
 #endif
 
 
