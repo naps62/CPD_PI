@@ -55,14 +55,14 @@ double compute_mesh_parameter(FVMesh2D mesh) {
 	return h;
 }
 
-void cudaSafe(cudaError_t error, const str msg) {
+void cudaSafe(cudaError_t error, const string msg) {
 	if (error != cudaSuccess) {
 		cerr << "Error: " << msg << " : " << error << endl;
 		exit(-1);
 	}
 }
 
-void cudaCheckError(const str msg) {
+void cudaCheckError(const string msg) {
 	cudaError_t error = cudaGetLastError();
 	if (error != cudaSuccess) {
 		cerr << "Error: " << msg << " : " cudaGetErrorString(error) << endl;
@@ -230,7 +230,7 @@ int main(int argc, char **argv) {
 				polution.cuda_getArray(),
 				flux.cuda_getArray(),
 				dt);
-		cudaCheckError("cuda[update]");
+		cudaCheckError(string("cuda[update]"));
 #endif
 
 
