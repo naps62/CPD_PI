@@ -172,6 +172,7 @@ int main(int argc, char **argv) {
 		mesh.cell_edges_normal.cuda_saveAsync(stream);
 		//mesh.cell_edges_normal.cuda_saveAsync(stream);
 	}
+	polution.cuda_saveAsync(stream);
 
 	// sizes of each kernel
 	dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
