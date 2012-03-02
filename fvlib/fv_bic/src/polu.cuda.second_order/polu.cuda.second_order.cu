@@ -188,7 +188,7 @@ int main(int argc, char **argv) {
 					polution,
 					vs,
 					flux,
-					data.comp_threshold),
+					data.comp_threshold);
 
 #else
 		kernel_compute_flux<<< grid_flux, block_flux >>>(
@@ -207,12 +207,13 @@ int main(int argc, char **argv) {
 		}
 #endif
 
+
 #ifndef NO_CUDA
-		//flux.cuda_get();
+		flux.cuda_get();
 #endif
-		for(int x = 0; x < 10; ++x) {
-			cout << flux[x] << "\n";
-		}
+
+		for(int x = 0; x < 10; ++x)
+			cout << flux[0] << "\n";
 		exit(0);
 
 		/* update */
