@@ -210,10 +210,10 @@ int main(int argc, char **argv) {
 #ifndef NO_CUDA
 		//flux.cuda_get();
 #endif
-		//for(int x = 0; x < 10; ++x) {
-		//	cout << mesh.cell_areas[x] << "\n";
-		//}
-		//exit(0);
+		for(int x = 0; x < 10; ++x) {
+			cout << flux[x] << "\n";
+		}
+		exit(0);
 
 		/* update */
 #ifdef NO_CUDA
