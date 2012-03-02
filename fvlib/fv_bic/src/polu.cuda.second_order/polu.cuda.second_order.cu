@@ -214,7 +214,7 @@ int main(int argc, char **argv) {
 
 		for(int x = 0; x < 10; ++x)
 			if (flux[x] != 0)
-			cout << i << "\t" << flux[x] << "\n";
+			cout << x << "\t" << flux[x] << "\n";
 		exit(0);
 
 		/* update */
