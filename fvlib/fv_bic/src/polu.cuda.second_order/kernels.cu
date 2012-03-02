@@ -107,7 +107,10 @@ void kernel_update(
 		// if this cell is at the left of the edge
 
 		// amount of polution transfered through the edge
-		double aux = dt * flux[edge] * edge_lengths[edge] / cell_areas[tid];
+		double aux = dt * 
+			flux[edge] * 
+			edge_lengths[edge] /
+			cell_areas[tid];
 
 		// if this cell is on the left or the right of the edge
 		if (edge_left_cells[edge] == tid) {

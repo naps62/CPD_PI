@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 		mesh.cell_edges.cuda_saveAsync(stream);
 		mesh.cell_edges_normal.cuda_saveAsync(stream);
-		mesh.cell_edges_normal.cuda_saveAsync(stream);
+		//mesh.cell_edges_normal.cuda_saveAsync(stream);
 	}
 
 	// sizes of each kernel
