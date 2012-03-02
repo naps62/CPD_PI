@@ -92,7 +92,7 @@ void kernel_update(
 		double dt) {
 
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid > num_cells) return;
+	if (tid >= num_cells) return;
 
 	// define start and end of neighbor edges
 	//unsigned int* edge_index = cell_edges_index[tid];
