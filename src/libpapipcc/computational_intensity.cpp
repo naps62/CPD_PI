@@ -4,12 +4,13 @@ PAPI_ComputationalIntensity::PAPI_ComputationalIntensity ()
 	: PAPI_Preset ()
 {
 	this->add_event( _btm.code() );
+	this->add_event( _btif.code() );
 	this->add_event( _iro.code() );
 }
 
 long long int PAPI_ComputationalIntensity::ram_accesses ()
 {
-	return (*this)[ _btm.code() ];
+	return (*this)[ _btm.code() ] - (*this)[ _btif.code() ];
 }
 
 long long int PAPI_ComputationalIntensity::bytes_accessed ()
