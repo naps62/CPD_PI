@@ -6,9 +6,9 @@
 #include <fv/cpu/edge.hpp>
 
 
-#include <papi/computational_intensity.hpp>
+#include <papi/instructions.hpp>
 
-PAPI_ComputationalIntensity *p;
+papi::Instructions *p;
 
 long long int ci_insts;
 long long int ci_bytes;
@@ -70,7 +70,6 @@ void compute_flux(
 	p->stop();
 
 	ci_insts += p->instructions();
-	ci_bytes += p->bytes_accessed();
 
 	{
 		long long int dt = p->last_time();
@@ -112,7 +111,6 @@ void    update(
 	p->stop();
 
 	ci_insts += p->instructions();
-	ci_bytes += p->bytes_accessed();
 
 	{
 		long long int dt = p->last_time();
@@ -188,7 +186,7 @@ int main(int argc, char *argv[])
 	tmin[0] = tmin[1] = numeric_limits<long long int>::max();
 	tmax[0] = tmax[1] = numeric_limits<long long int>::min();
 	ci_insts = ci_bytes = tcount = 0;
-	p = new PAPI_ComputationalIntensity();
+	p = new papi::Instructions();
 
 
 	unsigned edge_count = m.getNbEdge();
@@ -312,13 +310,12 @@ int main(int argc, char *argv[])
 
 	delete p;
 
-	double ci = (double) ci_insts / (double) ci_bytes;
 	double tavg[2];
 	tavg[0] = (double) ttot[0] / tcount;
 	tavg[1] = (double) ttot[1] / tcount;
 	cout
-		<<	"Computational Intensity"	<<	endl
-		<<	"\t:\t"	<<	ci	<<	endl
+		<<	"Instructions"	<<	endl
+		<<	"\t:\t"	<<	ci_insts	<<	endl
 		<<	"Time:"	<<	endl
 		<<	" compute_flux"	<<	endl
 		<<	"\tmin:\t"	<<	tmin[0]	<<	endl
