@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
 		unsigned int left	= mesh.edge_left_cells[i];
 		unsigned int right	= mesh.edge_right_cells[i];
 
-		if (right == NO_RIGHT_EDGE)
+		if (right == NO_RIGHT_CELL)
 			right = left;
 
 		double v	= ((old_velocity[left].x + old_velocity[right].x) * 0.5 * mesh.edge_normals.x[i])
@@ -192,9 +192,9 @@ int main(int argc, char **argv) {
 	dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
 
 #ifdef NO_CUDA
-	/*cpu_compute_reverseA(
+	cpu_compute_reverseA(
 			mesh,
-			matA);*/
+			matA);
 #else
 	kernel_compute_reverseA(
 			

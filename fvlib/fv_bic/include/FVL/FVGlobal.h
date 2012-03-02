@@ -18,8 +18,8 @@
  * Utilities
  */
 //#define NO_RIGHT_EDGE std::numeric_limits<unsigned int>::max()
-#define NO_RIGHT_EDGE	INT_MAX
-#define NO_EDGE			INT_MAX
+#define NO_RIGHT_CELL	INT_MAX
+#define NO_CELL			INT_MAX
 #define MAX_EDGES_PER_CELL 3
 
 /**

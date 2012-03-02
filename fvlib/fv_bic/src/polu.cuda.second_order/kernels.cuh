@@ -5,6 +5,18 @@
 #include "FVL/CFVVect.h"
 using namespace FVL;
 
+/* Compute matA inverse */
+#ifndef NO_CUDA
+__global__
+void kernel_compute_reverseA(
+		//TODO
+		);
+#else
+void cpu_compute_reverseA(
+		CFVMesh2D &mesh,
+		CFVMat<double> matA);
+#endif
+
 /* Compute flux */
 #ifndef NO_CUDA
 __global__
