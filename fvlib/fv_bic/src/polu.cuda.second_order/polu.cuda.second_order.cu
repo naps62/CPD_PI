@@ -173,11 +173,9 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 		mesh.cell_edges.cuda_saveAsync(stream);
 		mesh.cell_edges_normal.cuda_saveAsync(stream);
-		//mesh.cell_edges_normal.cuda_saveAsync(stream);
 	}
 	polution.cuda_saveAsync(stream);
 	vs.cuda_saveAsync(stream);
-	//matA.cuda_saveAsyn(stream);
 	
 
 	// sizes of each kernel
@@ -197,9 +195,25 @@ int main(int argc, char **argv) {
 			matA);
 #else
 	kernel_compute_reverseA(
-			
-			);
+			mesh.num_cells,
+			mesh.cell_centroids.x.cuda_getArray(),
+			mesh.cell_centroids.y.cuda_getArray(),
+			mesh.cell_edges_count.cuda_getArray(),
+			mesh.cell_edges.cuda_getMat(),
+			mesh.edge_left_cells.cuda_getArray(),
+			mesh.edge_right_cells.cuda_getArray(),
+			matA.cuda_getMat());
+matA.cuda_get();
 #endif
+
+		cout << "cell " << i << endl;
+		cout << "determinant " << det << endl;
+		for(int x = 0; x < 3; ++x) {
+			for(int y = 0; y < 3; ++y)
+				cout << matA.elem(x, y, i) << "   ";
+			cout << endl;
+		}
+		cout << endl;
 
 
 	while(t < data.final_time) {

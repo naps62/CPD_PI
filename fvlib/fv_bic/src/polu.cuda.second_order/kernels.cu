@@ -3,31 +3,103 @@
 #ifndef NO_CUDA
 __global__
 void kernel_compute_reverseA(
-		);
+		unsigned int num_cells,
+		double *cell_centroids_x,
+		double *cell_centroids_y,
+		double *cell_edges_count,
+		unsigned int ** cell_edges,
+		unsigned int *edge_left_cells,
+		unsigned int *edge_right_cells,
+		double **matA) {
+
+	// get thread id
+	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
+	if (tid >= num_cell) return;
+
+	double x = cell_centroids_x[tid];
+	double x = cell_centroids_y[tid];
+
+	matA[0][tid] = x * x;	// elem (0, 0, tid)
+	matA[1][tid] = x * y;	// elem (1, 0, tid)
+	matA[2][tid] = x;		// elem (2, 0, tid)
+
+	matA[3][tid] = x * y;	// elem (0, 1, tid)
+	matA[4][tid] = y * y;	// elem (1, 1, tid)
+	matA[5][tid] = y;		// elem (2, 1, tid)
+
+	matA[6][tid] = x;		// elem (0, 2, tid)
+	matA[7][tid] = y;		// elem (1, 2, tid)
+	matA[8][tid] = 4;		// elem (2, 2, tid)
+
+	unsigned int edge_limit = cell_edges_count[tid];
+	for(unsigned int j = 0; j < edge_limit; ++j) {
+		// get current edge
+		unsigned int edge = cell_edges[j][tid];
+
+		// get left cell of this edge
+		unsigned int cell_j = edge_right_cells[edge];
+		// if right cell is current one...
+		if (cell_k == tid || cell_j == NO_RIGHT_CELL)
+			cell_j = edge_left_cells[edge];
+
+		//TODO: was the 2 factor forgotten in the formulas?
+		x = cell_centroids_x[cell_j];
+		y = cell_centroids_y[cell_j];
+
+		matA[0][tid] += x * x;
+		matA[1][tid] += x * y;
+		matA[2][tid] += x;
+
+		matA[3][tid] += x * y;
+		matA[4][tid] += y * y;
+		matA[5][tid] += y;
+
+		matA[6][tid] += x;
+		matA[7][tid] += y;
+	}
+
+	double invDet = 1.0 /
+					matA[0][tid] * (matA[4][tid] * matA[8][tid] -
+									matA[7][tid] * matA[5][tid])
+				-	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
+									matA[6][tid] * matA[5][tid])
+				+	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
+									matA[6][tid] * matA[4][tid]);
+	
+	double tmpA[9];
+	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
+	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
+	tmpA[1] = (matA[3][tid] * matA[7][tid] - matA[6][tid] * matA[4][tid]) * invDet;
+
+	tmpA[3] = (matA[1][tid] * matA[8][tid] - matA[7][tid] * matA[2][tid]) * invDet;
+	tmpA[4] = (matA[0][tid] * matA[8][tid] - matA[6][tid] * matA[2][tid]) * invDet;
+	tmpA[5] = (matA[0][tid] * matA[7][tid] - matA[6][tid] * matA[1][tid]) * invDet;
+
+	tmpA[6] = (matA[1][tid] * matA[5][tid] - matA[4][tid] * matA[2][tid]) * invDet;
+	tmpA[7] = (matA[0][tid] * matA[5][tid] - matA[3][tid] * matA[2][tid]) * invDet;
+	tmpA[8] = (matA[0][tid] * matA[4][tid] - matA[3][tid] * matA[1][tid]) * invDet;
+
+	for(unsigned int j = 0; j < 9; ++j)
+		matA[j][tid] = tmpA[j];
+}
 #else
-void cpu_compute_reverseA(
-		CFVMesh2D &mesh,
-		CFVMat<double> matA) {
+void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> matA) {
 	
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 		// centroid for current cell
 		double x_j = mesh.cell_centroids.x[i];
 		double y_j = mesh.cell_centroids.y[i];
 
-		for(unsigned int x = 0; x < matA.width(); ++x)
-			for(unsigned int y = 0; y < matA.height(); ++y)
-				matA.elem(x, y, i) = 0;
+		matA.elem(0, 0, i) = x * x;
+		matA.elem(0, 1, i) = x * y;
+		matA.elem(0, 2, i) = x;
 
-		matA.elem(0, 0, i) = x_j * x_j;
-		matA.elem(0, 1, i) = x_j * y_j;
-		matA.elem(0, 2, i) = x_j;
+		matA.elem(1, 0, i) = x * y;
+		matA.elem(1, 1, i) = y * y;
+		matA.elem(1, 2, i) = y;
 
-		matA.elem(1, 0, i) = x_j * y_j;
-		matA.elem(1, 1, i) = y_j * y_j;
-		matA.elem(1, 2, i) = y_j;
-
-		matA.elem(2, 0, i) = x_j;
-		matA.elem(2, 1, i) = y_j;
+		matA.elem(2, 0, i) = x;
+		matA.elem(2, 1, i) = y;
 		matA.elem(2, 2, i) = 4;
 
 		// for each edge
@@ -45,20 +117,20 @@ void cpu_compute_reverseA(
 				cell_j = mesh.edge_left_cells[edge];
 
 			// TODO: was the 2 factor forgotten in the formulas?
-			x_j = mesh.cell_centroids.x[cell_j];
-			y_j = mesh.cell_centroids.y[cell_j];
+			x = mesh.cell_centroids.x[cell_j];
+			y = mesh.cell_centroids.y[cell_j];
 
 			// sum to each matrix elem
-			matA.elem(0, 0, i) += x_j * x_j;
-			matA.elem(0, 1, i) += x_j * y_j;
-			matA.elem(0, 2, i) += x_j;
+			matA.elem(0, 0, i) += x * x;
+			matA.elem(0, 1, i) += x * y;
+			matA.elem(0, 2, i) += x;
 
-			matA.elem(1, 0, i) += x_j * y_j;
-			matA.elem(1, 1, i) += y_j * y_j;
-			matA.elem(1, 2, i) += y_j;
+			matA.elem(1, 0, i) += x * y;
+			matA.elem(1, 1, i) += y * y;
+			matA.elem(1, 2, i) += y;
 
-			matA.elem(2, 0, i) += x_j;
-			matA.elem(2, 1, i) += y_j;
+			matA.elem(2, 0, i) += x;
+			matA.elem(2, 1, i) += y;
 		}
 
 		// A computed, now to the reverse
@@ -77,14 +149,7 @@ void cpu_compute_reverseA(
 		for(unsigned int x = 0; x < 3; ++x)
 			for(unsigned int y = 0; y < 3; ++y)
 				tmpA[x][y] = matA.elem(x, y, i);
-		cout << "cell " << i << endl;
-		cout << "determinant " << det << endl;
-		for(int x = 0; x < 3; ++x) {
-			for(int y = 0; y < 3; ++y)
-				cout << matA.elem(x, y, i) << "   ";
-			cout << endl;
-		}
-		cout << endl;
+
 		matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
 		matA.elem(0, 2, i) = (tmpA[1][0] * tmpA[2][1] - tmpA[1][1] * tmpA[2][0]) * invDet;
