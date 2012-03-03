@@ -77,6 +77,7 @@ void kernel_compute_reverseA(
 	matA[0][tid] = det1;
 	matA[1][tid] = det2;
 	matA[2][tid] = det3;
+	matA[3][tid] = det;
 	/*double tmpA[9];
 	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
 	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
@@ -173,6 +174,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 		matA.elem(0,0,i) = det1;
 		matA.elem(1,0,i) = det2;
 		matA.elem(2,0,i) = det3;
+		matA.elem(0,1,i) = det;
 
 		/*matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
