@@ -12,7 +12,8 @@ void kernel_compute_reverseA(
 		unsigned int num_cells,
 		double *cell_centroids_x,
 		double *cell_centroids_y,
-		double *cell_edges_count,
+		unsigned int *cell_edges_count,
+		unsigned int **cell_edges,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
 		double **matA);
