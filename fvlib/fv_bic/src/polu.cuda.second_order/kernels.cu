@@ -19,7 +19,7 @@ void kernel_compute_reverseA(
 	double x = cell_centroids_x[tid];
 	double y = cell_centroids_y[tid];
 
-	/*matA[0][tid] = x * x;	// elem (0, 0, tid)
+	matA[0][tid] = x * x;	// elem (0, 0, tid)
 	matA[1][tid] = x * y;	// elem (1, 0, tid)
 	matA[2][tid] = x;		// elem (2, 0, tid)
 
@@ -29,18 +29,7 @@ void kernel_compute_reverseA(
 
 	matA[6][tid] = x;		// elem (0, 2, tid)
 	matA[7][tid] = y;		// elem (1, 2, tid)
-	matA[8][tid] = 4;		// elem (2, 2, tid)*/
-	matA[0][tid] = 0;	// elem (0, 0, tid)
-	matA[1][tid] = 1;	// elem (1, 0, tid)
-	matA[2][tid] = 2;		// elem (2, 0, tid)
-
-	matA[3][tid] = 3;	// elem (0, 1, tid)
-	matA[4][tid] = 4;	// elem (1, 1, tid)
-	matA[5][tid] = 5;		// elem (2, 1, tid)
-
-	matA[6][tid] = 6;		// elem (0, 2, tid)
-	matA[7][tid] = 7;		// elem (1, 2, tid)
-	matA[8][tid] = 8;		// elem (2, 2, tid)
+	matA[8][tid] = 4;		// elem (2, 2, tid)
 	return;
 	unsigned int edge_limit = cell_edges_count[tid];
 	for(unsigned int j = 0; j < edge_limit; ++j) {
