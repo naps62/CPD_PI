@@ -314,17 +314,13 @@ int main(int argc, char *argv[])
 	tavg[0] = (double) ttot[0] / tcount;
 	tavg[1] = (double) ttot[1] / tcount;
 	cout
-		<<	"Bytes"	<<	endl
-		<<	"\t:\t"	<<	ci_bytes	<<	endl
-		<<	"Time:"	<<	endl
-		<<	" compute_flux"	<<	endl
-		<<	"\tmin:\t"	<<	tmin[0]	<<	endl
-		<<	"\tmax:\t"	<<	tmax[0]	<<	endl
-		<<	"\tavg:\t"	<<	tavg[0]	<<	endl
-		<<	endl
-		<<	" update"	<<	endl
-		<<	"\tmin:\t"	<<	tmin[1]	<<	endl
-		<<	"\tmax:\t"	<<	tmax[1]	<<	endl
-		<<	"\tavg:\t"	<<	tavg[1]	<<	endl
+				<<	ci_bytes
+		<<	','	<<	tmin[0]
+		<<	','	<<	tmax[0]
+		<<	','	<<	tavg[0]
+		<<	','	<<	tmin[1]
+		<<	','	<<	tmax[1]
+		<<	','	<<	tavg[1]
+							<<	endl
 		;
 }
