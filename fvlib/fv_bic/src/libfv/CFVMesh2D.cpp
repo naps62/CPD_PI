@@ -61,7 +61,7 @@ namespace FVL {
 			edge_left_cells[i]	= edge->leftCell->label - 1;
 
 			// edge right cell (need check. if border edge, rightCell is null)
-			edge_right_cells[i]	= (edge->rightCell != NULL) ? (edge->rightCell->label - 1) : NO_RIGHT_EDGE; 
+			edge_right_cells[i]	= (edge->rightCell != NULL) ? (edge->rightCell->label - 1) : NO_RIGHT_CELL; 
 		}
 
 		// copy cell data
@@ -181,8 +181,8 @@ namespace FVL {
 		// initialize vertex
 		// compute centroid and length
 		for(unsigned int i = 0; i < num_edges; ++i) {
-			edge_left_cells[i] = NO_EDGE;
-			edge_right_cells[i] = NO_EDGE;
+			edge_left_cells[i] = NO_CELL;
+			edge_right_cells[i] = NO_CELL;
 
 			unsigned int v1_i = edge_fst_vertex[i];
 			unsigned int v2_i = edge_snd_vertex[i];
@@ -221,7 +221,7 @@ namespace FVL {
 				cell_centroids.x[i] += edge_centroids.x[edge] * edge_lengths[edge];
 				cell_centroids.y[i] += edge_centroids.y[edge] * edge_lengths[edge];
 
-				if (edge_left_cells[edge] == NO_EDGE)
+				if (edge_left_cells[edge] == NO_CELL)
 					edge_left_cells[edge] = i;
 				else
 					edge_right_cells[edge] = i;
@@ -277,7 +277,7 @@ namespace FVL {
 				edge_normals.y[i] *= -1. ;
 			}
 
-			if (edge_right_cells[i] == NO_EDGE) {
+			if (edge_right_cells[i] == NO_CELL) {
 				// TODO push boundary edges
 			}
 		}
