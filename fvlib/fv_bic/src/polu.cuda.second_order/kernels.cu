@@ -57,15 +57,6 @@ void kernel_compute_reverseA(
 		matA[6][tid] += x;
 		matA[7][tid] += y;
 	}
-	
-	double det1 =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
-									matA[7][tid] * matA[5][tid]);
-
-	double det2 = -	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
-									matA[6][tid] * matA[5][tid]);
-	
-	double det3 =	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
-									matA[6][tid] * matA[4][tid]);
 
 	double det =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
 									matA[7][tid] * matA[5][tid])
