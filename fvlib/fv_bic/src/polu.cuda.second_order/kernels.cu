@@ -74,11 +74,8 @@ void kernel_compute_reverseA(
 	
 	double det3 =	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
 									matA[6][tid] * matA[4][tid]);
-	matA[0][tid] = det1;
-	matA[1][tid] = det2;
-	matA[2][tid] = det3;
-	matA[3][tid] = det1+det2+det3;
-	/*double tmpA[9];
+
+	double tmpA[9];
 	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
 	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
 	tmpA[2] = (matA[3][tid] * matA[7][tid] - matA[6][tid] * matA[4][tid]) * invDet;
@@ -92,7 +89,7 @@ void kernel_compute_reverseA(
 	tmpA[8] = (matA[0][tid] * matA[4][tid] - matA[3][tid] * matA[1][tid]) * invDet;
 
 	for(unsigned int j = 0; j < 9; ++j)
-		matA[j][tid] = tmpA[j];*/
+		matA[j][tid] = tmpA[j];
 }
 #else
 void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
@@ -176,7 +173,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 		matA.elem(2,0,i) = det3;
 		matA.elem(0,1,i) = det;
 
-		/*matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
+		matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
 		matA.elem(0, 2, i) = (tmpA[1][0] * tmpA[2][1] - tmpA[1][1] * tmpA[2][0]) * invDet;
 
@@ -186,7 +183,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 
 		matA.elem(2, 0, i) = (tmpA[0][1] * tmpA[1][2] - tmpA[0][2] * tmpA[1][1]) * invDet;
 		matA.elem(2, 1, i) = (tmpA[0][0] * tmpA[1][2] - tmpA[0][2] * tmpA[1][0]) * invDet;
-		matA.elem(2, 2, i) = (tmpA[0][0] * tmpA[1][1] - tmpA[0][1] * tmpA[1][0]) * invDet;*/
+		matA.elem(2, 2, i) = (tmpA[0][0] * tmpA[1][1] - tmpA[0][1] * tmpA[1][0]) * invDet;
 	}
 }
 #endif
