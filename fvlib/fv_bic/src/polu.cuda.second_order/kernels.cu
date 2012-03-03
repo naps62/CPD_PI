@@ -83,12 +83,12 @@ void kernel_compute_reverseA(
 		matA[j][tid] = tmpA[j];
 }
 #else
-void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> matA) {
+void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 	
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 		// centroid for current cell
-		double x_j = mesh.cell_centroids.x[i];
-		double y_j = mesh.cell_centroids.y[i];
+		double x = mesh.cell_centroids.x[i];
+		double y = mesh.cell_centroids.y[i];
 
 		matA.elem(0, 0, i) = x * x;
 		matA.elem(0, 1, i) = x * y;
@@ -149,6 +149,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> matA) {
 		for(unsigned int x = 0; x < 3; ++x)
 			for(unsigned int y = 0; y < 3; ++y)
 				tmpA[x][y] = matA.elem(x, y, i);
+		cout << " asd";
 
 		matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;

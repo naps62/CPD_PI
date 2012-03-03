@@ -19,7 +19,7 @@ void kernel_compute_reverseA(
 #else
 void cpu_compute_reverseA(
 		CFVMesh2D &mesh,
-		CFVMat<double> matA);
+		CFVMat<double> &matA);
 #endif
 
 /* Compute flux */

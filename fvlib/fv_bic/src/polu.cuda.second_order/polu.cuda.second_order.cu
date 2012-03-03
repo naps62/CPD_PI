@@ -206,14 +206,15 @@ int main(int argc, char **argv) {
 matA.cuda_get();
 #endif
 
+		for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 		cout << "cell " << i << endl;
-		cout << "determinant " << det << endl;
 		for(int x = 0; x < 3; ++x) {
 			for(int y = 0; y < 3; ++y)
 				cout << matA.elem(x, y, i) << "   ";
 			cout << endl;
 		}
 		cout << endl;
+		}
 
 
 	while(t < data.final_time) {
