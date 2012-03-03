@@ -310,13 +310,12 @@ int main(int argc, char *argv[])
 
 	delete p;
 
-	double ci = (double) ci_insts / (double) ci_bytes;
 	double tavg[2];
 	tavg[0] = (double) ttot[0] / tcount;
 	tavg[1] = (double) ttot[1] / tcount;
 	cout
-		<<	"Computational Intensity"	<<	endl
-		<<	"\t:\t"	<<	ci	<<	endl
+		<<	"Bytes"	<<	endl
+		<<	"\t:\t"	<<	ci_bytes	<<	endl
 		<<	"Time:"	<<	endl
 		<<	" compute_flux"	<<	endl
 		<<	"\tmin:\t"	<<	tmin[0]	<<	endl
