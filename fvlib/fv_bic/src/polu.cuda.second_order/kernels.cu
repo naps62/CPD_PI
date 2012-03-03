@@ -58,6 +58,15 @@ void kernel_compute_reverseA(
 		matA[7][tid] += y;
 	}
 	
+	double det1 =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
+									matA[7][tid] * matA[5][tid]);
+
+	double det2 = -	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
+									matA[6][tid] * matA[5][tid]);
+	
+	double det3 =	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
+									matA[6][tid] * matA[4][tid]);
+
 	double det =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
 									matA[7][tid] * matA[5][tid])
 				-	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
@@ -66,7 +75,17 @@ void kernel_compute_reverseA(
 									matA[6][tid] * matA[4][tid]);
 	double invDet = 1.0 / det;
 
-	matA[0][tid] = det;
+	double det1 =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
+									matA[7][tid] * matA[5][tid]);
+
+	double det2 = -	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
+									matA[6][tid] * matA[5][tid]);
+	
+	double det3 =	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
+									matA[6][tid] * matA[4][tid]);
+	matA[0][tid] = det1;
+	matA[1][tid] = det2;
+	matA[2][tid] = det3;
 	/*double tmpA[9];
 	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
 	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
@@ -151,7 +170,18 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 			for(unsigned int y = 0; y < 3; ++y)
 				tmpA[x][y] = matA.elem(x, y, i);
 		cout << i << " determinant: " << det << endl;
-		matA.elem(0,0,i) = det;
+		double det1 = matA.elem(0, 0, i) *	(matA.elem(1, 1, i) * matA.elem(2, 2, i) -
+											 matA.elem(1, 2, i) * matA.elem(2, 1, i));
+
+		double det2	=- matA.elem(1, 0, i) *	(matA.elem(0, 1, i) * matA.elem(2, 2, i) -
+											 matA.elem(0, 2, i) * matA.elem(2, 1, i));
+
+		double det3 = matA.elem(2, 0, i) *	(matA.elem(0, 1, i) * matA.elem(1, 2, i) -
+											 matA.elem(0, 2, i) * matA.elem(1, 1, i));
+
+		matA.elem(0,0,i) = det1;
+		matA.elem(1,0,i) = det2;
+		matA.elem(2,0,i) = det3;
 
 		/*matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
