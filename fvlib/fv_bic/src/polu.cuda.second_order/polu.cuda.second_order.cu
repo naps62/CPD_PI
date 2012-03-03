@@ -194,7 +194,7 @@ int main(int argc, char **argv) {
 			mesh,
 			matA);
 #else
-	kernel_compute_reverseA(
+	kernel_compute_reverseA<<< grid_matA, block_matA >>>(
 			mesh.num_cells,
 			mesh.cell_centroids.x.cuda_getArray(),
 			mesh.cell_centroids.y.cuda_getArray(),
