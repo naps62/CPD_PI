@@ -39,7 +39,7 @@ void kernel_compute_reverseA(
 		// get left cell of this edge
 		unsigned int cell_j = edge_right_cells[edge];
 		// if right cell is current one...
-		if (cell_k == tid || cell_j == NO_RIGHT_CELL)
+		if (cell_j == tid || cell_j == NO_RIGHT_CELL)
 			cell_j = edge_left_cells[edge];
 
 		//TODO: was the 2 factor forgotten in the formulas?
