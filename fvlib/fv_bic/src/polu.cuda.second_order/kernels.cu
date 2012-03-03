@@ -14,7 +14,7 @@ void kernel_compute_reverseA(
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid >= num_cell) return;
+	if (tid >= num_cells) return;
 
 	double x = cell_centroids_x[tid];
 	double y = cell_centroids_y[tid];
