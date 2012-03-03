@@ -66,6 +66,7 @@ void kernel_compute_reverseA(
 									matA[6][tid] * matA[4][tid]);
 	double invDet = 1.0 / det;
 
+	matA[0][tid] = det;
 	/*double tmpA[9];
 	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
 	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
