@@ -17,7 +17,7 @@ void kernel_compute_reverseA(
 	if (tid >= num_cell) return;
 
 	double x = cell_centroids_x[tid];
-	double x = cell_centroids_y[tid];
+	double y = cell_centroids_y[tid];
 
 	matA[0][tid] = x * x;	// elem (0, 0, tid)
 	matA[1][tid] = x * y;	// elem (1, 0, tid)
