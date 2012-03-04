@@ -92,7 +92,14 @@ void    update(
 
 int main(int argc, char *argv[])
 {  
-	string parameter_filename="param.xml", mesh_filename,velo_filename,pol_filename,pol_ini_filename;
+	string parameter_filename;
+	
+	if ( argc > 1 )
+		parameter_filename = argv[1];
+	else
+		parameter_filename = "param.xml";
+
+	string mesh_filename,velo_filename,pol_filename,pol_ini_filename;
 	string name;
 	// read the parameter
 	Parameter para(parameter_filename.c_str());
