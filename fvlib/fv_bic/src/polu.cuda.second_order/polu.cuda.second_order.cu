@@ -257,6 +257,7 @@ int main(int argc, char **argv) {
 		cpu_compute_vecABC(
 					mesh,
 					matA,
+					vecResult,
 					vecABC);
 		#else
 		kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(
@@ -273,8 +274,10 @@ int main(int argc, char **argv) {
 		#endif
 
  		if (i % 100 == 0) {
+		#ifndef NO_CUDA
 		vecResult.cuda_get();
 		vecABC.cuda_get();
+		#endif
 		for(unsigned int z = 0; z < mesh.num_cells; ++z) {
 		cout << "cell " << z << endl;
 		for(int x = 0; x < 3; ++x) {

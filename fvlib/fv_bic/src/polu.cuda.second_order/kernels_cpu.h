@@ -12,13 +12,14 @@ void cpu_compute_reverseA(
 /* compute system polution coeficients for system solve */
 void cpu_compute_vecResult(
 		CFVMesh2D &mesh,
-		CFVVect<double> polution,
-		CFVMat<double> vecResult);
+		CFVVect<double> &polution,
+		CFVMat<double> &vecResult);
 
 /* Compute vecABC */
 void cpu_compute_vecABC(
 		CFVMesh2D &mesh,
 		CFVMat<double> &matA,
+		CFVMat<double> &vecResult,
 		CFVMat<double> &vecABC);
 
 void cpu_compute_flux(

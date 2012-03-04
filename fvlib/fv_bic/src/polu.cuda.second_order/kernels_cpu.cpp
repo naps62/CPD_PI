@@ -97,28 +97,28 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 }
 
 /* Compute vecABC */
-void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecABC) {
+void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecABC) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		// A
-		vecABC.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecABC.elem(0, 0, cell)
-								+ matA.elem(0, 1, cell) * vecABC.elem(1, 0, cell)
-								+ matA.elem(0, 2, cell) * vecABC.elem(2, 0, cell);
+		vecABC.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(0, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(0, 2, cell) * vecResult.elem(2, 0, cell);
 
 		// B
-		vecABC.elem(1, 0, cell) = matA.elem(1, 0, cell) * vecABC.elem(0, 0, cell)
-								+ matA.elem(1, 1, cell) * vecABC.elem(1, 0, cell)
-								+ matA.elem(1, 2, cell) * vecABC.elem(2, 0, cell);
+		vecABC.elem(1, 0, cell) = matA.elem(1, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(1, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(1, 2, cell) * vecResult.elem(2, 0, cell);
 
 		// C
-		vecABC.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecABC.elem(0, 0, cell)
-								+ matA.elem(2, 1, cell) * vecABC.elem(1, 0, cell)
-								+ matA.elem(2, 2, cell) * vecABC.elem(2, 0, cell);
+		vecABC.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
 	}
 }
 
 /* Compute system polution coeficients for system solve */
-void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> polution, CFVMat<double> vecResult) {
+void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double x = mesh.cell_centroids.x[cell];
 		double y = mesh.cell_centroids.y[cell];
