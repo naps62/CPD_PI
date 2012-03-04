@@ -234,7 +234,7 @@ int main(int argc, char **argv) {
 					polution,
 					vecResult);
 		#else
-		kernel_compute_vecResult(
+		kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(
 				mesh.num_cells,
 				mesh.cell_centroids.x.cuda_getArray(),
 				mesh.cell_centroids.y.cuda_getArray(),
@@ -260,7 +260,7 @@ int main(int argc, char **argv) {
 					matA,
 					vecABC);
 		#else
-		kernel_compute_vecABC(
+		kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(
 				mesh.num_cells,
 				matA.cuda_getMat(),
 				vecResult.cuda_getMat(),
