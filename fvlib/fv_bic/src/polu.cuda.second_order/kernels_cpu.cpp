@@ -67,7 +67,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 		for(unsigned int x = 0; x < 3; ++x)
 			for(unsigned int y = 0; y < 3; ++y)
 				tmpA[x][y] = matA.elem(x, y, i);
-		cout << i << " determinant: " << det << endl;
+
 		double det1 = matA.elem(0, 0, i) *	(matA.elem(1, 1, i) * matA.elem(2, 2, i) -
 											 matA.elem(1, 2, i) * matA.elem(2, 1, i));
 

@@ -132,7 +132,7 @@ void kernel_compute_vecResult(
 	vecResult[1][tid] = u * y;
 	vecResult[2][tid] = u;
 
-	double edge_limit = cell_edges_count[tid];
+	unsigned int edge_limit = cell_edges_count[tid];
 	for(unsigned int j = 0; j < edge_limit; ++j) {
 		// get edge
 		unsigned int edge = cell_edges[j][tid];

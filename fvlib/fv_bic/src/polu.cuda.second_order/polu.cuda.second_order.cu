@@ -249,7 +249,6 @@ int main(int argc, char **argv) {
 			stringstream ss;
 			ss << "cuda[compute_vecResult] i=" << i;
 			cudaCheckError(ss.str());
-			vecResult.cuda_get();
 		}
 		#endif
 
@@ -270,10 +269,12 @@ int main(int argc, char **argv) {
 			stringstream ss;
 			ss << "cuda[compute_vectABC] i=" << i;
 			cudaCheckError(ss.str());
-			vecABC.cuda_get();
 		}
 		#endif
 
+ 		if (i % 100 == 0) {
+		vecResult.cuda_get();
+		vecABC.cuda_get();
 		for(unsigned int z = 0; z < mesh.num_cells; ++z) {
 		cout << "cell " << z << endl;
 		for(int x = 0; x < 3; ++x) {
@@ -284,7 +285,8 @@ int main(int argc, char **argv) {
 		}
 		cout << endl;
 		}
-		exit(0);
+		//exit(0);
+		}
 
 		/* compute flux */
 		#ifdef NO_CUDA
