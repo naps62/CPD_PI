@@ -26,12 +26,13 @@ void cpu_compute_flux(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
 		CFVVect<double> &velocity,
-		CFVVect<double> &flux,
+		CFVMat<double> &vecABC,
+		CFVMat<double> &flux,
 		double dc);
 
 void cpu_update(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
-		CFVVect<double> &flux,
+		CFVMat<double> &flux,
 		double dt);
 #endif // _H_KERNELS_CPU

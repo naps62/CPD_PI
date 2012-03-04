@@ -44,9 +44,12 @@ void kernel_compute_flux(
 		unsigned int num_edges,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
+		double *edge_centroids_x,
+		double *edge_centroids_y,
 		double *polution,
 		double *velocity,
-		double *flux,
+		double **vecABC,
+		double **flux,
 		double dc);
 
 
@@ -63,7 +66,7 @@ void kernel_update(
 		//unsigned int *cell_edges_index,
 		unsigned int *cell_edges_count,
 		double *polution,
-		double *flux,
+		double **flux,
 		double dt);
 
 /* Reduction of temporary velocities array */

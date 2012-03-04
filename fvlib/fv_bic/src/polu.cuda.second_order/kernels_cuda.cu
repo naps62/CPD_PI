@@ -162,11 +162,14 @@ void kernel_compute_flux(
 		//double *edge_normals_y,
 		unsigned int *edge_left_cells,
 		unsigned int *edge_right_cells,
+		double *edge_centroids_x,
+		double *edge_centroids_y,
 		double *polution,
 		//double *velocity_x,
 		//double *velocity_y,
 		double *velocity,
-		double *flux,
+		double **vecABC,
+		double **flux,
 		//double *vs,
 		double dc) {
 
@@ -190,10 +193,15 @@ void kernel_compute_flux(
 		p_right		= dc;
 	}
 
-	if (v < 0)
+	double x = edge_centroids_x[tid];
+	double y = edge_centroids_y[tid];
+	double system_result = vecABC[0][tid] * x + vecABC[1][tid] * y + vecABC[2][tid];
+	flux[0][tid] = p_left * system_result;
+	flux[1][tid] = p_right * system_result;
+	/*if (v < 0)
 		flux[tid] = v * p_right;
 	else
-		flux[tid] = v * p_left;
+		flux[tid] = v * p_left;*/
 
 	//vs[tid] = v;
 }
@@ -210,7 +218,7 @@ void kernel_update(
 		//unsigned int *cell_edges_index,
 		unsigned int *cell_edges_count,
 		double *polution,
-		double *flux,
+		double **flux,
 		double dt) {
 
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -230,15 +238,14 @@ void kernel_update(
 
 		// amount of polution transfered through the edge
 		double aux = dt * 
-			flux[edge] * 
 			edge_lengths[edge] /
 			cell_areas[tid];
 
 		// if this cell is on the left or the right of the edge
 		if (edge_left_cells[edge] == tid) {
-			new_polution -= aux;
+			new_polution -= aux * flux[0][edge];
 		} else {
-			new_polution += aux;
+			new_polution += aux * flux[1][edge];
 		}
 	}
 

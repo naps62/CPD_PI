@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
 	polu_ini_file.get(old_polution, t, name);
 
 	FVL::CFVVect<double> polution(mesh.num_cells);
-	FVL::CFVVect<double> flux(mesh.num_edges);
+	FVL::CFVMat<double> flux(2, 1, mesh.num_edges);
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
@@ -297,6 +297,7 @@ int main(int argc, char **argv) {
 					mesh,
 					polution,
 					vs,
+					vecABC,
 					flux,
 					data.comp_threshold);
 
@@ -305,9 +306,12 @@ int main(int argc, char **argv) {
 					mesh.num_edges,
 					mesh.edge_left_cells.cuda_getArray(),
 					mesh.edge_right_cells.cuda_getArray(),
+					mesh.edge_centroids.x.cuda_getArray(),
+					mesh.edge_centroids.y.cuda_getArray(),
 					polution.cuda_getArray(),
 					vs.cuda_getArray(),
-					flux.cuda_getArray(),
+					vecABC.cuda_getMat(),
+					flux.cuda_getMat(),
 					data.comp_threshold);
 
 		_DEBUG {
@@ -336,7 +340,7 @@ int main(int argc, char **argv) {
 				//mesh.cell_edges_index.cuda_getArray(),
 				mesh.cell_edges_count.cuda_getArray(),
 				polution.cuda_getArray(),
-				flux.cuda_getArray(),
+				flux.cuda_getMat(),
 				dt);
 
 		_DEBUG {

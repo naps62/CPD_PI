@@ -159,7 +159,8 @@ void cpu_compute_flux(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
 		CFVVect<double> &velocity,
-		CFVVect<double> &flux,
+		CFVMat<double> &vecABC,
+		CFVMat<double> &flux,
 		double dc) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		unsigned int i_left		= mesh.edge_left_cells[i];
@@ -177,10 +178,15 @@ void cpu_compute_flux(
 			p_right = dc;
 		}
 
-		if (v < 0)
+		double x = mesh.edge_centroids.x[i];
+		double y = mesh.edge_centroids.y[i];
+		double system_result = vecABC.elem(0, 0, i) * x + vecABC.elem(1, 0, i) * y + vecABC.elem(2, 0, i);
+		flux.elem(0, 0, i) = p_left	 * system_result;
+		flux.elem(1, 0, i) = p_right * system_result;
+		/*if (v < 0)
 			flux[i] = v * p_right;
 		else
-			flux[i] = v * p_left;
+			flux[i] = v * p_left;*/
 
 	};
 }
@@ -189,7 +195,7 @@ void cpu_compute_flux(
 void cpu_update(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
-		CFVVect<double> &flux,
+		CFVMat<double> &flux,
 		double dt) {
 
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
@@ -197,12 +203,13 @@ void cpu_update(
 		for(unsigned int e = 0; e < edge_limit; ++e) {
 			unsigned int edge = mesh.cell_edges.elem(e, 0, i);
 
-			double aux = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[i];
+			double aux = dt * mesh.edge_lengths[edge] / mesh.cell_areas[i];
 
 			if (mesh.edge_left_cells[edge] == i) {
-				polution[i] -= aux;
+				// TODO is this order correct?
+				polution[i] -= aux * flux.elem(0, 0, edge);
 			} else {
-				polution[i] += aux;
+				polution[i] += aux * flux.elem(1, 0, edge);
 			}
 		}
 	}
