@@ -5,7 +5,11 @@
 #include "FVio.h"
 #include "Parameter.h"
 
-#include "kernels.cuh"
+#ifdef NO_CUDA
+#include "kernels_cpu.h"
+#else
+#include "kernels_cuda.cu"
+#endif
 
 #define BLOCK_SIZE_FLUX		512
 #define BLOCK_SIZE_UPDATE	512
@@ -107,6 +111,8 @@ int main(int argc, char **argv) {
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
+	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
+	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
 
 	// TODO: remove this dependency
 	for(unsigned int i = 0; i < polution.size(); ++i) {
@@ -143,12 +149,15 @@ int main(int argc, char **argv) {
 	FVio polution_file(data.output_file.c_str(), FVWRITE);
 	polution_file.put(old_polution, t, "polution");
 
+	#ifndef NO_CUDA
 	// saves whole mesh to CUDA memory
 	mesh.cuda_malloc();
 	polution.cuda_malloc();
 	flux.cuda_malloc();
 	vs.cuda_malloc();
 	matA.cuda_malloc();
+	vecABC.cuda_malloc();
+	vecResult.cuda_malloc();
 
 	// data copy
 	cudaStream_t stream;
@@ -183,17 +192,24 @@ int main(int argc, char **argv) {
 	dim3 grid_matA(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
 	dim3 block_matA(BLOCK_SIZE_FLUX, 1, 1);
 
+	dim3 grid_vecResult(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
+	dim3 block_vecResult(BLOCK_SIZE_FLUX, 1, 1);
+
+	dim3 grid_vecABC(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
+	dim3 block_vecABC(BLOCK_SIZE_FLUX, 1, 1);
+
 	dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
 	dim3 block_flux(BLOCK_SIZE_FLUX, 1, 1);
 
 	dim3 grid_update(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_UPDATE), 1, 1);
 	dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
+	#endif
 
-#ifdef NO_CUDA
+	#ifdef NO_CUDA
 	cpu_compute_reverseA(
 			mesh,
 			matA);
-#else
+	#else
 	kernel_compute_reverseA<<< grid_matA, block_matA >>>(
 			mesh.num_cells,
 			mesh.cell_centroids.x.cuda_getArray(),
@@ -203,31 +219,83 @@ int main(int argc, char **argv) {
 			mesh.edge_left_cells.cuda_getArray(),
 			mesh.edge_right_cells.cuda_getArray(),
 			matA.cuda_getMat());
-matA.cuda_get();
-#endif
 
-		for(unsigned int i = 0; i < mesh.num_cells; ++i) {
-		cout << "cell " << i << endl;
-		for(int x = 0; x < 3; ++x) {
-			for(int y = 0; y < 3; ++y)
-				cout << matA.elem(x, y, i) << "   ";
-			cout << endl;
-		}
-		cout << endl;
-		}
+	_D(cudaCheckError("cuda[compute_reverseA]"));
+
+	matA.cuda_get();
+	#endif
 
 
 	while(t < data.final_time) {
+		/* compute system polution coeficients for system solve */
+		#ifdef NO_CUDA
+		cpu_compute_vecResult(
+					mesh,
+					polution,
+					vecResult);
+		#else
+		kernel_compute_vecResult(
+				mesh.num_cells,
+				mesh.cell_centroids.x.cuda_getArray(),
+				mesh.cell_centroids.y.cuda_getArray(),
+				mesh.cell_edges_count.cuda_getArray(),
+				mesh.cell_edges.cuda_getMat(),
+				mesh.edge_left_cells.cuda_getArray(),
+				mesh.edge_right_cells.cuda_getArray(),
+				polution.cuda_getArray(),
+				vecResult.cuda_getMat());
+
+		_DEBUG {
+			stringstream ss;
+			ss << "cuda[compute_vecResult] i=" << i;
+			cudaCheckError(ss.str());
+			vecResult.cuda_get();
+		}
+		#endif
+
+		/* compute (a,b,c) vector */
+		#ifdef NO_CUDA
+		cpu_compute_vecABC(
+					mesh,
+					matA,
+					vecABC);
+		#else
+		kernel_compute_vecABC(
+				mesh.num_cells,
+				matA.cuda_getMat(),
+				vecResult.cuda_getMat(),
+				vecABC.cuda_getMat());
+
+		_DEBUG {
+			stringstream ss;
+			ss << "cuda[compute_vectABC] i=" << i;
+			cudaCheckError(ss.str());
+			vecABC.cuda_get();
+		}
+		#endif
+
+		for(unsigned int z = 0; z < mesh.num_cells; ++z) {
+		cout << "cell " << z << endl;
+		for(int x = 0; x < 3; ++x) {
+			cout << vecABC.elem(x, 0, z) << " = [";
+			for(int y = 0; y < 3; ++y)
+				cout << matA.elem(x, y, z) << "   ";
+			cout << "]   [ " << vecResult.elem(x, 0, z) << " ]" << endl;
+		}
+		cout << endl;
+		}
+		exit(0);
+
 		/* compute flux */
-#ifdef NO_CUDA
-		kernel_compute_flux(
+		#ifdef NO_CUDA
+		cpu_compute_flux(
 					mesh,
 					polution,
 					vs,
 					flux,
 					data.comp_threshold);
 
-#else
+		#else
 		kernel_compute_flux<<< grid_flux, block_flux >>>(
 					mesh.num_edges,
 					mesh.edge_left_cells.cuda_getArray(),
@@ -242,16 +310,16 @@ matA.cuda_get();
 			ss << "cuda[compute_flux] i=" << i;
 			cudaCheckError(ss.str());
 		}
-#endif
+		#endif
 
 		/* update */
-#ifdef NO_CUDA
-		kernel_update(
+		#ifdef NO_CUDA
+		cpu_update(
 				mesh,
 				polution,
 				flux,
 				dt);
-#else
+		#else
 		kernel_update<<< grid_update, block_update >>>(
 				mesh.num_cells,
 				//mesh.num_total_edges,
@@ -271,13 +339,13 @@ matA.cuda_get();
 			ss << "cuda[update] i=" << i;
 			cudaCheckError(ss.str());
 		}
-#endif
+		#endif
 
 
 	if (i % data.anim_jump == 0) {
-#ifndef NO_CUDA
+		#ifndef NO_CUDA
 		polution.cuda_get();
-#endif
+		#endif
 		for(unsigned int x = 0; x < mesh.num_cells; ++x)
 			old_polution[x] = polution[x];
 		
@@ -289,18 +357,20 @@ matA.cuda_get();
 }
 
 	// dump final iteration
-#ifndef NO_CUDA
+	#ifndef NO_CUDA
 	polution.cuda_get();
-#endif
+	#endif
 	for(unsigned int x = 0; x < mesh.num_cells; ++x)
 		old_polution[x] = polution[x];
 
 	polution_file.put(old_polution, t, "polution");
 
+	#ifndef NO_CUDA
 	polution.cuda_free();
 	flux.cuda_free();
 	vs.cuda_free();
 	matA.cuda_free();
 	mesh.cuda_free();
+	#endif
 }
 
