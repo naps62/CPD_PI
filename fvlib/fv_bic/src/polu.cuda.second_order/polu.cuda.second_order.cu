@@ -8,7 +8,7 @@
 #ifdef NO_CUDA
 #include "kernels_cpu.h"
 #else
-#include "kernels_cuda.cu"
+#include "kernels_cuda.cuh"
 #endif
 
 #define BLOCK_SIZE_FLUX		512
