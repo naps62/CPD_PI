@@ -315,12 +315,14 @@ int main(int argc, char *argv[])
 	tavg[1] = (double) ttot[1] / tcount;
 	cout
 				<<	ci_bytes
-		<<	','	<<	tmin[0]
-		<<	','	<<	tmax[0]
-		<<	','	<<	tavg[0]
-		<<	','	<<	tmin[1]
-		<<	','	<<	tmax[1]
-		<<	','	<<	tavg[1]
+		<<	';'	<<	ttot[0]
+		<<	';'	<<	tmin[0]
+		<<	';'	<<	tmax[0]
+		<<	';'	<<	tavg[0]
+		<<	';'	<<	ttot[1]
+		<<	';'	<<	tmin[1]
+		<<	';'	<<	tmax[1]
+		<<	';'	<<	tavg[1]
 							<<	endl
 		;
 }
