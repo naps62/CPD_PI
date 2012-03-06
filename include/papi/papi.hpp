@@ -9,6 +9,21 @@
 using std::map;
 using std::vector;
 
+
+namespace papi
+{
+	//! Initialize the PAPI library funcionalities.
+	/*! Initialize the library with the current version. If an error occurs
+	 * throws an exception.
+	 *
+	 * \throw Error An error occurred while initializing the library. The value
+	 * of the exception is the error code returned by the PAPI library.
+	 */
+	void init();
+	void shutdown();
+}
+
+
 class PAPI
 {
 	int set;
@@ -40,7 +55,6 @@ class PAPI
 	static long long int real_nano_seconds ();
 
 	PAPI ();
-//	~PAPI ();
 
 	void start ();
 	void stop ();

@@ -14,6 +14,38 @@
 using std::cerr;
 using std::endl;
 
+
+
+namespace papi
+{
+	void init()
+	{
+		int result;
+
+		result = PAPI_library_init( PAPI_VER_CURRENT );
+		if ( result != PAPI_VER_CURRENT )
+		{
+			cerr
+				<<	'['
+				<<	result
+				<<	"] Error initializing PAPI!"
+				<<	endl;
+			throw( result );
+		}
+	}
+	
+	void shutdown()
+	{
+		PAPI_shutdown();
+	}
+}
+
+
+
+
+
+
+
 const int PAPI::CACHE_LINE_SIZE = 64;
 
 void PAPI::init ()

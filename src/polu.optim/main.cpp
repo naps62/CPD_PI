@@ -1,62 +1,120 @@
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)	\
+ ||   defined (PAPI_INSTRUCTIONS_LOADS) \
+ ||   defined (PAPI_INSTRUCTIONS_STORES) \
+ ||   defined (PAPI_INSTRUCTIONS_FPS) \
+ ||   defined (PAPI_INSTRUCTIONS_INTS)
+#define PAPI_INSTRUCTIONS
+#endif//PAPI_INSTRUCTIONS_*
+
+#if   defined (PAPI_INSTRUCTIONS)
+#define PAPIFU
+#endif
+
+
 #include <iostream>
 #include <limits>
 #include "FVLib.h"
 
 #include <fv/cpu/cell.hpp>
-#include <fv/cpu/edge.hpp>
-
-#define PI 3.141592653
-#define BIG 10e+30
-
 using fv::cpu::Cell;
+#include <fv/cpu/edge.hpp>
 using fv::cpu::Edge;
 
-//---------
-//double compute_flux(
+
+#if   defined (PAPIFU)
+#if   defined (PAPI_INSTRUCTIONS)
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)
+#include <papi/total_instructions_preset_counter.hpp>
+papi::TotalInstructionsPresetCounter *p;
+long long int tot_ins;
+#elif defined (PAPI_INSTRUCTIONS_LOADS)
+#include <papi/load_instructions_preset_counter.hpp>
+papi::LoadInstructionsPresetCounter *p;
+long long int ld_ins;
+#elif defined (PAPI_INSTRUCTIONS_STORES)
+#include <papi/store_instructions_preset_counter.hpp>
+papi::StoreInstructionsPresetCounter *p;
+long long int sr_ins;
+#elif defined (PAPI_INSTRUCTIONS_FPS)
+#include <papi/fp_instructions_preset_counter.hpp>
+papi::FloatingPointInstructionsPresetCounter *p;
+long long int fp_ins;
+#elif defined (PAPI_INSTRUCTIONS_INTS)
+#include <papi/int_instructions_preset_counter.hpp>
+papi::IntegerInstructionsPresetCounter *p;
+long long int int_ins;
+#endif//PAPI_INSTRUCTIONS_*
+long long int ctl_ins;
+#endif//PAPI_INSTRUCTIONS
+#endif//PAPI
+
+
+
 void compute_flux(
-	Edge *edges, unsigned edge_count, Cell *cells,
+	Edge *edges,
+	unsigned edge_count,
+	Cell *cells,
 	double dirichlet)
 {
-	double dt=1.e20;
-	FVPoint2D<double> VL,VR;
-	double polL,polR,v;
+	double polution_left;
+	double polution_right;
+
+#if defined (PAPIFU)
+	p->start();
+#endif
+
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
 		Cell &cell_left = cells[ edge.left ];
-//		VL.x = cell_left.velocity[0];
-//		VL.y = cell_left.velocity[1];
-		polL = cell_left.polution;
+		polution_left = cell_left.polution;
 		if ( edge.right < numeric_limits<unsigned>::max() )
 		{
 			Cell &cell_right = cells[ edge.right ];
-//			VR.x = cell_right.velocity[0];
-//			VR.y = cell_right.velocity[1];
-			polR = cell_right.polution;
+			polution_right = cell_right.polution;
 		}
 		else
 		{
-//			VR=VL;
-			polR= dirichlet;
+			polution_right= dirichlet;
 		} 
-//		v = ( VL.x + VR.x ) * 0.5 * edge.normal[0]
-//		  + ( VL.y + VR.y ) * 0.5 * edge.normal[1];
-//		if (abs(v)*dt>1) dt=1./abs(v);
-//		edge.flux = ( v < 0 ) ? ( v * polR ) : ( v * polL );
 		edge.flux = ( edge.velocity < 0 )
-				  ? ( edge.velocity * polR )
-				  : ( edge.velocity * polL );
+				  ? ( edge.velocity * polution_right )
+				  : ( edge.velocity * polution_left );
 	}
-//	return dt;
+
+#if   defined (PAPIFU)
+	p->stop();
+#if   defined (PAPI_INSTRUCTIONS)
+	long long int inst = p->instructions() - ctl_ins;
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)
+	tot_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_LOADS)
+	ld_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_STORES)
+	sr_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_FPS)
+	fp_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_INTS)
+	int_ins += inst;
+#endif//PAPI_INSTRUCTIONS_*
+#endif//PAPI_INSTRUCTIONS
+#endif//PAPI
 }
+
+
+
 
 void    update(
 	Cell *cells,
 	unsigned cell_count,
 	Edge *edges,
-//	unsigned edge_count,
 	double dt)
 {
+
+#ifdef PAPI
+	p->start();
+#endif
+
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];
@@ -74,6 +132,25 @@ void    update(
 
 		cell.polution += cdp;
 	}
+
+#if   defined (PAPIFU)
+	p->stop();
+#if   defined (PAPI_INSTRUCTIONS)
+	long long int inst = p->instructions() - ctl_ins;
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)
+	tot_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_LOADS)
+	ld_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_STORES)
+	sr_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_FPS)
+	fp_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_INTS)
+	int_ins += inst;
+#endif//PAPI_INSTRUCTIONS_*
+#endif//PAPI_INSTRUCTIONS
+#endif//PAPI
+
 }    
 
 
@@ -92,7 +169,14 @@ void    update(
 
 int main(int argc, char *argv[])
 {  
-	string parameter_filename="param.xml", mesh_filename,velo_filename,pol_filename,pol_ini_filename;
+	string parameter_filename;
+	
+	if ( argc > 1 )
+		parameter_filename = argv[1];
+	else
+		parameter_filename = "param.xml";
+	
+	string mesh_filename,velo_filename,pol_filename,pol_ini_filename;
 	string name;
 	// read the parameter
 	Parameter para(parameter_filename.c_str());
@@ -199,6 +283,30 @@ int main(int argc, char *argv[])
 
 
 
+#if   defined (PAPIFU)
+	papi::init();
+#if   defined (PAPI_INSTRUCTIONS)
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)
+	p = new papi::TotalInstructionsPresetCounter();
+	tot_ins = 0;
+#elif defined (PAPI_INSTRUCTIONS_LOADS)
+	p = new papi::LoadInstructionsPresetCounter();
+	ld_ins = 0;
+#elif defined (PAPI_INSTRUCTIONS_STORES)
+	p = new papi::StoreInstructionsPresetCounter();
+	sr_ins = 0;
+#elif defined (PAPI_INSTRUCTIONS_FPS)
+	p = new papi::FloatingPointInstructionsPresetCounter();
+	fp_ins = 0;
+#elif defined (PAPI_INSTRUCTIONS_INTS)
+	p = new papi::IntegerInstructionsPresetCounter();
+	int_ins = 0;
+#endif//PAPI_INSTRUCTIONS_*
+	p->start();
+	p->stop();
+	ctl_ins = p->instructions();
+#endif//PAPI_INSTRUCTIONS
+#endif//PAPI
 
 
 
@@ -248,5 +356,24 @@ int main(int argc, char *argv[])
 
 	pol_file.put(pol,time,"polution"); 
 
+#if   defined (PAPIFU)
+	delete p;
+	papi::shutdown();
+	cout
+#if   defined (PAPI_INSTRUCTIONS)
+#if   defined (PAPI_INSTRUCTIONS_TOTAL)
+		<<	tot_ins
+#elif defined (PAPI_INSTRUCTIONS_LOADS)
+		<<	ld_ins
+#elif defined (PAPI_INSTRUCTIONS_STORES)
+		<<	sr_ins
+#elif defined (PAPI_INSTRUCTIONS_FPS)
+		<<	fp_ins
+#elif defined (PAPI_INSTRUCTIONS_INTS)
+		<<	int_ins
+#endif//PAPI_INSTRUCTIONS_*
+#endif//PAPI_INSTRUCTIONS
+		<<	endl;
+#endif//PAPI
 
 }
