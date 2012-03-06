@@ -59,7 +59,7 @@ void compute_flux(
 	double polution_left;
 	double polution_right;
 
-#if defined (PAPIFU)
+#if   defined (PAPIFU)
 	p->start();
 #endif
 
@@ -111,7 +111,7 @@ void    update(
 	double dt)
 {
 
-#ifdef PAPI
+#if   defined  PAPIFU
 	p->start();
 #endif
 
