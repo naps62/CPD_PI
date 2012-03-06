@@ -1,5 +1,32 @@
 #include "kernels_cpu.h"
 
+/* Aux function for cpu_compute_vecResult - computes ghost cell centroid */
+void cpu_ghost_coords(CFVMesh2D &mesh, unsigned int edge, double &x, double &y) {
+	// compute lambda
+	unsigned int v1 = mesh.edge_fst_vertex[edge];
+	unsigned int v2 = mesh.edge_snd_vertex[edge];
+
+	double v1_x = mesh.vertex_coords.x[v1];
+	double v2_x = mesh.vertex_coords.x[v2];
+	double v1_y = mesh.vertex_coords.y[v1];
+	double v2_y = mesh.vertex_coords.y[v2];
+
+	double v1v2_x = v2_x - v1_x;
+	double v1v2_y = v2_y - v1_y;
+
+	double lambda	= ((x - v1_x) * v1v2_x	+ (y - v1_y) * v1v2_y)
+					/ (v1v2_x * v1v2_x 		+ v1v2_y * v1v2_y);
+
+	// compute AB vector
+	double ab_x = x - (v1_x + lambda * v1v2_x);
+	double ab_y = y - (v1_y + lambda * v1v2_y);
+
+	// update x & y coords to represent ghost cell
+	x -= 2 * ab_x;
+	y -= 2 * ab_y;
+
+}
+
 /* compute reverse A matrix kernel */
 void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 	
@@ -37,6 +64,11 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 			// TODO: was the 2 factor forgotten in the formulas?
 			x = mesh.cell_centroids.x[cell_j];
 			y = mesh.cell_centroids.y[cell_j];
+
+			// if there is no right cell, calc coords of ghost cell
+			if (cell_j == i) {
+				cpu_ghost_coords(mesh, edge, x, y);
+			}
 
 			// sum to each matrix elem
 			matA.elem(0, 0, i) += x * x;
@@ -77,10 +109,10 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 		double det3 = matA.elem(2, 0, i) *	(matA.elem(0, 1, i) * matA.elem(1, 2, i) -
 											 matA.elem(0, 2, i) * matA.elem(1, 1, i));
 
-		matA.elem(0,0,i) = det1;
+/*		matA.elem(0,0,i) = det1;
 		matA.elem(1,0,i) = det2;
 		matA.elem(2,0,i) = det3;
-		matA.elem(0,1,i) = det;
+		matA.elem(0,1,i) = det;*/
 
 		matA.elem(0, 0, i) = (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
 		matA.elem(0, 1, i) = (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
@@ -117,6 +149,7 @@ void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &v
 	}
 }
 
+
 /* Compute system polution coeficients for system solve */
 void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
@@ -141,10 +174,15 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 			// TODO: ghost cell, used correctly?
 			if (neighbor == cell || neighbor == NO_RIGHT_CELL)
 				neighbor = mesh.edge_left_cells[edge];
-
+			
 			x = mesh.cell_centroids.x[neighbor];
 			y = mesh.cell_centroids.y[neighbor];
 			u = polution[neighbor];
+
+			// if neighbor is still equal to cell, this is a ghost cell, compute centroid)
+			if (neighbor == cell) {
+				cpu_ghost_coords(mesh, edge, x, y);
+			}
 
 			// sum to current vec
 			vecResult.elem(0, 0, cell) += u * x;
@@ -160,7 +198,7 @@ void cpu_compute_flux(
 		CFVVect<double> &polution,
 		CFVVect<double> &velocity,
 		CFVMat<double> &vecABC,
-		CFVMat<double> &flux,
+		CFVVect<double> &flux,
 		double dc) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		unsigned int i_left		= mesh.edge_left_cells[i];
@@ -180,13 +218,24 @@ void cpu_compute_flux(
 
 		double x = mesh.edge_centroids.x[i];
 		double y = mesh.edge_centroids.y[i];
-		double system_result = vecABC.elem(0, 0, i) * x + vecABC.elem(1, 0, i) * y + vecABC.elem(2, 0, i);
-		flux.elem(0, 0, i) = p_left	 * system_result;
-		flux.elem(1, 0, i) = p_right * system_result;
-		/*if (v < 0)
-			flux[i] = v * p_right;
+
+		unsigned int left_cell = mesh.edge_left_cells[i];
+		unsigned int right_cell = mesh.edge_right_cells[i];
+		// TODO acrescentar x,y das celulas ao calculo do sistema
+		double system_result_left	= vecABC.elem(0, 0, left_cell) * x + vecABC.elem(1, 0, left_cell) * y + vecABC.elem(2, 0, left_cell);
+		double system_result_right;
+
+		if (right_cell == NO_RIGHT_CELL)
+			system_result_right = dc;
+		else {
+			system_result_right	= vecABC.elem(0, 0, right_cell) * x + vecABC.elem(1, 0, right_cell) * y + vecABC.elem(2, 0, right_cell);
+		}
+		if (v < 0)
+			flux[i] = v * system_result_right;
 		else
-			flux[i] = v * p_left;*/
+			flux[i] = v * system_result_left;
+
+		cout << "flux " << i << " " << flux[i] << endl;
 
 	};
 }
@@ -195,7 +244,7 @@ void cpu_compute_flux(
 void cpu_update(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
-		CFVMat<double> &flux,
+		CFVVect<double> &flux,
 		double dt) {
 
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
@@ -203,13 +252,12 @@ void cpu_update(
 		for(unsigned int e = 0; e < edge_limit; ++e) {
 			unsigned int edge = mesh.cell_edges.elem(e, 0, i);
 
-			double aux = dt * mesh.edge_lengths[edge] / mesh.cell_areas[i];
+			double aux = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[i];
 
 			if (mesh.edge_left_cells[edge] == i) {
-				// TODO is this order correct?
-				polution[i] -= aux * flux.elem(0, 0, edge);
+				polution[i] -= aux;
 			} else {
-				polution[i] += aux * flux.elem(1, 0, edge);
+				polution[i] += aux;
 			}
 		}
 	}

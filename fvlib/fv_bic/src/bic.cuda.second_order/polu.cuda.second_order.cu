@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
 	polu_ini_file.get(old_polution, t, name);
 
 	FVL::CFVVect<double> polution(mesh.num_cells);
-	FVL::CFVMat<double> flux(2, 1, mesh.num_edges);
+	FVL::CFVVect<double> flux(mesh.num_edges);
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
@@ -117,6 +117,7 @@ int main(int argc, char **argv) {
 	// TODO: remove this dependency
 	for(unsigned int i = 0; i < polution.size(); ++i) {
 		polution[i] = old_polution[i];
+		cout << "initial polution " << i << " " << polution[i] << endl;
 		//vs.x[i] = old_velocity[i].x;
 		//vs.y[i] = old_velocity[i].y;
 	}
@@ -135,8 +136,9 @@ int main(int argc, char **argv) {
 
 		vs[i] = v;
 
-		if (abs(v) > v_max || i == 0)
+		if (abs(v) > v_max || i == 0) {
 			v_max = abs(v);
+		}
 
 	}
 
@@ -273,23 +275,26 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
- 		if (i % 100 == 0) {
+ 		if (i < 2) {
 		#ifndef NO_CUDA
 		vecResult.cuda_get();
 		vecABC.cuda_get();
 		#endif
+
+		cout << "iteration " << i << endl;
 		for(unsigned int z = 0; z < mesh.num_cells; ++z) {
 		cout << "cell " << z << endl;
 		for(int x = 0; x < 3; ++x) {
-			cout << vecABC.elem(x, 0, z) << " = [";
+			cout << setw(12) << vecABC.elem(x, 0, z) << " = [";
 			for(int y = 0; y < 3; ++y)
-				cout << matA.elem(x, y, z) << "   ";
+				cout << setw(12) << matA.elem(x, y, z) << "   ";
 			cout << "]   [ " << vecResult.elem(x, 0, z) << " ]" << endl;
 		}
 		cout << endl;
 		}
-		//exit(0);
 		}
+		//else
+		//	exit(0);
 
 		/* compute flux */
 		#ifdef NO_CUDA
@@ -311,7 +316,7 @@ int main(int argc, char **argv) {
 					polution.cuda_getArray(),
 					vs.cuda_getArray(),
 					vecABC.cuda_getMat(),
-					flux.cuda_getMat(),
+					flux.cuda_getArray(),
 					data.comp_threshold);
 
 		_DEBUG {
@@ -340,7 +345,7 @@ int main(int argc, char **argv) {
 				//mesh.cell_edges_index.cuda_getArray(),
 				mesh.cell_edges_count.cuda_getArray(),
 				polution.cuda_getArray(),
-				flux.cuda_getMat(),
+				flux.cuda_getArray(),
 				dt);
 
 		_DEBUG {
