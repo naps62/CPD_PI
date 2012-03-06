@@ -1,432 +1,432 @@
 #!/bin/sh
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
+bin/polu.optim.papi.instructions.total data/xml/tiny.param.xml >> results/inst_total.tiny.out
 
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
+bin/polu.optim.papi.instructions.total data/xml/small.param.xml >> results/inst_total.small.out
 
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
+bin/polu.optim.papi.instructions.total data/xml/medium.param.xml >> results/inst_total.medium.out
 
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
+bin/polu.optim.papi.instructions.total data/xml/big.param.xml >> results/inst_total.big.out
 
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-bin/polu.optim.papi.instructions.total >> results/inst_total.huge.out
-
-
-
-
-
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.tiny.out
-
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.small.out
-
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.medium.out
-
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.big.out
-
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
-bin/polu.optim.papi.instructions.load >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
+bin/polu.optim.papi.instructions.total data/xml/huge.param.xml >> results/inst_total.huge.out
 
 
 
 
 
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
+bin/polu.optim.papi.instructions.load data/xml/tiny.param.xml >> results/inst_load.tiny.out
 
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
+bin/polu.optim.papi.instructions.load data/xml/small.param.xml >> results/inst_load.small.out
 
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
+bin/polu.optim.papi.instructions.load data/xml/medium.param.xml >> results/inst_load.medium.out
 
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
+bin/polu.optim.papi.instructions.load data/xml/big.param.xml >> results/inst_load.big.out
 
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-bin/polu.optim.papi.instructions.store >> results/inst_store.huge.out
-
-
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
+bin/polu.optim.papi.instructions.load data/xml/huge.param.xml >> results/inst_load.huge.out
 
 
 
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.tiny.out
 
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.small.out
 
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
+bin/polu.optim.papi.instructions.store data/xml/tiny.param.xml >> results/inst_store.tiny.out
 
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
+bin/polu.optim.papi.instructions.store data/xml/small.param.xml >> results/inst_store.small.out
 
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
-bin/polu.optim.papi.instructions.fp >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+bin/polu.optim.papi.instructions.store data/xml/medium.param.xml >> results/inst_store.medium.out
+
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+bin/polu.optim.papi.instructions.store data/xml/big.param.xml >> results/inst_store.big.out
+
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+bin/polu.optim.papi.instructions.store data/xml/huge.param.xml >> results/inst_store.huge.out
+
+
+
+
+
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+bin/polu.optim.papi.instructions.fp data/xml/tiny.param.xml >> results/inst_fp.tiny.out
+
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+bin/polu.optim.papi.instructions.fp data/xml/small.param.xml >> results/inst_fp.small.out
+
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+bin/polu.optim.papi.instructions.fp data/xml/medium.param.xml >> results/inst_fp.medium.out
+
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+bin/polu.optim.papi.instructions.fp data/xml/big.param.xml >> results/inst_fp.big.out
+
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
+bin/polu.optim.papi.instructions.fp data/xml/huge.param.xml >> results/inst_fp.huge.out
