@@ -79,6 +79,10 @@ int main(int argc, char **argv) {
 	cout << "Running in NO_CUDA mode" << endl;
 #endif
 
+	if (argc != 2) {
+		cerr << "Arg error: requires 1 argument (xml param filename)" << endl;
+		exit(-1);
+	}
 
 	// var declaration
 	int i = 0;
@@ -86,12 +90,7 @@ int main(int argc, char **argv) {
 	string name;
 
 	// read params
-	Parameters data;
-	if (argc != 2) {
-		cerr << "Arg warning: no xml param filename specified. Defaulting to param.xml" << endl;
-		data = read_parameters("param.xml");
-	} else
-		data = read_parameters(argv[1]);
+	Parameters data = read_parameters(argv[1]);
 
 	// read mesh
 	FVL::CFVMesh2D mesh(data.mesh_file);
@@ -112,6 +111,9 @@ int main(int argc, char **argv) {
 	FVL::CFVVect<double> vs(mesh.num_edges);
 
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
+	FVL::CFVVect<double> detA(mesh.num_cells);
+	FVL::CFVMat<double> matAReverse(3, 3, mesh.num_cells);
+	FVL::CFVMat<double> matAMulRes(3, 3, mesh.num_cells);
 	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
 	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
 
@@ -158,6 +160,9 @@ int main(int argc, char **argv) {
 	flux.cuda_malloc();
 	vs.cuda_malloc();
 	matA.cuda_malloc();
+	detA.cuda_malloc();
+	matAReverse.cuda_malloc();
+	matAMulRes.cuda_malloc();
 	vecABC.cuda_malloc();
 	vecResult.cuda_malloc();
 
@@ -210,7 +215,9 @@ int main(int argc, char **argv) {
 	#ifdef NO_CUDA
 	cpu_compute_reverseA(
 			mesh,
-			matA);
+			matA,
+			detA,
+			matAReverse);
 	#else
 	kernel_compute_reverseA<<< grid_matA, block_matA >>>(
 			mesh.num_cells,
@@ -225,7 +232,36 @@ int main(int argc, char **argv) {
 	_D(cudaCheckError("cuda[compute_reverseA]"));
 
 	matA.cuda_get();
+	detA.cuda_get();
 	#endif
+
+	for(unsigned int z = 0; z < mesh.num_cells; ++z) {
+		cout << "cell " << z << endl;
+		cout << "det: " << detA[z] << endl;
+		for(int x = 0; x < 3; ++x) {
+			cout << setw(12) << "[";
+
+			for(int y = 0; y < 3; ++y)
+				cout << setw(12) << matA.elem(x, y, z) << "   ";
+			cout << "] * [ ";
+
+			for(int y = 0; y < 3; ++y)
+				cout << setw(12) << matAReverse.elem(x, y, z) << "   ";
+			cout << "] = [ ";
+
+			for(int y = 0; y < 3; ++y) {
+				double res = 0;
+				for(int k = 0; k < 3; ++k)
+					res += matA.elem(x, k, z) * matAReverse.elem(k, y, z);
+				cout << setw(12) << res << "   ";
+			}
+			cout << "]" << endl;
+
+		}
+		cout << endl;
+	}
+	exit(0);
+
 
 	while(t < data.final_time) {
 		/* compute system polution coeficients for system solve */
@@ -274,7 +310,7 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
- 		/*if (i < 2) {
+ 		if (i < 2) {
 		#ifndef NO_CUDA
 		vecResult.cuda_get();
 		vecABC.cuda_get();
@@ -293,12 +329,13 @@ int main(int argc, char **argv) {
 			}
 		}
 		else
-			exit(0);*/
+			exit(0);
 
 		/* compute flux */
 		#ifdef NO_CUDA
 		cpu_compute_flux(
 					mesh,
+					polution,
 					vs,
 					vecABC,
 					flux,
@@ -353,20 +390,8 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
-		cout << endl << "it " << i << endl;
-		for(unsigned int x = 0; x < flux.size(); ++x)
-			cout << "edge: " << x << " " << flux[x] << endl;
-		cout << "--------------" << endl;
-		for(unsigned int x = 0; x < polution.size(); ++x) {
-			cout << "cell: " << x << " " << setw(12) << polution[x] << "     { ";
-			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
-			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
-			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}" << endl;
-
-		}
 
 	if (i % data.anim_jump == 0) {
-		cout << "anim @ " << t << endl;
 		#ifndef NO_CUDA
 		polution.cuda_get();
 		#endif

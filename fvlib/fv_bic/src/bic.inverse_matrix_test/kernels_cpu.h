@@ -7,7 +7,9 @@ using namespace FVL;
 
 void cpu_compute_reverseA(
 		CFVMesh2D &mesh,
-		CFVMat<double> &matA);
+		CFVMat<double> &matA,
+		CFVVect<double> &detA,
+		CFVMat<double> &matARev);
 
 /* compute system polution coeficients for system solve */
 void cpu_compute_vecResult(
@@ -24,6 +26,7 @@ void cpu_compute_vecABC(
 
 void cpu_compute_flux(
 		CFVMesh2D &mesh,
+		CFVVect<double> &polution,
 		CFVVect<double> &velocity,
 		CFVMat<double> &vecABC,
 		CFVVect<double> &flux,

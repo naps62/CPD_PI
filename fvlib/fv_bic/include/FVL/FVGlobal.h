@@ -20,7 +20,7 @@
 //#define NO_RIGHT_EDGE std::numeric_limits<unsigned int>::max()
 #define NO_RIGHT_CELL	INT_MAX
 #define NO_CELL			INT_MAX
-#define MAX_EDGES_PER_CELL 3
+#define MAX_EDGES_PER_CELL 4
 
 /**
  * Stream manipulation values
