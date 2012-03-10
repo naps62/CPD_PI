@@ -1,6 +1,7 @@
 #if   defined (PAPI_INSTRUCTIONS_TOTAL)	\
  ||   defined (PAPI_INSTRUCTIONS_LOADS) \
  ||   defined (PAPI_INSTRUCTIONS_STORES) \
+ ||   defined (PAPI_INSTRUCTIONS_BRANCHS) \
  ||   defined (PAPI_INSTRUCTIONS_FPS) \
  ||   defined (PAPI_INSTRUCTIONS_INTS)
 #define PAPI_INSTRUCTIONS
@@ -35,6 +36,10 @@ long long int ld_ins;
 #include <papi/store_instructions_preset_counter.hpp>
 papi::StoreInstructionsPresetCounter *p;
 long long int sr_ins;
+#elif defined (PAPI_INSTRUCTIONS_BRANCHS)
+#include <papi/branch_instructions_preset_counter.hpp>
+papi::BranchInstructionsPresetCounter *p;
+long long int br_ins;
 #elif defined (PAPI_INSTRUCTIONS_FPS)
 #include <papi/fp_instructions_preset_counter.hpp>
 papi::FloatingPointInstructionsPresetCounter *p;
@@ -92,6 +97,8 @@ void compute_flux(
 	ld_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_STORES)
 	sr_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_BRANCHS)
+	br_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_FPS)
 	fp_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_INTS)
@@ -143,6 +150,8 @@ void    update(
 	ld_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_STORES)
 	sr_ins += inst;
+#elif defined (PAPI_INSTRUCTIONS_BRANCHS)
+	br_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_FPS)
 	fp_ins += inst;
 #elif defined (PAPI_INSTRUCTIONS_INTS)
@@ -295,6 +304,9 @@ int main(int argc, char *argv[])
 #elif defined (PAPI_INSTRUCTIONS_STORES)
 	p = new papi::StoreInstructionsPresetCounter();
 	sr_ins = 0;
+#elif defined (PAPI_INSTRUCTIONS_BRANCHS)
+	p = new papi::BranchInstructionsPresetCounter();
+	br_ins = 0;
 #elif defined (PAPI_INSTRUCTIONS_FPS)
 	p = new papi::FloatingPointInstructionsPresetCounter();
 	fp_ins = 0;
@@ -367,6 +379,8 @@ int main(int argc, char *argv[])
 		<<	ld_ins
 #elif defined (PAPI_INSTRUCTIONS_STORES)
 		<<	sr_ins
+#elif defined (PAPI_INSTRUCTIONS_BRANCHS)
+		<<	br_ins
 #elif defined (PAPI_INSTRUCTIONS_FPS)
 		<<	fp_ins
 #elif defined (PAPI_INSTRUCTIONS_INTS)
