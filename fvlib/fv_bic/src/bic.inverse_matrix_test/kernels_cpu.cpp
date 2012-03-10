@@ -32,20 +32,20 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA, CFVVect<double>
 	
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 		// centroid for current cell
-		double x = mesh.cell_centroids.x[i];
-		double y = mesh.cell_centroids.y[i];
+		double x0 = mesh.cell_centroids.x[i];
+		double y0 = mesh.cell_centroids.y[i];
 
-		matA.elem(0, 0, i) = x * x;
-		matA.elem(0, 1, i) = x * y;
-		matA.elem(0, 2, i) = x;
+		matA.elem(0, 0, i) = 0;
+		matA.elem(0, 1, i) = 0;
+		matA.elem(0, 2, i) = 0;
 
-		matA.elem(1, 0, i) = x * y;
-		matA.elem(1, 1, i) = y * y;
-		matA.elem(1, 2, i) = y;
+		matA.elem(1, 0, i) = 0;
+		matA.elem(1, 1, i) = 0;
+		matA.elem(1, 2, i) = 0;
 
-		matA.elem(2, 0, i) = x;
-		matA.elem(2, 1, i) = y;
-		matA.elem(2, 2, i) = 4;
+		matA.elem(2, 0, i) = 0;
+		matA.elem(2, 1, i) = 0;
+		matA.elem(2, 2, i) = mesh.cell_edges_count[i];
 
 		// for each edge
 		unsigned int edge_limit = mesh.cell_edges_count[i];
@@ -62,13 +62,16 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA, CFVVect<double>
 				cell_j = mesh.edge_left_cells[edge];
 
 			// TODO: was the 2 factor forgotten in the formulas?
-			x = mesh.cell_centroids.x[cell_j];
-			y = mesh.cell_centroids.y[cell_j];
+			double x = mesh.cell_centroids.x[cell_j];
+			double y = mesh.cell_centroids.y[cell_j];
 
 			// if there is no right cell, calc coords of ghost cell
 			if (cell_j == i) {
 				cpu_ghost_coords(mesh, edge, x, y);
 			}
+
+			x -= x0;
+			y -= y0;
 
 			// sum to each matrix elem
 			matA.elem(0, 0, i) += x * x;
@@ -142,13 +145,13 @@ void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &v
 /* Compute system polution coeficients for system solve */
 void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		double x = mesh.cell_centroids.x[cell];
-		double y = mesh.cell_centroids.y[cell];
+		double x0 = mesh.cell_centroids.x[cell];
+		double y0 = mesh.cell_centroids.y[cell];
 		double u = polution[cell];
 
 		// fill initial value of vector
-		vecResult.elem(0, 0, cell) = u * x;
-		vecResult.elem(1, 0, cell) = u * y;
+		vecResult.elem(0, 0, cell) = 0;
+		vecResult.elem(1, 0, cell) = 0;
 		vecResult.elem(2, 0, cell) = u;
 
 		// for each neighbor cell, add to vector
@@ -164,14 +167,17 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 			if (neighbor == cell || neighbor == NO_RIGHT_CELL)
 				neighbor = mesh.edge_left_cells[edge];
 			
-			x = mesh.cell_centroids.x[neighbor];
-			y = mesh.cell_centroids.y[neighbor];
+			double x = mesh.cell_centroids.x[neighbor];
+			double y = mesh.cell_centroids.y[neighbor];
 			u = polution[neighbor];
 
 			// if neighbor is still equal to cell, this is a ghost cell, compute centroid)
 			if (neighbor == cell) {
 				cpu_ghost_coords(mesh, edge, x, y);
 			}
+
+			x -= x0;
+			y -= y0;
 
 			// sum to current vec
 			vecResult.elem(0, 0, cell) += u * x;

@@ -207,12 +207,14 @@ void cpu_compute_flux(
 		cout << "edge " <<setw(2)<< i << ": ";
 		if (cell == NO_RIGHT_CELL) {
 			system_res = dc;
+			cout << dc << " (no_right_cell)" << endl;
 		} else {
 			double x = mesh.edge_centroids.x[i];
 			double y = mesh.edge_centroids.y[i];
 			double x0 = mesh.cell_centroids.x[cell];
 			double y0 = mesh.cell_centroids.y[cell];
-			system_res = vecABC.elem(0, 0, cell) * x + vecABC.elem(1, 0, cell) * y + vecABC.elem(2, 0, cell);
+			system_res = vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
+			cout << setw(10) << system_res*v << " =    " << vecABC.elem(0, 0, cell) << " * " << x - x0 << " + " << vecABC.elem(1, 0, cell) << " * " << y - y0 << " + " << vecABC.elem(2, 0, cell) << endl;
 		}
 
 		flux[i] = v * system_res;

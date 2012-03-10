@@ -135,6 +135,7 @@ int main(int argc, char **argv) {
 					+ ((old_velocity[left].y + old_velocity[right].y) * 0.5 * mesh.edge_normals.y[i]);
 
 		vs[i] = v;
+		cout << "v["<<i<<"] = " << v << endl;
 
 		if (abs(v) > v_max || i == 0) {
 			v_max = abs(v);
@@ -228,6 +229,7 @@ int main(int argc, char **argv) {
 	#endif
 
 	while(t < data.final_time) {
+		cout << endl << "iteration " << i << endl;
 		/* compute system polution coeficients for system solve */
 		#ifdef NO_CUDA
 		cpu_compute_vecResult(
@@ -353,7 +355,7 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
-		cout << endl << "it " << i << endl;
+		/*cout << endl << "it " << i << endl;
 		for(unsigned int x = 0; x < flux.size(); ++x)
 			cout << "edge: " << x << " " << flux[x] << endl;
 		cout << "--------------" << endl;
@@ -361,12 +363,14 @@ int main(int argc, char **argv) {
 			cout << "cell: " << x << " " << setw(12) << polution[x] << "     { ";
 			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
 			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
-			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}" << endl;
-
-		}
+			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  {";
+			cout << "u0 = " << setw(12) << vecResult.elem(2, 0, x) << ", ";
+			cout << "u1 = " << setw(12) << vecResult.elem(2, 0, x) << ", ";
+			cout << "u2 = " << setw(12) << vecResult.elem(2, 0, x) << "} " << endl;
+		}*/
 
 	if (i % data.anim_jump == 0) {
-		cout << "anim @ " << t << endl;
+		//cout << "anim @ " << t << endl;
 		#ifndef NO_CUDA
 		polution.cuda_get();
 		#endif

@@ -220,14 +220,14 @@ void main_loop (
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
-		cout << endl << i << ": " << endl;
+		/*cout << endl << i << ": " << endl;
 		for(int x = 0; x < mesh.getNbEdge(); ++x) {
 			cout << "edge: " << x << " " << fluxes[x] << endl;
 		}
 		cout << "-------------------" << endl;
 		for(int x = 0; x < mesh.getNbCell(); ++x) {
 			cout << "cell: " << x << " " << polutions[x] << endl;
-		}
+		}*/
 
 		//for(int i = 0; i < 10; ++i)
 		//	cout << i << "\t" << fluxes[i] << endl;
@@ -237,13 +237,14 @@ void main_loop (
 		//cout << i << " " << dt << endl;
 		if ( i % jump_interval == 0 )
 		{
-			cout << "anim @ " << t << endl;
+			cout << "anim @ " << t << "\r";
 			//cout << "writing to file" << endl;
 			polution_file.put( polutions , t , "polution" );    
 			//printf("step %d  at time %f \r", i, t);
 			fflush(NULL);
 		}
 	}
+	cout << endl;
 
 	//cout << "total iterations: " << i << endl;
 	polution_file.put( polutions , t , "polution" ); 
