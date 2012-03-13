@@ -147,6 +147,7 @@ int main(int argc, char **argv) {
 	FVMesh2D old_mesh;
 	old_mesh.read(data.mesh_file.c_str());
 	h	= compute_mesh_parameter(old_mesh);
+	// TODO trocar 1.0 por parametro CFL (com valores entre 0 e 1)
 	dt	= 1.0 / v_max * h;
 
 	FVio polution_file(data.output_file.c_str(), FVWRITE);
@@ -355,7 +356,7 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
-		/*cout << endl << "it " << i << endl;
+		cout << endl << "it " << i << endl;
 		for(unsigned int x = 0; x < flux.size(); ++x)
 			cout << "edge: " << x << " " << flux[x] << endl;
 		cout << "--------------" << endl;
@@ -363,11 +364,8 @@ int main(int argc, char **argv) {
 			cout << "cell: " << x << " " << setw(12) << polution[x] << "     { ";
 			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
 			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
-			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  {";
-			cout << "u0 = " << setw(12) << vecResult.elem(2, 0, x) << ", ";
-			cout << "u1 = " << setw(12) << vecResult.elem(2, 0, x) << ", ";
-			cout << "u2 = " << setw(12) << vecResult.elem(2, 0, x) << "} " << endl;
-		}*/
+			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  {" << endl;
+		}
 
 	if (i % data.anim_jump == 0) {
 		//cout << "anim @ " << t << endl;

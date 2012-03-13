@@ -117,7 +117,8 @@ int main(int argc, char **argv) {
 
 	// TODO: remove this dependency
 	for(unsigned int i = 0; i < polution.size(); ++i) {
-		polution[i] = 2 *mesh.cell_centroids.x[i] - mesh.cell_centroids.y[i];
+		polution[i] = mesh.cell_centroids.x[i] + mesh.cell_centroids.y[i];
+		cout << i << " - " << polution[i] << endl;
 		//vs.x[i] = old_velocity[i].x;
 		//vs.y[i] = old_velocity[i].y;
 	}

@@ -35,16 +35,16 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 		double x0 = mesh.cell_centroids.x[i];
 		double y0 = mesh.cell_centroids.y[i];
 
-		matA.elem(0, 0, i) = x0*x0;
-		matA.elem(0, 1, i) = x0*y0;
-		matA.elem(0, 2, i) = x0;
+		matA.elem(0, 0, i) = 0;
+		matA.elem(0, 1, i) = 0;
+		matA.elem(0, 2, i) = 0;
 
-		matA.elem(1, 0, i) = x0*y0;
-		matA.elem(1, 1, i) = y0*y0;
-		matA.elem(1, 2, i) = y0;
+		matA.elem(1, 0, i) = 0;
+		matA.elem(1, 1, i) = 0;
+		matA.elem(1, 2, i) = 0;
 
-		matA.elem(2, 0, i) = x0;
-		matA.elem(2, 1, i) = y0;
+		matA.elem(2, 0, i) = 0;
+		matA.elem(2, 1, i) = 0;
 		matA.elem(2, 2, i) = mesh.cell_edges_count[i] + 1;
 
 		// for each edge
@@ -70,8 +70,8 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 				cpu_ghost_coords(mesh, edge, x, y);
 			}
 
-			//x -= x0;
-			//y -= y0;
+			x -= x0;
+			y -= y0;
 
 			// sum to each matrix elem
 			matA.elem(0, 0, i) += x * x;
@@ -149,8 +149,8 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 		// fill initial value of vector
 		//vecResult.elem(0, 0, cell) = u * x;
 		//vecResult.elem(1, 0, cell) = u * y;
-		vecResult.elem(0, 0, cell) = u*x0;
-		vecResult.elem(1, 0, cell) = u*y0;
+		vecResult.elem(0, 0, cell) = 0;
+		vecResult.elem(1, 0, cell) = 0;
 		vecResult.elem(2, 0, cell) = u;
 
 		// for each neighbor cell, add to vector
@@ -175,8 +175,8 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 				cpu_ghost_coords(mesh, edge, x, y);
 			}
 
-			//x -= x0;
-			//y -= y0;
+			x -= x0;
+			y -= y0;
 
 			// sum to current vec
 			vecResult.elem(0, 0, cell) += u * x;
@@ -204,15 +204,15 @@ void cpu_compute_flux(
 			cell = mesh.edge_left_cells[i];
 		}
 
-		cout << "edge " <<setw(2)<< i << ": ";
 		if (cell == NO_RIGHT_CELL) {
-			system_res = dc;
+			// TODO dirichlet(t) = sin(t)
+			system_res = dc; // * sin(t)
 		} else {
 			double x = mesh.edge_centroids.x[i];
 			double y = mesh.edge_centroids.y[i];
 			double x0 = mesh.cell_centroids.x[cell];
 			double y0 = mesh.cell_centroids.y[cell];
-			system_res = vecABC.elem(0, 0, cell) * x + vecABC.elem(1, 0, cell) * y + vecABC.elem(2, 0, cell);
+			system_res = vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
 		}
 
 		flux[i] = v * system_res;
@@ -240,6 +240,5 @@ void cpu_update(
 				polution[cell] += var;
 			}
 		}
-		cout << "cell " << cell << ": " << polution[cell] << endl;
 	}
 }

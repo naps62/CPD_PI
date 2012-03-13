@@ -45,7 +45,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 
 		matA.elem(2, 0, i) = 0;
 		matA.elem(2, 1, i) = 0;
-		matA.elem(2, 2, i) = mesh.cell_edges_count[i];
+		matA.elem(2, 2, i) = mesh.cell_edges_count[i] + 1;
 
 		// for each edge
 		unsigned int edge_limit = mesh.cell_edges_count[i];
@@ -151,6 +151,7 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 		//vecResult.elem(1, 0, cell) = u * y;
 		vecResult.elem(0, 0, cell) = 0;
 		vecResult.elem(1, 0, cell) = 0;
+		// TODO WTF??
 		vecResult.elem(2, 0, cell) = u;
 
 		// for each neighbor cell, add to vector
