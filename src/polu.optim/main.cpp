@@ -192,6 +192,7 @@ int main(int argc, char *argv[])
 	mesh_filename=para.getString("MeshName");
 	velo_filename=para.getString("VelocityFile");
 	pol_ini_filename=para.getString("PoluInitFile");
+	string pol_fname = para.getString( "PoluFile" );
 
 	double dirichlet = para.getDouble("DirichletCondition");
 
@@ -325,7 +326,8 @@ int main(int argc, char *argv[])
 
 	// the main loop
 	time=0.;nbiter=0;
-	FVio pol_file("polution.omp.xml",FVWRITE);
+	FVio pol_file( pol_fname.c_str() ,FVWRITE);
+	//FVio pol_file("polution.omp.xml",FVWRITE);
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	while(time<final_time)

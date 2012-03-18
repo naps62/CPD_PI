@@ -4,6 +4,40 @@
 
 
 
+#if   defined (PROFILE_L1DCM) \
+ ||   defined (PROFILE_L2DCM) \
+ ||   defined (PROFILE_BTM)
+#define PROFILE_MEMORY
+#endif
+
+#if   defined (PROFILE_TOTINS) \
+ ||   defined (PROFILE_LDINS) \
+ ||   defined (PROFILE_SRINS) \
+ ||   defined (PROFILE_BRINS) \
+ ||   defined (PROFILE_FPINS)
+#define PROFILE_INSTRUCTIONS
+#endif
+
+#if   defined (PROFILE_MEMORY) \
+ ||   defined (PROFILE_INSTRUCTIONS)
+#define PROFILE
+#endif
+
+
+
+//
+//	GLOBALS
+//
+#if   defined (PROFILE)
+#if   defined (PROFILE_MEMORY)
+#if   defined (PROFILE_BTM)
+#include <papi/bytes_accessed.hpp>
+papi::BytesAccessed *p;
+long long int btm_bytes;
+#endif//    PROFILE_BTM
+#endif//    PROFILE_MEMORY
+#endif//    PROFILE
+
 
 
 void
@@ -11,19 +45,22 @@ compute_flux
 	(
 	double *   polutions,
 	double *   velocities,
-	unsigned * cell_left,
-	unsigned * cell_right,
+	unsigned * lefts,
+	unsigned * rights,
 	double *   fluxes,
 	double     dirichlet,
 	unsigned   edge_count
 	)
 {
+#if   defined (PROFILE)
+	p->start();
+#endif//    PROFILE
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
-		double polution_left = polutions[ cell_left[e] ];
+		double polution_left = polutions[ lefts[e] ];
 		double polution_right
-			= ( cell_right[e] < numeric_limits<unsigned>::max() )
-			? cell_right[e]
+			= ( rights[e] < numeric_limits<unsigned>::max() )
+			? rights[e]
 			: dirichlet
 			;
 		fluxes[e] = ( velocities[e] < 0 )
@@ -31,6 +68,14 @@ compute_flux
 				  : velocities[e] * polution_left
 				  ;
 	}
+#if   defined (PROFILE)
+	p->stop();
+#if   defined (PROFILE_MEMORY)
+#if   defined (PROFILE_BTM)
+	btm_bytes += p->bytes();
+#endif//    PROFILE_BTM
+#endif//    PROFILE_MEMORY
+#endif//    PROFILE
 }
 
 
@@ -41,17 +86,21 @@ compute_flux
 void
 update
 	(
+	double *   polutions,
 	double *   areas,
 	double *   fluxes,
 	double *   lengths,
 	unsigned * indexes,
 	unsigned * edges,
-	unsigned * cell_left,
+	unsigned * lefts,
 	double     dt,
 	unsigned   index_count,
 	unsigned   cell_count
 	)
 {
+#if   defined (PROFILE)
+	p->start();
+#endif//    PROFILE
 	unsigned cell_last = cell_count - 1;
 
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
@@ -66,12 +115,22 @@ update
 		{
 			unsigned e = edges[i];
 			double edp = dt * fluxes[e] * lengths[e] / areas[c];
-			if ( cell_left[e] == c )
+			if ( lefts[e] == c )
 				cdp -= edp;
 			else
 				cdp += edp;
 		}
+
+		polutions[c] += cdp;
 	}
+#if   defined (PROFILE)
+	p->stop();
+#if   defined (PROFILE_MEMORY)
+#if   defined (PROFILE_BTM)
+	btm_bytes += p->bytes();
+#endif//    PROFILE_BTM
+#endif//    PROFILE_MEMORY
+#endif//    PROFILE
 }
 
 
@@ -104,6 +163,7 @@ int main(int argc, char *argv[])
 	mesh_filename=para.getString("MeshName");
 	velo_filename=para.getString("VelocityFile");
 	pol_ini_filename=para.getString("PoluInitFile");
+	string pol_fname = para.getString("PoluFile");
 
 	double dirichlet = para.getDouble("DirichletCondition");
 
@@ -137,14 +197,26 @@ int main(int argc, char *argv[])
 	}
 
 
+
+#if   defined (PROFILE)
+#if   defined (PROFILE_MEMORY)
+#if   defined (PROFILE_BTM)
+	p = new papi::BytesAccessed();
+	btm_bytes = 0;
+#endif//    PROFILE_BTM
+#endif//    PROFILE_MEMORY
+#endif//    PROFILE
+
+
+
 	unsigned edge_count = m.getNbEdge();
 	double max_vel = numeric_limits<double>::min();
 	//Edge *edges = new Edge[ edge_count ];
 	double *   fluxes     = new double[ edge_count ];
 	double *   lengths    = new double[ edge_count ];
 	double *   velocities = new double[ edge_count ];
-	unsigned * cell_left  = new unsigned[ edge_count ];
-	unsigned * cell_right = new unsigned[ edge_count ];
+	unsigned * lefts  = new unsigned[ edge_count ];
+	unsigned * rights = new unsigned[ edge_count ];
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		//Edge &edge = edges[ e ];
@@ -155,9 +227,9 @@ int main(int argc, char *argv[])
 		//edge.length = fv_edge->length;
 		lengths[ e ]  = fv_edge->length;
 		//edge.left = fv_edge->leftCell->label - 1;
-		cell_left[e]  = fv_edge->leftCell->label - 1;
+		lefts[e]  = fv_edge->leftCell->label - 1;
 		//edge.right = ( fv_edge->rightCell )
-		cell_right[e] = ( fv_edge->rightCell )
+		rights[e] = ( fv_edge->rightCell )
 					  ? fv_edge->rightCell->label - 1
 					  : numeric_limits<unsigned>::max();
 
@@ -165,14 +237,14 @@ int main(int argc, char *argv[])
 		normal[0] = fv_edge->normal.x;
 		normal[1] = fv_edge->normal.y;
 		double v_left[2];
-		v_left[0] = V[ cell_left[e] ].x;
-		v_left[1] = V[ cell_left[e] ].y;
+		v_left[0] = V[ lefts[e] ].x;
+		v_left[1] = V[ lefts[e] ].y;
 		double v_right[2];
 		//if ( edge.right < numeric_limits<unsigned>::max() )
-		if ( cell_right[e] < numeric_limits<unsigned>::max() )
+		if ( rights[e] < numeric_limits<unsigned>::max() )
 		{
-			v_right[0] = V[ cell_right[e] ].x;
-			v_right[1] = V[ cell_right[e] ].y;
+			v_right[0] = V[ rights[e] ].x;
+			v_right[1] = V[ rights[e] ].y;
 		}
 		else
 		{
@@ -198,7 +270,7 @@ int main(int argc, char *argv[])
 	unsigned   cell_count      = m.getNbCell();
 	unsigned   cell_edge_count = 0;
 	//Cell *cells = new Cell[ cell_count ];
-	double *   polution        = new double[ cell_count ];
+	double *   polutions       = new double[ cell_count ];
 	double *   areas           = new double[ cell_count ];
 	unsigned * indexes         = new unsigned[ cell_count ];
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
@@ -209,7 +281,7 @@ int main(int argc, char *argv[])
 		//cell.velocity[0] = V[ c ].x;
 		//cell.velocity[1] = V[ c ].y;
 		//cell.polution = pol[ c ];
-		polution[c] = pol[c];
+		polutions[c] = pol[c];
 		//cell.area = fv_cell->area;
 		areas[c] = fv_cell->area;
 		//cell.init( fv_cell->nb_edge );
@@ -237,40 +309,65 @@ int main(int argc, char *argv[])
 			++i;
 		}
 		++c;
+	}{
+		FVCell2D *fv_cell = m.getCell( c );
+		unsigned e = 0;
+		while ( i < cell_edge_count )
+		{
+			edges[i] = fv_cell->edge[e]->label - 1;
+			++e;
+			++i;
+		}
+	}		
+
+
+
+	unsigned last = cell_count - 1;
+	for ( i = 0 ; i < cell_last ; ++i )
+	{
+		unsigned begin = indexes[i];
+		unsigned limit = indexes[i+1];
+		for ( unsigned j = begin ; j < limit ; ++j )
+			cout << edges[j] << endl;
 	}
-			
-
-
-
-
+	cerr
+		<<	"Last cell: " << last << endl
+		<<	"i: " << i << endl
+		<<	"cell_edge_count: " << cell_edge_count << endl
+		;
+		for ( unsigned j = indexes[i] ; j < cell_edge_count ; ++j )
+			cout << edges[j] << endl;
+	return 0;
 
 
 
 
 	// the main loop
 	time=0.;nbiter=0;
-	FVio pol_file("polution.omp.xml",FVWRITE);
+	FVio pol_file( pol_fname.c_str() ,FVWRITE);
+	//FVio pol_file("polution.omp.xml",FVWRITE);
 	//pol_file.put(pol,time,"polution"); 
 	//cout<<"computing"<<endl;
 	while(time<final_time)
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
 		compute_flux(
-			polution,
+			polutions,
 			velocities,
-			cell_left,
-			cell_right,
+			lefts,
+			rights,
 			fluxes,
 			dirichlet,
 			edge_count)
 		;
 		update(
+			polutions,
 			areas,
 			fluxes,
 			lengths,
 			indexes,
 			edges,
-			cell_left,
+			lefts,
 			dt,
 			cell_edge_count,
 			cell_count)
@@ -296,17 +393,30 @@ int main(int argc, char *argv[])
 	}
 
 	for ( unsigned c = 0; c < cell_count ; ++c )
-		pol[ c ] = polution[c];
+		pol[ c ] = polutions[c];
 
 	pol_file.put(pol,time,"polution"); 
 
 	delete[] fluxes;
 	delete[] lengths;
 	delete[] velocities;
-	delete[] cell_left;
-	delete[] cell_right;
-	delete[] polution;
+	delete[] lefts;
+	delete[] rights;
+	delete[] polutions;
 	delete[] areas;
 	delete[] indexes;
 	delete[] edges;
+
+
+#if   defined (PROFILE)
+	delete p;
+	cout
+#if   defined (PROFILE_MEMORY)
+#if   defined (PROFILE_BTM)
+				<<	btm_bytes
+#endif//    PROFILE_BTM
+#endif//    PROFILE_MEMORY
+						<<	endl
+		;
+#endif//    PROFILE
 }
