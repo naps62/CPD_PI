@@ -10,16 +10,22 @@
 ** -------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 using std::stringstream;
+using std::ofstream;
 
 #include "FVL/FVXMLWriter.h"
-
-#include "rapidxml/rapidxml_print.hpp"
 
 namespace FVL {
 
 	FVXMLWriter::FVXMLWriter() {
+		this->filename = "";
+		init();
+	}
+
+	FVXMLWriter::FVXMLWriter(string filename) {
+		this->filename = filename;
 		init();
 	}
 
@@ -35,5 +41,18 @@ namespace FVL {
 		this->append_node(root);
 	}
 
+	void FVXMLWriter::save() {
+		this->save(this->filename);
+	}
+
+	void FVXMLWriter::save(string filename) {
+		ofstream out(filename.c_str());
+		out << *this;
+		cout << *this;
+	}
+
+	void FVXMLWriter::close() {
+		this->clear();
+	}
 	
 }

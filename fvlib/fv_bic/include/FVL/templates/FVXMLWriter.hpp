@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
 ** Finite Volume Library 
 **
-** Filename: FVXMLWriter.h
+** Filename: FVXMLWriter.hpp
 ** XML Writer class based on RapidXML
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
 ** -------------------------------------------------------------------------*/
@@ -53,7 +53,7 @@ namespace FVL {
 	template<class T>
 	void FVXMLWriter::add_attribute(xml_node<> *node, string name, T value) {
 		stringstream ss;
-		ss << value;
+		ss << scientific << setprecision(FV_PRECISION) << setw(FV_CHAMP) << value;
 		string str_value(ss.str());
 		node->append_attribute(
 				this->allocate_attribute(

@@ -4,7 +4,7 @@
 ** Filename: FVXMLWriter.h
 ** XML Writer class based on RapidXML
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
 ** -------------------------------------------------------------------------*/
@@ -16,14 +16,23 @@
 #include <iomanip>
 using namespace std;
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 #include "FVL/CFVVect.h"
 #include "rapidxml/rapidxml.hpp"
+#include "rapidxml/rapidxml_print.hpp"
 using namespace rapidxml;
 
 namespace FVL {
 	class FVXMLWriter : public xml_document<> {
 
 		private:
+			string filename;
+			ofstream out_stream;
+
 			xml_node<> *root;
 
 		public:
@@ -31,8 +40,14 @@ namespace FVL {
 			 * CONSTRUCTORS
 			 ***********************************************/
 			FVXMLWriter();
+			FVXMLWriter(string filename);
 
 			void init();
+
+			void save();
+			void save(string filename);
+			void close();
+
 
 			/************************************************
 			 * OUTPUT (methods will be added as needed)

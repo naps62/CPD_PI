@@ -2,9 +2,11 @@
 ** Finite Volume Library 
 **
 ** CFVLib.h
-** full library includes
+** full CUDA library includes
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
+** Created:		13-02-2012
+** Last Test:	---
 ** -------------------------------------------------------------------------*/
 
 #ifndef _CUDA_FVLIB
@@ -18,6 +20,7 @@
 #include "FVL/CFVProfile.h"
 #include "FVL/CFVVect.h"
 #include "FVL/CFVPoints2D.h"
+#include "FVL/CFVMat.h"
 #include "FVL/CFVMesh2D.h"
 
 #endif // _CUDA_FVLIB

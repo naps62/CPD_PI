@@ -8,74 +8,42 @@ using namespace FVL;
 /* Compute matA inverse */
 __global__
 void kernel_compute_reverseA(
-		unsigned int num_cells,
-		double *cell_centroids_x,
-		double *cell_centroids_y,
-		unsigned int *cell_edges_count,
-		unsigned int **cell_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		unsigned int *edge_fst_vertex,
-		unsigned int *edge_snd_vertex,
-		double *vertex_coords_x,
-		double *vertex_coords_y,
+		CFVMesh2D::CFVMesh2D_cuda *mesh,
 		double **matA);
 
 /* Compute system polution coeficients for system solve */
 __global__
 void kernel_compute_vecResult(
-		unsigned int num_cells,
-		double *cell_centroids_x,
-		double *cell_centroids_y,
-		unsigned int *cell_edges_count,
-		unsigned int **edge_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		unsigned int *edge_fst_vertex,
-		unsigned int *edge_snd_vertex,
-		double *vertex_coords_x,
-		double *vertex_coords_y,
+		CFVMesh2D::CFVMesh2D_cuda *mesh,
 		double *polution,
-		double **vecResult);
+		double **vecResult,
+		double dc);
 
 __global__
 void kernel_compute_vecABC(
 		unsigned int num_cells,
 		double **matA,
 		double **vecResult,
-		double **vecABC
-		);
+		double **vecABC);
 
 /* Compute flux */
 __global__
 void kernel_compute_flux(
-		unsigned int num_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *edge_centroids_x,
-		double *edge_centroids_y,
+		CFVMesh2D::CFVMesh2D_cuda *mesh,
 		double *polution,
 		double *velocity,
 		double **vecABC,
 		double *flux,
 		double dc);
 
-
 /* polution update */
 __global__
 void kernel_update(
-		unsigned int num_cells,
-		//unsigned int num_total_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *edge_lengths,
-		double *cell_areas,
-		unsigned int **cell_edges,
-		//unsigned int *cell_edges_index,
-		unsigned int *cell_edges_count,
+		CFVMesh2D::CFVMesh2D_cuda *mesh,
 		double *polution,
 		double *flux,
 		double dt);
+
 
 /* Reduction of temporary velocities array */
 template<class T, unsigned int blockSize, bool nIsPow2>

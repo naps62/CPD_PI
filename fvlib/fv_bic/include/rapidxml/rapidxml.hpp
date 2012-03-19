@@ -1,6 +1,8 @@
 #ifndef RAPIDXML_HPP_INCLUDED
 #define RAPIDXML_HPP_INCLUDED
 
+#define _UNUSED(x) ((void)x)
+
 // Copyright (C) 2006, 2009 Marcin Kalicinski
 // Version 1.13
 // Revision $DateTime: 2009/05/13 01:46:17 $
@@ -818,7 +820,8 @@ namespace rapidxml
         //! \return Pointer to document that contains this attribute, or 0 if there is no parent document.
         xml_document<Ch> *document() const
         {
-            if (xml_node<Ch> *node = this->parent())
+        	xml_node<Ch> *node;
+            if (node = this->parent())
             {
                 while (node->parent())
                     node = node->parent();
@@ -1401,7 +1404,8 @@ namespace rapidxml
                 if (*text == Ch('<'))
                 {
                     ++text;     // Skip '<'
-                    if (xml_node<Ch> *node = parse_node<Flags>(text))
+                    xml_node<Ch> *node;
+                    if ((node = parse_node<Flags>(text)))
                         this->append_node(node);
                 }
                 else
@@ -2214,7 +2218,8 @@ namespace rapidxml
                     {
                         // Child node
                         ++text;     // Skip '<'
-                        if (xml_node<Ch> *child = parse_node<Flags>(text))
+                        xml_node<Ch> *child;
+                        if ((child = parse_node<Flags>(text)))
                             node->append_node(child);
                     }
                     break;
@@ -2275,6 +2280,7 @@ namespace rapidxml
                 // Extract attribute value and expand char refs in it
                 Ch *value = text, *end;
                 const int AttFlags = Flags & ~parse_normalize_whitespace;   // No whitespace normalization in attributes
+                _UNUSED(AttFlags);
                 if (quote == Ch('\''))
                     end = skip_and_expand_character_refs<attribute_value_pred<Ch('\'')>, attribute_value_pure_pred<Ch('\'')>, AttFlags>(text);
                 else

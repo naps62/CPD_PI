@@ -4,9 +4,10 @@
 ** Filename: FVXMLReader.h
 ** XML Reader class based on RapidXML
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
+** TODO:		known issue with \n characters being stripped from stream, resulting in numbers between two lines beeing concatenated
 ** -------------------------------------------------------------------------*/
 
 #ifndef _H_FVXMLREADER
@@ -22,12 +23,17 @@ using std::istringstream;
 #include "rapidxml/rapidxml.hpp"
 using namespace rapidxml;
 
+#include "FVL/CFVVect.h"
+#include "FVL/CFVPoints2D.h"
+
 namespace FVL {
 
 	class FVXMLReader : public xml_document<> {
 			
 		private:
 			vector<char> xml_data;
+			xml_node<> *root;
+			xml_node<> *current;
 
 		public:
 			/************************************************
@@ -39,11 +45,15 @@ namespace FVL {
 			/************************************************
 			 * METHODS
 			 ***********************************************/
-			template<class T>
-			static bool str_cast(T &t, const string &s) {
-				istringstream iss(s);
-				return !(iss >> t).fail();
-			}
+			template<class T> static bool str_cast(T &t, const string &s);
+
+			// Reads next child node to a vector from the XML file
+			template<class T> void getVec	  	(CFVVect<T> &vec,	  double &time, string &name);
+
+			// Reads next child node to a vector of 2D points
+			template<class T> void getPoints2D	(CFVPoints2D<T> &vec, double &time, string &name);
+
+			void close();
 
 		private:
 			/************************************************
@@ -53,5 +63,7 @@ namespace FVL {
 
 	};
 }
+
+#include "FVL/templates/FVXMLReader.hpp"
 
 #endif // _H_FVXMLREADER

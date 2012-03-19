@@ -7,7 +7,9 @@
  ** 
  ** Intended to store an array of matrixes (but as s-o-a instead of a-o-s. e.g., store a matrix for each cell of a mesh
  **
- ** Author: Miguel Palhas, mpalhas@gmail.com
+ ** Author:		Miguel Palhas, mpalhas@gmail.com
+ ** Created:	13-02-2012
+ ** Last Test:	---
  ** TODO: allow for device-only allocation; alloc single block for whole matrix (allow single mem access instead of 2)
  ** -------------------------------------------------------------------------*/
 

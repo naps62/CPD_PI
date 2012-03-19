@@ -4,7 +4,7 @@
 ** Filename: FVPoint2D.h
 ** 2D Point
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
 ** Known Issues: operators need testing (just to be sure)

@@ -4,7 +4,7 @@
 ** Filename: FVLib.h
 ** Full library includes
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
 ** -------------------------------------------------------------------------*/
@@ -22,7 +22,7 @@
 #include "FVL/FVXMLReader.h"
 #include "FVL/FVXMLWriter.h"
 
-#include "CFVLib.h"
+#include "FVL/CFVLib.h"
 
 // TODO keep adding stuff here
 

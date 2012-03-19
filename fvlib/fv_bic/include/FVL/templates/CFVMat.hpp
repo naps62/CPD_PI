@@ -5,7 +5,9 @@
  ** CUDA Matrixes (cuda-optimized storage, struct-of-arrays instead
  **    of array-of-structs
  **
- ** Author: Miguel Palhas, mpalhas@gmail.com
+ ** Author:		Miguel Palhas, mpalhas@gmail.com
+ ** Created:	13-02-2012
+ ** Last Test:	---
  ** -------------------------------------------------------------------------*/
 
 #ifdef _H_CFVMAT

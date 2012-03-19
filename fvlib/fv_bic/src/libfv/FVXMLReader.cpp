@@ -21,6 +21,10 @@ namespace FVL {
 		xml_data = vector<char>(file_content.begin(), file_content.end());
 		xml_data.push_back('\0');
 		this->parse<0>(&xml_data[0]);
+
+		// get FVLIB node
+		root = this->first_node();
+		current = root->first_node();
 	}
 
 	string FVXMLReader::read_file(string filename) {
@@ -32,5 +36,10 @@ namespace FVL {
 			content += line;
 
 		return content;
+	}
+
+
+	void FVXMLReader::close() {
+		this->clear();
 	}
 }

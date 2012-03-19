@@ -1,4 +1,15 @@
-#pragma once
+/* ---------------------------------------------------------------------------
+ ** Finite Volume Library 
+ **
+ ** CFVProfile.h
+ ** Profiling library for cuda events
+ **
+ ** Author:			Miguel Palhas, mpalhas@gmail.com
+ ** Created:		13-02-2012
+ ** Last Tested:	---
+ ** -------------------------------------------------------------------------*/
+
+#ifndef _H_CPROFILE
 #define _H_CPROFILE
 
 #include <cuda.h>
@@ -30,3 +41,5 @@ namespace FVL {
 		void init(string msg, string filename);
 	};
 }
+
+#endif

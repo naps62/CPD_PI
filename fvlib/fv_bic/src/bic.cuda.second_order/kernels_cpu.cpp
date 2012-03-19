@@ -53,23 +53,35 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 			
 			// get current edge
 			unsigned int edge = mesh.cell_edges.elem(j, 0, i);
+			double x, y;
+			unsigned int cell_j;
 
-			// get left cell of this edge
-			unsigned int cell_j = mesh.edge_right_cells[edge];
-			// if right cell is the current one, or if there is no right cell, use left one
-			// TODO: if there is no right edge, is this the right way to create a ghost cell?
-			if (cell_j == i || cell_j == NO_RIGHT_CELL)
-				cell_j = mesh.edge_left_cells[edge];
+			switch (mesh.edge_types[i]) {
+				// inner edges, both left and right cell can be assumed to exists
+				case CFVMesh2D::EDGE:
+					// get right cell of this edge
+					cell_j = mesh.edge_right_cells[edge];
 
-			// TODO: was the 2 factor forgotten in the formulas?
-			double x = mesh.cell_centroids.x[cell_j];
-			double y = mesh.cell_centroids.y[cell_j];
+					// if right cell is the current one (cell i), we want the left instead
+					if (cell_j == i)
+						cell_j = mesh.edge_left_cells[edge];
+					
+					// get coords for this cell
+					x = mesh.cell_centroids.x[cell_j];
+					y = mesh.cell_centroids.y[cell_j];
+					break;
 
-			// if there is no right cell, calc coords of ghost cell
-			if (cell_j == i) {
-				cpu_ghost_coords(mesh, edge, x, y);
+				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
+				case CFVMesh2D::EDGE_DIRICHLET:
+				case CFVMesh2D::EDGE_NEUMMAN:
+					// get coords of current cell i, and compute ghost coords
+					x = x0;
+					y = y0;
+					cpu_ghost_coords(mesh, edge, x, y);
+					break;
 			}
 
+			// system normalization, to place all numbers on the same scale (avoid precision problems with too big numbers against small numbers)
 			x -= x0;
 			y -= y0;
 
@@ -140,7 +152,7 @@ void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &v
 
 
 /* Compute system polution coeficients for system solve */
-void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult) {
+void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult, CFVVect<double> velocity, double dc) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double x0 = mesh.cell_centroids.x[cell];
 		double y0 = mesh.cell_centroids.y[cell];
@@ -156,25 +168,63 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 		// for each neighbor cell, add to vector
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
 		for(unsigned int j = 0; j < edge_limit; ++j) {
+
 			// get edge
 			unsigned int edge = mesh.cell_edges.elem(j, 0, cell);
+			double x, y, u;
+			unsigned int cell_j;
 
-			// get right neighbor
-			unsigned int neighbor = mesh.edge_right_cells[edge];
+			switch (mesh.edge_types[edge]) {
+				// inner edges, both left and right cell can be assumed to exists
+				case CFVMesh2D::EDGE:
+					// get right cell of this edge
+					cell_j = mesh.edge_right_cells[edge];
 
-			// TODO: ghost cell, used correctly?
-			if (neighbor == cell || neighbor == NO_RIGHT_CELL)
-				neighbor = mesh.edge_left_cells[edge];
-			
-			double x = mesh.cell_centroids.x[neighbor];
-			double y = mesh.cell_centroids.y[neighbor];
-			u = polution[neighbor];
+					// if right cell is the current one (cell i), we want the left instead
+					if (cell_j == cell)
+						cell_j = mesh.edge_left_cells[edge];
+					
+					// get coords for this cell
+					x = mesh.cell_centroids.x[cell_j];
+					y = mesh.cell_centroids.y[cell_j];
+					u = polution[cell_j];
+					break;
 
-			// if neighbor is still equal to cell, this is a ghost cell, compute centroid)
-			if (neighbor == cell) {
-				cpu_ghost_coords(mesh, edge, x, y);
+				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
+				case CFVMesh2D::EDGE_DIRICHLET:
+					// get left cell
+					cell_j = mesh.edge_left_cells[edge];
+
+					// get coords of current cell i, and compute ghost coords
+					x = x0;
+					y = y0;
+					cpu_ghost_coords(mesh, edge, x, y);
+
+					// polution in this point is equal to the dirichlet condition (unless velocity is positive)
+					// TODO how to fix this? velocity shouldnt be needed right?
+					if (velocity[edge] < 0)
+						u = dc;
+					else {
+						u = 0;
+					}
+
+					break;
+
+				case CFVMesh2D::EDGE_NEUMMAN:
+					// get left cell
+					cell_j = mesh.edge_left_cells[edge];
+
+					// get coords of current cell i, and compute ghost coords
+					x = x0;
+					y = y0;
+					cpu_ghost_coords(mesh, edge, x, y);
+
+					// polution in this ghost cell is equal to the current cell (neumman condition)
+					u = polution[cell_j];
+					break;
 			}
 
+			// system normalization, to place all numbers on the same scale (avoid precision problems with too big numbers against small numbers)
 			x -= x0;
 			y -= y0;
 
@@ -197,25 +247,40 @@ void cpu_compute_flux(
 		double v = velocity[i];
 		unsigned int cell;
 		double system_res;
+		double x, y, x0, y0;
 
-		if (v < 0) {
-			cell = mesh.edge_right_cells[i];
-		} else {
-			cell = mesh.edge_left_cells[i];
-		}
 
-		if (cell == NO_RIGHT_CELL) {
-			// TODO dirichlet(t) = sin(t)
-			system_res = dc; // * sin(t)
-		} else {
-			double x = mesh.edge_centroids.x[i];
-			double y = mesh.edge_centroids.y[i];
-			double x0 = mesh.cell_centroids.x[cell];
-			double y0 = mesh.cell_centroids.y[cell];
-			system_res = vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
+		switch (mesh.edge_types[i]) {
+			case CFVMesh2D::EDGE:
+			case CFVMesh2D::EDGE_DIRICHLET:
+				if (v > 0) {
+					cell = mesh.edge_right_cells[i];
+					if (cell == NO_RIGHT_CELL)
+						cell = mesh.edge_left_cells[i];
+				} else {
+					cell = mesh.edge_left_cells[i];
+				}
+
+				x = mesh.edge_centroids.x[i];
+				y = mesh.edge_centroids.y[i];
+				x0 = mesh.cell_centroids.x[cell];
+				y0 = mesh.cell_centroids.y[cell];
+				system_res = vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
+
+				break;
+
+				//cell = mesh.edge_left_cell[i];
+				// TODO dirichlet(t) = sin(t)
+				//system_res = dc; // * sin(t)
+				//break;
+
+			case CFVMesh2D::EDGE_NEUMMAN:
+				system_res = 0;
+				break;
 		}
 
 		flux[i] = v * system_res;
+		cout << "flux[" << i << "] = " << flux[i] /*<< " (using cell " << cell << ")"*/ << endl;
 	};
 }
 

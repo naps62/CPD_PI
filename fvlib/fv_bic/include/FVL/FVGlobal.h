@@ -4,7 +4,9 @@
 ** MFVLog.h
 ** Global Configs for FVL
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
+** Created:		13-02-2012
+** Last Test:	---
 ** -------------------------------------------------------------------------*/
 
 #ifndef _H_FVGLOBAL
@@ -14,23 +16,22 @@
 #include <fstream>
 #include <string>
 
-/**
- * Utilities
- */
-//#define NO_RIGHT_EDGE std::numeric_limits<unsigned int>::max()
+/************************************************
+ * UTILITIES
+ ***********************************************/
 #define NO_RIGHT_CELL	INT_MAX
 #define NO_CELL			INT_MAX
 #define MAX_EDGES_PER_CELL 4
 
-/**
- * Stream manipulation values
- */
+/************************************************
+ * STREAM MANIPULATION VALUES
+ ***********************************************/
 #define FV_PRECISION	12
 #define FV_CHAMP		20
 
-/**
- * Logging options
- */
+/************************************************
+ * LOGGING OPTIONS
+ ***********************************************/
 #define FV_LOGMODE_APPEND	ofstream::app
 #define FV_LOGMODE_WRITE 	0
 #define FV_LOGMODE			FV_LOGMODE_APPEND
@@ -39,9 +40,9 @@
 #define FV_ERRFILE string("FVLib.err")
 #define FV_PROFILE string("FVLib.prof")
 
-/**
- * Debug options
- */
+/************************************************
+ * DEBUG OPTIONS
+ ***********************************************/
 #define FV_DEBUG	1
 
 #define _DEBUG	if (FV_DEBUG)
@@ -52,9 +53,9 @@
 #define _D(x)	(x)
 #endif
 
-/**
- * Profiling options
- */
+/************************************************
+ * PROFILING OPTIONS
+ ***********************************************/
 #define FV_PROF 1
 
 #if (FV_PROF == 0)

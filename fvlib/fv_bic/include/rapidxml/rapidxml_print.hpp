@@ -1,6 +1,8 @@
 #ifndef RAPIDXML_PRINT_HPP_INCLUDED
 #define RAPIDXML_PRINT_HPP_INCLUDED
 
+#define _UNUSED(x) ((void)x)
+
 // Copyright (C) 2006, 2009 Marcin Kalicinski
 // Version 1.13
 // Revision $DateTime: 2009/05/13 01:46:17 $
@@ -168,6 +170,7 @@ namespace rapidxml
         template<class OutIt, class Ch>
         inline OutIt print_children(OutIt out, const xml_node<Ch> *node, int flags, int indent)
         {
+        	_UNUSED(flags);
             for (xml_node<Ch> *child = node->first_node(); child; child = child->next_sibling())
                 out = print_node(out, child, flags, indent);
             return out;
@@ -175,8 +178,9 @@ namespace rapidxml
 
         // Print attributes of the node
         template<class OutIt, class Ch>
-        inline OutIt print_attributes(OutIt out, const xml_node<Ch> *node, int /*flags*/)
+        inline OutIt print_attributes(OutIt out, const xml_node<Ch> *node, int flags)
         {
+        	_UNUSED(flags);
             for (xml_attribute<Ch> *attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute())
             {
                 if (attribute->name() && attribute->value())

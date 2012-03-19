@@ -2,11 +2,11 @@
 ** Finite Volume Library
 ** 
 ** FVLog.h
-** Logging
+** Logging class for FVL
 **
-** Author: Miguel Palhas, mpalhas@gmail.com
+** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
-** Last Tested:	---
+** Last Test:	---
 ** -------------------------------------------------------------------------*/
 
 #ifndef _H_FVLOG

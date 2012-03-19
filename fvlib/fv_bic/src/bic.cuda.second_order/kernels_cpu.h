@@ -13,7 +13,9 @@ void cpu_compute_reverseA(
 void cpu_compute_vecResult(
 		CFVMesh2D &mesh,
 		CFVVect<double> &polution,
-		CFVMat<double> &vecResult);
+		CFVMat<double> &vecResult,
+		CFVVect<double> velocity,
+		double dc);
 
 /* Compute vecABC */
 void cpu_compute_vecABC(

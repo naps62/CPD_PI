@@ -4,7 +4,8 @@
  ** CFVVect.hpp
  ** Template declaration for CFVVect.h
  **
- ** Author: Miguel Palhas, mpalhas@gmail.com
+ ** Author:		Miguel Palhas, mpalhas@gmail.com
+ ** Created:	13-02-2012
  ** -------------------------------------------------------------------------*/
 
 #ifdef _H_CFVVECT
