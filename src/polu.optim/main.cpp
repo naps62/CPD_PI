@@ -333,6 +333,8 @@ int main(int argc, char *argv[])
 	while(time<final_time)
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
+//		cout << "--[" << time << "]--" << endl;
+
 //		dt = compute_flux(
 		compute_flux(
 			edges,
@@ -341,6 +343,7 @@ int main(int argc, char *argv[])
 			dirichlet)
 		;
 //		* h;
+
 		update(
 			cells,
 			cell_count,

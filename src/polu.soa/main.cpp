@@ -60,7 +60,7 @@ compute_flux
 		double polution_left = polutions[ lefts[e] ];
 		double polution_right
 			= ( rights[e] < numeric_limits<unsigned>::max() )
-			? rights[e]
+			? polutions[ rights[e] ]
 			: dirichlet
 			;
 		fluxes[e] = ( velocities[e] < 0 )
@@ -322,26 +322,6 @@ int main(int argc, char *argv[])
 
 
 
-	unsigned last = cell_count - 1;
-	for ( i = 0 ; i < cell_last ; ++i )
-	{
-		unsigned begin = indexes[i];
-		unsigned limit = indexes[i+1];
-		for ( unsigned j = begin ; j < limit ; ++j )
-			cout << edges[j] << endl;
-	}
-	cerr
-		<<	"Last cell: " << last << endl
-		<<	"i: " << i << endl
-		<<	"cell_edge_count: " << cell_edge_count << endl
-		;
-		for ( unsigned j = indexes[i] ; j < cell_edge_count ; ++j )
-			cout << edges[j] << endl;
-	return 0;
-
-
-
-
 	// the main loop
 	time=0.;nbiter=0;
 	FVio pol_file( pol_fname.c_str() ,FVWRITE);
@@ -351,6 +331,8 @@ int main(int argc, char *argv[])
 	while(time<final_time)
 //	for ( int i = 0 ; i < 10 ; ++i )
 	{
+//		cout << "--[" << time << "]--" << endl;
+
 		compute_flux(
 			polutions,
 			velocities,
@@ -360,6 +342,7 @@ int main(int argc, char *argv[])
 			dirichlet,
 			edge_count)
 		;
+
 		update(
 			polutions,
 			areas,
