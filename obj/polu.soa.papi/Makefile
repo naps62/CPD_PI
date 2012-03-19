@@ -1,5 +1,5 @@
 include ../polu.soa/Makefile
 
-LDFLAGS	+=	-lpapi -lpapipcc
+LDFLAGS	+=	-lpapipcc -lpapi
 
 $(ROOTD)/$(BIND)/$(BIN):	$(ROOTD)/$(LIBD)/libpapipcc.a
