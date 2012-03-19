@@ -38,6 +38,14 @@ namespace papi
 	{
 		PAPI_shutdown();
 	}
+
+
+
+	long long int
+	real_nano_seconds()
+	{
+		return PAPI_get_real_nsec();
+	}
 }
 
 

@@ -21,6 +21,8 @@ namespace papi
 	 */
 	void init();
 	void shutdown();
+	
+	long long int real_nano_seconds();
 }
 
 
