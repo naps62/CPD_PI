@@ -88,6 +88,8 @@ long long int flops;
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 
+long long int mlbegin;
+
 long long int cftotns;
 long long int cfminns;
 long long int cfmaxns;
@@ -520,7 +522,7 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE_WARMUP)
 		if ( mliters > PROFILE_WARMUP )
 #endif//	PROFILE_WARMUP
-		long long int mlbegin = papi::real_nano_seconds();
+		mlbegin = papi::real_nano_seconds();
 #else//    PROFILE
 	while( time < final_time)
 	{
