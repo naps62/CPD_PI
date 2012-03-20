@@ -14,7 +14,8 @@
  ||   defined (PROFILE_LDINS) \
  ||   defined (PROFILE_SRINS) \
  ||   defined (PROFILE_BRINS) \
- ||   defined (PROFILE_FPINS)
+ ||   defined (PROFILE_FPINS) \
+ ||   defined (PROFILE_VECINS)
 #define PROFILE_INSTRUCTIONS
 #endif
 
@@ -345,9 +346,9 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE_BRINS)
 	p = new papi::BranchInstructionsCounter();
 	brins = 0;
-#elif defined (PROFILE_BRINS)
-	p = new papi::BranchInstructionsCounter();
-	brins = 0;
+#elif defined (PROFILE_FPINS)
+	p = new papi::FloatingPointInstructionsCounter();
+	fpins = 0;
 #elif defined (PROFILE_LDINS)
 	p = new papi::LoadInstructionsCounter();
 	ldins = 0;
