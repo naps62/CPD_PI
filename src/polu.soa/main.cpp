@@ -489,7 +489,11 @@ int main(int argc, char *argv[])
 	FVio pol_file( pol_fname.c_str() ,FVWRITE);
 	
 #if   defined (PROFILE)
+#if   defined (PROFILE_LIMIT)
 	for ( int i = 0 ; i < PROFILE_CONFIG_ITERATIONS ; ++i )
+#else//	PROFILE_LIMIT
+	while( time < final_time)
+#endif//	PROFILE_LIMIT
 	{
 		long long int mlbegin = papi::real_nano_seconds();
 #else//    PROFILE
