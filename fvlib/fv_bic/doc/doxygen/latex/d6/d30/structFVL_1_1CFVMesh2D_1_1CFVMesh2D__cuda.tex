@@ -1,0 +1,240 @@
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda}{
+\section{CFVMesh2D::CFVMesh2D\_\-cuda Struct Reference}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda}\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+}
+
+
+2D Mesh structure to use in a CUDA device  
+
+
+
+
+{\ttfamily \#include $<$CFVMesh2D.h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a66b841fd6e58a9fc9b63df4fe982178f}{num\_\-vertex}
+\begin{DoxyCompactList}\small\item\em total number of vertex \item\end{DoxyCompactList}\item 
+unsigned int \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad1228ae08a3c287de40e4682e6538c12}{num\_\-edges}
+\begin{DoxyCompactList}\small\item\em total number of edges \item\end{DoxyCompactList}\item 
+unsigned int \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aede6f897b05f909a426f36f61b2b8d43}{num\_\-cells}
+\begin{DoxyCompactList}\small\item\em total number of cells \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a03658bd1b0082d5bd0726d7ef81c0bc2}{vertex\_\-coords} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em coords for each vertex \item\end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a6a62f4029cdd76f0ca586851d6eaf684}{edge\_\-types}
+\begin{DoxyCompactList}\small\item\em type associated with each edge \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae49cff6bcafed1edb776bf5104de51d1}{edge\_\-normals} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em normals for each edge \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aff4d73402091e4860e902f3f7f66a06c}{edge\_\-centroids} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em centroid for each edge \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad9e8d94c7c782f032f8320f7d5ee618b}{edge\_\-lengths}
+\begin{DoxyCompactList}\small\item\em length for each edge \item\end{DoxyCompactList}\item 
+unsigned int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a541be23cac3c920c96257391179a196c}{edge\_\-fst\_\-vertex}
+\begin{DoxyCompactList}\small\item\em first vertex of each edge \item\end{DoxyCompactList}\item 
+unsigned int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a656712266e15816d723aae1c64411c52}{edge\_\-snd\_\-vertex}
+\begin{DoxyCompactList}\small\item\em second vertex of each edge \item\end{DoxyCompactList}\item 
+unsigned int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aa06063ffa67470f21a645851175bf1f6}{edge\_\-left\_\-cells}
+\begin{DoxyCompactList}\small\item\em left cell of each edge \item\end{DoxyCompactList}\item 
+unsigned int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0afdfdb2e2d98e52ee797d883dafcf2f}{edge\_\-right\_\-cells}
+\begin{DoxyCompactList}\small\item\em right cell of each edge (NO\_\-RIGHT\_\-CELL indicates a border edge where no right cell exists) \item\end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a294a0484d68f983a11a627a5df0a767a}{cell\_\-types}
+\begin{DoxyCompactList}\small\item\em type associated with each cell \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05beb562a8dc14ea92dd8cc7b36f5131}{cell\_\-centroids} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em centroid for each cell \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05366b974186ac70d633948b29c56384}{cell\_\-perimeters}
+\begin{DoxyCompactList}\small\item\em perimeter for each cell \item\end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae8676892fd56ea5c4828b46ed48c222d}{cell\_\-areas}
+\begin{DoxyCompactList}\small\item\em area for each cell \item\end{DoxyCompactList}\item 
+unsigned int $\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0272dc8071de98dff11b0109af7bdbed}{cell\_\-edges\_\-count}
+\begin{DoxyCompactList}\small\item\em number of edges for each cell (to index cell\_\-edges) \item\end{DoxyCompactList}\item 
+unsigned int $\ast$$\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a618dbcd16053ddd3695a69d156f9caea}{cell\_\-edges}
+\begin{DoxyCompactList}\small\item\em index of edges for each cell (unsigned int \mbox{[}MAX\_\-EDGES\_\-PER\_\-CELL\mbox{]}\mbox{[}num\_\-cells\mbox{]}) \item\end{DoxyCompactList}\item 
+double $\ast$$\ast$ \hyperlink{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a8f355297b336ee7533f50e27b552216e}{cell\_\-edges\_\-normal}
+\begin{DoxyCompactList}\small\item\em distance of each cell to each edge (double \mbox{[}2$\ast$MAX\_\-EDGES\_\-PER\_\-CELL\mbox{]}\mbox{[}num\_\-cells\mbox{]}) \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+2D Mesh structure to use in a CUDA device In a CUDA environment (i.e. when programming a CUDA kernel) a different memory space is used (device memory) instead of RAM. There is also no access to class methods, so the following structure must be used instead to access the mesh Before usage, \hyperlink{classFVL_1_1CFVMesh2D_aa84c3c881bec148d68a3e847feb4ecd5}{cuda\_\-malloc()} must be used to ensure the memory is allocated \hyperlink{classFVL_1_1CFVMesh2D_a817cca487c7f644b7e5d1abf8bd42308}{cuda\_\-save()} is also probably necessary to copy mesh data to the device
+
+\begin{Desc}
+\item[\hyperlink{todo__todo000003}{Todo}]move this to a more suitable location \end{Desc}
+
+
+\subsection{Field Documentation}
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae8676892fd56ea5c4828b46ed48c222d}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-areas@{cell\_\-areas}}
+\index{cell\_\-areas@{cell\_\-areas}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-areas}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf cell\_\-areas}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae8676892fd56ea5c4828b46ed48c222d}
+
+
+area for each cell 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05beb562a8dc14ea92dd8cc7b36f5131}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-centroids@{cell\_\-centroids}}
+\index{cell\_\-centroids@{cell\_\-centroids}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-centroids}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf cell\_\-centroids}\mbox{[}2\mbox{]}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05beb562a8dc14ea92dd8cc7b36f5131}
+
+
+centroid for each cell 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a618dbcd16053ddd3695a69d156f9caea}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-edges@{cell\_\-edges}}
+\index{cell\_\-edges@{cell\_\-edges}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$$\ast$ {\bf cell\_\-edges}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a618dbcd16053ddd3695a69d156f9caea}
+
+
+index of edges for each cell (unsigned int \mbox{[}MAX\_\-EDGES\_\-PER\_\-CELL\mbox{]}\mbox{[}num\_\-cells\mbox{]}) 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0272dc8071de98dff11b0109af7bdbed}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-edges\_\-count@{cell\_\-edges\_\-count}}
+\index{cell\_\-edges\_\-count@{cell\_\-edges\_\-count}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-edges\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ {\bf cell\_\-edges\_\-count}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0272dc8071de98dff11b0109af7bdbed}
+
+
+number of edges for each cell (to index cell\_\-edges) 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a8f355297b336ee7533f50e27b552216e}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-edges\_\-normal@{cell\_\-edges\_\-normal}}
+\index{cell\_\-edges\_\-normal@{cell\_\-edges\_\-normal}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-edges\_\-normal}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$ {\bf cell\_\-edges\_\-normal}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a8f355297b336ee7533f50e27b552216e}
+
+
+distance of each cell to each edge (double \mbox{[}2$\ast$MAX\_\-EDGES\_\-PER\_\-CELL\mbox{]}\mbox{[}num\_\-cells\mbox{]}) 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05366b974186ac70d633948b29c56384}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-perimeters@{cell\_\-perimeters}}
+\index{cell\_\-perimeters@{cell\_\-perimeters}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-perimeters}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf cell\_\-perimeters}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a05366b974186ac70d633948b29c56384}
+
+
+perimeter for each cell 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a294a0484d68f983a11a627a5df0a767a}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!cell\_\-types@{cell\_\-types}}
+\index{cell\_\-types@{cell\_\-types}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{cell\_\-types}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ {\bf cell\_\-types}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a294a0484d68f983a11a627a5df0a767a}
+
+
+type associated with each cell 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aff4d73402091e4860e902f3f7f66a06c}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-centroids@{edge\_\-centroids}}
+\index{edge\_\-centroids@{edge\_\-centroids}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-centroids}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf edge\_\-centroids}\mbox{[}2\mbox{]}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aff4d73402091e4860e902f3f7f66a06c}
+
+
+centroid for each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a541be23cac3c920c96257391179a196c}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-fst\_\-vertex@{edge\_\-fst\_\-vertex}}
+\index{edge\_\-fst\_\-vertex@{edge\_\-fst\_\-vertex}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-fst\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ {\bf edge\_\-fst\_\-vertex}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a541be23cac3c920c96257391179a196c}
+
+
+first vertex of each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aa06063ffa67470f21a645851175bf1f6}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-left\_\-cells@{edge\_\-left\_\-cells}}
+\index{edge\_\-left\_\-cells@{edge\_\-left\_\-cells}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-left\_\-cells}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ {\bf edge\_\-left\_\-cells}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aa06063ffa67470f21a645851175bf1f6}
+
+
+left cell of each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad9e8d94c7c782f032f8320f7d5ee618b}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-lengths@{edge\_\-lengths}}
+\index{edge\_\-lengths@{edge\_\-lengths}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-lengths}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf edge\_\-lengths}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad9e8d94c7c782f032f8320f7d5ee618b}
+
+
+length for each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae49cff6bcafed1edb776bf5104de51d1}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-normals@{edge\_\-normals}}
+\index{edge\_\-normals@{edge\_\-normals}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-normals}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf edge\_\-normals}\mbox{[}2\mbox{]}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ae49cff6bcafed1edb776bf5104de51d1}
+
+
+normals for each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0afdfdb2e2d98e52ee797d883dafcf2f}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-right\_\-cells@{edge\_\-right\_\-cells}}
+\index{edge\_\-right\_\-cells@{edge\_\-right\_\-cells}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-right\_\-cells}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ {\bf edge\_\-right\_\-cells}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a0afdfdb2e2d98e52ee797d883dafcf2f}
+
+
+right cell of each edge (NO\_\-RIGHT\_\-CELL indicates a border edge where no right cell exists) 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a656712266e15816d723aae1c64411c52}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-snd\_\-vertex@{edge\_\-snd\_\-vertex}}
+\index{edge\_\-snd\_\-vertex@{edge\_\-snd\_\-vertex}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-snd\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ {\bf edge\_\-snd\_\-vertex}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a656712266e15816d723aae1c64411c52}
+
+
+second vertex of each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a6a62f4029cdd76f0ca586851d6eaf684}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!edge\_\-types@{edge\_\-types}}
+\index{edge\_\-types@{edge\_\-types}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{edge\_\-types}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ {\bf edge\_\-types}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a6a62f4029cdd76f0ca586851d6eaf684}
+
+
+type associated with each edge 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aede6f897b05f909a426f36f61b2b8d43}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!num\_\-cells@{num\_\-cells}}
+\index{num\_\-cells@{num\_\-cells}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{num\_\-cells}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf num\_\-cells}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_aede6f897b05f909a426f36f61b2b8d43}
+
+
+total number of cells 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad1228ae08a3c287de40e4682e6538c12}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!num\_\-edges@{num\_\-edges}}
+\index{num\_\-edges@{num\_\-edges}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{num\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf num\_\-edges}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_ad1228ae08a3c287de40e4682e6538c12}
+
+
+total number of edges 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a66b841fd6e58a9fc9b63df4fe982178f}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!num\_\-vertex@{num\_\-vertex}}
+\index{num\_\-vertex@{num\_\-vertex}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{num\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf num\_\-vertex}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a66b841fd6e58a9fc9b63df4fe982178f}
+
+
+total number of vertex 
+
+\hypertarget{structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a03658bd1b0082d5bd0726d7ef81c0bc2}{
+\index{FVL::CFVMesh2D::CFVMesh2D\_\-cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}!vertex\_\-coords@{vertex\_\-coords}}
+\index{vertex\_\-coords@{vertex\_\-coords}!FVL::CFVMesh2D::CFVMesh2D_cuda@{FVL::CFVMesh2D::CFVMesh2D\_\-cuda}}
+\subsubsection[{vertex\_\-coords}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ {\bf vertex\_\-coords}\mbox{[}2\mbox{]}}}
+\label{d6/d30/structFVL_1_1CFVMesh2D_1_1CFVMesh2D__cuda_a03658bd1b0082d5bd0726d7ef81c0bc2}
+
+
+coords for each vertex 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/FVL/\hyperlink{CFVMesh2D_8h}{CFVMesh2D.h}\end{DoxyCompactItemize}

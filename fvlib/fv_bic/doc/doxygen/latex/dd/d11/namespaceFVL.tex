@@ -1,0 +1,245 @@
+\hypertarget{namespaceFVL}{
+\section{FVL Namespace Reference}
+\label{dd/d11/namespaceFVL}\index{FVL@{FVL}}
+}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFVL_1_1CFVArray}{CFVArray}
+\item 
+class \hyperlink{classFVL_1_1CFVMat}{CFVMat}
+\item 
+struct \hyperlink{structFVL_1_1CFVMesh2D__cuda}{CFVMesh2D\_\-cuda}
+\begin{DoxyCompactList}\small\item\em 2D Mesh structure to use in a CUDA device \item\end{DoxyCompactList}\item 
+class \hyperlink{classFVL_1_1CFVMesh2D}{CFVMesh2D}
+\begin{DoxyCompactList}\small\item\em A CUDA enabled 2D Mesh. \item\end{DoxyCompactList}\item 
+class \hyperlink{classFVL_1_1CFVPoints2D}{CFVPoints2D}
+\item 
+class \hyperlink{classFVL_1_1CFVProfile}{CFVProfile}
+\item 
+class \hyperlink{classFVL_1_1FVArray}{FVArray}
+\begin{DoxyCompactList}\small\item\em Generic array template class. \item\end{DoxyCompactList}\item 
+class \hyperlink{classFVL_1_1FVErr}{FVErr}
+\item 
+class \hyperlink{classFVL_1_1FVLog}{FVLog}
+\item 
+class \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}
+\item 
+class \hyperlink{classFVL_1_1FVXMLReader}{FVXMLReader}
+\item 
+class \hyperlink{classFVL_1_1FVXMLWriter}{FVXMLWriter}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cb}{Edge2D\_\-Type} \{ \hyperlink{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbaa622cbc12b78e3e883dd7b3217088a66}{EDGE} =  0, 
+\hyperlink{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cba2e0991fad8c36215c4677e86e00e071c}{EDGE\_\-DIRICHLET} =  1, 
+\hyperlink{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbab37b73514a0194b0d535e7609c12b33b}{EDGE\_\-NEUMMAN} =  2
+ \}
+\begin{DoxyCompactList}\small\item\em Types of edges in a 2D Mesh. \item\end{DoxyCompactList}\item 
+enum \hyperlink{namespaceFVL_aa77be52d0539533043f307505d0a8ec6}{Cell2D\_\-Type} \{ \hyperlink{namespaceFVL_aa77be52d0539533043f307505d0a8ec6a03be5fc53a9d77a64ff24f85a7784a7b}{CELL} =  10
+ \}
+\begin{DoxyCompactList}\small\item\em Types of cells in a 2D Mesh. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\class \hyperlink{classFVL_1_1FVPoint2D}{FVL::FVPoint2D} \hyperlink{namespaceFVL_a9d63c61da787909700ebd6753c6c8b4d}{operator} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a7d5cb24f219876bf12dc09b7bf61aced}{operator-\/} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_adbed70591d9eda691e7b13d65522442a}{operator$\ast$} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a2744005a9d13a03dbd598b60efb9e886}{operator/} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_ac45bd75690254ff12861d49e8f099eef}{operator+} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const T \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a790238a5d379903700a9ca768581f476}{operator-\/} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const T \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a9182bd9a6593151a580c126b2b9a95a7}{operator$\ast$} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const T \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a2c00ee27a6efec77777d871f17c4a8ad}{operator$\ast$} (const T \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, const FVpoint2D$<$ T $>$ \&a)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_a101d709be4cbb8fbf4d3d6dea90b2e89}{operator/} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a, const T \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \hyperlink{namespaceFVL_af2e46d2e39647630b0c1cc146298ef33}{operator-\/} (const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&a)
+\item 
+{\footnotesize template$<$class T $>$ }\\std::ostream \& \hyperlink{namespaceFVL_a2c42a06efa3c35dd1fc72c25430a1b1c}{operator$<$$<$} (std::ostream \&s, const \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D}$<$ T $>$ \&p)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVL_1_1FVXMLReader}{FVL::FVXMLReader} \hyperlink{namespaceFVL_aa44c792c5d125745a60768dc48554744}{operator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespaceFVL_aa77be52d0539533043f307505d0a8ec6}{
+\index{FVL@{FVL}!Cell2D\_\-Type@{Cell2D\_\-Type}}
+\index{Cell2D\_\-Type@{Cell2D\_\-Type}!FVL@{FVL}}
+\subsubsection[{Cell2D\_\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Cell2D\_\-Type}}}
+\label{dd/d11/namespaceFVL_aa77be52d0539533043f307505d0a8ec6}
+
+
+Types of cells in a 2D Mesh. 
+
+\begin{Desc}
+\item[\hyperlink{todo__todo000002}{Todo}]move this to a more suitable class \end{Desc}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{CELL@{CELL}!FVL@{FVL}}\index{FVL@{FVL}!CELL@{CELL}}\item[{\em 
+\hypertarget{namespaceFVL_aa77be52d0539533043f307505d0a8ec6a03be5fc53a9d77a64ff24f85a7784a7b}{
+CELL}
+\label{dd/d11/namespaceFVL_aa77be52d0539533043f307505d0a8ec6a03be5fc53a9d77a64ff24f85a7784a7b}
+}]regular cell \end{description}
+\end{Desc}
+
+\hypertarget{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cb}{
+\index{FVL@{FVL}!Edge2D\_\-Type@{Edge2D\_\-Type}}
+\index{Edge2D\_\-Type@{Edge2D\_\-Type}!FVL@{FVL}}
+\subsubsection[{Edge2D\_\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Edge2D\_\-Type}}}
+\label{dd/d11/namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cb}
+
+
+Types of edges in a 2D Mesh. 
+
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]move this to a more suitable class \end{Desc}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EDGE@{EDGE}!FVL@{FVL}}\index{FVL@{FVL}!EDGE@{EDGE}}\item[{\em 
+\hypertarget{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbaa622cbc12b78e3e883dd7b3217088a66}{
+EDGE}
+\label{dd/d11/namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbaa622cbc12b78e3e883dd7b3217088a66}
+}]regular internal edge \index{EDGE\_\-DIRICHLET@{EDGE\_\-DIRICHLET}!FVL@{FVL}}\index{FVL@{FVL}!EDGE\_\-DIRICHLET@{EDGE\_\-DIRICHLET}}\item[{\em 
+\hypertarget{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cba2e0991fad8c36215c4677e86e00e071c}{
+EDGE\_\-DIRICHLET}
+\label{dd/d11/namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cba2e0991fad8c36215c4677e86e00e071c}
+}]border edge where dirichlet condition is applied \index{EDGE\_\-NEUMMAN@{EDGE\_\-NEUMMAN}!FVL@{FVL}}\index{FVL@{FVL}!EDGE\_\-NEUMMAN@{EDGE\_\-NEUMMAN}}\item[{\em 
+\hypertarget{namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbab37b73514a0194b0d535e7609c12b33b}{
+EDGE\_\-NEUMMAN}
+\label{dd/d11/namespaceFVL_abde0d02a32faee2d4b3e6c243d9d94cbab37b73514a0194b0d535e7609c12b33b}
+}]border edge where neumman condition is applied \end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceFVL_a9d63c61da787909700ebd6753c6c8b4d}{
+\index{FVL@{FVL}!operator@{operator}}
+\index{operator@{operator}!FVL@{FVL}}
+\subsubsection[{operator}]{\setlength{\rightskip}{0pt plus 5cm}class {\bf FVL::FVPoint2D} {\bf FVL::operator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a9d63c61da787909700ebd6753c6c8b4d}
+\hypertarget{namespaceFVL_a2c00ee27a6efec77777d871f17c4a8ad}{
+\index{FVL@{FVL}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVL@{FVL}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{ x, }
+\item[{const FVpoint2D$<$ T $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a2c00ee27a6efec77777d871f17c4a8ad}
+\hypertarget{namespaceFVL_adbed70591d9eda691e7b13d65522442a}{
+\index{FVL@{FVL}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVL@{FVL}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_adbed70591d9eda691e7b13d65522442a}
+\hypertarget{namespaceFVL_a9182bd9a6593151a580c126b2b9a95a7}{
+\index{FVL@{FVL}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVL@{FVL}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const T \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a9182bd9a6593151a580c126b2b9a95a7}
+\hypertarget{namespaceFVL_ac45bd75690254ff12861d49e8f099eef}{
+\index{FVL@{FVL}!operator+@{operator+}}
+\index{operator+@{operator+}!FVL@{FVL}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const T \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_ac45bd75690254ff12861d49e8f099eef}
+\hypertarget{namespaceFVL_af2e46d2e39647630b0c1cc146298ef33}{
+\index{FVL@{FVL}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVL@{FVL}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_af2e46d2e39647630b0c1cc146298ef33}
+\hypertarget{namespaceFVL_a7d5cb24f219876bf12dc09b7bf61aced}{
+\index{FVL@{FVL}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVL@{FVL}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a7d5cb24f219876bf12dc09b7bf61aced}
+\hypertarget{namespaceFVL_a790238a5d379903700a9ca768581f476}{
+\index{FVL@{FVL}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVL@{FVL}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const T \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a790238a5d379903700a9ca768581f476}
+\hypertarget{namespaceFVL_a2744005a9d13a03dbd598b60efb9e886}{
+\index{FVL@{FVL}!operator/@{operator/}}
+\index{operator/@{operator/}!FVL@{FVL}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a2744005a9d13a03dbd598b60efb9e886}
+\hypertarget{namespaceFVL_a101d709be4cbb8fbf4d3d6dea90b2e89}{
+\index{FVL@{FVL}!operator/@{operator/}}
+\index{operator/@{operator/}!FVL@{FVL}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T$>$ {\bf FVL::operator}/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ a, }
+\item[{const T \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a101d709be4cbb8fbf4d3d6dea90b2e89}
+\hypertarget{namespaceFVL_a2c42a06efa3c35dd1fc72c25430a1b1c}{
+\index{FVL@{FVL}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!FVL@{FVL}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& {\bf FVL::operator}$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std::ostream \&}]{ s, }
+\item[{const {\bf FVPoint2D}$<$ T $>$ \&}]{ p}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d11/namespaceFVL_a2c42a06efa3c35dd1fc72c25430a1b1c}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceFVL_aa44c792c5d125745a60768dc48554744}{
+\index{FVL@{FVL}!operator@{operator}}
+\index{operator@{operator}!FVL@{FVL}}
+\subsubsection[{operator}]{\setlength{\rightskip}{0pt plus 5cm} {\bf FVL::FVXMLReader}  {\bf operator}}}
+\label{dd/d11/namespaceFVL_aa44c792c5d125745a60768dc48554744}

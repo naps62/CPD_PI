@@ -1,0 +1,232 @@
+\hypertarget{classFVFace3D}{
+\section{FVFace3D Class Reference}
+\label{de/df5/classFVFace3D}\index{FVFace3D@{FVFace3D}}
+}
+
+
+{\ttfamily \#include $<$FVFace3D.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVFace3D_af9501b4ab6a48512f589a981e547a138}{FVFace3D} ()
+\item 
+\hyperlink{classFVFace3D_a82460c8f716bdb29e5b3990e8bf9b972}{$\sim$FVFace3D} ()
+\item 
+\hyperlink{classFVVertex3D}{FVVertex3D} $\ast$ \hyperlink{classFVFace3D_a00e03dd7e67cf78d0d00487e52394451}{beginVertex} ()
+\item 
+\hyperlink{classFVVertex3D}{FVVertex3D} $\ast$ \hyperlink{classFVFace3D_a936762a7544b61fc2a7bf156a3394d28}{nextVertex} ()
+\item 
+\hyperlink{classFVEdge3D}{FVEdge3D} $\ast$ \hyperlink{classFVFace3D_aa5375d5ffa663cdd69ade5bc63928201}{beginEdge} ()
+\item 
+\hyperlink{classFVEdge3D}{FVEdge3D} $\ast$ \hyperlink{classFVFace3D_a67d59b9d682de14593cbd6c930acaaef}{nextEdge} ()
+\item 
+\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \hyperlink{classFVFace3D_a748535152afdb832cb615c717ea08f62}{getNormal} ()
+\item 
+void \hyperlink{classFVFace3D_a9e25d24a18a62921eff34d38f8b1b896}{setCode2Edge} (size\_\-t val=0)
+\item 
+void \hyperlink{classFVFace3D_a0a47b3287cfccb79cba1552f3ad1e7b9}{setCode2Vertex} (size\_\-t val=0)
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \hyperlink{classFVFace3D_af0e77c00d990c1a712cf032be1bb8f0f}{centroid}
+\item 
+double \hyperlink{classFVFace3D_a079d8fd569c3406fb63e0511eb0338c0}{perimeter}
+\item 
+double \hyperlink{classFVFace3D_ae517bffd82b9428b4f1d9500ea01c04f}{area}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a1ec973463c76e6d9e91160720959ad68}{label}
+\item 
+size\_\-t \hyperlink{classFVFace3D_acf258c3b3328a96e3ee1e3b875b7874f}{code}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a0a063e99fbc85e837d93dfbcda6f5252}{nb\_\-vertex}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a71d1c26cc375a03060b9eb8453a3680a}{nb\_\-edge}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a1a5a11cfc8bbaa0cf132759c0382da70}{nb\_\-cell}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a6320f7771a5dd32537e636a23fbf7e7c}{pos\_\-e}
+\item 
+size\_\-t \hyperlink{classFVFace3D_a9edf0688f0159bed5d3a6828f63146fd}{pos\_\-v}
+\item 
+\hyperlink{classFVCell3D}{FVCell3D} $\ast$ \hyperlink{classFVFace3D_a21a17acd25e8b790315d31bb141824f8}{leftCell}
+\item 
+\hyperlink{classFVCell3D}{FVCell3D} $\ast$ \hyperlink{classFVFace3D_aca0787b6acdd2934da16d4a600f75732}{rightCell}
+\item 
+\hyperlink{classFVVertex3D}{FVVertex3D} $\ast$ \hyperlink{classFVFace3D_ac405432b9a986bb191c3eda7e7163a60}{vertex} \mbox{[}NB\_\-VERTEX\_\-PER\_\-FACE\_\-3D\mbox{]}
+\item 
+\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \hyperlink{classFVFace3D_aa492e5327e0487055f0a989431eefc0d}{normal} \mbox{[}NB\_\-VERTEX\_\-PER\_\-FACE\_\-3D\mbox{]}
+\item 
+\hyperlink{classFVEdge3D}{FVEdge3D} $\ast$ \hyperlink{classFVFace3D_a68ec0a4d9b6476bcf7e6da7dc19d4b75}{edge} \mbox{[}NB\_\-EDGE\_\-PER\_\-FACE\_\-3D\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVFace3D_af9501b4ab6a48512f589a981e547a138}{
+\index{FVFace3D@{FVFace3D}!FVFace3D@{FVFace3D}}
+\index{FVFace3D@{FVFace3D}!FVFace3D@{FVFace3D}}
+\subsubsection[{FVFace3D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVFace3D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_af9501b4ab6a48512f589a981e547a138}
+\hypertarget{classFVFace3D_a82460c8f716bdb29e5b3990e8bf9b972}{
+\index{FVFace3D@{FVFace3D}!$\sim$FVFace3D@{$\sim$FVFace3D}}
+\index{$\sim$FVFace3D@{$\sim$FVFace3D}!FVFace3D@{FVFace3D}}
+\subsubsection[{$\sim$FVFace3D}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf FVFace3D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a82460c8f716bdb29e5b3990e8bf9b972}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVFace3D_aa5375d5ffa663cdd69ade5bc63928201}{
+\index{FVFace3D@{FVFace3D}!beginEdge@{beginEdge}}
+\index{beginEdge@{beginEdge}!FVFace3D@{FVFace3D}}
+\subsubsection[{beginEdge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVEdge3D}$\ast$ beginEdge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_aa5375d5ffa663cdd69ade5bc63928201}
+\hypertarget{classFVFace3D_a00e03dd7e67cf78d0d00487e52394451}{
+\index{FVFace3D@{FVFace3D}!beginVertex@{beginVertex}}
+\index{beginVertex@{beginVertex}!FVFace3D@{FVFace3D}}
+\subsubsection[{beginVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex3D}$\ast$ beginVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a00e03dd7e67cf78d0d00487e52394451}
+\hypertarget{classFVFace3D_a748535152afdb832cb615c717ea08f62}{
+\index{FVFace3D@{FVFace3D}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!FVFace3D@{FVFace3D}}
+\subsubsection[{getNormal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$double$>$ getNormal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a748535152afdb832cb615c717ea08f62}
+\hypertarget{classFVFace3D_a67d59b9d682de14593cbd6c930acaaef}{
+\index{FVFace3D@{FVFace3D}!nextEdge@{nextEdge}}
+\index{nextEdge@{nextEdge}!FVFace3D@{FVFace3D}}
+\subsubsection[{nextEdge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVEdge3D}$\ast$ nextEdge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a67d59b9d682de14593cbd6c930acaaef}
+\hypertarget{classFVFace3D_a936762a7544b61fc2a7bf156a3394d28}{
+\index{FVFace3D@{FVFace3D}!nextVertex@{nextVertex}}
+\index{nextVertex@{nextVertex}!FVFace3D@{FVFace3D}}
+\subsubsection[{nextVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex3D}$\ast$ nextVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a936762a7544b61fc2a7bf156a3394d28}
+\hypertarget{classFVFace3D_a9e25d24a18a62921eff34d38f8b1b896}{
+\index{FVFace3D@{FVFace3D}!setCode2Edge@{setCode2Edge}}
+\index{setCode2Edge@{setCode2Edge}!FVFace3D@{FVFace3D}}
+\subsubsection[{setCode2Edge}]{\setlength{\rightskip}{0pt plus 5cm}void setCode2Edge (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ val = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a9e25d24a18a62921eff34d38f8b1b896}
+\hypertarget{classFVFace3D_a0a47b3287cfccb79cba1552f3ad1e7b9}{
+\index{FVFace3D@{FVFace3D}!setCode2Vertex@{setCode2Vertex}}
+\index{setCode2Vertex@{setCode2Vertex}!FVFace3D@{FVFace3D}}
+\subsubsection[{setCode2Vertex}]{\setlength{\rightskip}{0pt plus 5cm}void setCode2Vertex (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ val = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{de/df5/classFVFace3D_a0a47b3287cfccb79cba1552f3ad1e7b9}
+
+
+\subsection{Field Documentation}
+\hypertarget{classFVFace3D_ae517bffd82b9428b4f1d9500ea01c04f}{
+\index{FVFace3D@{FVFace3D}!area@{area}}
+\index{area@{area}!FVFace3D@{FVFace3D}}
+\subsubsection[{area}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf area}}}
+\label{de/df5/classFVFace3D_ae517bffd82b9428b4f1d9500ea01c04f}
+\hypertarget{classFVFace3D_af0e77c00d990c1a712cf032be1bb8f0f}{
+\index{FVFace3D@{FVFace3D}!centroid@{centroid}}
+\index{centroid@{centroid}!FVFace3D@{FVFace3D}}
+\subsubsection[{centroid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$double$>$ {\bf centroid}}}
+\label{de/df5/classFVFace3D_af0e77c00d990c1a712cf032be1bb8f0f}
+\hypertarget{classFVFace3D_acf258c3b3328a96e3ee1e3b875b7874f}{
+\index{FVFace3D@{FVFace3D}!code@{code}}
+\index{code@{code}!FVFace3D@{FVFace3D}}
+\subsubsection[{code}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf code}}}
+\label{de/df5/classFVFace3D_acf258c3b3328a96e3ee1e3b875b7874f}
+\hypertarget{classFVFace3D_a68ec0a4d9b6476bcf7e6da7dc19d4b75}{
+\index{FVFace3D@{FVFace3D}!edge@{edge}}
+\index{edge@{edge}!FVFace3D@{FVFace3D}}
+\subsubsection[{edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVEdge3D}$\ast$ {\bf edge}\mbox{[}NB\_\-EDGE\_\-PER\_\-FACE\_\-3D\mbox{]}}}
+\label{de/df5/classFVFace3D_a68ec0a4d9b6476bcf7e6da7dc19d4b75}
+\hypertarget{classFVFace3D_a1ec973463c76e6d9e91160720959ad68}{
+\index{FVFace3D@{FVFace3D}!label@{label}}
+\index{label@{label}!FVFace3D@{FVFace3D}}
+\subsubsection[{label}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf label}}}
+\label{de/df5/classFVFace3D_a1ec973463c76e6d9e91160720959ad68}
+\hypertarget{classFVFace3D_a21a17acd25e8b790315d31bb141824f8}{
+\index{FVFace3D@{FVFace3D}!leftCell@{leftCell}}
+\index{leftCell@{leftCell}!FVFace3D@{FVFace3D}}
+\subsubsection[{leftCell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVCell3D}$\ast$ {\bf leftCell}}}
+\label{de/df5/classFVFace3D_a21a17acd25e8b790315d31bb141824f8}
+\hypertarget{classFVFace3D_a1a5a11cfc8bbaa0cf132759c0382da70}{
+\index{FVFace3D@{FVFace3D}!nb\_\-cell@{nb\_\-cell}}
+\index{nb\_\-cell@{nb\_\-cell}!FVFace3D@{FVFace3D}}
+\subsubsection[{nb\_\-cell}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf nb\_\-cell}}}
+\label{de/df5/classFVFace3D_a1a5a11cfc8bbaa0cf132759c0382da70}
+\hypertarget{classFVFace3D_a71d1c26cc375a03060b9eb8453a3680a}{
+\index{FVFace3D@{FVFace3D}!nb\_\-edge@{nb\_\-edge}}
+\index{nb\_\-edge@{nb\_\-edge}!FVFace3D@{FVFace3D}}
+\subsubsection[{nb\_\-edge}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf nb\_\-edge}}}
+\label{de/df5/classFVFace3D_a71d1c26cc375a03060b9eb8453a3680a}
+\hypertarget{classFVFace3D_a0a063e99fbc85e837d93dfbcda6f5252}{
+\index{FVFace3D@{FVFace3D}!nb\_\-vertex@{nb\_\-vertex}}
+\index{nb\_\-vertex@{nb\_\-vertex}!FVFace3D@{FVFace3D}}
+\subsubsection[{nb\_\-vertex}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf nb\_\-vertex}}}
+\label{de/df5/classFVFace3D_a0a063e99fbc85e837d93dfbcda6f5252}
+\hypertarget{classFVFace3D_aa492e5327e0487055f0a989431eefc0d}{
+\index{FVFace3D@{FVFace3D}!normal@{normal}}
+\index{normal@{normal}!FVFace3D@{FVFace3D}}
+\subsubsection[{normal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$double$>$ {\bf normal}\mbox{[}NB\_\-VERTEX\_\-PER\_\-FACE\_\-3D\mbox{]}}}
+\label{de/df5/classFVFace3D_aa492e5327e0487055f0a989431eefc0d}
+\hypertarget{classFVFace3D_a079d8fd569c3406fb63e0511eb0338c0}{
+\index{FVFace3D@{FVFace3D}!perimeter@{perimeter}}
+\index{perimeter@{perimeter}!FVFace3D@{FVFace3D}}
+\subsubsection[{perimeter}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf perimeter}}}
+\label{de/df5/classFVFace3D_a079d8fd569c3406fb63e0511eb0338c0}
+\hypertarget{classFVFace3D_a6320f7771a5dd32537e636a23fbf7e7c}{
+\index{FVFace3D@{FVFace3D}!pos\_\-e@{pos\_\-e}}
+\index{pos\_\-e@{pos\_\-e}!FVFace3D@{FVFace3D}}
+\subsubsection[{pos\_\-e}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf pos\_\-e}}}
+\label{de/df5/classFVFace3D_a6320f7771a5dd32537e636a23fbf7e7c}
+\hypertarget{classFVFace3D_a9edf0688f0159bed5d3a6828f63146fd}{
+\index{FVFace3D@{FVFace3D}!pos\_\-v@{pos\_\-v}}
+\index{pos\_\-v@{pos\_\-v}!FVFace3D@{FVFace3D}}
+\subsubsection[{pos\_\-v}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf pos\_\-v}}}
+\label{de/df5/classFVFace3D_a9edf0688f0159bed5d3a6828f63146fd}
+\hypertarget{classFVFace3D_aca0787b6acdd2934da16d4a600f75732}{
+\index{FVFace3D@{FVFace3D}!rightCell@{rightCell}}
+\index{rightCell@{rightCell}!FVFace3D@{FVFace3D}}
+\subsubsection[{rightCell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVCell3D} $\ast$ {\bf rightCell}}}
+\label{de/df5/classFVFace3D_aca0787b6acdd2934da16d4a600f75732}
+\hypertarget{classFVFace3D_ac405432b9a986bb191c3eda7e7163a60}{
+\index{FVFace3D@{FVFace3D}!vertex@{vertex}}
+\index{vertex@{vertex}!FVFace3D@{FVFace3D}}
+\subsubsection[{vertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex3D}$\ast$ {\bf vertex}\mbox{[}NB\_\-VERTEX\_\-PER\_\-FACE\_\-3D\mbox{]}}}
+\label{de/df5/classFVFace3D_ac405432b9a986bb191c3eda7e7163a60}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{FVFace3D_8h}{FVFace3D.h}\end{DoxyCompactItemize}

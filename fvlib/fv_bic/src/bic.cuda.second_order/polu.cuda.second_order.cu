@@ -1,6 +1,6 @@
 #include "FVL/FVLib.h"
 #include "FVL/FVXMLWriter.h"
-#include "FVVect.h"
+#include "FVArray.h"
 #include "FVio.h"
 #include "Parameter.h"
 using namespace std;
@@ -61,7 +61,7 @@ double cpu_compute_mesh_parameter(CFVMesh2D mesh) {
 	return h;
 }
 
-void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVVect<double> &vs, double &v_max) {
+void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		unsigned int left	= mesh.edge_left_cells[i];
 		unsigned int right	= mesh.edge_right_cells[i];
@@ -118,9 +118,9 @@ int main(int argc, char **argv) {
 	FVL::CFVMesh2D mesh(data.mesh_file);
 
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
-	FVL::CFVVect<double> polution(mesh.num_cells);
-	FVL::CFVVect<double> flux(mesh.num_edges);
-	FVL::CFVVect<double> vs(mesh.num_edges);
+	FVL::CFVArray<double> polution(mesh.num_cells);
+	FVL::CFVArray<double> flux(mesh.num_edges);
+	FVL::CFVArray<double> vs(mesh.num_edges);
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
 	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
 	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
 	// TODO: Convert to CUDA
 	cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = cpu_compute_mesh_parameter(mesh);
-	// TODO trocar 1.0 por parametro CFL (com valores entre 0 e 1)
+	// TODO trocar 1.0 por parametro CFL (com valores entre 0 e 1, 0.3 para esquema de ordem 2)
 	dt	= 1.0 / v_max * h;
 
 	#ifndef NO_CUDA
@@ -158,8 +158,8 @@ int main(int argc, char **argv) {
 	cudaStreamCreate(&stream);
 
 	mesh.cuda_save(stream);
-	polution.cuda_saveAsync(stream);
-	vs.cuda_saveAsync(stream);
+	polution.cuda_save(stream);
+	vs.cuda_save(stream);
 	
 
 	// sizes of each kernel
@@ -289,7 +289,8 @@ int main(int argc, char **argv) {
 			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
 			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
 			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  ";
-			cout << "vecResult[3] = " << vecResult.elem(2, 0, x) << endl;
+			cout << "R[0] = " << vecResult.elem(0, 0, x) << " ";
+			cout << "R[3] = " << vecResult.elem(2, 0, x) << endl;
 		}
 		cout << "--------------" << endl;
 

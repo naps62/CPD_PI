@@ -1,0 +1,51 @@
+\hypertarget{rapidxml__print_8hpp}{
+\section{include/rapidxml/rapidxml\_\-print.hpp File Reference}
+\label{d8/d2b/rapidxml__print_8hpp}\index{include/rapidxml/rapidxml\_\-print.hpp@{include/rapidxml/rapidxml\_\-print.hpp}}
+}
+
+
+This file contains rapidxml printer implementation.  
+
+
+{\ttfamily \#include \char`\"{}rapidxml.hpp\char`\"{}}\par
+{\ttfamily \#include $<$ostream$>$}\par
+{\ttfamily \#include $<$iterator$>$}\par
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespacerapidxml}{rapidxml}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{rapidxml__print_8hpp_a674dd1ba0db34c463bbf7e37ffef7a7c}{\_\-UNUSED}(\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})~((void)\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class OutIt , class Ch $>$ }\\OutIt \hyperlink{namespacerapidxml_ab94d570fc4c4ab2423813cd0243326b1}{rapidxml::print} (OutIt out, const xml\_\-node$<$ Ch $>$ \&node, int flags=0)
+\item 
+{\footnotesize template$<$class Ch $>$ }\\std::basic\_\-ostream$<$ Ch $>$ \& \hyperlink{namespacerapidxml_a13bc37d6d1047acb0efdbc1689221a5e}{rapidxml::print} (std::basic\_\-ostream$<$ Ch $>$ \&out, const xml\_\-node$<$ Ch $>$ \&node, int flags=0)
+\item 
+{\footnotesize template$<$class Ch $>$ }\\std::basic\_\-ostream$<$ Ch $>$ \& \hyperlink{namespacerapidxml_a5619b38000d967fb223b2b0a8c17463a}{rapidxml::operator$<$$<$} (std::basic\_\-ostream$<$ Ch $>$ \&out, const xml\_\-node$<$ Ch $>$ \&node)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{namespacerapidxml_a65477b812a80f5bda693ec57e57de064}{rapidxml::print\_\-no\_\-indenting} = 0x1
+\begin{DoxyCompactList}\small\item\em Printer flag instructing the printer to suppress indenting of XML. See \hyperlink{namespacerapidxml_ab94d570fc4c4ab2423813cd0243326b1}{print()} function. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains rapidxml printer implementation. 
+
+\subsection{Define Documentation}
+\hypertarget{rapidxml__print_8hpp_a674dd1ba0db34c463bbf7e37ffef7a7c}{
+\index{rapidxml\_\-print.hpp@{rapidxml\_\-print.hpp}!\_\-UNUSED@{\_\-UNUSED}}
+\index{\_\-UNUSED@{\_\-UNUSED}!rapidxml_print.hpp@{rapidxml\_\-print.hpp}}
+\subsubsection[{\_\-UNUSED}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-UNUSED(
+\begin{DoxyParamCaption}
+\item[{}]{{\bf x}}
+\end{DoxyParamCaption}
+)~((void){\bf x})}}
+\label{d8/d2b/rapidxml__print_8hpp_a674dd1ba0db34c463bbf7e37ffef7a7c}

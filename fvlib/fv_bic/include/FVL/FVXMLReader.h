@@ -23,7 +23,7 @@ using std::istringstream;
 #include "rapidxml/rapidxml.hpp"
 using namespace rapidxml;
 
-#include "FVL/CFVVect.h"
+#include "FVL/CFVArray.h"
 #include "FVL/CFVPoints2D.h"
 
 namespace FVL {
@@ -48,7 +48,7 @@ namespace FVL {
 			template<class T> static bool str_cast(T &t, const string &s);
 
 			// Reads next child node to a vector from the XML file
-			template<class T> void getVec	  	(CFVVect<T> &vec,	  double &time, string &name);
+			template<class T> void getVec	  	(CFVArray<T> &vec,	  double &time, string &name);
 
 			// Reads next child node to a vector of 2D points
 			template<class T> void getPoints2D	(CFVPoints2D<T> &vec, double &time, string &name);

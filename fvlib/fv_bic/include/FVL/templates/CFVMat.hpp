@@ -83,9 +83,9 @@ namespace FVL {
 		if (mat_size > 0) {
 			for(unsigned int y = 0; y < h; ++y)
 				for(unsigned int x = 0; x < w; ++x)
-					mat.push_back(CFVVect<T>(size));
+					mat.push_back(CFVArray<T>(size));
 
-			cuda_mat = CFVVect<T*>(w*h);
+			cuda_mat = CFVArray<T*>(w*h);
 		}
 	}
 

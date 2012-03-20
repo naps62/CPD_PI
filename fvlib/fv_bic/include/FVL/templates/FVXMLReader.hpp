@@ -19,7 +19,7 @@
 #include <string>
 using namespace std;
 
-#include "FVL/CFVVect.h"
+#include "FVL/CFVArray.h"
 #include "FVL/CFVPoints2D.h"
 #include "rapidxml/rapidxml.hpp"
 using namespace rapidxml;
@@ -34,7 +34,7 @@ namespace FVL {
 
 	// Reads next child node to a vector from the XML file
 	template<class T>
-		void FVXMLReader::getVec(CFVVect<T> &vec, double &time, string &name) {
+		void FVXMLReader::getVec(CFVArray<T> &vec, double &time, string &name) {
 			xml_attribute<> *time_attr = current->first_attribute("time");
 			xml_attribute<> *name_attr = current->first_attribute("name");
 

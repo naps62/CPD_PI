@@ -18,7 +18,7 @@
 #include "FVL/FVErr.h"
 
 #include "FVL/CFVProfile.h"
-#include "FVL/CFVVect.h"
+#include "FVL/CFVArray.h"
 #include "FVL/CFVPoints2D.h"
 #include "FVL/CFVMat.h"
 #include "FVL/CFVMesh2D.h"

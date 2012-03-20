@@ -1,0 +1,217 @@
+\hypertarget{classFVL_1_1CFVMat}{
+\section{CFVMat$<$ T $>$ Class Template Reference}
+\label{d9/dcb/classFVL_1_1CFVMat}\index{FVL::CFVMat@{FVL::CFVMat}}
+}
+
+
+{\ttfamily \#include $<$CFVMat.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}{CFVMat} ()
+\begin{DoxyCompactList}\small\item\em CONSTRUCTORS. \item\end{DoxyCompactList}\item 
+\hyperlink{classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}{CFVMat} (unsigned int w, unsigned int h, unsigned int size)
+\item 
+\hyperlink{classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}{$\sim$CFVMat} ()
+\item 
+\hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \& \hyperlink{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{elem} (unsigned int \hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, unsigned int \hyperlink{FVL_2FVPoint2D_8h_a1cb2b5ea04251d543e49356ef54eb853}{y})
+\begin{DoxyCompactList}\small\item\em GETTERS/SETTERS. \item\end{DoxyCompactList}\item 
+T \& \hyperlink{classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}{elem} (unsigned int \hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, unsigned int \hyperlink{FVL_2FVPoint2D_8h_a1cb2b5ea04251d543e49356ef54eb853}{y}, unsigned int i)
+\item 
+vector$<$ \hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ $>$ \& \hyperlink{classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}{getMat} ()
+\item 
+unsigned int \hyperlink{classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}{size} () const 
+\item 
+unsigned int \hyperlink{classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}{width} () const 
+\item 
+unsigned int \hyperlink{classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}{height} () const 
+\item 
+T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}{cuda\_\-getMat} ()
+\begin{DoxyCompactList}\small\item\em CUDA. \item\end{DoxyCompactList}\item 
+T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}{cuda\_\-malloc} ()
+\item 
+T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}{cuda\_\-mallocAndSave} ()
+\item 
+void \hyperlink{classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}{cuda\_\-free} ()
+\item 
+void \hyperlink{classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}{cuda\_\-save} ()
+\item 
+void \hyperlink{classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}{cuda\_\-saveAsync} (cudaStream\_\-t \&stream)
+\item 
+void \hyperlink{classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}{cuda\_\-get} ()
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$class T$>$ class FVL::CFVMat$<$ T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}{
+\index{FVL::CFVMat@{FVL::CFVMat}!CFVMat@{CFVMat}}
+\index{CFVMat@{CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{CFVMat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVMat} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}
+
+
+CONSTRUCTORS. 
+
+\hypertarget{classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}{
+\index{FVL::CFVMat@{FVL::CFVMat}!CFVMat@{CFVMat}}
+\index{CFVMat@{CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{CFVMat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVMat} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ w, }
+\item[{unsigned int}]{ h, }
+\item[{unsigned int}]{ size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}
+\hypertarget{classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}{
+\index{FVL::CFVMat@{FVL::CFVMat}!$\sim$CFVMat@{$\sim$CFVMat}}
+\index{$\sim$CFVMat@{$\sim$CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{$\sim$CFVMat}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf CFVMat} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-free@{cuda\_\-free}}
+\index{cuda\_\-free@{cuda\_\-free}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}
+\hypertarget{classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-get@{cuda\_\-get}}
+\index{cuda\_\-get@{cuda\_\-get}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-get (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}
+\hypertarget{classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-getMat@{cuda\_\-getMat}}
+\index{cuda\_\-getMat@{cuda\_\-getMat}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-getMat}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-getMat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}
+
+
+CUDA. 
+
+Each elem is stored as an individual vector an additional T$\ast$$\ast$ array of size w$\ast$y is stored to hold references to each elem \hypertarget{classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-malloc@{cuda\_\-malloc}}
+\index{cuda\_\-malloc@{cuda\_\-malloc}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-malloc}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-malloc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}
+\hypertarget{classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}}
+\index{cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-mallocAndSave}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-mallocAndSave (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}
+\hypertarget{classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-save@{cuda\_\-save}}
+\index{cuda\_\-save@{cuda\_\-save}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-save}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-save (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}
+\hypertarget{classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-saveAsync@{cuda\_\-saveAsync}}
+\index{cuda\_\-saveAsync@{cuda\_\-saveAsync}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-saveAsync}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-saveAsync (
+\begin{DoxyParamCaption}
+\item[{cudaStream\_\-t \&}]{ stream}
+\end{DoxyParamCaption}
+)}}
+\label{d9/dcb/classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}
+\hypertarget{classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}{
+\index{FVL::CFVMat@{FVL::CFVMat}!elem@{elem}}
+\index{elem@{elem}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{elem}]{\setlength{\rightskip}{0pt plus 5cm}T\& elem (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ x, }
+\item[{unsigned int}]{ y, }
+\item[{unsigned int}]{ i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}
+\hypertarget{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{
+\index{FVL::CFVMat@{FVL::CFVMat}!elem@{elem}}
+\index{elem@{elem}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{elem}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVArray}$<$T$>$\& elem (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ x, }
+\item[{unsigned int}]{ y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}
+
+
+GETTERS/SETTERS. 
+
+\hypertarget{classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}{
+\index{FVL::CFVMat@{FVL::CFVMat}!getMat@{getMat}}
+\index{getMat@{getMat}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{getMat}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf CFVArray}$<$T$>$ $>$\& getMat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}
+\hypertarget{classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}{
+\index{FVL::CFVMat@{FVL::CFVMat}!height@{height}}
+\index{height@{height}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}
+\hypertarget{classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}{
+\index{FVL::CFVMat@{FVL::CFVMat}!size@{size}}
+\index{size@{size}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}
+\hypertarget{classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}{
+\index{FVL::CFVMat@{FVL::CFVMat}!width@{width}}
+\index{width@{width}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/dcb/classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/FVL/\hyperlink{CFVMat_8h}{CFVMat.h}\end{DoxyCompactItemize}

@@ -18,14 +18,14 @@
 #include <iomanip>
 using namespace std;
 
-#include "FVL/CFVVect.h"
+#include "FVL/CFVArray.h"
 #include "rapidxml/rapidxml.hpp"
 using namespace rapidxml;
 
 namespace FVL {
 
 	template<class T>
-	void FVXMLWriter::append(CFVVect<T> &vec, double time, string name) {
+	void FVXMLWriter::append(CFVArray<T> &vec, double time, string name) {
 		stringstream ss;
 		ss << endl;
 		ss << scientific << setprecision(FV_PRECISION) << setw(FV_CHAMP);

@@ -152,7 +152,7 @@ void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &v
 
 
 /* Compute system polution coeficients for system solve */
-void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<double> &vecResult, CFVVect<double> velocity, double dc) {
+void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, CFVArray<double> velocity, double dc) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double x0 = mesh.cell_centroids.x[cell];
 		double y0 = mesh.cell_centroids.y[cell];
@@ -202,11 +202,11 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 
 					// polution in this point is equal to the dirichlet condition (unless velocity is positive)
 					// TODO how to fix this? velocity shouldnt be needed right?
-					if (velocity[edge] < 0)
+					//if (velocity[edge] < 0)
 						u = dc;
-					else {
-						u = 0;
-					}
+					//else {
+					//	u = 0;
+					//}
 
 					break;
 
@@ -239,9 +239,9 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVVect<double> &polution, CFVMat<do
 /* compute flux kernel */
 void cpu_compute_flux(
 		CFVMesh2D &mesh,
-		CFVVect<double> &velocity,
+		CFVArray<double> &velocity,
 		CFVMat<double> &vecABC,
-		CFVVect<double> &flux,
+		CFVArray<double> &flux,
 		double dc) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		double v = velocity[i];
@@ -287,8 +287,8 @@ void cpu_compute_flux(
 /* update kernel */
 void cpu_update(
 		CFVMesh2D &mesh,
-		CFVVect<double> &polution,
-		CFVVect<double> &flux,
+		CFVArray<double> &polution,
+		CFVArray<double> &flux,
 		double dt) {
 
 	//cout << endl;
