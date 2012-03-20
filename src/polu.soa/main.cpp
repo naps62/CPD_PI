@@ -95,6 +95,11 @@ long long int cfmaxns;
 long long int uptotns;
 long long int upminns;
 long long int upmaxns;
+
+#if   defined (PROFILE_WARMUP)
+unsigned mliters;
+#endif//	PROFILE_WARMUP
+
 #endif//    PROFILE
 
 
@@ -112,6 +117,9 @@ compute_flux
 	)
 {
 #if   defined (PROFILE)
+#if   defined (PROFILE_WARMUP)
+	if ( mliters > PROFILE_WARMUP )
+#endif//	PROFILE_WARMUP
 	p->start();
 #endif//    PROFILE
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
@@ -128,6 +136,10 @@ compute_flux
 				  ;
 	}
 #if   defined (PROFILE)
+#if   defined (PROFILE_WARMUP)
+	if ( mliters > PROFILE_WARMUP )
+	{
+#endif//	PROFILE_WARMUP
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
@@ -166,6 +178,9 @@ compute_flux
 		cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
 		cfminns = ( timens < cfminns ) ? timens : cfminns;
 	}
+#if   defined (PROFILE_WARMUP)
+	}
+#endif//	PROFILE_WARMUP
 #endif//    PROFILE
 }
 
@@ -190,6 +205,9 @@ update
 	)
 {
 #if   defined (PROFILE)
+#if   defined (PROFILE_WARMUP)
+	if ( mliters > PROFILE_WARMUP )
+#endif
 	p->start();
 #endif//    PROFILE
 	unsigned cell_last = cell_count - 1;
@@ -215,6 +233,10 @@ update
 		polutions[c] += cdp;
 	}
 #if   defined (PROFILE)
+#if   defined (PROFILE_WARMUP)
+	if ( mliters > PROFILE_WARMUP )
+	{
+#endif
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
@@ -253,6 +275,9 @@ update
 		upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
 		upminns = ( timens < upminns ) ? timens : upminns;
 	}
+#if   defined (PROFILE_WARMUP)
+	}
+#endif
 #endif//    PROFILE
 }
 
@@ -492,6 +517,9 @@ int main(int argc, char *argv[])
 	while( time < final_time)
 #endif//	PROFILE_LIMITED
 	{
+#if   defined (PROFILE_WARMUP)
+		if ( mliters > PROFILE_WARMUP )
+#endif//	PROFILE_WARMUP
 		long long int mlbegin = papi::real_nano_seconds();
 #else//    PROFILE
 	while( time < final_time)
@@ -523,10 +551,18 @@ int main(int argc, char *argv[])
 
 		time += dt;
 #if   defined (PROFILE)
+#if   defined (PROFILE_WARMUP)
+		if ( mliters > PROFILE_WARMUP )
+		{
+#endif//	PROFILE_WARMUP
 		long long int timens = papi::real_nano_seconds() - mlbegin;
 		mltotns += timens;
 		mlmaxns = ( timens > mlmaxns ) ? timens : mlmaxns;
 		mlminns = ( timens < mlminns ) ? timens : mlminns;
+#if   defined (PROFILE_WARMUP)
+		}
+		mliters++;
+#endif//	PROFILE_WARMUP
 #endif//	PROFILE
 	}
 
