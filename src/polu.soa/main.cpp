@@ -27,9 +27,6 @@
  ||   defined (PROFILE_INSTRUCTIONS) \
  ||   defined (PROFILE_OPERATIONS)
 #define PROFILE
-#ifndef PROFILE_CONFIG_ITERATIONS
-#define PROFILE_CONFIG_ITERATIONS 50
-#endif//	PROFILE_CONFIG_ITERATIONS
 #endif
 
 
@@ -489,11 +486,11 @@ int main(int argc, char *argv[])
 	FVio pol_file( pol_fname.c_str() ,FVWRITE);
 	
 #if   defined (PROFILE)
-#if   defined (PROFILE_LIMIT)
-	for ( int i = 0 ; i < PROFILE_CONFIG_ITERATIONS ; ++i )
-#else//	PROFILE_LIMIT
+#if   defined (PROFILE_LIMITED)
+	for ( int i = 0 ; i < PROFILE_LIMITED ; ++i )
+#else//	PROFILE_LIMITED
 	while( time < final_time)
-#endif//	PROFILE_LIMIT
+#endif//	PROFILE_LIMITED
 	{
 		long long int mlbegin = papi::real_nano_seconds();
 #else//    PROFILE
