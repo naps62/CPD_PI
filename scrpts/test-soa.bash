@@ -8,7 +8,7 @@ CASES=( "huge" );
 EXEC="polu.soa"
 #MEASURES=( "btm" "l1dcm" "l2dcm" "brins" "fpins" "ldins" "srins" "totins" "vecins" "flops" );
 MEASURES=( "fpins" "vecins" "flops" );
-RUNS=1
+RUNS=10
 
 for CASE in "${CASES[@]}";
 do
