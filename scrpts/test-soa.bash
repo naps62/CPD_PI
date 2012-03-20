@@ -23,11 +23,12 @@ do
 			then
 				mkdir "data/out";
 			fi;
-			if [ -f "data/out/${EXEC}.${CASE}.${MEASURE}" ];
+			OUTFILE="data/out/${EXEC}_${CASE}_${MEASURE}.csv"
+			if [ -f "$OUTFILE" ];
 			then
-				bin/${EXEC}.${MEASURE} data/xml/${CASE}.param.xml >> data/out/${EXEC}.${CASE}.${MEASURE};
+				bin/${EXEC}.${MEASURE} data/xml/${CASE}.param.xml >> "$OUTFILE";
 			else
-				bin/${EXEC}.${MEASURE} data/xml/${CASE}.param.xml > data/out/${EXEC}.${CASE}.${MEASURE};
+				bin/${EXEC}.${MEASURE} data/xml/${CASE}.param.xml > "$OUTFILE";
 			fi;
 		done;
 	done;
