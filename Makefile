@@ -25,6 +25,7 @@ test-soa:	\
 	polu.soa.brins	\
 	polu.soa.btm	\
 	polu.soa.flops	\
+	polu.soa.fpins	\
 	polu.soa.l1dcm	\
 	polu.soa.l2dcm	\
 	polu.soa.ldins	\
