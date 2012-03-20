@@ -1,0 +1,213 @@
+\hypertarget{FVMacros_8h}{
+\section{include/FVL/FVMacros.h File Reference}
+\label{d3/d80/FVMacros_8h}\index{include/FVL/FVMacros.h@{include/FVL/FVMacros.h}}
+}
+{\ttfamily \#include $<$climits$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{FVMacros_8h_a4a7c575ce9586c776da7bae865d12a7b}{NO\_\-RIGHT\_\-CELL}~INT\_\-MAX
+\begin{DoxyCompactList}\small\item\em Indicate non-\/existance of a right cell. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{FVMacros_8h_accd32c979ded2b0c7ab1efaf8fc3756d}{NO\_\-CELL}~INT\_\-MAX
+\begin{DoxyCompactList}\small\item\em Indicates non-\/existance of a cell. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{FVMacros_8h_a30fb97283ac31016acd1bc1dad728480}{MAX\_\-EDGES\_\-PER\_\-CELL}~4
+\item 
+\#define \hyperlink{FVMacros_8h_a9f1b34e347f7b79ee999353878fce712}{FV\_\-PRECISION}~12
+\begin{DoxyCompactList}\small\item\em Precision to be used when outputing to a stream. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{FVMacros_8h_a8142e87b22064c193f2a21692cbc8e32}{FV\_\-CHAMP}~20
+\item 
+\#define \hyperlink{FVMacros_8h_a6f0ff9105a3e0ceb56dd8783d3370bdb}{FV\_\-LOGMODE\_\-APPEND}~ofstream::app
+\begin{DoxyCompactList}\small\item\em Append mode for FVLog. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{FVMacros_8h_a70f40a51627355a4063369ead4cb6401}{FV\_\-LOGMODE\_\-WRITE}~0
+\begin{DoxyCompactList}\small\item\em Overwrite mode for FVLog. \item\end{DoxyCompactList}\item 
+\#define \hyperlink{FVMacros_8h_a3842a67534e67416db38f6c2b0b30de9}{FV\_\-LOGMODE}~FV\_\-LOGMODE\_\-APPEND
+\item 
+\#define \hyperlink{FVMacros_8h_a7b6bb00af6750cecdb196c9a8908d759}{FV\_\-LOGFILE}~string(\char`\"{}FVLib.log\char`\"{})
+\item 
+\#define \hyperlink{FVMacros_8h_a4cb6bbc2c16d7fc7d1fb914ac4a4c8b0}{FV\_\-ERRFILE}~string(\char`\"{}FVLib.err\char`\"{})
+\item 
+\#define \hyperlink{FVMacros_8h_a01a46e0ca0f53aa931f43f1a18b8056f}{FV\_\-PROFILE}~string(\char`\"{}FVLib.prof\char`\"{})
+\item 
+\#define \hyperlink{FVMacros_8h_a18ca513bbb6063a08c200a208f14c2fa}{FV\_\-DEBUG}~1
+\item 
+\#define \hyperlink{FVMacros_8h_a152fc5203b90b1cff03b7b78579b8f52}{\_\-DEBUG}~if (FV\_\-DEBUG)
+\item 
+\#define \hyperlink{FVMacros_8h_aeabcf9fa78b36f72cdafc2fdbab61482}{\_\-D}(x)~(x)
+\item 
+\#define \hyperlink{FVMacros_8h_a8f8d5794d3b6ec9edd4b36ea35980b4c}{FV\_\-PROF}~1
+\item 
+\#define \hyperlink{FVMacros_8h_a71cefa55896580a886a53f9a2da4d04c}{PROF\_\-START}(x)~(x.start())
+\item 
+\#define \hyperlink{FVMacros_8h_aea41a362103d6e185cad34baef830814}{PROF\_\-STOP}(x)~(x.stop())
+\item 
+\#define \hyperlink{FVMacros_8h_a2c263e0f0f778e9ab980a85f6b8910e7}{PROF\_\-START\_\-ONCE}(i, x)~(if (i == 0) PROF\_\-START(x))
+\item 
+\#define \hyperlink{FVMacros_8h_a33eb273d8dc81a48cf784ff88bfd42e0}{PROF\_\-STOP\_\-ONCE}(i, x)~(if (i == 0) PROF\_\-STOP(x))
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Miguel Palhas 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13-\/02-\/2012 
+\end{DoxyDate}
+
+
+\subsection{Define Documentation}
+\hypertarget{FVMacros_8h_aeabcf9fa78b36f72cdafc2fdbab61482}{
+\index{FVMacros.h@{FVMacros.h}!\_\-D@{\_\-D}}
+\index{\_\-D@{\_\-D}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{\_\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-D(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(x)}}
+\label{d3/d80/FVMacros_8h_aeabcf9fa78b36f72cdafc2fdbab61482}
+\hypertarget{FVMacros_8h_a152fc5203b90b1cff03b7b78579b8f52}{
+\index{FVMacros.h@{FVMacros.h}!\_\-DEBUG@{\_\-DEBUG}}
+\index{\_\-DEBUG@{\_\-DEBUG}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{\_\-DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-DEBUG~if (FV\_\-DEBUG)}}
+\label{d3/d80/FVMacros_8h_a152fc5203b90b1cff03b7b78579b8f52}
+\hypertarget{FVMacros_8h_a8142e87b22064c193f2a21692cbc8e32}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-CHAMP@{FV\_\-CHAMP}}
+\index{FV\_\-CHAMP@{FV\_\-CHAMP}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-CHAMP}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-CHAMP~20}}
+\label{d3/d80/FVMacros_8h_a8142e87b22064c193f2a21692cbc8e32}
+\begin{Desc}
+\item[\hyperlink{todo__todo000006}{Todo}]comment this \end{Desc}
+\hypertarget{FVMacros_8h_a18ca513bbb6063a08c200a208f14c2fa}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-DEBUG@{FV\_\-DEBUG}}
+\index{FV\_\-DEBUG@{FV\_\-DEBUG}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-DEBUG~1}}
+\label{d3/d80/FVMacros_8h_a18ca513bbb6063a08c200a208f14c2fa}
+\begin{Desc}
+\item[\hyperlink{todo__todo000011}{Todo}]move this to INI file \end{Desc}
+Set to 0 to disable debugging \hypertarget{FVMacros_8h_a4cb6bbc2c16d7fc7d1fb914ac4a4c8b0}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-ERRFILE@{FV\_\-ERRFILE}}
+\index{FV\_\-ERRFILE@{FV\_\-ERRFILE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-ERRFILE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-ERRFILE~string(\char`\"{}FVLib.err\char`\"{})}}
+\label{d3/d80/FVMacros_8h_a4cb6bbc2c16d7fc7d1fb914ac4a4c8b0}
+\begin{Desc}
+\item[\hyperlink{todo__todo000009}{Todo}]move this to INI file \end{Desc}
+Default error file for FVErr \hypertarget{FVMacros_8h_a7b6bb00af6750cecdb196c9a8908d759}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-LOGFILE@{FV\_\-LOGFILE}}
+\index{FV\_\-LOGFILE@{FV\_\-LOGFILE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-LOGFILE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-LOGFILE~string(\char`\"{}FVLib.log\char`\"{})}}
+\label{d3/d80/FVMacros_8h_a7b6bb00af6750cecdb196c9a8908d759}
+\begin{Desc}
+\item[\hyperlink{todo__todo000008}{Todo}]move this to INI file \end{Desc}
+Default log file for FVLog \hypertarget{FVMacros_8h_a3842a67534e67416db38f6c2b0b30de9}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-LOGMODE@{FV\_\-LOGMODE}}
+\index{FV\_\-LOGMODE@{FV\_\-LOGMODE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-LOGMODE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-LOGMODE~FV\_\-LOGMODE\_\-APPEND}}
+\label{d3/d80/FVMacros_8h_a3842a67534e67416db38f6c2b0b30de9}
+\begin{Desc}
+\item[\hyperlink{todo__todo000007}{Todo}]move this to INI file \end{Desc}
+Currently selected mode for FVLog \hypertarget{FVMacros_8h_a6f0ff9105a3e0ceb56dd8783d3370bdb}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-LOGMODE\_\-APPEND@{FV\_\-LOGMODE\_\-APPEND}}
+\index{FV\_\-LOGMODE\_\-APPEND@{FV\_\-LOGMODE\_\-APPEND}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-LOGMODE\_\-APPEND}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-LOGMODE\_\-APPEND~ofstream::app}}
+\label{d3/d80/FVMacros_8h_a6f0ff9105a3e0ceb56dd8783d3370bdb}
+
+
+Append mode for FVLog. 
+
+\hypertarget{FVMacros_8h_a70f40a51627355a4063369ead4cb6401}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-LOGMODE\_\-WRITE@{FV\_\-LOGMODE\_\-WRITE}}
+\index{FV\_\-LOGMODE\_\-WRITE@{FV\_\-LOGMODE\_\-WRITE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-LOGMODE\_\-WRITE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-LOGMODE\_\-WRITE~0}}
+\label{d3/d80/FVMacros_8h_a70f40a51627355a4063369ead4cb6401}
+
+
+Overwrite mode for FVLog. 
+
+\hypertarget{FVMacros_8h_a9f1b34e347f7b79ee999353878fce712}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-PRECISION@{FV\_\-PRECISION}}
+\index{FV\_\-PRECISION@{FV\_\-PRECISION}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-PRECISION}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-PRECISION~12}}
+\label{d3/d80/FVMacros_8h_a9f1b34e347f7b79ee999353878fce712}
+
+
+Precision to be used when outputing to a stream. 
+
+\hypertarget{FVMacros_8h_a8f8d5794d3b6ec9edd4b36ea35980b4c}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-PROF@{FV\_\-PROF}}
+\index{FV\_\-PROF@{FV\_\-PROF}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-PROF}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-PROF~1}}
+\label{d3/d80/FVMacros_8h_a8f8d5794d3b6ec9edd4b36ea35980b4c}
+\begin{Desc}
+\item[\hyperlink{todo__todo000012}{Todo}]move this to INI file \end{Desc}
+Set to 0 to disable profiling \hypertarget{FVMacros_8h_a01a46e0ca0f53aa931f43f1a18b8056f}{
+\index{FVMacros.h@{FVMacros.h}!FV\_\-PROFILE@{FV\_\-PROFILE}}
+\index{FV\_\-PROFILE@{FV\_\-PROFILE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{FV\_\-PROFILE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FV\_\-PROFILE~string(\char`\"{}FVLib.prof\char`\"{})}}
+\label{d3/d80/FVMacros_8h_a01a46e0ca0f53aa931f43f1a18b8056f}
+\begin{Desc}
+\item[\hyperlink{todo__todo000010}{Todo}]move this to INI file \end{Desc}
+Default profiling file for FVProfile and CFVProfile \hypertarget{FVMacros_8h_a30fb97283ac31016acd1bc1dad728480}{
+\index{FVMacros.h@{FVMacros.h}!MAX\_\-EDGES\_\-PER\_\-CELL@{MAX\_\-EDGES\_\-PER\_\-CELL}}
+\index{MAX\_\-EDGES\_\-PER\_\-CELL@{MAX\_\-EDGES\_\-PER\_\-CELL}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{MAX\_\-EDGES\_\-PER\_\-CELL}]{\setlength{\rightskip}{0pt plus 5cm}\#define MAX\_\-EDGES\_\-PER\_\-CELL~4}}
+\label{d3/d80/FVMacros_8h_a30fb97283ac31016acd1bc1dad728480}
+\begin{Desc}
+\item[\hyperlink{todo__todo000005}{Todo}]move this to INI file \end{Desc}
+Maximum number of edges allowed for each cell \hypertarget{FVMacros_8h_accd32c979ded2b0c7ab1efaf8fc3756d}{
+\index{FVMacros.h@{FVMacros.h}!NO\_\-CELL@{NO\_\-CELL}}
+\index{NO\_\-CELL@{NO\_\-CELL}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{NO\_\-CELL}]{\setlength{\rightskip}{0pt plus 5cm}\#define NO\_\-CELL~INT\_\-MAX}}
+\label{d3/d80/FVMacros_8h_accd32c979ded2b0c7ab1efaf8fc3756d}
+
+
+Indicates non-\/existance of a cell. 
+
+\hypertarget{FVMacros_8h_a4a7c575ce9586c776da7bae865d12a7b}{
+\index{FVMacros.h@{FVMacros.h}!NO\_\-RIGHT\_\-CELL@{NO\_\-RIGHT\_\-CELL}}
+\index{NO\_\-RIGHT\_\-CELL@{NO\_\-RIGHT\_\-CELL}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{NO\_\-RIGHT\_\-CELL}]{\setlength{\rightskip}{0pt plus 5cm}\#define NO\_\-RIGHT\_\-CELL~INT\_\-MAX}}
+\label{d3/d80/FVMacros_8h_a4a7c575ce9586c776da7bae865d12a7b}
+
+
+Indicate non-\/existance of a right cell. 
+
+\hypertarget{FVMacros_8h_a71cefa55896580a886a53f9a2da4d04c}{
+\index{FVMacros.h@{FVMacros.h}!PROF\_\-START@{PROF\_\-START}}
+\index{PROF\_\-START@{PROF\_\-START}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{PROF\_\-START}]{\setlength{\rightskip}{0pt plus 5cm}\#define PROF\_\-START(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(x.start())}}
+\label{d3/d80/FVMacros_8h_a71cefa55896580a886a53f9a2da4d04c}
+\hypertarget{FVMacros_8h_a2c263e0f0f778e9ab980a85f6b8910e7}{
+\index{FVMacros.h@{FVMacros.h}!PROF\_\-START\_\-ONCE@{PROF\_\-START\_\-ONCE}}
+\index{PROF\_\-START\_\-ONCE@{PROF\_\-START\_\-ONCE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{PROF\_\-START\_\-ONCE}]{\setlength{\rightskip}{0pt plus 5cm}\#define PROF\_\-START\_\-ONCE(
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(if (i == 0) PROF\_\-START(x))}}
+\label{d3/d80/FVMacros_8h_a2c263e0f0f778e9ab980a85f6b8910e7}
+\hypertarget{FVMacros_8h_aea41a362103d6e185cad34baef830814}{
+\index{FVMacros.h@{FVMacros.h}!PROF\_\-STOP@{PROF\_\-STOP}}
+\index{PROF\_\-STOP@{PROF\_\-STOP}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{PROF\_\-STOP}]{\setlength{\rightskip}{0pt plus 5cm}\#define PROF\_\-STOP(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(x.stop())}}
+\label{d3/d80/FVMacros_8h_aea41a362103d6e185cad34baef830814}
+\hypertarget{FVMacros_8h_a33eb273d8dc81a48cf784ff88bfd42e0}{
+\index{FVMacros.h@{FVMacros.h}!PROF\_\-STOP\_\-ONCE@{PROF\_\-STOP\_\-ONCE}}
+\index{PROF\_\-STOP\_\-ONCE@{PROF\_\-STOP\_\-ONCE}!FVMacros.h@{FVMacros.h}}
+\subsubsection[{PROF\_\-STOP\_\-ONCE}]{\setlength{\rightskip}{0pt plus 5cm}\#define PROF\_\-STOP\_\-ONCE(
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~(if (i == 0) PROF\_\-STOP(x))}}
+\label{d3/d80/FVMacros_8h_a33eb273d8dc81a48cf784ff88bfd42e0}

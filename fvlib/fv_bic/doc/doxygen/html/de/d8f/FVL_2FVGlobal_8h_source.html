@@ -58,79 +58,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <h1>FVGlobal.h</h1>  </div>
 </div>
 <div class="contents">
-<a href="../../de/d8f/FVL_2FVGlobal_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* ---------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="comment">** Finite Volume Library</span>
-<a name="l00003"></a>00003 <span class="comment">** </span>
-<a name="l00004"></a>00004 <span class="comment">** MFVLog.h</span>
-<a name="l00005"></a>00005 <span class="comment">** Global Configs for FVL</span>
-<a name="l00006"></a>00006 <span class="comment">**</span>
-<a name="l00007"></a>00007 <span class="comment">** Author:      Miguel Palhas, mpalhas@gmail.com</span>
-<a name="l00008"></a>00008 <span class="comment">** Created:     13-02-2012</span>
-<a name="l00009"></a>00009 <span class="comment">** Last Test:   ---</span>
-<a name="l00010"></a>00010 <span class="comment">** -------------------------------------------------------------------------*/</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 <span class="preprocessor">#ifndef _H_FVGLOBAL</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#define _H_FVGLOBAL</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;climits&gt;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;fstream&gt;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="comment">/************************************************</span>
-<a name="l00020"></a>00020 <span class="comment"> * UTILITIES</span>
-<a name="l00021"></a>00021 <span class="comment"> ***********************************************/</span>
-<a name="l00022"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a4a7c575ce9586c776da7bae865d12a7b">00022</a> <span class="preprocessor">#define NO_RIGHT_CELL   INT_MAX</span>
-<a name="l00023"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#accd32c979ded2b0c7ab1efaf8fc3756d">00023</a> <span class="preprocessor"></span><span class="preprocessor">#define NO_CELL         INT_MAX</span>
-<a name="l00024"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a30fb97283ac31016acd1bc1dad728480">00024</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_EDGES_PER_CELL 4</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span>
-<a name="l00026"></a>00026 <span class="comment">/************************************************</span>
-<a name="l00027"></a>00027 <span class="comment"> * STREAM MANIPULATION VALUES</span>
-<a name="l00028"></a>00028 <span class="comment"> ***********************************************/</span>
-<a name="l00029"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a9f1b34e347f7b79ee999353878fce712">00029</a> <span class="preprocessor">#define FV_PRECISION    12</span>
-<a name="l00030"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a8142e87b22064c193f2a21692cbc8e32">00030</a> <span class="preprocessor"></span><span class="preprocessor">#define FV_CHAMP        20</span>
-<a name="l00031"></a>00031 <span class="preprocessor"></span>
-<a name="l00032"></a>00032 <span class="comment">/************************************************</span>
-<a name="l00033"></a>00033 <span class="comment"> * LOGGING OPTIONS</span>
-<a name="l00034"></a>00034 <span class="comment"> ***********************************************/</span>
-<a name="l00035"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a6f0ff9105a3e0ceb56dd8783d3370bdb">00035</a> <span class="preprocessor">#define FV_LOGMODE_APPEND   ofstream::app</span>
-<a name="l00036"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a70f40a51627355a4063369ead4cb6401">00036</a> <span class="preprocessor"></span><span class="preprocessor">#define FV_LOGMODE_WRITE    0</span>
-<a name="l00037"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a3842a67534e67416db38f6c2b0b30de9">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define FV_LOGMODE          FV_LOGMODE_APPEND</span>
-<a name="l00038"></a>00038 <span class="preprocessor"></span>
-<a name="l00039"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a7b6bb00af6750cecdb196c9a8908d759">00039</a> <span class="preprocessor">#define FV_LOGFILE string(&quot;FVLib.log&quot;)</span>
-<a name="l00040"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a4cb6bbc2c16d7fc7d1fb914ac4a4c8b0">00040</a> <span class="preprocessor"></span><span class="preprocessor">#define FV_ERRFILE string(&quot;FVLib.err&quot;)</span>
-<a name="l00041"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a01a46e0ca0f53aa931f43f1a18b8056f">00041</a> <span class="preprocessor"></span><span class="preprocessor">#define FV_PROFILE string(&quot;FVLib.prof&quot;)</span>
-<a name="l00042"></a>00042 <span class="preprocessor"></span>
-<a name="l00043"></a>00043 <span class="comment">/************************************************</span>
-<a name="l00044"></a>00044 <span class="comment"> * DEBUG OPTIONS</span>
-<a name="l00045"></a>00045 <span class="comment"> ***********************************************/</span>
-<a name="l00046"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a18ca513bbb6063a08c200a208f14c2fa">00046</a> <span class="preprocessor">#define FV_DEBUG    1</span>
-<a name="l00047"></a>00047 <span class="preprocessor"></span>
-<a name="l00048"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a152fc5203b90b1cff03b7b78579b8f52">00048</a> <span class="preprocessor">#define _DEBUG  if (FV_DEBUG)</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span>
-<a name="l00050"></a>00050 <span class="preprocessor">#if (FV_DEBUG == 0)</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define _D</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00053"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#aeabcf9fa78b36f72cdafc2fdbab61482">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define _D(x)   (x)</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span>
-<a name="l00056"></a>00056 <span class="comment">/************************************************</span>
-<a name="l00057"></a>00057 <span class="comment"> * PROFILING OPTIONS</span>
-<a name="l00058"></a>00058 <span class="comment"> ***********************************************/</span>
-<a name="l00059"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a8f8d5794d3b6ec9edd4b36ea35980b4c">00059</a> <span class="preprocessor">#define FV_PROF 1</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>
-<a name="l00061"></a>00061 <span class="preprocessor">#if (FV_PROF == 0)</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span><span class="preprocessor">#define PROF_START(x)</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">#define PROF_STOP(x)</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">#define PROF_START_ONCE(i,x)</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span><span class="preprocessor">#define PROF_STOP_ONCE(i,x)</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00067"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a71cefa55896580a886a53f9a2da4d04c">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define PROF_START(x)           (x.start())</span>
-<a name="l00068"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#aea41a362103d6e185cad34baef830814">00068</a> <span class="preprocessor"></span><span class="preprocessor">#define PROF_STOP(x)            (x.stop())</span>
-<a name="l00069"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a2c263e0f0f778e9ab980a85f6b8910e7">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define PROF_START_ONCE(i,x)    (if (i == 0) PROF_START(x))</span>
-<a name="l00070"></a><a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a33eb273d8dc81a48cf784ff88bfd42e0">00070</a> <span class="preprocessor"></span><span class="preprocessor">#define PROF_STOP_ONCE(i,x)     (if (i == 0) PROF_STOP(x))</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00072"></a>00072 <span class="preprocessor"></span>
-<a name="l00073"></a>00073 <span class="preprocessor">#endif // _H_FVGLOBAL</span>
+<a href="../../de/d8f/FVL_2FVGlobal_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef _H_FVGLOBAL</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define _H_FVGLOBAL</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="../../d3/d80/FVMacros_8h.html">FVL/FVMacros.h</a>&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="../../d3/dfe/FVEnum_8h.html" title="Holds all enumerators used by FVL.">FVL/FVEnum.h</a>&quot;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="preprocessor">#endif // _H_FVGLOBAL</span>
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -147,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

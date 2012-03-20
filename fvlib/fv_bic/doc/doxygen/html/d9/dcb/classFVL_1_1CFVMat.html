@@ -63,53 +63,51 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="FVL::CFVMat" -->
+<p>Generic CUDA-ready array of matrixes class.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d0/dc1/CFVMat_8h_source.html">CFVMat.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a51ff8888d077d558b27474c15368baf9">CFVMat</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">CONSTRUCTORS.  <a href="#a51ff8888d077d558b27474c15368baf9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a90b5cd38bfc076884d1f3cacc9f35cee">CFVMat</a> (unsigned int w, unsigned int h, unsigned int size)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor to create a matrix with given dimensions.  <a href="#a90b5cd38bfc076884d1f3cacc9f35cee"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a9746a1a3f248769a1268c2a225cedd52">~CFVMat</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray</a>&lt; T &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#ab179d788531c0f2d2f17e75896112f63">elem</a> (unsigned int <a class="el" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a9a4f74af87a76a4c3dcb729cb0e68f8d">x</a>, unsigned int <a class="el" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a1cb2b5ea04251d543e49356ef54eb853">y</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">GETTERS/SETTERS.  <a href="#ab179d788531c0f2d2f17e75896112f63"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">T &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a2d02be460deeb3ad73a4bf0a3f9beb4d">elem</a> (unsigned int <a class="el" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a9a4f74af87a76a4c3dcb729cb0e68f8d">x</a>, unsigned int <a class="el" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a1cb2b5ea04251d543e49356ef54eb853">y</a>, unsigned int i)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Default destructor.  <a href="#a9746a1a3f248769a1268c2a225cedd52"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray</a>&lt; T &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#ab179d788531c0f2d2f17e75896112f63">elem</a> (unsigned int x, unsigned int y)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives a vector of the matrix values at given coords.  <a href="#ab179d788531c0f2d2f17e75896112f63"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">T &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a2d02be460deeb3ad73a4bf0a3f9beb4d">elem</a> (unsigned int x, unsigned int y, unsigned int i)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns a single element of a matrix at given coordinates.  <a href="#a2d02be460deeb3ad73a4bf0a3f9beb4d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray</a>&lt; T &gt; &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a434d97b662d1620513d0f27ecd0e9b1e">getMat</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the vector of each array of the matrix.  <a href="#a434d97b662d1620513d0f27ecd0e9b1e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a90ca964ebcc1b02bbcde225edd49e812">size</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives number of matrixes stored.  <a href="#a90ca964ebcc1b02bbcde225edd49e812"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a7b736ec9a05be5c498760d35a0406ed3">width</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives width (number of columns) of each matrix.  <a href="#a7b736ec9a05be5c498760d35a0406ed3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#aa420a28166e708e3f8b9ecc8e527fc09">height</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">T **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#aceec2df9965a4291582db9fc8fc699b3">cuda_getMat</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">CUDA.  <a href="#aceec2df9965a4291582db9fc8fc699b3"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives height (number of rows) of each matrix.  <a href="#aa420a28166e708e3f8b9ecc8e527fc09"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">T **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a8b296b3ae7f031dac8aecc13b0bf39fc">cuda_get</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the array of pointers for each elem in CUDA memory.  <a href="#a8b296b3ae7f031dac8aecc13b0bf39fc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">T **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a09eadb0032c2862e02ddaf42732533f0">cuda_malloc</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">T **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a94baaa72706c36df0f63c9a91c2643d3">cuda_mallocAndSave</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates space in CUDA memory for all matrixes.  <a href="#a09eadb0032c2862e02ddaf42732533f0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">T **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#add6329cf5dda5b5bf602d724d6d69abc">cuda_mallocAndSave</a> (cudaStream_t stream=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates space in CUDA memory for all matrixes, and copies all data to it.  <a href="#add6329cf5dda5b5bf602d724d6d69abc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a7da37a3af0dbb3b115a980bf13d30d02">cuda_free</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#af496393c6fc22710b80e2dcb735ccce7">cuda_save</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#abde9b4b5738a7aeb95290249a3035ab5">cuda_saveAsync</a> (cudaStream_t &amp;stream)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#add025b0a8b98e7d4d6e631bbaf30b088">cuda_get</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Releases CUDA memory of all matrixes.  <a href="#a7da37a3af0dbb3b115a980bf13d30d02"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a817cca487c7f644b7e5d1abf8bd42308">cuda_save</a> (cudaStream_t stream=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">copies data from the array on host memory to CUDA memory  <a href="#a817cca487c7f644b7e5d1abf8bd42308"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#a9ea6b5a93cae1474a26ebef38d1eb350">cuda_load</a> (cudaStream_t stream=0)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">copies data from the array on CUDA memory back to the host  <a href="#a9ea6b5a93cae1474a26ebef38d1eb350"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
 <h3>template&lt;class T&gt;<br/>
  class FVL::CFVMat&lt; T &gt;</h3>
 
+<p>Generic CUDA-ready array of matrixes class. </p>
+<p>Even though it is meant to represent an array of matrixes, it is stored as a vector of arrays, where the vector is 1-dimensional representation of the 2D matrix.</p>
+<p>Instead of accessing elements in the form mat[matrix_index][row][column], elements are accessed as mat[row * width + column][matrix_index]. Method <a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html#ab179d788531c0f2d2f17e75896112f63" title="Gives a vector of the matrix values at given coords.">elem()</a> provides an easier way of accessing items in CPU-code, in the form elem(row, column, matrix_index)</p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Todo:</a></b></dt><dd>Allow for device-only allocation; alloc single block for whole matrix (allow single mem access instead of 2) </dd></dl>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a51ff8888d077d558b27474c15368baf9"></a><!-- doxytag: member="FVL::CFVMat::CFVMat" ref="a51ff8888d077d558b27474c15368baf9" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d9/dcb/classFVL_1_1CFVMat.html">CFVMat</a> </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>CONSTRUCTORS. </p>
-
-</div>
-</div>
 <a class="anchor" id="a90b5cd38bfc076884d1f3cacc9f35cee"></a><!-- doxytag: member="FVL::CFVMat::CFVMat" ref="a90b5cd38bfc076884d1f3cacc9f35cee" args="(unsigned int w, unsigned int h, unsigned int size)" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,6 +139,16 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Constructor to create a matrix with given dimensions. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>w</em>&nbsp;</td><td>Number of columns </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>h</em>&nbsp;</td><td>Number of rows </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>size</em>&nbsp;</td><td>Number of matrixes to allocated </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a9746a1a3f248769a1268c2a225cedd52"></a><!-- doxytag: member="FVL::CFVMat::~CFVMat" ref="a9746a1a3f248769a1268c2a225cedd52" args="()" -->
@@ -157,6 +165,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Default destructor. </p>
+<p>Releases all memory allocated for this array </p>
 
 </div>
 </div>
@@ -176,14 +187,16 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Releases CUDA memory of all matrixes. </p>
+
 </div>
 </div>
-<a class="anchor" id="add025b0a8b98e7d4d6e631bbaf30b088"></a><!-- doxytag: member="FVL::CFVMat::cuda_get" ref="add025b0a8b98e7d4d6e631bbaf30b088" args="()" -->
+<a class="anchor" id="a8b296b3ae7f031dac8aecc13b0bf39fc"></a><!-- doxytag: member="FVL::CFVMat::cuda_get" ref="a8b296b3ae7f031dac8aecc13b0bf39fc" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cuda_get </td>
+          <td class="memname">T** cuda_get </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -193,16 +206,20 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get the array of pointers for each elem in CUDA memory. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of pointers for each elem </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="aceec2df9965a4291582db9fc8fc699b3"></a><!-- doxytag: member="FVL::CFVMat::cuda_getMat" ref="aceec2df9965a4291582db9fc8fc699b3" args="()" -->
+<a class="anchor" id="a9ea6b5a93cae1474a26ebef38d1eb350"></a><!-- doxytag: member="FVL::CFVMat::cuda_load" ref="a9ea6b5a93cae1474a26ebef38d1eb350" args="(cudaStream_t stream=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">T** cuda_getMat </td>
+          <td class="memname">void cuda_load </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype">cudaStream_t&nbsp;</td>
+          <td class="paramname"> <em>stream</em> = <code>0</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -210,8 +227,13 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>CUDA. </p>
-<p>Each elem is stored as an individual vector an additional T** array of size w*y is stored to hold references to each elem </p>
+<p>copies data from the array on CUDA memory back to the host </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>stream</em>&nbsp;</td><td>cuda stream to use (defaults to 0 to use no stream) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -230,16 +252,20 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Allocates space in CUDA memory for all matrixes. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of pointers for each elem </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="a94baaa72706c36df0f63c9a91c2643d3"></a><!-- doxytag: member="FVL::CFVMat::cuda_mallocAndSave" ref="a94baaa72706c36df0f63c9a91c2643d3" args="()" -->
+<a class="anchor" id="add6329cf5dda5b5bf602d724d6d69abc"></a><!-- doxytag: member="FVL::CFVMat::cuda_mallocAndSave" ref="add6329cf5dda5b5bf602d724d6d69abc" args="(cudaStream_t stream=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">T** cuda_mallocAndSave </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype">cudaStream_t&nbsp;</td>
+          <td class="paramname"> <em>stream</em> = <code>0</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -247,16 +273,26 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Allocates space in CUDA memory for all matrixes, and copies all data to it. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>stream</em>&nbsp;</td><td>CUDA Stream to use (defaults to 0 to use no stream) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of pointers for each elem </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="af496393c6fc22710b80e2dcb735ccce7"></a><!-- doxytag: member="FVL::CFVMat::cuda_save" ref="af496393c6fc22710b80e2dcb735ccce7" args="()" -->
+<a class="anchor" id="a817cca487c7f644b7e5d1abf8bd42308"></a><!-- doxytag: member="FVL::CFVMat::cuda_save" ref="a817cca487c7f644b7e5d1abf8bd42308" args="(cudaStream_t stream=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void cuda_save </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype">cudaStream_t&nbsp;</td>
+          <td class="paramname"> <em>stream</em> = <code>0</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -264,23 +300,13 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="abde9b4b5738a7aeb95290249a3035ab5"></a><!-- doxytag: member="FVL::CFVMat::cuda_saveAsync" ref="abde9b4b5738a7aeb95290249a3035ab5" args="(cudaStream_t &amp;stream)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cuda_saveAsync </td>
-          <td>(</td>
-          <td class="paramtype">cudaStream_t &amp;&nbsp;</td>
-          <td class="paramname"> <em>stream</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>copies data from the array on host memory to CUDA memory </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>stream</em>&nbsp;</td><td>cuda stream to use (defaults to 0 to use no stream) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -315,6 +341,17 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Returns a single element of a matrix at given coordinates. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>x</em>&nbsp;</td><td>Row of the element to acess </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>y</em>&nbsp;</td><td>Column of the element to access </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index of the matrix to acess </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>element of matrix with index i, at coordinates (x, y) </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="ab179d788531c0f2d2f17e75896112f63"></a><!-- doxytag: member="FVL::CFVMat::elem" ref="ab179d788531c0f2d2f17e75896112f63" args="(unsigned int x, unsigned int y)" -->
@@ -342,7 +379,16 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>GETTERS/SETTERS. </p>
+<p>Gives a vector of the matrix values at given coords. </p>
+<p>For coords (x, y) gives the vector with elements of each matrix at position (x, y)</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>x</em>&nbsp;</td><td>Row of the matrixes to access </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>y</em>&nbsp;</td><td>Column of the matrixes to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of elements contained at (x, y) in each matrix </dd></dl>
 
 </div>
 </div>
@@ -361,6 +407,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get the vector of each array of the matrix. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Vector of arrays of the matrix </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="aa420a28166e708e3f8b9ecc8e527fc09"></a><!-- doxytag: member="FVL::CFVMat::height" ref="aa420a28166e708e3f8b9ecc8e527fc09" args="() const " -->
@@ -377,6 +426,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Gives height (number of rows) of each matrix. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Height of each matrix </dd></dl>
 
 </div>
 </div>
@@ -395,6 +447,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Gives number of matrixes stored. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Number of matrixes stored </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a7b736ec9a05be5c498760d35a0406ed3"></a><!-- doxytag: member="FVL::CFVMat::width" ref="a7b736ec9a05be5c498760d35a0406ed3" args="() const " -->
@@ -411,6 +466,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Gives width (number of columns) of each matrix. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Width of each matrix </dd></dl>
 
 </div>
 </div>
@@ -432,7 +490,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:04 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:26 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

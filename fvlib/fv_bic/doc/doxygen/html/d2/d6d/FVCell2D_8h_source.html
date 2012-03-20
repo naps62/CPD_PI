@@ -70,13 +70,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00011"></a><a class="code" href="../../da/da3/classFVCell2D.html">00011</a> <span class="keyword">class </span><a class="code" href="../../da/da3/classFVCell2D.html">FVCell2D</a>
 <a name="l00012"></a>00012 {
 <a name="l00013"></a>00013 <span class="keyword">public</span>:
-<a name="l00014"></a><a class="code" href="../../da/da3/classFVCell2D.html#ab3ed78ad91cf05def39147f46817c454">00014</a> <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> centroid;
+<a name="l00014"></a><a class="code" href="../../da/da3/classFVCell2D.html#ab3ed78ad91cf05def39147f46817c454">00014</a> FVPoint2D&lt;double&gt; centroid;
 <a name="l00015"></a><a class="code" href="../../da/da3/classFVCell2D.html#a0a063e99fbc85e837d93dfbcda6f5252">00015</a> <span class="keywordtype">size_t</span> label,code,nb_vertex,nb_edge;
 <a name="l00016"></a><a class="code" href="../../da/da3/classFVCell2D.html#a9edf0688f0159bed5d3a6828f63146fd">00016</a> <span class="keywordtype">size_t</span> pos_e,pos_v;
 <a name="l00017"></a><a class="code" href="../../da/da3/classFVCell2D.html#a079d8fd569c3406fb63e0511eb0338c0">00017</a> <span class="keywordtype">double</span> perimeter,area;
 <a name="l00018"></a><a class="code" href="../../da/da3/classFVCell2D.html#a43af246790b321630c5b93c98d944c4e">00018</a> <a class="code" href="../../d5/dbb/classFVVertex2D.html">FVVertex2D</a>* vertex[NB_VERTEX_PER_CELL_2D] ; <span class="comment">// the  vertices</span>
 <a name="l00019"></a><a class="code" href="../../da/da3/classFVCell2D.html#aaef61084c7d087b06124b4e122b26eba">00019</a> <a class="code" href="../../db/d31/classFVEdge2D.html">FVEdge2D</a>* edge[NB_EDGE_PER_CELL_2D];     <span class="comment">// the edge</span>
-<a name="l00020"></a><a class="code" href="../../da/da3/classFVCell2D.html#a99bffb94997ba2dc39e4184c17166cce">00020</a> <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a>  cell2edge[NB_EDGE_PER_CELL_2D]; <span class="comment">// normal exterior for each edge</span>
+<a name="l00020"></a><a class="code" href="../../da/da3/classFVCell2D.html#a99bffb94997ba2dc39e4184c17166cce">00020</a> FVPoint2D&lt;double&gt;  cell2edge[NB_EDGE_PER_CELL_2D]; <span class="comment">// normal exterior for each edge</span>
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 
 <a name="l00023"></a><a class="code" href="../../da/da3/classFVCell2D.html#ae1be13799d8d42fcb7aebe7fe88bda3f">00023</a>      <a class="code" href="../../da/da3/classFVCell2D.html#ae1be13799d8d42fcb7aebe7fe88bda3f">FVCell2D</a>(){nb_vertex=0;nb_edge=0;label=0;}
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00028"></a><a class="code" href="../../da/da3/classFVCell2D.html#a18cc99908c3657e8afe0e7b5feee5c23">00028</a>      <a class="code" href="../../d5/dbb/classFVVertex2D.html">FVVertex2D</a>* <a class="code" href="../../da/da3/classFVCell2D.html#a18cc99908c3657e8afe0e7b5feee5c23">nextVertex</a>(){<span class="keywordflow">if</span>(pos_v&lt;nb_vertex) <span class="keywordflow">return</span>(vertex[pos_v++]);<span class="keywordflow">else</span> <span class="keywordflow">return</span>(NULL);}  
 <a name="l00029"></a><a class="code" href="../../da/da3/classFVCell2D.html#a1ae842934bc9c9c5d246f70ff2413057">00029</a>      <a class="code" href="../../db/d31/classFVEdge2D.html">FVEdge2D</a>* <a class="code" href="../../da/da3/classFVCell2D.html#a1ae842934bc9c9c5d246f70ff2413057">beginEdge</a>(){pos_e=0;<span class="keywordflow">if</span>(pos_e&lt;nb_edge) <span class="keywordflow">return</span>(edge[0]);<span class="keywordflow">else</span> <span class="keywordflow">return</span>(NULL);};
 <a name="l00030"></a><a class="code" href="../../da/da3/classFVCell2D.html#a3616f047ec627e0ccc4c30343e9b24ef">00030</a>      <a class="code" href="../../db/d31/classFVEdge2D.html">FVEdge2D</a>* <a class="code" href="../../da/da3/classFVCell2D.html#a3616f047ec627e0ccc4c30343e9b24ef">nextEdge</a>(){<span class="keywordflow">if</span>(pos_e&lt;nb_edge) <span class="keywordflow">return</span>(edge[pos_e++]);<span class="keywordflow">else</span> <span class="keywordflow">return</span>(NULL);} 
-<a name="l00031"></a><a class="code" href="../../da/da3/classFVCell2D.html#ab303dcc1c05e3294ff6cb25dcf088fe2">00031</a>      <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> <a class="code" href="../../da/da3/classFVCell2D.html#ab303dcc1c05e3294ff6cb25dcf088fe2">getCell2Edge</a>(){<span class="keywordflow">return</span> cell2edge[pos_e-1];}
+<a name="l00031"></a><a class="code" href="../../da/da3/classFVCell2D.html#ab303dcc1c05e3294ff6cb25dcf088fe2">00031</a>      FVPoint2D&lt;double&gt; <a class="code" href="../../da/da3/classFVCell2D.html#ab303dcc1c05e3294ff6cb25dcf088fe2">getCell2Edge</a>(){<span class="keywordflow">return</span> cell2edge[pos_e-1];}
 <a name="l00032"></a><a class="code" href="../../da/da3/classFVCell2D.html#a9e25d24a18a62921eff34d38f8b1b896">00032</a>      <span class="keywordtype">void</span> setCode2Edge(<span class="keywordtype">size_t</span> val=0)
 <a name="l00033"></a>00033          {<span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i=0;i&lt;nb_edge;i++) 
 <a name="l00034"></a>00034           <span class="keywordflow">if</span>(edge[i]) edge[i]-&gt;code=val;}
@@ -135,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

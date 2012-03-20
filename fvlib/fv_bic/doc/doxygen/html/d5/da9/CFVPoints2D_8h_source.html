@@ -58,43 +58,39 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <h1>CFVPoints2D.h</h1>  </div>
 </div>
 <div class="contents">
-<a href="../../d5/da9/CFVPoints2D_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* ---------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="comment"> ** Finite Volume Library </span>
-<a name="l00003"></a>00003 <span class="comment"> **</span>
-<a name="l00004"></a>00004 <span class="comment"> ** CFVPoints2D.h</span>
-<a name="l00005"></a>00005 <span class="comment"> ** CUDA Arrayor of 2D Points (cuda-optimized storage, struct-of-arrays instead</span>
-<a name="l00006"></a>00006 <span class="comment"> **    of array-of-structs)</span>
-<a name="l00007"></a>00007 <span class="comment"> **</span>
-<a name="l00008"></a>00008 <span class="comment"> ** Author:     Miguel Palhas, mpalhas@gmail.com</span>
-<a name="l00009"></a>00009 <span class="comment"> ** Created:    13-02-2012</span>
-<a name="l00010"></a>00010 <span class="comment"> ** Last Test:  ---</span>
-<a name="l00011"></a>00011 <span class="comment"> ** TODO: optimize storage; maybe implement as subclass of CFVMat instead of using 2 CFVArray</span>
-<a name="l00012"></a>00012 <span class="comment"> ** -------------------------------------------------------------------------*/</span>
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="preprocessor">#ifndef _H_CUDA_FVPOINTS2D</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">#define _H_CUDA_FVPOINTS2D</span>
-<a name="l00016"></a>00016 <span class="preprocessor"></span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="../../d6/d93/CFVArray_8h.html">FVL/CFVArray.h</a>&quot;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="keyword">namespace </span>FVL {
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021     <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;
-<a name="l00022"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">00022</a>         <span class="keyword">class </span><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">CFVPoints2D</a> {
-<a name="l00023"></a>00023             <span class="keyword">public</span>:
-<a name="l00027"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">00027</a>                 <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray&lt;T&gt;</a> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159" title="one array for X coord, another for Y">x</a>, <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">y</a>;
+<a href="../../d5/da9/CFVPoints2D_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00008"></a>00008 <span class="preprocessor">#ifndef _H_CUDA_FVPOINTS2D</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#define _H_CUDA_FVPOINTS2D</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="../../d6/d93/CFVArray_8h.html">FVL/CFVArray.h</a>&quot;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="keyword">namespace </span>FVL {
+<a name="l00014"></a>00014 
+<a name="l00020"></a>00020     <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;
+<a name="l00021"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">00021</a>         <span class="keyword">class </span><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html" title="Generic CUDA-ready array of 2-dimensional pointers.">CFVPoints2D</a> {
+<a name="l00022"></a>00022             <span class="keyword">public</span>:
+<a name="l00023"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">00023</a>                 <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html" title="Generic CUDA-ready array template class.">CFVArray&lt;T&gt;</a> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a>, <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41" title="Arrays for each coord.">y</a>;   
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025                 <span class="comment">/************************************************</span>
+<a name="l00026"></a>00026 <span class="comment">                 * CONSTRUCTORS</span>
+<a name="l00027"></a>00027 <span class="comment">                 ***********************************************/</span>
 <a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a3df02bf525a9d5df56cdb835260a9453">00029</a>                 <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a3df02bf525a9d5df56cdb835260a9453">CFVPoints2D</a>()                                   { }
-<a name="l00030"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a63bf7c15d2279b68774bd55c5813b3e0">00030</a>                 <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a63bf7c15d2279b68774bd55c5813b3e0">CFVPoints2D</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767" title="GETTERS/SETTERS.">size</a>)            { <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159" title="one array for X coord, another for Y">x</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray&lt;T&gt;</a>(size);    <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">y</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray&lt;T&gt;</a>(size); }
-<a name="l00031"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a89b71fc079d99459852b91dfc2517958">00031</a>                 <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a89b71fc079d99459852b91dfc2517958">CFVPoints2D</a>(<span class="keyword">const</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">FVL::CFVPoints2D&lt;T&gt;</a> &amp;copy)    { <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159" title="one array for X coord, another for Y">x</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray&lt;T&gt;</a>(copy.<a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159" title="one array for X coord, another for Y">x</a>);  <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">y</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray&lt;T&gt;</a>(copy.<a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">y</a>); }
-<a name="l00032"></a>00032 
-<a name="l00036"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767">00036</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767" title="GETTERS/SETTERS.">size</a>() {
-<a name="l00037"></a>00037                     <span class="keywordflow">return</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159" title="one array for X coord, another for Y">x</a>.size();
-<a name="l00038"></a>00038                 }
-<a name="l00039"></a>00039         };
-<a name="l00040"></a>00040 }
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042 <span class="preprocessor">#endif // _H_CUDA_FVPOINTS2D</span>
-<a name="l00043"></a>00043 <span class="preprocessor"></span>
+<a name="l00034"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a63bf7c15d2279b68774bd55c5813b3e0">00034</a>                 <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a63bf7c15d2279b68774bd55c5813b3e0" title="Constructor to create a CUDA-ready array of 2-dimensional pointers with a given size.">CFVPoints2D</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767" title="Gives size of the array (number of (x, y) elements).">size</a>)            { <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html" title="Generic CUDA-ready array template class.">CFVArray&lt;T&gt;</a>(size);    <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41" title="Arrays for each coord.">y</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html" title="Generic CUDA-ready array template class.">CFVArray&lt;T&gt;</a>(size); }
+<a name="l00035"></a>00035 
+<a name="l00041"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a89b71fc079d99459852b91dfc2517958">00041</a>                 <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a89b71fc079d99459852b91dfc2517958" title="Constructor to create a CUDA-ready array of 2-dimensional pointers by copying an already existing arr...">CFVPoints2D</a>(<span class="keyword">const</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html" title="Generic CUDA-ready array of 2-dimensional pointers.">FVL::CFVPoints2D&lt;T&gt;</a> &amp;copy)    { <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html" title="Generic CUDA-ready array template class.">CFVArray&lt;T&gt;</a>(copy.<a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a>);  <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41" title="Arrays for each coord.">y</a> = <a class="code" href="../../dc/d80/classFVL_1_1CFVArray.html" title="Generic CUDA-ready array template class.">CFVArray&lt;T&gt;</a>(copy.<a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41" title="Arrays for each coord.">y</a>); }
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043                 <span class="comment">/************************************************</span>
+<a name="l00044"></a>00044 <span class="comment">                 * GETTERS/SETTERS</span>
+<a name="l00045"></a>00045 <span class="comment">                 ***********************************************/</span>
+<a name="l00046"></a>00046 
+<a name="l00052"></a><a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767">00052</a>                 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767" title="Gives size of the array (number of (x, y) elements).">size</a>() {
+<a name="l00053"></a>00053                     <span class="keywordflow">return</span> <a class="code" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a>.size();
+<a name="l00054"></a>00054                 }
+<a name="l00055"></a>00055         };
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="preprocessor">#endif // _H_CUDA_FVPOINTS2D</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -111,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

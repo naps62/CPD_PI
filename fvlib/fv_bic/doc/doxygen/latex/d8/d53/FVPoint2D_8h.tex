@@ -1,161 +1,18 @@
 \hypertarget{FVPoint2D_8h}{
-\section{include/FVPoint2D.h File Reference}
-\label{d8/d53/FVPoint2D_8h}\index{include/FVPoint2D.h@{include/FVPoint2D.h}}
+\section{include/FVL/FVPoint2D.h File Reference}
+\label{d8/d53/FVPoint2D_8h}\index{include/FVL/FVPoint2D.h@{include/FVL/FVPoint2D.h}}
 }
+{\ttfamily \#include $<$cmath$>$}\par
 {\ttfamily \#include $<$iostream$>$}\par
 {\ttfamily \#include $<$iomanip$>$}\par
-{\ttfamily \#include $<$math.h$>$}\par
-{\ttfamily \#include \char`\"{}FVLib\_\-config.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}FVL/FVGlobal.h\char`\"{}}\par
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classFVPoint2D}{FVPoint2D$<$ T\_\- $>$}
+class \hyperlink{classFVL_1_1FVPoint2D}{FVPoint2D$<$ T $>$}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$class T\_\- $>$ }\\T\_\- \hyperlink{FVPoint2D_8h_aebaefbd618ec926c7009f69644e34639}{Det} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&u, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&v)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\T\_\- \hyperlink{FVPoint2D_8h_a9538b66631baac4d9bd07a521e8754cf}{Norm} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&u)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_a3dca356d9d64e53140a7362c5a0d0ca7}{operator+} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_a0ae3295eb73ca56619eefeb658677b5f}{operator+} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a, const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_ae210b2288dcfbaeb6fb1a0c5d8deebc1}{operator-\/} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_a51a039fd1e2f558325dd9f8b112a5b1f}{operator-\/} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_a218dd4be614a4e02f191e804939bf32b}{operator-\/} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a, const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_ac4d2d7fb5367456cb82d8c46165c65c0}{operator$\ast$} (const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_af6c3422676960f824fc1cdf2b01dfb9c}{operator$\ast$} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b, const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\T\_\- \hyperlink{FVPoint2D_8h_a707f58b47a1e0182c6c40f9d681554cd}{operator$\ast$} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a)
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \hyperlink{FVPoint2D_8h_a096304bfb92863d89e7fff3adf2bbee4}{operator/} (const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&b, const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
-\item 
-{\footnotesize template$<$class T\_\- $>$ }\\std::ostream \& \hyperlink{FVPoint2D_8h_a0c10ce402e4105487112a04a71061c1c}{operator$<$$<$} (std::ostream \&s, const \hyperlink{classFVPoint2D}{FVPoint2D}$<$ T\_\- $>$ \&a)
+namespace \hyperlink{namespaceFVL}{FVL}
 \end{DoxyCompactItemize}
-
-
-\subsection{Function Documentation}
-\hypertarget{FVPoint2D_8h_aebaefbd618ec926c7009f69644e34639}{
-\index{FVPoint2D.h@{FVPoint2D.h}!Det@{Det}}
-\index{Det@{Det}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{Det}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- Det (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ u, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ v}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{d8/d53/FVPoint2D_8h_aebaefbd618ec926c7009f69644e34639}
-\hypertarget{FVPoint2D_8h_a9538b66631baac4d9bd07a521e8754cf}{
-\index{FVPoint2D.h@{FVPoint2D.h}!Norm@{Norm}}
-\index{Norm@{Norm}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{Norm}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- Norm (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ u}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{d8/d53/FVPoint2D_8h_a9538b66631baac4d9bd07a521e8754cf}
-\hypertarget{FVPoint2D_8h_ac4d2d7fb5367456cb82d8c46165c65c0}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator$\ast$@{operator$\ast$}}
-\index{operator$\ast$@{operator$\ast$}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator$\ast$ (
-\begin{DoxyParamCaption}
-\item[{const T\_\- \&}]{ x, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_ac4d2d7fb5367456cb82d8c46165c65c0}
-\hypertarget{FVPoint2D_8h_af6c3422676960f824fc1cdf2b01dfb9c}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator$\ast$@{operator$\ast$}}
-\index{operator$\ast$@{operator$\ast$}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator$\ast$ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b, }
-\item[{const T\_\- \&}]{ x}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_af6c3422676960f824fc1cdf2b01dfb9c}
-\hypertarget{FVPoint2D_8h_a707f58b47a1e0182c6c40f9d681554cd}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator$\ast$@{operator$\ast$}}
-\index{operator$\ast$@{operator$\ast$}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- operator$\ast$ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a707f58b47a1e0182c6c40f9d681554cd}
-\hypertarget{FVPoint2D_8h_a0ae3295eb73ca56619eefeb658677b5f}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator+@{operator+}}
-\index{operator+@{operator+}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator+ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a, }
-\item[{const T\_\- \&}]{ x}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a0ae3295eb73ca56619eefeb658677b5f}
-\hypertarget{FVPoint2D_8h_a3dca356d9d64e53140a7362c5a0d0ca7}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator+@{operator+}}
-\index{operator+@{operator+}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator+ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a3dca356d9d64e53140a7362c5a0d0ca7}
-\hypertarget{FVPoint2D_8h_a51a039fd1e2f558325dd9f8b112a5b1f}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator-\/ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a51a039fd1e2f558325dd9f8b112a5b1f}
-\hypertarget{FVPoint2D_8h_ae210b2288dcfbaeb6fb1a0c5d8deebc1}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator-\/ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_ae210b2288dcfbaeb6fb1a0c5d8deebc1}
-\hypertarget{FVPoint2D_8h_a218dd4be614a4e02f191e804939bf32b}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator-\/ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a, }
-\item[{const T\_\- \&}]{ x}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a218dd4be614a4e02f191e804939bf32b}
-\hypertarget{FVPoint2D_8h_a096304bfb92863d89e7fff3adf2bbee4}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator/@{operator/}}
-\index{operator/@{operator/}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint2D}$<$T\_\-$>$ operator/ (
-\begin{DoxyParamCaption}
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ b, }
-\item[{const T\_\- \&}]{ x}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a096304bfb92863d89e7fff3adf2bbee4}
-\hypertarget{FVPoint2D_8h_a0c10ce402e4105487112a04a71061c1c}{
-\index{FVPoint2D.h@{FVPoint2D.h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!FVPoint2D.h@{FVPoint2D.h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& operator$<$$<$ (
-\begin{DoxyParamCaption}
-\item[{std::ostream \&}]{ s, }
-\item[{const {\bf FVPoint2D}$<$ T\_\- $>$ \&}]{ a}
-\end{DoxyParamCaption}
-)}}
-\label{d8/d53/FVPoint2D_8h_a0c10ce402e4105487112a04a71061c1c}

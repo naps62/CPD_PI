@@ -47,6 +47,24 @@ namespace FVL {
 			FVPoint2D<T> & operator *=	(const T &a) { x *= a;	y *= a;	return *this;}
 			FVPoint2D<T> & operator /=	(const T &a) { x /= a;	y /= a;	return *this;}
 
+
+			// Operatros with FVPoint2D & FVpoint2D params
+			/*friend FVPoint2D<T> operator + (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
+			friend FVPoint2D<T> operator - (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
+			friend FVPoint2D<T> operator * (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
+			friend FVPoint2D<T> operator / (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
+
+			// operators with FVPoint2D & T params
+			friend FVPoint2D<T> operator + (const friend FVPoint2D<T> &a, const T &x);
+			friend FVPoint2D<T> operator - (const friend FVPoint2D<T> &a, const T &x);
+			friend FVPoint2D<T> operator * (const friend FVPoint2D<T> &a, const T &x);
+			friend FVPoint2D<T> operator * (const T &x, const friend FVpoint2D<T> &a);
+			friend FVPoint2D<T> operator / (const friend FVPoint2D<T> &a, const T &x);
+
+			friend FVPoint2D<T> operator - (const FVPoint2D<T> &a);
+
+			friend std::ostream & operator << (std::ostream &s, const FVPoint2D<T> &p);*/
+
 			/************************************************
 			 * MATH
 			 ***********************************************/
@@ -55,45 +73,50 @@ namespace FVL {
 
 			// norm of the point
 			inline T norm() { return sqrt(x*x + y*y);}
-	}
+	};
 
 	/************************************************
 	 * GLOBAL OPERATORS
 	 ***********************************************/
+
 	// Operators with FVPoint2D & FVPoint2D params
-	template<class T>
-	FVPoint2D<T> operator + (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x+b.x, a.y+b.y);}
-	template<class T>
-	FVPoint2D<T> operator - (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x-b.x, a.y-b.y);}
-	template<class T>
-	FVPoint2D<T> operator * (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x*b.x, a.y*b.y);}
-	template<class T>
-	FVPoint2D<T> operator / (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x/b.x, a.y/b.y);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator + (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x+b.x, a.y+b.y);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x-b.x, a.y-b.y);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator * (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x*b.x, a.y*b.y);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator / (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x/b.x, a.y/b.y);}
 
 	// operators with FVPoint2D & T params
-	template<class T>
-	FVPoint2D<T> operator + (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x+x, a.y+x);}
-	template<class T>
-	FVPoint2D<T> operator - (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x-x, a.y-x);}
-	template<class T>
-	FVPoint2D<T> operator * (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x*x, a.y*x);}
-	template<class T>
-	FVPoint2D<T> operator * (const T &x, const FVpoint2D<T> &a) {return FVPoint2D<T>(a.x*x, a.y*x);}
-	template<class T>
-	FVPoint2D<T> operator / (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x/x, a.y/x);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator + (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x+x, a.y+x);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x-x, a.y-x);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator * (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x*x, a.y*x);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator * (const T &x, const FVpoint2D<T> &a) {return FVPoint2D<T>(a.x*x, a.y*x);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator / (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x/x, a.y/x);}
 
 	// operators with T params
-	template<class T>
-	FVPoint2D<T> operator - (const FVPoint2D<T> &a) {return FVPoint2D<T>(-a.x, -a.y);}
+	/// \relates FVPoint2D
+	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a) {return FVPoint2D<T>(-a.x, -a.y);}
 
 	// stream operators
-	template<class T>
-	std::ostream & operator << (std::ostream &s, const FVPoint2D<T> &p) {
+	/// \relates FVPoint2D
+	template<class T> std::ostream & operator << (std::ostream &s, const FVPoint2D<T> &p) {
 		s.setf(std::ios::scientific);
 		s	<< std::setprecision(FV_PRECISION) << setw(FV_CHAMP)
 			<< "(" << p.x << ", " << p.y << ")";
 		return s;
 	}
+	/**
+	 * @}
+	 */
+
 }
 
 

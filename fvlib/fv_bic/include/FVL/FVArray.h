@@ -93,7 +93,7 @@ namespace FVL {
 				/**
 				 * Gives size of the array (number of elements)
 				 *
-				 * \return total number of elements allocated
+				 * \return Total number of elements allocated
 				 */
 				unsigned int size() const;
 

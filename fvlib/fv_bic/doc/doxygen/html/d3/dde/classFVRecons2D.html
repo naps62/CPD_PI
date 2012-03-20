@@ -72,7 +72,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a6d820346769771af609dbdaa7b1f3021">setStencil</a> (<a class="el" href="../../d3/d29/classFVStencil.html">FVStencil</a> *ptr_s, size_t degree)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a277a64063b5e54974f88aa36f01dd729">setPolynomialDegree</a> (size_t degree)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">size_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a51ced9e32566282ad2c8aa54e23f3cc5">getPolynomialDegree</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">setReferencePoint</a> (<a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt; P)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">setReferencePoint</a> (FVPoint2D&lt; double &gt; P)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#ab7a2586dc96682fbdfd945755620f3cc">setVectorVertex2D</a> (<a class="el" href="../../da/d83/classFVVect.html">FVVect</a>&lt; double &gt; &amp;u)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a2f6606e5da89f8268f32d1f63dff07d9">setVectorEdge2D</a> (<a class="el" href="../../da/d83/classFVVect.html">FVVect</a>&lt; double &gt; &amp;u)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#aedbe092efe0b4fb30f1c6009988e649d">setVectorCell2D</a> (<a class="el" href="../../da/d83/classFVVect.html">FVVect</a>&lt; double &gt; &amp;u)</td></tr>
@@ -80,10 +80,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a8d6d0de3223ec5b38427aac5a0b4b2a0">computeConservativeCoef</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a778ff476790db0a772b0de4670138fd1">doMatrix</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a542380877cfbecb217d6079b325bcc9b">computeCoef</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">getValue</a> (<a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt; P, size_t degree)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">getValue</a> (<a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt; P)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">getDerivative</a> (<a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt; P, size_t degree)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">getDerivative</a> (<a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt; P)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">getValue</a> (FVPoint2D&lt; double &gt; P, size_t degree)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">getValue</a> (FVPoint2D&lt; double &gt; P)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">FVPoint2D&lt; double &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">getDerivative</a> (FVPoint2D&lt; double &gt; P, size_t degree)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">FVPoint2D&lt; double &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">getDerivative</a> (FVPoint2D&lt; double &gt; P)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dde/classFVRecons2D.html#a2bbe646c052baf99f04a367ef6031d74">clean</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -275,9 +275,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt;double&gt; getDerivative </td>
+          <td class="memname">FVPoint2D&lt;double&gt; getDerivative </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td>
+          <td class="paramtype">FVPoint2D&lt; double &gt;&nbsp;</td>
           <td class="paramname"> <em>P</em>, </td>
         </tr>
         <tr>
@@ -302,9 +302,9 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt;double&gt; getDerivative </td>
+          <td class="memname">FVPoint2D&lt;double&gt; getDerivative </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td>
+          <td class="paramtype">FVPoint2D&lt; double &gt;&nbsp;</td>
           <td class="paramname"> <em>P</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
@@ -339,7 +339,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double getValue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td>
+          <td class="paramtype">FVPoint2D&lt; double &gt;&nbsp;</td>
           <td class="paramname"> <em>P</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
@@ -357,7 +357,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double getValue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td>
+          <td class="paramtype">FVPoint2D&lt; double &gt;&nbsp;</td>
           <td class="paramname"> <em>P</em>, </td>
         </tr>
         <tr>
@@ -402,7 +402,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void setReferencePoint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D</a>&lt; double &gt;&nbsp;</td>
+          <td class="paramtype">FVPoint2D&lt; double &gt;&nbsp;</td>
           <td class="paramname"> <em>P</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
@@ -575,7 +575,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

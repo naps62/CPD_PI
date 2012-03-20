@@ -7,8 +7,13 @@
 ** Author:		Miguel Palhas, mpalhas@gmail.com
 ** Created:		13-02-2012
 ** Last Tested:	---
-** TODO:		known issue with \n characters being stripped from stream, resulting in numbers between two lines beeing concatenated
 ** -------------------------------------------------------------------------*/
+/**
+ * \file CFVMesh2D.h
+ *
+ * \author Miguel Palhas
+ * \date 13-02-2012
+ */
 
 #ifndef _H_FVXMLREADER
 #define _H_FVXMLREADER
@@ -28,6 +33,10 @@ using namespace rapidxml;
 
 namespace FVL {
 
+	/**
+	 *
+	 * \todo known issue with \n characters being stripped from stream, resulting in numbers between two lines beeing concatenated
+	 */
 	class FVXMLReader : public xml_document<> {
 			
 		private:

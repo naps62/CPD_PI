@@ -4,6 +4,11 @@
 }
 
 
+Generic CUDA-\/ready array template class.  
+
+
+
+
 {\ttfamily \#include $<$CFVArray.h$>$}
 
 Inheritance diagram for CFVArray$<$ T $>$:\begin{figure}[H]
@@ -15,51 +20,37 @@ Inheritance diagram for CFVArray$<$ T $>$:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classFVL_1_1CFVArray_af141a187a6f343f8f0acf258ee9428f5}{CFVArray} ()
-\begin{DoxyCompactList}\small\item\em CONSTRUCTORS. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVArray_a4533252544513e80b44814b8afab3190}{CFVArray} (const unsigned int size)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor to create a CUDA-\/ready array with a given size. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVArray_a2bfe813d44db8292ff5793db73fe7fe0}{CFVArray} (const \hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \&copy)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor to create an array by copying an already existing array. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVArray_a3c7cfa5d9c6793cd2866030b734b5987}{$\sim$CFVArray} ()
-\item 
-T $\ast$ \hyperlink{classFVL_1_1CFVArray_a79c842ffa963500e75bb49038b5a91cf}{cuda\_\-getArray} ()
-\begin{DoxyCompactList}\small\item\em OPERATORS. \item\end{DoxyCompactList}\item 
-T $\ast$ \hyperlink{classFVL_1_1CFVArray_a91b72217e89ae594799cf6f5d5e790fb}{cuda\_\-mallocAndSave} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Default destructor. \item\end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{classFVL_1_1CFVArray_aa18ec3374bed8aae707bb943f500cb6f}{cuda\_\-get} ()
+\begin{DoxyCompactList}\small\item\em Get pointer to CUDA memory of the array. \item\end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{classFVL_1_1CFVArray_af2915e0aeb48486f7210527178f3c1da}{cuda\_\-mallocAndSave} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em Allocates CUDA memory for the array, and copies data to it. \item\end{DoxyCompactList}\item 
 T $\ast$ \hyperlink{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc8403143e}{cuda\_\-malloc} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Allocates CUDA memory for the array. \item\end{DoxyCompactList}\item 
 void \hyperlink{classFVL_1_1CFVArray_a7da37a3af0dbb3b115a980bf13d30d02}{cuda\_\-free} ()
-\item 
-void \hyperlink{classFVL_1_1CFVArray_af496393c6fc22710b80e2dcb735ccce7}{cuda\_\-save} ()
-\item 
-void \hyperlink{classFVL_1_1CFVArray_abde9b4b5738a7aeb95290249a3035ab5}{cuda\_\-saveAsync} (cudaStream\_\-t \&stream)
-\item 
-void \hyperlink{classFVL_1_1CFVArray_add025b0a8b98e7d4d6e631bbaf30b088}{cuda\_\-get} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Releases CUDA memory of this array. \item\end{DoxyCompactList}\item 
+void \hyperlink{classFVL_1_1CFVArray_a817cca487c7f644b7e5d1abf8bd42308}{cuda\_\-save} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em Copies data from the array on host memory to CUDA memory. \item\end{DoxyCompactList}\item 
+void \hyperlink{classFVL_1_1CFVArray_a9ea6b5a93cae1474a26ebef38d1eb350}{cuda\_\-load} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em Copies data from the array on CUDA memory back to the host. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 T $\ast$ \hyperlink{classFVL_1_1CFVArray_ac7c2eda2752dff79215dfcc062d0d814}{cuda\_\-arr}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Ptr to CUDA memory of the array (NULL if not allocated). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
 \subsubsection*{template$<$class T$>$ class FVL::CFVArray$<$ T $>$}
 
-
+Generic CUDA-\/ready array template class. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classFVL_1_1CFVArray_af141a187a6f343f8f0acf258ee9428f5}{
-\index{FVL::CFVArray@{FVL::CFVArray}!CFVArray@{CFVArray}}
-\index{CFVArray@{CFVArray}!FVL::CFVArray@{FVL::CFVArray}}
-\subsubsection[{CFVArray}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVArray} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{dc/d80/classFVL_1_1CFVArray_af141a187a6f343f8f0acf258ee9428f5}
-
-
-CONSTRUCTORS. 
-
 \hypertarget{classFVL_1_1CFVArray_a4533252544513e80b44814b8afab3190}{
 \index{FVL::CFVArray@{FVL::CFVArray}!CFVArray@{CFVArray}}
 \index{CFVArray@{CFVArray}!FVL::CFVArray@{FVL::CFVArray}}
@@ -69,6 +60,13 @@ CONSTRUCTORS.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{dc/d80/classFVL_1_1CFVArray_a4533252544513e80b44814b8afab3190}
+
+
+Constructor to create a CUDA-\/ready array with a given size. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em size}]Number of elements to allocate for the array \end{DoxyParams}
 \hypertarget{classFVL_1_1CFVArray_a2bfe813d44db8292ff5793db73fe7fe0}{
 \index{FVL::CFVArray@{FVL::CFVArray}!CFVArray@{CFVArray}}
 \index{CFVArray@{CFVArray}!FVL::CFVArray@{FVL::CFVArray}}
@@ -78,6 +76,13 @@ CONSTRUCTORS.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{dc/d80/classFVL_1_1CFVArray_a2bfe813d44db8292ff5793db73fe7fe0}
+
+
+Constructor to create an array by copying an already existing array. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em copy}]Array to copy \end{DoxyParams}
 \hypertarget{classFVL_1_1CFVArray_a3c7cfa5d9c6793cd2866030b734b5987}{
 \index{FVL::CFVArray@{FVL::CFVArray}!$\sim$CFVArray@{$\sim$CFVArray}}
 \index{$\sim$CFVArray@{$\sim$CFVArray}!FVL::CFVArray@{FVL::CFVArray}}
@@ -89,6 +94,10 @@ CONSTRUCTORS.
 \label{dc/d80/classFVL_1_1CFVArray_a3c7cfa5d9c6793cd2866030b734b5987}
 
 
+Default destructor. 
+
+Releases all memory allocated for this array 
+
 \subsection{Member Function Documentation}
 \hypertarget{classFVL_1_1CFVArray_a7da37a3af0dbb3b115a980bf13d30d02}{
 \index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-free@{cuda\_\-free}}
@@ -99,29 +108,43 @@ CONSTRUCTORS.
 \end{DoxyParamCaption}
 )}}
 \label{dc/d80/classFVL_1_1CFVArray_a7da37a3af0dbb3b115a980bf13d30d02}
-\hypertarget{classFVL_1_1CFVArray_add025b0a8b98e7d4d6e631bbaf30b088}{
+
+
+Releases CUDA memory of this array. 
+
+\hypertarget{classFVL_1_1CFVArray_aa18ec3374bed8aae707bb943f500cb6f}{
 \index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-get@{cuda\_\-get}}
 \index{cuda\_\-get@{cuda\_\-get}!FVL::CFVArray@{FVL::CFVArray}}
-\subsubsection[{cuda\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-get (
+\subsubsection[{cuda\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$ cuda\_\-get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{dc/d80/classFVL_1_1CFVArray_add025b0a8b98e7d4d6e631bbaf30b088}
-\hypertarget{classFVL_1_1CFVArray_a79c842ffa963500e75bb49038b5a91cf}{
-\index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-getArray@{cuda\_\-getArray}}
-\index{cuda\_\-getArray@{cuda\_\-getArray}!FVL::CFVArray@{FVL::CFVArray}}
-\subsubsection[{cuda\_\-getArray}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$ cuda\_\-getArray (
+\label{dc/d80/classFVL_1_1CFVArray_aa18ec3374bed8aae707bb943f500cb6f}
+
+
+Get pointer to CUDA memory of the array. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to allocated memory on CUDA device (NULL if not allocated) 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVArray_a9ea6b5a93cae1474a26ebef38d1eb350}{
+\index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-load@{cuda\_\-load}}
+\index{cuda\_\-load@{cuda\_\-load}!FVL::CFVArray@{FVL::CFVArray}}
+\subsubsection[{cuda\_\-load}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-load (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{dc/d80/classFVL_1_1CFVArray_a79c842ffa963500e75bb49038b5a91cf}
+\label{dc/d80/classFVL_1_1CFVArray_a9ea6b5a93cae1474a26ebef38d1eb350}
 
 
-OPERATORS. 
+Copies data from the array on CUDA memory back to the host. 
 
-GETTERS/SETTERS CUDA \hypertarget{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc8403143e}{
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]CUDA Stream to use (defaults to 0 to use no stream) \end{DoxyParams}
+\hypertarget{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc8403143e}{
 \index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-malloc@{cuda\_\-malloc}}
 \index{cuda\_\-malloc@{cuda\_\-malloc}!FVL::CFVArray@{FVL::CFVArray}}
 \subsubsection[{cuda\_\-malloc}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$ cuda\_\-malloc (
@@ -130,33 +153,50 @@ GETTERS/SETTERS CUDA \hypertarget{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc
 \end{DoxyParamCaption}
 )}}
 \label{dc/d80/classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc8403143e}
-\hypertarget{classFVL_1_1CFVArray_a91b72217e89ae594799cf6f5d5e790fb}{
+
+
+Allocates CUDA memory for the array. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to allocated memory on CUDA device (NULL in case of allocation error) 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVArray_af2915e0aeb48486f7210527178f3c1da}{
 \index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}}
 \index{cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}!FVL::CFVArray@{FVL::CFVArray}}
 \subsubsection[{cuda\_\-mallocAndSave}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$ cuda\_\-mallocAndSave (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{dc/d80/classFVL_1_1CFVArray_a91b72217e89ae594799cf6f5d5e790fb}
-\hypertarget{classFVL_1_1CFVArray_af496393c6fc22710b80e2dcb735ccce7}{
+\label{dc/d80/classFVL_1_1CFVArray_af2915e0aeb48486f7210527178f3c1da}
+
+
+Allocates CUDA memory for the array, and copies data to it. 
+
+Equivalent to calling \hyperlink{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc8403143e}{cuda\_\-malloc()} and \hyperlink{classFVL_1_1CFVArray_a817cca487c7f644b7e5d1abf8bd42308}{cuda\_\-save()} in sequence.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]CUDA Stream to use (defaults to 0 to use no stream) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to allocated memory on CUDA device (NULL in case of allocation error) 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVArray_a817cca487c7f644b7e5d1abf8bd42308}{
 \index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-save@{cuda\_\-save}}
 \index{cuda\_\-save@{cuda\_\-save}!FVL::CFVArray@{FVL::CFVArray}}
 \subsubsection[{cuda\_\-save}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-save (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{dc/d80/classFVL_1_1CFVArray_af496393c6fc22710b80e2dcb735ccce7}
-\hypertarget{classFVL_1_1CFVArray_abde9b4b5738a7aeb95290249a3035ab5}{
-\index{FVL::CFVArray@{FVL::CFVArray}!cuda\_\-saveAsync@{cuda\_\-saveAsync}}
-\index{cuda\_\-saveAsync@{cuda\_\-saveAsync}!FVL::CFVArray@{FVL::CFVArray}}
-\subsubsection[{cuda\_\-saveAsync}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-saveAsync (
-\begin{DoxyParamCaption}
-\item[{cudaStream\_\-t \&}]{ stream}
-\end{DoxyParamCaption}
-)}}
-\label{dc/d80/classFVL_1_1CFVArray_abde9b4b5738a7aeb95290249a3035ab5}
+\label{dc/d80/classFVL_1_1CFVArray_a817cca487c7f644b7e5d1abf8bd42308}
+
+
+Copies data from the array on host memory to CUDA memory. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]CUDA Stream to use (defaults to 0 to use no stream) \end{DoxyParams}
 
 
 \subsection{Field Documentation}
@@ -165,6 +205,10 @@ GETTERS/SETTERS CUDA \hypertarget{classFVL_1_1CFVArray_ac5b54e1d7aacbc7ac8f947cc
 \index{cuda\_\-arr@{cuda\_\-arr}!FVL::CFVArray@{FVL::CFVArray}}
 \subsubsection[{cuda\_\-arr}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$ {\bf cuda\_\-arr}}}
 \label{dc/d80/classFVL_1_1CFVArray_ac7c2eda2752dff79215dfcc062d0d814}
+
+
+Ptr to CUDA memory of the array (NULL if not allocated). 
+
 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}

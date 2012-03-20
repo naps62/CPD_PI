@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00041"></a>00041     T_ <a class="code" href="../../d9/d70/classFVDenseM.html#a89d9927485d8a33c508e8caf871ca117">getValue</a>(<span class="keywordtype">size_t</span> i, <span class="keywordtype">size_t</span> j)  ;
 <a name="l00042"></a>00042     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a9441579962fe169d09d5fd504388da1a">setLine</a>  (<span class="keywordtype">size_t</span> i, <span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;line);
 <a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a888ffa88e606f11b989361ef3b1176b6">setColumn</a>(<span class="keywordtype">size_t</span> j, <span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;column);
-<a name="l00044"></a>00044     <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp; <a class="code" href="../../d9/d70/classFVDenseM.html#a06daa883e8e99590868bfd95689d638b">operator=</a>(<span class="keyword">const</span> T_ &amp;<a class="code" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a9a4f74af87a76a4c3dcb729cb0e68f8d">x</a>);
+<a name="l00044"></a>00044     <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp; <a class="code" href="../../d9/d70/classFVDenseM.html#a06daa883e8e99590868bfd95689d638b">operator=</a>(<span class="keyword">const</span> T_ &amp;x);
 <a name="l00045"></a>00045     <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp; <a class="code" href="../../d9/d70/classFVDenseM.html#a1beab84f76baeed61a89633796b6cc29">operator+=</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;m);
 <a name="l00046"></a>00046     <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp; <a class="code" href="../../d9/d70/classFVDenseM.html#afb8664e2aaa7a8897ee8aef014a494da">operator-=</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;m);
 <a name="l00047"></a>00047     <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp; <a class="code" href="../../d9/d70/classFVDenseM.html#aa5ac6333bf08dddc27d45d6f7ddb79c9">operator/=</a>(<span class="keyword">const</span> T_ &amp;val);
@@ -114,15 +114,15 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00055"></a>00055     <span class="comment">// resolution method</span>
 <a name="l00056"></a>00056     <span class="comment">// Gauss method with pivot</span>
 <a name="l00057"></a>00057     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">Gauss</a>(<a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp;) ;
-<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">Gauss</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;);
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">Gauss</a>(FVPoint2D&lt;double&gt; &amp;);
 <a name="l00059"></a>00059     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">Gauss</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;);   
 <a name="l00060"></a>00060     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">Gauss</a>(<a class="code" href="../../d1/de0/classFVPoint4D.html">FVPoint4D&lt;double&gt;</a> &amp;);    
 <a name="l00061"></a>00061     <span class="comment">//L U decomposition, we assume diag(L) are unit  </span>
 <a name="l00062"></a>00062     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#af59b5802fb916dad62140d59f266dc5d">LUFactorize</a>() ;   
 <a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">ForwardSubstitution</a>(<a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp;) ;<span class="comment">// for lower matrix assuming identity on the diagonal </span>
 <a name="l00064"></a>00064     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">BackwardSubstitution</a>(<a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp;) ;<span class="comment">// for upper matrix</span>
-<a name="l00065"></a>00065     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">ForwardSubstitution</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;) ;<span class="comment">// for lower matrix assuming identity on the diagonal</span>
-<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">BackwardSubstitution</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;) ;<span class="comment">// for upper matrix</span>
+<a name="l00065"></a>00065     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">ForwardSubstitution</a>(FVPoint2D&lt;double&gt; &amp;) ;<span class="comment">// for lower matrix assuming identity on the diagonal</span>
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">BackwardSubstitution</a>(FVPoint2D&lt;double&gt; &amp;) ;<span class="comment">// for upper matrix</span>
 <a name="l00067"></a>00067     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">ForwardSubstitution</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;) ;<span class="comment">// for lower matrix assuming identity on the diagonal</span>
 <a name="l00068"></a>00068     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">BackwardSubstitution</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;) ;<span class="comment">// for upper matrix    </span>
 <a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">ForwardSubstitution</a>(<a class="code" href="../../d1/de0/classFVPoint4D.html">FVPoint4D&lt;double&gt;</a> &amp;) ;<span class="comment">// for lower matrix assuming identity on the diagonal</span>
@@ -132,8 +132,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00073"></a>00073     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a14f7b6677261c452cf1d7b2e674df9a3">LUFactorizePivoting</a>() ;   <span class="comment">//L U decomposition, we assume diag(L) are unit    </span>
 <a name="l00074"></a>00074     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">ForwardSubstitutionPivoting</a>(<a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp;) ;    
 <a name="l00075"></a>00075     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">BackwardSubstitutionPivoting</a>(<a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp;) ;    
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">ForwardSubstitutionPivoting</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;) ;    
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">BackwardSubstitutionPivoting</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;) ;   
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">ForwardSubstitutionPivoting</a>(FVPoint2D&lt;double&gt; &amp;) ;    
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">BackwardSubstitutionPivoting</a>(FVPoint2D&lt;double&gt; &amp;) ;   
 <a name="l00078"></a>00078     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">ForwardSubstitutionPivoting</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;) ;     
 <a name="l00079"></a>00079     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">BackwardSubstitutionPivoting</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;) ;    
 <a name="l00080"></a>00080     <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">ForwardSubstitutionPivoting</a>(<a class="code" href="../../d1/de0/classFVPoint4D.html">FVPoint4D&lt;double&gt;</a> &amp;) ;         
@@ -345,7 +345,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00288"></a>00288 }
 <a name="l00289"></a>00289 
 <a name="l00290"></a>00290 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00291"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a9e3c4f4b9a12920a741a479fb9e3cbde">00291</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#a9e3c4f4b9a12920a741a479fb9e3cbde">operator+</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa, <span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;bb)
+<a name="l00291"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a9e3c4f4b9a12920a741a479fb9e3cbde">00291</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#af8f481fb9e7a476e2f5148f01f36a05a">operator+</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa, <span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;bb)
 <a name="l00292"></a>00292 {
 <a name="l00293"></a>00293 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00294"></a>00294 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(aa.<a class="code" href="../../d9/d70/classFVDenseM.html#a660778a5412448cf6b641e67d1d70011">nb_rows</a>!=bb.<a class="code" href="../../d9/d70/classFVDenseM.html#a660778a5412448cf6b641e67d1d70011">nb_rows</a>())+2*(aa.<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>()!=bb.<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>());
@@ -359,7 +359,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00302"></a>00302 }
 <a name="l00303"></a>00303 
 <a name="l00304"></a>00304 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00305"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a182438597171752ae79fe20efb80edc2">00305</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#a182438597171752ae79fe20efb80edc2">operator-</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa, <span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;bb)
+<a name="l00305"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a182438597171752ae79fe20efb80edc2">00305</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#a5f264c9cef903053a216a56c65d9249e">operator-</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa, <span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;bb)
 <a name="l00306"></a>00306 {
 <a name="l00307"></a>00307 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00308"></a>00308 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(aa.<a class="code" href="../../d9/d70/classFVDenseM.html#a660778a5412448cf6b641e67d1d70011">nb_rows</a>!=bb.<a class="code" href="../../d9/d70/classFVDenseM.html#a660778a5412448cf6b641e67d1d70011">nb_rows</a>)+2*(aa.<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>!=bb.<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>);
@@ -374,7 +374,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00317"></a>00317 
 <a name="l00318"></a>00318 
 <a name="l00319"></a>00319 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00320"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#aabb4419cd45c19b062e4dd90e3b6dcf6">00320</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#a9e3c4f4b9a12920a741a479fb9e3cbde">operator+</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
+<a name="l00320"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#aabb4419cd45c19b062e4dd90e3b6dcf6">00320</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#af8f481fb9e7a476e2f5148f01f36a05a">operator+</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
 <a name="l00321"></a>00321 { 
 <a name="l00322"></a>00322    <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> c(aa);
 <a name="l00323"></a>00323  <span class="comment">// #pragma omp parallel for num_threads(nb_thread)   </span>
@@ -384,7 +384,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00327"></a>00327 }
 <a name="l00328"></a>00328 
 <a name="l00329"></a>00329 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00330"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a6bf357a19c96830c8751f9dd85b13f9b">00330</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#a182438597171752ae79fe20efb80edc2">operator-</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
+<a name="l00330"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a6bf357a19c96830c8751f9dd85b13f9b">00330</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#a5f264c9cef903053a216a56c65d9249e">operator-</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
 <a name="l00331"></a>00331 { 
 <a name="l00332"></a>00332    <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> c(aa);
 <a name="l00333"></a>00333  <span class="comment">// #pragma omp parallel for num_threads(nb_thread)   </span>
@@ -394,7 +394,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00337"></a>00337 }
 <a name="l00338"></a>00338 
 <a name="l00339"></a>00339 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00340"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#ab62020d67b706f4d898b8a18de2223e3">00340</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#ab62020d67b706f4d898b8a18de2223e3">operator*</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
+<a name="l00340"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#ab62020d67b706f4d898b8a18de2223e3">00340</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#a04bc7e803d73ef330131856d6105c730">operator*</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
 <a name="l00341"></a>00341 { 
 <a name="l00342"></a>00342    <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> c(aa);
 <a name="l00343"></a>00343   <span class="comment">//#pragma omp parallel for num_threads(nb_thread)   </span>
@@ -404,7 +404,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00347"></a>00347 }
 <a name="l00348"></a>00348 
 <a name="l00349"></a>00349 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00350"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a3b56dff6fd0bbd887964c5b412ed1127">00350</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../dc/dfc/FVDenseM_8h.html#a3b56dff6fd0bbd887964c5b412ed1127">operator/</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
+<a name="l00350"></a><a class="code" href="../../dc/dfc/FVDenseM_8h.html#a3b56dff6fd0bbd887964c5b412ed1127">00350</a> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> <a class="code" href="../../d8/d2b/classFVL_1_1FVPoint2D.html#a7cf0bdae41a03ea052321be2e9d71692">operator/</a>(<span class="keyword">const</span> <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> &amp;aa,<span class="keyword">const</span> T_ &amp;val)
 <a name="l00351"></a>00351 { 
 <a name="l00352"></a>00352    <a class="code" href="../../d9/d70/classFVDenseM.html">FVDenseM&lt;T_&gt;</a> c(aa);
 <a name="l00353"></a>00353   <span class="comment">//#pragma omp parallel for num_threads(nb_thread)   </span>
@@ -417,7 +417,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00360"></a>00360  
 <a name="l00361"></a>00361 <span class="comment">// compute y=A*x</span>
 <a name="l00362"></a>00362 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00363"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a75a2ced8980671cf0a67b6fdd5ededb5">00363</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a75a2ced8980671cf0a67b6fdd5ededb5">FVDenseM&lt;T_&gt;::Mult</a>(<span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;<a class="code" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a9a4f74af87a76a4c3dcb729cb0e68f8d">x</a>, <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;<a class="code" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a1cb2b5ea04251d543e49356ef54eb853">y</a>) 
+<a name="l00363"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a75a2ced8980671cf0a67b6fdd5ededb5">00363</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a75a2ced8980671cf0a67b6fdd5ededb5">FVDenseM&lt;T_&gt;::Mult</a>(<span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;x, <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;y) 
 <a name="l00364"></a>00364     {
 <a name="l00365"></a>00365 <span class="keyword">register</span> <span class="keywordtype">size_t</span> pos_i; 
 <a name="l00366"></a>00366 <span class="keyword">register</span> <span class="keywordtype">size_t</span> i,j; 
@@ -439,7 +439,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00382"></a>00382     }
 <a name="l00383"></a>00383 <span class="comment">// compute y=A^T*x</span>
 <a name="l00384"></a>00384 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00385"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a51effb20cd7b29168e5f8eb0a96067a0">00385</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a51effb20cd7b29168e5f8eb0a96067a0">FVDenseM&lt;T_&gt;::TransMult</a>(<span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;<a class="code" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a9a4f74af87a76a4c3dcb729cb0e68f8d">x</a>, <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;<a class="code" href="../../d7/d79/FVL_2FVPoint2D_8h.html#a1cb2b5ea04251d543e49356ef54eb853">y</a>) 
+<a name="l00385"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a51effb20cd7b29168e5f8eb0a96067a0">00385</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a51effb20cd7b29168e5f8eb0a96067a0">FVDenseM&lt;T_&gt;::TransMult</a>(<span class="keyword">const</span> <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;x, <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;T_&gt;</a> &amp;y) 
 <a name="l00386"></a>00386     {
 <a name="l00387"></a>00387 <span class="keyword">register</span> <span class="keywordtype">size_t</span> pos_j;        
 <a name="l00388"></a>00388 <span class="preprocessor">#ifdef _DEBUGS</span>
@@ -522,15 +522,15 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00465"></a>00465     } 
 <a name="l00466"></a>00466 }
 <a name="l00467"></a>00467 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00468"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a24fe34cc0ea853e2b1db3a67af13a7d8">00468</a> <span class="keywordtype">void</span>  <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">FVDenseM&lt;T_&gt;::Gauss</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;u)
+<a name="l00468"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a24fe34cc0ea853e2b1db3a67af13a7d8">00468</a> <span class="keywordtype">void</span>  <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">FVDenseM&lt;T_&gt;::Gauss</a>(FVPoint2D&lt;double&gt; &amp;u)
 <a name="l00469"></a>00469 {
 <a name="l00470"></a>00470 <span class="keywordtype">double</span> det=<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[0]*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[3]-<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[1]*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[2];
 <a name="l00471"></a>00471 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00472"></a>00472 <span class="preprocessor"></span>  <span class="keywordflow">if</span> (det==0.0) cout&lt;&lt;<span class="stringliteral">&quot; Warning, singular matrix&quot;</span>&lt;&lt;endl; 
 <a name="l00473"></a>00473 <span class="preprocessor">#endif   </span>
-<a name="l00474"></a>00474 <span class="preprocessor"></span><a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> f(u);
-<a name="l00475"></a>00475 u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>=(f.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>*a[3]-f.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>*a[1])/det;
-<a name="l00476"></a>00476 u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>=(f.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>*a[0]-f.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>*a[2])/det;
+<a name="l00474"></a>00474 <span class="preprocessor"></span>FVPoint2D&lt;double&gt; f(u);
+<a name="l00475"></a>00475 u.x=(f.x*a[3]-f.y*a[1])/det;
+<a name="l00476"></a>00476 u.y=(f.y*a[0]-f.x*a[2])/det;
 <a name="l00477"></a>00477 }
 <a name="l00478"></a>00478 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
 <a name="l00479"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a864f4adb3fe4e5c6d74daa5cedd3df7c">00479</a> <span class="keywordtype">void</span>  <a class="code" href="../../d9/d70/classFVDenseM.html#aea5f8e6172b2bc847ebe020b047508f6">FVDenseM&lt;T_&gt;::Gauss</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;u)
@@ -636,13 +636,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00579"></a>00579 }
 <a name="l00580"></a>00580 <span class="comment">// forward substitution </span>
 <a name="l00581"></a>00581 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00582"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a22fd244ada8027b00b4e8e719b12b98d">00582</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">FVDenseM&lt;T_&gt;::ForwardSubstitution</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;u) 
+<a name="l00582"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a22fd244ada8027b00b4e8e719b12b98d">00582</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">FVDenseM&lt;T_&gt;::ForwardSubstitution</a>(FVPoint2D&lt;double&gt; &amp;u) 
 <a name="l00583"></a>00583 {
 <a name="l00584"></a>00584 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00585"></a>00585 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>!=2);
 <a name="l00586"></a>00586     <span class="keywordflow">if</span>(err) cout&lt;&lt;<span class="stringliteral">&quot; in file &quot;</span>&lt;&lt;__FILE__&lt;&lt;<span class="stringliteral">&quot;, line &quot;</span>&lt;&lt;__LINE__&lt;&lt;<span class="stringliteral">&quot;index out of range, error code=&quot;</span>&lt;&lt;err&lt;&lt;endl;
 <a name="l00587"></a>00587 <span class="preprocessor">#endif </span>
-<a name="l00588"></a>00588 <span class="preprocessor"></span>u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>-=u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[2];
+<a name="l00588"></a>00588 <span class="preprocessor"></span>u.y-=u.x*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[2];
 <a name="l00589"></a>00589 }
 <a name="l00590"></a>00590 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
 <a name="l00591"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a9ccdde3331a8053bcb9d0ad20abd46bd">00591</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a7f0e2f87410bc98b81e4b45bc93dc8c7">FVDenseM&lt;T_&gt;::ForwardSubstitution</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;u) 
@@ -685,13 +685,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00628"></a>00628     }
 <a name="l00629"></a>00629 }
 <a name="l00630"></a>00630 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00631"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a7b446c084839b05d16f40bfc87d7240f">00631</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">FVDenseM&lt;T_&gt;::BackwardSubstitution</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;u) 
+<a name="l00631"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a7b446c084839b05d16f40bfc87d7240f">00631</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">FVDenseM&lt;T_&gt;::BackwardSubstitution</a>(FVPoint2D&lt;double&gt; &amp;u) 
 <a name="l00632"></a>00632 {
 <a name="l00633"></a>00633 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00634"></a>00634 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>!=2);
 <a name="l00635"></a>00635     <span class="keywordflow">if</span>(err) cout&lt;&lt;<span class="stringliteral">&quot; in file &quot;</span>&lt;&lt;__FILE__&lt;&lt;<span class="stringliteral">&quot;, line &quot;</span>&lt;&lt;__LINE__&lt;&lt;<span class="stringliteral">&quot;index out of range, error code=&quot;</span>&lt;&lt;err&lt;&lt;endl;
 <a name="l00636"></a>00636 <span class="preprocessor">#endif </span>
-<a name="l00637"></a>00637 <span class="preprocessor"></span>u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>/=<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[3]; u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>=(u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>-<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[1]*u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>)/<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[0];
+<a name="l00637"></a>00637 <span class="preprocessor"></span>u.y/=<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[3]; u.x=(u.x-<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[1]*u.y)/<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[0];
 <a name="l00638"></a>00638 }
 <a name="l00639"></a>00639 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
 <a name="l00640"></a><a class="code" href="../../d9/d70/classFVDenseM.html#a7018eb739af43b8ff3b6d457437f29ab">00640</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a3749badec5bcc0b96381564309b61f5c">FVDenseM&lt;T_&gt;::BackwardSubstitution</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;u) 
@@ -763,13 +763,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00706"></a>00706 }
 <a name="l00707"></a>00707 <span class="comment">// forward substitution </span>
 <a name="l00708"></a>00708 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00709"></a><a class="code" href="../../d9/d70/classFVDenseM.html#aa2d2bc1b0cb10097d02a1d41ea963d56">00709</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">FVDenseM&lt;T_&gt;::ForwardSubstitutionPivoting</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;u) 
+<a name="l00709"></a><a class="code" href="../../d9/d70/classFVDenseM.html#aa2d2bc1b0cb10097d02a1d41ea963d56">00709</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">FVDenseM&lt;T_&gt;::ForwardSubstitutionPivoting</a>(FVPoint2D&lt;double&gt; &amp;u) 
 <a name="l00710"></a>00710 {
 <a name="l00711"></a>00711 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00712"></a>00712 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>!=2);
 <a name="l00713"></a>00713     <span class="keywordflow">if</span>(err) cout&lt;&lt;<span class="stringliteral">&quot; in file &quot;</span>&lt;&lt;__FILE__&lt;&lt;<span class="stringliteral">&quot;, line &quot;</span>&lt;&lt;__LINE__&lt;&lt;<span class="stringliteral">&quot;index out of range, error code=&quot;</span>&lt;&lt;err&lt;&lt;endl;
 <a name="l00714"></a>00714 <span class="preprocessor">#endif </span>
-<a name="l00715"></a>00715 <span class="preprocessor"></span>u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>-=u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[2];
+<a name="l00715"></a>00715 <span class="preprocessor"></span>u.y-=u.x*<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[2];
 <a name="l00716"></a>00716 }
 <a name="l00717"></a>00717 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
 <a name="l00718"></a><a class="code" href="../../d9/d70/classFVDenseM.html#adbc33db602247330e73b05ecef74678f">00718</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#a98ff2d70d8ac97a2d8c1a6a109285fb9">FVDenseM&lt;T_&gt;::ForwardSubstitutionPivoting</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;u) 
@@ -812,13 +812,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00755"></a>00755     }
 <a name="l00756"></a>00756 }
 <a name="l00757"></a>00757 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
-<a name="l00758"></a><a class="code" href="../../d9/d70/classFVDenseM.html#af0e30762af46f60b2e6dc4cbabdbb4bd">00758</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">FVDenseM&lt;T_&gt;::BackwardSubstitutionPivoting</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> &amp;u) 
+<a name="l00758"></a><a class="code" href="../../d9/d70/classFVDenseM.html#af0e30762af46f60b2e6dc4cbabdbb4bd">00758</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">FVDenseM&lt;T_&gt;::BackwardSubstitutionPivoting</a>(FVPoint2D&lt;double&gt; &amp;u) 
 <a name="l00759"></a>00759 {
 <a name="l00760"></a>00760 <span class="preprocessor">#ifdef _DEBUGS</span>
 <a name="l00761"></a>00761 <span class="preprocessor"></span>    <span class="keywordtype">size_t</span> err=(<a class="code" href="../../d9/d70/classFVDenseM.html#a4451904bc3a87b7e94ba9967cfe5acc9">nb_cols</a>!=2);
 <a name="l00762"></a>00762     <span class="keywordflow">if</span>(err) cout&lt;&lt;<span class="stringliteral">&quot; in file &quot;</span>&lt;&lt;__FILE__&lt;&lt;<span class="stringliteral">&quot;, line &quot;</span>&lt;&lt;__LINE__&lt;&lt;<span class="stringliteral">&quot;index out of range, error code=&quot;</span>&lt;&lt;err&lt;&lt;endl;
 <a name="l00763"></a>00763 <span class="preprocessor">#endif </span>
-<a name="l00764"></a>00764 <span class="preprocessor"></span>u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>/=<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[3]; u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>=(u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#a4333b1040efe8cd32f7c76bfc2269e0d">x</a>-<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[1]*u.<a class="code" href="../../d7/dbe/classFVPoint2D.html#ab4943c75e718fe503722ac7d26c746a6">y</a>)/<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[0];
+<a name="l00764"></a>00764 <span class="preprocessor"></span>u.y/=<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[3]; u.x=(u.x-<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[1]*u.y)/<a class="code" href="../../d9/d70/classFVDenseM.html#a79134a5b7e0d6acf861da02da21d735e">a</a>[0];
 <a name="l00765"></a>00765 }
 <a name="l00766"></a>00766 <span class="keyword">template</span>&lt;<span class="keyword">class</span> T_&gt;
 <a name="l00767"></a><a class="code" href="../../d9/d70/classFVDenseM.html#aebf5f34295c995ea440e913e0e27c32d">00767</a> <span class="keywordtype">void</span> <a class="code" href="../../d9/d70/classFVDenseM.html#afdda7cd3e2492739a87f026cf6ac55ea">FVDenseM&lt;T_&gt;::BackwardSubstitutionPivoting</a>(<a class="code" href="../../dd/d3c/classFVPoint3D.html">FVPoint3D&lt;double&gt;</a> &amp;u) 
@@ -923,7 +923,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

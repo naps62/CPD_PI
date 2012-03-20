@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00015"></a><a class="code" href="../../d3/dde/classFVRecons2D.html">00015</a> <span class="keyword">class </span><a class="code" href="../../d3/dde/classFVRecons2D.html">FVRecons2D</a>
 <a name="l00016"></a>00016 {
 <a name="l00017"></a>00017 <span class="keyword">private</span>:
-<a name="l00018"></a>00018 <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> _ref_point;
+<a name="l00018"></a>00018 FVPoint2D&lt;double&gt; _ref_point;
 <a name="l00019"></a>00019 <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  
 <a name="l00020"></a>00020 <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> *_coef,*_M;
 <a name="l00021"></a>00021 <a class="code" href="../../d3/d29/classFVStencil.html">FVStencil</a> * _ptr_s;
@@ -134,7 +134,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00075"></a>00075 <span class="comment">// others     </span>
 <a name="l00076"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a277a64063b5e54974f88aa36f01dd729">00076</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a277a64063b5e54974f88aa36f01dd729">setPolynomialDegree</a>(<span class="keywordtype">size_t</span> degree){_degree=degree;_Ncoef=((_degree+2)*(_degree+1))/2-1;}    
 <a name="l00077"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a51ced9e32566282ad2c8aa54e23f3cc5">00077</a> <span class="keywordtype">size_t</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a51ced9e32566282ad2c8aa54e23f3cc5">getPolynomialDegree</a>(){<span class="keywordflow">return</span>(_degree); } 
-<a name="l00078"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">00078</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">setReferencePoint</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> P){_ref_point=P;}
+<a name="l00078"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">00078</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#adefd5b78a5f9730ed90fa03fe7ddb671">setReferencePoint</a>(FVPoint2D&lt;double&gt; P){_ref_point=P;}
 <a name="l00079"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#ab7a2586dc96682fbdfd945755620f3cc">00079</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#ab7a2586dc96682fbdfd945755620f3cc">setVectorVertex2D</a>( <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp; u){_Vertex2DVect=&amp;u;}
 <a name="l00080"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a2f6606e5da89f8268f32d1f63dff07d9">00080</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a2f6606e5da89f8268f32d1f63dff07d9">setVectorEdge2D</a>( <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp; u)  {_Edge2DVect=&amp;u;}
 <a name="l00081"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#aedbe092efe0b4fb30f1c6009988e649d">00081</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#aedbe092efe0b4fb30f1c6009988e649d">setVectorCell2D</a>( <a class="code" href="../../da/d83/classFVVect.html">FVVect&lt;double&gt;</a> &amp; u)  {_Cell2DVect=&amp;u;}
@@ -142,10 +142,10 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00083"></a>00083 <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a8d6d0de3223ec5b38427aac5a0b4b2a0">computeConservativeCoef</a>(); 
 <a name="l00084"></a>00084 <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a778ff476790db0a772b0de4670138fd1">doMatrix</a>();
 <a name="l00085"></a>00085 <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a542380877cfbecb217d6079b325bcc9b">computeCoef</a>();
-<a name="l00086"></a>00086 <span class="keywordtype">double</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">getValue</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> P, <span class="keywordtype">size_t</span> degree );    
-<a name="l00087"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">00087</a> <span class="keywordtype">double</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">getValue</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> P){<span class="keywordflow">return</span>(<a class="code" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">FVRecons2D::getValue</a>(P,_degree));}    
-<a name="l00088"></a>00088 <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> <a class="code" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">getDerivative</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> P, <span class="keywordtype">size_t</span> degree);
-<a name="l00089"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">00089</a> <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> <a class="code" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">getDerivative</a>(<a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;double&gt;</a> P){<span class="keywordflow">return</span>(<a class="code" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">FVRecons2D::getDerivative</a>(P,_degree));}
+<a name="l00086"></a>00086 <span class="keywordtype">double</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">getValue</a>(FVPoint2D&lt;double&gt; P, <span class="keywordtype">size_t</span> degree );    
+<a name="l00087"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">00087</a> <span class="keywordtype">double</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a8813590c93228ac4cab9e6c3c1d2dd99">getValue</a>(FVPoint2D&lt;double&gt; P){<span class="keywordflow">return</span>(<a class="code" href="../../d3/dde/classFVRecons2D.html#ac1cc4ea8df74c7a534d6cfbcdcfbb2f9">FVRecons2D::getValue</a>(P,_degree));}    
+<a name="l00088"></a>00088 FVPoint2D&lt;double&gt; <a class="code" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">getDerivative</a>(FVPoint2D&lt;double&gt; P, <span class="keywordtype">size_t</span> degree);
+<a name="l00089"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">00089</a> FVPoint2D&lt;double&gt; <a class="code" href="../../d3/dde/classFVRecons2D.html#a950d06dbe4a1c248ba83ac1689156272">getDerivative</a>(FVPoint2D&lt;double&gt; P){<span class="keywordflow">return</span>(<a class="code" href="../../d3/dde/classFVRecons2D.html#a5f177a63e2041865e9c629f0eb4a06a5">FVRecons2D::getDerivative</a>(P,_degree));}
 <a name="l00090"></a><a class="code" href="../../d3/dde/classFVRecons2D.html#a2bbe646c052baf99f04a367ef6031d74">00090</a> <span class="keywordtype">void</span> <a class="code" href="../../d3/dde/classFVRecons2D.html#a2bbe646c052baf99f04a367ef6031d74">clean</a>()
 <a name="l00091"></a>00091     {
 <a name="l00092"></a>00092     <span class="keywordflow">if</span>(_A) <span class="keyword">delete</span>(_A); <span class="keywordflow">if</span>(_Q) <span class="keyword">delete</span>(_Q);<span class="keywordflow">if</span>(_coef) <span class="keyword">delete</span>(_coef);<span class="keywordflow">if</span>(_M) <span class="keyword">delete</span>(_M);
@@ -156,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00097"></a>00097     
 <a name="l00098"></a>00098 };
 <a name="l00099"></a>00099 
-<a name="l00100"></a>00100 <a class="code" href="../../d7/dbe/classFVPoint2D.html">FVPoint2D&lt;size_t&gt;</a> <a class="code" href="../../d7/d8f/FVRecons2D_8h.html#a81b642d1525527943d042610f8089569">alpha2D</a>(<span class="keywordtype">size_t</span> k);
+<a name="l00100"></a>00100 FVPoint2D&lt;size_t&gt; <a class="code" href="../../d7/d8f/FVRecons2D_8h.html#a81b642d1525527943d042610f8089569">alpha2D</a>(<span class="keywordtype">size_t</span> k);
 <a name="l00101"></a>00101 
 <a name="l00102"></a>00102 
 <a name="l00103"></a>00103 
@@ -180,7 +180,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

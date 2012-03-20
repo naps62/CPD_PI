@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00028"></a>00028     <span class="keywordtype">void</span> FVXMLWriter::append(CFVArray&lt;T&gt; &amp;vec, <span class="keywordtype">double</span> time, <span class="keywordtype">string</span> name) {
 <a name="l00029"></a>00029         stringstream ss;
 <a name="l00030"></a>00030         ss &lt;&lt; endl;
-<a name="l00031"></a>00031         ss &lt;&lt; scientific &lt;&lt; setprecision(<a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a9f1b34e347f7b79ee999353878fce712">FV_PRECISION</a>) &lt;&lt; setw(<a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a8142e87b22064c193f2a21692cbc8e32">FV_CHAMP</a>);
+<a name="l00031"></a>00031         ss &lt;&lt; scientific &lt;&lt; setprecision(<a class="code" href="../../d3/d80/FVMacros_8h.html#a9f1b34e347f7b79ee999353878fce712" title="Precision to be used when outputing to a stream.">FV_PRECISION</a>) &lt;&lt; setw(<a class="code" href="../../d3/d80/FVMacros_8h.html#a8142e87b22064c193f2a21692cbc8e32">FV_CHAMP</a>);
 <a name="l00032"></a>00032         <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vec.size(); ++i) {
 <a name="l00033"></a>00033             ss &lt;&lt; vec[i] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;
 <a name="l00034"></a>00034         }
@@ -114,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00053"></a>00053     <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;
 <a name="l00054"></a>00054     <span class="keywordtype">void</span> FVXMLWriter::add_attribute(xml_node&lt;&gt; *node, <span class="keywordtype">string</span> name, T value) {
 <a name="l00055"></a>00055         stringstream ss;
-<a name="l00056"></a>00056         ss &lt;&lt; scientific &lt;&lt; setprecision(<a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a9f1b34e347f7b79ee999353878fce712">FV_PRECISION</a>) &lt;&lt; setw(<a class="code" href="../../de/d8f/FVL_2FVGlobal_8h.html#a8142e87b22064c193f2a21692cbc8e32">FV_CHAMP</a>) &lt;&lt; value;
+<a name="l00056"></a>00056         ss &lt;&lt; scientific &lt;&lt; setprecision(<a class="code" href="../../d3/d80/FVMacros_8h.html#a9f1b34e347f7b79ee999353878fce712" title="Precision to be used when outputing to a stream.">FV_PRECISION</a>) &lt;&lt; setw(<a class="code" href="../../d3/d80/FVMacros_8h.html#a8142e87b22064c193f2a21692cbc8e32">FV_CHAMP</a>) &lt;&lt; value;
 <a name="l00057"></a>00057         <span class="keywordtype">string</span> str_value(ss.str());
 <a name="l00058"></a>00058         node-&gt;append_attribute(
 <a name="l00059"></a>00059                 this-&gt;allocate_attribute(
@@ -141,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:03 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:25 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

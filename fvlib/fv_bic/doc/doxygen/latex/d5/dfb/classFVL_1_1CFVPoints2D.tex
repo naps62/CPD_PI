@@ -4,40 +4,37 @@
 }
 
 
+Generic CUDA-\/ready array of 2-\/dimensional pointers.  
+
+
+
+
 {\ttfamily \#include $<$CFVPoints2D.h$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classFVL_1_1CFVPoints2D_a3df02bf525a9d5df56cdb835260a9453}{CFVPoints2D} ()
-\item 
 \hyperlink{classFVL_1_1CFVPoints2D_a63bf7c15d2279b68774bd55c5813b3e0}{CFVPoints2D} (const unsigned int size)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor to create a CUDA-\/ready array of 2-\/dimensional pointers with a given size. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVPoints2D_a89b71fc079d99459852b91dfc2517958}{CFVPoints2D} (const \hyperlink{classFVL_1_1CFVPoints2D}{FVL::CFVPoints2D}$<$ T $>$ \&copy)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor to create a CUDA-\/ready array of 2-\/dimensional pointers by copying an already existing array. \item\end{DoxyCompactList}\item 
 unsigned int \hyperlink{classFVL_1_1CFVPoints2D_a7033bafa80d2349b9b0da59d8c486767}{size} ()
-\begin{DoxyCompactList}\small\item\em GETTERS/SETTERS. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gives size of the array (number of (x, y) elements). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \hyperlink{classFVL_1_1CFVPoints2D_ae3f7cddcef8c7dca840ce2f51e60e159}{x}
-\begin{DoxyCompactList}\small\item\em one array for X coord, another for Y \item\end{DoxyCompactList}\item 
+\item 
 \hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \hyperlink{classFVL_1_1CFVPoints2D_a640cc15f66d3b56162f7455968907c41}{y}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Arrays for each coord. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
 \subsubsection*{template$<$class T$>$ class FVL::CFVPoints2D$<$ T $>$}
 
-
+Generic CUDA-\/ready array of 2-\/dimensional pointers. Stored with one array for x coord, and one for y 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classFVL_1_1CFVPoints2D_a3df02bf525a9d5df56cdb835260a9453}{
-\index{FVL::CFVPoints2D@{FVL::CFVPoints2D}!CFVPoints2D@{CFVPoints2D}}
-\index{CFVPoints2D@{CFVPoints2D}!FVL::CFVPoints2D@{FVL::CFVPoints2D}}
-\subsubsection[{CFVPoints2D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVPoints2D} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{d5/dfb/classFVL_1_1CFVPoints2D_a3df02bf525a9d5df56cdb835260a9453}
 \hypertarget{classFVL_1_1CFVPoints2D_a63bf7c15d2279b68774bd55c5813b3e0}{
 \index{FVL::CFVPoints2D@{FVL::CFVPoints2D}!CFVPoints2D@{CFVPoints2D}}
 \index{CFVPoints2D@{CFVPoints2D}!FVL::CFVPoints2D@{FVL::CFVPoints2D}}
@@ -47,6 +44,13 @@ unsigned int \hyperlink{classFVL_1_1CFVPoints2D_a7033bafa80d2349b9b0da59d8c48676
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d5/dfb/classFVL_1_1CFVPoints2D_a63bf7c15d2279b68774bd55c5813b3e0}
+
+
+Constructor to create a CUDA-\/ready array of 2-\/dimensional pointers with a given size. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em size}]Number of 2-\/dimensional elements to allocate for the array \end{DoxyParams}
 \hypertarget{classFVL_1_1CFVPoints2D_a89b71fc079d99459852b91dfc2517958}{
 \index{FVL::CFVPoints2D@{FVL::CFVPoints2D}!CFVPoints2D@{CFVPoints2D}}
 \index{CFVPoints2D@{CFVPoints2D}!FVL::CFVPoints2D@{FVL::CFVPoints2D}}
@@ -56,6 +60,13 @@ unsigned int \hyperlink{classFVL_1_1CFVPoints2D_a7033bafa80d2349b9b0da59d8c48676
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d5/dfb/classFVL_1_1CFVPoints2D_a89b71fc079d99459852b91dfc2517958}
+
+
+Constructor to create a CUDA-\/ready array of 2-\/dimensional pointers by copying an already existing array. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em copy}]Array to copy \end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
@@ -70,8 +81,11 @@ unsigned int \hyperlink{classFVL_1_1CFVPoints2D_a7033bafa80d2349b9b0da59d8c48676
 \label{d5/dfb/classFVL_1_1CFVPoints2D_a7033bafa80d2349b9b0da59d8c486767}
 
 
-GETTERS/SETTERS. 
+Gives size of the array (number of (x, y) elements). 
 
+\begin{DoxyReturn}{Returns}
+Total number of elements allocated 
+\end{DoxyReturn}
 
 
 \subsection{Field Documentation}
@@ -80,15 +94,15 @@ GETTERS/SETTERS.
 \index{x@{x}!FVL::CFVPoints2D@{FVL::CFVPoints2D}}
 \subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVArray}$<$T$>$ {\bf x}}}
 \label{d5/dfb/classFVL_1_1CFVPoints2D_ae3f7cddcef8c7dca840ce2f51e60e159}
-
-
-one array for X coord, another for Y 
-
 \hypertarget{classFVL_1_1CFVPoints2D_a640cc15f66d3b56162f7455968907c41}{
 \index{FVL::CFVPoints2D@{FVL::CFVPoints2D}!y@{y}}
 \index{y@{y}!FVL::CFVPoints2D@{FVL::CFVPoints2D}}
 \subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVArray}$<$T$>$ {\bf y}}}
 \label{d5/dfb/classFVL_1_1CFVPoints2D_a640cc15f66d3b56162f7455968907c41}
+
+
+Arrays for each coord. 
+
 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}

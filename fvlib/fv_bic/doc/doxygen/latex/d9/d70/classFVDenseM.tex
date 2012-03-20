@@ -43,7 +43,7 @@ void \hyperlink{classFVDenseM_a9441579962fe169d09d5fd504388da1a}{setLine} (size\
 \item 
 void \hyperlink{classFVDenseM_a888ffa88e606f11b989361ef3b1176b6}{setColumn} (size\_\-t j, const \hyperlink{classFVVect}{FVVect}$<$ T\_\- $>$ \&column)
 \item 
-\hyperlink{classFVDenseM}{FVDenseM}$<$ T\_\- $>$ \& \hyperlink{classFVDenseM_a06daa883e8e99590868bfd95689d638b}{operator=} (const T\_\- \&\hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x})
+\hyperlink{classFVDenseM}{FVDenseM}$<$ T\_\- $>$ \& \hyperlink{classFVDenseM_a06daa883e8e99590868bfd95689d638b}{operator=} (const T\_\- \&x)
 \item 
 \hyperlink{classFVDenseM}{FVDenseM}$<$ T\_\- $>$ \& \hyperlink{classFVDenseM_a1beab84f76baeed61a89633796b6cc29}{operator+=} (const \hyperlink{classFVDenseM}{FVDenseM}$<$ T\_\- $>$ \&m)
 \item 
@@ -63,7 +63,7 @@ void \hyperlink{classFVDenseM_a51effb20cd7b29168e5f8eb0a96067a0}{TransMult} (con
 \item 
 void \hyperlink{classFVDenseM_aea5f8e6172b2bc847ebe020b047508f6}{Gauss} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&)
 \item 
-void \hyperlink{classFVDenseM_a24fe34cc0ea853e2b1db3a67af13a7d8}{Gauss} (\hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ \&)
+void \hyperlink{classFVDenseM_a24fe34cc0ea853e2b1db3a67af13a7d8}{Gauss} (FVPoint2D$<$ double $>$ \&)
 \item 
 void \hyperlink{classFVDenseM_a864f4adb3fe4e5c6d74daa5cedd3df7c}{Gauss} (\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&)
 \item 
@@ -75,9 +75,9 @@ void \hyperlink{classFVDenseM_a7f0e2f87410bc98b81e4b45bc93dc8c7}{ForwardSubstitu
 \item 
 void \hyperlink{classFVDenseM_a3749badec5bcc0b96381564309b61f5c}{BackwardSubstitution} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&)
 \item 
-void \hyperlink{classFVDenseM_a22fd244ada8027b00b4e8e719b12b98d}{ForwardSubstitution} (\hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ \&)
+void \hyperlink{classFVDenseM_a22fd244ada8027b00b4e8e719b12b98d}{ForwardSubstitution} (FVPoint2D$<$ double $>$ \&)
 \item 
-void \hyperlink{classFVDenseM_a7b446c084839b05d16f40bfc87d7240f}{BackwardSubstitution} (\hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ \&)
+void \hyperlink{classFVDenseM_a7b446c084839b05d16f40bfc87d7240f}{BackwardSubstitution} (FVPoint2D$<$ double $>$ \&)
 \item 
 void \hyperlink{classFVDenseM_a9ccdde3331a8053bcb9d0ad20abd46bd}{ForwardSubstitution} (\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&)
 \item 
@@ -93,9 +93,9 @@ void \hyperlink{classFVDenseM_a98ff2d70d8ac97a2d8c1a6a109285fb9}{ForwardSubstitu
 \item 
 void \hyperlink{classFVDenseM_afdda7cd3e2492739a87f026cf6ac55ea}{BackwardSubstitutionPivoting} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&)
 \item 
-void \hyperlink{classFVDenseM_aa2d2bc1b0cb10097d02a1d41ea963d56}{ForwardSubstitutionPivoting} (\hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ \&)
+void \hyperlink{classFVDenseM_aa2d2bc1b0cb10097d02a1d41ea963d56}{ForwardSubstitutionPivoting} (FVPoint2D$<$ double $>$ \&)
 \item 
-void \hyperlink{classFVDenseM_af0e30762af46f60b2e6dc4cbabdbb4bd}{BackwardSubstitutionPivoting} (\hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ \&)
+void \hyperlink{classFVDenseM_af0e30762af46f60b2e6dc4cbabdbb4bd}{BackwardSubstitutionPivoting} (FVPoint2D$<$ double $>$ \&)
 \item 
 void \hyperlink{classFVDenseM_adbc33db602247330e73b05ecef74678f}{ForwardSubstitutionPivoting} (\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&)
 \item 
@@ -203,7 +203,7 @@ size\_\-t \hyperlink{classFVDenseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
 \index{BackwardSubstitution@{BackwardSubstitution}!FVDenseM@{FVDenseM}}
 \subsubsection[{BackwardSubstitution}]{\setlength{\rightskip}{0pt plus 5cm}void BackwardSubstitution (
 \begin{DoxyParamCaption}
-\item[{{\bf FVPoint2D}$<$ double $>$ \&}]{ u}
+\item[{FVPoint2D$<$ double $>$ \&}]{ u}
 \end{DoxyParamCaption}
 )}}
 \label{d9/d70/classFVDenseM_a7b446c084839b05d16f40bfc87d7240f}
@@ -230,7 +230,7 @@ size\_\-t \hyperlink{classFVDenseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
 \index{BackwardSubstitutionPivoting@{BackwardSubstitutionPivoting}!FVDenseM@{FVDenseM}}
 \subsubsection[{BackwardSubstitutionPivoting}]{\setlength{\rightskip}{0pt plus 5cm}void BackwardSubstitutionPivoting (
 \begin{DoxyParamCaption}
-\item[{{\bf FVPoint2D}$<$ double $>$ \&}]{ u}
+\item[{FVPoint2D$<$ double $>$ \&}]{ u}
 \end{DoxyParamCaption}
 )}}
 \label{d9/d70/classFVDenseM_af0e30762af46f60b2e6dc4cbabdbb4bd}
@@ -275,7 +275,7 @@ size\_\-t \hyperlink{classFVDenseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
 \index{ForwardSubstitution@{ForwardSubstitution}!FVDenseM@{FVDenseM}}
 \subsubsection[{ForwardSubstitution}]{\setlength{\rightskip}{0pt plus 5cm}void ForwardSubstitution (
 \begin{DoxyParamCaption}
-\item[{{\bf FVPoint2D}$<$ double $>$ \&}]{ u}
+\item[{FVPoint2D$<$ double $>$ \&}]{ u}
 \end{DoxyParamCaption}
 )}}
 \label{d9/d70/classFVDenseM_a22fd244ada8027b00b4e8e719b12b98d}
@@ -302,7 +302,7 @@ size\_\-t \hyperlink{classFVDenseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
 \index{ForwardSubstitutionPivoting@{ForwardSubstitutionPivoting}!FVDenseM@{FVDenseM}}
 \subsubsection[{ForwardSubstitutionPivoting}]{\setlength{\rightskip}{0pt plus 5cm}void ForwardSubstitutionPivoting (
 \begin{DoxyParamCaption}
-\item[{{\bf FVPoint2D}$<$ double $>$ \&}]{ u}
+\item[{FVPoint2D$<$ double $>$ \&}]{ u}
 \end{DoxyParamCaption}
 )}}
 \label{d9/d70/classFVDenseM_aa2d2bc1b0cb10097d02a1d41ea963d56}
@@ -338,7 +338,7 @@ size\_\-t \hyperlink{classFVDenseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
 \index{Gauss@{Gauss}!FVDenseM@{FVDenseM}}
 \subsubsection[{Gauss}]{\setlength{\rightskip}{0pt plus 5cm}void Gauss (
 \begin{DoxyParamCaption}
-\item[{{\bf FVPoint2D}$<$ double $>$ \&}]{ u}
+\item[{FVPoint2D$<$ double $>$ \&}]{ u}
 \end{DoxyParamCaption}
 )}}
 \label{d9/d70/classFVDenseM_a24fe34cc0ea853e2b1db3a67af13a7d8}

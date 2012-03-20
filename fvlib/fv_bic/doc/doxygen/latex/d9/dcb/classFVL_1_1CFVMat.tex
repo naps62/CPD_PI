@@ -4,61 +4,58 @@
 }
 
 
+Generic CUDA-\/ready array of matrixes class.  
+
+
+
+
 {\ttfamily \#include $<$CFVMat.h$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}{CFVMat} ()
-\begin{DoxyCompactList}\small\item\em CONSTRUCTORS. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}{CFVMat} (unsigned int w, unsigned int h, unsigned int size)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor to create a matrix with given dimensions. \item\end{DoxyCompactList}\item 
 \hyperlink{classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}{$\sim$CFVMat} ()
-\item 
-\hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \& \hyperlink{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{elem} (unsigned int \hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, unsigned int \hyperlink{FVL_2FVPoint2D_8h_a1cb2b5ea04251d543e49356ef54eb853}{y})
-\begin{DoxyCompactList}\small\item\em GETTERS/SETTERS. \item\end{DoxyCompactList}\item 
-T \& \hyperlink{classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}{elem} (unsigned int \hyperlink{FVL_2FVPoint2D_8h_a9a4f74af87a76a4c3dcb729cb0e68f8d}{x}, unsigned int \hyperlink{FVL_2FVPoint2D_8h_a1cb2b5ea04251d543e49356ef54eb853}{y}, unsigned int i)
-\item 
+\begin{DoxyCompactList}\small\item\em Default destructor. \item\end{DoxyCompactList}\item 
+\hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \& \hyperlink{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{elem} (unsigned int x, unsigned int y)
+\begin{DoxyCompactList}\small\item\em Gives a vector of the matrix values at given coords. \item\end{DoxyCompactList}\item 
+T \& \hyperlink{classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}{elem} (unsigned int x, unsigned int y, unsigned int i)
+\begin{DoxyCompactList}\small\item\em Returns a single element of a matrix at given coordinates. \item\end{DoxyCompactList}\item 
 vector$<$ \hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ $>$ \& \hyperlink{classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}{getMat} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the vector of each array of the matrix. \item\end{DoxyCompactList}\item 
 unsigned int \hyperlink{classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}{size} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em Gives number of matrixes stored. \item\end{DoxyCompactList}\item 
 unsigned int \hyperlink{classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}{width} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em Gives width (number of columns) of each matrix. \item\end{DoxyCompactList}\item 
 unsigned int \hyperlink{classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}{height} () const 
-\item 
-T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}{cuda\_\-getMat} ()
-\begin{DoxyCompactList}\small\item\em CUDA. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Gives height (number of rows) of each matrix. \item\end{DoxyCompactList}\item 
+T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_a8b296b3ae7f031dac8aecc13b0bf39fc}{cuda\_\-get} ()
+\begin{DoxyCompactList}\small\item\em Get the array of pointers for each elem in CUDA memory. \item\end{DoxyCompactList}\item 
 T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}{cuda\_\-malloc} ()
-\item 
-T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}{cuda\_\-mallocAndSave} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Allocates space in CUDA memory for all matrixes. \item\end{DoxyCompactList}\item 
+T $\ast$$\ast$ \hyperlink{classFVL_1_1CFVMat_add6329cf5dda5b5bf602d724d6d69abc}{cuda\_\-mallocAndSave} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em Allocates space in CUDA memory for all matrixes, and copies all data to it. \item\end{DoxyCompactList}\item 
 void \hyperlink{classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}{cuda\_\-free} ()
-\item 
-void \hyperlink{classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}{cuda\_\-save} ()
-\item 
-void \hyperlink{classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}{cuda\_\-saveAsync} (cudaStream\_\-t \&stream)
-\item 
-void \hyperlink{classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}{cuda\_\-get} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Releases CUDA memory of all matrixes. \item\end{DoxyCompactList}\item 
+void \hyperlink{classFVL_1_1CFVMat_a817cca487c7f644b7e5d1abf8bd42308}{cuda\_\-save} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em copies data from the array on host memory to CUDA memory \item\end{DoxyCompactList}\item 
+void \hyperlink{classFVL_1_1CFVMat_a9ea6b5a93cae1474a26ebef38d1eb350}{cuda\_\-load} (cudaStream\_\-t stream=0)
+\begin{DoxyCompactList}\small\item\em copies data from the array on CUDA memory back to the host \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
 \subsubsection*{template$<$class T$>$ class FVL::CFVMat$<$ T $>$}
 
+Generic CUDA-\/ready array of matrixes class. Even though it is meant to represent an array of matrixes, it is stored as a vector of arrays, where the vector is 1-\/dimensional representation of the 2D matrix.
+
+Instead of accessing elements in the form mat\mbox{[}matrix\_\-index\mbox{]}\mbox{[}row\mbox{]}\mbox{[}column\mbox{]}, elements are accessed as mat\mbox{[}row $\ast$ width + column\mbox{]}\mbox{[}matrix\_\-index\mbox{]}. Method \hyperlink{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{elem()} provides an easier way of accessing items in CPU-\/code, in the form elem(row, column, matrix\_\-index)
+
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]Allow for device-\/only allocation; alloc single block for whole matrix (allow single mem access instead of 2) \end{Desc}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}{
-\index{FVL::CFVMat@{FVL::CFVMat}!CFVMat@{CFVMat}}
-\index{CFVMat@{CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
-\subsubsection[{CFVMat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CFVMat} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{d9/dcb/classFVL_1_1CFVMat_a51ff8888d077d558b27474c15368baf9}
-
-
-CONSTRUCTORS. 
-
 \hypertarget{classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}{
 \index{FVL::CFVMat@{FVL::CFVMat}!CFVMat@{CFVMat}}
 \index{CFVMat@{CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
@@ -70,6 +67,13 @@ CONSTRUCTORS.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_a90b5cd38bfc076884d1f3cacc9f35cee}
+
+
+Constructor to create a matrix with given dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em w}]Number of columns \item[{\em h}]Number of rows \item[{\em size}]Number of matrixes to allocated \end{DoxyParams}
 \hypertarget{classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}{
 \index{FVL::CFVMat@{FVL::CFVMat}!$\sim$CFVMat@{$\sim$CFVMat}}
 \index{$\sim$CFVMat@{$\sim$CFVMat}!FVL::CFVMat@{FVL::CFVMat}}
@@ -81,6 +85,10 @@ CONSTRUCTORS.
 \label{d9/dcb/classFVL_1_1CFVMat_a9746a1a3f248769a1268c2a225cedd52}
 
 
+Default destructor. 
+
+Releases all memory allocated for this array 
+
 \subsection{Member Function Documentation}
 \hypertarget{classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}{
 \index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-free@{cuda\_\-free}}
@@ -91,29 +99,43 @@ CONSTRUCTORS.
 \end{DoxyParamCaption}
 )}}
 \label{d9/dcb/classFVL_1_1CFVMat_a7da37a3af0dbb3b115a980bf13d30d02}
-\hypertarget{classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}{
+
+
+Releases CUDA memory of all matrixes. 
+
+\hypertarget{classFVL_1_1CFVMat_a8b296b3ae7f031dac8aecc13b0bf39fc}{
 \index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-get@{cuda\_\-get}}
 \index{cuda\_\-get@{cuda\_\-get}!FVL::CFVMat@{FVL::CFVMat}}
-\subsubsection[{cuda\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-get (
+\subsubsection[{cuda\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{d9/dcb/classFVL_1_1CFVMat_add025b0a8b98e7d4d6e631bbaf30b088}
-\hypertarget{classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}{
-\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-getMat@{cuda\_\-getMat}}
-\index{cuda\_\-getMat@{cuda\_\-getMat}!FVL::CFVMat@{FVL::CFVMat}}
-\subsubsection[{cuda\_\-getMat}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-getMat (
+\label{d9/dcb/classFVL_1_1CFVMat_a8b296b3ae7f031dac8aecc13b0bf39fc}
+
+
+Get the array of pointers for each elem in CUDA memory. 
+
+\begin{DoxyReturn}{Returns}
+Array of pointers for each elem 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVMat_a9ea6b5a93cae1474a26ebef38d1eb350}{
+\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-load@{cuda\_\-load}}
+\index{cuda\_\-load@{cuda\_\-load}!FVL::CFVMat@{FVL::CFVMat}}
+\subsubsection[{cuda\_\-load}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-load (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{d9/dcb/classFVL_1_1CFVMat_aceec2df9965a4291582db9fc8fc699b3}
+\label{d9/dcb/classFVL_1_1CFVMat_a9ea6b5a93cae1474a26ebef38d1eb350}
 
 
-CUDA. 
+copies data from the array on CUDA memory back to the host 
 
-Each elem is stored as an individual vector an additional T$\ast$$\ast$ array of size w$\ast$y is stored to hold references to each elem \hypertarget{classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}{
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]cuda stream to use (defaults to 0 to use no stream) \end{DoxyParams}
+\hypertarget{classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}{
 \index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-malloc@{cuda\_\-malloc}}
 \index{cuda\_\-malloc@{cuda\_\-malloc}!FVL::CFVMat@{FVL::CFVMat}}
 \subsubsection[{cuda\_\-malloc}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-malloc (
@@ -122,33 +144,48 @@ Each elem is stored as an individual vector an additional T$\ast$$\ast$ array of
 \end{DoxyParamCaption}
 )}}
 \label{d9/dcb/classFVL_1_1CFVMat_a09eadb0032c2862e02ddaf42732533f0}
-\hypertarget{classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}{
+
+
+Allocates space in CUDA memory for all matrixes. 
+
+\begin{DoxyReturn}{Returns}
+Array of pointers for each elem 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVMat_add6329cf5dda5b5bf602d724d6d69abc}{
 \index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}}
 \index{cuda\_\-mallocAndSave@{cuda\_\-mallocAndSave}!FVL::CFVMat@{FVL::CFVMat}}
 \subsubsection[{cuda\_\-mallocAndSave}]{\setlength{\rightskip}{0pt plus 5cm}T$\ast$$\ast$ cuda\_\-mallocAndSave (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{d9/dcb/classFVL_1_1CFVMat_a94baaa72706c36df0f63c9a91c2643d3}
-\hypertarget{classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}{
+\label{d9/dcb/classFVL_1_1CFVMat_add6329cf5dda5b5bf602d724d6d69abc}
+
+
+Allocates space in CUDA memory for all matrixes, and copies all data to it. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]CUDA Stream to use (defaults to 0 to use no stream) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of pointers for each elem 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1CFVMat_a817cca487c7f644b7e5d1abf8bd42308}{
 \index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-save@{cuda\_\-save}}
 \index{cuda\_\-save@{cuda\_\-save}!FVL::CFVMat@{FVL::CFVMat}}
 \subsubsection[{cuda\_\-save}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-save (
 \begin{DoxyParamCaption}
-{}
+\item[{cudaStream\_\-t}]{ stream = {\ttfamily 0}}
 \end{DoxyParamCaption}
 )}}
-\label{d9/dcb/classFVL_1_1CFVMat_af496393c6fc22710b80e2dcb735ccce7}
-\hypertarget{classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}{
-\index{FVL::CFVMat@{FVL::CFVMat}!cuda\_\-saveAsync@{cuda\_\-saveAsync}}
-\index{cuda\_\-saveAsync@{cuda\_\-saveAsync}!FVL::CFVMat@{FVL::CFVMat}}
-\subsubsection[{cuda\_\-saveAsync}]{\setlength{\rightskip}{0pt plus 5cm}void cuda\_\-saveAsync (
-\begin{DoxyParamCaption}
-\item[{cudaStream\_\-t \&}]{ stream}
-\end{DoxyParamCaption}
-)}}
-\label{d9/dcb/classFVL_1_1CFVMat_abde9b4b5738a7aeb95290249a3035ab5}
+\label{d9/dcb/classFVL_1_1CFVMat_a817cca487c7f644b7e5d1abf8bd42308}
+
+
+copies data from the array on host memory to CUDA memory 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em stream}]cuda stream to use (defaults to 0 to use no stream) \end{DoxyParams}
 \hypertarget{classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}{
 \index{FVL::CFVMat@{FVL::CFVMat}!elem@{elem}}
 \index{elem@{elem}!FVL::CFVMat@{FVL::CFVMat}}
@@ -160,6 +197,16 @@ Each elem is stored as an individual vector an additional T$\ast$$\ast$ array of
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_a2d02be460deeb3ad73a4bf0a3f9beb4d}
+
+
+Returns a single element of a matrix at given coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em x}]Row of the element to acess \item[{\em y}]Column of the element to access \item[{\em i}]Index of the matrix to acess \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+element of matrix with index i, at coordinates (x, y) 
+\end{DoxyReturn}
 \hypertarget{classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}{
 \index{FVL::CFVMat@{FVL::CFVMat}!elem@{elem}}
 \index{elem@{elem}!FVL::CFVMat@{FVL::CFVMat}}
@@ -172,8 +219,16 @@ Each elem is stored as an individual vector an additional T$\ast$$\ast$ array of
 \label{d9/dcb/classFVL_1_1CFVMat_ab179d788531c0f2d2f17e75896112f63}
 
 
-GETTERS/SETTERS. 
+Gives a vector of the matrix values at given coords. 
 
+For coords (x, y) gives the vector with elements of each matrix at position (x, y)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em x}]Row of the matrixes to access \item[{\em y}]Column of the matrixes to access \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of elements contained at (x, y) in each matrix 
+\end{DoxyReturn}
 \hypertarget{classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}{
 \index{FVL::CFVMat@{FVL::CFVMat}!getMat@{getMat}}
 \index{getMat@{getMat}!FVL::CFVMat@{FVL::CFVMat}}
@@ -183,6 +238,13 @@ GETTERS/SETTERS.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_a434d97b662d1620513d0f27ecd0e9b1e}
+
+
+Get the vector of each array of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+Vector of arrays of the matrix 
+\end{DoxyReturn}
 \hypertarget{classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}{
 \index{FVL::CFVMat@{FVL::CFVMat}!height@{height}}
 \index{height@{height}!FVL::CFVMat@{FVL::CFVMat}}
@@ -192,6 +254,13 @@ GETTERS/SETTERS.
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_aa420a28166e708e3f8b9ecc8e527fc09}
+
+
+Gives height (number of rows) of each matrix. 
+
+\begin{DoxyReturn}{Returns}
+Height of each matrix 
+\end{DoxyReturn}
 \hypertarget{classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}{
 \index{FVL::CFVMat@{FVL::CFVMat}!size@{size}}
 \index{size@{size}!FVL::CFVMat@{FVL::CFVMat}}
@@ -201,6 +270,13 @@ GETTERS/SETTERS.
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_a90ca964ebcc1b02bbcde225edd49e812}
+
+
+Gives number of matrixes stored. 
+
+\begin{DoxyReturn}{Returns}
+Number of matrixes stored 
+\end{DoxyReturn}
 \hypertarget{classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}{
 \index{FVL::CFVMat@{FVL::CFVMat}!width@{width}}
 \index{width@{width}!FVL::CFVMat@{FVL::CFVMat}}
@@ -210,6 +286,13 @@ GETTERS/SETTERS.
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{d9/dcb/classFVL_1_1CFVMat_a7b736ec9a05be5c498760d35a0406ed3}
+
+
+Gives width (number of columns) of each matrix. 
+
+\begin{DoxyReturn}{Returns}
+Width of each matrix 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}

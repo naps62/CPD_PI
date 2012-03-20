@@ -64,42 +64,32 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="FVL::CFVPoints2D" -->
+<p>Generic CUDA-ready array of 2-dimensional pointers.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d5/da9/CFVPoints2D_8h_source.html">CFVPoints2D.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a3df02bf525a9d5df56cdb835260a9453">CFVPoints2D</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a63bf7c15d2279b68774bd55c5813b3e0">CFVPoints2D</a> (const unsigned int size)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor to create a CUDA-ready array of 2-dimensional pointers with a given size.  <a href="#a63bf7c15d2279b68774bd55c5813b3e0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a89b71fc079d99459852b91dfc2517958">CFVPoints2D</a> (const <a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">FVL::CFVPoints2D</a>&lt; T &gt; &amp;copy)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor to create a CUDA-ready array of 2-dimensional pointers by copying an already existing array.  <a href="#a89b71fc079d99459852b91dfc2517958"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a7033bafa80d2349b9b0da59d8c486767">size</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">GETTERS/SETTERS.  <a href="#a7033bafa80d2349b9b0da59d8c486767"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives size of the array (number of (x, y) elements).  <a href="#a7033bafa80d2349b9b0da59d8c486767"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray</a>&lt; T &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#ae3f7cddcef8c7dca840ce2f51e60e159">x</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">one array for X coord, another for Y  <a href="#ae3f7cddcef8c7dca840ce2f51e60e159"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d80/classFVL_1_1CFVArray.html">CFVArray</a>&lt; T &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html#a640cc15f66d3b56162f7455968907c41">y</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Arrays for each coord.  <a href="#a640cc15f66d3b56162f7455968907c41"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
 <h3>template&lt;class T&gt;<br/>
  class FVL::CFVPoints2D&lt; T &gt;</h3>
 
+<p>Generic CUDA-ready array of 2-dimensional pointers. </p>
+<p>Stored with one array for x coord, and one for y </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3df02bf525a9d5df56cdb835260a9453"></a><!-- doxytag: member="FVL::CFVPoints2D::CFVPoints2D" ref="a3df02bf525a9d5df56cdb835260a9453" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d5/dfb/classFVL_1_1CFVPoints2D.html">CFVPoints2D</a> </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a63bf7c15d2279b68774bd55c5813b3e0"></a><!-- doxytag: member="FVL::CFVPoints2D::CFVPoints2D" ref="a63bf7c15d2279b68774bd55c5813b3e0" args="(const unsigned int size)" -->
 <div class="memitem">
 <div class="memproto">
@@ -115,6 +105,14 @@ Data Fields</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Constructor to create a CUDA-ready array of 2-dimensional pointers with a given size. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>size</em>&nbsp;</td><td>Number of 2-dimensional elements to allocate for the array </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -134,6 +132,14 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Constructor to create a CUDA-ready array of 2-dimensional pointers by copying an already existing array. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>copy</em>&nbsp;</td><td>Array to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -152,7 +158,8 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>GETTERS/SETTERS. </p>
+<p>Gives size of the array (number of (x, y) elements). </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Total number of elements allocated </dd></dl>
 
 </div>
 </div>
@@ -168,8 +175,6 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>one array for X coord, another for Y </p>
-
 </div>
 </div>
 <a class="anchor" id="a640cc15f66d3b56162f7455968907c41"></a><!-- doxytag: member="FVL::CFVPoints2D::y" ref="a640cc15f66d3b56162f7455968907c41" args="" -->
@@ -182,6 +187,8 @@ Data Fields</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Arrays for each coord. </p>
 
 </div>
 </div>
@@ -203,7 +210,7 @@ Data Fields</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 01:03:04 for FVLib by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 12:38:26 for FVLib by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

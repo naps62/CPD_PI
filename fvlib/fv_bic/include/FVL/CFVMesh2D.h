@@ -22,26 +22,6 @@ using namespace std;
 
 namespace FVL {
 
-	/**
-	 * Types of edges in a 2D Mesh
-	 *
-	 * \todo move this to a more suitable class
-	 */
-	enum Edge2D_Type {
-		EDGE			= 0,	///< regular internal edge
-		EDGE_DIRICHLET	= 1,	///< border edge where dirichlet condition is applied
-		EDGE_NEUMMAN	= 2,	///< border edge where neumman condition is applied
-	};
-
-	/**
-	 * Types of cells in a 2D Mesh
-	 *
-	 * \todo move this to a more suitable class
-	 */
-	enum Cell2D_Type {
-		CELL = 10,				///< regular cell
-	};
-
 
 	/**
 	 * 2D Mesh structure to use in a CUDA device
