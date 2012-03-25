@@ -21,8 +21,8 @@
 namespace FVL {
 
 	template<class T>
-	T** CFVMat<T>::cuda_getMat() {
-		return cuda_mat.cuda_getArray();
+	T** CFVMat<T>::cuda_get() {
+		return cuda_mat.cuda_get();
 	}
 
 	template<class T>
@@ -35,14 +35,14 @@ namespace FVL {
 		}
 
 		cuda_mat.cuda_mallocAndSave();
-		return cuda_getMat();
+		return cuda_get();
 	}
 
 	template<class T>
-	T** CFVMat<T>::cuda_mallocAndSave() {
+	T** CFVMat<T>::cuda_mallocAndSave(cudaStream_t stream) {
 		this->cuda_malloc();
-		this->cuda_save();
-		return this->cuda_getMat();
+		this->cuda_save(stream);
+		return this->cuda_get();
 	}
 
 	template<class T>
@@ -54,24 +54,17 @@ namespace FVL {
 	}
 
 	template<class T>
-	void CFVMat<T>::cuda_save() {
+	void CFVMat<T>::cuda_save(cudaStream_t stream) {
 		for(unsigned int y = 0; y < h; ++y)
 			for(unsigned int x = 0; x < w; ++x)
-				mat[y * w + x].cuda_save();
+				mat[y * w + x].cuda_save(stream);
 	}
 
 	template<class T>
-	void CFVMat<T>::cuda_saveAsync(cudaStream_t &stream) {
+	void CFVMat<T>::cuda_load(cudaStream_t stream) {
 		for(unsigned int y = 0; y < h; ++y)
 			for(unsigned int x = 0; x < w; ++x)
-				mat[y * w + x].cuda_saveAsync(stream);
-	}
-
-	template<class T>
-	void CFVMat<T>::cuda_get() {
-		for(unsigned int y = 0; y < h; ++y)
-			for(unsigned int x = 0; x < w; ++x)
-				mat[y * w + x].cuda_get();
+				mat[y * w + x].cuda_load(stream);
 	}
 
 	/* ALLOC/DELETE */

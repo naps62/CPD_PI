@@ -27,6 +27,11 @@ namespace FVL {
 				 ***********************************************/
 
 				/**
+				 * Empty constructor
+				 */
+				FVArray();
+
+				/**
 				 * Constructor to create an array with a given size
 				 *
 				 * \param size Number of elements to allocate for the array

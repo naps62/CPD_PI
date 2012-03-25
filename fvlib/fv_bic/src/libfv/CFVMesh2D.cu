@@ -28,7 +28,6 @@ namespace FVL {
 	}
 
 	CFVMesh2D::~CFVMesh2D() {
-		dealloc();
 		cuda_free();
 	}
 
@@ -253,7 +252,7 @@ namespace FVL {
 	/************************************************
 	 * GETTERS/SETTERS
 	 ***********************************************/
-	CFVMesh2D_cuda* CFVMesh2D::cuda_getMesh() {
+	CFVMesh2D_cuda* CFVMesh2D::cuda_get() {
 		return cuda_mesh;
 	}
 
@@ -266,7 +265,7 @@ namespace FVL {
 	 * MEMORY MANAGEMENT METHODS
 	 ***********************************************/
 
-	CFVMesh2D::CFVMesh2D_cuda* CFVMesh2D::cuda_malloc() {
+	CFVMesh2D_cuda* CFVMesh2D::cuda_malloc() {
 		// if cuda memory is already allocated, skip and return it
 		if (! cuda_is_alloc()) {
 			CFVMesh2D_cuda tmp_cuda_mesh;

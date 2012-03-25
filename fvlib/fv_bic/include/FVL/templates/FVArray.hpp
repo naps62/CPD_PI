@@ -17,12 +17,19 @@ namespace FVL {
 	 ***********************************************/
 
 	template<class T>
+		FVArray<T>::FVArray() {
+			arr = NULL;
+		}
+
+	template<class T>
 		FVArray<T>::FVArray(const unsigned int size) {
+			arr = NULL;
 			alloc(size);
 		}
 
 	template<class T>
 		FVArray<T>::FVArray(const FVArray<T> &copy) {
+			arr = NULL;
 			alloc(copy.size());
 			for(unsigned int i = 0; i < arr_size; ++i) {
 				arr[i] = copy[i];

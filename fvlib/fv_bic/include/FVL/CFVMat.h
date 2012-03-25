@@ -39,6 +39,11 @@ namespace FVL {
 				 ***********************************************/
 
 				/**
+				 * Empty constructor
+				 */
+				CFVMat() { }
+
+				/**
 				 * Constructor to create a matrix with given dimensions
 				 *
 				 * \param w Number of columns

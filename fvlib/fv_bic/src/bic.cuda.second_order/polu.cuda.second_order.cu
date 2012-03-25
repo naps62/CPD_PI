@@ -1,6 +1,6 @@
 #include "FVL/FVLib.h"
 #include "FVL/FVXMLWriter.h"
-#include "FVArray.h"
+#include "FVL/FVArray.h"
 #include "FVio.h"
 #include "Parameter.h"
 using namespace std;
@@ -124,6 +124,7 @@ int main(int argc, char **argv) {
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
 	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
 	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
+	FVL::CFVArray<bool> vecValidABC(mesh.num_cells);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -152,6 +153,7 @@ int main(int argc, char **argv) {
 	matA.cuda_malloc();
 	vecABC.cuda_malloc();
 	vecResult.cuda_malloc();
+	vecValidABC.cuda_malloc();
 
 	// data copy
 	cudaStream_t stream;
@@ -173,10 +175,13 @@ int main(int argc, char **argv) {
 	dim3 grid_vecABC(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
 	dim3 block_vecABC(BLOCK_SIZE_FLUX, 1, 1);
 
+	dim3 grid_vecValidABC(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_FLUX), 1, 1);
+	dim3 block_vecValidABC(BLOCK_SIZE_FLUX, 1, 1);
+
 	dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
 	dim3 block_flux(BLOCK_SIZE_FLUX, 1, 1);
 
-	dim3 grid_update(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_UPDATE), 1, 1);
+	dim3 grid_update(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_UPDATE), 1, 1);
 	dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
 	#endif
 
@@ -186,8 +191,8 @@ int main(int argc, char **argv) {
 			matA);
 	#else
 	kernel_compute_reverseA<<< grid_matA, block_matA >>>(
-			mesh.cuda_mesh;
-			matA.cuda_getMat());
+			mesh.cuda_get(),
+			matA.cuda_get());
 
 	_D(cudaCheckError("cuda[compute_reverseA]"));
 
@@ -201,13 +206,12 @@ int main(int argc, char **argv) {
 					mesh,
 					polution,
 					vecResult,
-					vs,
 					data.dirichlet);
 		#else
 		kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(
-				mesh.cuda_mesh,
-				polution.cuda_getArray(),
-				vecResult.cuda_getMat(),
+				mesh.cuda_get(),
+				polution.cuda_get(),
+				vecResult.cuda_get(),
 				data.dirichlet);
 
 		_DEBUG {
@@ -227,9 +231,9 @@ int main(int argc, char **argv) {
 		#else
 		kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(
 				mesh.num_cells,
-				matA.cuda_getMat(),
-				vecResult.cuda_getMat(),
-				vecABC.cuda_getMat());
+				matA.cuda_get(),
+				vecResult.cuda_get(),
+				vecABC.cuda_get());
 
 		_DEBUG {
 			stringstream ss;
@@ -238,23 +242,40 @@ int main(int argc, char **argv) {
 		}
 		#endif
 
+		#ifdef NO_CUDA
+		cpu_validate_ABC(
+					mesh,
+					vecABC,
+					polution,
+					vecValidABC,
+					data.dirichlet);
+		#else
+		kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(
+					mesh.cuda_get(),
+					vs.cuda_get(),
+					vecABC.cuda_get(),
+					vecValidResult.cuda_get());
+		#endif
+
 		/* compute flux */
 		#ifdef NO_CUDA
 		cpu_compute_flux(
 					mesh,
 					vs,
 					vecABC,
+					vecValidABC,
+					polution,
 					flux,
 					data.dirichlet);
 
 		#else
 		kernel_compute_flux<<< grid_flux, block_flux >>>(
-					mesh.cuda_mesh,
-					polution.cuda_getArray(),
-					vs.cuda_getArray(),
-					vecABC.cuda_getMat(),
-					flux.cuda_getArray(),
-					data.comp_threshold);
+					mesh.cuda_get(),
+					polution.cuda_get(),
+					vs.cuda_get(),
+					vecABC.cuda_get(),
+					flux.cuda_get(),
+					data.dirichlet);
 
 		_DEBUG {
 			stringstream ss;
@@ -272,9 +293,9 @@ int main(int argc, char **argv) {
 				dt);
 		#else
 		kernel_update<<< grid_update, block_update >>>(
-				mesh.cuda_mesh,
-				polution.cuda_getArray(),
-				flux.cuda_getArray(),
+				mesh.cuda_get(),
+				polution.cuda_get(),
+				flux.cuda_get(),
 				dt);
 
 		_DEBUG {
@@ -289,8 +310,7 @@ int main(int argc, char **argv) {
 			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
 			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
 			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  ";
-			cout << "R[0] = " << vecResult.elem(0, 0, x) << " ";
-			cout << "R[3] = " << vecResult.elem(2, 0, x) << endl;
+			cout << "ABCvalid[3] = " << vecValidABC[x] << endl;
 		}
 		cout << "--------------" << endl;
 

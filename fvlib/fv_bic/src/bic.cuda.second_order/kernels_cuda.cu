@@ -2,7 +2,7 @@
 
 /* Aux function for kernel_compute_vecResult - computes ghost cell centroid */
 __device__
-void gpu_ghost_coords(
+void cuda_ghost_coords(
 		unsigned int *edge_fst_vertex,
 		unsigned int *edge_snd_vertex,
 		double *vertex_coords_x,
@@ -34,18 +34,8 @@ void gpu_ghost_coords(
 }
 
 __global__
-void kernel_compute_reverseA(
-		unsigned int num_cells,
-		double *cell_centroids_x,
-		double *cell_centroids_y,
-		unsigned int *cell_edges_count,
-		unsigned int ** cell_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		unsigned int *edge_fst_vertex,
-		unsigned int *edge_snd_vertex,
-		double *vertex_coords_x,
-		double *vertex_coords_y,
+void cuda_compute_reverseA(
+		CFVMesh2D_cuda *mesh,
 		double **matA) {
 
 	// get thread id
@@ -156,19 +146,10 @@ void kernel_compute_vecABC(
 /* Compute system polution coeficients for system solve */
 __global__
 void kernel_compute_vecResult(
-		unsigned int num_cells,
-		double *cell_centroids_x,
-		double *cell_centroids_y,
-		unsigned int *cell_edges_count,
-		unsigned int **cell_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		unsigned int *edge_fst_vertex,
-		unsigned int *edge_snd_vertex,
-		double *vertex_coords_x,
-		double *vertex_coords_y,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
-		double **vecResult) {
+		double **vecResult,
+		double dc) {
 
 	// get thread id
 	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -211,20 +192,11 @@ void kernel_compute_vecResult(
 
 __global__
 void kernel_compute_flux(
-		unsigned int num_edges,
-		//double *edge_normals_x,
-		//double *edge_normals_y,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *edge_centroids_x,
-		double *edge_centroids_y,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
-		//double *velocity_x,
-		//double *velocity_y,
 		double *velocity,
 		double **vecABC,
 		double *flux,
-		//double *vs,
 		double dc) {
 
 	// get thread id
@@ -262,15 +234,7 @@ void kernel_compute_flux(
 
 __global__
 void kernel_update(
-		unsigned int num_cells,
-		//unsigned int num_total_edges,
-		unsigned int *edge_left_cells,
-		unsigned int *edge_right_cells,
-		double *edge_lengths,
-		double *cell_areas,
-		unsigned int **cell_edges,
-		//unsigned int *cell_edges_index,
-		unsigned int *cell_edges_count,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
 		double *flux,
 		double dt) {

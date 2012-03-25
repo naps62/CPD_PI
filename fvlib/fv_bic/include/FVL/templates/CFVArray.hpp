@@ -23,15 +23,15 @@ namespace FVL {
 
 	template<class T>
 		T* CFVArray<T>::cuda_mallocAndSave(cudaStream_t stream) {
-			this->cuda_malloc(stream);
-			this->cuda_save();
-			return this->cuda_getArray();
+			this->cuda_malloc();
+			this->cuda_save(stream);
+			return this->cuda_get();
 		}
 
 	template<class T>
 		T* CFVArray<T>::cuda_malloc() {
 			cudaMalloc((void **)&cuda_arr, sizeof(T) * this->arr_size);
-			return this->cuda_getArray();
+			return this->cuda_get();
 		}
 
 	template<class T>
@@ -40,12 +40,12 @@ namespace FVL {
 		}
 
 	template<class T>
-		void CFVArray<T>::cuda_save(cudaStream_t &stream) {
+		void CFVArray<T>::cuda_save(cudaStream_t stream) {
 			cudaMemcpyAsync(cuda_arr, this->arr, sizeof(T) * this->arr_size, cudaMemcpyHostToDevice, stream);
 		}
 
 	template<class T>
-		void CFVArray<T>::cuda_load(cudaStream_t &stream) {
+		void CFVArray<T>::cuda_load(cudaStream_t stream) {
 			cudaMemcpy(this->arr, cuda_arr, sizeof(T) * this->arr_size, cudaMemcpyDeviceToHost);
 		}
 

@@ -5,7 +5,7 @@
  * \date 13-02-2012
  */
 
-#ifndef _H_CFVARAY
+#ifndef _H_CFVARRAY
 #define _H_CFVARRAY
 
 #include <cuda.h>
@@ -28,6 +28,11 @@ namespace FVL {
 				/************************************************
 				 * CONSTRUCTORS
 				 ***********************************************/
+
+				/**
+				 * Empty constructor
+				 */
+				CFVArray() : FVArray<T>() { }
 
 				/**
 				 * Constructor to create a CUDA-ready array with a given size

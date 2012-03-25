@@ -31,7 +31,6 @@ namespace FVL {
 	enum FVCell2D_Type {
 		FV_CELL = 10,				///< regular cell
 	};
-}
 
 	/************************************************
 	 * IO-RELATED ENUMS
@@ -44,6 +43,7 @@ namespace FVL {
 		FV_READ,		///< Read only file
 		FV_WRITE,		///< Write only file
 		FV_READ_WRITE	///< Read and Write file (use with care)
-	}
+	};
+}
 
 #endif // _H_FVENUM

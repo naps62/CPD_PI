@@ -132,7 +132,7 @@ namespace FVL {
 			 *
 			 * \return Pointer to #CFVMesh2D_cuda struct, or NULL if no memory was previously allocated on the device
 			 */
-			CFVMesh2D_cuda *cuda_getMesh();
+			CFVMesh2D_cuda *cuda_get();
 
 			/**
 			 * Checks whether device memory is allocated

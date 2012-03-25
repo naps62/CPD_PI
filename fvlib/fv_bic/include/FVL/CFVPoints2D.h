@@ -27,6 +27,11 @@ namespace FVL {
 				 ***********************************************/
 
 				/**
+				 * Empty constructor
+				 */
+				CFVPoints2D() { }
+
+				/**
 				 * Constructor to create a CUDA-ready array of 2-dimensional pointers with a given size
 				 *
 				 * \param size Number of 2-dimensional elements to allocate for the array

@@ -6,13 +6,13 @@
 *.swo
 *.tmp
 *.log
+*.err
 *.aux
 *.toc
 doc/doxygen-fv_default
 fvlib/data
 *.xml
 *.msh
-*.geo
 fvlib/*/BIC2012/polu*
 fvlib/*/BIC2012/velocity*
 fvlib/*/FVLib/bin/fvcd*

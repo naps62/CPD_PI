@@ -2,19 +2,19 @@
 #define _CUH_KERNELS_CUDA
 
 #include "FVL/CFVMesh2D.h"
-#include "FVL/CFVVect.h"
+#include "FVL/CFVArray.h"
 using namespace FVL;
 
 /* Compute matA inverse */
 __global__
 void kernel_compute_reverseA(
-		CFVMesh2D::CFVMesh2D_cuda *mesh,
+		CFVMesh2D_cuda *mesh,
 		double **matA);
 
 /* Compute system polution coeficients for system solve */
 __global__
 void kernel_compute_vecResult(
-		CFVMesh2D::CFVMesh2D_cuda *mesh,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
 		double **vecResult,
 		double dc);
@@ -29,7 +29,7 @@ void kernel_compute_vecABC(
 /* Compute flux */
 __global__
 void kernel_compute_flux(
-		CFVMesh2D::CFVMesh2D_cuda *mesh,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
 		double *velocity,
 		double **vecABC,
@@ -39,7 +39,7 @@ void kernel_compute_flux(
 /* polution update */
 __global__
 void kernel_update(
-		CFVMesh2D::CFVMesh2D_cuda *mesh,
+		CFVMesh2D_cuda *mesh,
 		double *polution,
 		double *flux,
 		double dt);

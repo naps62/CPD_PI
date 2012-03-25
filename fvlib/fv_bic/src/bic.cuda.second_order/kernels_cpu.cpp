@@ -58,7 +58,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 
 			switch (mesh.edge_types[i]) {
 				// inner edges, both left and right cell can be assumed to exists
-				case CFVMesh2D::EDGE:
+				case FV_EDGE:
 					// get right cell of this edge
 					cell_j = mesh.edge_right_cells[edge];
 
@@ -72,8 +72,8 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 					break;
 
 				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
-				case CFVMesh2D::EDGE_DIRICHLET:
-				case CFVMesh2D::EDGE_NEUMMAN:
+				case FV_EDGE_DIRICHLET:
+				case FV_EDGE_NEUMMAN:
 					// get coords of current cell i, and compute ghost coords
 					x = x0;
 					y = y0;
@@ -152,7 +152,7 @@ void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &v
 
 
 /* Compute system polution coeficients for system solve */
-void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, CFVArray<double> velocity, double dc) {
+void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, double dc) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double x0 = mesh.cell_centroids.x[cell];
 		double y0 = mesh.cell_centroids.y[cell];
@@ -176,7 +176,7 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<d
 
 			switch (mesh.edge_types[edge]) {
 				// inner edges, both left and right cell can be assumed to exists
-				case CFVMesh2D::EDGE:
+				case FV_EDGE:
 					// get right cell of this edge
 					cell_j = mesh.edge_right_cells[edge];
 
@@ -191,7 +191,7 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<d
 					break;
 
 				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
-				case CFVMesh2D::EDGE_DIRICHLET:
+				case FV_EDGE_DIRICHLET:
 					// get left cell
 					cell_j = mesh.edge_left_cells[edge];
 
@@ -201,16 +201,11 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<d
 					cpu_ghost_coords(mesh, edge, x, y);
 
 					// polution in this point is equal to the dirichlet condition (unless velocity is positive)
-					// TODO how to fix this? velocity shouldnt be needed right?
-					//if (velocity[edge] < 0)
-						u = dc;
-					//else {
-					//	u = 0;
-					//}
+					u = dc;
 
 					break;
 
-				case CFVMesh2D::EDGE_NEUMMAN:
+				case FV_EDGE_NEUMMAN:
 					// get left cell
 					cell_j = mesh.edge_left_cells[edge];
 
@@ -236,51 +231,126 @@ void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<d
 	}
 }
 
+double cpu_ABCsystem_result(
+		CFVMesh2D &mesh,
+		CFVMat<double> &vecABC,
+		unsigned int edge,
+		unsigned int cell) {
+
+	double x = mesh.edge_centroids.x[edge];
+	double y = mesh.edge_centroids.y[edge];
+	double x0 = mesh.cell_centroids.x[cell];
+	double y0 = mesh.cell_centroids.y[cell];
+
+	return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
+}
+
+bool cpu_assert_ABCsystem_result(
+		CFVMesh2D &mesh,
+		CFVMat<double> &vecABC,
+		CFVArray<double> &polution,
+		unsigned int edge,
+		unsigned int cell,
+		double dc) {
+
+	unsigned int left_cell	= mesh.edge_left_cells[edge];
+	unsigned int right_cell = mesh.edge_right_cells[edge];
+
+	double polu_left = polution[left_cell];
+	double polu_right;
+	switch (mesh.edge_types[edge]) {
+		case FV_EDGE:
+			polu_right = polution[right_cell];
+			break;
+		case FV_EDGE_DIRICHLET:
+			polu_right = dc;
+			break;
+		case FV_EDGE_NEUMMAN:
+			polu_right = polu_left;
+			break;
+	}
+
+	double system_res = cpu_ABCsystem_result(mesh, vecABC, edge, cell);
+
+	// system result is valid it is between the polution of the 2 neighbor cells
+	// if it's between, then one subtraction will give > 0, and the other < 0, the product being < 0
+	return ((system_res - polu_left) * (system_res - polu_right) < 0);
+}
+
+
+void cpu_validate_ABC(
+		CFVMesh2D &mesh,
+		CFVMat<double> &vecABC,
+		CFVArray<double> &polution,
+		CFVArray<bool> vecValidABC,
+		double dc) {
+
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+		vecValidABC[cell] = true;
+	}
+
+	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
+		double left_cell	= mesh.edge_left_cells[edge];
+		double right_cell	= mesh.edge_right_cells[edge];
+		unsigned int edge_type	= mesh.edge_types[edge];
+
+		if (cpu_assert_ABCsystem_result(mesh, vecABC, polution, edge, left_cell, dc) == false)
+			vecValidABC[left_cell] = false;
+
+		if (edge_type == FV_EDGE && cpu_assert_ABCsystem_result(mesh, vecABC, polution, edge, right_cell, dc) == false)
+			vecValidABC[right_cell] = false;
+	}
+}
+
 /* compute flux kernel */
 void cpu_compute_flux(
 		CFVMesh2D &mesh,
 		CFVArray<double> &velocity,
 		CFVMat<double> &vecABC,
+		CFVArray<bool> &vecValidABC,
+		CFVArray<double> &polution,
 		CFVArray<double> &flux,
 		double dc) {
-	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
-		double v = velocity[i];
+
+	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
+		double v = velocity[edge];
 		unsigned int cell;
 		double system_res;
-		double x, y, x0, y0;
 
-
-		switch (mesh.edge_types[i]) {
-			case CFVMesh2D::EDGE:
-			case CFVMesh2D::EDGE_DIRICHLET:
+				
+		switch (mesh.edge_types[edge]) {
+			case FV_EDGE:
 				if (v > 0) {
-					cell = mesh.edge_right_cells[i];
+					cell = mesh.edge_right_cells[edge];
 					if (cell == NO_RIGHT_CELL)
-						cell = mesh.edge_left_cells[i];
+						cell = mesh.edge_left_cells[edge];
 				} else {
-					cell = mesh.edge_left_cells[i];
+					cell = mesh.edge_left_cells[edge];
 				}
 
-				x = mesh.edge_centroids.x[i];
-				y = mesh.edge_centroids.y[i];
-				x0 = mesh.cell_centroids.x[cell];
-				y0 = mesh.cell_centroids.y[cell];
-				system_res = vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0) + vecABC.elem(2, 0, cell);
-
+				if (vecValidABC[cell]) {
+					system_res = cpu_ABCsystem_result(mesh, vecABC, edge, cell);
+				} else {
+					system_res = polution[cell];
+				}
 				break;
 
-				//cell = mesh.edge_left_cell[i];
-				// TODO dirichlet(t) = sin(t)
-				//system_res = dc; // * sin(t)
-				//break;
+			case FV_EDGE_DIRICHLET:
+				cell = mesh.edge_left_cells[edge];
+				if (v > 0 && vecValidABC[cell]) {
+					system_res = cpu_ABCsystem_result(mesh, vecABC, edge, cell);
+				} else {
+					system_res = dc;
+				}
+				break;
 
-			case CFVMesh2D::EDGE_NEUMMAN:
+			case FV_EDGE_NEUMMAN:
 				system_res = 0;
 				break;
 		}
 
-		flux[i] = v * system_res;
-		cout << "flux[" << i << "] = " << flux[i] /*<< " (using cell " << cell << ")"*/ << endl;
+		flux[edge] = v * system_res;
+		cout << "flux[" << edge << "] = " << flux[edge] /*<< " (using cell " << cell << ")"*/ << endl;
 	};
 }
 
