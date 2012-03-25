@@ -6,6 +6,7 @@
 
 #if   defined (PROFILE_BTM) \
  ||   defined (PROFILE_L1DCM) \
+ ||   defined (PROFILE_L2TCM) \
  ||   defined (PROFILE_L2DCM)
 #define PROFILE_MEMORY
 #endif
@@ -45,6 +46,10 @@ long long int btm_bytes;
 #include <papi/l1dcm.hpp>
 papi::L1DataCacheMissesCounter *p;
 long long int l1dcm;
+#elif   defined (PROFILE_L2TCM)
+#include <papi/l2tcm.hpp>
+papi::L2TotalCacheMissesCounter *p;
+long long int l2tcm;
 #elif   defined (PROFILE_L2DCM)
 #include <papi/l2dcm.hpp>
 papi::L2DataCacheMissesCounter *p;
@@ -148,6 +153,8 @@ compute_flux
 	btm_bytes += p->bytes();
 #elif defined (PROFILE_L1DCM)
 	l1dcm += p->misses();
+#elif defined (PROFILE_L2TCM)
+	l2tcm += p->misses();
 #elif defined (PROFILE_L2DCM)
 	l2dcm += p->misses();
 #endif//    PROFILE_*
@@ -245,6 +252,8 @@ update
 	btm_bytes += p->bytes();
 #elif defined (PROFILE_L1DCM)
 	l1dcm += p->misses();
+#elif defined (PROFILE_L2TCM)
+	l2tcm += p->misses();
 #elif defined (PROFILE_L2DCM)
 	l2dcm += p->misses();
 #endif//    PROFILE_*
@@ -360,6 +369,9 @@ int main(int argc, char *argv[])
 #elif defined (PROFILE_L1DCM)
 	p = new papi::L1DataCacheMissesCounter();
 	l1dcm = 0;
+#elif defined (PROFILE_L2TCM)
+	p = new papi::L2TotalCacheMissesCounter();
+	l2tcm = 0;
 #elif defined (PROFILE_L2DCM)
 	p = new papi::L2DataCacheMissesCounter();
 	l2dcm = 0;
@@ -593,6 +605,8 @@ int main(int argc, char *argv[])
 				<<	btm_bytes
 #elif defined (PROFILE_L1DCM)
 				<<	l1dcm
+#elif defined (PROFILE_L2TCM)
+				<<	l2tcm
 #elif defined (PROFILE_L2DCM)
 				<<	l2dcm
 #endif//    PROFILE_*
