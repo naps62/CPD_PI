@@ -39,7 +39,7 @@ namespace FVL {
 	 */
 	class FVXMLReader : public xml_document<> {
 			
-		private:
+		protected:
 			vector<char> xml_data;
 			xml_node<> *root;
 			xml_node<> *current;

@@ -23,7 +23,7 @@ namespace FVL {
 		this->parse<0>(&xml_data[0]);
 
 		// get FVLIB node
-		root = this->first_node();
+		root = this->first_node("fvlib", 0, false);
 		current = root->first_node();
 	}
 

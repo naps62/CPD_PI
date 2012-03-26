@@ -16,6 +16,8 @@
  * UTILITIES
  ***********************************************/
 
+#define FV_PARAM_DEFAULT_KEY	"value"	///< Default key to look for in a parameter file
+
 #define NO_RIGHT_CELL	INT_MAX	///< Indicate non-existance of a right cell
 #define NO_CELL			INT_MAX	///< Indicates non-existance of a cell
 /**

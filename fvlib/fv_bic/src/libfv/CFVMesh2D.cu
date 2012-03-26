@@ -83,9 +83,9 @@ namespace FVL {
 		xml_node<> *cell	= edge->next_sibling();
 
 		// get count of each element
-		FVXMLReader::str_cast<unsigned int>(num_vertex, vertex->first_attribute("nbvertex")->value());
-		FVXMLReader::str_cast<unsigned int>(num_edges, edge->first_attribute("nbedge")->value());
-		FVXMLReader::str_cast<unsigned int>(num_cells, cell->first_attribute("nbcell")->value());
+		FVXMLReader::str_cast<unsigned int>(num_vertex, vertex->first_attribute("nbvertex", 0, false)->value());
+		FVXMLReader::str_cast<unsigned int>(num_edges, edge->first_attribute("nbedge", 0, false)->value());
+		FVXMLReader::str_cast<unsigned int>(num_cells, cell->first_attribute("nbcell", 0, false)->value());
 
 		// alloc cpu memory for all data
 		alloc();

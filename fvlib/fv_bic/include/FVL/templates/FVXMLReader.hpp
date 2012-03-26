@@ -35,8 +35,8 @@ namespace FVL {
 	// Reads next child node to a vector from the XML file
 	template<class T>
 		void FVXMLReader::getVec(CFVArray<T> &vec, double &time, string &name) {
-			xml_attribute<> *time_attr = current->first_attribute("time");
-			xml_attribute<> *name_attr = current->first_attribute("name");
+			xml_attribute<> *time_attr = current->first_attribute("time", 0, false);
+			xml_attribute<> *name_attr = current->first_attribute("name", 0, false);
 
 			FVXMLReader::str_cast<double>(time, time_attr->value());
 			FVXMLReader::str_cast<string>(name, name_attr->value());
@@ -54,8 +54,8 @@ namespace FVL {
 	// Reads next child node to a vector of 2D points from the XML file
 	template<class T>
 		void FVXMLReader::getPoints2D(CFVPoints2D<T> &vec, double &time, string &name) {
-			xml_attribute<> *time_attr = current->first_attribute("time");
-			xml_attribute<> *name_attr = current->first_attribute("name");
+			xml_attribute<> *time_attr = current->first_attribute("time", 0, false);
+			xml_attribute<> *name_attr = current->first_attribute("name", 0, false);
 
 			FVXMLReader::str_cast<double>(time, time_attr->value());
 			FVXMLReader::str_cast<string>(name, name_attr->value());
