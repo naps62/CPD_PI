@@ -11,7 +11,7 @@
 namespace FVL {
 
 	FVParameters::FVParameters(const string filename) : FVXMLReader(filename) {
-		param_list = root->first_node("parameters", 0, false);
+		param_list = this->getRootNode()->first_node("parameters", 0, false);
 	}
 
 	string FVParameters::getString(const string param, const string key) {

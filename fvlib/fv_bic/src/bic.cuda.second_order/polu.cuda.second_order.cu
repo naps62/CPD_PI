@@ -2,7 +2,7 @@
 #include "FVL/FVXMLWriter.h"
 #include "FVL/FVArray.h"
 #include "FVio.h"
-#include "Parameter.h"
+#include "FVL/FVParameters.h"
 using namespace std;
 
 #ifdef NO_CUDA
@@ -24,12 +24,13 @@ typedef struct _parameters {
 	double final_time;
 	int anim_jump;
 	double dirichlet;
+	double CFL;
 } Parameters;
 
 // TODO: interface decente para paremetros xml
 Parameters read_parameters (string parameters_filename) {
 	Parameters data;
-	Parameter para(parameters_filename.c_str());
+	FVParameters para(parameters_filename);
 
 	data.mesh_file		= para.getString("MeshName");
 	data.velocity_file	= para.getString("VelocityFile");
@@ -38,6 +39,7 @@ Parameters read_parameters (string parameters_filename) {
 	data.final_time		= para.getDouble("FinalTime");
 	data.anim_jump		= para.getInteger("NbJump");
 	data.dirichlet		= para.getDouble("DirichletCondition");
+	data.CFL			= para.getDouble("CFL");
 
 	return data;
 }
@@ -142,7 +144,7 @@ int main(int argc, char **argv) {
 	cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = cpu_compute_mesh_parameter(mesh);
 	// TODO trocar 1.0 por parametro CFL (com valores entre 0 e 1, 0.3 para esquema de ordem 2)
-	dt	= 1.0 / v_max * h;
+	dt	= data.CFL / v_max * h;
 
 	#ifndef NO_CUDA
 	// saves whole mesh to CUDA memory

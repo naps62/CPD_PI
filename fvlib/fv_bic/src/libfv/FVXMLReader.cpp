@@ -27,6 +27,10 @@ namespace FVL {
 		current = root->first_node();
 	}
 
+	xml_node<>* FVXMLReader::getRootNode() {
+		return root;
+	}
+
 	string FVXMLReader::read_file(string filename) {
 		ifstream mesh_file(filename.c_str());
 		string content;
