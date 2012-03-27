@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ___PAPI_HPP___
 #define ___PAPI_HPP___
 
@@ -12,17 +13,21 @@ using std::vector;
 
 namespace papi
 {
-	//! Initialize the PAPI library funcionalities.
-	/*! Initialize the library with the current version. If an error occurs
-	 * throws an exception.
-	 *
-	 * \throw Error An error occurred while initializing the library. The value
-	 * of the exception is the error code returned by the PAPI library.
-	 */
+	/// Initialize the PAPI library funcionalities.
 	void init();
+
+	/// Free the PAPI library resources.
 	void shutdown();
 	
-	long long int real_nano_seconds();
+	namespace time
+	{
+		namespace real
+		{
+			/// Get a timestamp in nanoseconds.
+			long long int nanoseconds();
+		}
+	}
+
 }
 
 

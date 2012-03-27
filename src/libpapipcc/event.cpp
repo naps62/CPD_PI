@@ -35,4 +35,10 @@ namespace papi
 		_name = name;
 		free(s);
 	}
+
+
+
+	NativeEvent::NativeEvent(string name)
+	: Event(name)
+	{}
 }

@@ -1,7 +1,7 @@
 ROOTD	=	.
 include $(ROOTD)/conf/config.mk
 
-.PHONY:	test-soa
+.PHONY:	doc test-soa
 
 %:
 	@echo "<<==::    $@    ::==>>"
@@ -13,6 +13,9 @@ include $(ROOTD)/conf/config.mk
 	@echo "<<<<< $(OBJD)"
 all:
 	$_ $@
+
+doc:
+	doxygen conf/Doxyfile
 
 objs:
 	@echo ">>>>> $(SRCD)"

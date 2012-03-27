@@ -18,6 +18,8 @@ using std::endl;
 
 namespace papi
 {
+	/** Detailed
+	 */
 	void init()
 	{
 		int result;
@@ -41,10 +43,15 @@ namespace papi
 
 
 
-	long long int
-	real_nano_seconds()
+	namespace time
 	{
-		return PAPI_get_real_nsec();
+		namespace real
+		{
+			long long int nanoseconds()
+			{
+				return PAPI_get_real_nsec();
+			}
+		}
 	}
 }
 

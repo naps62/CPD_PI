@@ -150,35 +150,36 @@ compute_flux
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-	btm_bytes += p->bytes();
+	btm += p->transactions() - ctl;
 #elif defined (PROFILE_L1DCM)
-	l1dcm += p->misses();
+	l1dcm += p->misses() - ctl;
 #elif defined (PROFILE_L2TCM)
-	l2tcm += p->misses();
+	l2tcm += p->misses() - ctl;
 #elif defined (PROFILE_L2DCM)
-	l2dcm += p->misses();
+	l2dcm += p->misses() - ctl;
 #endif//    PROFILE_*
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
+long long int inst = p->instructions() - ctl;
 #if   defined (PROFILE_BRINS)
-	brins += p->instructions();
+	brins += inst;
 #elif defined (PROFILE_FPINS)
-	fpins += p->instructions();
+	fpins += inst;
 #elif defined (PROFILE_LDINS)
-	ldins += p->instructions();
+	ldins += inst;
 #elif defined (PROFILE_SRINS)
-	srins += p->instructions();
+	srins += inst;
 #elif defined (PROFILE_TOTINS)
-	totins += p->instructions();
+	totins += inst;
 #elif defined (PROFILE_VECINS)
-	vecins += p->instructions();
+	vecins += inst;
 #endif//	PROFILE_*
 #endif//	PROFILE_INSTRUCTIONS
 
 #if   defined (PROFILE_OPERATIONS)
 #if   defined (PROFILE_FLOPS)
-	flops += p->operations();
+	flops += p->operations() - ctl;
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 	{
@@ -598,6 +599,7 @@ int main(int argc, char *argv[])
 
 #if   defined (PROFILE)
 	delete p;
+	papi::shutdown();
 	totalns = papi::real_nano_seconds() - totalns;
 	cout
 #if   defined (PROFILE_MEMORY)
