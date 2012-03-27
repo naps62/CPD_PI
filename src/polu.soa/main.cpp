@@ -36,6 +36,7 @@
 //	GLOBALS
 //
 #if   defined (PROFILE)
+#include <papi/papi.hpp>
 
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
@@ -58,6 +59,7 @@ long long int l2dcm;
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
+#include <papi/papiinst.hpp>
 #if   defined (PROFILE_BRINS)
 #include <papi/brins.hpp>
 papi::BranchInstructionsCounter *p;
@@ -75,7 +77,7 @@ long long int ldins;
 papi::StoreInstructionsCounter *p;
 long long int srins;
 #elif defined (PROFILE_TOTINS)
-#include <papi/totins.hpp>
+//#include <papi/totins.hpp>
 papi::TotalInstructionsCounter *p;
 long long int totins;
 #elif defined (PROFILE_VECINS)
@@ -92,6 +94,8 @@ papi::FloatingPointOperationsCounter *p;
 long long int flops;
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
+
+long long int ctl;
 
 long long int mlbegin;
 
@@ -161,7 +165,7 @@ compute_flux
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
-long long int inst = p->instructions() - ctl;
+long long int inst = p->instructions_l() - ctl;
 #if   defined (PROFILE_BRINS)
 	brins += inst;
 #elif defined (PROFILE_FPINS)
@@ -183,7 +187,7 @@ long long int inst = p->instructions() - ctl;
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 	{
-		long long int timens = p->last_time();
+		long long int timens = p->last();
 		cftotns += timens;
 		cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
 		cfminns = ( timens < cfminns ) ? timens : cfminns;
@@ -270,7 +274,7 @@ update
 #elif defined (PROFILE_SRINS)
 	srins += p->instructions();
 #elif defined (PROFILE_TOTINS)
-	totins += p->instructions();
+	totins += p->instructions_l();
 #elif defined (PROFILE_VECINS)
 	vecins += p->instructions();
 #endif//	PROFILE_*
@@ -282,7 +286,7 @@ update
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 	{
-		long long int timens = p->last_time();
+		long long int timens = p->last();
 		uptotns += timens;
 		upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
 		upminns = ( timens < upminns ) ? timens : upminns;
@@ -311,7 +315,7 @@ int main(int argc, char *argv[])
 {
 #if   defined (PROFILE)
 	papi::init();
-	long long int totalns = papi::real_nano_seconds();
+	long long int totalns = papi::time::real::nanoseconds();
 #endif//	PROFILE
 	string parameter_filename;
 	
@@ -535,7 +539,7 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE_WARMUP)
 		if ( mliters > PROFILE_WARMUP )
 #endif//	PROFILE_WARMUP
-		mlbegin = papi::real_nano_seconds();
+		mlbegin = papi::time::real::nanoseconds();
 #else//    PROFILE
 	while( time < final_time)
 	{
@@ -570,7 +574,7 @@ int main(int argc, char *argv[])
 		if ( mliters > PROFILE_WARMUP )
 		{
 #endif//	PROFILE_WARMUP
-		long long int timens = papi::real_nano_seconds() - mlbegin;
+		long long int timens = papi::time::real::nanoseconds() - mlbegin;
 		mltotns += timens;
 		mlmaxns = ( timens > mlmaxns ) ? timens : mlmaxns;
 		mlminns = ( timens < mlminns ) ? timens : mlminns;
@@ -600,7 +604,7 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE)
 	delete p;
 	papi::shutdown();
-	totalns = papi::real_nano_seconds() - totalns;
+	totalns = papi::time::real::nanoseconds() - totalns;
 	cout
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)

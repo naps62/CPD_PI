@@ -41,4 +41,8 @@ namespace papi
 	NativeEvent::NativeEvent(string name)
 	: Event(name)
 	{}
+
+	PresetEvent::PresetEvent(string name)
+	: Event(name)
+	{}
 }

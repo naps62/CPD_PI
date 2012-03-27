@@ -49,6 +49,13 @@ namespace papi
 	protected:
 		NativeEvent(string name);
 	};
+
+	struct PresetEvent
+	: public Event
+	{
+	protected:
+		PresetEvent(string name);
+	};
 }
 
 #endif//___EVENT_HPP___

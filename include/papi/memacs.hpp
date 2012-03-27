@@ -42,7 +42,7 @@ namespace papi
 	: public MemoryAccessesCounter
 	{
 		MemoryBusTransactionsNativeEvent _btm;
-		InstructionFetchBusTransactionsNativeEvent _btif;
+		SelfInstructionFetchBusTransactionsNativeEvent _btif;
 	public:
 		DataMemoryAccessesCounter();
 

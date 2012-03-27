@@ -44,11 +44,12 @@ using fv::cpu::Edge;
 //  GLOBAL
 //
 #if   defined (PROFILE)
+#include <papi/papi.hpp>
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-#include <papi/bustransmem.hpp>
-papi::BusTransMemNativeCounter *p;
-long long int btm;
+#include <papi/memacs.hpp>
+papi::TotalMemoryAccessesCounter *p;
+//long long int btm;
 #elif defined (PROFILE_L1DCM)
 #include <papi/l1dcm.hpp>
 papi::L1DataCacheMissesPresetCounter *p;
@@ -64,6 +65,7 @@ long long int l2dcm;
 #endif//	PROFILE_*
 #endif//	PROFILE_MEMORY
 #if   defined (PROFILE_INSTRUCTIONS)
+#include <papi/papiinst.hpp>
 #if   defined (PROFILE_BRINS)
 #include <papi/brins.hpp>
 papi::BranchInstructionsPresetCounter *p;
@@ -81,9 +83,9 @@ long long int ldins;
 papi::StoreInstructionsPresetCounter *p;
 long long int srins;
 #elif defined (PROFILE_TOTINS)
-#include <papi/totins.hpp>
-papi::TotalInstructionsPresetCounter *p;
-long long int totins;
+//#include <papi/totins.hpp>
+papi::TotalInstructionsCounter *p;
+//long long int totins;
 #elif defined (PROFILE_VECINS)
 #include <papi/vecins.hpp>
 papi::VectorInstructionsPresetCounter *p;
@@ -155,7 +157,7 @@ void compute_flux(
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-	btm += p->transactions() - ctl;
+//	btm += p->transactions() - ctl;
 #elif defined (PROFILE_L1DCM)
 	l1dcm += p->misses() - ctl;
 #elif defined (PROFILE_L2TCM)
@@ -165,7 +167,7 @@ void compute_flux(
 #endif//PROFILE_*
 #endif//PROFILE_MEMORY
 #if   defined (PROFILE_INSTRUCTIONS)
-	long long int inst = p->instructions() - ctl;
+	//long long int inst = p->instructions() - ctl;
 #if   defined (PROFILE_BRINS)
 	brins += inst;
 #elif defined (PROFILE_FPINS)
@@ -175,7 +177,7 @@ void compute_flux(
 #elif defined (PROFILE_SRINS)
 	srins += inst;
 #elif defined (PROFILE_TOTINS)
-	totins += inst;
+//	totins += inst;
 #elif defined (PROFILE_VECINS)
 	vecins += inst;
 #endif//PROFILE_*
@@ -186,7 +188,7 @@ void compute_flux(
 #endif//PROFILE_FLOPS
 #endif//PROFILE_OPERATIONS
 	{
-		long long int timens = p->last_time();
+		long long int timens = p->last();
 		cftotns += timens;
 		cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
 		cfminns = ( timens < cfminns ) ? timens : cfminns;
@@ -242,7 +244,7 @@ void    update(
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-	btm += p->transactions() - ctl;
+//	btm += p->transactions() - ctl;
 #elif defined (PROFILE_L1DCM)
 	l1dcm += p->misses() - ctl;
 #elif defined (PROFILE_L2TCM)
@@ -252,7 +254,7 @@ void    update(
 #endif//PROFILE_*
 #endif//PROFILE_MEMORY
 #if   defined (PROFILE_INSTRUCTIONS)
-	long long int inst = p->instructions() - ctl_ins;
+//	long long int inst = p->instructions() - ctl_ins;
 #if   defined (PROFILE_BRINS)
 	br_ins += inst;
 #elif defined (PROFILE_FPINS)
@@ -262,7 +264,7 @@ void    update(
 #elif defined (PROFILE_SRINS)
 	sr_ins += inst;
 #elif defined (PROFILE_TOTINS)
-	tot_ins += inst;
+	//tot_ins += inst;
 #elif defined (PROFILE_VECINS)
 	int_ins += inst;
 #endif//PROFILE_*
@@ -273,7 +275,7 @@ void    update(
 #endif//PROFILE_FLOPS
 #endif//PROFILE_OPERATIONS
 	{
-		long long int timens = p->last_time();
+		long long int timens = p->last();
 		uptotns += timens;
 		upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
 		upminns = ( timens < upminns ) ? timens : upminns;
@@ -303,7 +305,7 @@ int main(int argc, char *argv[])
 {
 #if   defined (PROFILE)
 	papi::init();
-	long long int totalns = papi::real_nano_seconds();
+	long long int totalns = papi::time::real::nanoseconds();
 #endif//PROFILE
 	string parameter_filename;
 	
@@ -423,11 +425,11 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE)
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-	p = new papi::BusTransMemNativeCounter();
-	btm = 0;
+	p = new papi::TotalMemoryAccessesCounter();
+//	btm = 0;
 	p->start();
 	p->stop();
-	ctl = p->transactions();
+//	ctl = p->transactions();
 #elif defined (PROFILE_L1DCM)
 	p = new papi::L1DataCacheMissesPresetCounter();
 	l1dcm = 0;
@@ -462,15 +464,15 @@ int main(int argc, char *argv[])
 	p = new papi::StoreInstructionsPresetCounter();
 	srins = 0;
 #elif defined (PROFILE_TOTINS)
-	p = new papi::TotalInstructionsPresetCounter();
-	totins = 0;
+	p = new papi::TotalInstructionsCounter();
+	//totins = 0;
 #elif defined (PROFILE_VECINS)
 	p = new papi::VectorInstructionsPresetCounter();
 	vecins = 0;
 #endif//PROFILE_*
-	p->start();
-	p->stop();
-	ctl = p->instructions();
+	//p->start();
+	//p->stop();
+	//ctl = p->instructions_l();
 #endif//PROFILE_INSTRUCTIONS
 #if   defined (PROFILE_OPERATIONS)
 #if   defined (PROFILE_FLOPS)
@@ -506,7 +508,7 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE_WARMUP)
 		if ( mliters > PROFILE_WARMUP )
 #endif//PROFILE_WARMUP
-			mlbegin = papi::real_nano_seconds();
+			mlbegin = papi::time::real::nanoseconds();
 #else//PROFILE
 	while(time<final_time)
 	{
@@ -529,7 +531,7 @@ int main(int argc, char *argv[])
 		if ( mliters > PROFILE_WARMUP )
 		{
 #endif//PROFILE_WARMUP
-			long long int timens = papi::real_nano_seconds() - mlbegin;
+			long long int timens = papi::time::real::nanoseconds() - mlbegin;
 			mltotns += timens;
 			mlmaxns = ( timens > mlmaxns ) ? timens : mlmaxns;
 			mlminns = ( timens < mlminns ) ? timens : mlminns;
@@ -551,11 +553,12 @@ int main(int argc, char *argv[])
 #if   defined (PROFILE)
 	delete p;
 	papi::shutdown();
-	totalns = papi::real_nano_seconds() - totalns;
+	totalns = papi::time::real::nanoseconds() - totalns;
 	cout
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-				<<	btm
+				//<<	btm
+				<<	p->accesses_t()
 #elif defined (PROFILE_L1DCM)
 				<<	l1dcm
 #elif defined (PROFILE_L2TCM)
@@ -574,7 +577,8 @@ int main(int argc, char *argv[])
 #elif defined (PROFILE_SRINS)
 				<<	srins
 #elif defined (PROFILE_TOTINS)
-				<<	totins
+				//<<	totins
+				<<	p->instructions_t()
 #elif defined (PROFILE_VECINS)
 				<<	vecins
 #endif//PROFILE_*
