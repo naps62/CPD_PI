@@ -95,8 +95,6 @@ long long int flops;
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 
-long long int ctl;
-
 long long int mlbegin;
 
 long long int cftotns;
@@ -154,18 +152,18 @@ compute_flux
 	p->stop();
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-	btm += p->transactions() - ctl;
+	btm += p->transactions();
 #elif defined (PROFILE_L1DCM)
-	l1dcm += p->misses() - ctl;
+	l1dcm += p->misses();
 #elif defined (PROFILE_L2TCM)
-	l2tcm += p->misses() - ctl;
+	l2tcm += p->misses();
 #elif defined (PROFILE_L2DCM)
-	l2dcm += p->misses() - ctl;
+	l2dcm += p->misses();
 #endif//    PROFILE_*
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
-long long int inst = p->instructions_l() - ctl;
+long long int inst = p->instructions_l();
 #if   defined (PROFILE_BRINS)
 	brins += inst;
 #elif defined (PROFILE_FPINS)
@@ -176,6 +174,10 @@ long long int inst = p->instructions_l() - ctl;
 	srins += inst;
 #elif defined (PROFILE_TOTINS)
 	totins += inst;
+	cerr
+		<<	totins
+		<<	endl
+		;
 #elif defined (PROFILE_VECINS)
 	vecins += inst;
 #endif//	PROFILE_*
@@ -183,7 +185,7 @@ long long int inst = p->instructions_l() - ctl;
 
 #if   defined (PROFILE_OPERATIONS)
 #if   defined (PROFILE_FLOPS)
-	flops += p->operations() - ctl;
+	flops += p->operations();
 #endif//	PROFILE_FLOPS
 #endif//	PROFILE_OPERATIONS
 	{
@@ -274,7 +276,11 @@ update
 #elif defined (PROFILE_SRINS)
 	srins += p->instructions();
 #elif defined (PROFILE_TOTINS)
-	totins += p->instructions_l() - ctl;
+	totins += p->instructions_l();
+	cerr
+		<<	totins
+		<<	endl
+		;
 #elif defined (PROFILE_VECINS)
 	vecins += p->instructions();
 #endif//	PROFILE_*
@@ -399,6 +405,10 @@ int main(int argc, char *argv[])
 #elif defined (PROFILE_TOTINS)
 	p = new papi::TotalInstructionsCounter();
 	totins = 0;
+	cerr
+		<<	totins
+		<<	endl
+		;
 #elif defined (PROFILE_VECINS)
 	p = new papi::VectorInstructionsCounter();
 	vecins = 0;
@@ -648,6 +658,9 @@ int main(int argc, char *argv[])
 		<<	';'	<<	upmaxns
 		<<	';'	<<	upminns
 						<<	endl
+		cerr
+			<<	totins
+			<<	endl;
 		;
 #endif//    PROFILE
 }
