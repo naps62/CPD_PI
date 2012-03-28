@@ -175,7 +175,7 @@ long long int inst = p->instructions_l();
 #elif defined (PROFILE_TOTINS)
 	totins += inst;
 	cerr
-		<<	totins
+		<<	p->instructions_l()
 		<<	endl
 		;
 #elif defined (PROFILE_VECINS)
@@ -278,7 +278,7 @@ update
 #elif defined (PROFILE_TOTINS)
 	totins += p->instructions_l();
 	cerr
-		<<	totins
+		<<	p->instructions_l()
 		<<	endl
 		;
 #elif defined (PROFILE_VECINS)
@@ -406,7 +406,7 @@ int main(int argc, char *argv[])
 	p = new papi::TotalInstructionsCounter();
 	totins = 0;
 	cerr
-		<<	totins
+		<<	p->instructions_l()
 		<<	endl
 		;
 #elif defined (PROFILE_VECINS)
@@ -659,8 +659,5 @@ int main(int argc, char *argv[])
 		<<	';'	<<	upminns
 						<<	endl
 		;
-		cerr
-			<<	totins
-			<<	endl;
 #endif//    PROFILE
 }
