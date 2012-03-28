@@ -116,8 +116,8 @@ namespace papi
 		unsigned size = _totals.size();
 		for ( unsigned i = 0 ; i < size ; ++i )
 		{
-			_lasts[ i ] = _values[ i ];
-			_totals[ i ] += _values[ i ];
+			_lasts[ _events[i] ] = _values[ i ];
+			_totals[ _events[i] ] += _values[ i ];
 		}
 		delete _values;
 		_values = NULL;
