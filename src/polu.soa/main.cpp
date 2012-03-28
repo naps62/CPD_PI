@@ -274,7 +274,7 @@ update
 #elif defined (PROFILE_SRINS)
 	srins += p->instructions();
 #elif defined (PROFILE_TOTINS)
-	totins += p->instructions_l();
+	totins += p->instructions_l() - ctl;
 #elif defined (PROFILE_VECINS)
 	vecins += p->instructions();
 #endif//	PROFILE_*
@@ -603,8 +603,8 @@ int main(int argc, char *argv[])
 
 #if   defined (PROFILE)
 	delete p;
-	papi::shutdown();
 	totalns = papi::time::real::nanoseconds() - totalns;
+	papi::shutdown();
 	cout
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
