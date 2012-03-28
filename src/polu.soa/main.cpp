@@ -174,10 +174,6 @@ long long int inst = p->instructions_l();
 	srins += inst;
 #elif defined (PROFILE_TOTINS)
 	totins += inst;
-	cerr
-		<<	p->instructions_l()
-		<<	endl
-		;
 #elif defined (PROFILE_VECINS)
 	vecins += inst;
 #endif//	PROFILE_*
@@ -277,10 +273,6 @@ update
 	srins += p->instructions();
 #elif defined (PROFILE_TOTINS)
 	totins += p->instructions_l();
-	cerr
-		<<	p->instructions_l()
-		<<	endl
-		;
 #elif defined (PROFILE_VECINS)
 	vecins += p->instructions();
 #endif//	PROFILE_*
@@ -405,10 +397,6 @@ int main(int argc, char *argv[])
 #elif defined (PROFILE_TOTINS)
 	p = new papi::TotalInstructionsCounter();
 	totins = 0;
-	cerr
-		<<	p->instructions_l()
-		<<	endl
-		;
 #elif defined (PROFILE_VECINS)
 	p = new papi::VectorInstructionsCounter();
 	vecins = 0;
