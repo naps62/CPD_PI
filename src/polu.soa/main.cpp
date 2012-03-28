@@ -658,9 +658,9 @@ int main(int argc, char *argv[])
 		<<	';'	<<	upmaxns
 		<<	';'	<<	upminns
 						<<	endl
+		;
 		cerr
 			<<	totins
 			<<	endl;
-		;
 #endif//    PROFILE
 }
