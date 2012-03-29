@@ -29,7 +29,7 @@ compute_flux
 	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER.start();
+		PROFILE_COUNTER->start();
 #endif
 
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
@@ -48,10 +48,10 @@ compute_flux
 
 #ifdef PROFILE
 	#ifdef PROFILE_WARMUP
-	if ( mliters < PROFILE_WARMUP )
+	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER.stop();
+		PROFILE_COUNTER->stop();
 		PROFILE_RETRIEVE_CF();
 	#ifdef PROFILE_WARMUP
 	}
@@ -83,9 +83,9 @@ update
 
 #ifdef PROFILE
 	#ifdef PROFILE_WARMUP
-	if ( mliters > PROFILE_LIMITED )
+	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER.start();
+		PROFILE_COUNTER->start();
 #endif
 
 	unsigned cell_last = cell_count - 1;
@@ -113,10 +113,10 @@ update
 
 #ifdef PROFILE
 	#ifdef PROFILE_WARMUP
-	if ( mliters < PROFILE_LIMITED )
+	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER.stop();
+		PROFILE_COUNTER->stop();
 		PROFILE_RETRIEVE_UP();
 	#ifdef PROFILE_WARMUP
 	}
@@ -141,7 +141,6 @@ update
 int main(int argc, char *argv[])
 {
 #ifdef PROFILE
-	papi::init();
 	PROFILE_INIT();
 #endif
 
@@ -341,7 +340,6 @@ int main(int argc, char *argv[])
 
 
 #ifdef PROFILE
-	papi::shutdown();
 	PROFILE_OUTPUT();
 	PROFILE_CLEANUP();
 #endif

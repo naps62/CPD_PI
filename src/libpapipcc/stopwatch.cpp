@@ -1,4 +1,5 @@
 #include <papi/stopwatch.hpp>
+#include <papi/papi.hpp>
 #include <papi.h>
 
 #define NOW() PAPI_get_real_nsec()
@@ -13,6 +14,9 @@ namespace papi
 			: _running(false)
 			, _last(0)
 			{
+				if ( ! PAPI_is_initialized() )
+					papi::init();
+
 				_total = 0;
 				_overhead = 0;
 				this->start();

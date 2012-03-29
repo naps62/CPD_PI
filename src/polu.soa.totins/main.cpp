@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 
+#include <papi/papi.hpp>
 #include <papi/instruction.hpp>
 
 
@@ -14,7 +15,7 @@
 
 namespace profile
 {
-	PROFILE_COUNTER_CLASS PROFILE_COUNTER_NAME;
+	PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 	long long int PROFILE_COUNTER_FIELD;
 
 	long long int cftotns;
@@ -33,12 +34,16 @@ namespace profile
 
 	void init()
 	{
+		papi::init();
+
+		PROFILE_COUNTER_NAME = new PROFILE_COUNTER_CLASS();
+
 		PROFILE_COUNTER_FIELD = 0;
 		
-		PROFILE_COUNTER_NAME.start();
-		PROFILE_COUNTER_NAME.stop();
-		overhead.PROFILE_COUNTER_FIELD = PROFILE_COUNTER_NAME.PROFILE_COUNTER_FIELD();
-		overhead.nanoseconds = PROFILE_COUNTER_NAME.last();
+		PROFILE_COUNTER_NAME->start();
+		PROFILE_COUNTER_NAME->stop();
+		overhead.PROFILE_COUNTER_FIELD = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD();
+		overhead.nanoseconds = PROFILE_COUNTER_NAME->last();
 
 		cftotns = 0;
 		cfminns = std::numeric_limits<long long int>::max();
@@ -62,6 +67,12 @@ namespace profile
 								<<	std::endl
 			;
 	}
+
+	void cleanup()
+	{
+		delete PROFILE_COUNTER_NAME;
+		papi::shutdown();
+	}
 }
 
 namespace profile
@@ -69,8 +80,8 @@ namespace profile
 	inline
 	void compute_flux()
 	{
-		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME.PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
-		long long int timens = PROFILE_COUNTER_NAME.last();
+		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
+		long long int timens = PROFILE_COUNTER_NAME->last();
 		cftotns += timens;
 		cfminns = ( timens < cfminns ) ? timens : cfminns;
 		cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
@@ -79,8 +90,8 @@ namespace profile
 	inline
 	void update()
 	{
-		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME.PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
-		long long int timens = PROFILE_COUNTER_NAME.last();
+		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
+		long long int timens = PROFILE_COUNTER_NAME->last();
 		uptotns += timens;
 		upminns = ( timens < upminns ) ? timens : upminns;
 		upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
@@ -99,5 +110,7 @@ namespace profile
 #define PROFILE_OUTPUT() profile::output(std::cout)
 
 #define PROFILE_CLEANUP()
+
+#define PROFILE
 
 #include "../polu.soa.papi/main.cpp"
