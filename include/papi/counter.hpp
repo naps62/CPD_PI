@@ -9,6 +9,13 @@
 
 namespace papi
 {
+	/**
+	 * \todo Add overhead control. This depends on the counter, as single value counters will need only a variable, and multiple values counters will require an array.
+	 * \todo {
+	 * Give some statistical meaning to the overhead control. Measure the overhead a few times and use the median. An alternative would be to calculate the overhead right before the beginning of the measurement.
+	 * This would allow the measured overhead to suffer from most interferences the measurement will.
+	 * }
+	 */
 	class Counter
 	: protected time::real::Stopwatch
 	{
