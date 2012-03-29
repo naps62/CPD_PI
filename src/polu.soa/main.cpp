@@ -3,114 +3,13 @@
 #include "FVLib.h"
 
 
-
-#if   defined (PROFILE_BTM) \
- ||   defined (PROFILE_L1DCM) \
- ||   defined (PROFILE_L2TCM) \
- ||   defined (PROFILE_L2DCM)
-#define PROFILE_MEMORY
-#endif
-
-#if   defined (PROFILE_TOTINS) \
- ||   defined (PROFILE_LDINS) \
- ||   defined (PROFILE_SRINS) \
- ||   defined (PROFILE_BRINS) \
- ||   defined (PROFILE_FPINS) \
- ||   defined (PROFILE_VECINS)
-#define PROFILE_INSTRUCTIONS
-#endif
-
-#if   defined (PROFILE_FLOPS)
-#define PROFILE_OPERATIONS
-#endif
-
-#if   defined (PROFILE_MEMORY) \
- ||   defined (PROFILE_INSTRUCTIONS) \
- ||   defined (PROFILE_OPERATIONS)
-#define PROFILE
-#endif
-
-
-
 //
 //	GLOBALS
 //
-#if   defined (PROFILE)
-#include <papi/papi.hpp>
-#if   defined (PROFILE_MEMORY)
-#if   defined (PROFILE_BTM)
-#include <papi/memacs.hpp>
-papi::TotalMemoryAccessesCounter *p;
-long long int btm;
-#elif defined (PROFILE_BTIF)
-papi::DataMemoryAccessesCounter *p;
-#elif defined (PROFILE_L1DCM)
-#include <papi/l1dcm.hpp>
-papi::L1DataCacheMissesCounter *p;
-long long int l1dcm;
-#elif   defined (PROFILE_L2TCM)
-#include <papi/l2tcm.hpp>
-papi::L2TotalCacheMissesCounter *p;
-long long int l2tcm;
-#elif   defined (PROFILE_L2DCM)
-#include <papi/l2dcm.hpp>
-papi::L2DataCacheMissesCounter *p;
-long long int l2dcm;
-#endif//    PROFILE_*
-#endif//    PROFILE_MEMORY
 
-#if   defined (PROFILE_INSTRUCTIONS)
-#include <papi/instruction.hpp>
-#if   defined (PROFILE_BRINS)
-#include <papi/brins.hpp>
-papi::BranchInstructionsCounter *p;
-long long int brins;
-#elif defined (PROFILE_FPINS)
-#include <papi/fpins.hpp>
-papi::FloatingPointInstructionsCounter *p;
-long long int fpins;
-#elif defined (PROFILE_LDINS)
-#include <papi/ldins.hpp>
-papi::LoadInstructionsCounter *p;
-long long int ldins;
-#elif defined (PROFILE_SRINS)
-#include <papi/srins.hpp>
-papi::StoreInstructionsCounter *p;
-long long int srins;
-#elif defined (PROFILE_TOTINS)
-papi::counters::TotalInstructionsCounter *p;
-long long int totins;
-#elif defined (PROFILE_VECINS)
-#include <papi/vecins.hpp>
-papi::VectorInstructionsCounter *p;
-long long int vecins;
-#endif//	PROFILE_*
-#endif//	PROFILE_INSTRUCTIONS
-
-#if   defined (PROFILE_OPERATIONS)
-#if   defined (PROFILE_FLOPS)
-#include <papi/flops.hpp>
-papi::FloatingPointOperationsCounter *p;
-long long int flops;
-#endif//	PROFILE_FLOPS
-#endif//	PROFILE_OPERATIONS
-
-long long int mlbegin;
-
-long long int cftotns;
-long long int cfminns;
-long long int cfmaxns;
-
-long long int uptotns;
-long long int upminns;
-long long int upmaxns;
-
-#if   defined (PROFILE_WARMUP)
+#ifdef PROFILE_LIMITED
 unsigned mliters;
-#endif//	PROFILE_WARMUP
-
-#endif//    PROFILE
-
+#endif
 
 
 void
@@ -125,12 +24,14 @@ compute_flux
 	unsigned   edge_count
 	)
 {
-#if   defined (PROFILE)
-#if   defined (PROFILE_WARMUP)
+
+#ifdef PROFILE
+	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
-#endif//	PROFILE_WARMUP
-	p->start();
-#endif//    PROFILE
+	#endif
+		PROFILE_COUNTER.start();
+#endif
+
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		double polution_left = polutions[ lefts[e] ];
@@ -144,56 +45,19 @@ compute_flux
 				  : velocities[e] * polution_left
 				  ;
 	}
-#if   defined (PROFILE)
-#if   defined (PROFILE_WARMUP)
-	if ( mliters > PROFILE_WARMUP )
-	{
-#endif//	PROFILE_WARMUP
-	p->stop();
-#if   defined (PROFILE_MEMORY)
-#if   defined (PROFILE_BTM)
-	btm += p->transactions();
-#elif defined (PROFILE_L1DCM)
-	l1dcm += p->misses();
-#elif defined (PROFILE_L2TCM)
-	l2tcm += p->misses();
-#elif defined (PROFILE_L2DCM)
-	l2dcm += p->misses();
-#endif//    PROFILE_*
-#endif//    PROFILE_MEMORY
 
-#if   defined (PROFILE_INSTRUCTIONS)
-long long int inst = p->instructions();
-#if   defined (PROFILE_BRINS)
-	brins += inst;
-#elif defined (PROFILE_FPINS)
-	fpins += inst;
-#elif defined (PROFILE_LDINS)
-	ldins += inst;
-#elif defined (PROFILE_SRINS)
-	srins += inst;
-#elif defined (PROFILE_TOTINS)
-	totins += inst;
-#elif defined (PROFILE_VECINS)
-	vecins += inst;
-#endif//	PROFILE_*
-#endif//	PROFILE_INSTRUCTIONS
-
-#if   defined (PROFILE_OPERATIONS)
-#if   defined (PROFILE_FLOPS)
-	flops += p->operations();
-#endif//	PROFILE_FLOPS
-#endif//	PROFILE_OPERATIONS
+#ifdef PROFILE
+	#ifdef PROFILE_WARMUP
+	if ( mliters < PROFILE_WARMUP )
 	{
-		long long int timens = p->last();
-		cftotns += timens;
-		cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
-		cfminns = ( timens < cfminns ) ? timens : cfminns;
+	#endif
+		PROFILE_COUNTER.stop();
+		PROFILE_RETRIEVE_CF();
+	#ifdef PROFILE_WARMUP
 	}
-#if   defined (PROFILE_WARMUP)
-	}
-#endif//	PROFILE_WARMUP
-#endif//    PROFILE
+	#endif
+#endif
+
 }
 
 
@@ -216,12 +80,14 @@ update
 	unsigned   cell_count
 	)
 {
-#if   defined (PROFILE)
-#if   defined (PROFILE_WARMUP)
-	if ( mliters > PROFILE_WARMUP )
+
+#ifdef PROFILE
+	#ifdef PROFILE_WARMUP
+	if ( mliters > PROFILE_LIMITED )
+	#endif
+		PROFILE_COUNTER.start();
 #endif
-	p->start();
-#endif//    PROFILE
+
 	unsigned cell_last = cell_count - 1;
 
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
@@ -244,56 +110,18 @@ update
 
 		polutions[c] += cdp;
 	}
-#if   defined (PROFILE)
-#if   defined (PROFILE_WARMUP)
-	if ( mliters > PROFILE_WARMUP )
-	{
-#endif
-	p->stop();
-#if   defined (PROFILE_MEMORY)
-#if   defined (PROFILE_BTM)
-	btm_bytes += p->bytes();
-#elif defined (PROFILE_L1DCM)
-	l1dcm += p->misses();
-#elif defined (PROFILE_L2TCM)
-	l2tcm += p->misses();
-#elif defined (PROFILE_L2DCM)
-	l2dcm += p->misses();
-#endif//    PROFILE_*
-#endif//    PROFILE_MEMORY
 
-#if   defined (PROFILE_INSTRUCTIONS)
-	long long int inst = p->instructions();
-#if   defined (PROFILE_BRINS)
-	brins += p->instructions();
-#elif defined (PROFILE_FPINS)
-	fpins += p->instructions();
-#elif defined (PROFILE_LDINS)
-	ldins += p->instructions();
-#elif defined (PROFILE_SRINS)
-	srins += p->instructions();
-#elif defined (PROFILE_TOTINS)
-	totins += p->instructions_l();
-#elif defined (PROFILE_VECINS)
-	vecins += p->instructions();
-#endif//	PROFILE_*
-#endif//	PROFILE_INSTRUCTIONS
-
-#if   defined (PROFILE_OPERATIONS)
-#if   defined (PROFILE_FLOPS)
-	flops += p->operations();
-#endif//	PROFILE_FLOPS
-#endif//	PROFILE_OPERATIONS
+#ifdef PROFILE
+	#ifdef PROFILE_WARMUP
+	if ( mliters < PROFILE_LIMITED )
 	{
-		long long int timens = p->last();
-		uptotns += timens;
-		upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
-		upminns = ( timens < upminns ) ? timens : upminns;
+	#endif
+		PROFILE_COUNTER.stop();
+		PROFILE_RETRIEVE_UP();
+	#ifdef PROFILE_WARMUP
 	}
-#if   defined (PROFILE_WARMUP)
-	}
+	#endif
 #endif
-#endif//    PROFILE
 }
 
 
@@ -312,10 +140,11 @@ update
 
 int main(int argc, char *argv[])
 {
-#if   defined (PROFILE)
+#ifdef PROFILE
 	papi::init();
-	long long int totalns = papi::time::real::nanoseconds();
-#endif//	PROFILE
+	PROFILE_INIT();
+#endif
+
 	string parameter_filename;
 	
 	if ( argc > 1 )
@@ -364,66 +193,6 @@ int main(int argc, char *argv[])
 	}
 
 
-
-#if   defined (PROFILE)
-#if   defined (PROFILE_MEMORY)
-#if   defined (PROFILE_BTM)
-	p = new papi::BytesAccessed();
-	btm_bytes = 0;
-#elif defined (PROFILE_L1DCM)
-	p = new papi::L1DataCacheMissesCounter();
-	l1dcm = 0;
-#elif defined (PROFILE_L2TCM)
-	p = new papi::L2TotalCacheMissesCounter();
-	l2tcm = 0;
-#elif defined (PROFILE_L2DCM)
-	p = new papi::L2DataCacheMissesCounter();
-	l2dcm = 0;
-#endif//    PROFILE_*
-#endif//    PROFILE_MEMORY
-
-#if   defined (PROFILE_INSTRUCTIONS)
-#if   defined (PROFILE_BRINS)
-	p = new papi::BranchInstructionsCounter();
-	brins = 0;
-#elif defined (PROFILE_FPINS)
-	p = new papi::FloatingPointInstructionsCounter();
-	fpins = 0;
-#elif defined (PROFILE_LDINS)
-	p = new papi::LoadInstructionsCounter();
-	ldins = 0;
-#elif defined (PROFILE_SRINS)
-	p = new papi::StoreInstructionsCounter();
-	srins = 0;
-#elif defined (PROFILE_TOTINS)
-	p = new papi::counters::TotalInstructionsCounter();
-	totins = 0;
-#elif defined (PROFILE_VECINS)
-	p = new papi::VectorInstructionsCounter();
-	vecins = 0;
-#endif//	PROFILE_*
-#endif//	PROFILE_INSTRUCTIONS
-
-#if   defined (PROFILE_OPERATIONS)
-#if   defined (PROFILE_FLOPS)
-	p = new papi::FloatingPointOperationsCounter();
-	flops = 0;
-#endif//	PROFILE_FLOPS
-#endif//	PROFILE_OPERATIONS
-
-	long long int mltotns = 0;
-	long long int mlmaxns = numeric_limits<long long int>::min();
-	long long int mlminns = numeric_limits<long long int>::max();
-	
-	cftotns = 0;
-	cfmaxns = numeric_limits<long long int>::min();
-	cfminns = numeric_limits<long long int>::max();
-
-	uptotns = 0;
-	upmaxns = numeric_limits<long long int>::min();
-	upminns = numeric_limits<long long int>::max();
-
-#endif//    PROFILE
 
 
 
@@ -525,24 +294,12 @@ int main(int argc, char *argv[])
 
 
 	// the main loop
-	time=0.;
-	FVio pol_file( pol_fname.c_str() ,FVWRITE);
-	
-#if   defined (PROFILE)
-#if   defined (PROFILE_LIMITED)
-	for ( int i = 0 ; i < PROFILE_LIMITED ; ++i )
-#else//	PROFILE_LIMITED
-	while( time < final_time)
-#endif//	PROFILE_LIMITED
+#ifdef PROFILE_LIMITED
+	for ( mliters = 0 ; mliters < PROFILE_LIMITED ; ++mliters)
+#else
+	for ( ; time < final_time ; time += dt )
+#endif
 	{
-#if   defined (PROFILE_WARMUP)
-		if ( mliters > PROFILE_WARMUP )
-#endif//	PROFILE_WARMUP
-		mlbegin = papi::time::real::nanoseconds();
-#else//    PROFILE
-	while( time < final_time)
-	{
-#endif//    PROFILE
 		compute_flux(
 			polutions,
 			velocities,
@@ -552,7 +309,6 @@ int main(int argc, char *argv[])
 			dirichlet,
 			edge_count)
 		;
-
 		update(
 			polutions,
 			areas,
@@ -565,28 +321,12 @@ int main(int argc, char *argv[])
 			cell_edge_count,
 			cell_count)
 		;
-
-
-		time += dt;
-#if   defined (PROFILE)
-#if   defined (PROFILE_WARMUP)
-		if ( mliters > PROFILE_WARMUP )
-		{
-#endif//	PROFILE_WARMUP
-		long long int timens = papi::time::real::nanoseconds() - mlbegin;
-		mltotns += timens;
-		mlmaxns = ( timens > mlmaxns ) ? timens : mlmaxns;
-		mlminns = ( timens < mlminns ) ? timens : mlminns;
-#if   defined (PROFILE_WARMUP)
-		}
-		mliters++;
-#endif//	PROFILE_WARMUP
-#endif//	PROFILE
 	}
 
 	for ( unsigned c = 0; c < cell_count ; ++c )
 		pol[ c ] = polutions[c];
 
+	FVio pol_file( pol_fname.c_str() ,FVWRITE);
 	pol_file.put(pol,time,"polution"); 
 
 	delete[] fluxes;
@@ -600,53 +340,9 @@ int main(int argc, char *argv[])
 	delete[] edges;
 
 
-#if   defined (PROFILE)
-	delete p;
-	totalns = papi::time::real::nanoseconds() - totalns;
+#ifdef PROFILE
 	papi::shutdown();
-	cout
-#if   defined (PROFILE_MEMORY)
-#if   defined (PROFILE_BTM)
-				<<	btm_bytes
-#elif defined (PROFILE_L1DCM)
-				<<	l1dcm
-#elif defined (PROFILE_L2TCM)
-				<<	l2tcm
-#elif defined (PROFILE_L2DCM)
-				<<	l2dcm
-#endif//    PROFILE_*
-#endif//    PROFILE_MEMORY
-#if   defined (PROFILE_INSTRUCTIONS)
-#if   defined (PROFILE_BRINS)
-				<<	brins
-#elif defined (PROFILE_FPINS)
-				<<	fpins
-#elif defined (PROFILE_LDINS)
-				<<	ldins
-#elif defined (PROFILE_SRINS)
-				<<	srins
-#elif defined (PROFILE_TOTINS)
-				<<	totins
-#elif defined (PROFILE_VECINS)
-				<<	vecins
-#endif//	PROFILE_*
-#endif//	PROFILE_INSTRUCTIONS
-#if   defined (PROFILE_OPERATIONS)
-#if   defined (PROFILE_FLOPS)
-				<<	flops
-#endif//	PROFILE_FLOPS
-#endif//	PROFILE_OPERATIONS
-		<<	';'	<<	totalns
-		<<	';'	<<	mltotns
-		<<	';'	<<	mlmaxns
-		<<	';'	<<	mlminns
-		<<	';'	<<	cftotns
-		<<	';'	<<	cfmaxns
-		<<	';'	<<	cfminns
-		<<	';'	<<	uptotns
-		<<	';'	<<	upmaxns
-		<<	';'	<<	upminns
-						<<	endl
-		;
-#endif//    PROFILE
+	PROFILE_OUTPUT();
+	PROFILE_CLEANUP();
+#endif
 }
