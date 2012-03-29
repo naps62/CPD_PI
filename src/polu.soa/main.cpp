@@ -37,13 +37,14 @@
 //
 #if   defined (PROFILE)
 #include <papi/papi.hpp>
-
 #if   defined (PROFILE_MEMORY)
 #if   defined (PROFILE_BTM)
-#include <papi/bytes_accessed.hpp>
-papi::BytesAccessed *p;
-long long int btm_bytes;
-#elif   defined (PROFILE_L1DCM)
+#include <papi/memacs.hpp>
+papi::TotalMemoryAccessesCounter *p;
+long long int btm;
+#elif defined (PROFILE_BTIF)
+papi::DataMemoryAccessesCounter *p;
+#elif defined (PROFILE_L1DCM)
 #include <papi/l1dcm.hpp>
 papi::L1DataCacheMissesCounter *p;
 long long int l1dcm;
@@ -59,7 +60,7 @@ long long int l2dcm;
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
-#include <papi/papiinst.hpp>
+#include <papi/instruction.hpp>
 #if   defined (PROFILE_BRINS)
 #include <papi/brins.hpp>
 papi::BranchInstructionsCounter *p;
@@ -77,8 +78,7 @@ long long int ldins;
 papi::StoreInstructionsCounter *p;
 long long int srins;
 #elif defined (PROFILE_TOTINS)
-//#include <papi/totins.hpp>
-papi::TotalInstructionsCounter *p;
+papi::counters::TotalInstructionsCounter *p;
 long long int totins;
 #elif defined (PROFILE_VECINS)
 #include <papi/vecins.hpp>
@@ -163,7 +163,7 @@ compute_flux
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
-long long int inst = p->instructions_l();
+long long int inst = p->instructions();
 #if   defined (PROFILE_BRINS)
 	brins += inst;
 #elif defined (PROFILE_FPINS)
@@ -263,6 +263,7 @@ update
 #endif//    PROFILE_MEMORY
 
 #if   defined (PROFILE_INSTRUCTIONS)
+	long long int inst = p->instructions();
 #if   defined (PROFILE_BRINS)
 	brins += p->instructions();
 #elif defined (PROFILE_FPINS)
@@ -395,7 +396,7 @@ int main(int argc, char *argv[])
 	p = new papi::StoreInstructionsCounter();
 	srins = 0;
 #elif defined (PROFILE_TOTINS)
-	p = new papi::TotalInstructionsCounter();
+	p = new papi::counters::TotalInstructionsCounter();
 	totins = 0;
 #elif defined (PROFILE_VECINS)
 	p = new papi::VectorInstructionsCounter();
