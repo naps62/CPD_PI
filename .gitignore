@@ -22,8 +22,6 @@ bin/*
 lib/*
 original/*
 results/*
-data/xml/*
-data/geo/*
-data/msh/*
-data/out/*
+data*
+doc*
 *.swo
