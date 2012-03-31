@@ -13,6 +13,12 @@ namespace papi
 		{
 			L2TotalCacheMissesPresetEvent();
 		};
+
+		struct L2DataCacheMissesPresetEvent
+		: public Event
+		{
+			L2DataCacheMissesPresetEvent();
+		};
 	}
 
 	namespace counters
@@ -42,6 +48,22 @@ namespace papi
 			//
 
 			/// Retrieves the last measured value for the number of misses in the L2 cache (both for instructions and data).
+			long long int misses();
+		};
+
+		class L2DataCacheMissesCounter
+		: public CacheMissesCounter
+		{
+			events::L2DataCacheMissesPresetEvent _l2dcm;
+		public:
+			/// Default constructor. Adds the event \ref events::L2DataCacheMissesPresetEvent.
+			L2DataCacheMissesCounter();
+
+			//
+			//  getter
+			//
+
+			/// Retrieves the last measured value for the number of misses in the L2 data cache.
 			long long int misses();
 		};
 	}
