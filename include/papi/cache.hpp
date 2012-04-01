@@ -8,10 +8,34 @@ namespace papi
 {
 	namespace events
 	{
+		struct L1DataCacheAccessesPresetEvent
+		: public Event
+		{
+			L1DataCacheAccessesPresetEvent();
+		};
+
+		struct L1DataCacheMissesPresetEvent
+		: public Event
+		{
+			L1DataCacheMissesPresetEvent();
+		};
+
+
+
+
+
 		struct L2TotalCacheMissesPresetEvent
 		: public Event
 		{
 			L2TotalCacheMissesPresetEvent();
+		};
+
+
+
+		struct L2DataCacheAccessesPresetEvent
+		: public Event
+		{
+			L2DataCacheAccessesPresetEvent();
 		};
 
 		struct L2DataCacheMissesPresetEvent
@@ -23,12 +47,44 @@ namespace papi
 
 	namespace counters
 	{
+		struct CacheAccessesCounter
+		: public Counter
+		{
+			virtual long long int accesses() = 0;
+		};
+
 		struct CacheMissesCounter
 		: public Counter
 		{
 			/// Retrieves the last measured value for the number of cache misses.
 			virtual long long int misses() = 0;
 		};
+
+
+
+		class L1DataCacheAccessesCounter
+		: public CacheAccessesCounter
+		{
+			events::L1DataCacheAccessesPresetEvent _l1dca;
+		public:
+			L1DataCacheAccessesCounter();
+
+			long long int accesses();
+		};
+
+		class L1DataCacheMissesCounter
+		: public CacheMissesCounter
+		{
+			events::L1DataCacheMissesPresetEvent _l1dcm;
+		public:
+			L1DataCacheMissesCounter();
+
+			long long int misses();
+		};
+
+
+
+
 
 		/// Measures the total number of misses in the L2 cache using a preset counter.
 		/** This counter includes both instructions and data misses.
@@ -49,6 +105,18 @@ namespace papi
 
 			/// Retrieves the last measured value for the number of misses in the L2 cache (both for instructions and data).
 			long long int misses();
+		};
+
+		
+
+		class L2DataCacheAccessesCounter
+		: public CacheAccessesCounter
+		{
+			events::L2DataCacheAccessesPresetEvent _l2dca;
+		public:
+			L2DataCacheAccessesCounter();
+
+			long long int accesses();
 		};
 
 		class L2DataCacheMissesCounter
