@@ -2,14 +2,16 @@
 #include <limits>
 
 #include <papi/papi.hpp>
-#include <papi/instruction.hpp>
+#include <papi/cache.hpp>
 
 #define PROFILE_LIMITED 1000
 #define PROFILE_WARMUP   100
 
-#define PROFILE_COUNTER_CLASS papi::counters::TotalInstructionsCounter
+
+
+#define PROFILE_COUNTER_CLASS papi::counters::L2DataCacheMissesCounter
 #define PROFILE_COUNTER_NAME  p
-#define PROFILE_COUNTER_FIELD instructions
+#define PROFILE_COUNTER_FIELD misses
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
 
 

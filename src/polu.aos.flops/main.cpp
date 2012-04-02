@@ -2,14 +2,14 @@
 #include <limits>
 
 #include <papi/papi.hpp>
-#include <papi/instruction.hpp>
+#include <papi/flops.hpp>
 
 #define PROFILE_LIMITED 1000
 #define PROFILE_WARMUP   100
 
-#define PROFILE_COUNTER_CLASS papi::counters::TotalInstructionsCounter
+#define PROFILE_COUNTER_CLASS papi::counters::FloatingPointOperationsCounter
 #define PROFILE_COUNTER_NAME  p
-#define PROFILE_COUNTER_FIELD instructions
+#define PROFILE_COUNTER_FIELD operations
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
 
 

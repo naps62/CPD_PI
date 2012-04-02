@@ -7,7 +7,7 @@
 #define PROFILE_LIMITED 1000
 #define PROFILE_WARMUP   100
 
-#define PROFILE_COUNTER_CLASS papi::counters::TotalInstructionsCounter
+#define PROFILE_COUNTER_CLASS papi::counters::VectorInstructionsCounter
 #define PROFILE_COUNTER_NAME  p
 #define PROFILE_COUNTER_FIELD instructions
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
