@@ -1,1 +1,0 @@
-../polu.openmp.papi/main.cpp

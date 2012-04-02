@@ -1,1 +1,0 @@
-../polu.optim/main.cpp

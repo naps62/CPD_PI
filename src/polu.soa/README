@@ -1,0 +1,14 @@
+POLU.SOA
+Struct Of Arrays version of the polu application.
+
+Designed for memory usage comparison with the POLU.AOS application.
+
+Derivatives for performance evaluation:
+* PAPI      root application for the performance tests
+* BRINS     singleton test: number of branch instructions
+* FPINS     singleton test: number of floating-point instructions
+* LDINS     singleton test: number of load instructions
+* SRINS     singleton test: number of store instructions
+* TOTINS    singleton test: total number of instructions
+* VECINS    singleton test: number of vector instructions
+* FLOPS     singleton test: number of floating point operations

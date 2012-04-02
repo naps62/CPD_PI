@@ -1,0 +1,18 @@
+POLU.AOS
+
+Array of Structs version of the polu application. This contains all the optimizations of the first analysis to the original application (replaces the POLU.OPTIM version to focus in AOS vs SOA comparisons).
+
+Optimizations performed so far:
+* POLU.STRUCT    the original FVLib is replaced by two arrays of structures
+               to achieve better memory accesses by removing the need for
+               pointers. (This is the primary SOA version)
+* POLU.UPDATE    the update function is changed so the external loop
+               iterates over the cells instead of the edges, thus removing
+               a race condition which would otherwise prevent parallel
+               execution.
+* POLU.OPTIM     due to some simplifications in the original version's code
+               some of the code in the compute_flux was moved to the
+               beginning of the program, reducing the amount of computation
+               in this step.
+
+Derivatives for performance evaluation:
