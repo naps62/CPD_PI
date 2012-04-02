@@ -31,6 +31,10 @@ namespace papi
 		L2DataCacheMissesPresetEvent::L2DataCacheMissesPresetEvent()
 		: Event( "PAPI_L2_DCM" )
 		{}
+
+		L2InstructionCacheMissesPresetEvent::L2InstructionCacheMissesPresetEvent()
+		: Event( "PAPI_L2_DCM" )
+		{}
 	}
 
 	namespace counters
@@ -98,6 +102,19 @@ namespace papi
 		L2DataCacheMissesCounter::misses()
 		{
 			return this->last( _l2dcm.code() );
+		}
+
+
+
+		L2InstructionCacheMissesCounter::L2InstructionCacheMissesCounter()
+		{
+			this->add_event( _l2icm.code() );
+		}
+
+		long long int
+		L2InstructionCacheMissesCounter::misses()
+		{
+			return this->last( _l2icm.code() );
 		}
 	}
 }
