@@ -1,6 +1,0 @@
-local_load
-local_store
-gld_request
-gst_request
-shared_load
-shared_store
