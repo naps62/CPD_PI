@@ -1,11 +1,12 @@
-#ifndef ___STOPWATCH_HPP___
-#define ___STOPWATCH_HPP___
+#ifndef ___LIBTK___STOPWATCH_HPP___
+#define ___LIBTK___STOPWATCH_HPP___
 
 #include <iostream>
 #include <sys/time.h>
 
 using std::ostream;
 
+/// General Tool Kit for a variety of useful stuff.
 namespace tk
 {
 	class Time : public timeval
@@ -51,15 +52,18 @@ namespace tk
 		const Time operator-( const Time &time );
 	};
 
+	/// Measures time intervals.
+	/** This class is specially meant for execution time profilling.
+	 * \todo Optimize this class with inline definitions.
+	 */
 	class Stopwatch
 	{
-		//	instance
-		bool _running;
-		Time _control;
-		Time _begin;
-		Time _end;
-		Time _total;
-		Time _partial;
+		bool _running;    ///< Current state. Tracks whether the stopwatch has been started or is stopped.
+		Time _control;    ///< Overhead control. Saves the value regarding the time interval spent starting/stopping the stopwatch.
+		Time _begin;      ///< Timestamp tracking when the stopwatch was started.
+		Time _end;        ///< Timestamp tracking when the stopwatch was stopped.
+		Time _total;      ///< Total time the stopwatch was activated, since creation or last reset.
+		Time _last;       ///< Duration of the last measured time interval.
 
 
 		public:
@@ -76,8 +80,8 @@ namespace tk
 		//	getters
 		//		pure
 		Time total();
-		Time partial();
+		Time last();
 	};
 }
 
-#endif/*___STOPWATCH_HPP___*/
+#endif//___LIBTK___STOPWATCH_HPP___
