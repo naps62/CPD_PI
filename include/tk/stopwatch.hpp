@@ -67,19 +67,49 @@ namespace tk
 
 
 		public:
-		//	constructors
+		/// Default constructor. Reset every timestamp and perform a test run to obtain the overhead control value.
 		Stopwatch();
 
-		//	actions
+		/// Start counting time.
+		/**
+		 * Resets the partial timer, changes the current state and saves the current value of the time mechanism as the initial timestamp.
+		 * This function is ignored if the stopwatch is running.
+		 */
 		void start();
+
+		/// Stop counting time.
+		/**
+		 * Gets the current timestamp and toggles the state. The measured time interval is saved in the 'last' timer and added to the 'total'.
+		 * This function is ignored if the stopwatch is stopped.
+		 */
 		void stop();
+
+		/// Reset the timers.
+		/**
+		 * Changes both the 'last' and 'total' timers back to zero. The 'total' timer remains unchanged if the stopwatch is running.
+		 */
 		void reset();
+
+		/// Stops and resets the stopwatch.
 		void finish();
+
+		/// Toggles the stopwatch state.
+		/**
+		 * If the stopwatch is running, stop is called. Otherwise start is called.
+		 */
 		void toggle();
 		
-		//	getters
-		//		pure
+		//
+		//  GETTERS
+		//
+
+		/// Retrieve the 'total' timer value.
+		/**
+		 * The value of this timer is the total amount of time the stopwatch spent activated since creation or last call to the reset method.
+		 */
 		Time total();
+
+		/// Retrieve the last measured timer value.
 		Time last();
 	};
 }
