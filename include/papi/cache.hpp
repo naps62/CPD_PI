@@ -94,6 +94,31 @@ namespace papi
 
 
 
+		class L2CacheMissesCounter
+		: public CacheMissesCounter
+		{
+			events::L2DataCacheMissesPresetEvent        _l2dcm;
+			events::L2InstructionCacheMissesPresetEvent _l2icm;
+			events::L2TotalCacheMissesPresetEvent       _l2tcm;
+		public:
+			enum Event
+			{
+				DATA,
+				INSTRUCTION,
+				TOTAL
+			};
+
+			L2CacheMissesCounter();
+
+			long long int data();
+			long long int instruction();
+			long long int total();
+			long long int misses( Event e );
+			long long int misses();
+		};
+
+
+
 		/// Measures the total number of misses in the L2 cache using a preset counter.
 		/** This counter includes both instructions and data misses.
 		 *

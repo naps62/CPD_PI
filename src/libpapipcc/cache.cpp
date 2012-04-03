@@ -69,6 +69,53 @@ namespace papi
 
 
 
+		L2CacheMissesCounter::L2CacheMissesCounter()
+		{
+			this->add_event( _l2dcm.code() );
+			this->add_event( _l2icm.code() );
+			this->add_event( _l2tcm.code() );
+		}
+
+		long long int
+		L2CacheMissesCounter::data()
+		{
+			return this->last( _l2dcm.code() );
+		}
+
+		long long int
+		L2CacheMissesCounter::instruction()
+		{
+			return this->last( _l2icm.code() );
+		}
+
+		long long int
+		L2CacheMissesCounter::total()
+		{
+			return this->last( _l2tcm.code() );
+		}
+
+		long long int
+		L2CacheMissesCounter::misses( Event e )
+		{
+			switch (e)
+			{
+				case DATA:
+					return this->data();
+				case INSTRUCTION:
+					return this->instruction();
+				default:
+					return this->total();
+			}
+		}
+
+		long long int
+		L2CacheMissesCounter::misses()
+		{
+			return this->misses( TOTAL );
+		}
+
+
+
 		L2TotalCacheMissesCounter::L2TotalCacheMissesCounter()
 		{
 			this->add_event( _l2tcm.code() );
