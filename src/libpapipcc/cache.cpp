@@ -32,8 +32,10 @@ namespace papi
 		: Event( "PAPI_L2_DCM" )
 		{}
 
+
+
 		L2InstructionCacheMissesPresetEvent::L2InstructionCacheMissesPresetEvent()
-		: Event( "PAPI_L2_DCM" )
+		: Event( "PAPI_L2_ICM" )
 		{}
 	}
 
