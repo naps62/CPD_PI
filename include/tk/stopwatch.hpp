@@ -22,6 +22,7 @@ namespace tk
 
 		//	friends
 		friend ostream& operator<<(ostream& out, const Time& time);
+		friend const Time operator-( const Time &t1 , const Time &t2 );
 
 
 	public:
@@ -50,6 +51,7 @@ namespace tk
 
 		const Time operator+( const Time &time );
 		const Time operator-( const Time &time );
+
 	};
 
 	/// Measures time intervals.
