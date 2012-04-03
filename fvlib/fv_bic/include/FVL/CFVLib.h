@@ -1,13 +1,14 @@
-/* ---------------------------------------------------------------------------
-** Finite Volume Library 
-**
-** CFVLib.h
-** full CUDA library includes
-**
-** Author:		Miguel Palhas, mpalhas@gmail.com
-** Created:		13-02-2012
-** Last Test:	---
-** -------------------------------------------------------------------------*/
+/**
+ * \file FVLib.h
+ *
+ * \brief Global header file for FVL.
+ *
+ * Use this to include all library headers
+ *
+ * \author Miguel Palhas
+ * \date 13-02-2012
+ * \todo make sure everything is included here
+ */
 
 #ifndef _CUDA_FVLIB
 #define _CUDA_FVLIB

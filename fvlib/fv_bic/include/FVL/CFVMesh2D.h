@@ -90,8 +90,8 @@ namespace FVL {
 			CFVArray<int> cell_types;				///< type associated with each cell
 			CFVPoints2D<double> cell_centroids;		///< centroid for each cell
 			CFVArray<double> cell_perimeters;		///< perimeter for each cell
-			CFVArray<double> cell_areas;				///< area for each cell
-			CFVArray<unsigned int> cell_edges_count;	///< number of edges of each cell (to index cell_edges)
+			CFVArray<double> cell_areas;			///< area for each cell
+			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
 			CFVMat<double> cell_edges_normal;		///< distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 2, num_cells)
 

@@ -6,21 +6,21 @@ namespace FVL {
 	FVLog FVErr::err_log(FV_ERRFILE);
 	
 	void FVErr::error(string &msg, int err_code) {
-		output(ERROR, msg);
+		output(FV_ERROR, msg);
 		exit(err_code);
 	}
 	
 	void FVErr::warn(string &msg) {
-		output(WARNING, msg);
+		output(FV_WARNING, msg);
 	}
 	
-	void FVErr::output(MSG_TYPE type, string &msg) {
+	void FVErr::output(FV_LogType type, string &msg) {
 		stringstream full_msg;
 		switch (type) {
-			case ERROR:
+			case FV_ERROR:
 				full_msg << "Error: ";
 				break;
-			case WARNING:
+			case FV_WARNING:
 				full_msg << "Warning: ";
 				break;
 			default:

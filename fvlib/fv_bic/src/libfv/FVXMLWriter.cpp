@@ -19,11 +19,6 @@ using std::ofstream;
 
 namespace FVL {
 
-	FVXMLWriter::FVXMLWriter() {
-		this->filename = "";
-		init();
-	}
-
 	FVXMLWriter::FVXMLWriter(string filename) {
 		this->filename = filename;
 		init();
@@ -41,14 +36,10 @@ namespace FVL {
 		this->append_node(root);
 	}
 
-	void FVXMLWriter::save() {
-		this->save(this->filename);
-	}
-
 	void FVXMLWriter::save(string filename) {
-		ofstream out(filename.c_str());
-		out << *this;
-		cout << *this;
+		if (! filename.empty())
+			this->filename = filename;
+		ofstream out(this->filename.c_str());
 	}
 
 	void FVXMLWriter::close() {

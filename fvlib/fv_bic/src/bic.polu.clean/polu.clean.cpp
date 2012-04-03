@@ -3,6 +3,7 @@
 #include <omp.h>
 #include "FVLib.h"
 #include "FVL/FVLog.h"
+#include "FVL/FVParameters.h"
 
 //	BEGIN TYPES
 
@@ -147,7 +148,9 @@ Parameters read_parameters (
 	string parameter_filename)
 {
 	Parameters data;
-	Parameter para( parameter_filename.c_str() );
+	//Parameter para( parameter_filename.c_str() );
+	string str_file(parameter_filename);
+	FVL::FVParameters para(str_file);
 
 	data.filenames.mesh = para.getString("MeshName");
 	data.filenames.velocity = para.getString("VelocityFile");
@@ -220,24 +223,20 @@ void main_loop (
 	{
 		dt = compute_flux( mesh , polutions , velocities , fluxes , dc ) * mesh_parameter;
 		update( mesh , polutions , fluxes , dt );
-		/*cout << endl << i << ": " << endl;
+		cout << endl << "iteration: " << i << ": " << endl;
 		for(int x = 0; x < mesh.getNbEdge(); ++x) {
-			cout << "edge: " << x << " " << fluxes[x] << endl;
+			cout << "flux[" << x << "] = " << fluxes[x] << endl;
 		}
 		cout << "-------------------" << endl;
 		for(int x = 0; x < mesh.getNbCell(); ++x) {
-			cout << "cell: " << x << " " << polutions[x] << endl;
-		}*/
-
-		//for(int i = 0; i < 10; ++i)
-		//	cout << i << "\t" << fluxes[i] << endl;
-		//exit(0);
+			cout << "polution[" << x << "] = " << polutions[x] << endl;
+		}
 		t += dt;
 		++i;
 		//cout << i << " " << dt << endl;
 		if ( i % jump_interval == 0 )
 		{
-			cout << "anim @ " << t << "\r";
+			//cout << "anim @ " << t << "\r";
 			//cout << "writing to file" << endl;
 			polution_file.put( polutions , t , "polution" );    
 			//printf("step %d  at time %f \r", i, t);

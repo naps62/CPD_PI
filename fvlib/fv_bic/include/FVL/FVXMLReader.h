@@ -34,8 +34,9 @@ using namespace rapidxml;
 namespace FVL {
 
 	/**
+	 * XML Reader class for FVL
 	 *
-	 * \todo known issue with \\n characters being stripped from stream, resulting in numbers between two lines beeing concatenated if an additional space is not placed between them
+	 * Used to parse a XML file for input
 	 */
 	class FVXMLReader : public xml_document<> {
 		

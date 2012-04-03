@@ -44,6 +44,12 @@ namespace FVL {
 		FV_WRITE,		///< Write only file
 		FV_READ_WRITE	///< Read and Write file (use with care)
 	};
+
+	enum FV_LogType {
+		FV_LOG,		///< Log message
+		FV_WARNING,	///< Warning message
+		FV_ERROR		///< Error message
+	};
 }
 
 #endif // _H_FVENUM

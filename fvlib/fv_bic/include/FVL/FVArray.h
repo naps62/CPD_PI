@@ -102,6 +102,13 @@ namespace FVL {
 				 */
 				unsigned int size() const;
 
+				/**
+				 * Prints the array in a human readable format
+				 *
+				 * Each elem is printed in a new line
+				 */
+				void dump();
+
 			private:
 
 				/************************************************

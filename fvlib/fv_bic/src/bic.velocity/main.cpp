@@ -1,5 +1,6 @@
 #include <iostream>
 #include "FVLib.h"
+#include "FVL/FVParameters.h"
 
 //	BEGIN TYPES
 
@@ -26,7 +27,9 @@ void read_parameters(
 	const char* filename,
 	Parameters& data)
 {
-	Parameter para( filename );
+	//Parameter para( filename );
+	string str_file(filename);
+	FVL::FVParameters para(str_file);
 
 	data.filenames.mesh = para.getString("MeshName");
 	data.filenames.velocity = para.getString("VelocityFile");

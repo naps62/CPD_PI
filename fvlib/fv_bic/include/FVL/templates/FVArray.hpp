@@ -10,6 +10,11 @@
 #ifndef _HPP_FVARRAY
 #define _HPP_FVARRAY
 
+#include <iostream>
+#include <string>
+using std::string;
+using std::cout;
+
 namespace FVL {
 
 	/************************************************
@@ -79,6 +84,13 @@ namespace FVL {
 			return arr_size;
 		}
 
+	template<class T>
+		void FVArray<T>::dump() {
+			for(unsigned int elem = 0; elem < arr_size; ++elem) {
+				cout << "[" << elem << "] = " << arr[elem] << endl;
+			}
+		}
+
 	/************************************************
 	 * MEMORY MANAGEMENT
 	 ***********************************************/
@@ -100,6 +112,7 @@ namespace FVL {
 			arr = NULL;
 			arr_size = 0;
 		}
+
 }
 
 #endif // _HPP_FVARRAY

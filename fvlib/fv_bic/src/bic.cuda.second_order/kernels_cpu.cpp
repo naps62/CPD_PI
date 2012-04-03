@@ -56,7 +56,7 @@ void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 			double x, y;
 			unsigned int cell_j;
 
-			switch (mesh.edge_types[i]) {
+			switch (mesh.edge_types[edge]) {
 				// inner edges, both left and right cell can be assumed to exists
 				case FV_EDGE:
 					// get right cell of this edge
@@ -282,11 +282,11 @@ void cpu_validate_ABC(
 		CFVMesh2D &mesh,
 		CFVMat<double> &vecABC,
 		CFVArray<double> &polution,
-		CFVArray<bool> vecValidABC,
+		CFVArray<int> &vecValidABC,
 		double dc) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		vecValidABC[cell] = true;
+		vecValidABC[cell] = 1;
 	}
 
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
@@ -295,10 +295,10 @@ void cpu_validate_ABC(
 		unsigned int edge_type	= mesh.edge_types[edge];
 
 		if (cpu_assert_ABCsystem_result(mesh, vecABC, polution, edge, left_cell, dc) == false)
-			vecValidABC[left_cell] = false;
+			vecValidABC[left_cell] = 0;
 
 		if (edge_type == FV_EDGE && cpu_assert_ABCsystem_result(mesh, vecABC, polution, edge, right_cell, dc) == false)
-			vecValidABC[right_cell] = false;
+			vecValidABC[right_cell] = 0;
 	}
 }
 
@@ -307,7 +307,7 @@ void cpu_compute_flux(
 		CFVMesh2D &mesh,
 		CFVArray<double> &velocity,
 		CFVMat<double> &vecABC,
-		CFVArray<bool> &vecValidABC,
+		CFVArray<int> &vecValidABC,
 		CFVArray<double> &polution,
 		CFVArray<double> &flux,
 		double dc) {
@@ -321,11 +321,9 @@ void cpu_compute_flux(
 		switch (mesh.edge_types[edge]) {
 			case FV_EDGE:
 				if (v > 0) {
-					cell = mesh.edge_right_cells[edge];
-					if (cell == NO_RIGHT_CELL)
-						cell = mesh.edge_left_cells[edge];
-				} else {
 					cell = mesh.edge_left_cells[edge];
+				} else {
+					cell = mesh.edge_right_cells[edge];
 				}
 
 				if (vecValidABC[cell]) {
@@ -336,12 +334,23 @@ void cpu_compute_flux(
 				break;
 
 			case FV_EDGE_DIRICHLET:
+				system_res = dc;
 				cell = mesh.edge_left_cells[edge];
-				if (v > 0 && vecValidABC[cell]) {
-					system_res = cpu_ABCsystem_result(mesh, vecABC, edge, cell);
-				} else {
+				if (v >= 0) {
+					if (vecValidABC[cell])
+						system_res = cpu_ABCsystem_result(mesh, vecABC, edge, cell);
+					else
+						system_res = polution[cell];
+				} else { 
+					// vector is entering the mesh
 					system_res = dc;
 				}
+				/*if (v >= 0) {
+					cell = mesh.edge_left_cells[edge];
+					system_res = polution[cell];
+				} else {
+					system_res = dc;
+				}*/
 				break;
 
 			case FV_EDGE_NEUMMAN:

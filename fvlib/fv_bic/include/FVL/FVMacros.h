@@ -45,17 +45,17 @@
 /**
  * \todo move this to INI file
  */
-#define FV_LOGFILE string("FVLib.log")	///< Default log file for #FVLog
+#define FV_LOGFILE string("/var/log/FVL/log.log")	///< Default log file for #FVLog
 
 /**
  * \todo move this to INI file
  */
-#define FV_ERRFILE string("FVLib.err")	///< Default error file for #FVErr
+#define FV_ERRFILE string("/var/log/FVL/err.log")	///< Default error file for #FVErr
 
 /**
  * \todo move this to INI file
  */
-#define FV_PROFILE string("FVLib.prof")	///< Default profiling file for #FVProfile and #CFVProfile
+#define FV_PROFILE string("/var/lib/prof.log")	///< Default profiling file for #FVProfile and #CFVProfile
 
 /************************************************
  * DEBUG OPTIONS

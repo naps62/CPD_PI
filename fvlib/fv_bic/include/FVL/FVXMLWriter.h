@@ -27,6 +27,12 @@ using namespace std;
 using namespace rapidxml;
 
 namespace FVL {
+
+	/**
+	 * XML Writer class for FVL
+	 *
+	 * Used to generate output XML files
+	 */
 	class FVXMLWriter : public xml_document<> {
 
 		private:
@@ -39,13 +45,26 @@ namespace FVL {
 			/************************************************
 			 * CONSTRUCTORS
 			 ***********************************************/
-			FVXMLWriter();
-			FVXMLWriter(string filename);
 
-			void init();
+			/**
+			 * Default constructor
+			 *
+			 * Initializes a Writer for file specified in filename. If no file is specified, it is initialized to an empty string, and must later be give when saving the output
+			 *
+			 * \param filename The output file (can be left unspecified)
+			 */
+			FVXMLWriter(string filename = string());
 
-			void save();
-			void save(string filename);
+			/**
+			 * Saves current output data to XML file
+			 *
+			 * \param filename If a filename was already specified upon construction, it is not necessary now, although a differente one can be used
+			 */
+			void save(string filename = string());
+
+			/**
+			 * Closes this writer
+			 */
 			void close();
 
 
@@ -57,7 +76,15 @@ namespace FVL {
 			template<class T> void append(CFVArray<T> &vec, double time=0.0, string name="noname");
 
 		private:
-			// aux functions to allocate and append attributes
+
+			/**
+			 * Performs initializations on the class to prepare XML generation
+			 */
+			void init();
+
+			/**
+			 * Auxiliary functions to allocate and append attributes
+			 */
 			template<class T> void add_attribute(xml_node<> *node, string name, T value);
 	};
 

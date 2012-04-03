@@ -1,14 +1,14 @@
-/* ---------------------------------------------------------------------------
-** Finite Volume Library 
-**
-** Filename: FVPoint2D.h
-** 2D Point
-**
-** Author:		Miguel Palhas, mpalhas@gmail.com
-** Created:		13-02-2012
-** Last Tested:	---
-** Known Issues: operators need testing (just to be sure)
-** -------------------------------------------------------------------------*/
+/**
+ * \file FVLib.h
+ *
+ * \brief Global header file for FVL.
+ *
+ * Use this to include all library headers
+ *
+ * \author Miguel Palhas
+ * \date 13-02-2012
+ * \todo operators need testing (just to be sure)
+ */
 
 #ifndef _H_FVPOINT2D
 #define _H_FVPOINT2D
@@ -20,18 +20,37 @@
 #include "FVL/FVGlobal.h"
 
 namespace FVL {
+
+	/**
+	 * 2 Dimensional point template class
+	 *
+	 * Manages a single point in a 2D space
+	 */
 	template<class T>
 	class FVPoint2D {
 
 		public:
-			T x, y;
+			T x; ///< X coord of the point
+			T y; ///< Y coord of the point
 
 
 			/************************************************
 			 * CONSTRUCTORS
 			 ***********************************************/
+
+			/**
+			 * Default constructor. Initializes point to (0, 0)
+			 */
 			FVPoint2D() 						{x = y = T(0); }
+
+			/**
+			 * Constructor from two parameter values, for X and Y respectively
+			 */
 			FVPoint2D(T new_x, T new_y) 		{x = new_x; y = new_y;}
+
+			/**
+			 * Copy constructor
+			 */
 			FVPoint2D(const FVPoint<T> &copy)	{x = copy.x; y = copy.y;}
 
 			/************************************************
@@ -47,31 +66,25 @@ namespace FVL {
 			FVPoint2D<T> & operator *=	(const T &a) { x *= a;	y *= a;	return *this;}
 			FVPoint2D<T> & operator /=	(const T &a) { x /= a;	y /= a;	return *this;}
 
-
-			// Operatros with FVPoint2D & FVpoint2D params
-			/*friend FVPoint2D<T> operator + (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
-			friend FVPoint2D<T> operator - (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
-			friend FVPoint2D<T> operator * (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
-			friend FVPoint2D<T> operator / (const friend FVPoint2D<T> &a, const friend FVPoint2D<T> &b);
-
-			// operators with FVPoint2D & T params
-			friend FVPoint2D<T> operator + (const friend FVPoint2D<T> &a, const T &x);
-			friend FVPoint2D<T> operator - (const friend FVPoint2D<T> &a, const T &x);
-			friend FVPoint2D<T> operator * (const friend FVPoint2D<T> &a, const T &x);
-			friend FVPoint2D<T> operator * (const T &x, const friend FVpoint2D<T> &a);
-			friend FVPoint2D<T> operator / (const friend FVPoint2D<T> &a, const T &x);
-
-			friend FVPoint2D<T> operator - (const FVPoint2D<T> &a);
-
-			friend std::ostream & operator << (std::ostream &s, const FVPoint2D<T> &p);*/
-
 			/************************************************
 			 * MATH
 			 ***********************************************/
-			// calcs the determinant between this point and b
+			/**
+			 * Gives the determinant between this point and a given point
+			 *
+			 * Being A the main point and B the point given as argument, the determinant is given by:
+			 * \f$ \sqrt{(x_2-x_1)^2+(y_2-y_1)^2} \f$
+			 *
+			 * \param b The point to use
+			 */
 			inline T determinant(const FVPoint2D<T> &b) { return (this->x * b.y - this->y * b.x);}
 
-			// norm of the point
+			/**
+			 * Gives the norm of the point
+			 *
+			 * The norm is given by:
+			 * \f$ Norm = \sqrt{x*x + y*y} \f$
+			 */
 			inline T norm() { return sqrt(x*x + y*y);}
 	};
 

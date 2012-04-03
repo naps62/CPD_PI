@@ -32,14 +32,14 @@ void cpu_validate_ABC(
 		CFVMesh2D &mesh,
 		CFVMat<double> &vecABC,
 		CFVArray<double> &polution,
-		CFVArray<bool> vecValidABC,
+		CFVArray<int> &vecValidABC,
 		double dc);
 
 void cpu_compute_flux(
 		CFVMesh2D &mesh,
 		CFVArray<double> &velocity,
 		CFVMat<double> &vecABC,
-		CFVArray<bool> &vecValidABC,
+		CFVArray<int> &vecValidABC,
 		CFVArray<double> &polution,
 		CFVArray<double> &flux,
 		double dc);
