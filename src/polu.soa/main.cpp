@@ -32,6 +32,9 @@ compute_flux
 		PROFILE_START();
 #endif
 
+#ifdef _OPENMP
+	#pragma omp parallel for
+#endif
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		double polution_left = polutions[ lefts[e] ];
@@ -90,6 +93,9 @@ update
 
 	unsigned cell_last = cell_count - 1;
 
+#ifdef _OPENMP
+	#pragma omp parallel for
+#endif
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		double cdp = 0;
