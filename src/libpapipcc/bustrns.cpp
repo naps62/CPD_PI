@@ -2,25 +2,41 @@
 
 namespace papi
 {
-	BusTransactionsNativeEvent::BusTransactionsNativeEvent(string name)
-	: NativeEvent(name)
-	{}
+	namespace events
+	{
+		MemoryBusTransactionsNativeEvent::MemoryBusTransactionsNativeEvent()
+		: Event( "BUS_TRANS_MEM" )
+		{}
+		
+		SelfInstructionFetchBusTransactionsNativeEvent::SelfInstructionFetchBusTransactionsNativeEvent()
+		: Event( "BUS_TRANS_IFETCH:SELF" )
+		{}
+	}
+
+	namespace counters
+	{
+		MemoryBusTransactionsCounter::MemoryBusTransactionsCounter()
+		{
+			this->add_event( _btm.code() );
+		}
+
+		long long int
+		MemoryBusTransactionsCounter::transactions()
+		{
+			return this->last( _btm.code() );
+		}
 
 
 
-	MemoryBusTransactionsNativeEvent::MemoryBusTransactionsNativeEvent()
-	: BusTransactionsNativeEvent( "BUS_TRANS_MEM" )
-	{}
+		SelfInstructionFetchBusTransactionsCounter::SelfInstructionFetchBusTransactionsCounter()
+		{
+			this->add_event( _btsif.code() );
+		}
 
-
-
-	InstructionFetchBusTransactionsNativeEvent::InstructionFetchBusTransactionsNativeEvent(string name)
-	: BusTransactionsNativeEvent(name)
-	{}
-
-
-
-	SelfInstructionFetchBusTransactionsNativeEvent::SelfInstructionFetchBusTransactionsNativeEvent()
-	: InstructionFetchBusTransactionsNativeEvent( "BUS_TRANS_IFETCH:SELF" )
-	{}
+		long long int
+		SelfInstructionFetchBusTransactionsCounter::transactions()
+		{
+			return this->last( _btsif.code() );
+		}
+	}
 }

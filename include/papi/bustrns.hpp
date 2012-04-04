@@ -2,45 +2,62 @@
 #ifndef ___PAPI_BUS_TRANSACTIONS_HPP___
 #define ___PAPI_BUS_TRANSACTIONS_HPP___
 
+#include <papi/counter.hpp>
 #include <papi/event.hpp>
-
-#include <string>
-using std::string;
 
 namespace papi
 {
-	/// Super class for any native event regarding any bus transactions.
-	/** This class holds no value other than hierarchy logic.
-	 */
-	struct BusTransactionsNativeEvent
-	: public NativeEvent
+	namespace events
 	{
-	protected:
-		BusTransactionsNativeEvent(string name);
-	};
+		/// Native event for bus transactions with memory.
+		struct MemoryBusTransactionsNativeEvent
+		: public Event
+		{
+			MemoryBusTransactionsNativeEvent();
+		};
 
-	/// Native event for bus transactions with memory.
-	struct MemoryBusTransactionsNativeEvent
-	: public BusTransactionsNativeEvent
-	{
-		MemoryBusTransactionsNativeEvent();
-	};
+		/// Native event for bus transactions regarding the fetch of instructions, only for the current core.
+		struct SelfInstructionFetchBusTransactionsNativeEvent
+		: public Event
+		{
+			SelfInstructionFetchBusTransactionsNativeEvent();
+		};
+	}
 
-	/** This class holds no value other than hierarchy logic.
-	 */
-	struct InstructionFetchBusTransactionsNativeEvent
-	: public BusTransactionsNativeEvent
+	namespace counters
 	{
-	protected:
-		InstructionFetchBusTransactionsNativeEvent(string name);
-	};
+		struct BusTransactionsCounter
+		: public Counter
+		{
+			virtual long long int transactions() = 0;
+		};
 
-	/// Native event for bus transactions regarding the fetch of instructions, only for the current core.
-	struct SelfInstructionFetchBusTransactionsNativeEvent
-	: public InstructionFetchBusTransactionsNativeEvent
-	{
-		SelfInstructionFetchBusTransactionsNativeEvent();
-	};
+		class MemoryBusTransactionsCounter
+		: public BusTransactionsCounter
+		{
+			events::MemoryBusTransactionsNativeEvent _btm;
+		public:
+			MemoryBusTransactionsCounter();
+
+			//
+			//
+			//
+			long long int transactions();
+		};
+
+		class SelfInstructionFetchBusTransactionsCounter
+		: public BusTransactionsCounter
+		{
+			events::SelfInstructionFetchBusTransactionsNativeEvent _btsif;
+		public:
+			SelfInstructionFetchBusTransactionsCounter();
+
+			//
+			//
+			//
+			long long int transactions();
+		};
+	}
 }
 
 #endif//___PAPI_BUS_TRANSACTIONS_HPP___
