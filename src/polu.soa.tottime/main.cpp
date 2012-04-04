@@ -11,7 +11,6 @@
 
 #define PROFILE_COUNTER_CLASS tk::Stopwatch
 #define PROFILE_COUNTER_NAME  s
-//#define PROFILE_COUNTER_FIELD instructions
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
 
 
@@ -19,62 +18,28 @@
 namespace profile
 {
 	PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
-	//long long int PROFILE_COUNTER_FIELD;
 
-	//long long int cftotns;
-	//long long int cfminns;
-	//long long int cfmaxns;
+	long long int mntotus;
 
-	//long long int uptotns;
-	//long long int upminns;
-	//long long int upmaxns;
-
-	//struct Overhead
-	//{
-		//long long int PROFILE_COUNTER_FIELD;
-		//long long int nanoseconds;
-	//} overhead;
-
-	long long int cffncus;
-	long long int upfncus;
-
+	inline
 	void init()
 	{
-		//papi::init();
-
 		PROFILE_COUNTER_NAME = new PROFILE_COUNTER_CLASS();
 
-		//PROFILE_COUNTER_FIELD = 0;
-		
-		//PROFILE_COUNTER_NAME->start();
-		//PROFILE_COUNTER_NAME->stop();
-		//overhead.PROFILE_COUNTER_FIELD = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD();
-		//overhead.nanoseconds = PROFILE_COUNTER_NAME->last();
+		mntotus = 0;
 
-		//cftotns = 0;
-		//cfminns = std::numeric_limits<long long int>::max();
-		//cfmaxns = std::numeric_limits<long long int>::min();
-
-		//uptotns = 0;
-		//upminns = std::numeric_limits<long long int>::max();
-		//upmaxns = std::numeric_limits<long long int>::min();
-
-		cffncus = 0;
-		upfncus = 0;
+		PROFILE_COUNTER_NAME->start();
 	}
 
+	inline
 	void output(std::ostream& out)
 	{
+		PROFILE_COUNTER_NAME->stop();
+
+		mntotus += PROFILE_COUNTER_NAME->last().microseconds();
+
 		out
-			//<<	PROFILE_COUNTER_FIELD	<<	';'
-			//<<	cftotns	<<	';'
-			//<<	cfminns	<<	';'
-			//<<	cfmaxns	<<	';'
-			//<<	uptotns	<<	';'
-			//<<	upminns	<<	';'
-			//<<	upmaxns	<<	';'
-			<<	cffncus	<<	';'
-			<<	upfncus	<<	';'
+			<<	mntotus	<<	';'
 								<<	std::endl
 			;
 	}
@@ -82,48 +47,28 @@ namespace profile
 	void cleanup()
 	{
 		delete PROFILE_COUNTER_NAME;
-		//papi::shutdown();
 	}
 }
-
-namespace profile
-{
-	inline
-	void compute_flux()
-	{
-		//PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
-		//long long int timens = PROFILE_COUNTER_NAME->last();
-		//cftotns += timens;
-		//cfminns = ( timens < cfminns ) ? timens : cfminns;
-		//cfmaxns = ( timens > cfmaxns ) ? timens : cfmaxns;
-		cffncus = PROFILE_COUNTER_NAME->last();
-	}
-
-	inline
-	void update()
-	{
-		//PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
-		//long long int timens = PROFILE_COUNTER_NAME->last();
-		//uptotns += timens;
-		//upminns = ( timens < upminns ) ? timens : upminns;
-		//upmaxns = ( timens > upmaxns ) ? timens : upmaxns;
-		upfncus = PROFILE_COUNTER_NAME->last();
-	}
-}
-
 
 
 
 #define PROFILE_INIT() profile::init()
 
-#define PROFILE_RETRIEVE_CF() profile::compute_flux()
+#define PROFILE_RETRIEVE_CF() ;
 
-#define PROFILE_RETRIEVE_UP() profile::update()
+#define PROFILE_RETRIEVE_UP() ;
 
 #define PROFILE_OUTPUT() profile::output(std::cout)
 
 #define PROFILE_CLEANUP()
 
 #define PROFILE
+
+
+#define PROFILE_START() {;}
+
+#define PROFILE_STOP() {;}
+
+
 
 #include "../polu.soa.papi/main.cpp"

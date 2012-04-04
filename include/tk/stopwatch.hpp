@@ -9,13 +9,28 @@ using std::ostream;
 /// General Tool Kit for a variety of useful stuff.
 namespace tk
 {
+	/// Timestamp class, used with the Unix Standard library functions to retrieve the system time.
+	/**
+	 * This class has been optimized by implementing most methods as inline.
+	 */
 	class Time : public timeval
 	{
+		//
+		//  STATIC
+		//
+
+		/// Retrieve the current timestamp.
 		static timeval timernow();
+
+		/// Retrieve the current timestamp.
 		static timeval& timernow( timeval& time );
 
 
-		//	instance
+		
+		//
+		//  INSTANCE
+		//
+		
 		void set( const timeval& time );
 		void set( const time_t seconds, const suseconds_t _microseconds );
 
@@ -26,27 +41,54 @@ namespace tk
 
 
 	public:
+		/// Default constructor. Creates an instance which holds the current timestamp.
 		Time();
+
+		/// Copy constructor. Creates a new instance with the same timestamp as another.
 		Time( const Time& time );
 
+		/// Set this instance's timestamp to the current moment.
 		void now();
+
+		/// Clear this instance's timestamp.
 		void reset();
 
-		//	getters
-		//		pure
+		//
+		//  GETTERS
+		//
+
+		/// Retrieve from the timeval structure only the value regarding the seconds fraction of the timestamp.
 		time_t get_seconds() const;
+
+		/// Retrieve from the timeval structure only the value regarding the microseconds fraction of the timestamp.
 		suseconds_t get_microseconds() const;
-		//		worked
+		
+		/// Retrieve this instance's timestamp value in hours.
 		double hours() const;
+
+		/// Retrieve this instance's timestamp value in minutes.
 		double minutes() const;
+		
+		/// Retrieve this instance's timestamp value in seconds.
 		double seconds() const;
+
+		/// Retrieve this instance's timestamp value in miliseconds.
 		double miliseconds() const;
+
+		/// Retrieve this instance's timestamp value in microseconds.
 		long long int microseconds() const;
 
-		//	operators
+		//
+		//  OPERATORS
+		//
+
+		/// Assignment operator. Sets this instance's timestamp to the same value as another.
 		Time& operator=( const Time& time );
 
+		/// Modifying addition. Adds the timestamp of another instance to this instance's timestamp.
 		Time& operator+=( const Time& time );
+
+		/// Modifying difference. Changes this instance's timestamp to be the difference between the original timestamp and another instance's timestamp.
 		Time& operator-=( const Time& time );
 
 		const Time operator+( const Time &time );
@@ -56,7 +98,8 @@ namespace tk
 
 	/// Measures time intervals.
 	/** This class is specially meant for execution time profilling.
-	 * \todo Optimize this class with inline definitions.
+	 *
+	 * This class has been optimized by implementing most methods as inline.
 	 */
 	class Stopwatch
 	{

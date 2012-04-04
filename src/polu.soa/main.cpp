@@ -29,7 +29,7 @@ compute_flux
 	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER->start();
+		PROFILE_START();
 #endif
 
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
@@ -51,7 +51,7 @@ compute_flux
 	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER->stop();
+		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF();
 	#ifdef PROFILE_WARMUP
 	}
@@ -85,7 +85,7 @@ update
 	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER->start();
+		PROFILE_START();
 #endif
 
 	unsigned cell_last = cell_count - 1;
@@ -116,7 +116,7 @@ update
 	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER->stop();
+		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP();
 	#ifdef PROFILE_WARMUP
 	}
