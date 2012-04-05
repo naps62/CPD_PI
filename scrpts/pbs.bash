@@ -1,25 +1,26 @@
 #!/bin/bash
 #
 #	SeARCH Job Script
-#	Runs OpenMP on the 24 core with 64GB RAM AMD 6174 (511 group)
-#	Runs OpenMP on the 2 core with 2GB RAM Xeon 3.2GHz (101 group)
 #
-#PBS -l nodes=1:r101
-#PBS -l walltime=1:00:00
+#PBS -l nodes=1:r201:ppn=4
+#PBS -l walltime=2:00:00
 #
-#PBS -M pdrcosta@gmail.com
+#PBS -M pdrcosta90@gmail.com
 #PBS -m bea
-#PBS -e out/openmp.24.out
-#PBS -o out/openmp.24.err
+#PBS -e data/out/pbs.err
+#PBS -o data/out/pbs.out
 #
-CASES=( tiny small medium huge original )
-EXE=polu.openmp
+declare -a CASES;
+declare -a MEASURES;
 
-cd "$PBS_O_WORKDIR"
+CASE="huge"
+EXEC="polu.soa"
+TIMER="tottime"
+RUNS=10
 
-for c in $CASES[@];
+cd "$PBS_O_WORKDIR";
+
+for (( i = 0 ; i < $RUNS ; ++i ));
 do
-	echo "#####    ${c}    #####";
-	bin/${EXE} "data/xml/${c}.params.xml";
-	echo;
+	bin/${EXEC}.${TIMER} data/xml/${CASE}.param.xml;
 done;
