@@ -1,4 +1,4 @@
-cscope 15 $HOME/projects/pi/fvlib/fv_bic               0000453110
+cscope 15 $HOME/projects/pi/fv_bic               0000393535
 	@include/FVCell1D.h
 
 1 #iâdeà
@@ -24123,55 +24123,59 @@ th»ads
 
 	)
 
-19 
+20 
+	gasd
+
+
+23 
 	s_·¿m‘”s
  {
 
-20 
+24 
 ¡ršg
  
 	mmesh_fe
 ;
 
-21 
+25 
 ¡ršg
  
 	mv–oc™y_fe
 ;
 
-22 
+26 
 ¡ršg
  
 	mš™Ÿl_fe
 ;
 
-23 
+27 
 ¡ršg
  
 	mouut_fe
 ;
 
-24 
+28 
 	mfš®_time
 ;
 
-25 
+29 
 	mªim_jump
 ;
 
-26 
+30 
 	mdœichËt
 ;
 
-27 
+31 
 	mCFL
 ;
 
-28 } 
+32 } 
 	tP¬am‘”s
 ;
 
-31 
+35 
 P¬am‘”s
  
 	$»ad_·¿m‘”s
@@ -24181,13 +24185,13 @@ P¬am‘”s
 ·¿m‘”s_f’ame
 ) {
 
-32 
+36 
 P¬am‘”s
  
 d©a
 ;
 
-33 
+37 
 FVP¬am‘”s
  
 	`·¿
@@ -24195,7 +24199,7 @@ FVP¬am‘”s
 ·¿m‘”s_f’ame
 );
 
-35 
+39 
 d©a
 .
 mesh_fe
@@ -24205,7 +24209,7 @@ mesh_fe
 	`g‘SŒšg
 ("MeshName");
 
-36 
+40 
 d©a
 .
 v–oc™y_fe
@@ -24215,7 +24219,7 @@ v–oc™y_fe
 	`g‘SŒšg
 ("VelocityFile");
 
-37 
+41 
 d©a
 .
 š™Ÿl_fe
@@ -24225,7 +24229,7 @@ d©a
 	`g‘SŒšg
 ("PoluInitFile");
 
-38 
+42 
 d©a
 .
 ouut_fe
@@ -24235,7 +24239,7 @@ ouut_fe
 	`g‘SŒšg
 ("OutputFile");
 
-39 
+43 
 d©a
 .
 fš®_time
@@ -24245,7 +24249,7 @@ fš®_time
 	`g‘DoubË
 ("FinalTime");
 
-40 
+44 
 d©a
 .
 ªim_jump
@@ -24255,7 +24259,7 @@ d©a
 	`g‘IÁeg”
 ("NbJump");
 
-41 
+45 
 d©a
 .
 dœichËt
@@ -24265,7 +24269,7 @@ dœichËt
 	`g‘DoubË
 ("DirichletCondition");
 
-42 
+46 
 d©a
 .
 CFL
@@ -24275,15 +24279,15 @@ CFL
 	`g‘DoubË
 ("CFL");
 
-44  
+48  
 d©a
 ;
 
-45 
+49 
 	}
 }
 
-48 
+52 
 	$ıu_compu‹_mesh_·¿m‘”
 (
 CFVMesh2D
@@ -24291,19 +24295,19 @@ CFVMesh2D
 mesh
 ) {
 
-49 
+53 
 h
 ;
 
-50 
+54 
 S
 ;
 
-52 
+56 
 h
  = 1.e20;
 
-53 
+57 
 ûÎ
  = 0; c–È< 
 mesh
@@ -24311,7 +24315,7 @@ mesh
 num_ûÎs
 ; ++cell) {
 
-54 
+58 
 S
  = 
 mesh
@@ -24321,7 +24325,7 @@ mesh
 ûÎ
 ];
 
-56 
+60 
 edge
  = 0;ƒdg< 
 mesh
@@ -24331,7 +24335,7 @@ mesh
 ûÎ
 ]; ++edge) {
 
-57 
+61 
 Ëngth
  = 
 mesh
@@ -24341,7 +24345,7 @@ edge_Ëngths
 edge
 ];
 
-58 ià(
+62 ià(
 h
  * 
 Ëngth
@@ -24349,7 +24353,7 @@ h
 S
 )
 
-59 
+63 
 h
  = 
 S
@@ -24357,15 +24361,15 @@ S
 Ëngth
 ;
 
-63  
+67  
 h
 ;
 
-64 
+68 
 	}
 }
 
-66 
+70 
 ıu_compu‹_edge_v–oc™›s
 (
 CFVMesh2D
@@ -24383,7 +24387,7 @@ vs
 v_max
 ) {
 
-67 
+71 
 	gi
  = 0; i < 
 	gmesh
@@ -24391,7 +24395,7 @@ v_max
 	gnum_edges
 ; ++i) {
 
-68 
+72 
 	gËá
  = 
 mesh
@@ -24401,7 +24405,7 @@ edge_Ëá_ûÎs
 i
 ];
 
-69 
+73 
 	gright
  = 
 mesh
@@ -24411,19 +24415,19 @@ edge_right_ûÎs
 i
 ];
 
-71 ià(
+75 ià(
 	gright
  =ğ
 NO_RIGHT_CELL
 )
 
-72 
+76 
 right
  = 
 Ëá
 ;
 
-74 
+78 
 	gv
  = ((
 v–oc™›s
@@ -24441,7 +24445,7 @@ edge_nÜm®s
 i
 ])
 
-75 + ((
+79 + ((
 v–oc™›s
 .
 y
@@ -24457,7 +24461,7 @@ edge_nÜm®s
 i
 ]);
 
-77 
+81 
 	gvs
 [
 i
@@ -24465,7 +24469,7 @@ i
 v
 ;
 
-79 ià(
+83 ià(
 abs
 (
 v
@@ -24475,7 +24479,7 @@ v
 	gi
  == 0) {
 
-80 
+84 
 v_max
  = 
 abs
@@ -24483,7 +24487,7 @@ abs
 v
 );
 
-82 
+86 
 	gcout
  << "vs[" << 
 	gi
@@ -24495,7 +24499,7 @@ i
 	g’dl
 ;
 
-86 
+90 
 	$cudaSaã
 (
 cudaE¼Ü_t
@@ -24507,13 +24511,13 @@ cudaE¼Ü_t
 msg
 ) {
 
-87 ià(
+91 ià(
 ”rÜ
  !ğ
 cudaSucûss
 ) {
 
-88 
+92 
 û¼
  << "E¼Ü: " << 
 msg
@@ -24523,15 +24527,15 @@ msg
 ’dl
 ;
 
-89 
+93 
 	`ex™
 (-1);
 
-91 
+95 
 	}
 }
 
-93 
+97 
 	$cudaCheckE¼Ü
 (cÚ¡ 
 ¡ršg
@@ -24539,7 +24543,7 @@ msg
 msg
 ) {
 
-94 
+98 
 cudaE¼Ü_t
  
 ”rÜ
@@ -24547,13 +24551,13 @@ cudaE¼Ü_t
 	`cudaG‘La¡E¼Ü
 ();
 
-95 ià(
+99 ià(
 ”rÜ
  !ğ
 cudaSucûss
 ) {
 
-96 
+100 
 û¼
  << "E¼Ü: " << 
 msg
@@ -24565,15 +24569,15 @@ msg
 ’dl
 ;
 
-97 
+101 
 	`ex™
 (-1);
 
-99 
+103 
 	}
 }
 
-101 
+105 
 	$maš
 (
 ¬gc
@@ -24581,21 +24585,21 @@ msg
 ¬gv
 ) {
 
-102 #ifdeà
+106 #ifdeà
 NO_CUDA
 
 
-103 
+107 
 cout
  << "RuÂšg iÀNO_CUDA mode" << 
 ’dl
 ;
 
-107 
+111 
 i
  = 0;
 
-108 
+112 
 h
 , 
 t
@@ -24605,35 +24609,35 @@ dt
 v_max
  = 0;
 
-109 
+113 
 ¡ršg
  
 Çme
 ;
 
-112 
+116 
 P¬am‘”s
  
 d©a
 ;
 
-113 ià(
+117 ià(
 ¬gc
  != 2) {
 
-114 
+118 
 û¼
  << "Arg w¬nšg:‚ØxmÈ·¿m f’am¥ecif›d. DeçuÉšgØ·¿m.xml" << 
 ’dl
 ;
 
-115 
+119 
 d©a
  = 
 	`»ad_·¿m‘”s
 ("param.xml");
 
-117 
+121 
 d©a
  = 
 	`»ad_·¿m‘”s
@@ -24641,7 +24645,7 @@ d©a
 ¬gv
 [1]);
 
-120 
+124 
 FVL
 ::
 CFVMesh2D
@@ -24653,7 +24657,7 @@ d©a
 mesh_fe
 );
 
-122 
+126 
 FVL
 ::
 CFVPošts2D
@@ -24665,7 +24669,7 @@ mesh
 num_ûÎs
 );
 
-123 
+127 
 FVL
 ::
 CFVA¼ay
@@ -24677,7 +24681,7 @@ mesh
 num_ûÎs
 );
 
-124 
+128 
 FVL
 ::
 CFVA¼ay
@@ -24689,7 +24693,7 @@ mesh
 num_edges
 );
 
-125 
+129 
 FVL
 ::
 CFVA¼ay
@@ -24701,7 +24705,7 @@ mesh
 num_edges
 );
 
-126 
+130 
 FVL
 ::
 CFVM©
@@ -24713,7 +24717,7 @@ mesh
 num_ûÎs
 );
 
-127 
+131 
 FVL
 ::
 CFVM©
@@ -24725,7 +24729,7 @@ mesh
 num_ûÎs
 );
 
-128 
+132 
 FVL
 ::
 CFVM©
@@ -24737,7 +24741,7 @@ mesh
 num_ûÎs
 );
 
-129 
+133 
 FVL
 ::
 CFVA¼ay
@@ -24749,7 +24753,7 @@ mesh
 num_ûÎs
 );
 
-132 
+136 
 FVL
 ::
 FVXMLR—d”
@@ -24761,7 +24765,7 @@ d©a
 v–oc™y_fe
 );
 
-133 
+137 
 FVL
 ::
 FVXMLR—d”
@@ -24773,7 +24777,7 @@ d©a
 š™Ÿl_fe
 );
 
-134 
+138 
 pŞu_ši_»ad”
 .
 	`g‘Vec
@@ -24785,7 +24789,7 @@ t
 Çme
 );
 
-135 
+139 
 v–oc™y_»ad”
 .
 	`g‘Pošts2D
@@ -24797,19 +24801,19 @@ t
 Çme
 );
 
-136 
+140 
 pŞu_ši_»ad”
 .
 	`şo£
 ();
 
-137 
+141 
 v–oc™y_»ad”
 .
 	`şo£
 ();
 
-139 
+143 
 FVL
 ::
 FVXMLWr™”
@@ -24821,7 +24825,7 @@ d©a
 ouut_fe
 );
 
-140 
+144 
 pŞutiÚ_wr™”
 .
 	`­³nd
@@ -24831,7 +24835,7 @@ pŞutiÚ
 t
 , "polution");
 
-144 
+148 
 	`ıu_compu‹_edge_v–oc™›s
 (
 mesh
@@ -24843,7 +24847,7 @@ vs
 v_max
 );
 
-145 
+149 
 h
  = 
 	`ıu_compu‹_mesh_·¿m‘”
@@ -24851,7 +24855,7 @@ h
 mesh
 );
 
-147 
+151 
 dt
  = 
 d©a
@@ -24863,71 +24867,71 @@ v_max
 h
 ;
 
-149 #iâdeà
+153 #iâdeà
 NO_CUDA
 
 
-151 
-mesh
-.
-	`cuda_m®loc
-();
-
-152 
-pŞutiÚ
-.
-	`cuda_m®loc
-();
-
-153 
-æux
-.
-	`cuda_m®loc
-();
-
-154 
-vs
-.
-	`cuda_m®loc
-();
-
 155 
-m©A
+mesh
 .
 	`cuda_m®loc
 ();
 
 156 
-vecABC
+pŞutiÚ
 .
 	`cuda_m®loc
 ();
 
 157 
-vecResuÉ
+æux
 .
 	`cuda_m®loc
 ();
 
 158 
-vecV®idABC
+vs
+.
+	`cuda_m®loc
+();
+
+159 
+m©A
+.
+	`cuda_m®loc
+();
+
+160 
+vecABC
 .
 	`cuda_m®loc
 ();
 
 161 
+vecResuÉ
+.
+	`cuda_m®loc
+();
+
+162 
+vecV®idABC
+.
+	`cuda_m®loc
+();
+
+165 
 cudaSŒ—m_t
  
 ¡»am
 ;
 
-162 
+166 
 	`cudaSŒ—mC»©e
 (&
 ¡»am
 );
 
-164 
+168 
 mesh
 .
 	`cuda_§ve
@@ -24935,7 +24939,7 @@ mesh
 ¡»am
 );
 
-165 
+169 
 pŞutiÚ
 .
 	`cuda_§ve
@@ -24943,7 +24947,7 @@ pŞutiÚ
 ¡»am
 );
 
-166 
+170 
 vs
 .
 	`cuda_§ve
@@ -24951,7 +24955,7 @@ vs
 ¡»am
 );
 
-171 
+175 
 dim3
  
 	`grid_m©A
@@ -24965,7 +24969,7 @@ num_ûÎs
 BLOCK_SIZE_FLUX
 ), 1, 1);
 
-172 
+176 
 dim3
  
 	`block_m©A
@@ -24973,7 +24977,7 @@ dim3
 BLOCK_SIZE_FLUX
 , 1, 1);
 
-174 
+178 
 dim3
  
 	`grid_vecResuÉ
@@ -24987,7 +24991,7 @@ num_ûÎs
 BLOCK_SIZE_FLUX
 ), 1, 1);
 
-175 
+179 
 dim3
  
 	`block_vecResuÉ
@@ -24995,7 +24999,7 @@ dim3
 BLOCK_SIZE_FLUX
 , 1, 1);
 
-177 
+181 
 dim3
  
 	`grid_vecABC
@@ -25009,7 +25013,7 @@ num_ûÎs
 BLOCK_SIZE_FLUX
 ), 1, 1);
 
-178 
+182 
 dim3
  
 	`block_vecABC
@@ -25017,7 +25021,7 @@ dim3
 BLOCK_SIZE_FLUX
 , 1, 1);
 
-180 
+184 
 dim3
  
 	`grid_vecV®idABC
@@ -25031,7 +25035,7 @@ num_ûÎs
 BLOCK_SIZE_FLUX
 ), 1, 1);
 
-181 
+185 
 dim3
  
 	`block_vecV®idABC
@@ -25039,7 +25043,7 @@ dim3
 BLOCK_SIZE_FLUX
 , 1, 1);
 
-183 
+187 
 dim3
  
 	`grid_æux
@@ -25053,7 +25057,7 @@ num_edges
 BLOCK_SIZE_FLUX
 ), 1, 1);
 
-184 
+188 
 dim3
  
 	`block_æux
@@ -25061,7 +25065,7 @@ dim3
 BLOCK_SIZE_FLUX
 , 1, 1);
 
-186 
+190 
 dim3
  
 	`grid_upd©e
@@ -25075,7 +25079,7 @@ num_ûÎs
 BLOCK_SIZE_UPDATE
 ), 1, 1);
 
-187 
+191 
 dim3
  
 	`block_upd©e
@@ -25083,23 +25087,23 @@ dim3
 BLOCK_SIZE_UPDATE
 , 1, 1);
 
-190 #ifdeà
+194 #ifdeà
 NO_CUDA
 
 
-191 
+195 
 	`ıu_compu‹_»v”£A
 (
 
-192 
+196 
 mesh
 ,
 
-193 
+197 
 m©A
 );
 
-195 
+199 
 k”Ãl_compu‹_»v”£A
 <<< 
 grid_m©A
@@ -25107,25 +25111,25 @@ grid_m©A
 block_m©A
  >>>(
 
-196 
+200 
 mesh
 .
 	`cuda_g‘
 (),
 
-197 
+201 
 m©A
 .
 	`cuda_g‘
 ());
 
-199 
+203 
 	`_D
 (
 	`cudaCheckE¼Ü
 ("cuda[compute_reverseA]"));
 
-203 
+207 
 t
  < 
 d©a
@@ -25133,7 +25137,7 @@ d©a
 fš®_time
 ) {
 
-204 
+208 
 cout
  << 
 ’dl
@@ -25141,33 +25145,33 @@ cout
 i
  <<ƒndl;
 
-206 #ifdeà
+210 #ifdeà
 NO_CUDA
 
 
-207 
+211 
 	`ıu_compu‹_vecResuÉ
 (
 
-208 
+212 
 mesh
 ,
 
-209 
+213 
 pŞutiÚ
 ,
 
-210 
+214 
 vecResuÉ
 ,
 
-211 
+215 
 d©a
 .
 dœichËt
 );
 
-213 
+217 
 k”Ãl_compu‹_vecResuÉ
 <<< 
 grid_vecResuÉ
@@ -25175,47 +25179,47 @@ grid_vecResuÉ
 block_vecResuÉ
  >>>(
 
-214 
+218 
 mesh
 .
 	`cuda_g‘
 (),
 
-215 
+219 
 pŞutiÚ
 .
 	`cuda_g‘
 (),
 
-216 
+220 
 vecResuÉ
 .
 	`cuda_g‘
 (),
 
-217 
+221 
 d©a
 .
 dœichËt
 );
 
-219 
+223 
 _DEBUG
  {
 
-220 
+224 
 ¡ršg¡»am
  
 ss
 ;
 
-221 
+225 
 ss
  << "cuda[compu‹_vecResuÉ] i=" << 
 i
 ;
 
-222 
+226 
 	`cudaCheckE¼Ü
 (
 ss
@@ -25223,31 +25227,31 @@ ss
 	`¡r
 ());
 
-227 #ifdeà
+231 #ifdeà
 NO_CUDA
 
 
-228 
+232 
 	`ıu_compu‹_vecABC
 (
 
-229 
+233 
 mesh
 ,
 
-230 
+234 
 m©A
 ,
 
-231 
+235 
 vecResuÉ
 ,
 
-232 
+236 
 vecABC
 );
 
-234 
+238 
 k”Ãl_compu‹_vecABC
 <<< 
 grid_vecABC
@@ -25255,47 +25259,47 @@ grid_vecABC
 block_vecABC
  >>>(
 
-235 
+239 
 mesh
 .
 num_ûÎs
 ,
 
-236 
+240 
 m©A
 .
 	`cuda_g‘
 (),
 
-237 
+241 
 vecResuÉ
 .
 	`cuda_g‘
 (),
 
-238 
+242 
 vecABC
 .
 	`cuda_g‘
 ());
 
-240 
+244 
 _DEBUG
  {
 
-241 
+245 
 ¡ršg¡»am
  
 ss
 ;
 
-242 
+246 
 ss
  << "cuda[compu‹_veùABC] i=" << 
 i
 ;
 
-243 
+247 
 	`cudaCheckE¼Ü
 (
 ss
@@ -25303,37 +25307,37 @@ ss
 	`¡r
 ());
 
-247 #ifdeà
+251 #ifdeà
 NO_CUDA
 
 
-248 
+252 
 	`ıu_v®id©e_ABC
 (
 
-249 
+253 
 mesh
 ,
 
-250 
+254 
 vecABC
 ,
 
-251 
+255 
 pŞutiÚ
 ,
 
-252 
+256 
 vecV®idABC
 ,
 
-253 
+257 
 d©a
 .
 dœichËt
 );
 
-255 
+259 
 k”Ãl_v®id©e_ABC
 <<< 
 grid_vecV®idResuÉ
@@ -25341,69 +25345,69 @@ grid_vecV®idResuÉ
 block_vecV®idResuÉ
  >>>(
 
-256 
+260 
 mesh
 .
 	`cuda_g‘
 (),
 
-257 
+261 
 vs
 .
 	`cuda_g‘
 (),
 
-258 
+262 
 vecABC
 .
 	`cuda_g‘
 (),
 
-259 
+263 
 vecV®idResuÉ
 .
 	`cuda_g‘
 ());
 
-263 #ifdeà
+267 #ifdeà
 NO_CUDA
 
 
-264 
+268 
 	`ıu_compu‹_æux
 (
 
-265 
+269 
 mesh
 ,
 
-266 
+270 
 vs
 ,
 
-267 
+271 
 vecABC
 ,
 
-268 
+272 
 vecV®idABC
 ,
 
-269 
+273 
 pŞutiÚ
 ,
 
-270 
+274 
 æux
 ,
 
-271 
+275 
 d©a
 .
 dœichËt
 );
 
-274 
+278 
 k”Ãl_compu‹_æux
 <<< 
 grid_æux
@@ -25411,59 +25415,59 @@ grid_æux
 block_æux
  >>>(
 
-275 
+279 
 mesh
 .
 	`cuda_g‘
 (),
 
-276 
+280 
 pŞutiÚ
 .
 	`cuda_g‘
 (),
 
-277 
+281 
 vs
 .
 	`cuda_g‘
 (),
 
-278 
+282 
 vecABC
 .
 	`cuda_g‘
 (),
 
-279 
+283 
 æux
 .
 	`cuda_g‘
 (),
 
-280 
+284 
 d©a
 .
 dœichËt
 );
 
-282 
+286 
 _DEBUG
  {
 
-283 
+287 
 ¡ršg¡»am
  
 ss
 ;
 
-284 
+288 
 ss
  << "cuda[compu‹_æux] i=" << 
 i
 ;
 
-285 
+289 
 	`cudaCheckE¼Ü
 (
 ss
@@ -25471,31 +25475,31 @@ ss
 	`¡r
 ());
 
-290 #ifdeà
+294 #ifdeà
 NO_CUDA
 
 
-291 
+295 
 	`ıu_upd©e
 (
 
-292 
+296 
 mesh
 ,
 
-293 
+297 
 pŞutiÚ
 ,
 
-294 
+298 
 æux
 ,
 
-295 
+299 
 dt
 );
 
-297 
+301 
 k”Ãl_upd©e
 <<< 
 grid_upd©e
@@ -25503,45 +25507,45 @@ grid_upd©e
 block_upd©e
  >>>(
 
-298 
+302 
 mesh
 .
 	`cuda_g‘
 (),
 
-299 
+303 
 pŞutiÚ
 .
 	`cuda_g‘
 (),
 
-300 
+304 
 æux
 .
 	`cuda_g‘
 (),
 
-301 
+305 
 dt
 );
 
-303 
+307 
 _DEBUG
  {
 
-304 
+308 
 ¡ršg¡»am
  
 ss
 ;
 
-305 
+309 
 ss
  << "cuda[upd©e] i=" << 
 i
 ;
 
-306 
+310 
 	`cudaCheckE¼Ü
 (
 ss
@@ -25549,7 +25553,7 @@ ss
 	`¡r
 ());
 
-310 
+314 
 x
  = 0; x < 
 pŞutiÚ
@@ -25557,7 +25561,7 @@ pŞutiÚ
 	`size
 (); ++x) {
 
-311 
+315 
 cout
  << "pŞutiÚ[ " << 
 x
@@ -25567,7 +25571,7 @@ x
 pŞutiÚ
 [x] << " { ";
 
-312 
+316 
 cout
  << "¨ğ" << 
 	`£tw
@@ -25579,7 +25583,7 @@ vecABC
 x
 ) << ", ";
 
-313 
+317 
 cout
  << "b = " << 
 	`£tw
@@ -25591,7 +25595,7 @@ vecABC
 x
 ) << ", ";
 
-314 
+318 
 cout
  << "øğ" << 
 	`£tw
@@ -25603,7 +25607,7 @@ vecABC
 x
 ) << "} ";
 
-315 
+319 
 cout
  << "ABCv®id[3] = " << 
 vecV®idABC
@@ -25613,19 +25617,19 @@ x
 ’dl
 ;
 
-317 
+321 
 cout
  << "--------------" << 
 ’dl
 ;
 
-319 
+323 
 t
  +ğ
 dt
 ;
 
-321 ià(
+325 ià(
 i
  % 
 d©a
@@ -25633,17 +25637,17 @@ d©a
 ªim_jump
  == 0) {
 
-322 #iâdeà
+326 #iâdeà
 NO_CUDA
 
 
-323 
+327 
 pŞutiÚ
 .
 	`cuda_g‘
 ();
 
-326 
+330 
 pŞutiÚ_wr™”
 .
 	`­³nd
@@ -25653,21 +25657,21 @@ pŞutiÚ
 t
 , "polution");
 
-329 ++
+333 ++
 i
 ;
 
-333 #iâdeà
+337 #iâdeà
 NO_CUDA
 
 
-334 
+338 
 pŞutiÚ
 .
 	`cuda_g‘
 ();
 
-336 
+340 
 pŞutiÚ_wr™”
 .
 	`­³nd
@@ -25677,53 +25681,53 @@ pŞutiÚ
 t
 , "polution");
 
-337 
+341 
 pŞutiÚ_wr™”
 .
 	`§ve
 ();
 
-338 
+342 
 pŞutiÚ_wr™”
 .
 	`şo£
 ();
 
-340 #iâdeà
+344 #iâdeà
 NO_CUDA
 
 
-341 
+345 
 pŞutiÚ
 .
 	`cuda_ä“
 ();
 
-342 
+346 
 æux
 .
 	`cuda_ä“
 ();
 
-343 
+347 
 vs
 .
 	`cuda_ä“
 ();
 
-344 
+348 
 m©A
 .
 	`cuda_ä“
 ();
 
-345 
+349 
 mesh
 .
 	`cuda_ä“
 ();
 
-347 
+351 
 	}
 }
 
@@ -27910,98 +27914,6 @@ th»shŞd
 )
 
 300 
-	}
-}
-
-	@src/bic.test.parameters/main.cpp
-
-3 
-	~<io¡»am
->
-
-4 
-	~<f¡»am
->
-
-5 
-	~<s¡»am
->
-
-6 
-	~<¡ršg
->
-
-7 
-	~<veùÜ
->
-
-8 
-	~"FVL/FVP¬am‘”s.h
-"
-
-11 
-	$maš
-() {
-
-12 
-FVL
-::
-FVP¬am‘”s
- 
-	`·¿ms
-("param.xml");
-
-14 
-cout
- << 
-·¿ms
-.
-	`g‘SŒšg
-("SŒšgV®"è<< " " <<…¬ams.g‘SŒšg("SŒšgV®", "İt"è<< 
-’dl
-;
-
-15 
-cout
- << 
-·¿ms
-.
-	`g‘DoubË
-("DoubËV®"è<< 
-’dl
-;
-
-16 
-cout
- << 
-·¿ms
-.
-	`g‘IÁeg”
-("IÁV®"è<< 
-’dl
-;
-
-17 
-cout
- << 
-·¿ms
-.
-	`g‘UnsigÃd
-("UnsigÃdV®"è<< 
-’dl
-;
-
-18 
-cout
- << 
-·¿ms
-.
-	`g‘BoŞ—n
-("BoŞV®"è<< 
-’dl
-;
-
-19 
 	}
 }
 
@@ -61719,11114 +61631,6 @@ _cu¼’t_pos™iÚ
 	}
 }
 
-	@src/old.cuda_test/kernels.cu
-
-1 
-	~"k”Ãls.cuh
-"
-
-3 
-	~"FVL/CUDA/CFVLib.h
-"
-
-5 
-__glob®__
-
-
-6 
-	$k”Ãl_compu‹_æux
-(
-
-7 
-num_edges
-,
-
-8 *
-edge_nÜm®s_x
-,
-
-9 *
-edge_nÜm®s_y
-,
-
-10 *
-edge_Ëá_ûÎs
-,
-
-11 *
-edge_right_ûÎs
-,
-
-12 *
-pŞutiÚ
-,
-
-13 *
-v–oc™y_x
-,
-
-14 *
-v–oc™y_y
-,
-
-15 *
-æux
-,
-
-16 *
-vs
-,
-
-17 
-dc
-) {
-
-20 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-22 ià(
-tid
- >ğ
-num_edges
-) ;
-
-24 
-i_Ëá
- = 
-edge_Ëá_ûÎs
-[
-tid
-];
-
-25 
-i_right
- = 
-edge_right_ûÎs
-[
-tid
-];
-
-27 
-v_Ëá
-[2], 
-v_right
-[2];
-
-28 
-p_Ëá
-, 
-p_right
-;
-
-30 
-v_Ëá
-[0] = 
-v–oc™y_x
-[
-i_Ëá
-];
-
-31 
-v_Ëá
-[1] = 
-v–oc™y_y
-[
-i_Ëá
-];
-
-32 
-p_Ëá
- = 
-pŞutiÚ
-[
-i_Ëá
-];
-
-34 ià(
-i_right
- !ğ
-NO_RIGHT_EDGE
-) {
-
-35 
-v_right
-[0] = 
-v–oc™y_x
-[
-i_right
-];
-
-36 
-v_right
-[1] = 
-v–oc™y_y
-[
-i_right
-];
-
-37 
-p_right
- = 
-pŞutiÚ
-[
-i_right
-];
-
-39 
-v_right
-[0] = 
-v_Ëá
-[0];
-
-40 
-v_right
-[1] = 
-v_Ëá
-[1];
-
-41 
-p_right
- = 
-dc
-;
-
-44 
-v
- = ((
-v_Ëá
-[0] + 
-v_right
-[0]è* 0.5 * 
-edge_nÜm®s_x
-[
-tid
-])
-
-45 + ((
-v_Ëá
-[1] + 
-v_right
-[1]è* 0.5 * 
-edge_nÜm®s_y
-[
-tid
-]);
-
-47 ià(
-v
- < 0)
-
-48 
-æux
-[
-tid
-] = 
-v
- * 
-p_right
-;
-
-50 
-æux
-[
-tid
-] = 
-v
- * 
-p_Ëá
-;
-
-52 
-vs
-[
-tid
-] = 
-v
-;
-
-53 
-	}
-}
-
-55 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-56 
-	sSh¬edMemÜy
- {
-
-57 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- 
-	mT
-*() {
-
-58 
-__sh¬ed__
- 
-__smem
-[];
-
-59  (
-	mT
-*)
-	m__smem
-;
-
-61 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- cÚ¡ 
-	mT
-*() const {
-
-62 
-__sh¬ed__
- 
-__smem
-[];
-
-63  (
-	mT
-*)
-	m__smem
-;
-
-69 
-	g‹m¶©e
-<>
-
-70 
-	gSh¬edMemÜy
-<> {
-
-71 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- *() {
-
-72 
-__sh¬ed__
- 
-__smem_d
-[];
-
-73  (*)
-	g__smem_d
-;
-
-75 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- const *() const {
-
-76 
-__sh¬ed__
- 
-__smem_d
-[];
-
-77  (*)
-	g__smem_d
-;
-
-85 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-86 
-__glob®__
-
-
-87 
-	$k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-) {
-
-89 
-T
- *
-sd©a
- = 
-Sh¬edMemÜy
-<T>();
-
-93 
-tid
- = 
-th»adIdx
-.
-x
-;
-
-94 
-i
- = 
-blockIdx
-.
-x
- * 
-blockSize
-*2 + 
-th»adIdx
-.x;
-
-95 
-gridSize
- = 
-blockSize
-*2 * 
-gridDim
-.
-x
-;
-
-97 
-T
- 
-myMax
- = 
-g_id©a
-[
-i
-];
-
-102 
-i
- < 
-n
-) {
-
-103 ià(
-g_id©a
-[
-i
-] > 
-myMax
-) myMax = g_idata[i];
-
-105 ià(
-nIsPow2
- || 
-i
- + 
-blockSize
- < 
-n
-)
-
-106 ià(
-g_id©a
-[
-i
-+
-blockSize
-]è
-myMax
- = g_idata[i+blockSize];
-
-107 
-i
- +ğ
-gridSize
-;
-
-111 
-sd©a
-[
-tid
-] = 
-myMax
-;
-
-112 
-	`__synùh»ads
-();
-
-115 ià(
-blockSize
- >ğ512è{ ià(
-tid
- < 256è{ ià(
-sd©a
-[tid+256] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+256]; } 
-	`__synùh»ads
-(); } }
-
-116 ià(
-blockSize
- >ğ256è{ ià(
-tid
- < 128è{ ià(
-sd©a
-[tid+128] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+128]; } 
-	`__synùh»ads
-(); } }
-
-117 ià(
-blockSize
- >ğ128è{ ià(
-tid
- < 64è{ ià(
-sd©a
-[tid+ 64] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+ 64]; } 
-	`__synùh»ads
-(); } }
-
-122 vŞ©
-T
-* 
-smem
- = 
-sd©a
-;
-
-123 ià(
-blockSize
- >ğ64è{ ià(
-tid
- < 32è{ ià(
-smem
-[tid+ 32] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 32]; } 
-	`__synùh»ads
-(); } }
-
-124 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 16è{ ià(
-smem
-[tid+ 16] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 16]; } 
-	`__synùh»ads
-(); } }
-
-125 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 8è{ ià(
-smem
-[tid+ 8] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 8]; } 
-	`__synùh»ads
-(); } }
-
-126 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 4è{ ià(
-smem
-[tid+ 4] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 4]; } 
-	`__synùh»ads
-(); } }
-
-127 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 2è{ ià(
-smem
-[tid+ 2] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 2]; } 
-	`__synùh»ads
-(); } }
-
-128 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 1è{ ià(
-smem
-[tid+ 1] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 1]; } 
-	`__synùh»ads
-(); } }
-
-136 ià(
-tid
- == 0)
-
-137 
-g_od©a
-[
-blockIdx
-.
-x
-] = 
-sd©a
-[0];
-
-138 
-	}
-}
-
-140 
-boŞ
- 
-	$i¥ow2
-(
-x
-) {
-
-141  ((
-x
- & (x-1)) == 0);
-
-142 
-	}
-}
-
-144 
-	$ÃxtPow2
-(
-x
-) {
-
-145 --
-x
-;
-
-146 
-x
- |= x >> 1;
-
-147 
-x
- |= x >> 2;
-
-148 
-x
- |= x >> 4;
-
-149 
-x
- |= x >> 8;
-
-150 
-x
- |= x >> 16;
-
-151  ++
-x
-;
-
-152 
-	}
-}
-
-154 
-boŞ
- 
-	$isPow2
-(
-x
-) {
-
-155  ((
-x
- & (x-1)) == 0);
-
-156 
-	}
-}
-
-158 #iâdeà
-MIN
-
-
-159 
-	#MIN
-(
-x
-,
-y
-è((x < yè? x : y)
-
-	)
-
-162 
-	$g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-) {
-
-163 
-th»ads
- = (
-n
- < 
-maxTh»ads
- * 2è? 
-	`ÃxtPow2
-((n + 1) / 2) : maxThreads;
-
-164 
-blocks
- = (
-n
- + (
-th»ads
- * 2- 1)) / (threads * 2);
-
-168 
-	}
-}
-
-170 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-171 
-	$w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-) {
-
-172 
-dim3
- 
-	`dimBlock
-(
-th»ads
-, 1, 1);
-
-173 
-dim3
- 
-	`dimGrid
-(
-blocks
-, 1, 1);
-
-177 
-smemSize
- = (
-th»ads
- <ğ32è? 2 *h»ad * (
-T
-) :hreads * (T);
-
-180 ià(
-	`isPow2
-(
-size
-)) {
-
-181 
-th»ads
-) {
-
-182 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-183 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-184 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-185 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-186 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-187 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-188 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-189 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-190 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-191 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-195 
-th»ads
-) {
-
-196 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-197 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-198 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-199 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-200 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-201 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-202 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-203 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-204 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-205 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-208 
-	}
-}
-
-211 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<>(
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-212 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-213 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-219 
-__glob®__
-
-
-220 
-	$k”Ãl_upd©e
-(
-
-221 
-num_edges
-,
-
-222 *
-edge_Ëá_ûÎs
-,
-
-223 *
-edge_right_ûÎs
-,
-
-224 *
-Ëngths
-,
-
-225 *
-¬—s
-,
-
-226 *
-pŞutiÚ
-,
-
-227 *
-æux
-,
-
-228 
-dt
-) {
-
-230 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-231 ià(
-tid
- >ğ
-num_edges
-) ;
-
-233 
-Ëá
- = 
-edge_Ëá_ûÎs
-[
-tid
-];
-
-234 
-right
- = 
-edge_right_ûÎs
-[
-tid
-];
-
-236 
-pŞutiÚ
-[
-Ëá
-] =
-
-237 
-dt
- * 
-æux
-[
-tid
-] * 
-Ëngths
-[tid] / 
-¬—s
-[
-Ëá
-];
-
-239 ià(
-right
- =ğ
-NO_RIGHT_EDGE
-)
-
-242 
-pŞutiÚ
-[
-right
-] =
-
-243 
-dt
- * 
-æux
-[
-tid
-] * 
-Ëngths
-[tid] / 
-¬—s
-[
-right
-];
-
-244 
-	}
-}
-
-246 
-__glob®__
-
-
-247 
-	$k”Ãl_upd©e
-(
-
-248 
-num_ûÎs
-,
-
-249 
-num_tÙ®_edges
-,
-
-250 *
-edge_Ëá_ûÎs
-,
-
-251 *
-edge_right_ûÎs
-,
-
-252 *
-edge_Ëngths
-,
-
-253 *
-ûÎ_¬—s
-,
-
-254 *
-ûÎ_edges
-,
-
-255 *
-ûÎ_edges_šdex
-,
-
-256 *
-ûÎ_edges_couÁ
-,
-
-257 *
-pŞutiÚ
-,
-
-258 *
-æux
-,
-
-259 
-dt
-) {
-
-261 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-262 ià(
-tid
- > 
-num_ûÎs
-) ;
-
-265 
-edge_šdex
- = 
-ûÎ_edges_šdex
-[
-tid
-];
-
-266 
-edge_lim™
- = 
-edge_šdex
- + 
-ûÎ_edges_couÁ
-[
-tid
-];
-
-269 
-Ãw_pŞutiÚ
- = 0;
-
-272 
-i
- = 
-edge_šdex
-; i < 
-edge_lim™
-; ++i) {
-
-273 
-edge
- = 
-ûÎ_edges
-[
-i
-];
-
-277 
-aux
- = 
-dt
- * 
-æux
-[
-edge
-] * 
-edge_Ëngths
-[edge] / 
-ûÎ_¬—s
-[
-tid
-];
-
-280 ià(
-edge_Ëá_ûÎs
-[
-edge
-] =ğ
-tid
-) {
-
-281 
-Ãw_pŞutiÚ
- -ğ
-aux
-;
-
-283 
-Ãw_pŞutiÚ
- +ğ
-aux
-;
-
-288 
-pŞutiÚ
-[
-tid
-] +ğ
-Ãw_pŞutiÚ
-;
-
-289 
-	}
-}
-
-	@src/old.cuda_test/kernels.cuh
-
-1 #iâdeà
-_CUH_KERNELS_
-
-
-2 
-	#_CUH_KERNELS_
-
-
-	)
-
-7 
-__glob®__
-
-
-8 
-k”Ãl_compu‹_æux
-(
-
-9 
-num_edges
-,
-
-10 *
-edge_nÜm®s_x
-,
-
-11 *
-edge_nÜm®s_y
-,
-
-12 *
-edge_Ëá_ûÎs
-,
-
-13 *
-edge_right_ûÎs
-,
-
-14 *
-pŞutiÚ
-,
-
-15 *
-v–oc™y_x
-,
-
-16 *
-v–oc™y_y
-,
-
-17 *
-æux
-,
-
-18 *
-vs
-,
-
-19 
-dc
-);
-
-24 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-25 
-__glob®__
-
-
-26 
-k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-);
-
-28 
-boŞ
- 
-i¥ow2
-(
-x
-);
-
-29 
-ÃxtPow2
-(
-x
-);
-
-30 
-g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-);
-
-31 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-32 
-w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-);
-
-37 
-__glob®__
-
-
-38 
-k”Ãl_upd©e
-(
-
-39 
-num_edges
-,
-
-40 *
-edge_Ëá_ûÎs
-,
-
-41 *
-edge_right_ûÎs
-,
-
-42 *
-Ëngths
-,
-
-43 *
-¬—s
-,
-
-44 *
-pŞutiÚ
-,
-
-45 *
-æux
-,
-
-46 
-dt
-);
-
-48 
-__glob®__
-
-
-49 
-k”Ãl_upd©e
-(
-
-50 
-num_ûÎs
-,
-
-51 
-num_tÙ®_edges
-,
-
-52 *
-edge_Ëá_ûÎs
-,
-
-53 *
-edge_right_ûÎs
-,
-
-54 *
-edge_Ëngths
-,
-
-55 *
-ûÎ_¬—s
-,
-
-56 *
-ûÎ_edges
-,
-
-57 *
-ûÎ_edges_šdex
-,
-
-58 *
-ûÎ_edges_couŠ
-,
-
-59 *
-pŞutiÚ
-,
-
-60 *
-æux
-,
-
-61 
-dt
-);
-
-	@src/old.cuda_test/parameters.cpp
-
-1 
-	~"FVLib.h
-"
-
-2 
-	~"·¿m‘”s.h
-"
-
-4 
-P¬am‘”s
- 
-	$»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-) {
-
-5 
-P¬am‘”s
- 
-d©a
-;
-
-6 
-P¬am‘”
- 
-	`·¿
-Ğ
-·¿m‘”_f’ame
-.
-	`c_¡r
-() );
-
-8 
-d©a
-.
-f’ames
-.
-mesh
- = 
-·¿
-.
-	`g‘SŒšg
-("MeshName");
-
-9 
-d©a
-.
-f’ames
-.
-v–oc™y
- = 
-·¿
-.
-	`g‘SŒšg
-("VelocityFile");
-
-10 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
- = 
-·¿
-.
-	`g‘SŒšg
-("PoluInitFile");
-
-11 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-ouut
- = "polution.openmp.xml";
-
-12 
-d©a
-.
-time
-.
-fš®
- = 
-·¿
-.
-	`g‘DoubË
-("FinalTime");
-
-13 
-d©a
-.
-™”©iÚs
-.
-jump
- = 
-·¿
-.
-	`g‘IÁeg”
-("NbJump");
-
-14 
-d©a
-.
-computiÚ
-.
-th»shŞd
- = 
-·¿
-.
-	`g‘DoubË
-("DirichletCondition");
-
-16  
-d©a
-;
-
-17 
-	}
-}
-
-	@src/old.cuda_test/parameters.h
-
-1 #iâdeà
-_H_PARAMETERS
-
-
-2 
-	#_H_PARAMETERS
-
-
-	)
-
-4 
-	~<¡ršg
->
-
-5 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-11 
-	s_·¿m‘”s
-
-
-15 
-¡ršg
- 
-	mmesh
-;
-
-16 
-¡ršg
- 
-	mv–oc™y
-;
-
-19 
-¡ršg
- 
-	mš™Ÿl
-;
-
-20 
-¡ršg
- 
-	mouut
-;
-
-21 } 
-	mpŞutiÚ
-;
-
-22 } 
-	mf’ames
-;
-
-25 
-	mfš®
-;
-
-26 } 
-	mtime
-;
-
-29 
-	mjump
-;
-
-30 } 
-	m™”©iÚs
-;
-
-33 
-	mth»shŞd
-;
-
-34 } 
-	mcomputiÚ
-;
-
-36 
-	tP¬am‘”s
-;
-
-45 
-P¬am‘”s
- 
-»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-);
-
-	@src/old.cuda_test/polu_cuda.cu
-
-1 
-	~<cuda.h
->
-
-3 
-	~"FVLib.h
-"
-
-4 
-	~"FVL/CUDA/CFVLib.h
-"
-
-6 
-	~"·¿m‘”s.h
-"
-
-7 
-	~"pŞu_cuda.h
-"
-
-8 
-	~"k”Ãls.cuh
-"
-
-11 
-gpu_upd©e
-(
-
-12 
-FVL
-::
-CFVMesh2D
- &
-mesh
-,
-
-13 
-FVL
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-14 
-FVL
-::
-CFVVeù
-<> &
-æux
-,
-
-15 
-dt
-) {
-
-19 
-	gi
- = 0; i < 
-	gmesh
-.
-	gnum_edges
-; ++i) {
-
-20 
-	gpŞutiÚ
-[ (è
-mesh
-.
-edge_Ëá_ûÎs
-[
-i
-] ] -=
-
-21 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_Ëá_ûÎs
-[i] ];
-
-22 ià(
-	gmesh
-.
-	gedge_right_ûÎs
-[
-i
-] !ğ
-NO_RIGHT_EDGE
-)
-
-23 
-pŞutiÚ
-[ (è
-mesh
-.
-edge_right_ûÎs
-[
-i
-] ] +=
-
-24 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_right_ûÎs
-[i] ];
-
-28 
-	$compu‹_mesh_·¿m‘”s
- (
-FVMesh2D
- 
-mesh
-) {
-
-29 
-h
-;
-
-30 
-S
-;
-
-31 
-FVC–l2D
- *
-ûÎ
-;
-
-32 
-FVEdge2D
- *
-edge
-;
-
-34 
-h
- = 1.e20;
-
-35  
-mesh
-.
-	`begšC–l
-(); (
-ûÎ
- = mesh.
-	`ÃxtC–l
-()è!ğ
-NULL
- ; ) {
-
-36 
-S
- = 
-ûÎ
-->
-¬—
-;
-
-37  
-ûÎ
-->
-	`begšEdge
-(); (
-edge
- = c–l->
-	`ÃxtEdge
-()è!ğ
-NULL
-; ) {
-
-38 iàĞ
-h
- * 
-edge
-->
-Ëngth
- > 
-S
- )
-
-39 
-h
- = 
-S
- / 
-edge
-->
-Ëngth
-;
-
-42  
-h
-;
-
-43 
-	}
-}
-
-48 
-	$maš
-() {
-
-50 
-¡ršg
- 
-Çme
-;
-
-51 
-t
-;
-
-52 
-FVMesh2D
- 
-Şd_mesh
-;
-
-54 
-P¬am‘”s
- 
-d©a
-;
-
-55 
-d©a
- = 
-	`»ad_·¿m‘”s
-( "param.xml" );
-
-58 
-Şd_mesh
-.
-	`»ad
-Ğ
-d©a
-.
-f’ames
-.
-mesh
-.
-	`c_¡r
-() );
-
-61 
-FVL
-::
-CFVMesh2D
- 
-	`mesh
-(
-d©a
-.
-f’ames
-.
-mesh
-);
-
-63 
-i
- = 0; i < 
-mesh
-.
-num_edges
-; ++i) {
-
-64 
-cout
- << 
-mesh
-.
-edge_nÜm®s
-.
-x
-[
-i
-] << " " << mesh.edge_nÜm®s.
-y
-[i] << " " << mesh.
-edge_Ëngths
-[i] << 
-’dl
-;
-
-66 
-	`ex™
-(0);
-
-69 
-FVVeù
-<> 
-	`Şd_pŞutiÚ
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-70 
-FVVeù
-<> 
-	`Şd_æux
-Ğ
-Şd_mesh
-.
-	`g‘NbEdge
-() );
-
-71 
-FVVeù
-<
-FVPošt2D
-<> > 
-	`Şd_v–oc™y
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-74 
-FVio
- 
-	`v–oc™y_fe
-Ğ
-d©a
-.
-f’ames
-.
-v–oc™y
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-75 
-v–oc™y_fe
-.
-	`g‘
-Ğ
-Şd_v–oc™y
- , 
-t
- , 
-Çme
- );
-
-77 
-FVio
- 
-	`pŞu_ši_fe
-Ğ
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-78 
-pŞu_ši_fe
-.
-	`g‘
-Ğ
-Şd_pŞutiÚ
- , 
-t
- , 
-Çme
- );
-
-81 
-	}
-}
-
-	@src/old.cuda_test/polu_cuda.h
-
-1 
-	~<cuda.h
->
-
-2 
-	~<cm©h
->
-
-4 
-	~"FVL/CUDA/CFVLib.h
-"
-
-5 
-	~"FVLib.h
-"
-
-7 
-	#BLOCK_SIZE_CF
- 512
-
-	)
-
-8 
-	#BLOCK_SIZE_RED
- 512
-
-	)
-
-9 
-	#BLOCK_SIZE_UP
- 512
-
-	)
-
-10 
-	#GRID_SIZE
-(
-–ems
-, 
-th»ads
-è((è
-¡d
-::
-	`û
-((è–em /h»ads))
-
-	)
-
-15 
-cuda_maš_loİ
-(
-
-16 
-fš®_time
-,
-
-17 
-jump_š‹rv®
-,
-
-18 
-FVL
-::
-CFVMesh2D
- &
-mesh
-,
-
-19 
-mesh_·¿m‘”
-,
-
-20 
-FVVeù
-<> &
-Şd_pŞutiÚ
-,
-
-21 
-FVL
-::
-CFVVeù
-<> &
-pŞutiÚs
-,
-
-22 
-FVL
-::
-CFVPošts2D
- &
-v–oc™›s
-,
-
-23 
-FVL
-::
-CFVVeù
-<> &
-æux
-,
-
-24 
-dc
-);
-
-33 
-gpu_upd©e
-(
-
-34 
-FVL
-::
-CFVMesh2D
- &
-mesh
-,
-
-35 
-FVL
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-36 
-FVL
-::
-CFVVeù
-<> &
-æux
-,
-
-37 
-dt
-);
-
-	@src/old.msh_gen/main.cpp
-
-6 
-	~<veùÜ
->
-
-7 
-	~<io¡»am
->
-
-8 
-	~<f¡»am
->
-
-9 
-	~<s¡»am
->
-
-10 
-	~<c¡dlib
->
-
-11 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-14 
-	eMESH_TYPE
- {
-
-15 
-	mSQUARE
-,
-
-16 
-	mTRIANGLE
-,
-
-17 
-	mREVERSE_TRIANGLE
-,
-
-18 
-	mCROSS
-,
-
-21 şas 
-	cV”‹x
- {
-
-22 
-	mid
-;
-
-23 
-	mty³
-;
-
-24 
-	mx
-;
-
-25 
-	my
-;
-
-27 
-	mpublic
-:
-
-28 
-	$V”‹x
-(
-Ãwid
-, 
-Ãwty³
-, 
-Ãwx
-, 
-Ãwy
-)
-
-29 { 
-id
-=
-Ãwid
-; 
-ty³
-=
-Ãwty³
-; 
-x
-=
-Ãwx
-; 
-y
-=
-Ãwy
-; }
-
-31 
-ä›nd
- 
-o¡»am
-& 
-İ”©Ü
- << (o¡»am &
-¡»am
-, cÚ¡ 
-V”‹x
- &
-v
-);
-
-32 
-	}
-};
-
-34 
-	go¡»am
-& 
-	gİ”©Ü
- << (o¡»am &
-	g¡»am
-, cÚ¡ 
-	gV”‹x
- &
-	gv
-) {
-
-35 
-	g¡»am
-
-
-36 << "\t\t\t" << 
-	gv
-.
-	gid
-
-
-37 << "\t" << 
-	gv
-.
-	gty³
-
-
-38 << "\t" << 
-	gv
-.
-	gx
-
-
-39 << "\t" << 
-	gv
-.
-	gy
-
-
-40 << 
-	g’dl
-;
-
-41  
-	g¡»am
-;
-
-44 şas 
-	cEdge
- {
-
-45 
-	mid
-;
-
-46 
-	mty³
-;
-
-47 
-	mveùÜ
-<> 
-	mlow”_dim_li¡
-;
-
-49 
-	mpublic
-:
-
-50 
-Edge
-(
-Ãwid
-, 
-Ãwty³
-, 
-veùÜ
-<> 
-Ãw_low”_dim_li¡
-)
-
-51 { 
-	mid
-=
-Ãwid
-; 
-	mty³
-=
-Ãwty³
-; 
-	mlow”_dim_li¡
-=
-Ãw_low”_dim_li¡
-; }
-
-53 
-ä›nd
- 
-	go¡»am
-& 
-	gİ”©Ü
- << (o¡»am &
-	g¡»am
-, cÚ¡ 
-	gEdge
- &
-	ge
-);
-
-56 
-	go¡»am
-& 
-	gİ”©Ü
- << (o¡»am &
-	g¡»am
-, cÚ¡ 
-	gEdge
- &
-	ge
-) {
-
-57 
-	g¡»am
-
-
-58 << "\t\t\t" << 
-	ge
-.
-	gid
-
-
-59 << "\t" << 
-	ge
-.
-	gty³
-
-
-60 << "\t" << 
-	ge
-.
-	glow”_dim_li¡
-.
-size
-();
-
-62 
-	gi
- = 0; i < 
-	ge
-.
-	glow”_dim_li¡
-.
-size
-(); ++i)
-
-63 
-	g¡»am
- << "\t" << 
-	ge
-.
-	glow”_dim_li¡
-[
-i
-];
-
-64 
-	g¡»am
- << 
-	g’dl
-;
-
-65  
-	g¡»am
-;
-
-68 
-Edge
- 
-	tC–l
-;
-
-71 
-	$maš
-(
-¬gc
-, **
-¬gv
-) {
-
-72 ià(
-¬gc
- != 6) {
-
-73 
-cout
-
-
-74 << "Inv®id u§ge. CÜ»ù…¬am‘”s: " << 
-’dl
-
-
-75 << "msg_g’ fe_ÇmLx Ly wX wY" << 
-’dl
-;
-
-76 
-	`ex™
-(-1);
-
-80 
-¡ršg
- 
-Çme
- = 
-	`¡ršg
-(
-¬gv
-[1]);
-
-81 
-Lx
- = 
-	`¡¹od
-(
-¬gv
-[2], 
-NULL
-);
-
-82 
-Ly
- = 
-	`¡¹od
-(
-¬gv
-[3], 
-NULL
-);
-
-83 
-Wx
- = 
-	`¡¹od
-(
-¬gv
-[4], 
-NULL
-);
-
-84 
-Wy
- = 
-	`¡¹od
-(
-¬gv
-[5], 
-NULL
-);
-
-86 
-num_v”‹x
- = (
-Lx
- +1è* (
-Ly
- + 1);
-
-87 
-num_edges
- = (
-Lx
- * 
-Ly
- * 2) + Lx + Ly;
-
-88 
-num_ûÎs
- = 
-Lx
- * 
-Ly
-;
-
-90 
-of¡»am
- 
-	`ouut
-(
-Çme
-.
-	`c_¡r
-());
-
-91 
-¡ršg¡»am
- 
-v”‹x_¡»am
-;
-
-92 
-¡ršg¡»am
- 
-edge_¡»am
-;
-
-93 
-¡ršg¡»am
- 
-ûÎ_¡»am
-;
-
-95 
-i_v”‹x
- = 1;
-
-96 
-i_edge
- = 1;
-
-97 
-i_ûÎ
- = 1;
-
-99 
-x
-, 
-y
-;
-
-101 
-x
- = 0; x <ğ
-Lx
-; ++x) {
-
-102 
-v”‹x_¡»am
- << 
-	`V”‹x
-(
-i_v”‹x
-++, 2, 
-x
- * 
-Wx
-, 0);
-
-106 
-x
- = 1; x <ğ
-Lx
-; ++x) {
-
-107 
-veùÜ
-<> 
-v”‹x_li¡
-;
-
-108 
-v”‹x_li¡
-.
-	`push_back
-(
-x
-);
-
-109 
-v”‹x_li¡
-.
-	`push_back
-(
-x
-+1);
-
-110 
-edge_¡»am
- << 
-	`Edge
-(
-i_edge
-++, 0, 
-v”‹x_li¡
-);
-
-113 
-y
- = 0; y < 
-Ly
-; ++y) {
-
-115 
-v”‹x_¡»am
- << 
-	`V”‹x
-(
-i_v”‹x
-++, 2, 0, (
-y
-+1è* 
-Wy
-);
-
-116 
-edge_ty³
- = (
-y
- =ğ
-Ly
- - 1) ? 2 : 0;
-
-117 
-x
- = 1; x < 
-Lx
-; ++x) {
-
-118 
-v”‹x_¡»am
- << 
-	`V”‹x
-(
-i_v”‹x
-++, 
-edge_ty³
-, 
-x
- * 
-Wx
-, (
-y
-+1è* 
-Wy
-);
-
-120 
-v”‹x_¡»am
- << 
-	`V”‹x
-(
-i_v”‹x
-++, 2, 
-Lx
- * 
-Wx
-, (
-y
-+1è* 
-Wy
-);
-
-123 
-x
- = 0; x <ğ
-Lx
-; ++x) {
-
-124 
-v1
- = (
-Lx
- + 1è* 
-y
- + 
-x
- + 1;
-
-125 
-v2
- = 
-v1
- + 
-Lx
- + 1;
-
-126 
-veùÜ
-<> 
-v”‹x_li¡
-;
-
-127 
-v”‹x_li¡
-.
-	`push_back
-(
-v1
-);
-
-128 
-v”‹x_li¡
-.
-	`push_back
-(
-v2
-);
-
-129 
-edge_¡»am
- << 
-	`Edge
-(
-i_edge
-++, 0, 
-v”‹x_li¡
-);
-
-134 
-x
- = 1; x <ğ
-Lx
-; ++x) {
-
-136 
-v1
- = (
-Lx
- + 1è* (
-y
- + 1è+ 
-x
-;
-
-137 
-v2
- = 
-v1
- + 1;
-
-138 
-veùÜ
-<> 
-v”‹x_li¡
-;
-
-139 
-v”‹x_li¡
-.
-	`push_back
-(
-v1
-);
-
-140 
-v”‹x_li¡
-.
-	`push_back
-(
-v2
-);
-
-141 
-edge_¡»am
- << 
-	`Edge
-(
-i_edge
-++, 1, 
-v”‹x_li¡
-);
-
-144 
-e1
- = 
-y
- * 
-Lx
- + y * (Lx + 1è+ 
-x
-;
-
-145 
-e2
- = 
-e1
- + 
-Lx
-;
-
-146 
-e3
- = 
-e2
- + 1;
-
-147 
-e4
- = 
-e3
- + 
-Lx
-;
-
-148 
-veùÜ
-<> 
-edge_li¡
-;
-
-149 
-edge_li¡
-.
-	`push_back
-(
-e1
-);
-
-150 
-edge_li¡
-.
-	`push_back
-(
-e2
-);
-
-151 
-edge_li¡
-.
-	`push_back
-(
-e3
-);
-
-152 
-edge_li¡
-.
-	`push_back
-(
-e4
-);
-
-153 
-ûÎ_¡»am
- << 
-	`C–l
-(
-i_ûÎ
-++, 0, 
-edge_li¡
-);
-
-157 
-ouut
-
-
-158 << "<?xmÈv”siÚ=\"1.0\"ƒncodšg=\"ISO-8859-1\"?>" << 
-’dl
-
-
-159 << "<FVLIB>" << 
-’dl
-
-
-160 << "\t<MESH dim=\"2\"‚ame=\"fvcm cÚv”tÜ\">" << 
-’dl
-
-
-161 << "\t\t<VERTEX‚bv”‹x=\"" << 
-num_v”‹x
- << "\">" << 
-’dl
-
-
-162 << 
-v”‹x_¡»am
-.
-	`¡r
-()
-
-163 << "\t\t</VERTEX>" << 
-’dl
-
-
-164 << "\t\t<EDGE‚bedge=\"" << 
-num_edges
- << "\">" << 
-’dl
-
-
-165 << 
-edge_¡»am
-.
-	`¡r
-()
-
-166 << "\t\t</EDGE>" << 
-’dl
-
-
-167 << "\t\t<CELL‚bûÎ=\"" << 
-num_ûÎs
- << "\">" << 
-’dl
-
-
-168 << 
-ûÎ_¡»am
-.
-	`¡r
-()
-
-169 << "\t\t</CELL>" << 
-’dl
-
-
-170 << "\t</MESH>" << 
-’dl
-
-
-171 << "</FVLIB>" << 
-’dl
-;
-
-173 
-ouut
-.
-	`şo£
-();
-
-174 
-	}
-}
-
-	@src/old.polu.cuda.no_reduction/kernels.cu
-
-1 
-	~"k”Ãls.cuh
-"
-
-3 
-	~"CUDA/CFVLib.h
-"
-
-5 
-__glob®__
-
-
-6 
-	$k”Ãl_compu‹_æux
-(
-
-7 
-num_edges
-,
-
-10 *
-edge_Ëá_ûÎs
-,
-
-11 *
-edge_right_ûÎs
-,
-
-12 *
-pŞutiÚ
-,
-
-15 *
-v–oc™y
-,
-
-16 *
-æux
-,
-
-18 
-dc
-) {
-
-21 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-23 ià(
-tid
- >ğ
-num_edges
-) ;
-
-25 
-i_Ëá
- = 
-edge_Ëá_ûÎs
-[
-tid
-];
-
-26 
-i_right
- = 
-edge_right_ûÎs
-[
-tid
-];
-
-28 
-p_Ëá
-, 
-p_right
-;
-
-29 
-v
-;
-
-31 
-p_Ëá
- = 
-pŞutiÚ
-[
-i_Ëá
-];
-
-32 
-v
- = 
-v–oc™y
-[
-tid
-];
-
-34 ià(
-i_right
- !ğ
-NO_RIGHT_EDGE
-) {
-
-35 
-p_right
- = 
-pŞutiÚ
-[
-i_right
-];
-
-37 
-p_right
- = 
-dc
-;
-
-40 ià(
-v
- < 0)
-
-41 
-æux
-[
-tid
-] = 
-v
- * 
-p_right
-;
-
-43 
-æux
-[
-tid
-] = 
-v
- * 
-p_Ëá
-;
-
-46 
-	}
-}
-
-48 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-49 
-	sSh¬edMemÜy
- {
-
-50 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- 
-	mT
-*() {
-
-51 
-__sh¬ed__
- 
-__smem
-[];
-
-52  (
-	mT
-*)
-	m__smem
-;
-
-54 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- cÚ¡ 
-	mT
-*() const {
-
-55 
-__sh¬ed__
- 
-__smem
-[];
-
-56  (
-	mT
-*)
-	m__smem
-;
-
-62 
-	g‹m¶©e
-<>
-
-63 
-	gSh¬edMemÜy
-<> {
-
-64 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- *() {
-
-65 
-__sh¬ed__
- 
-__smem_d
-[];
-
-66  (*)
-	g__smem_d
-;
-
-68 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- const *() const {
-
-69 
-__sh¬ed__
- 
-__smem_d
-[];
-
-70  (*)
-	g__smem_d
-;
-
-78 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-79 
-__glob®__
-
-
-80 
-	$k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-) {
-
-82 
-T
- *
-sd©a
- = 
-Sh¬edMemÜy
-<T>();
-
-86 
-tid
- = 
-th»adIdx
-.
-x
-;
-
-87 
-i
- = 
-blockIdx
-.
-x
- * 
-blockSize
-*2 + 
-th»adIdx
-.x;
-
-88 
-gridSize
- = 
-blockSize
-*2 * 
-gridDim
-.
-x
-;
-
-90 
-T
- 
-myMax
- = 
-g_id©a
-[
-i
-];
-
-95 
-i
- < 
-n
-) {
-
-96 ià(
-g_id©a
-[
-i
-] > 
-myMax
-) myMax = g_idata[i];
-
-98 ià(
-nIsPow2
- || 
-i
- + 
-blockSize
- < 
-n
-)
-
-99 ià(
-g_id©a
-[
-i
-+
-blockSize
-]è
-myMax
- = g_idata[i+blockSize];
-
-100 
-i
- +ğ
-gridSize
-;
-
-104 
-sd©a
-[
-tid
-] = 
-myMax
-;
-
-105 
-	`__synùh»ads
-();
-
-108 ià(
-blockSize
- >ğ512è{ ià(
-tid
- < 256è{ ià(
-sd©a
-[tid+256] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+256]; } 
-	`__synùh»ads
-(); } }
-
-109 ià(
-blockSize
- >ğ256è{ ià(
-tid
- < 128è{ ià(
-sd©a
-[tid+128] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+128]; } 
-	`__synùh»ads
-(); } }
-
-110 ià(
-blockSize
- >ğ128è{ ià(
-tid
- < 64è{ ià(
-sd©a
-[tid+ 64] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+ 64]; } 
-	`__synùh»ads
-(); } }
-
-115 vŞ©
-T
-* 
-smem
- = 
-sd©a
-;
-
-116 ià(
-blockSize
- >ğ64è{ ià(
-tid
- < 32è{ ià(
-smem
-[tid+ 32] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 32]; } 
-	`__synùh»ads
-(); } }
-
-117 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 16è{ ià(
-smem
-[tid+ 16] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 16]; } 
-	`__synùh»ads
-(); } }
-
-118 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 8è{ ià(
-smem
-[tid+ 8] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 8]; } 
-	`__synùh»ads
-(); } }
-
-119 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 4è{ ià(
-smem
-[tid+ 4] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 4]; } 
-	`__synùh»ads
-(); } }
-
-120 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 2è{ ià(
-smem
-[tid+ 2] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 2]; } 
-	`__synùh»ads
-(); } }
-
-121 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 1è{ ià(
-smem
-[tid+ 1] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 1]; } 
-	`__synùh»ads
-(); } }
-
-129 ià(
-tid
- == 0)
-
-130 
-g_od©a
-[
-blockIdx
-.
-x
-] = 
-sd©a
-[0];
-
-131 
-	}
-}
-
-133 
-boŞ
- 
-	$i¥ow2
-(
-x
-) {
-
-134  ((
-x
- & (x-1)) == 0);
-
-135 
-	}
-}
-
-137 
-	$ÃxtPow2
-(
-x
-) {
-
-138 --
-x
-;
-
-139 
-x
- |= x >> 1;
-
-140 
-x
- |= x >> 2;
-
-141 
-x
- |= x >> 4;
-
-142 
-x
- |= x >> 8;
-
-143 
-x
- |= x >> 16;
-
-144  ++
-x
-;
-
-145 
-	}
-}
-
-147 
-boŞ
- 
-	$isPow2
-(
-x
-) {
-
-148  ((
-x
- & (x-1)) == 0);
-
-149 
-	}
-}
-
-151 #iâdeà
-MIN
-
-
-152 
-	#MIN
-(
-x
-,
-y
-è((x < yè? x : y)
-
-	)
-
-155 
-	$g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-) {
-
-156 
-th»ads
- = (
-n
- < 
-maxTh»ads
- * 2è? 
-	`ÃxtPow2
-((n + 1) / 2) : maxThreads;
-
-157 
-blocks
- = (
-n
- + (
-th»ads
- * 2- 1)) / (threads * 2);
-
-161 
-	}
-}
-
-163 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-164 
-	$w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-) {
-
-165 
-dim3
- 
-	`dimBlock
-(
-th»ads
-, 1, 1);
-
-166 
-dim3
- 
-	`dimGrid
-(
-blocks
-, 1, 1);
-
-170 
-smemSize
- = (
-th»ads
- <ğ32è? 2 *h»ad * (
-T
-) :hreads * (T);
-
-173 ià(
-	`isPow2
-(
-size
-)) {
-
-174 
-th»ads
-) {
-
-175 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-176 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-177 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-178 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-179 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-180 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-181 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-182 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-183 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-184 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-188 
-th»ads
-) {
-
-189 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-190 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-191 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-192 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-193 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-194 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-195 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-196 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-197 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-198 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-201 
-	}
-}
-
-204 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<>(
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-205 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-206 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-209 
-__glob®__
-
-
-210 
-	$k”Ãl_upd©e
-(
-
-211 
-num_ûÎs
-,
-
-212 
-num_tÙ®_edges
-,
-
-213 *
-edge_Ëá_ûÎs
-,
-
-214 *
-edge_right_ûÎs
-,
-
-215 *
-edge_Ëngths
-,
-
-216 *
-ûÎ_¬—s
-,
-
-217 *
-ûÎ_edges
-,
-
-218 *
-ûÎ_edges_šdex
-,
-
-219 *
-ûÎ_edges_couÁ
-,
-
-220 *
-pŞutiÚ
-,
-
-221 *
-æux
-,
-
-222 
-dt
-) {
-
-224 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-225 ià(
-tid
- > 
-num_ûÎs
-) ;
-
-228 
-edge_šdex
- = 
-ûÎ_edges_šdex
-[
-tid
-];
-
-229 
-edge_lim™
- = 
-edge_šdex
- + 
-ûÎ_edges_couÁ
-[
-tid
-];
-
-232 
-Ãw_pŞutiÚ
- = 0;
-
-235 
-i
- = 
-edge_šdex
-; i < 
-edge_lim™
-; ++i) {
-
-236 
-edge
- = 
-ûÎ_edges
-[
-i
-];
-
-240 
-aux
- = 
-dt
- * 
-æux
-[
-edge
-] * 
-edge_Ëngths
-[edge] / 
-ûÎ_¬—s
-[
-tid
-];
-
-243 ià(
-edge_Ëá_ûÎs
-[
-edge
-] =ğ
-tid
-) {
-
-244 
-Ãw_pŞutiÚ
- -ğ
-aux
-;
-
-246 
-Ãw_pŞutiÚ
- +ğ
-aux
-;
-
-251 
-pŞutiÚ
-[
-tid
-] +ğ
-Ãw_pŞutiÚ
-;
-
-252 
-	}
-}
-
-	@src/old.polu.cuda.no_reduction/kernels.cuh
-
-1 #iâdeà
-_CUH_KERNELS_
-
-
-2 
-	#_CUH_KERNELS_
-
-
-	)
-
-7 
-__glob®__
-
-
-8 
-k”Ãl_compu‹_æux
-(
-
-9 
-num_edges
-,
-
-12 *
-edge_Ëá_ûÎs
-,
-
-13 *
-edge_right_ûÎs
-,
-
-14 *
-pŞutiÚ
-,
-
-17 *
-v–oc™y
-,
-
-18 *
-æux
-,
-
-20 
-dc
-);
-
-25 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-26 
-__glob®__
-
-
-27 
-k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-);
-
-29 
-boŞ
- 
-i¥ow2
-(
-x
-);
-
-30 
-ÃxtPow2
-(
-x
-);
-
-31 
-g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-);
-
-32 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-33 
-w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-);
-
-38 
-__glob®__
-
-
-39 
-k”Ãl_upd©e
-(
-
-40 
-num_edges
-,
-
-41 *
-edge_Ëá_ûÎs
-,
-
-42 *
-edge_right_ûÎs
-,
-
-43 *
-Ëngths
-,
-
-44 *
-¬—s
-,
-
-45 *
-pŞutiÚ
-,
-
-46 *
-æux
-,
-
-47 
-dt
-);
-
-49 
-__glob®__
-
-
-50 
-k”Ãl_upd©e
-(
-
-51 
-num_ûÎs
-,
-
-52 
-num_tÙ®_edges
-,
-
-53 *
-edge_Ëá_ûÎs
-,
-
-54 *
-edge_right_ûÎs
-,
-
-55 *
-edge_Ëngths
-,
-
-56 *
-ûÎ_¬—s
-,
-
-57 *
-ûÎ_edges
-,
-
-58 *
-ûÎ_edges_šdex
-,
-
-59 *
-ûÎ_edges_couŠ
-,
-
-60 *
-pŞutiÚ
-,
-
-61 *
-æux
-,
-
-62 
-dt
-);
-
-	@src/old.polu.cuda.no_reduction/parameters.cpp
-
-1 
-	~"FVLib.h
-"
-
-2 
-	~"·¿m‘”s.h
-"
-
-4 
-P¬am‘”s
- 
-	$»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-) {
-
-5 
-P¬am‘”s
- 
-d©a
-;
-
-6 
-P¬am‘”
- 
-	`·¿
-Ğ
-·¿m‘”_f’ame
-.
-	`c_¡r
-() );
-
-8 
-d©a
-.
-f’ames
-.
-mesh
- = 
-·¿
-.
-	`g‘SŒšg
-("MeshName");
-
-9 
-d©a
-.
-f’ames
-.
-v–oc™y
- = 
-·¿
-.
-	`g‘SŒšg
-("VelocityFile");
-
-10 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
- = 
-·¿
-.
-	`g‘SŒšg
-("PoluInitFile");
-
-11 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-ouut
- = "polution.openmp.xml";
-
-12 
-d©a
-.
-time
-.
-fš®
- = 
-·¿
-.
-	`g‘DoubË
-("FinalTime");
-
-13 
-d©a
-.
-™”©iÚs
-.
-jump
- = 
-·¿
-.
-	`g‘IÁeg”
-("NbJump");
-
-14 
-d©a
-.
-computiÚ
-.
-th»shŞd
- = 
-·¿
-.
-	`g‘DoubË
-("DirichletCondition");
-
-16  
-d©a
-;
-
-17 
-	}
-}
-
-	@src/old.polu.cuda.no_reduction/parameters.h
-
-1 #iâdeà
-_H_PARAMETERS
-
-
-2 
-	#_H_PARAMETERS
-
-
-	)
-
-4 
-	~<¡ršg
->
-
-5 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-11 
-	s_·¿m‘”s
-
-
-15 
-¡ršg
- 
-	mmesh
-;
-
-16 
-¡ršg
- 
-	mv–oc™y
-;
-
-19 
-¡ršg
- 
-	mš™Ÿl
-;
-
-20 
-¡ršg
- 
-	mouut
-;
-
-21 } 
-	mpŞutiÚ
-;
-
-22 } 
-	mf’ames
-;
-
-25 
-	mfš®
-;
-
-26 } 
-	mtime
-;
-
-29 
-	mjump
-;
-
-30 } 
-	m™”©iÚs
-;
-
-33 
-	mth»shŞd
-;
-
-34 } 
-	mcomputiÚ
-;
-
-36 
-	tP¬am‘”s
-;
-
-45 
-P¬am‘”s
- 
-»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-);
-
-	@src/old.polu.cuda.no_reduction/polu_cuda.cu
-
-1 
-	~<cuda.h
->
-
-3 
-	~"FVLib.h
-"
-
-4 
-	~"CUDA/CFVLib.h
-"
-
-5 
-	~"FVLib.h
-"
-
-7 
-	~"·¿m‘”s.h
-"
-
-8 
-	~"pŞu_cuda.h
-"
-
-9 
-	~"k”Ãls.cuh
-"
-
-12 
-gpu_upd©e
-(
-
-13 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-14 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-15 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-16 
-dt
-) {
-
-20 
-	gi
- = 0; i < 
-	gmesh
-.
-	gnum_edges
-; ++i) {
-
-21 
-	gpŞutiÚ
-[ (è
-mesh
-.
-edge_Ëá_ûÎs
-[
-i
-] ] -=
-
-22 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_Ëá_ûÎs
-[i] ];
-
-23 ià(
-	gmesh
-.
-	gedge_right_ûÎs
-[
-i
-] !ğ
-NO_RIGHT_EDGE
-)
-
-24 
-pŞutiÚ
-[ (è
-mesh
-.
-edge_right_ûÎs
-[
-i
-] ] +=
-
-25 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_right_ûÎs
-[i] ];
-
-29 
-	$compu‹_mesh_·¿m‘”s
- (
-FVMesh2D
- 
-mesh
-) {
-
-30 
-h
-;
-
-31 
-S
-;
-
-32 
-FVC–l2D
- *
-ûÎ
-;
-
-33 
-FVEdge2D
- *
-edge
-;
-
-35 
-h
- = 1.e20;
-
-36  
-mesh
-.
-	`begšC–l
-(); (
-ûÎ
- = mesh.
-	`ÃxtC–l
-()è!ğ
-NULL
- ; ) {
-
-37 
-S
- = 
-ûÎ
-->
-¬—
-;
-
-38  
-ûÎ
-->
-	`begšEdge
-(); (
-edge
- = c–l->
-	`ÃxtEdge
-()è!ğ
-NULL
-; ) {
-
-39 iàĞ
-h
- * 
-edge
-->
-Ëngth
- > 
-S
- )
-
-40 
-h
- = 
-S
- / 
-edge
-->
-Ëngth
-;
-
-43  
-h
-;
-
-44 
-	}
-}
-
-49 
-	$maš
-() {
-
-51 
-CudaFV
-::
-CFVProfe
- 
-	`p_fuÎ_func
-("cuda_full_func");
-
-52 
-CudaFV
-::
-CFVProfe
- 
-	`p_m®loc
-("cuda_mallocs");
-
-53 
-CudaFV
-::
-CFVProfe
- 
-	`p_memıy
-("cuda_memcpy");
-
-54 
-CudaFV
-::
-CFVProfe
- 
-	`p_maš_loİ
-("main_loop");
-
-55 
-CudaFV
-::
-CFVProfe
- 
-	`p_loİ_™”
-("main_loop_iteration");
-
-56 
-CudaFV
-::
-CFVProfe
- 
-	`p_compu‹_æux
-("compute_flux");
-
-57 
-CudaFV
-::
-CFVProfe
- 
-	`p_»duùiÚ
-("reduction");
-
-58 
-CudaFV
-::
-CFVProfe
- 
-	`p_upd©e
-("update");
-
-59 
-CudaFV
-::
-CFVProfe
- 
-	`p_ouut
-("file_output");
-
-61 
-	`PROF_START
-(
-p_fuÎ_func
-);
-
-64 
-i
- = 0;
-
-65 
-¡ršg
- 
-Çme
-;
-
-66 
-h
-;
-
-67 
-t
-;
-
-68 
-v_max
- = 0, 
-dt
-;
-
-69 
-FVMesh2D
- 
-Şd_mesh
-;
-
-71 
-P¬am‘”s
- 
-d©a
-;
-
-72 
-d©a
- = 
-	`»ad_·¿m‘”s
-( "param.xml" );
-
-75 
-Şd_mesh
-.
-	`»ad
-Ğ
-d©a
-.
-f’ames
-.
-mesh
-.
-	`c_¡r
-() );
-
-78 
-CudaFV
-::
-CFVMesh2D
- 
-	`mesh
-(
-Şd_mesh
-);
-
-80 
-FVVeù
-<> 
-	`Şd_pŞutiÚ
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-81 
-FVVeù
-<> 
-	`Şd_æux
-Ğ
-Şd_mesh
-.
-	`g‘NbEdge
-() );
-
-82 
-FVVeù
-<
-FVPošt2D
-<> > 
-	`Şd_v–oc™y
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-85 
-FVio
- 
-	`v–oc™y_fe
-Ğ
-d©a
-.
-f’ames
-.
-v–oc™y
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-86 
-v–oc™y_fe
-.
-	`g‘
-Ğ
-Şd_v–oc™y
- , 
-t
- , 
-Çme
- );
-
-88 
-FVio
- 
-	`pŞu_ši_fe
-Ğ
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-89 
-pŞu_ši_fe
-.
-	`g‘
-Ğ
-Şd_pŞutiÚ
- , 
-t
- , 
-Çme
- );
-
-92 
-CudaFV
-::
-CFVVeù
-<> 
-	`pŞutiÚ
-(
-mesh
-.
-num_ûÎs
-);
-
-93 
-CudaFV
-::
-CFVVeù
-<> 
-	`æux
-(
-mesh
-.
-num_edges
-);
-
-95 
-CudaFV
-::
-CFVVeù
-<> 
-	`v–oc™y
-(
-mesh
-.
-num_edges
-);
-
-97 
-i
- = 0; i < 
-pŞutiÚ
-.
-	`size
-(); ++i) {
-
-98 
-pŞutiÚ
-[
-i
-] = 
-Şd_pŞutiÚ
-[i];
-
-104 
-i
- = 0; i < 
-mesh
-.
-num_edges
-; ++i) {
-
-105 
-Ëá
- = 
-mesh
-.
-edge_Ëá_ûÎs
-[
-i
-];
-
-106 
-right
- = 
-mesh
-.
-edge_right_ûÎs
-[
-i
-];
-
-108 ià(
-right
- =ğ
-NO_RIGHT_EDGE
-) {
-
-109 
-right
- = 
-Ëá
-;
-
-112 
-v
- = ((
-Şd_v–oc™y
-[
-Ëá
-].
-x
- + old_v–oc™y[
-right
-].xè* 0.5 * 
-mesh
-.
-edge_nÜm®s
-.x[
-i
-])
-
-113 + ((
-Şd_v–oc™y
-[
-Ëá
-].
-y
- + old_v–oc™y[
-right
-].yè* 0.5 * 
-mesh
-.
-edge_nÜm®s
-.y[
-i
-]);
-
-115 ià(
-	`abs
-(
-v
-è> 
-v_max
- || 
-i
- == 0)
-
-116 
-v_max
- = 
-	`abs
-(
-v
-);
-
-119 
-h
- = 
-	`compu‹_mesh_·¿m‘”s
-Ğ
-Şd_mesh
- );
-
-120 
-dt
- = 1.0 / 
-v_max
- * 
-h
-;
-
-124 
-FVio
- 
-	`pŞutiÚ_fe
-("pŞutiÚ.xml", 
-FVWRITE
-);
-
-125 
-pŞutiÚ_fe
-.
-	`put
-(
-Şd_pŞutiÚ
-, 
-t
-, "polution");
-
-127 
-	`PROF_START
-(
-p_m®loc
-);
-
-129 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_m®loc
-();
-
-130 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_m®loc
-();
-
-131 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_m®loc
-();
-
-132 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_m®loc
-();
-
-133 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_m®loc
-();
-
-134 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_m®loc
-();
-
-135 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_m®loc
-();
-
-136 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_m®loc
-();
-
-137 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_m®loc
-();
-
-138 
-pŞutiÚ
-.
-	`cuda_m®loc
-();
-
-141 
-v–oc™y
-.
-	`cuda_m®loc
-();
-
-142 
-æux
-.
-	`cuda_m®loc
-();
-
-144 
-CudaFV
-::
-CFVVeù
-<> 
-	`vs
-(
-mesh
-.
-num_edges
-);
-
-145 
-vs
-.
-	`cuda_m®loc
-();
-
-146 
-	`PROF_STOP
-(
-p_m®loc
-);
-
-148 
-	`PROF_START
-(
-p_memıy
-);
-
-149 
-cudaSŒ—m_t
- 
-¡»am
-;
-
-150 
-	`cudaSŒ—mC»©e
-(&
-¡»am
-);
-
-152 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-153 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-154 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-155 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-156 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-157 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-158 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-159 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-160 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-162 
-pŞutiÚ
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-165 
-v–oc™y
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-167 
-	`cudaSŒ—mSynchrÚize
-(
-¡»am
-);
-
-168 
-	`PROF_STOP
-(
-p_memıy
-);
-
-170 
-	`cudaSŒ—mDe¡roy
-(
-¡»am
-);
-
-172 
-_DEBUG
- {
-
-173 
-_d_cİ›d_d©a_by‹s
- =
-
-177 
-mesh
-.
-edge_Ëngths
-.
-	`size
-() +
-
-178 
-mesh
-.
-ûÎ_¬—s
-.
-	`size
-() +
-
-179 
-pŞutiÚ
-.
-	`size
-() +
-
-182 
-v–oc™y
-.
-	`size
-() +
-
-183 
-æux
-.
-	`size
-()) +
-
-185 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`size
-() +
-
-186 
-mesh
-.
-edge_right_ûÎs
-.
-	`size
-() +
-
-187 
-mesh
-.
-ûÎ_edges
-.
-	`size
-() +
-
-188 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`size
-() +
-
-189 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`size
-());
-
-191 
-_d_cİ›d_d©a_size
-=
-
-192 
-_d_cİ›d_d©a_by‹s
- / () 1024;
-
-194 
-_d_fuÎ_d©a_by‹s
- =
-
-195 
-_d_cİ›d_d©a_by‹s
- + (è* (
-vs
-.
-	`size
-(è+ 
-æux
-.size());
-
-197 
-_d_fuÎ_d©a_size
- =
-
-198 
-_d_fuÎ_d©a_by‹s
- / () 1024;
-
-200 
-_d_Œªsãr_¿‹
- =
-
-201 ((è
-_d_cİ›d_d©a_size
-è* 1000 / 
-p_memıy
-.
-	`g‘Time
-();
-
-203 
-CudaFV
-::
-CFVProfe
-::
-¡»am
-
-
-204 << "Cİ›d d©¨size: " << (è
-_d_cİ›d_d©a_size
- << " KB" << 
-’dl
-
-
-205 << "FuÎ d©¨£ˆsize: " << (è
-_d_fuÎ_d©a_size
- << " KB" << 
-’dl
-
-
-206 << "D©¨Œªsã¸¿‹: " << 
-_d_Œªsãr_¿‹
- << " KB/s" << 
-’dl
-;
-
-211 
-»d_blocks
-, 
-»d_th»ads
-;
-
-212 
-	`g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-mesh
-.
-num_edges
-, 0, 512, 
-»d_blocks
-, 
-»d_th»ads
-);
-
-213 
-CudaFV
-::
-CFVVeù
-<> 
-	`ıu_»ducibËs
-(
-»d_blocks
-);
-
-214 
-ıu_»ducibËs
-.
-	`cuda_m®loc
-();
-
-218 
-dim3
- 
-	`grid_size_cf
-(
-	`GRID_SIZE
-(
-mesh
-.
-num_edges
-, 
-BLOCK_SIZE_CF
-), 1, 1);
-
-219 
-dim3
- 
-	`block_size_cf
-(
-BLOCK_SIZE_CF
-, 1, 1);
-
-221 
-dim3
- 
-	`grid_size_up
-(
-	`GRID_SIZE
-(
-mesh
-.
-num_edges
-, 
-BLOCK_SIZE_UP
-), 1, 1);
-
-222 
-dim3
- 
-	`block_size_up
-(
-BLOCK_SIZE_UP
-, 1, 1);
-
-227 
-fš®_time
- = 
-d©a
-.
-time
-.
-fš®
-;
-
-228 
-dc
- = 
-d©a
-.
-computiÚ
-.
-th»shŞd
-;
-
-229 
-	`PROF_START
-(
-p_maš_loİ
-);
-
-230 
-t
- < 
-fš®_time
-) {
-
-231 
-	`PROF_START
-(
-p_loİ_™”
-);
-
-238 
-	`PROF_START
-(
-p_compu‹_æux
-);
-
-239 
-k”Ãl_compu‹_æux
-<<< 
-grid_size_cf
-, 
-block_size_cf
- >>>(
-
-240 
-mesh
-.
-num_edges
-,
-
-243 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-244 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-245 
-pŞutiÚ
-.
-	`cuda_g‘A¼ay
-(),
-
-248 
-v–oc™y
-.
-	`cuda_g‘A¼ay
-(),
-
-249 
-æux
-.
-	`cuda_g‘A¼ay
-(),
-
-251 
-dc
-);
-
-252 
-	`PROF_STOP
-(
-p_compu‹_æux
-);
-
-276 
-	`PROF_START
-(
-p_upd©e
-);
-
-277 
-k”Ãl_upd©e
-<<< 
-grid_size_up
-, 
-block_size_up
- >>>(
-
-278 
-mesh
-.
-num_ûÎs
-,
-
-279 
-mesh
-.
-num_tÙ®_edges
-,
-
-280 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-281 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-282 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_g‘A¼ay
-(),
-
-283 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_g‘A¼ay
-(),
-
-284 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_g‘A¼ay
-(),
-
-285 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_g‘A¼ay
-(),
-
-286 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_g‘A¼ay
-(),
-
-287 
-pŞutiÚ
-.
-	`cuda_g‘A¼ay
-(),
-
-288 
-æux
-.
-	`cuda_g‘A¼ay
-(),
-
-289 
-dt
-);
-
-290 
-	`PROF_STOP
-(
-p_upd©e
-);
-
-292 
-t
- +ğ
-dt
-;
-
-293 ++
-i
-;
-
-313 
-	`PROF_STOP
-(
-p_loİ_™”
-);
-
-315 
-	`PROF_STOP
-(
-p_maš_loİ
-);
-
-317 
-FVLog
-::
-logg”
- << "tÙ® i‹¿tiÚs: " << 
-i
- << 
-’dl
-;
-
-319 
-pŞutiÚ
-.
-	`cuda_g‘
-();
-
-320 
-x
- = 0; x < 
-mesh
-.
-num_ûÎs
-; ++x) {
-
-321 
-Şd_pŞutiÚ
-[
-x
-] = 
-pŞutiÚ
-[x];
-
-323 
-pŞutiÚ_fe
-.
-	`put
-(
-Şd_pŞutiÚ
-, 
-t
-, "polution");
-
-328 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_ä“
-();
-
-329 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_ä“
-();
-
-330 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_ä“
-();
-
-331 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_ä“
-();
-
-332 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_ä“
-();
-
-333 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_ä“
-();
-
-334 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_ä“
-();
-
-336 
-pŞutiÚ
-.
-	`cuda_ä“
-();
-
-339 
-v–oc™y
-.
-	`cuda_ä“
-();
-
-340 
-æux
-.
-	`cuda_ä“
-();
-
-342 
-	`PROF_STOP
-(
-p_fuÎ_func
-);
-
-345 
-	}
-}
-
-	@src/old.polu.cuda.no_reduction/polu_cuda.h
-
-1 
-	~<cuda.h
->
-
-2 
-	~<cm©h
->
-
-4 
-	~"CUDA/CFVLib.h
-"
-
-5 
-	~"FVLib.h
-"
-
-7 
-	#BLOCK_SIZE_CF
- 512
-
-	)
-
-8 
-	#BLOCK_SIZE_RED
- 512
-
-	)
-
-9 
-	#BLOCK_SIZE_UP
- 512
-
-	)
-
-10 
-	#GRID_SIZE
-(
-–ems
-, 
-th»ads
-è((è
-¡d
-::
-	`û
-((è–em /h»ads))
-
-	)
-
-15 
-cuda_maš_loİ
-(
-
-16 
-fš®_time
-,
-
-17 
-jump_š‹rv®
-,
-
-18 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-19 
-mesh_·¿m‘”
-,
-
-20 
-FVVeù
-<> &
-Şd_pŞutiÚ
-,
-
-21 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚs
-,
-
-22 
-CudaFV
-::
-CFVPošts2D
- &
-v–oc™›s
-,
-
-23 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-24 
-dc
-);
-
-33 
-gpu_upd©e
-(
-
-34 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-35 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-36 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-37 
-dt
-);
-
-	@src/old.polu.cuda/kernels.cu
-
-1 
-	~"k”Ãls.cuh
-"
-
-3 
-	~"CUDA/CFVLib.h
-"
-
-5 
-__glob®__
-
-
-6 
-	$k”Ãl_compu‹_æux
-(
-
-7 
-num_edges
-,
-
-8 *
-edge_nÜm®s_x
-,
-
-9 *
-edge_nÜm®s_y
-,
-
-10 *
-edge_Ëá_ûÎs
-,
-
-11 *
-edge_right_ûÎs
-,
-
-12 *
-pŞutiÚ
-,
-
-13 *
-v–oc™y_x
-,
-
-14 *
-v–oc™y_y
-,
-
-15 *
-æux
-,
-
-16 *
-vs
-,
-
-17 
-dc
-) {
-
-20 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-22 ià(
-tid
- >ğ
-num_edges
-) ;
-
-24 
-i_Ëá
- = 
-edge_Ëá_ûÎs
-[
-tid
-];
-
-25 
-i_right
- = 
-edge_right_ûÎs
-[
-tid
-];
-
-27 
-v_Ëá
-[2], 
-v_right
-[2];
-
-28 
-p_Ëá
-, 
-p_right
-;
-
-30 
-v_Ëá
-[0] = 
-v–oc™y_x
-[
-i_Ëá
-];
-
-31 
-v_Ëá
-[1] = 
-v–oc™y_y
-[
-i_Ëá
-];
-
-32 
-p_Ëá
- = 
-pŞutiÚ
-[
-i_Ëá
-];
-
-34 ià(
-i_right
- !ğ
-NO_RIGHT_EDGE
-) {
-
-35 
-v_right
-[0] = 
-v–oc™y_x
-[
-i_right
-];
-
-36 
-v_right
-[1] = 
-v–oc™y_y
-[
-i_right
-];
-
-37 
-p_right
- = 
-pŞutiÚ
-[
-i_right
-];
-
-39 
-v_right
-[0] = 
-v_Ëá
-[0];
-
-40 
-v_right
-[1] = 
-v_Ëá
-[1];
-
-41 
-p_right
- = 
-dc
-;
-
-44 
-v
- = ((
-v_Ëá
-[0] + 
-v_right
-[0]è* 0.5 * 
-edge_nÜm®s_x
-[
-tid
-])
-
-45 + ((
-v_Ëá
-[1] + 
-v_right
-[1]è* 0.5 * 
-edge_nÜm®s_y
-[
-tid
-]);
-
-47 ià(
-v
- < 0)
-
-48 
-æux
-[
-tid
-] = 
-v
- * 
-p_right
-;
-
-50 
-æux
-[
-tid
-] = 
-v
- * 
-p_Ëá
-;
-
-52 
-vs
-[
-tid
-] = 
-v
-;
-
-53 
-	}
-}
-
-55 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-56 
-	sSh¬edMemÜy
- {
-
-57 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- 
-	mT
-*() {
-
-58 
-__sh¬ed__
- 
-__smem
-[];
-
-59  (
-	mT
-*)
-	m__smem
-;
-
-61 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- cÚ¡ 
-	mT
-*() const {
-
-62 
-__sh¬ed__
- 
-__smem
-[];
-
-63  (
-	mT
-*)
-	m__smem
-;
-
-69 
-	g‹m¶©e
-<>
-
-70 
-	gSh¬edMemÜy
-<> {
-
-71 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- *() {
-
-72 
-__sh¬ed__
- 
-__smem_d
-[];
-
-73  (*)
-	g__smem_d
-;
-
-75 
-__deviû__
- 
-šlše
- 
-İ”©Ü
- const *() const {
-
-76 
-__sh¬ed__
- 
-__smem_d
-[];
-
-77  (*)
-	g__smem_d
-;
-
-85 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-86 
-__glob®__
-
-
-87 
-	$k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-) {
-
-89 
-T
- *
-sd©a
- = 
-Sh¬edMemÜy
-<T>();
-
-93 
-tid
- = 
-th»adIdx
-.
-x
-;
-
-94 
-i
- = 
-blockIdx
-.
-x
- * 
-blockSize
-*2 + 
-th»adIdx
-.x;
-
-95 
-gridSize
- = 
-blockSize
-*2 * 
-gridDim
-.
-x
-;
-
-97 
-T
- 
-myMax
- = 
-g_id©a
-[
-i
-];
-
-102 
-i
- < 
-n
-) {
-
-103 ià(
-g_id©a
-[
-i
-] > 
-myMax
-) myMax = g_idata[i];
-
-105 ià(
-nIsPow2
- || 
-i
- + 
-blockSize
- < 
-n
-)
-
-106 ià(
-g_id©a
-[
-i
-+
-blockSize
-]è
-myMax
- = g_idata[i+blockSize];
-
-107 
-i
- +ğ
-gridSize
-;
-
-111 
-sd©a
-[
-tid
-] = 
-myMax
-;
-
-112 
-	`__synùh»ads
-();
-
-115 ià(
-blockSize
- >ğ512è{ ià(
-tid
- < 256è{ ià(
-sd©a
-[tid+256] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+256]; } 
-	`__synùh»ads
-(); } }
-
-116 ià(
-blockSize
- >ğ256è{ ià(
-tid
- < 128è{ ià(
-sd©a
-[tid+128] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+128]; } 
-	`__synùh»ads
-(); } }
-
-117 ià(
-blockSize
- >ğ128è{ ià(
-tid
- < 64è{ ià(
-sd©a
-[tid+ 64] > 
-myMax
-è{ sd©a[tid] = myMax = sd©a[tid+ 64]; } 
-	`__synùh»ads
-(); } }
-
-122 vŞ©
-T
-* 
-smem
- = 
-sd©a
-;
-
-123 ià(
-blockSize
- >ğ64è{ ià(
-tid
- < 32è{ ià(
-smem
-[tid+ 32] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 32]; } 
-	`__synùh»ads
-(); } }
-
-124 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 16è{ ià(
-smem
-[tid+ 16] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 16]; } 
-	`__synùh»ads
-(); } }
-
-125 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 8è{ ià(
-smem
-[tid+ 8] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 8]; } 
-	`__synùh»ads
-(); } }
-
-126 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 4è{ ià(
-smem
-[tid+ 4] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 4]; } 
-	`__synùh»ads
-(); } }
-
-127 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 2è{ ià(
-smem
-[tid+ 2] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 2]; } 
-	`__synùh»ads
-(); } }
-
-128 ià(
-blockSize
- >ğ32è{ ià(
-tid
- < 1è{ ià(
-smem
-[tid+ 1] > 
-myMax
-è{ smem[tid] = myMax = smem[tid+ 1]; } 
-	`__synùh»ads
-(); } }
-
-136 ià(
-tid
- == 0)
-
-137 
-g_od©a
-[
-blockIdx
-.
-x
-] = 
-sd©a
-[0];
-
-138 
-	}
-}
-
-140 
-boŞ
- 
-	$i¥ow2
-(
-x
-) {
-
-141  ((
-x
- & (x-1)) == 0);
-
-142 
-	}
-}
-
-144 
-	$ÃxtPow2
-(
-x
-) {
-
-145 --
-x
-;
-
-146 
-x
- |= x >> 1;
-
-147 
-x
- |= x >> 2;
-
-148 
-x
- |= x >> 4;
-
-149 
-x
- |= x >> 8;
-
-150 
-x
- |= x >> 16;
-
-151  ++
-x
-;
-
-152 
-	}
-}
-
-154 
-boŞ
- 
-	$isPow2
-(
-x
-) {
-
-155  ((
-x
- & (x-1)) == 0);
-
-156 
-	}
-}
-
-158 #iâdeà
-MIN
-
-
-159 
-	#MIN
-(
-x
-,
-y
-è((x < yè? x : y)
-
-	)
-
-162 
-	$g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-) {
-
-163 
-th»ads
- = (
-n
- < 
-maxTh»ads
- * 2è? 
-	`ÃxtPow2
-((n + 1) / 2) : maxThreads;
-
-164 
-blocks
- = (
-n
- + (
-th»ads
- * 2- 1)) / (threads * 2);
-
-168 
-	}
-}
-
-170 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-171 
-	$w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-) {
-
-172 
-dim3
- 
-	`dimBlock
-(
-th»ads
-, 1, 1);
-
-173 
-dim3
- 
-	`dimGrid
-(
-blocks
-, 1, 1);
-
-177 
-smemSize
- = (
-th»ads
- <ğ32è? 2 *h»ad * (
-T
-) :hreads * (T);
-
-180 ià(
-	`isPow2
-(
-size
-)) {
-
-181 
-th»ads
-) {
-
-182 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-183 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-184 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-185 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-186 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-187 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-188 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-189 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-190 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-191 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-Œue
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-195 
-th»ads
-) {
-
-196 512: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 512, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-197 256: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 256, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-198 128: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 128, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-199 64: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 64, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-200 32: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 32, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-201 16: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 16, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-202 8: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 8, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-203 4: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 4, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-204 2: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 2, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-205 1: 
-k”Ãl_v–oc™›s_»duùiÚ
-<
-T
-, 1, 
-çl£
-><<< 
-dimGrid
-, 
-dimBlock
-, 
-smemSize
- >>> (
-d_id©a
-, 
-d_od©a
-, 
-size
-); ;
-
-208 
-	}
-}
-
-211 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<>(
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-212 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-213 
-‹m¶©e
- 
-	gw¿µ”_»duû_v–oc™›s
-<> (
-	gsize
-, 
-	gth»ads
-, 
-	gblocks
-, *
-	gd_id©a
-, *
-	gd_od©a
-);
-
-219 
-__glob®__
-
-
-220 
-	$k”Ãl_upd©e
-(
-
-221 
-num_edges
-,
-
-222 *
-edge_Ëá_ûÎs
-,
-
-223 *
-edge_right_ûÎs
-,
-
-224 *
-Ëngths
-,
-
-225 *
-¬—s
-,
-
-226 *
-pŞutiÚ
-,
-
-227 *
-æux
-,
-
-228 
-dt
-) {
-
-230 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-231 ià(
-tid
- >ğ
-num_edges
-) ;
-
-233 
-Ëá
- = 
-edge_Ëá_ûÎs
-[
-tid
-];
-
-234 
-right
- = 
-edge_right_ûÎs
-[
-tid
-];
-
-236 
-pŞutiÚ
-[
-Ëá
-] =
-
-237 
-dt
- * 
-æux
-[
-tid
-] * 
-Ëngths
-[tid] / 
-¬—s
-[
-Ëá
-];
-
-239 ià(
-right
- =ğ
-NO_RIGHT_EDGE
-)
-
-242 
-pŞutiÚ
-[
-right
-] =
-
-243 
-dt
- * 
-æux
-[
-tid
-] * 
-Ëngths
-[tid] / 
-¬—s
-[
-right
-];
-
-244 
-	}
-}
-
-246 
-__glob®__
-
-
-247 
-	$k”Ãl_upd©e
-(
-
-248 
-num_ûÎs
-,
-
-249 
-num_tÙ®_edges
-,
-
-250 *
-edge_Ëá_ûÎs
-,
-
-251 *
-edge_right_ûÎs
-,
-
-252 *
-edge_Ëngths
-,
-
-253 *
-ûÎ_¬—s
-,
-
-254 *
-ûÎ_edges
-,
-
-255 *
-ûÎ_edges_šdex
-,
-
-256 *
-ûÎ_edges_couÁ
-,
-
-257 *
-pŞutiÚ
-,
-
-258 *
-æux
-,
-
-259 
-dt
-) {
-
-261 
-tid
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-262 ià(
-tid
- > 
-num_ûÎs
-) ;
-
-265 
-edge_šdex
- = 
-ûÎ_edges_šdex
-[
-tid
-];
-
-266 
-edge_lim™
- = 
-edge_šdex
- + 
-ûÎ_edges_couÁ
-[
-tid
-];
-
-269 
-Ãw_pŞutiÚ
- = 0;
-
-272 
-i
- = 
-edge_šdex
-; i < 
-edge_lim™
-; ++i) {
-
-273 
-edge
- = 
-ûÎ_edges
-[
-i
-];
-
-277 
-aux
- = 
-dt
- * 
-æux
-[
-edge
-] * 
-edge_Ëngths
-[edge] / 
-ûÎ_¬—s
-[
-tid
-];
-
-280 ià(
-edge_Ëá_ûÎs
-[
-edge
-] =ğ
-tid
-) {
-
-281 
-Ãw_pŞutiÚ
- -ğ
-aux
-;
-
-283 
-Ãw_pŞutiÚ
- +ğ
-aux
-;
-
-288 
-pŞutiÚ
-[
-tid
-] +ğ
-Ãw_pŞutiÚ
-;
-
-289 
-	}
-}
-
-	@src/old.polu.cuda/kernels.cuh
-
-1 #iâdeà
-_CUH_KERNELS_
-
-
-2 
-	#_CUH_KERNELS_
-
-
-	)
-
-7 
-__glob®__
-
-
-8 
-k”Ãl_compu‹_æux
-(
-
-9 
-num_edges
-,
-
-10 *
-edge_nÜm®s_x
-,
-
-11 *
-edge_nÜm®s_y
-,
-
-12 *
-edge_Ëá_ûÎs
-,
-
-13 *
-edge_right_ûÎs
-,
-
-14 *
-pŞutiÚ
-,
-
-15 *
-v–oc™y_x
-,
-
-16 *
-v–oc™y_y
-,
-
-17 *
-æux
-,
-
-18 *
-vs
-,
-
-19 
-dc
-);
-
-24 
-	g‹m¶©e
-<
-şass
- 
-	gT
-, 
-	gblockSize
-, 
-boŞ
- 
-	gnIsPow2
->
-
-25 
-__glob®__
-
-
-26 
-k”Ãl_v–oc™›s_»duùiÚ
-(
-T
- *
-g_id©a
-, T *
-g_od©a
-, 
-n
-);
-
-28 
-boŞ
- 
-i¥ow2
-(
-x
-);
-
-29 
-ÃxtPow2
-(
-x
-);
-
-30 
-g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-n
-, 
-maxBlocks
-, 
-maxTh»ads
-, &
-blocks
-, &
-th»ads
-);
-
-31 
-	g‹m¶©e
-<
-şass
- 
-	gT
->
-
-32 
-w¿µ”_»duû_v–oc™›s
-(
-size
-, 
-th»ads
-, 
-blocks
-, 
-T
- *
-d_id©a
-, T *
-d_od©a
-);
-
-37 
-__glob®__
-
-
-38 
-k”Ãl_upd©e
-(
-
-39 
-num_edges
-,
-
-40 *
-edge_Ëá_ûÎs
-,
-
-41 *
-edge_right_ûÎs
-,
-
-42 *
-Ëngths
-,
-
-43 *
-¬—s
-,
-
-44 *
-pŞutiÚ
-,
-
-45 *
-æux
-,
-
-46 
-dt
-);
-
-48 
-__glob®__
-
-
-49 
-k”Ãl_upd©e
-(
-
-50 
-num_ûÎs
-,
-
-51 
-num_tÙ®_edges
-,
-
-52 *
-edge_Ëá_ûÎs
-,
-
-53 *
-edge_right_ûÎs
-,
-
-54 *
-edge_Ëngths
-,
-
-55 *
-ûÎ_¬—s
-,
-
-56 *
-ûÎ_edges
-,
-
-57 *
-ûÎ_edges_šdex
-,
-
-58 *
-ûÎ_edges_couŠ
-,
-
-59 *
-pŞutiÚ
-,
-
-60 *
-æux
-,
-
-61 
-dt
-);
-
-	@src/old.polu.cuda/parameters.cpp
-
-1 
-	~"FVLib.h
-"
-
-2 
-	~"·¿m‘”s.h
-"
-
-4 
-P¬am‘”s
- 
-	$»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-) {
-
-5 
-P¬am‘”s
- 
-d©a
-;
-
-6 
-P¬am‘”
- 
-	`·¿
-Ğ
-·¿m‘”_f’ame
-.
-	`c_¡r
-() );
-
-8 
-d©a
-.
-f’ames
-.
-mesh
- = 
-·¿
-.
-	`g‘SŒšg
-("MeshName");
-
-9 
-d©a
-.
-f’ames
-.
-v–oc™y
- = 
-·¿
-.
-	`g‘SŒšg
-("VelocityFile");
-
-10 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
- = 
-·¿
-.
-	`g‘SŒšg
-("PoluInitFile");
-
-11 
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-ouut
- = "polution.openmp.xml";
-
-12 
-d©a
-.
-time
-.
-fš®
- = 
-·¿
-.
-	`g‘DoubË
-("FinalTime");
-
-13 
-d©a
-.
-™”©iÚs
-.
-jump
- = 
-·¿
-.
-	`g‘IÁeg”
-("NbJump");
-
-14 
-d©a
-.
-computiÚ
-.
-th»shŞd
- = 
-·¿
-.
-	`g‘DoubË
-("DirichletCondition");
-
-16  
-d©a
-;
-
-17 
-	}
-}
-
-	@src/old.polu.cuda/parameters.h
-
-1 #iâdeà
-_H_PARAMETERS
-
-
-2 
-	#_H_PARAMETERS
-
-
-	)
-
-4 
-	~<¡ršg
->
-
-5 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-11 
-	s_·¿m‘”s
-
-
-15 
-¡ršg
- 
-	mmesh
-;
-
-16 
-¡ršg
- 
-	mv–oc™y
-;
-
-19 
-¡ršg
- 
-	mš™Ÿl
-;
-
-20 
-¡ršg
- 
-	mouut
-;
-
-21 } 
-	mpŞutiÚ
-;
-
-22 } 
-	mf’ames
-;
-
-25 
-	mfš®
-;
-
-26 } 
-	mtime
-;
-
-29 
-	mjump
-;
-
-30 } 
-	m™”©iÚs
-;
-
-33 
-	mth»shŞd
-;
-
-34 } 
-	mcomputiÚ
-;
-
-36 
-	tP¬am‘”s
-;
-
-45 
-P¬am‘”s
- 
-»ad_·¿m‘”s
- (
-¡ršg
- 
-·¿m‘”_f’ame
-);
-
-	@src/old.polu.cuda/polu_cuda.cu
-
-1 
-	~<cuda.h
->
-
-3 
-	~"FVLib.h
-"
-
-4 
-	~"CUDA/CFVLib.h
-"
-
-5 
-	~"FVLib.h
-"
-
-7 
-	~"·¿m‘”s.h
-"
-
-8 
-	~"pŞu_cuda.h
-"
-
-9 
-	~"k”Ãls.cuh
-"
-
-12 
-gpu_upd©e
-(
-
-13 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-14 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-15 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-16 
-dt
-) {
-
-20 
-	gi
- = 0; i < 
-	gmesh
-.
-	gnum_edges
-; ++i) {
-
-21 
-	gpŞutiÚ
-[ (è
-mesh
-.
-edge_Ëá_ûÎs
-[
-i
-] ] -=
-
-22 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_Ëá_ûÎs
-[i] ];
-
-23 ià(
-	gmesh
-.
-	gedge_right_ûÎs
-[
-i
-] !ğ
-NO_RIGHT_EDGE
-)
-
-24 
-pŞutiÚ
-[ (è
-mesh
-.
-edge_right_ûÎs
-[
-i
-] ] +=
-
-25 
-dt
- * 
-æux
-[
-i
-] * 
-mesh
-.
-edge_Ëngths
-[i] / mesh.
-ûÎ_¬—s
-[ (èmesh.
-edge_right_ûÎs
-[i] ];
-
-29 
-	$compu‹_mesh_·¿m‘”s
- (
-FVMesh2D
- 
-mesh
-) {
-
-30 
-h
-;
-
-31 
-S
-;
-
-32 
-FVC–l2D
- *
-ûÎ
-;
-
-33 
-FVEdge2D
- *
-edge
-;
-
-35 
-h
- = 1.e20;
-
-36  
-mesh
-.
-	`begšC–l
-(); (
-ûÎ
- = mesh.
-	`ÃxtC–l
-()è!ğ
-NULL
- ; ) {
-
-37 
-S
- = 
-ûÎ
-->
-¬—
-;
-
-38  
-ûÎ
-->
-	`begšEdge
-(); (
-edge
- = c–l->
-	`ÃxtEdge
-()è!ğ
-NULL
-; ) {
-
-39 iàĞ
-h
- * 
-edge
-->
-Ëngth
- > 
-S
- )
-
-40 
-h
- = 
-S
- / 
-edge
-->
-Ëngth
-;
-
-43  
-h
-;
-
-44 
-	}
-}
-
-49 
-	$maš
-() {
-
-51 
-CudaFV
-::
-CFVProfe
- 
-	`p_fuÎ_func
-("cuda_full_func");
-
-52 
-CudaFV
-::
-CFVProfe
- 
-	`p_m®loc
-("cuda_mallocs");
-
-53 
-CudaFV
-::
-CFVProfe
- 
-	`p_memıy
-("cuda_memcpy");
-
-54 
-CudaFV
-::
-CFVProfe
- 
-	`p_maš_loİ
-("main_loop");
-
-55 
-CudaFV
-::
-CFVProfe
- 
-	`p_loİ_™”
-("main_loop_iteration");
-
-56 
-CudaFV
-::
-CFVProfe
- 
-	`p_compu‹_æux
-("compute_flux");
-
-57 
-CudaFV
-::
-CFVProfe
- 
-	`p_»duùiÚ
-("reduction");
-
-58 
-CudaFV
-::
-CFVProfe
- 
-	`p_upd©e
-("update");
-
-59 
-CudaFV
-::
-CFVProfe
- 
-	`p_ouut
-("file_output");
-
-61 
-	`PROF_START
-(
-p_fuÎ_func
-);
-
-63 
-¡ršg
- 
-Çme
-;
-
-64 
-h
-;
-
-65 
-t
-;
-
-66 
-FVMesh2D
- 
-Şd_mesh
-;
-
-68 
-P¬am‘”s
- 
-d©a
-;
-
-69 
-d©a
- = 
-	`»ad_·¿m‘”s
-( "param.xml" );
-
-72 
-Şd_mesh
-.
-	`»ad
-Ğ
-d©a
-.
-f’ames
-.
-mesh
-.
-	`c_¡r
-() );
-
-75 
-CudaFV
-::
-CFVMesh2D
- 
-	`mesh
-(
-Şd_mesh
-);
-
-77 
-FVVeù
-<> 
-	`Şd_pŞutiÚ
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-78 
-FVVeù
-<> 
-	`Şd_æux
-Ğ
-Şd_mesh
-.
-	`g‘NbEdge
-() );
-
-79 
-FVVeù
-<
-FVPošt2D
-<> > 
-	`Şd_v–oc™y
-Ğ
-Şd_mesh
-.
-	`g‘NbC–l
-() );
-
-82 
-FVio
- 
-	`v–oc™y_fe
-Ğ
-d©a
-.
-f’ames
-.
-v–oc™y
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-83 
-v–oc™y_fe
-.
-	`g‘
-Ğ
-Şd_v–oc™y
- , 
-t
- , 
-Çme
- );
-
-85 
-FVio
- 
-	`pŞu_ši_fe
-Ğ
-d©a
-.
-f’ames
-.
-pŞutiÚ
-.
-š™Ÿl
-.
-	`c_¡r
-(è, 
-FVREAD
- );
-
-86 
-pŞu_ši_fe
-.
-	`g‘
-Ğ
-Şd_pŞutiÚ
- , 
-t
- , 
-Çme
- );
-
-89 
-CudaFV
-::
-CFVVeù
-<> 
-	`pŞutiÚ
-(
-mesh
-.
-num_ûÎs
-);
-
-90 
-CudaFV
-::
-CFVVeù
-<> 
-	`æux
-(
-mesh
-.
-num_edges
-);
-
-91 
-CudaFV
-::
-CFVPošts2D
- 
-	`v–oc™y
-(
-mesh
-.
-num_ûÎs
-);
-
-93 
-i
- = 0; i < 
-pŞutiÚ
-.
-	`size
-(); ++i) {
-
-94 
-pŞutiÚ
-[
-i
-] = 
-Şd_pŞutiÚ
-[i];
-
-95 
-v–oc™y
-.
-x
-[
-i
-] = 
-Şd_v–oc™y
-[i].x;
-
-96 
-v–oc™y
-.
-y
-[
-i
-] = 
-Şd_v–oc™y
-[i].y;
-
-99 
-h
- = 
-	`compu‹_mesh_·¿m‘”s
-Ğ
-Şd_mesh
- );
-
-102 
-dt
-;
-
-103 
-i
- = 0;
-
-106 
-FVio
- 
-	`pŞutiÚ_fe
-("pŞutiÚ.xml", 
-FVWRITE
-);
-
-107 
-pŞutiÚ_fe
-.
-	`put
-(
-Şd_pŞutiÚ
-, 
-t
-, "polution");
-
-109 
-	`PROF_START
-(
-p_m®loc
-);
-
-111 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_m®loc
-();
-
-112 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_m®loc
-();
-
-113 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_m®loc
-();
-
-114 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_m®loc
-();
-
-115 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_m®loc
-();
-
-116 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_m®loc
-();
-
-117 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_m®loc
-();
-
-118 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_m®loc
-();
-
-119 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_m®loc
-();
-
-120 
-pŞutiÚ
-.
-	`cuda_m®loc
-();
-
-121 
-v–oc™y
-.
-x
-.
-	`cuda_m®loc
-();
-
-122 
-v–oc™y
-.
-y
-.
-	`cuda_m®loc
-();
-
-123 
-æux
-.
-	`cuda_m®loc
-();
-
-125 
-CudaFV
-::
-CFVVeù
-<> 
-	`vs
-(
-mesh
-.
-num_edges
-);
-
-126 
-vs
-.
-	`cuda_m®loc
-();
-
-127 
-	`PROF_STOP
-(
-p_m®loc
-);
-
-129 
-	`PROF_START
-(
-p_memıy
-);
-
-130 
-cudaSŒ—m_t
- 
-¡»am
-;
-
-131 
-	`cudaSŒ—mC»©e
-(&
-¡»am
-);
-
-133 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-134 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-135 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-136 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-137 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-138 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-139 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-140 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-141 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-143 
-pŞutiÚ
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-144 
-v–oc™y
-.
-x
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-145 
-v–oc™y
-.
-y
-.
-	`cuda_§veAsync
-(
-¡»am
-);
-
-147 
-	`cudaSŒ—mSynchrÚize
-(
-¡»am
-);
-
-148 
-	`PROF_STOP
-(
-p_memıy
-);
-
-150 
-	`cudaSŒ—mDe¡roy
-(
-¡»am
-);
-
-152 
-_DEBUG
- {
-
-153 
-_d_cİ›d_d©a_by‹s
- =
-
-155 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`size
-() +
-
-156 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`size
-() +
-
-157 
-mesh
-.
-edge_Ëngths
-.
-	`size
-() +
-
-158 
-mesh
-.
-ûÎ_¬—s
-.
-	`size
-() +
-
-159 
-pŞutiÚ
-.
-	`size
-() +
-
-160 
-v–oc™y
-.
-x
-.
-	`size
-() +
-
-161 
-v–oc™y
-.
-y
-.
-	`size
-() +
-
-162 
-æux
-.
-	`size
-()) +
-
-164 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`size
-() +
-
-165 
-mesh
-.
-edge_right_ûÎs
-.
-	`size
-() +
-
-166 
-mesh
-.
-ûÎ_edges
-.
-	`size
-() +
-
-167 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`size
-() +
-
-168 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`size
-());
-
-170 
-_d_cİ›d_d©a_size
-=
-
-171 
-_d_cİ›d_d©a_by‹s
- / () 1024;
-
-173 
-_d_fuÎ_d©a_by‹s
- =
-
-174 
-_d_cİ›d_d©a_by‹s
- + (è* (
-vs
-.
-	`size
-(è+ 
-æux
-.size());
-
-176 
-_d_fuÎ_d©a_size
- =
-
-177 
-_d_fuÎ_d©a_by‹s
- / () 1024;
-
-179 
-_d_Œªsãr_¿‹
- =
-
-180 ((è
-_d_cİ›d_d©a_size
-è* 1000 / 
-p_memıy
-.
-	`g‘Time
-();
-
-182 
-CudaFV
-::
-CFVProfe
-::
-¡»am
-
-
-183 << "Cİ›d d©¨size: " << (è
-_d_cİ›d_d©a_size
- << " KB" << 
-’dl
-
-
-184 << "FuÎ d©¨£ˆsize: " << (è
-_d_fuÎ_d©a_size
- << " KB" << 
-’dl
-
-
-185 << "D©¨Œªsã¸¿‹: " << 
-_d_Œªsãr_¿‹
- << " KB/s" << 
-’dl
-;
-
-190 
-»d_blocks
-, 
-»d_th»ads
-;
-
-191 
-	`g‘_»duùiÚ_num_blocks_ªd_th»ads
-(
-mesh
-.
-num_edges
-, 0, 512, 
-»d_blocks
-, 
-»d_th»ads
-);
-
-192 
-CudaFV
-::
-CFVVeù
-<> 
-	`ıu_»ducibËs
-(
-»d_blocks
-);
-
-193 
-ıu_»ducibËs
-.
-	`cuda_m®loc
-();
-
-197 
-dim3
- 
-	`grid_size_cf
-(
-	`GRID_SIZE
-(
-mesh
-.
-num_edges
-, 
-BLOCK_SIZE_CF
-), 1, 1);
-
-198 
-dim3
- 
-	`block_size_cf
-(
-BLOCK_SIZE_CF
-, 1, 1);
-
-200 
-dim3
- 
-	`grid_size_up
-(
-	`GRID_SIZE
-(
-mesh
-.
-num_edges
-, 
-BLOCK_SIZE_UP
-), 1, 1);
-
-201 
-dim3
- 
-	`block_size_up
-(
-BLOCK_SIZE_UP
-, 1, 1);
-
-206 
-fš®_time
- = 
-d©a
-.
-time
-.
-fš®
-;
-
-207 
-dc
- = 
-d©a
-.
-computiÚ
-.
-th»shŞd
-;
-
-208 
-	`PROF_START
-(
-p_maš_loİ
-);
-
-209 
-t
- < 
-fš®_time
-) {
-
-210 
-	`PROF_START
-(
-p_loİ_™”
-);
-
-212 
-max_vs
-;
-
-217 
-	`PROF_START
-(
-p_compu‹_æux
-);
-
-218 
-k”Ãl_compu‹_æux
-<<< 
-grid_size_cf
-, 
-block_size_cf
- >>>(
-
-219 
-mesh
-.
-num_edges
-,
-
-220 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_g‘A¼ay
-(),
-
-221 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_g‘A¼ay
-(),
-
-222 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-223 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-224 
-pŞutiÚ
-.
-	`cuda_g‘A¼ay
-(),
-
-225 
-v–oc™y
-.
-x
-.
-	`cuda_g‘A¼ay
-(),
-
-226 
-v–oc™y
-.
-y
-.
-	`cuda_g‘A¼ay
-(),
-
-227 
-æux
-.
-	`cuda_g‘A¼ay
-(),
-
-228 
-vs
-.
-	`cuda_g‘A¼ay
-(),
-
-229 
-dc
-);
-
-230 
-	`PROF_STOP
-(
-p_compu‹_æux
-);
-
-236 
-	`PROF_START
-(
-p_»duùiÚ
-);
-
-237 
-	`w¿µ”_»duû_v–oc™›s
-(
-mesh
-.
-num_edges
-, 
-»d_th»ads
-, 
-»d_blocks
-, 
-vs
-.
-	`cuda_g‘A¼ay
-(), 
-ıu_»ducibËs
-.cuda_getArray());
-
-240 
-ıu_»ducibËs
-.
-	`cuda_g‘
-();
-
-241 
-max_vs
- = 
-ıu_»ducibËs
-[0];
-
-242 
-x
- = 1; x < 
-ıu_»ducibËs
-.
-	`size
-(); ++x) {
-
-243 ià(
-ıu_»ducibËs
-[
-x
-] > 
-max_vs
-)
-
-244 
-max_vs
- = 
-ıu_»ducibËs
-[
-x
-];
-
-248 
-dt
- = 1.0 / 
-	`abs
-(
-max_vs
-è* 
-h
-;
-
-250 
-	`PROF_STOP
-(
-p_»duùiÚ
-);
-
-255 
-	`PROF_START
-(
-p_upd©e
-);
-
-256 
-k”Ãl_upd©e
-<<< 
-grid_size_up
-, 
-block_size_up
- >>>(
-
-257 
-mesh
-.
-num_ûÎs
-,
-
-258 
-mesh
-.
-num_tÙ®_edges
-,
-
-259 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-260 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_g‘A¼ay
-(),
-
-261 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_g‘A¼ay
-(),
-
-262 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_g‘A¼ay
-(),
-
-263 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_g‘A¼ay
-(),
-
-264 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_g‘A¼ay
-(),
-
-265 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_g‘A¼ay
-(),
-
-266 
-pŞutiÚ
-.
-	`cuda_g‘A¼ay
-(),
-
-267 
-æux
-.
-	`cuda_g‘A¼ay
-(),
-
-268 
-dt
-);
-
-269 
-	`PROF_STOP
-(
-p_upd©e
-);
-
-271 
-t
- +ğ
-dt
-;
-
-272 ++
-i
-;
-
-292 
-	`PROF_STOP
-(
-p_loİ_™”
-);
-
-294 
-	`PROF_STOP
-(
-p_maš_loİ
-);
-
-296 
-FVLog
-::
-logg”
- << "tÙ® i‹¿tiÚs: " << 
-i
- << 
-’dl
-;
-
-298 
-pŞutiÚ
-.
-	`cuda_g‘
-();
-
-299 
-x
- = 0; x < 
-mesh
-.
-num_ûÎs
-; ++x) {
-
-300 
-Şd_pŞutiÚ
-[
-x
-] = 
-pŞutiÚ
-[x];
-
-302 
-pŞutiÚ_fe
-.
-	`put
-(
-Şd_pŞutiÚ
-, 
-t
-, "polution");
-
-305 
-mesh
-.
-edge_nÜm®s
-.
-x
-.
-	`cuda_ä“
-();
-
-306 
-mesh
-.
-edge_nÜm®s
-.
-y
-.
-	`cuda_ä“
-();
-
-307 
-mesh
-.
-edge_Ëngths
-.
-	`cuda_ä“
-();
-
-308 
-mesh
-.
-edge_Ëá_ûÎs
-.
-	`cuda_ä“
-();
-
-309 
-mesh
-.
-edge_right_ûÎs
-.
-	`cuda_ä“
-();
-
-310 
-mesh
-.
-ûÎ_¬—s
-.
-	`cuda_ä“
-();
-
-311 
-mesh
-.
-ûÎ_edges
-.
-	`cuda_ä“
-();
-
-312 
-mesh
-.
-ûÎ_edges_šdex
-.
-	`cuda_ä“
-();
-
-313 
-mesh
-.
-ûÎ_edges_couÁ
-.
-	`cuda_ä“
-();
-
-315 
-pŞutiÚ
-.
-	`cuda_ä“
-();
-
-316 
-v–oc™y
-.
-x
-.
-	`cuda_ä“
-();
-
-317 
-v–oc™y
-.
-y
-.
-	`cuda_ä“
-();
-
-318 
-æux
-.
-	`cuda_ä“
-();
-
-320 
-	`PROF_STOP
-(
-p_fuÎ_func
-);
-
-323 
-	}
-}
-
-	@src/old.polu.cuda/polu_cuda.h
-
-1 
-	~<cuda.h
->
-
-2 
-	~<cm©h
->
-
-4 
-	~"CUDA/CFVLib.h
-"
-
-5 
-	~"FVLib.h
-"
-
-7 
-	#BLOCK_SIZE_CF
- 512
-
-	)
-
-8 
-	#BLOCK_SIZE_RED
- 512
-
-	)
-
-9 
-	#BLOCK_SIZE_UP
- 512
-
-	)
-
-10 
-	#GRID_SIZE
-(
-–ems
-, 
-th»ads
-è((è
-¡d
-::
-	`û
-((è–em /h»ads))
-
-	)
-
-15 
-cuda_maš_loİ
-(
-
-16 
-fš®_time
-,
-
-17 
-jump_š‹rv®
-,
-
-18 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-19 
-mesh_·¿m‘”
-,
-
-20 
-FVVeù
-<> &
-Şd_pŞutiÚ
-,
-
-21 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚs
-,
-
-22 
-CudaFV
-::
-CFVPošts2D
- &
-v–oc™›s
-,
-
-23 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-24 
-dc
-);
-
-33 
-gpu_upd©e
-(
-
-34 
-CudaFV
-::
-CFVMesh2D
- &
-mesh
-,
-
-35 
-CudaFV
-::
-CFVVeù
-<> &
-pŞutiÚ
-,
-
-36 
-CudaFV
-::
-CFVVeù
-<> &
-æux
-,
-
-37 
-dt
-);
-
-	@src/old.rapidxml_test/main.cpp
-
-3 
-	~<io¡»am
->
-
-4 
-	~<f¡»am
->
-
-5 
-	~<s¡»am
->
-
-6 
-	~<¡ršg
->
-
-7 
-	~<veùÜ
->
-
-8 
-	~"FVL/FVio.h
-"
-
-9 
-	~"FVL/CFVVeù.h
-"
-
-10 
-	~"FVL/FVXMLWr™”.h
-"
-
-11 
-	~"FVL/FVXMLR—d”.h
-"
-
-12 
-	~"¿pidxml/¿pidxml.hµ
-"
-
-13 
-	~"¿pidxml/¿pidxml_´št.hµ
-"
-
-14 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-15 
-usšg
- 
-Çme¥aû
- 
-	g¿pidxml
-;
-
-18 
-	$maš
-() {
-
-20 
-FVL
-::
-FVXMLWr™”
- 
-wr™”
-;
-
-21 
-FVL
-::
-CFVVeù
-<> 
-	`vec
-(10);
-
-22 
-i
- = 0; i < 10; i++)
-
-23 
-vec
-[
-i
-] = i*2;
-
-24 
-wr™”
-.
-	`­³nd
-(
-vec
-);
-
-25 
-cout
- << 
-wr™”
- << 
-’dl
-;
-
-96 
-	}
-}
-
-	@src/old.rapidxml_writer_test/main.cu
-
-9 
-	~"FVL/FVLib.h
-"
-
-10 
-	~"FVL/CFVVeù.h
-"
-
-11 
-	~"FVL/FVXMLR—d”.h
-"
-
-15 
-usšg
- 
-Çme¥aû
- 
-	g¡d
-;
-
-16 
-usšg
- 
-Çme¥aû
- 
-	g¿pidxml
-;
-
-19 
-	$maš
-() {
-
-21 
-FVL
-::
-FVXMLR—d”
- 
-	`»ad”
-("concentration_ini.xml");
-
-22 
-FVL
-::
-CFVVeù
-<> 
-	`pŞ
-(6);
-
-23 
-time
-;
-
-24 
-¡ršg
- 
-Çme
-;
-
-25 
-»ad”
-.
-	`g‘Vec
-(
-pŞ
-, 
-time
-, 
-Çme
-);
-
-27 
-cout
- << 
-Çme
- << 
-’dl
-;
-
-105 
-	}
-}
-
-	@src/old.test_mat/test_mat.cu
-
-1 
-	~"FVL/CFVM©.h
-"
-
-2 
-usšg
- 
-Çme¥aû
- 
-	gFVL
-;
-
-4 
-	~<veùÜ
->
-
-5 
-	~<io¡»am
->
-
-6 
-usšg
- 
-	g¡d
-::
-cout
-;
-
-7 
-	~<cuda.h
->
-
-8 
-	~<cuda_ruÁime_­i.h
->
-
-10 
-__glob®__
- 
-	$k”Ãl_sum
-(**
-X
-, **
-Y
-, **
-R
-, 
-w
-, 
-h
-) {
-
-11 
-tidX
- = 
-blockIdx
-.
-x
- * 
-blockDim
-.x + 
-th»adIdx
-.x;
-
-12 
-tidY
- = 
-blockIdx
-.
-y
- * 
-blockDim
-.y + 
-th»adIdx
-.y;
-
-13 
-tidR
- = 
-blockIdx
-.
-z
- * 
-blockDim
-.z + 
-th»adIdx
-.z;
-
-15 
-–em
- = 
-tidY
- * 
-w
- + 
-tidX
-;
-
-16 * 
-m©X
- = 
-X
-[
-–em
-];
-
-17 * 
-m©Y
- = 
-Y
-[
-–em
-];
-
-18 * 
-m©R
- = 
-R
-[
-–em
-];
-
-20 
-m©R
-[
-tidR
-] = 
-m©X
-[tidR] + 
-m©Y
-[tidR];
-
-21 
-	}
-}
-
-23 
-	$maš
-() {
-
-25 
-CFVM©
-<> 
-	`m©X
-(2, 2, 5);
-
-26 
-CFVM©
-<> 
-	`m©Y
-(2, 2, 5);
-
-27 
-CFVM©
-<> 
-	`m©R
-(2, 2, 5);
-
-29 
-y
- = 0; y < 2; ++y)
-
-30 
-x
- = 0; x < 2; ++x)
-
-31 
-i
- = 0; i < 5; ++i)
-
-32 
-m©X
-.
-	`–em
-(
-x
-, 
-y
-, 
-i
-èğ
-m©Y
-.elem(x, y, i) = i;
-
-34 
-m©X
-.
-	`cuda_m®locAndSave
-();
-
-35 
-m©Y
-.
-	`cuda_m®locAndSave
-();
-
-36 
-m©R
-.
-	`cuda_m®loc
-();
-
-38 
-dim3
- 
-gridDim
- = 1;
-
-39 
-dim3
- 
-	`blockDim
-(2, 2, 5);
-
-40 
-k”Ãl_sum
-<<<
-gridDim
-, 
-blockDim
->>>(
-
-41 
-m©X
-.
-	`cuda_g‘M©
-(),
-
-42 
-m©Y
-.
-	`cuda_g‘M©
-(),
-
-43 
-m©R
-.
-	`cuda_g‘M©
-(),
-
-44 
-m©X
-.
-	`width
-(),
-
-45 
-m©Y
-.
-	`height
-());
-
-47 
-m©X
-.
-	`cuda_g‘
-();
-
-48 
-m©R
-.
-	`cuda_g‘
-();
-
-49 
-y
- = 0; y < 2; ++y) {
-
-50 
-x
- = 0; x < 2; ++x) {
-
-51 
-cout
- << "coÜd: (" << 
-x
- << ", " << 
-y
- << ")";
-
-52 
-i
- = 0; i < 5; ++i)
-
-53 
-cout
- << " " << 
-m©X
-.
-	`–em
-(
-x
-, 
-y
-, 
-i
-);
-
-54 
-cout
- << 
-’dl
-;
-
-57 
-cout
- << 
-’dl
-;
-
-58 
-y
- = 0; y < 2; ++y) {
-
-59 
-x
- = 0; x < 2; ++x) {
-
-60 
-cout
- << "coÜd: (" << 
-x
- << ", " << 
-y
- << ")";
-
-61 
-i
- = 0; i < 5; ++i)
-
-62 
-cout
- << " " << 
-m©Y
-.
-	`–em
-(
-x
-, 
-y
-, 
-i
-);
-
-63 
-cout
- << 
-’dl
-;
-
-66 
-cout
- << 
-’dl
-;
-
-67 
-y
- = 0; y < 2; ++y) {
-
-68 
-x
- = 0; x < 2; ++x) {
-
-69 
-cout
- << "coÜd: (" << 
-x
- << ", " << 
-y
- << ")";
-
-70 
-i
- = 0; i < 5; ++i)
-
-71 
-cout
- << " " << 
-m©R
-.
-	`–em
-(
-x
-, 
-y
-, 
-i
-);
-
-72 
-cout
- << 
-’dl
-;
-
-75 
-	}
-}
-
 	@/usr/include/math.h
 
 25 #iâdef 
@@ -88876,8 +77680,8 @@ _LIBC
 .
 1
 /usr/include
-136
-3493
+113
+2708
 include/FVCell1D.h
 include/FVCell2D.h
 include/FVCell3D.h
@@ -88935,7 +77739,6 @@ src/bic.cuda.second_order/polu.cuda.second_order.cu
 src/bic.fvcd/fvcd.cpp
 src/bic.fvcm/fvcm.cpp
 src/bic.polu.clean/polu.clean.cpp
-src/bic.test.parameters/main.cpp
 src/bic.velocity/main.cpp
 src/libfv/CFVMesh2D.cu
 src/libfv/CFVProfile.cpp
@@ -88957,28 +77760,6 @@ src/libfv/Gmsh.cpp
 src/libfv/Parameter.cpp
 src/libfv/Table.cpp
 src/libfv/XML.cpp
-src/old.cuda_test/kernels.cu
-src/old.cuda_test/kernels.cuh
-src/old.cuda_test/parameters.cpp
-src/old.cuda_test/parameters.h
-src/old.cuda_test/polu_cuda.cu
-src/old.cuda_test/polu_cuda.h
-src/old.msh_gen/main.cpp
-src/old.polu.cuda.no_reduction/kernels.cu
-src/old.polu.cuda.no_reduction/kernels.cuh
-src/old.polu.cuda.no_reduction/parameters.cpp
-src/old.polu.cuda.no_reduction/parameters.h
-src/old.polu.cuda.no_reduction/polu_cuda.cu
-src/old.polu.cuda.no_reduction/polu_cuda.h
-src/old.polu.cuda/kernels.cu
-src/old.polu.cuda/kernels.cuh
-src/old.polu.cuda/parameters.cpp
-src/old.polu.cuda/parameters.h
-src/old.polu.cuda/polu_cuda.cu
-src/old.polu.cuda/polu_cuda.h
-src/old.rapidxml_test/main.cpp
-src/old.rapidxml_writer_test/main.cu
-src/old.test_mat/test_mat.cu
 /usr/include/math.h
 /usr/include/stdlib.h
 /usr/include/alloca.h

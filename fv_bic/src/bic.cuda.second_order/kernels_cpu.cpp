@@ -1,11 +1,10 @@
 #include "kernels_cpu.h"
-
 /* Aux function for cpu_compute_vecResult - computes ghost cell centroid */
 void cpu_ghost_coords(CFVMesh2D &mesh, unsigned int edge, double &x, double &y) {
 	// compute lambda
 	unsigned int v1 = mesh.edge_fst_vertex[edge];
 	unsigned int v2 = mesh.edge_snd_vertex[edge];
-
+	asd
 	double v1_x = mesh.vertex_coords.x[v1];
 	double v2_x = mesh.vertex_coords.x[v2];
 	double v1_y = mesh.vertex_coords.y[v1];

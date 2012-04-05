@@ -21,3 +21,4 @@ fvlib/simulations
 fvlib/*/bin
 FVLib.log
 Lib.err
+fv_bic/doc/doxygen

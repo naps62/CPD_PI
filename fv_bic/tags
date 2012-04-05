@@ -1,0 +1,1571 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BLOCK_SIZE_CF	src/old/old.cuda_test/polu_cuda.h	7;"	d
+BLOCK_SIZE_CF	src/old/old.polu.cuda.no_reduction/polu_cuda.h	7;"	d
+BLOCK_SIZE_CF	src/old/old.polu.cuda/polu_cuda.h	7;"	d
+BLOCK_SIZE_RED	src/old/old.cuda_test/polu_cuda.h	8;"	d
+BLOCK_SIZE_RED	src/old/old.polu.cuda.no_reduction/polu_cuda.h	8;"	d
+BLOCK_SIZE_RED	src/old/old.polu.cuda/polu_cuda.h	8;"	d
+BLOCK_SIZE_UP	src/old/old.cuda_test/polu_cuda.h	9;"	d
+BLOCK_SIZE_UP	src/old/old.polu.cuda.no_reduction/polu_cuda.h	9;"	d
+BLOCK_SIZE_UP	src/old/old.polu.cuda/polu_cuda.h	9;"	d
+BackwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitution(FVPoint2D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitution(FVPoint3D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitution(FVPoint4D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitution(FVVect<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint2D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint3D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitutionPivoting(FVPoint4D<double> &u) $/;"	f	class:FVDenseM
+BackwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::BackwardSubstitutionPivoting(FVVect<double> &u) $/;"	f	class:FVDenseM
+BadBaliseFormat	include/FVLib_config.h	/^           BadBaliseFormat=0,$/;"	e	enum:BaliseCode
+BaliseCode	include/FVLib_config.h	/^enum BaliseCode{$/;"	g
+CELL	include/FVLib_config.h	/^           CELL       $/;"	e	enum:FVFile
+CFVArray	include/FVL/CFVArray.h	/^				CFVArray() : FVArray<T>() { }$/;"	f	class:FVL::CFVArray
+CFVArray	include/FVL/CFVArray.h	/^				CFVArray(const CFVArray<T> &copy) : FVArray<T>(copy) { }$/;"	f	class:FVL::CFVArray
+CFVArray	include/FVL/CFVArray.h	/^				CFVArray(const unsigned int size) : FVArray<T>(size) { }$/;"	f	class:FVL::CFVArray
+CFVArray	include/FVL/CFVArray.h	/^		class CFVArray : public FVArray<T> {$/;"	c	namespace:FVL
+CFVMat	include/FVL/CFVMat.h	/^				CFVMat() { }$/;"	f	class:FVL::CFVMat
+CFVMat	include/FVL/CFVMat.h	/^				CFVMat(unsigned int w, unsigned int h, unsigned int size) { alloc(w, h, size);}$/;"	f	class:FVL::CFVMat
+CFVMat	include/FVL/CFVMat.h	/^		class CFVMat {$/;"	c	namespace:FVL
+CFVMesh2D	include/FVL/CFVMesh2D.h	/^	class CFVMesh2D {$/;"	c	namespace:FVL
+CFVMesh2D_cuda	include/FVL/CFVMesh2D.h	/^	struct CFVMesh2D_cuda {$/;"	s	namespace:FVL
+CFVPoints2D	include/FVL/CFVPoints2D.h	/^				CFVPoints2D() { }$/;"	f	class:FVL::CFVPoints2D
+CFVPoints2D	include/FVL/CFVPoints2D.h	/^				CFVPoints2D(const FVL::CFVPoints2D<T> &copy)    { x = CFVArray<T>(copy.x);  y = CFVArray<T>(copy.y); }$/;"	f	class:FVL::CFVPoints2D
+CFVPoints2D	include/FVL/CFVPoints2D.h	/^				CFVPoints2D(const unsigned int size)            { x = CFVArray<T>(size);    y = CFVArray<T>(size); }$/;"	f	class:FVL::CFVPoints2D
+CFVPoints2D	include/FVL/CFVPoints2D.h	/^		class CFVPoints2D {$/;"	c	namespace:FVL
+CFVProfile	include/FVL/CFVProfile.h	/^	class CFVProfile {$/;"	c	namespace:FVL
+CFVProfile	src/libfv/CFVProfile.cpp	/^	CFVProfile::CFVProfile(string msg) {$/;"	f	class:FVL::CFVProfile
+CROSS	src/old/old.msh_gen/main.cpp	/^	CROSS,$/;"	e	enum:MESH_TYPE	file:
+Cell	src/old/old.msh_gen/main.cpp	/^typedef Edge Cell;$/;"	t	file:
+CrossProduct	include/FVPoint3D.h	/^inline FVPoint3D<double> CrossProduct(const FVPoint3D<double> &u, const FVPoint3D<double> &v)$/;"	f
+DIRS	src/Makefile	/^DIRS	:=	$(filter-out $(NO_DIRS), $(DIRS))$/;"	m
+DIRS	src/Makefile	/^DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d)$/;"	m
+Det	include/FVPoint2D.h	/^inline T_ Det(const FVPoint2D<T_> &u,const FVPoint2D<T_> &v)$/;"	f
+Det	include/FVPoint3D.h	/^inline double Det(const FVPoint3D<double> &u, const FVPoint3D<double> &v, const FVPoint3D<double> &w)$/;"	f
+Edge	src/old/old.msh_gen/main.cpp	/^	Edge(unsigned int newid, unsigned int newtype, vector<unsigned int> new_lower_dim_list)$/;"	f	class:Edge
+Edge	src/old/old.msh_gen/main.cpp	/^class Edge {$/;"	c	file:
+EndXMLFile	include/FVLib_config.h	/^           EndXMLFile,$/;"	e	enum:BaliseCode
+EntityCode	include/FVLib_config.h	/^enum EntityCode{$/;"	g
+FVArray	include/FVL/FVArray.h	/^		class FVArray {$/;"	c	namespace:FVL
+FVArray	include/FVL/templates/FVArray.hpp	/^		FVArray<T>::FVArray() {$/;"	f	class:FVL::FVArray
+FVArray	include/FVL/templates/FVArray.hpp	/^		FVArray<T>::FVArray(const FVArray<T> &copy) {$/;"	f	class:FVL::FVArray
+FVArray	include/FVL/templates/FVArray.hpp	/^		FVArray<T>::FVArray(const unsigned int size) {$/;"	f	class:FVL::FVArray
+FVCELL1D	include/FVLib_config.h	/^           FVCELL1D,$/;"	e	enum:EntityCode
+FVCELL2D	include/FVLib_config.h	/^           FVCELL2D,$/;"	e	enum:EntityCode
+FVCELL3D	include/FVLib_config.h	/^           FVCELL3D,$/;"	e	enum:EntityCode
+FVCHAMP	include/FVLib_config.h	10;"	d
+FVCHAMPINT	include/FVLib_config.h	11;"	d
+FVCell1D	include/FVCell1D.h	/^     FVCell1D(){firstVertex=NULL;secondVertex=NULL;label=0;_pos_v=0;}$/;"	f	class:FVCell1D
+FVCell1D	include/FVCell1D.h	/^class FVCell1D$/;"	c
+FVCell2D	include/FVCell2D.h	/^     FVCell2D(){nb_vertex=0;nb_edge=0;label=0;}$/;"	f	class:FVCell2D
+FVCell2D	include/FVCell2D.h	/^class FVCell2D$/;"	c
+FVCell2D_Type	include/FVL/FVEnum.h	/^	enum FVCell2D_Type {$/;"	g	namespace:FVL
+FVCell3D	include/FVCell3D.h	/^     FVCell3D(){nb_vertex=0;nb_face=0;label=0;}$/;"	f	class:FVCell3D
+FVCell3D	include/FVCell3D.h	/^class FVCell3D$/;"	c
+FVDOUBLE_PRECISION	include/FVLib_config.h	8;"	d
+FVDenseM	include/FVDenseM.h	/^FVDenseM<T_>::FVDenseM()$/;"	f	class:FVDenseM
+FVDenseM	include/FVDenseM.h	/^FVDenseM<T_>::FVDenseM(const FVDenseM<T_> &m)$/;"	f	class:FVDenseM
+FVDenseM	include/FVDenseM.h	/^FVDenseM<T_>::FVDenseM(size_t nr, size_t nc)$/;"	f	class:FVDenseM
+FVDenseM	include/FVDenseM.h	/^FVDenseM<T_>::FVDenseM(size_t size)$/;"	f	class:FVDenseM
+FVDenseM	include/FVDenseM.h	/^template<class T_> class FVDenseM : public valarray<T_>$/;"	c
+FVEDGE2D	include/FVLib_config.h	/^           FVEDGE2D,$/;"	e	enum:EntityCode
+FVEDGE3D	include/FVLib_config.h	/^           FVEDGE3D,$/;"	e	enum:EntityCode
+FVENDFILE	include/FVLib_config.h	/^           FVENDFILE  ,$/;"	e	enum:FVFile
+FVERROR	include/FVLib_config.h	/^           FVERROR    ,$/;"	e	enum:FVFile
+FVEdge2D	include/FVEdge2D.h	/^     FVEdge2D(){leftCell=NULL;rightCell=NULL;firstVertex=NULL;secondVertex=NULL;label=0;}$/;"	f	class:FVEdge2D
+FVEdge2D	include/FVEdge2D.h	/^class FVEdge2D$/;"	c
+FVEdge2D_Type	include/FVL/FVEnum.h	/^	enum FVEdge2D_Type {$/;"	g	namespace:FVL
+FVEdge3D	include/FVEdge3D.h	/^     FVEdge3D(){firstVertex=NULL;secondVertex=NULL;nb_vertex=0;label=0;}$/;"	f	class:FVEdge3D
+FVEdge3D	include/FVEdge3D.h	/^class FVEdge3D$/;"	c
+FVErr	include/FVL/FVErr.h	/^	class FVErr {$/;"	c	namespace:FVL
+FVFACE3D	include/FVLib_config.h	/^           FVFACE3D$/;"	e	enum:EntityCode
+FVFace3D	include/FVFace3D.h	/^     FVFace3D(){leftCell=NULL;rightCell=NULL;nb_vertex=0;nb_edge=0;nb_cell=0;label=0;}$/;"	f	class:FVFace3D
+FVFace3D	include/FVFace3D.h	/^class FVFace3D$/;"	c
+FVFile	include/FVLib_config.h	/^enum FVFile{$/;"	g
+FVGaussPoint1D	include/FVGaussPoint.h	/^    FVGaussPoint1D(){ ; }$/;"	f	class:FVGaussPoint1D
+FVGaussPoint1D	include/FVGaussPoint.h	/^class FVGaussPoint1D{$/;"	c
+FVGaussPoint2D	include/FVGaussPoint.h	/^    FVGaussPoint2D() { ; }$/;"	f	class:FVGaussPoint2D
+FVGaussPoint2D	include/FVGaussPoint.h	/^class FVGaussPoint2D{$/;"	c
+FVGaussPoint3D	include/FVGaussPoint.h	/^    FVGaussPoint3D() { ; }$/;"	f	class:FVGaussPoint3D
+FVGaussPoint3D	include/FVGaussPoint.h	/^class FVGaussPoint3D{$/;"	c
+FVL	include/FVL/CFVArray.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/CFVMat.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/CFVMesh2D.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/CFVPoints2D.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/CFVProfile.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVArray.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVEnum.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVErr.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVLog.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVParameters.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVPoint2D.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVXMLReader.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/FVXMLWriter.h	/^namespace FVL {$/;"	n
+FVL	include/FVL/templates/CFVArray.hpp	/^namespace FVL {$/;"	n
+FVL	include/FVL/templates/CFVMat.hpp	/^namespace FVL {$/;"	n
+FVL	include/FVL/templates/FVArray.hpp	/^namespace FVL {$/;"	n
+FVL	include/FVL/templates/FVXMLReader.hpp	/^namespace FVL {$/;"	n
+FVL	include/FVL/templates/FVXMLWriter.hpp	/^namespace FVL {$/;"	n
+FVL	src/libfv/CFVProfile.cpp	/^namespace FVL {$/;"	n	file:
+FVL	src/libfv/FVErr.cpp	/^namespace FVL {$/;"	n	file:
+FVL	src/libfv/FVLog.cpp	/^namespace FVL {$/;"	n	file:
+FVL	src/libfv/FVParameters.cpp	/^namespace FVL {$/;"	n	file:
+FVL	src/libfv/FVXMLReader.cpp	/^namespace FVL {$/;"	n	file:
+FVL	src/libfv/FVXMLWriter.cpp	/^namespace FVL {$/;"	n	file:
+FVLog	include/FVL/FVLog.h	/^	class FVLog : public ofstream {$/;"	c	namespace:FVL
+FVLog	src/libfv/FVLog.cpp	/^	FVLog::FVLog() : ofstream(FV_LOGFILE.c_str(), ofstream::out | FV_LOGMODE ) {$/;"	f	class:FVL::FVLog
+FVLog	src/libfv/FVLog.cpp	/^	FVLog::FVLog(string filename) : ofstream(filename.c_str(), ofstream::out | FV_LOGMODE ) {$/;"	f	class:FVL::FVLog
+FVMesh1D	include/FVMesh1D.h	/^class FVMesh1D$/;"	c
+FVMesh1D	src/libfv/FVMesh1D.cpp	/^FVMesh1D::FVMesh1D()$/;"	f	class:FVMesh1D
+FVMesh1D	src/libfv/FVMesh1D.cpp	/^FVMesh1D::FVMesh1D(const char *filename)$/;"	f	class:FVMesh1D
+FVMesh2D	include/FVMesh2D.h	/^class FVMesh2D$/;"	c
+FVMesh2D	src/libfv/FVMesh2D.cpp	/^FVMesh2D::FVMesh2D()$/;"	f	class:FVMesh2D
+FVMesh2D	src/libfv/FVMesh2D.cpp	/^FVMesh2D::FVMesh2D(const char *filename)$/;"	f	class:FVMesh2D
+FVMesh2Gmsh	src/libfv/Gmsh.cpp	/^void Gmsh::FVMesh2Gmsh(FVMesh1D &m) \/\/ constructor which convert a FVMesh1D into a gmah struct$/;"	f	class:Gmsh
+FVMesh2Gmsh	src/libfv/Gmsh.cpp	/^void Gmsh::FVMesh2Gmsh(FVMesh2D &m) \/\/ constructor which convert a FVMesh2D into a gmah struct $/;"	f	class:Gmsh
+FVMesh2Gmsh	src/libfv/Gmsh.cpp	/^void Gmsh::FVMesh2Gmsh(FVMesh3D &m) \/\/ constructor which convert a FVMesh3D into a gmah struct$/;"	f	class:Gmsh
+FVMesh3D	include/FVMesh3D.h	/^class FVMesh3D$/;"	c
+FVMesh3D	src/libfv/FVMesh3D.cpp	/^FVMesh3D::FVMesh3D()$/;"	f	class:FVMesh3D
+FVMesh3D	src/libfv/FVMesh3D.cpp	/^FVMesh3D::FVMesh3D(const char *filename)$/;"	f	class:FVMesh3D
+FVNOFILE	include/FVLib_config.h	/^           FVNOFILE   ,$/;"	e	enum:FVFile
+FVNULL	include/FVLib_config.h	/^           FVNULL     =  0,$/;"	e	enum:FVFile
+FVOK	include/FVLib_config.h	/^           FVOK       ,$/;"	e	enum:FVFile
+FVPRECISION	include/FVLib_config.h	9;"	d
+FVParameters	include/FVL/FVParameters.h	/^	class FVParameters : public FVXMLReader {$/;"	c	namespace:FVL
+FVParameters	src/libfv/FVParameters.cpp	/^	FVParameters::FVParameters(const string filename) : FVXMLReader(filename) {$/;"	f	class:FVL::FVParameters
+FVPoint1D	include/FVPoint1D.h	/^    FVPoint1D() { x =  T_(0); }$/;"	f	class:FVPoint1D
+FVPoint1D	include/FVPoint1D.h	/^    FVPoint1D(T_ a) { x = a; }$/;"	f	class:FVPoint1D
+FVPoint1D	include/FVPoint1D.h	/^    FVPoint1D(const FVPoint1D<T_> &pt) { x = pt.x;  }$/;"	f	class:FVPoint1D
+FVPoint1D	include/FVPoint1D.h	/^class FVPoint1D{$/;"	c
+FVPoint2D	include/FVL/FVPoint2D.h	/^			FVPoint2D() 						{x = y = T(0); }$/;"	f	class:FVL::FVPoint2D
+FVPoint2D	include/FVL/FVPoint2D.h	/^			FVPoint2D(T new_x, T new_y) 		{x = new_x; y = new_y;}$/;"	f	class:FVL::FVPoint2D
+FVPoint2D	include/FVL/FVPoint2D.h	/^			FVPoint2D(const FVPoint<T> &copy)	{x = copy.x; y = copy.y;}$/;"	f	class:FVL::FVPoint2D
+FVPoint2D	include/FVL/FVPoint2D.h	/^	class FVPoint2D {$/;"	c	namespace:FVL
+FVPoint2D	include/FVPoint2D.h	/^    FVPoint2D() { x = y =  T_(0); }$/;"	f	class:FVPoint2D
+FVPoint2D	include/FVPoint2D.h	/^    FVPoint2D(T_ a, T_ b=T_(0)) { x = a; y = b; }$/;"	f	class:FVPoint2D
+FVPoint2D	include/FVPoint2D.h	/^    FVPoint2D(const FVPoint2D<T_> &pt) { x = pt.x; y = pt.y;  }$/;"	f	class:FVPoint2D
+FVPoint2D	include/FVPoint2D.h	/^class FVPoint2D{$/;"	c
+FVPoint3D	include/FVPoint3D.h	/^    FVPoint3D() { x = y = z = T_(0); }$/;"	f	class:FVPoint3D
+FVPoint3D	include/FVPoint3D.h	/^    FVPoint3D(T_ a, T_ b=T_(0), T_ c=T_(0)) { x = a; y = b; z = c; }$/;"	f	class:FVPoint3D
+FVPoint3D	include/FVPoint3D.h	/^    FVPoint3D(const FVPoint3D<T_> &pt) { x = pt.x; y = pt.y; z = pt.z; }$/;"	f	class:FVPoint3D
+FVPoint3D	include/FVPoint3D.h	/^class FVPoint3D{$/;"	c
+FVPoint4D	include/FVPoint4D.h	/^    FVPoint4D() { x = y = z = t = T_(0); }$/;"	f	class:FVPoint4D
+FVPoint4D	include/FVPoint4D.h	/^    FVPoint4D(T_ a, T_ b=T_(0), T_ c=T_(0),T_  d=T_(0)) { x = a; y = b; z = c; t = d;}$/;"	f	class:FVPoint4D
+FVPoint4D	include/FVPoint4D.h	/^    FVPoint4D(const FVPoint4D<T_> &pt) { x = pt.x; y = pt.y; z = pt.z; t = pt.t; }$/;"	f	class:FVPoint4D
+FVPoint4D	include/FVPoint4D.h	/^class FVPoint4D{$/;"	c
+FVREAD	include/FVLib_config.h	/^           FVREAD     ,$/;"	e	enum:FVFile
+FVRecons1D	include/FVRecons1D.h	/^FVRecons1D(){_ptr_s=NULL;_Vertex1DVect=NULL;_Cell1DVect=NULL;_A=NULL;_Q=NULL;_coef=NULL;_M=NULL;$/;"	f	class:FVRecons1D
+FVRecons1D	include/FVRecons1D.h	/^FVRecons1D(FVStencil *ptr_s)$/;"	f	class:FVRecons1D
+FVRecons1D	include/FVRecons1D.h	/^FVRecons1D(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons1D
+FVRecons1D	include/FVRecons1D.h	/^class FVRecons1D$/;"	c
+FVRecons1D	src/libfv/FVRecons1D.cpp	/^FVRecons1D::FVRecons1D(const FVRecons1D & rec) \/\/ copy constructor$/;"	f	class:FVRecons1D
+FVRecons2D	include/FVRecons2D.h	/^FVRecons2D(){_ptr_s=NULL;_Vertex2DVect=NULL;_Edge2DVect=NULL;_Cell2DVect=NULL;$/;"	f	class:FVRecons2D
+FVRecons2D	include/FVRecons2D.h	/^FVRecons2D(FVStencil *ptr_s)$/;"	f	class:FVRecons2D
+FVRecons2D	include/FVRecons2D.h	/^FVRecons2D(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons2D
+FVRecons2D	include/FVRecons2D.h	/^class FVRecons2D$/;"	c
+FVRecons2D	src/libfv/FVRecons2D.cpp	/^FVRecons2D::FVRecons2D(const FVRecons2D & rec) \/\/ copy constructor$/;"	f	class:FVRecons2D
+FVRecons3D	include/FVRecons3D.h	/^FVRecons3D(){_ptr_s=NULL;_Vertex3DVect=NULL;_Edge3DVect=NULL;_Face3DVect=NULL;_Cell3DVect=NULL;_A=NULL;_Q=NULL;$/;"	f	class:FVRecons3D
+FVRecons3D	include/FVRecons3D.h	/^FVRecons3D(FVStencil *ptr_s)$/;"	f	class:FVRecons3D
+FVRecons3D	include/FVRecons3D.h	/^FVRecons3D(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons3D
+FVRecons3D	include/FVRecons3D.h	/^class FVRecons3D$/;"	c
+FVRecons3D	src/libfv/FVRecons3D.cpp	/^FVRecons3D::FVRecons3D(const FVRecons3D & rec) \/\/ copy constructor$/;"	f	class:FVRecons3D
+FVSkylineM	include/FVSkylineM.h	/^template<class T_> class FVSkylineM : public valarray<T_>$/;"	c
+FVSparseM	include/FVSparseM.h	/^FVSparseM<T_>::FVSparseM()$/;"	f	class:FVSparseM
+FVSparseM	include/FVSparseM.h	/^FVSparseM<T_>::FVSparseM(const FVSparseM<T_> &m)$/;"	f	class:FVSparseM
+FVSparseM	include/FVSparseM.h	/^FVSparseM<T_>::FVSparseM(size_t nr, size_t nc)$/;"	f	class:FVSparseM
+FVSparseM	include/FVSparseM.h	/^FVSparseM<T_>::FVSparseM(size_t size)$/;"	f	class:FVSparseM
+FVSparseM	include/FVSparseM.h	/^template<class T_> class FVSparseM $/;"	c
+FVStencil	include/FVStencil.h	/^     FVStencil(){ $/;"	f	class:FVStencil
+FVStencil	include/FVStencil.h	/^class FVStencil$/;"	c
+FVStencil	src/libfv/FVStencil.cpp	/^FVStencil::FVStencil(const FVStencil &st) \/\/ copy class$/;"	f	class:FVStencil
+FVVERTEX1D	include/FVLib_config.h	/^           FVVERTEX1D,$/;"	e	enum:EntityCode
+FVVERTEX2D	include/FVLib_config.h	/^           FVVERTEX2D,$/;"	e	enum:EntityCode
+FVVERTEX3D	include/FVLib_config.h	/^           FVVERTEX3D,$/;"	e	enum:EntityCode
+FVVect	include/FVVect.h	/^FVVect<T_>::FVVect() : valarray<T_>(0){;}$/;"	f	class:FVVect
+FVVect	include/FVVect.h	/^FVVect<T_>::FVVect(const  size_t n) : valarray<T_>(n){;}$/;"	f	class:FVVect
+FVVect	include/FVVect.h	/^FVVect<T_>::FVVect(const FVVect<T_>& v) : valarray<T_>(v){;}$/;"	f	class:FVVect
+FVVect	include/FVVect.h	/^template<class T_>  class FVVect : public valarray<T_>$/;"	c
+FVVertex1D	include/FVVertex1D.h	/^     FVVertex1D(){leftCell=NULL;rightCell=NULL;label=0;coord=0;normal=0;}$/;"	f	class:FVVertex1D
+FVVertex1D	include/FVVertex1D.h	/^class FVVertex1D$/;"	c
+FVVertex2D	include/FVVertex2D.h	/^     FVVertex2D(){label=0;nb_cell=0;}$/;"	f	class:FVVertex2D
+FVVertex2D	include/FVVertex2D.h	/^class FVVertex2D$/;"	c
+FVVertex3D	include/FVVertex3D.h	/^     FVVertex3D(){label=0;nb_cell=0;}$/;"	f	class:FVVertex3D
+FVVertex3D	include/FVVertex3D.h	/^class FVVertex3D$/;"	c
+FVWRITE	include/FVLib_config.h	/^           FVWRITE    ,$/;"	e	enum:FVFile
+FVWRONGDIM	include/FVLib_config.h	/^           FVWRONGDIM ,$/;"	e	enum:FVFile
+FVXMLReader	include/FVL/FVXMLReader.h	/^	class FVXMLReader : public xml_document<> {$/;"	c	namespace:FVL
+FVXMLReader	src/libfv/FVXMLReader.cpp	/^	FVXMLReader::FVXMLReader(string filename) {$/;"	f	class:FVL::FVXMLReader
+FVXMLWriter	include/FVL/FVXMLWriter.h	/^	class FVXMLWriter : public xml_document<> {$/;"	c	namespace:FVL
+FVXMLWriter	src/libfv/FVXMLWriter.cpp	/^	FVXMLWriter::FVXMLWriter(string filename) {$/;"	f	class:FVL::FVXMLWriter
+FV_CELL	include/FVL/FVEnum.h	/^		FV_CELL = 10,				\/\/\/< regular cell$/;"	e	enum:FVL::FVCell2D_Type
+FV_CHAMP	include/FVL/FVMacros.h	33;"	d
+FV_DEBUG	include/FVL/FVMacros.h	67;"	d
+FV_EDGE	include/FVL/FVEnum.h	/^		FV_EDGE			= 0,		\/\/\/< regular internal edge$/;"	e	enum:FVL::FVEdge2D_Type
+FV_EDGE_DIRICHLET	include/FVL/FVEnum.h	/^		FV_EDGE_DIRICHLET	= 1,	\/\/\/< border edge where dirichlet condition is applied$/;"	e	enum:FVL::FVEdge2D_Type
+FV_EDGE_NEUMMAN	include/FVL/FVEnum.h	/^		FV_EDGE_NEUMMAN	= 2,		\/\/\/< border edge where neumman condition is applied$/;"	e	enum:FVL::FVEdge2D_Type
+FV_ERRFILE	include/FVL/FVMacros.h	53;"	d
+FV_ERROR	include/FVL/FVEnum.h	/^		FV_ERROR		\/\/\/< Error message$/;"	e	enum:FVL::FV_LogType
+FV_LOG	include/FVL/FVEnum.h	/^		FV_LOG,		\/\/\/< Log message$/;"	e	enum:FVL::FV_LogType
+FV_LOGFILE	include/FVL/FVMacros.h	48;"	d
+FV_LOGMODE	include/FVL/FVMacros.h	43;"	d
+FV_LOGMODE_APPEND	include/FVL/FVMacros.h	38;"	d
+FV_LOGMODE_WRITE	include/FVL/FVMacros.h	39;"	d
+FV_LogType	include/FVL/FVEnum.h	/^	enum FV_LogType {$/;"	g	namespace:FVL
+FV_PARAM_DEFAULT_KEY	include/FVL/FVMacros.h	19;"	d
+FV_PRECISION	include/FVL/FVMacros.h	32;"	d
+FV_PROF	include/FVL/FVMacros.h	84;"	d
+FV_PROFILE	include/FVL/FVMacros.h	58;"	d
+FV_READ	include/FVL/FVEnum.h	/^		FV_READ,		\/\/\/< Read only file$/;"	e	enum:FVL::FVio_Type
+FV_READ_WRITE	include/FVL/FVEnum.h	/^		FV_READ_WRITE	\/\/\/< Read and Write file (use with care)$/;"	e	enum:FVL::FVio_Type
+FV_WARNING	include/FVL/FVEnum.h	/^		FV_WARNING,	\/\/\/< Warning message$/;"	e	enum:FVL::FV_LogType
+FV_WRITE	include/FVL/FVEnum.h	/^		FV_WRITE,		\/\/\/< Write only file$/;"	e	enum:FVL::FVio_Type
+FVio	include/FVio.h	/^class FVio$/;"	c
+FVio	src/libfv/FVio.cpp	/^FVio::FVio() $/;"	f	class:FVio
+FVio	src/libfv/FVio.cpp	/^FVio::FVio(const char *filename, int access)$/;"	f	class:FVio
+FVio_Type	include/FVL/FVEnum.h	/^	enum FVio_Type {$/;"	g	namespace:FVL
+ForwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitution(FVPoint2D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitution(FVPoint3D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitution(FVPoint4D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitution(FVVect<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint2D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint3D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitutionPivoting(FVPoint4D<double> &u) $/;"	f	class:FVDenseM
+ForwardSubstitutionPivoting	include/FVDenseM.h	/^void FVDenseM<T_>::ForwardSubstitutionPivoting(FVVect<double> &u) $/;"	f	class:FVDenseM
+GMElement	include/Gmsh.h	/^    GMElement(){label=0;}$/;"	f	class:GMElement
+GMElement	include/Gmsh.h	/^class GMElement$/;"	c
+GMSH_NB_NODE_PER_ELEMENT	include/FVLib_config.h	21;"	d
+GRID_SIZE	src/old/old.cuda_test/polu_cuda.h	10;"	d
+GRID_SIZE	src/old/old.polu.cuda.no_reduction/polu_cuda.h	10;"	d
+GRID_SIZE	src/old/old.polu.cuda/polu_cuda.h	10;"	d
+Gauss	include/FVDenseM.h	/^void  FVDenseM<T_>::Gauss(FVPoint2D<double> &u)$/;"	f	class:FVDenseM
+Gauss	include/FVDenseM.h	/^void  FVDenseM<T_>::Gauss(FVPoint3D<double> &u)$/;"	f	class:FVDenseM
+Gauss	include/FVDenseM.h	/^void  FVDenseM<T_>::Gauss(FVPoint4D<double> &u)$/;"	f	class:FVDenseM
+Gauss	include/FVDenseM.h	/^void  FVDenseM<T_>::Gauss(FVVect<double> &u) $/;"	f	class:FVDenseM
+Gmsh	include/Gmsh.h	/^class Gmsh$/;"	c
+Gmsh	src/libfv/Gmsh.cpp	/^Gmsh::Gmsh()$/;"	f	class:Gmsh
+Gmsh	src/libfv/Gmsh.cpp	/^Gmsh::Gmsh(const char *filename)$/;"	f	class:Gmsh
+Gmsh2FVMesh	src/libfv/FVMesh1D.cpp	/^void FVMesh1D::Gmsh2FVMesh( Gmsh &m) \/\/ convert a Gmsh struct into a FVMesh1D$/;"	f	class:FVMesh1D
+Gmsh2FVMesh	src/libfv/FVMesh2D.cpp	/^void FVMesh2D::Gmsh2FVMesh( Gmsh &m) \/\/ convert a Gmsh struct into a FVMesh2D$/;"	f	class:FVMesh2D
+Gmsh2FVMesh	src/libfv/FVMesh3D.cpp	/^void FVMesh3D::Gmsh2FVMesh( Gmsh &m)  \/\/ convert a Gmsh struct into a FVMesh3D    $/;"	f	class:FVMesh3D
+INF_MIN	include/FVLib_config.h	6;"	d
+LIB	src/libfv/Makefile	/^LIB		=	fv$/;"	m
+LUFactorize	include/FVDenseM.h	/^void FVDenseM<T_>::LUFactorize() $/;"	f	class:FVDenseM
+LUFactorizePivoting	include/FVDenseM.h	/^void FVDenseM<T_>::LUFactorizePivoting() $/;"	f	class:FVDenseM
+MAX_EDGES_PER_CELL	include/FVL/FVMacros.h	26;"	d
+MESH_TYPE	src/old/old.msh_gen/main.cpp	/^enum MESH_TYPE {$/;"	g	file:
+MINUS_ONE_DIM	include/FVLib_config.h	26;"	d
+MINUS_THREE_DIM	include/FVLib_config.h	24;"	d
+MINUS_TWO_DIM	include/FVLib_config.h	25;"	d
+MSH_EXT	src/bic.fvcm/fvcm.cpp	/^	MSH_EXT$/;"	e	enum:__anon1	file:
+Mult	include/FVDenseM.h	/^void FVDenseM<T_>::Mult(const FVVect<T_> &x, FVVect<T_> &y) $/;"	f	class:FVDenseM
+Mult	include/FVSparseM.h	/^void FVSparseM<T_>::Mult(const FVVect<T_> &x, FVVect<T_> &y) const$/;"	f	class:FVSparseM
+NB_CELL_PER_VERTEX_2D	include/FVLib_config.h	13;"	d
+NB_CELL_PER_VERTEX_3D	include/FVLib_config.h	16;"	d
+NB_EDGE_PER_CELL_2D	include/FVLib_config.h	15;"	d
+NB_EDGE_PER_FACE_3D	include/FVLib_config.h	18;"	d
+NB_FACE_PER_CELL_3D	include/FVLib_config.h	20;"	d
+NB_VERTEX_PER_CELL_2D	include/FVLib_config.h	14;"	d
+NB_VERTEX_PER_CELL_3D	include/FVLib_config.h	19;"	d
+NB_VERTEX_PER_FACE_3D	include/FVLib_config.h	17;"	d
+NO_CELL	include/FVL/FVMacros.h	22;"	d
+NO_DIRS	src/Makefile	/^NO_DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d -name "old*")$/;"	m
+NO_INDEX	include/FVSparseM.h	11;"	d
+NO_RIGHT_CELL	include/FVL/FVMacros.h	21;"	d
+NULL_ENTITY	include/FVLib_config.h	/^           NULL_ENTITY=0,$/;"	e	enum:EntityCode
+NoAttribute	include/FVLib_config.h	/^           NoAttribute,$/;"	e	enum:BaliseCode
+NoCloseBalise	include/FVLib_config.h	/^           NoCloseBalise,$/;"	e	enum:BaliseCode
+NoOpenBalise	include/FVLib_config.h	/^           NoOpenBalise,$/;"	e	enum:BaliseCode
+Norm	include/FVPoint1D.h	/^inline double Norm(const FVPoint1D<double> &u)$/;"	f
+Norm	include/FVPoint2D.h	/^inline T_ Norm(const FVPoint2D<T_> &u)$/;"	f
+Norm	include/FVPoint3D.h	/^inline double Norm(const FVPoint3D<double> &u)$/;"	f
+Norm	include/FVPoint4D.h	/^inline double Norm(const FVPoint4D<double> &u)$/;"	f
+OkAttribute	include/FVLib_config.h	/^           OkAttribute$/;"	e	enum:BaliseCode
+OkCloseBalise	include/FVLib_config.h	/^           OkCloseBalise,$/;"	e	enum:BaliseCode
+OkOpenBalise	include/FVLib_config.h	/^           OkOpenBalise,$/;"	e	enum:BaliseCode
+PROF_START	include/FVL/FVMacros.h	87;"	d
+PROF_START	include/FVL/FVMacros.h	92;"	d
+PROF_START_ONCE	include/FVL/FVMacros.h	89;"	d
+PROF_START_ONCE	include/FVL/FVMacros.h	94;"	d
+PROF_STOP	include/FVL/FVMacros.h	88;"	d
+PROF_STOP	include/FVL/FVMacros.h	93;"	d
+PROF_STOP_ONCE	include/FVL/FVMacros.h	90;"	d
+PROF_STOP_ONCE	include/FVL/FVMacros.h	95;"	d
+Parameter	include/Parameter.h	/^Parameter(string &){cout<<"under construction"<<endl;} \/\/ take the first parameter section$/;"	f	class:Parameter
+Parameter	include/Parameter.h	/^class Parameter$/;"	c
+Parameter	src/libfv/Parameter.cpp	/^Parameter::Parameter(const char * filename)$/;"	f	class:Parameter
+Parameters	src/bic.polu.clean/polu.clean.cpp	/^Parameters;$/;"	t	typeref:struct:_parameters	file:
+Parameters	src/bic.velocity/main.cpp	/^struct Parameters$/;"	s	file:
+Parameters	src/old/old.cuda_test/parameters.h	/^Parameters;$/;"	t	typeref:struct:_parameters
+Parameters	src/old/old.polu.cuda.no_reduction/parameters.h	/^Parameters;$/;"	t	typeref:struct:_parameters
+Parameters	src/old/old.polu.cuda/parameters.h	/^Parameters;$/;"	t	typeref:struct:_parameters
+PartialBackwardSubstitution	include/FVDenseM.h	/^void FVDenseM<T_>::PartialBackwardSubstitution( FVVect<double> & u)$/;"	f	class:FVDenseM
+QRFactorize	include/FVDenseM.h	/^void FVDenseM<T_>::QRFactorize(FVDenseM<double> &q)   $/;"	f	class:FVDenseM
+RAPIDXML_ALIGNMENT	include/rapidxml/rapidxml.hpp	133;"	d
+RAPIDXML_DYNAMIC_POOL_SIZE	include/rapidxml/rapidxml.hpp	125;"	d
+RAPIDXML_HPP_INCLUDED	include/rapidxml/rapidxml.hpp	2;"	d
+RAPIDXML_ITERATORS_HPP_INCLUDED	include/rapidxml/rapidxml_iterators.hpp	2;"	d
+RAPIDXML_PARSE_ERROR	include/rapidxml/rapidxml.hpp	2595;"	d
+RAPIDXML_PARSE_ERROR	include/rapidxml/rapidxml.hpp	30;"	d
+RAPIDXML_PRINT_HPP_INCLUDED	include/rapidxml/rapidxml_print.hpp	2;"	d
+RAPIDXML_STATIC_POOL_SIZE	include/rapidxml/rapidxml.hpp	118;"	d
+RAPIDXML_UTILS_HPP_INCLUDED	include/rapidxml/rapidxml_utils.hpp	2;"	d
+REVERSE_TRIANGLE	src/old/old.msh_gen/main.cpp	/^	REVERSE_TRIANGLE,$/;"	e	enum:MESH_TYPE	file:
+ROOTD	src/Makefile	/^ROOTD	=	..$/;"	m
+ROOTD	src/bic.cuda.second_order/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/bic.fvcd/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/bic.fvcm/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/bic.polu.clean/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/bic.velocity/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/libfv/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/bic.test.parameters/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.cuda_test/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.msh_gen/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.polu.cuda.no_reduction/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.polu.cuda/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.rapidxml_test/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.rapidxml_writer_test/Makefile	/^ROOTD	=	..\/..$/;"	m
+ROOTD	src/old/old.test_mat/Makefile	/^ROOTD	=	..\/..$/;"	m
+SQUARE	src/old/old.msh_gen/main.cpp	/^	SQUARE,$/;"	e	enum:MESH_TYPE	file:
+SUP_MAX	include/FVLib_config.h	7;"	d
+SparseNode	include/FVSparseM.h	/^    SparseNode(){index=0;pos=0;}$/;"	f	class:SparseNode
+SparseNode	include/FVSparseM.h	/^class SparseNode$/;"	c
+SparseXML	include/XML.h	/^class SparseXML $/;"	c
+SparseXML	src/libfv/XML.cpp	/^SparseXML::SparseXML()$/;"	f	class:SparseXML
+SparseXML	src/libfv/XML.cpp	/^SparseXML::SparseXML(const char * filename,string &xml)$/;"	f	class:SparseXML
+SparseXML	src/libfv/XML.cpp	/^SparseXML::SparseXML(string &xml_string)$/;"	f	class:SparseXML
+StringMap	include/FVLib_config.h	/^typedef  std::map<std::string,std::string> StringMap; $/;"	t
+TRIANGLE	src/old/old.msh_gen/main.cpp	/^	TRIANGLE,$/;"	e	enum:MESH_TYPE	file:
+Tab_index	include/FVSparseM.h	/^typedef std::vector<SparseNode> Tab_index;$/;"	t
+Table	include/Table.h	/^Table(string &,const char *){cout<<"under construction"<<endl;}\/\/take the parameter section with name$/;"	f	class:Table
+Table	include/Table.h	/^class Table$/;"	c
+Table	src/libfv/Table.cpp	/^Table::Table(const char *filename,const char *functionname)$/;"	f	class:Table
+TransMult	include/FVDenseM.h	/^void FVDenseM<T_>::TransMult(const FVVect<T_> &x, FVVect<T_> &y) $/;"	f	class:FVDenseM
+TransMult	include/FVSparseM.h	/^void FVSparseM<T_>::TransMult(const FVVect<T_> &x, FVVect<T_> &y) const$/;"	f	class:FVSparseM
+UNKNOWN_EXT	src/bic.fvcm/fvcm.cpp	/^	UNKNOWN_EXT = 0,$/;"	e	enum:__anon1	file:
+UNUSED	include/FVGlobal.h	7;"	d
+UNUSED	include/XML.h	16;"	d
+VERTEX	include/FVLib_config.h	/^           VERTEX     ,$/;"	e	enum:FVFile
+Vertex	src/old/old.msh_gen/main.cpp	/^	Vertex(unsigned int newid, int newtype, double newx, double newy)$/;"	f	class:Vertex
+Vertex	src/old/old.msh_gen/main.cpp	/^class Vertex {$/;"	c	file:
+XML_EXT	src/bic.fvcm/fvcm.cpp	/^	XML_EXT,$/;"	e	enum:__anon1	file:
+_A	include/FVRecons1D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons1D
+_A	include/FVRecons2D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons2D
+_A	include/FVRecons3D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons3D
+_CUDA_FVLIB	include/FVL/CFVLib.h	14;"	d
+_Cell1DVect	include/FVRecons1D.h	/^FVVect<double> *_Vertex1DVect,*_Cell1DVect;  $/;"	m	class:FVRecons1D
+_Cell2DVect	include/FVRecons2D.h	/^FVVect<double> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  $/;"	m	class:FVRecons2D
+_Cell3DVect	include/FVRecons3D.h	/^FVVect<double> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    $/;"	m	class:FVRecons3D
+_D	include/FVL/FVMacros.h	72;"	d
+_D	include/FVL/FVMacros.h	74;"	d
+_DEBUG	include/FVL/FVMacros.h	69;"	d
+_Edge2DVect	include/FVRecons2D.h	/^FVVect<double> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  $/;"	m	class:FVRecons2D
+_Edge3DVect	include/FVRecons3D.h	/^FVVect<double> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    $/;"	m	class:FVRecons3D
+_FVDenseM	include/FVDenseM.h	4;"	d
+_FVGAUSSPOINT_H	include/FVGaussPoint.h	4;"	d
+_FVGLOBAL	include/FVGlobal.h	2;"	d
+_FVLIB_	include/FVLib.h	3;"	d
+_FVLIB_Config	include/FVLib_config.h	3;"	d
+_FVMESH1D	include/FVMesh1D.h	5;"	d
+_FVMESH2D	include/FVMesh2D.h	4;"	d
+_FVMESH3D	include/FVMesh3D.h	4;"	d
+_FVRECONS1D	include/FVRecons1D.h	4;"	d
+_FVRECONS2D	include/FVRecons2D.h	4;"	d
+_FVRECONS3D	include/FVRecons3D.h	4;"	d
+_FVSkylineM	include/FVSkylineM.h	4;"	d
+_FVSparseM	include/FVSparseM.h	4;"	d
+_FVVect	include/FVVect.h	4;"	d
+_Face3DVect	include/FVRecons3D.h	/^FVVect<double> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    $/;"	m	class:FVRecons3D
+_GMSH	include/Gmsh.h	5;"	d
+_HPP_CFVARRAY	include/FVL/templates/CFVArray.hpp	11;"	d
+_HPP_CFVMAT	include/FVL/templates/CFVMat.hpp	16;"	d
+_HPP_FVARRAY	include/FVL/templates/FVArray.hpp	11;"	d
+_HPP_FVXMLREADER	include/FVL/templates/FVXMLReader.hpp	15;"	d
+_HPP_FVXMLWRITER	include/FVL/templates/FVXMLWriter.hpp	15;"	d
+_H_CFVARRAY	include/FVL/CFVArray.h	9;"	d
+_H_CFVMAT	include/FVL/CFVMat.h	9;"	d
+_H_CPROFILE	include/FVL/CFVProfile.h	13;"	d
+_H_CUDA_FVMESH2D	include/FVL/CFVMesh2D.h	9;"	d
+_H_CUDA_FVPOINTS2D	include/FVL/CFVPoints2D.h	9;"	d
+_H_FVARRAY	include/FVL/FVArray.h	9;"	d
+_H_FVENUM	include/FVL/FVEnum.h	11;"	d
+_H_FVERR	include/FVL/FVErr.h	11;"	d
+_H_FVGLOBAL	include/FVL/FVGlobal.h	11;"	d
+_H_FVLIB	include/FVL/FVLib.h	14;"	d
+_H_FVLOG	include/FVL/FVLog.h	11;"	d
+_H_FVMACROS	include/FVL/FVMacros.h	9;"	d
+_H_FVPARAMETERS	include/FVL/FVParameters.h	9;"	d
+_H_FVPOINT2D	include/FVL/FVPoint2D.h	14;"	d
+_H_FVXMLREADER	include/FVL/FVXMLReader.h	19;"	d
+_H_FVXMLWRITER	include/FVL/FVXMLWriter.h	13;"	d
+_H_KERNELS_CPU	src/bic.cuda.second_order/kernels_cpu.h	2;"	d
+_H_PARAMETERS	src/old/old.cuda_test/parameters.h	2;"	d
+_H_PARAMETERS	src/old/old.polu.cuda.no_reduction/parameters.h	2;"	d
+_H_PARAMETERS	src/old/old.polu.cuda/parameters.h	2;"	d
+_M	include/FVRecons1D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons1D
+_M	include/FVRecons2D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons2D
+_M	include/FVRecons3D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons3D
+_Ncoef	include/FVRecons1D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons1D
+_Ncoef	include/FVRecons2D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons2D
+_Ncoef	include/FVRecons3D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons3D
+_Parameter	include/Parameter.h	4;"	d
+_Q	include/FVRecons1D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons1D
+_Q	include/FVRecons2D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons2D
+_Q	include/FVRecons3D.h	/^FVDenseM<double> *_A,*_Q;$/;"	m	class:FVRecons3D
+_Table	include/Table.h	4;"	d
+_UNUSED	include/rapidxml/rapidxml.hpp	4;"	d
+_UNUSED	include/rapidxml/rapidxml_print.hpp	4;"	d
+_Vertex1DVect	include/FVRecons1D.h	/^FVVect<double> *_Vertex1DVect,*_Cell1DVect;  $/;"	m	class:FVRecons1D
+_Vertex2DVect	include/FVRecons2D.h	/^FVVect<double> *_Vertex2DVect,*_Edge2DVect,*_Cell2DVect;  $/;"	m	class:FVRecons2D
+_Vertex3DVect	include/FVRecons3D.h	/^FVVect<double> *_Vertex3DVect,*_Edge3DVect,*_Face3DVect,*_Cell3DVect;    $/;"	m	class:FVRecons3D
+_XML	include/XML.h	4;"	d
+__FVCELL1D_H	include/FVCell1D.h	2;"	d
+__FVCELL2D_H	include/FVCell2D.h	2;"	d
+__FVCELL3D_H	include/FVCell3D.h	2;"	d
+__FVEDGE2D_H	include/FVEdge2D.h	2;"	d
+__FVEDGE3D_H	include/FVEdge3D.h	2;"	d
+__FVFACE3D_H	include/FVFace3D.h	2;"	d
+__FVIO_H	include/FVio.h	2;"	d
+__FVPOINT1D_H	include/FVPoint1D.h	2;"	d
+__FVPOINT2D_H	include/FVPoint2D.h	2;"	d
+__FVPOINT3D_H	include/FVPoint3D.h	2;"	d
+__FVPOINT4D_H	include/FVPoint4D.h	2;"	d
+__FVSTENCIL_H	include/FVStencil.h	2;"	d
+__FVVERTEX1D_H	include/FVVertex1D.h	2;"	d
+__FVVERTEX2D_H	include/FVVertex2D.h	2;"	d
+__FVVERTEX3D_H	include/FVVertex3D.h	2;"	d
+_access	include/FVio.h	/^    size_t          _access;$/;"	m	class:FVio
+_attribute	include/XML.h	/^StringMap _attribute;$/;"	m	class:SparseXML
+_boundary_edge	include/FVMesh2D.h	/^    vector<FVEdge2D *>  _boundary_edge;  $/;"	m	class:FVMesh2D
+_boundary_face	include/FVMesh3D.h	/^    vector<FVFace3D *>  _boundary_face;$/;"	m	class:FVMesh3D
+_boundary_vertex	include/FVMesh1D.h	/^    vector<FVVertex1D *>  _boundary_vertex;$/;"	m	class:FVMesh1D
+_cell	include/FVMesh1D.h	/^    vector<FVCell1D>  _cell;   $/;"	m	class:FVMesh1D
+_cell	include/FVMesh2D.h	/^    vector<FVCell2D>  _cell;   $/;"	m	class:FVMesh2D
+_cell	include/FVMesh3D.h	/^    vector<FVCell3D>   _cell;   $/;"	m	class:FVMesh3D
+_coef	include/FVRecons1D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons1D
+_coef	include/FVRecons2D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons2D
+_coef	include/FVRecons3D.h	/^FVVect<double> *_coef,*_M;$/;"	m	class:FVRecons3D
+_current_position	include/XML.h	/^size_t  _current_position, _data_position,_data_length;$/;"	m	class:SparseXML
+_data_length	include/XML.h	/^size_t  _current_position, _data_position,_data_length;$/;"	m	class:SparseXML
+_data_position	include/XML.h	/^size_t  _current_position, _data_position,_data_length;$/;"	m	class:SparseXML
+_degree	include/FVRecons1D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons1D
+_degree	include/FVRecons2D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons2D
+_degree	include/FVRecons3D.h	/^size_t _degree,_Ncoef;$/;"	m	class:FVRecons3D
+_dim	include/FVMesh1D.h	/^    size_t _nb_vertex,_nb_cell,_dim,_nb_boundary_vertex;$/;"	m	class:FVMesh1D
+_dim	include/FVMesh2D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_boundary_edge,_dim;$/;"	m	class:FVMesh2D
+_dim	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_dim	include/Gmsh.h	/^    size_t _nb_node,_nb_element,_dim,_nb_save;    $/;"	m	class:Gmsh
+_edge	include/FVMesh2D.h	/^    vector<FVEdge2D>  _edge;  $/;"	m	class:FVMesh2D
+_edge	include/FVMesh3D.h	/^    vector<FVEdge3D>   _edge;     $/;"	m	class:FVMesh3D
+_element	include/Gmsh.h	/^    vector<GMElement> _element;$/;"	m	class:Gmsh
+_element	include/XML.h	/^string _element;$/;"	m	class:SparseXML
+_empty_element	include/XML.h	/^bool _empty_element;$/;"	m	class:SparseXML
+_evalMean	src/libfv/FVRecons1D.cpp	/^double FVRecons1D::_evalMean(void *ptr,size_t type,size_t alpha)$/;"	f	class:FVRecons1D
+_evalMean	src/libfv/FVRecons2D.cpp	/^double FVRecons2D::_evalMean(void *ptr,size_t type,size_t alpha1,size_t alpha2)$/;"	f	class:FVRecons2D
+_evalMean	src/libfv/FVRecons3D.cpp	/^double FVRecons3D::_evalMean(void *ptr,size_t type,size_t alpha1,size_t alpha2,size_t alpha3)$/;"	f	class:FVRecons3D
+_face	include/FVMesh3D.h	/^    vector<FVFace3D>   _face;   $/;"	m	class:FVMesh3D
+_field_name	include/FVio.h	/^    string          _field_name;$/;"	m	class:FVio
+_geometry	include/FVStencil.h	/^vector<void*>  *_geometry ; $/;"	m	class:FVStencil
+_if	include/Gmsh.h	/^    ifstream  _if;$/;"	m	class:Gmsh
+_if_is_open	include/Gmsh.h	/^    bool _if_is_open,_of_is_open;$/;"	m	class:Gmsh
+_is_open	include/FVio.h	/^    bool _is_open; $/;"	m	class:FVio
+_key	include/XML.h	/^string _key;$/;"	m	class:SparseXML
+_level	include/XML.h	/^size_t _level;$/;"	m	class:SparseXML
+_max1	include/Table.h	/^double _max1,_max2,_max3;$/;"	m	class:Table
+_max2	include/Table.h	/^double _max1,_max2,_max3;$/;"	m	class:Table
+_max3	include/Table.h	/^double _max1,_max2,_max3;$/;"	m	class:Table
+_min1	include/Table.h	/^double _min1,_min2,_min3;$/;"	m	class:Table
+_min2	include/Table.h	/^double _min1,_min2,_min3;$/;"	m	class:Table
+_min3	include/Table.h	/^double _min1,_min2,_min3;$/;"	m	class:Table
+_name	include/FVMesh1D.h	/^    string _xml,_name;$/;"	m	class:FVMesh1D
+_name	include/FVMesh2D.h	/^    string _xml,_name;$/;"	m	class:FVMesh2D
+_name	include/FVMesh3D.h	/^    string _xml,_name;$/;"	m	class:FVMesh3D
+_name	include/FVio.h	/^    string _xml,_name;$/;"	m	class:FVio
+_name	include/Gmsh.h	/^    string _name;$/;"	m	class:Gmsh
+_nb_boundary_edge	include/FVMesh2D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_boundary_edge,_dim;$/;"	m	class:FVMesh2D
+_nb_boundary_face	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_nb_boundary_vertex	include/FVMesh1D.h	/^    size_t _nb_vertex,_nb_cell,_dim,_nb_boundary_vertex;$/;"	m	class:FVMesh1D
+_nb_cell	include/FVMesh1D.h	/^    size_t _nb_vertex,_nb_cell,_dim,_nb_boundary_vertex;$/;"	m	class:FVMesh1D
+_nb_cell	include/FVMesh2D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_boundary_edge,_dim;$/;"	m	class:FVMesh2D
+_nb_cell	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_nb_edge	include/FVMesh2D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_boundary_edge,_dim;$/;"	m	class:FVMesh2D
+_nb_edge	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_nb_element	include/Gmsh.h	/^    size_t _nb_node,_nb_element,_dim,_nb_save;    $/;"	m	class:Gmsh
+_nb_face	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_nb_geometry	include/FVStencil.h	/^size_t _nb_geometry,_pos;$/;"	m	class:FVStencil
+_nb_node	include/Gmsh.h	/^    size_t _nb_node,_nb_element,_dim,_nb_save;    $/;"	m	class:Gmsh
+_nb_pts1	include/Table.h	/^size_t _nb_pts1,_nb_pts2,_nb_pts3;$/;"	m	class:Table
+_nb_pts2	include/Table.h	/^size_t _nb_pts1,_nb_pts2,_nb_pts3;$/;"	m	class:Table
+_nb_pts3	include/Table.h	/^size_t _nb_pts1,_nb_pts2,_nb_pts3;$/;"	m	class:Table
+_nb_save	include/Gmsh.h	/^    size_t _nb_node,_nb_element,_dim,_nb_save;    $/;"	m	class:Gmsh
+_nb_vertex	include/FVMesh1D.h	/^    size_t _nb_vertex,_nb_cell,_dim,_nb_boundary_vertex;$/;"	m	class:FVMesh1D
+_nb_vertex	include/FVMesh2D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_boundary_edge,_dim;$/;"	m	class:FVMesh2D
+_nb_vertex	include/FVMesh3D.h	/^    size_t _nb_vertex,_nb_cell,_nb_edge,_nb_face,_nb_boundary_face,_dim;$/;"	m	class:FVMesh3D
+_nbvec	include/FVio.h	/^    size_t _nbvec,_sizevec;$/;"	m	class:FVio
+_node	include/Gmsh.h	/^    vector<FVVertex3D> _node;$/;"	m	class:Gmsh
+_of	include/FVio.h	/^    ofstream        _of;$/;"	m	class:FVio
+_of	include/Gmsh.h	/^    ofstream _of;$/;"	m	class:Gmsh
+_of_is_open	include/Gmsh.h	/^    bool _if_is_open,_of_is_open;$/;"	m	class:Gmsh
+_param	include/Parameter.h	/^StringMap _param;$/;"	m	class:Parameter
+_parameters	src/bic.polu.clean/polu.clean.cpp	/^struct _parameters$/;"	s	file:
+_parameters	src/old/old.cuda_test/parameters.h	/^struct _parameters$/;"	s
+_parameters	src/old/old.polu.cuda.no_reduction/parameters.h	/^struct _parameters$/;"	s
+_parameters	src/old/old.polu.cuda/parameters.h	/^struct _parameters$/;"	s
+_pos	include/FVStencil.h	/^size_t _nb_geometry,_pos;$/;"	m	class:FVStencil
+_pos_v	include/FVCell1D.h	/^size_t _pos_v;$/;"	m	class:FVCell1D
+_ptr_s	include/FVRecons1D.h	/^FVStencil * _ptr_s;$/;"	m	class:FVRecons1D
+_ptr_s	include/FVRecons2D.h	/^FVStencil * _ptr_s;$/;"	m	class:FVRecons2D
+_ptr_s	include/FVRecons3D.h	/^FVStencil * _ptr_s;$/;"	m	class:FVRecons3D
+_ref_point	include/FVRecons1D.h	/^FVPoint1D<double> _ref_point;$/;"	m	class:FVRecons1D
+_ref_point	include/FVRecons2D.h	/^FVPoint2D<double> _ref_point;$/;"	m	class:FVRecons2D
+_ref_point	include/FVRecons3D.h	/^FVPoint3D<double> _ref_point;$/;"	m	class:FVRecons3D
+_ref_val	include/FVRecons1D.h	/^double _ref_val;$/;"	m	class:FVRecons1D
+_ref_val	include/FVRecons2D.h	/^double _ref_val;$/;"	m	class:FVRecons2D
+_ref_val	include/FVRecons3D.h	/^double _ref_val;$/;"	m	class:FVRecons3D
+_reference_geometry	include/FVStencil.h	/^void*  _reference_geometry;$/;"	m	class:FVStencil
+_reference_type	include/FVStencil.h	/^size_t _reference_type;$/;"	m	class:FVStencil
+_sizevec	include/FVio.h	/^    size_t _nbvec,_sizevec;$/;"	m	class:FVio
+_spxml	include/FVMesh1D.h	/^    SparseXML _spxml;$/;"	m	class:FVMesh1D
+_spxml	include/FVMesh2D.h	/^    SparseXML _spxml;$/;"	m	class:FVMesh2D
+_spxml	include/FVMesh3D.h	/^    SparseXML _spxml;$/;"	m	class:FVMesh3D
+_spxml	include/FVio.h	/^    SparseXML _spxml;$/;"	m	class:FVio
+_table	include/Table.h	/^valarray<double> _table;  $/;"	m	class:Table
+_time	include/FVio.h	/^    double _time;$/;"	m	class:FVio
+_type	include/FVStencil.h	/^vector<size_t> *_type; $/;"	m	class:FVStencil
+_value	include/XML.h	/^string _value;$/;"	m	class:SparseXML
+_var1	include/Table.h	/^string _var1,_var2,_var3;$/;"	m	class:Table
+_var2	include/Table.h	/^string _var1,_var2,_var3;$/;"	m	class:Table
+_var3	include/Table.h	/^string _var1,_var2,_var3;$/;"	m	class:Table
+_vertex	include/FVMesh1D.h	/^    vector<FVVertex1D> _vertex;$/;"	m	class:FVMesh1D
+_vertex	include/FVMesh2D.h	/^    vector<FVVertex2D> _vertex;$/;"	m	class:FVMesh2D
+_vertex	include/FVMesh3D.h	/^    vector<FVVertex3D> _vertex;$/;"	m	class:FVMesh3D
+_xml	include/FVMesh1D.h	/^    string _xml,_name;$/;"	m	class:FVMesh1D
+_xml	include/FVMesh2D.h	/^    string _xml,_name;$/;"	m	class:FVMesh2D
+_xml	include/FVMesh3D.h	/^    string _xml,_name;$/;"	m	class:FVMesh3D
+_xml	include/FVio.h	/^    string _xml,_name;$/;"	m	class:FVio
+_xml_string	include/XML.h	/^string * _xml_string;  $/;"	m	class:SparseXML
+a	include/FVDenseM.h	/^valarray<T_>  a;  \/\/ the place for the matrice$/;"	m	class:FVDenseM
+a	include/FVSparseM.h	/^std::vector<T_>  a;  \/\/ the place for the matrice$/;"	m	class:FVSparseM
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVCell1D *ptr )$/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVCell2D *ptr )$/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVCell3D *ptr )$/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVEdge2D *ptr )$/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVEdge3D *ptr )  $/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVFace3D *ptr )  $/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVVertex1D *ptr )$/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVVertex2D *ptr ) $/;"	f	class:FVStencil
+addStencil	src/libfv/FVStencil.cpp	/^void FVStencil::addStencil(FVVertex3D *ptr )$/;"	f	class:FVStencil
+addValue	include/FVDenseM.h	/^void FVDenseM<T_>::addValue(size_t i, size_t j, const T_ &val) $/;"	f	class:FVDenseM
+addValue	include/FVSparseM.h	/^void FVSparseM<T_>::addValue(size_t i, size_t j, const T_ &val)$/;"	f	class:FVSparseM
+add_attribute	include/FVL/templates/FVXMLWriter.hpp	/^	void FVXMLWriter::add_attribute(xml_node<> *node, string name, T value) {$/;"	f	class:FVL::FVXMLWriter
+align	include/rapidxml/rapidxml.hpp	/^        char *align(char *ptr)$/;"	f	class:rapidxml::memory_pool
+alloc	include/FVL/templates/CFVMat.hpp	/^	void CFVMat<T>::alloc(unsigned int w, unsigned int h, unsigned int size) {$/;"	f	class:FVL::CFVMat
+alloc	include/FVL/templates/FVArray.hpp	/^		void FVArray<T>::alloc(unsigned int size) {$/;"	f	class:FVL::FVArray
+alloc_func	include/rapidxml/rapidxml.hpp	/^        typedef void *(alloc_func)(std::size_t);       \/\/ Type of user-defined function used to allocate memory$/;"	t	class:rapidxml::memory_pool
+allocate_aligned	include/rapidxml/rapidxml.hpp	/^        void *allocate_aligned(std::size_t size)$/;"	f	class:rapidxml::memory_pool
+allocate_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *allocate_attribute(const Ch *name = 0, const Ch *value = 0, $/;"	f	class:rapidxml::memory_pool
+allocate_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *allocate_node(node_type type, $/;"	f	class:rapidxml::memory_pool
+allocate_raw	include/rapidxml/rapidxml.hpp	/^        char *allocate_raw(std::size_t size)$/;"	f	class:rapidxml::memory_pool
+allocate_string	include/rapidxml/rapidxml.hpp	/^        Ch *allocate_string(const Ch *source = 0, std::size_t size = 0)$/;"	f	class:rapidxml::memory_pool
+alpha1D	src/libfv/FVRecons1D.cpp	/^FVPoint1D<size_t> alpha1D(size_t k)$/;"	f
+alpha2D	src/libfv/FVRecons2D.cpp	/^FVPoint2D<size_t> alpha2D(size_t k)$/;"	f
+alpha3D	src/libfv/FVRecons3D.cpp	/^FVPoint3D<size_t> alpha3D(size_t k1)\/\/k1 start to 0$/;"	f
+append	include/FVL/templates/FVXMLWriter.hpp	/^	void FVXMLWriter::append(CFVArray<T> &vec, double time, string name) {$/;"	f	class:FVL::FVXMLWriter
+append_attribute	include/rapidxml/rapidxml.hpp	/^        void append_attribute(xml_attribute<Ch> *attribute)$/;"	f	class:rapidxml::xml_node
+append_node	include/rapidxml/rapidxml.hpp	/^        void append_node(xml_node<Ch> *child)$/;"	f	class:rapidxml::xml_node
+area	include/FVCell2D.h	/^double perimeter,area;$/;"	m	class:FVCell2D
+area	include/FVFace3D.h	/^double perimeter,area;$/;"	m	class:FVFace3D
+arr	include/FVL/FVArray.h	/^				T *arr;					\/\/\/< Ptr to array memory$/;"	m	class:FVL::FVArray
+arr_size	include/FVL/FVArray.h	/^				unsigned int arr_size;	\/\/\/< number of elems allocated$/;"	m	class:FVL::FVArray
+attribute_iterator	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator()$/;"	f	class:rapidxml::attribute_iterator
+attribute_iterator	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator(xml_node<Ch> *node)$/;"	f	class:rapidxml::attribute_iterator
+attribute_iterator	include/rapidxml/rapidxml_iterators.hpp	/^    class attribute_iterator$/;"	c	namespace:rapidxml
+attribute_name_pred	include/rapidxml/rapidxml.hpp	/^        struct attribute_name_pred$/;"	s	class:rapidxml::xml_document
+attribute_value_pred	include/rapidxml/rapidxml.hpp	/^        struct attribute_value_pred$/;"	s	class:rapidxml::xml_document
+attribute_value_pure_pred	include/rapidxml/rapidxml.hpp	/^        struct attribute_value_pure_pred$/;"	s	class:rapidxml::xml_document
+beginBoundaryEdge	include/FVMesh2D.h	/^     FVEdge2D* beginBoundaryEdge()$/;"	f	class:FVMesh2D
+beginBoundaryFace	include/FVMesh3D.h	/^     FVFace3D* beginBoundaryFace()$/;"	f	class:FVMesh3D
+beginBoundaryVertex	include/FVMesh1D.h	/^     FVVertex1D* beginBoundaryVertex()$/;"	f	class:FVMesh1D
+beginCell	include/FVMesh1D.h	/^     FVCell1D* beginCell(){pos_c=0;if(pos_c<_nb_cell) return&(_cell[0]);else return(NULL);};$/;"	f	class:FVMesh1D
+beginCell	include/FVMesh2D.h	/^     FVCell2D* beginCell(){pos_c=0;if(pos_c<_nb_cell) return&(_cell[0]);else return(NULL);}$/;"	f	class:FVMesh2D
+beginCell	include/FVMesh3D.h	/^     FVCell3D* beginCell(){pos_c=0;if(pos_c<_nb_cell) return&(_cell[0]);else return(NULL);}$/;"	f	class:FVMesh3D
+beginCell	include/FVVertex2D.h	/^     FVCell2D* beginCell(){pos_c=0;if(pos_c<nb_cell) return(cell[0]);else return(NULL);};$/;"	f	class:FVVertex2D
+beginCell	include/FVVertex3D.h	/^     FVCell3D* beginCell(){pos_c=0;if(pos_c<nb_cell) return(cell[0]);else return(NULL);};$/;"	f	class:FVVertex3D
+beginEdge	include/FVCell2D.h	/^     FVEdge2D* beginEdge(){pos_e=0;if(pos_e<nb_edge) return(edge[0]);else return(NULL);};$/;"	f	class:FVCell2D
+beginEdge	include/FVFace3D.h	/^     FVEdge3D* beginEdge(){pos_e=0;if(pos_e<nb_edge) return(edge[0]);else return(NULL);};$/;"	f	class:FVFace3D
+beginEdge	include/FVMesh2D.h	/^     FVEdge2D* beginEdge(){pos_e=0;if(pos_e<_nb_edge) return&(_edge[0]);else return(NULL);}$/;"	f	class:FVMesh2D
+beginEdge	include/FVMesh3D.h	/^     FVEdge3D* beginEdge(){pos_e=0;if(pos_e<_nb_edge) return&(_edge[0]);else return(NULL);}$/;"	f	class:FVMesh3D
+beginElement	include/FVVect.h	/^    T_ beginElement(){pos=0;if(pos< this->size()) return((*this)[0]);else return(NULL);}$/;"	f	class:FVVect
+beginFace	include/FVCell3D.h	/^     FVFace3D* beginFace(){pos_f=0;if(pos_f<nb_face) return(face[0]);else return(NULL);};$/;"	f	class:FVCell3D
+beginFace	include/FVMesh3D.h	/^     FVFace3D* beginFace(){pos_f=0;if(pos_f<_nb_face) return&(_face[0]);else return(NULL);}$/;"	f	class:FVMesh3D
+beginGeometry	include/FVStencil.h	/^     void* beginGeometry(){_pos=0;if(_pos<_nb_geometry) return((*_geometry)[0]);else return(NULL);}$/;"	f	class:FVStencil
+beginVertex	include/FVCell1D.h	/^     FVVertex1D* beginVertex(){_pos_v=0;return(firstVertex);}$/;"	f	class:FVCell1D
+beginVertex	include/FVCell2D.h	/^     FVVertex2D* beginVertex(){pos_v=0;if(pos_v<nb_vertex) return(vertex[0]);else return(NULL);}$/;"	f	class:FVCell2D
+beginVertex	include/FVCell3D.h	/^     FVVertex3D* beginVertex(){pos_v=0;if(pos_v<nb_vertex) return(vertex[0]);else return(NULL);}$/;"	f	class:FVCell3D
+beginVertex	include/FVFace3D.h	/^     FVVertex3D* beginVertex(){pos_v=0;if(pos_v<nb_vertex) return(vertex[0]);else return(NULL);}$/;"	f	class:FVFace3D
+beginVertex	include/FVMesh1D.h	/^     FVVertex1D* beginVertex(){pos_v=0;if(pos_v<_nb_vertex) return&(_vertex[0]);else return(NULL);}$/;"	f	class:FVMesh1D
+beginVertex	include/FVMesh2D.h	/^     FVVertex2D* beginVertex(){pos_v=0;if(pos_v<_nb_vertex) return&(_vertex[0]);else return(NULL);}$/;"	f	class:FVMesh2D
+beginVertex	include/FVMesh3D.h	/^     FVVertex3D* beginVertex(){pos_v=0;if(pos_v<_nb_vertex) return&(_vertex[0]);else return(NULL);}$/;"	f	class:FVMesh3D
+cell	include/FVVertex2D.h	/^FVCell2D* cell[NB_CELL_PER_VERTEX_2D]; $/;"	m	class:FVVertex2D
+cell	include/FVVertex3D.h	/^FVCell3D* cell[NB_CELL_PER_VERTEX_3D]; $/;"	m	class:FVVertex3D
+cell2edge	include/FVCell2D.h	/^FVPoint2D<double>  cell2edge[NB_EDGE_PER_CELL_2D]; \/\/ normal exterior for each edge$/;"	m	class:FVCell2D
+cell2face	include/FVCell3D.h	/^FVPoint3D<double>  cell2face[NB_FACE_PER_CELL_3D]; \/\/ normal exterior for each face$/;"	m	class:FVCell3D
+cell_areas	include/FVL/CFVMesh2D.h	/^			CFVArray<double> cell_areas;			\/\/\/< area for each cell$/;"	m	class:FVL::CFVMesh2D
+cell_areas	include/FVL/CFVMesh2D.h	/^		double *cell_areas;				\/\/\/< area for each cell$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_centroids	include/FVL/CFVMesh2D.h	/^			CFVPoints2D<double> cell_centroids;		\/\/\/< centroid for each cell$/;"	m	class:FVL::CFVMesh2D
+cell_centroids	include/FVL/CFVMesh2D.h	/^		double *cell_centroids[2];		\/\/\/< centroid for each cell$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_edges	include/FVL/CFVMesh2D.h	/^			CFVMat<unsigned int> cell_edges;		\/\/\/< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)$/;"	m	class:FVL::CFVMesh2D
+cell_edges	include/FVL/CFVMesh2D.h	/^		unsigned int **cell_edges;		\/\/\/< index of edges for each cell (unsigned int [MAX_EDGES_PER_CELL][num_cells])$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_edges_count	include/FVL/CFVMesh2D.h	/^			CFVArray<unsigned int> cell_edges_count;\/\/\/< number of edges of each cell (to index cell_edges)$/;"	m	class:FVL::CFVMesh2D
+cell_edges_count	include/FVL/CFVMesh2D.h	/^		unsigned int *cell_edges_count;	\/\/\/< number of edges for each cell (to index cell_edges)$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_edges_normal	include/FVL/CFVMesh2D.h	/^			CFVMat<double> cell_edges_normal;		\/\/\/< distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 2, num_cells)$/;"	m	class:FVL::CFVMesh2D
+cell_edges_normal	include/FVL/CFVMesh2D.h	/^		double **cell_edges_normal;		\/\/\/< distance of each cell to each edge (double [2*MAX_EDGES_PER_CELL][num_cells])$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_perimeters	include/FVL/CFVMesh2D.h	/^			CFVArray<double> cell_perimeters;		\/\/\/< perimeter for each cell$/;"	m	class:FVL::CFVMesh2D
+cell_perimeters	include/FVL/CFVMesh2D.h	/^		double *cell_perimeters;		\/\/\/< perimeter for each cell	$/;"	m	struct:FVL::CFVMesh2D_cuda
+cell_types	include/FVL/CFVMesh2D.h	/^			CFVArray<int> cell_types;				\/\/\/< type associated with each cell$/;"	m	class:FVL::CFVMesh2D
+cell_types	include/FVL/CFVMesh2D.h	/^		int *cell_types;				\/\/\/< type associated with each cell$/;"	m	struct:FVL::CFVMesh2D_cuda
+centroid	include/FVCell1D.h	/^FVPoint1D<double> centroid;$/;"	m	class:FVCell1D
+centroid	include/FVCell2D.h	/^FVPoint2D<double> centroid;$/;"	m	class:FVCell2D
+centroid	include/FVCell3D.h	/^FVPoint3D<double> centroid;$/;"	m	class:FVCell3D
+centroid	include/FVEdge2D.h	/^FVPoint2D<double> centroid;$/;"	m	class:FVEdge2D
+centroid	include/FVEdge3D.h	/^FVPoint3D<double> centroid;$/;"	m	class:FVEdge3D
+centroid	include/FVFace3D.h	/^FVPoint3D<double> centroid;$/;"	m	class:FVFace3D
+clean	include/FVRecons1D.h	/^void clean()$/;"	f	class:FVRecons1D
+clean	include/FVRecons2D.h	/^void clean()$/;"	f	class:FVRecons2D
+clean	include/FVRecons3D.h	/^void clean()$/;"	f	class:FVRecons3D
+clean	include/FVStencil.h	/^     void clean(){_nb_geometry=0;_reference_geometry=NULL;_reference_type=NULL_ENTITY;$/;"	f	class:FVStencil
+clear	include/rapidxml/rapidxml.hpp	/^        void clear()$/;"	f	class:rapidxml::memory_pool
+clear	include/rapidxml/rapidxml.hpp	/^        void clear()$/;"	f	class:rapidxml::xml_document
+clone_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *clone_node(const xml_node<Ch> *source, xml_node<Ch> *result = 0)$/;"	f	class:rapidxml::memory_pool
+close	src/libfv/FVXMLReader.cpp	/^	void FVXMLReader::close() {$/;"	f	class:FVL::FVXMLReader
+close	src/libfv/FVXMLWriter.cpp	/^	void FVXMLWriter::close() {$/;"	f	class:FVL::FVXMLWriter
+close	src/libfv/FVio.cpp	/^void FVio::close()$/;"	f	class:FVio
+close	src/libfv/Gmsh.cpp	/^void Gmsh::close()$/;"	f	class:Gmsh
+closeBalise	src/libfv/XML.cpp	/^int  SparseXML::closeBalise()$/;"	f	class:SparseXML
+closeBalise	src/libfv/XML.cpp	/^int  SparseXML::closeBalise(const char *name,size_t level)$/;"	f	class:SparseXML
+closeBalise	src/libfv/XML.cpp	/^int  SparseXML::closeBalise(const string &element,size_t level)$/;"	f	class:SparseXML
+code	include/FVCell1D.h	/^size_t label,code,nb_vertex;$/;"	m	class:FVCell1D
+code	include/FVCell2D.h	/^size_t label,code,nb_vertex,nb_edge;$/;"	m	class:FVCell2D
+code	include/FVCell3D.h	/^size_t label,code,nb_vertex,nb_face;$/;"	m	class:FVCell3D
+code	include/FVEdge2D.h	/^size_t label, code,nb_vertex,nb_cell;$/;"	m	class:FVEdge2D
+code	include/FVEdge3D.h	/^size_t label, code,nb_vertex;$/;"	m	class:FVEdge3D
+code	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+code	include/FVVertex1D.h	/^size_t label, code;$/;"	m	class:FVVertex1D
+code	include/FVVertex2D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex2D
+code	include/FVVertex3D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex3D
+code_elementary	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+code_physical	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+col	include/FVSparseM.h	/^std::vector<Tab_index *> row,col; \/\/ index table$/;"	m	class:FVSparseM
+compare	include/rapidxml/rapidxml.hpp	/^        inline bool compare(const Ch *p1, std::size_t size1, const Ch *p2, std::size_t size2, bool case_sensitive)$/;"	f	namespace:rapidxml::internal
+complete_data	src/libfv/FVMesh1D.cpp	/^void FVMesh1D::complete_data()$/;"	f	class:FVMesh1D
+complete_data	src/libfv/FVMesh2D.cpp	/^void FVMesh2D::complete_data()$/;"	f	class:FVMesh2D
+complete_data	src/libfv/FVMesh3D.cpp	/^void FVMesh3D::complete_data()$/;"	f	class:FVMesh3D
+computation	src/bic.polu.clean/polu.clean.cpp	/^	} computation;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon6	file:
+computation	src/old/old.cuda_test/parameters.h	/^	} computation;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon18
+computation	src/old/old.polu.cuda.no_reduction/parameters.h	/^	} computation;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon13
+computation	src/old/old.polu.cuda/parameters.h	/^	} computation;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon23
+computeCoef	src/libfv/FVRecons1D.cpp	/^void FVRecons1D::computeCoef()$/;"	f	class:FVRecons1D
+computeCoef	src/libfv/FVRecons2D.cpp	/^void FVRecons2D::computeCoef()$/;"	f	class:FVRecons2D
+computeCoef	src/libfv/FVRecons3D.cpp	/^void FVRecons3D::computeCoef()$/;"	f	class:FVRecons3D
+computeConservativeCoef	src/libfv/FVRecons1D.cpp	/^void FVRecons1D::computeConservativeCoef()$/;"	f	class:FVRecons1D
+computeConservativeCoef	src/libfv/FVRecons2D.cpp	/^void FVRecons2D::computeConservativeCoef()$/;"	f	class:FVRecons2D
+computeConservativeCoef	src/libfv/FVRecons3D.cpp	/^void FVRecons3D::computeConservativeCoef()$/;"	f	class:FVRecons3D
+compute_flux	src/bic.polu.clean/polu.clean.cpp	/^double compute_flux($/;"	f
+compute_mesh_parameter	src/bic.polu.clean/polu.clean.cpp	/^double compute_mesh_parameter ($/;"	f
+coord	include/FVVertex1D.h	/^FVPoint1D<double> coord, normal;$/;"	m	class:FVVertex1D
+coord	include/FVVertex2D.h	/^FVPoint2D <double> coord;$/;"	m	class:FVVertex2D
+coord	include/FVVertex3D.h	/^FVPoint3D <double> coord;$/;"	m	class:FVVertex3D
+copy_and_expand_chars	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt copy_and_expand_chars(const Ch *begin, const Ch *end, Ch noexpand, OutIt out)$/;"	f	namespace:rapidxml::internal
+copy_chars	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt copy_chars(const Ch *begin, const Ch *end, OutIt out)$/;"	f	namespace:rapidxml::internal
+count_attributes	include/rapidxml/rapidxml_utils.hpp	/^    inline std::size_t count_attributes(xml_node<Ch> *node)$/;"	f	namespace:rapidxml
+count_children	include/rapidxml/rapidxml_utils.hpp	/^    inline std::size_t count_children(xml_node<Ch> *node)$/;"	f	namespace:rapidxml
+cpu_ABCsystem_result	src/bic.cuda.second_order/kernels_cpu.cpp	/^double cpu_ABCsystem_result($/;"	f
+cpu_assert_ABCsystem_result	src/bic.cuda.second_order/kernels_cpu.cpp	/^bool cpu_assert_ABCsystem_result($/;"	f
+cpu_compute_flux	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_compute_flux($/;"	f
+cpu_compute_reverseA	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_compute_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {$/;"	f
+cpu_compute_vecABC	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_compute_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecABC) {$/;"	f
+cpu_compute_vecResult	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_compute_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, double dc) {$/;"	f
+cpu_ghost_coords	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_ghost_coords(CFVMesh2D &mesh, unsigned int edge, double &x, double &y) {$/;"	f
+cpu_update	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_update($/;"	f
+cpu_validate_ABC	src/bic.cuda.second_order/kernels_cpu.cpp	/^void cpu_validate_ABC($/;"	f
+cuda_arr	include/FVL/CFVArray.h	/^				T *cuda_arr;	\/\/\/< Ptr to CUDA memory of the array (NULL if not allocated)$/;"	m	class:FVL::CFVArray
+cuda_free	include/FVL/templates/CFVArray.hpp	/^		void CFVArray<T>::cuda_free() {$/;"	f	class:FVL::CFVArray
+cuda_free	include/FVL/templates/CFVMat.hpp	/^	void CFVMat<T>::cuda_free() {$/;"	f	class:FVL::CFVMat
+cuda_get	include/FVL/templates/CFVArray.hpp	/^		T* CFVArray<T>::cuda_get() {$/;"	f	class:FVL::CFVArray
+cuda_get	include/FVL/templates/CFVMat.hpp	/^	T** CFVMat<T>::cuda_get() {$/;"	f	class:FVL::CFVMat
+cuda_load	include/FVL/templates/CFVArray.hpp	/^		void CFVArray<T>::cuda_load(cudaStream_t stream) {$/;"	f	class:FVL::CFVArray
+cuda_load	include/FVL/templates/CFVMat.hpp	/^	void CFVMat<T>::cuda_load(cudaStream_t stream) {$/;"	f	class:FVL::CFVMat
+cuda_malloc	include/FVL/templates/CFVArray.hpp	/^		T* CFVArray<T>::cuda_malloc() {$/;"	f	class:FVL::CFVArray
+cuda_malloc	include/FVL/templates/CFVMat.hpp	/^	T** CFVMat<T>::cuda_malloc() {$/;"	f	class:FVL::CFVMat
+cuda_mallocAndSave	include/FVL/templates/CFVArray.hpp	/^		T* CFVArray<T>::cuda_mallocAndSave(cudaStream_t stream) {$/;"	f	class:FVL::CFVArray
+cuda_mallocAndSave	include/FVL/templates/CFVMat.hpp	/^	T** CFVMat<T>::cuda_mallocAndSave(cudaStream_t stream) {$/;"	f	class:FVL::CFVMat
+cuda_mat	include/FVL/CFVMat.h	/^				CFVArray<T*> cuda_mat;		\/\/\/< Vector of pointers for each CUDA array representing each element of the matrix$/;"	m	class:FVL::CFVMat
+cuda_mesh	include/FVL/CFVMesh2D.h	/^			CFVMesh2D_cuda *cuda_mesh;	\/\/\/< CUDA structure holding the mesh (ptr to CUDA memory space). Set to NULL if cuda memory not allocated$/;"	m	class:FVL::CFVMesh2D
+cuda_save	include/FVL/templates/CFVArray.hpp	/^		void CFVArray<T>::cuda_save(cudaStream_t stream) {$/;"	f	class:FVL::CFVArray
+cuda_save	include/FVL/templates/CFVMat.hpp	/^	void CFVMat<T>::cuda_save(cudaStream_t stream) {$/;"	f	class:FVL::CFVMat
+current	include/FVL/FVXMLReader.h	/^			xml_node<> *current;$/;"	m	class:FVL::FVXMLReader
+data	include/rapidxml/rapidxml_utils.hpp	/^        Ch *data()$/;"	f	class:rapidxml::file
+data	include/rapidxml/rapidxml_utils.hpp	/^        const Ch *data() const$/;"	f	class:rapidxml::file
+data	src/libfv/XML.cpp	/^void  SparseXML::data()$/;"	f	class:SparseXML
+dealloc	include/FVL/templates/CFVMat.hpp	/^	void CFVMat<T>::dealloc() {$/;"	f	class:FVL::CFVMat
+dealloc	include/FVL/templates/FVArray.hpp	/^		void FVArray<T>::dealloc() {$/;"	f	class:FVL::FVArray
+determinant	include/FVL/FVPoint2D.h	/^			inline T determinant(const FVPoint2D<T> &b) { return (this->x * b.y - this->y * b.x);}$/;"	f	class:FVL::FVPoint2D
+difference_type	include/rapidxml/rapidxml_iterators.hpp	/^        typedef std::ptrdiff_t difference_type;$/;"	t	class:rapidxml::attribute_iterator
+difference_type	include/rapidxml/rapidxml_iterators.hpp	/^        typedef std::ptrdiff_t difference_type;$/;"	t	class:rapidxml::node_iterator
+dim	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+doConservativeMatrix	src/libfv/FVRecons1D.cpp	/^void FVRecons1D::doConservativeMatrix()$/;"	f	class:FVRecons1D
+doConservativeMatrix	src/libfv/FVRecons2D.cpp	/^void FVRecons2D::doConservativeMatrix()$/;"	f	class:FVRecons2D
+doConservativeMatrix	src/libfv/FVRecons3D.cpp	/^void FVRecons3D::doConservativeMatrix()$/;"	f	class:FVRecons3D
+doMatrix	src/libfv/FVRecons1D.cpp	/^void FVRecons1D::doMatrix()$/;"	f	class:FVRecons1D
+doMatrix	src/libfv/FVRecons2D.cpp	/^void FVRecons2D::doMatrix()$/;"	f	class:FVRecons2D
+doMatrix	src/libfv/FVRecons3D.cpp	/^void FVRecons3D::doMatrix()$/;"	f	class:FVRecons3D
+document	include/rapidxml/rapidxml.hpp	/^        xml_document<Ch> *document() const$/;"	f	class:rapidxml::xml_attribute
+document	include/rapidxml/rapidxml.hpp	/^        xml_document<Ch> *document() const$/;"	f	class:rapidxml::xml_node
+dump	include/FVL/templates/FVArray.hpp	/^		void FVArray<T>::dump() {$/;"	f	class:FVL::FVArray
+edge	include/FVCell2D.h	/^FVEdge2D* edge[NB_EDGE_PER_CELL_2D];     \/\/ the edge$/;"	m	class:FVCell2D
+edge	include/FVFace3D.h	/^FVEdge3D *edge[NB_EDGE_PER_FACE_3D]; \/\/ the vertices$/;"	m	class:FVFace3D
+edge_centroids	include/FVL/CFVMesh2D.h	/^			CFVPoints2D<double> edge_centroids;		\/\/\/< centroid for each edge$/;"	m	class:FVL::CFVMesh2D
+edge_centroids	include/FVL/CFVMesh2D.h	/^		double *edge_centroids[2];		\/\/\/< centroid for each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_fst_vertex	include/FVL/CFVMesh2D.h	/^			CFVArray<unsigned int> edge_fst_vertex;	\/\/\/< first vertex of each edge$/;"	m	class:FVL::CFVMesh2D
+edge_fst_vertex	include/FVL/CFVMesh2D.h	/^		unsigned int *edge_fst_vertex;	\/\/\/< first vertex of each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_left_cells	include/FVL/CFVMesh2D.h	/^			CFVArray<unsigned int> edge_left_cells;	\/\/\/< left cell of each edge$/;"	m	class:FVL::CFVMesh2D
+edge_left_cells	include/FVL/CFVMesh2D.h	/^		unsigned int *edge_left_cells;	\/\/\/< left cell of each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_lengths	include/FVL/CFVMesh2D.h	/^			CFVArray<double> edge_lengths;			\/\/\/< length for each edge$/;"	m	class:FVL::CFVMesh2D
+edge_lengths	include/FVL/CFVMesh2D.h	/^		double *edge_lengths;			\/\/\/< length for each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_normals	include/FVL/CFVMesh2D.h	/^			CFVPoints2D<double> edge_normals;		\/\/\/< normals for each edge$/;"	m	class:FVL::CFVMesh2D
+edge_normals	include/FVL/CFVMesh2D.h	/^		double *edge_normals[2];		\/\/\/< normals for each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_right_cells	include/FVL/CFVMesh2D.h	/^			CFVArray<unsigned int> edge_right_cells;	\/\/\/< right cell of each edge (NO_RIGHT_CELL indicates a border edge where no right cell exists)$/;"	m	class:FVL::CFVMesh2D
+edge_right_cells	include/FVL/CFVMesh2D.h	/^		unsigned int *edge_right_cells;	\/\/\/< right cell of each edge (NO_RIGHT_CELL indicates a border edge where no right cell exists)$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_snd_vertex	include/FVL/CFVMesh2D.h	/^			CFVArray<unsigned int> edge_snd_vertex;	\/\/\/< second vertex of each edge$/;"	m	class:FVL::CFVMesh2D
+edge_snd_vertex	include/FVL/CFVMesh2D.h	/^		unsigned int *edge_snd_vertex;	\/\/\/< second vertex of each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+edge_types	include/FVL/CFVMesh2D.h	/^			CFVArray<int> edge_types;				\/\/\/< type associated with each edge$/;"	m	class:FVL::CFVMesh2D
+edge_types	include/FVL/CFVMesh2D.h	/^		int *edge_types;				\/\/\/< type associated with each edge$/;"	m	struct:FVL::CFVMesh2D_cuda
+elem	include/FVL/CFVMat.h	/^				CFVArray<T>& elem(unsigned int x, unsigned int y) { return mat[y * w + x]; }$/;"	f	class:FVL::CFVMat
+elem	include/FVL/CFVMat.h	/^				T & elem(unsigned int x, unsigned int y, unsigned int i) {$/;"	f	class:FVL::CFVMat
+err_log	include/FVL/FVErr.h	/^			static FVLog err_log;$/;"	m	class:FVL::FVErr
+error	src/libfv/FVErr.cpp	/^	void FVErr::error(string &msg, int err_code) {$/;"	f	class:FVL::FVErr
+exist	include/FVSparseM.h	/^size_t FVSparseM<T_>::exist( Tab_index *tab,size_t loc)$/;"	f	class:FVSparseM
+extension	src/bic.fvcm/fvcm.cpp	/^extension;$/;"	t	typeref:enum:__anon1	file:
+face	include/FVCell3D.h	/^FVFace3D* face[NB_FACE_PER_CELL_3D];     \/\/ the face$/;"	m	class:FVCell3D
+file	include/rapidxml/rapidxml_utils.hpp	/^        file(const char *filename)$/;"	f	class:rapidxml::file
+file	include/rapidxml/rapidxml_utils.hpp	/^        file(std::basic_istream<Ch> &stream)$/;"	f	class:rapidxml::file
+file	include/rapidxml/rapidxml_utils.hpp	/^    class file$/;"	c	namespace:rapidxml
+filename	include/FVL/FVXMLWriter.h	/^			string filename;$/;"	m	class:FVL::FVXMLWriter
+filenames	src/bic.polu.clean/polu.clean.cpp	/^	} filenames;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon2	file:
+filenames	src/bic.velocity/main.cpp	/^	} filenames;$/;"	m	struct:Parameters	typeref:struct:Parameters::__anon7	file:
+filenames	src/old/old.cuda_test/parameters.h	/^	} filenames;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon14
+filenames	src/old/old.polu.cuda.no_reduction/parameters.h	/^	} filenames;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon9
+filenames	src/old/old.polu.cuda/parameters.h	/^	} filenames;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon19
+fill_chars	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt fill_chars(OutIt out, int n, Ch ch)$/;"	f	namespace:rapidxml::internal
+final	src/bic.polu.clean/polu.clean.cpp	/^		double final;$/;"	m	struct:_parameters::__anon4	file:
+final	src/old/old.cuda_test/parameters.h	/^		double final;$/;"	m	struct:_parameters::__anon16
+final	src/old/old.polu.cuda.no_reduction/parameters.h	/^		double final;$/;"	m	struct:_parameters::__anon11
+final	src/old/old.polu.cuda/parameters.h	/^		double final;$/;"	m	struct:_parameters::__anon21
+find_char	include/rapidxml/rapidxml_print.hpp	/^        inline bool find_char(const Ch *begin, const Ch *end)$/;"	f	namespace:rapidxml::internal
+firstVertex	include/FVCell1D.h	/^FVVertex1D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVCell1D
+firstVertex	include/FVEdge2D.h	/^FVVertex2D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVEdge2D
+firstVertex	include/FVEdge3D.h	/^FVVertex3D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVEdge3D
+first_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *first_attribute(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+first_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *first_node(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+first_normal	include/FVCell1D.h	/^FVPoint1D<double> first_normal,second_normal; \/\/ normal exterior$/;"	m	class:FVCell1D
+free_func	include/rapidxml/rapidxml.hpp	/^        typedef void (free_func)(void *);              \/\/ Type of user-defined function used to free memory$/;"	t	class:rapidxml::memory_pool
+get	include/FVio.h	/^    size_t get(FVVect <FVPoint2D<double> > &u)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <FVPoint2D<double> >&u, double &time)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <FVPoint3D<double> > &u)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <FVPoint3D<double> >&u, double &time)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u,  double &time )$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u, FVVect <double> &v)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w)$/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w, double &time)   $/;"	f	class:FVio
+get	include/FVio.h	/^    size_t get(FVVect <double> &u, FVVect <double> &v, double &time)$/;"	f	class:FVio
+get	src/libfv/FVio.cpp	/^size_t FVio::get(FVVect <FVPoint2D<double> >&u, double &time, string &name)$/;"	f	class:FVio
+get	src/libfv/FVio.cpp	/^size_t FVio::get(FVVect <FVPoint3D<double> >&u, double &time, string &name)$/;"	f	class:FVio
+get	src/libfv/FVio.cpp	/^size_t FVio::get(FVVect <double> &u,  double &time, string &name)$/;"	f	class:FVio
+get	src/libfv/FVio.cpp	/^size_t FVio::get(FVVect <double> &u, FVVect <double> &v, FVVect <double> &w, double &time, string &name)$/;"	f	class:FVio
+get	src/libfv/FVio.cpp	/^size_t FVio::get(FVVect <double> &u, FVVect <double> &v, double &time, string &name)$/;"	f	class:FVio
+getArray	include/FVL/templates/FVArray.hpp	/^		T* FVArray<T>::getArray() {$/;"	f	class:FVL::FVArray
+getAttribute	include/XML.h	/^  StringMap getAttribute(){ return _attribute;}$/;"	f	class:SparseXML
+getBoolean	src/libfv/FVParameters.cpp	/^	bool FVParameters::getBoolean(const string param, const string key) {$/;"	f	class:FVL::FVParameters
+getCell	include/FVMesh1D.h	/^     FVCell1D*    getCell(size_t i){return &(_cell[i]);}     $/;"	f	class:FVMesh1D
+getCell	include/FVMesh2D.h	/^     FVCell2D*    getCell(size_t i){return &(_cell[i]);}    $/;"	f	class:FVMesh2D
+getCell	include/FVMesh3D.h	/^     FVCell3D*    getCell(size_t i){return &(_cell[i]);}   $/;"	f	class:FVMesh3D
+getCell2Edge	include/FVCell2D.h	/^     FVPoint2D<double> getCell2Edge(){return cell2edge[pos_e-1];}$/;"	f	class:FVCell2D
+getCell2Face	include/FVCell3D.h	/^     FVPoint3D<double> getCell2Face(){return cell2face[pos_f-1];}$/;"	f	class:FVCell3D
+getDerivative	include/FVRecons1D.h	/^FVPoint1D<double> getDerivative(FVPoint1D<double> P){return(FVRecons1D::getDerivative(P,_degree));}$/;"	f	class:FVRecons1D
+getDerivative	include/FVRecons2D.h	/^FVPoint2D<double> getDerivative(FVPoint2D<double> P){return(FVRecons2D::getDerivative(P,_degree));}$/;"	f	class:FVRecons2D
+getDerivative	include/FVRecons3D.h	/^FVPoint3D<double> getDerivative(FVPoint3D<double> P){return(FVRecons3D::getDerivative(P,_degree));}$/;"	f	class:FVRecons3D
+getDerivative	src/libfv/FVRecons1D.cpp	/^FVPoint1D<double> FVRecons1D::getDerivative(FVPoint1D<double> P, size_t degree) $/;"	f	class:FVRecons1D
+getDerivative	src/libfv/FVRecons2D.cpp	/^FVPoint2D<double> FVRecons2D::getDerivative(FVPoint2D<double> P, size_t degree) $/;"	f	class:FVRecons2D
+getDerivative	src/libfv/FVRecons3D.cpp	/^FVPoint3D<double> FVRecons3D::getDerivative(FVPoint3D<double> P, size_t degree)$/;"	f	class:FVRecons3D
+getDim	include/Gmsh.h	/^     size_t getDim(){return _dim;}            $/;"	f	class:Gmsh
+getDouble	include/Parameter.h	/^double getDouble(const char *keyname)$/;"	f	class:Parameter
+getDouble	include/Parameter.h	/^double getDouble(const string &key)$/;"	f	class:Parameter
+getDouble	src/libfv/FVParameters.cpp	/^	double FVParameters::getDouble(const string param, const string key) {$/;"	f	class:FVL::FVParameters
+getEdge	include/FVMesh2D.h	/^     FVEdge2D*    getEdge(size_t i){return &(_edge[i]);}      $/;"	f	class:FVMesh2D
+getEdge	include/FVMesh3D.h	/^     FVEdge3D*    getEdge(size_t i){return &(_edge[i]);}   $/;"	f	class:FVMesh3D
+getElement	include/Gmsh.h	/^     GMElement* getElement(const size_t i){return &(_element[i]);}$/;"	f	class:Gmsh
+getElement	include/XML.h	/^  string getElement(){return _element;}$/;"	f	class:SparseXML
+getFace	include/FVMesh3D.h	/^     FVFace3D*    getFace(size_t i){return &(_face[i]);}      $/;"	f	class:FVMesh3D
+getGeometry	include/FVStencil.h	/^     void* getGeometry(size_t i){return ((*_geometry)[i]);}$/;"	f	class:FVStencil
+getIndex	include/FVStencil.h	/^     size_t getIndex(){if(_pos>0) return (_pos-1); else return(0);}$/;"	f	class:FVStencil
+getInteger	include/Parameter.h	/^int getInteger(const char *keyname)$/;"	f	class:Parameter
+getInteger	include/Parameter.h	/^int getInteger(const string &key)$/;"	f	class:Parameter
+getInteger	src/libfv/FVParameters.cpp	/^	int FVParameters::getInteger(const string param, const string key) {$/;"	f	class:FVL::FVParameters
+getLength	include/FVDenseM.h	/^    size_t getLength(){ return length;}    $/;"	f	class:FVDenseM
+getLength	include/FVSparseM.h	/^    size_t getLength(){ return length;} $/;"	f	class:FVSparseM
+getLength	include/XML.h	/^  size_t getLength(){return _data_length;}$/;"	f	class:SparseXML
+getLevel	include/XML.h	/^  size_t getLevel(){return _level;}$/;"	f	class:SparseXML
+getMat	include/FVL/CFVMat.h	/^				vector<CFVArray<T> >& getMat() { return mat; }$/;"	f	class:FVL::CFVMat
+getMax1	include/Table.h	/^double getMax1(){return _max1;}$/;"	f	class:Table
+getMax2	include/Table.h	/^double getMax2(){return _max2;}$/;"	f	class:Table
+getMax3	include/Table.h	/^double getMax3(){return _max3;}$/;"	f	class:Table
+getMin1	include/Table.h	/^double getMin1(){return _min1;}$/;"	f	class:Table
+getMin2	include/Table.h	/^double getMin2(){return _min2;}$/;"	f	class:Table
+getMin3	include/Table.h	/^double getMin3(){return _min3;}$/;"	f	class:Table
+getName	include/FVMesh1D.h	/^     string getName(){ return _name;}$/;"	f	class:FVMesh1D
+getName	include/FVMesh2D.h	/^     string getName(){ return _name;}$/;"	f	class:FVMesh2D
+getName	include/FVMesh3D.h	/^     string getName(){ return _name;}$/;"	f	class:FVMesh3D
+getNbBoundaryEdge	include/FVMesh2D.h	/^     size_t getNbBoundaryEdge(){return _nb_boundary_edge;}$/;"	f	class:FVMesh2D
+getNbBoundaryFace	include/FVMesh3D.h	/^     size_t getNbBoundaryFace(){return _nb_boundary_face;}$/;"	f	class:FVMesh3D
+getNbBoundaryVertex	include/FVMesh1D.h	/^     size_t getNbBoundaryVertex(){return _nb_boundary_vertex;}$/;"	f	class:FVMesh1D
+getNbCell	include/FVMesh1D.h	/^     size_t getNbCell() {return _nb_cell;}$/;"	f	class:FVMesh1D
+getNbCell	include/FVMesh2D.h	/^     size_t getNbCell() {return _nb_cell;}$/;"	f	class:FVMesh2D
+getNbCell	include/FVMesh3D.h	/^     size_t getNbCell() {return _nb_cell;}$/;"	f	class:FVMesh3D
+getNbColumns	include/FVDenseM.h	/^    size_t getNbColumns() {return nb_cols;}$/;"	f	class:FVDenseM
+getNbColumns	include/FVSparseM.h	/^    size_t getNbColumns() {return nb_cols;}$/;"	f	class:FVSparseM
+getNbEdge	include/FVMesh2D.h	/^     size_t getNbEdge() {return _nb_edge;}    $/;"	f	class:FVMesh2D
+getNbEdge	include/FVMesh3D.h	/^     size_t getNbEdge() {return _nb_edge;}    $/;"	f	class:FVMesh3D
+getNbElement	include/Gmsh.h	/^     size_t getNbElement(){return _nb_element;}     $/;"	f	class:Gmsh
+getNbFace	include/FVMesh3D.h	/^     size_t getNbFace() {return _nb_face;}  $/;"	f	class:FVMesh3D
+getNbGeometry	include/FVStencil.h	/^     size_t getNbGeometry(){return(_nb_geometry);}$/;"	f	class:FVStencil
+getNbNode	include/Gmsh.h	/^     size_t getNbNode(){return _nb_node;}$/;"	f	class:Gmsh
+getNbPoint	src/libfv/FVGaussPoint.cpp	/^size_t FVGaussPoint1D::getNbPoint(size_t order)$/;"	f	class:FVGaussPoint1D
+getNbPoint	src/libfv/FVGaussPoint.cpp	/^size_t FVGaussPoint2D::getNbPoint(size_t order)$/;"	f	class:FVGaussPoint2D
+getNbPoint	src/libfv/FVGaussPoint.cpp	/^size_t FVGaussPoint3D::getNbPoint(size_t order)$/;"	f	class:FVGaussPoint3D
+getNbPoints1	include/Table.h	/^size_t  getNbPoints1(){return _nb_pts1;}$/;"	f	class:Table
+getNbPoints2	include/Table.h	/^size_t  getNbPoints2(){return _nb_pts2;}$/;"	f	class:Table
+getNbPoints3	include/Table.h	/^size_t  getNbPoints3(){return _nb_pts3;}$/;"	f	class:Table
+getNbRows	include/FVDenseM.h	/^    size_t getNbRows(){ return nb_rows;}$/;"	f	class:FVDenseM
+getNbRows	include/FVSparseM.h	/^    size_t getNbRows(){ return nb_rows;}$/;"	f	class:FVSparseM
+getNbVect	include/FVio.h	/^    size_t getNbVect(){return(_nbvec);}$/;"	f	class:FVio
+getNbVertex	include/FVMesh1D.h	/^     size_t getNbVertex(){ return _nb_vertex;}$/;"	f	class:FVMesh1D
+getNbVertex	include/FVMesh2D.h	/^     size_t getNbVertex(){return _nb_vertex;}$/;"	f	class:FVMesh2D
+getNbVertex	include/FVMesh3D.h	/^     size_t getNbVertex(){return _nb_vertex;}$/;"	f	class:FVMesh3D
+getNode	include/Gmsh.h	/^     FVVertex3D* getNode(const size_t i){return &(_node[i]);}$/;"	f	class:Gmsh
+getNormal	include/FVFace3D.h	/^     FVPoint3D<double> getNormal(){return normal[pos_e];}$/;"	f	class:FVFace3D
+getPoint	src/libfv/FVGaussPoint.cpp	/^FVPoint2D<double> FVGaussPoint1D::getPoint(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint1D
+getPoint	src/libfv/FVGaussPoint.cpp	/^FVPoint3D<double> FVGaussPoint2D::getPoint(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint2D
+getPoint	src/libfv/FVGaussPoint.cpp	/^FVPoint4D<double> FVGaussPoint3D::getPoint(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint3D
+getPoints2D	include/FVL/templates/FVXMLReader.hpp	/^		void FVXMLReader::getPoints2D(CFVPoints2D<T> &vec, double &time, string &name) {$/;"	f	class:FVL::FVXMLReader
+getPolynomialDegree	include/FVRecons1D.h	/^size_t getPolynomialDegree(){return(_degree); } $/;"	f	class:FVRecons1D
+getPolynomialDegree	include/FVRecons2D.h	/^size_t getPolynomialDegree(){return(_degree); } $/;"	f	class:FVRecons2D
+getPolynomialDegree	include/FVRecons3D.h	/^size_t getPolynomialDegree(){return(_degree); } $/;"	f	class:FVRecons3D
+getPosition	include/XML.h	/^  size_t getPosition(){return _data_position ;}$/;"	f	class:SparseXML
+getReferenceGeometry	include/FVStencil.h	/^     void* getReferenceGeometry(){return (_reference_geometry);}         $/;"	f	class:FVStencil
+getReferenceType	include/FVStencil.h	/^     size_t getReferenceType(){return _reference_type;}     $/;"	f	class:FVStencil
+getRootNode	src/libfv/FVXMLReader.cpp	/^	xml_node<>* FVXMLReader::getRootNode() {$/;"	f	class:FVL::FVXMLReader
+getString	include/Parameter.h	/^string getString(const char *keyname)$/;"	f	class:Parameter
+getString	include/Parameter.h	/^string getString(const string &key)$/;"	f	class:Parameter
+getString	src/libfv/FVParameters.cpp	/^	string FVParameters::getString(const string param, const string key) {$/;"	f	class:FVL::FVParameters
+getTab	include/FVDenseM.h	/^    valarray<T_> * getTab(){return &a;}$/;"	f	class:FVDenseM
+getTime	src/libfv/CFVProfile.cpp	/^	float CFVProfile::getTime() {$/;"	f	class:FVL::CFVProfile
+getType	include/FVStencil.h	/^     size_t getType(){if(_pos>0) return((*_type)[_pos-1]); else return(NULL_ENTITY);}$/;"	f	class:FVStencil
+getType	include/FVStencil.h	/^     size_t getType(size_t i){return((*_type)[i]);}   $/;"	f	class:FVStencil
+getUnsigned	include/Parameter.h	/^size_t getUnsigned(const char *keyname)$/;"	f	class:Parameter
+getUnsigned	include/Parameter.h	/^size_t getUnsigned(const string &key)$/;"	f	class:Parameter
+getUnsigned	src/libfv/FVParameters.cpp	/^	unsigned int FVParameters::getUnsigned(const string param, const string key) {$/;"	f	class:FVL::FVParameters
+getValue	include/FVDenseM.h	/^T_  FVDenseM<T_>::getValue(size_t i, size_t j)$/;"	f	class:FVDenseM
+getValue	include/FVRecons1D.h	/^double getValue(FVPoint1D<double> P){return(FVRecons1D::getValue(P,_degree));} $/;"	f	class:FVRecons1D
+getValue	include/FVRecons2D.h	/^double getValue(FVPoint2D<double> P){return(FVRecons2D::getValue(P,_degree));}    $/;"	f	class:FVRecons2D
+getValue	include/FVRecons3D.h	/^double getValue(FVPoint3D<double> P){return(FVRecons3D::getValue(P,_degree));}    $/;"	f	class:FVRecons3D
+getValue	include/FVSparseM.h	/^T_ FVSparseM<T_>::getValue(size_t i, size_t j)  $/;"	f	class:FVSparseM
+getValue	src/libfv/FVRecons1D.cpp	/^double FVRecons1D::getValue(FVPoint1D<double> P,size_t d)$/;"	f	class:FVRecons1D
+getValue	src/libfv/FVRecons2D.cpp	/^double FVRecons2D::getValue(FVPoint2D<double> P,size_t d)$/;"	f	class:FVRecons2D
+getValue	src/libfv/FVRecons3D.cpp	/^double FVRecons3D::getValue(FVPoint3D<double> P,size_t d)$/;"	f	class:FVRecons3D
+getVar1	include/Table.h	/^string getVar1(){return _var1;}$/;"	f	class:Table
+getVar2	include/Table.h	/^string getVar2(){return _var2;}$/;"	f	class:Table
+getVar3	include/Table.h	/^string getVar3(){return _var3;}$/;"	f	class:Table
+getVec	include/FVL/templates/FVXMLReader.hpp	/^		void FVXMLReader::getVec(CFVArray<T> &vec, double &time, string &name) {$/;"	f	class:FVL::FVXMLReader
+getVertex	include/FVMesh1D.h	/^     FVVertex1D*  getVertex(size_t i){return &(_vertex[i]);} $/;"	f	class:FVMesh1D
+getVertex	include/FVMesh2D.h	/^     FVVertex2D*  getVertex(size_t i){return &(_vertex[i]);} $/;"	f	class:FVMesh2D
+getVertex	include/FVMesh3D.h	/^     FVVertex3D*  getVertex(size_t i){return &(_vertex[i]);} $/;"	f	class:FVMesh3D
+getWeight	src/libfv/FVGaussPoint.cpp	/^double FVGaussPoint1D::getWeight(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint1D
+getWeight	src/libfv/FVGaussPoint.cpp	/^double FVGaussPoint2D::getWeight(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint2D
+getWeight	src/libfv/FVGaussPoint.cpp	/^double FVGaussPoint3D::getWeight(size_t order, size_t no=1)$/;"	f	class:FVGaussPoint3D
+h	include/FVL/CFVMat.h	/^				unsigned int w, h, mat_size;$/;"	m	class:FVL::CFVMat
+header	include/rapidxml/rapidxml.hpp	/^        struct header$/;"	s	class:rapidxml::memory_pool
+height	include/FVL/CFVMat.h	/^				unsigned int height() 	const { return h; }$/;"	f	class:FVL::CFVMat
+id	src/old/old.msh_gen/main.cpp	/^	unsigned int id;$/;"	m	class:Edge	file:
+id	src/old/old.msh_gen/main.cpp	/^	unsigned int id;$/;"	m	class:Vertex	file:
+index	include/FVSparseM.h	/^    size_t index;$/;"	m	class:SparseNode
+init	include/rapidxml/rapidxml.hpp	/^        void init()$/;"	f	class:rapidxml::memory_pool
+init	src/libfv/CFVProfile.cpp	/^	void CFVProfile::init(string msg, string) {$/;"	f	class:FVL::CFVProfile
+init	src/libfv/FVXMLWriter.cpp	/^	void FVXMLWriter::init() {$/;"	f	class:FVL::FVXMLWriter
+initLog	src/libfv/FVLog.cpp	/^	void FVLog::initLog() {$/;"	f	class:FVL::FVLog
+initial	src/bic.polu.clean/polu.clean.cpp	/^			string initial;$/;"	m	struct:_parameters::__anon2::__anon3	file:
+initial	src/bic.velocity/main.cpp	/^			string initial;$/;"	m	struct:Parameters::__anon7::__anon8	file:
+initial	src/old/old.cuda_test/parameters.h	/^			string initial;$/;"	m	struct:_parameters::__anon14::__anon15
+initial	src/old/old.polu.cuda.no_reduction/parameters.h	/^			string initial;$/;"	m	struct:_parameters::__anon9::__anon10
+initial	src/old/old.polu.cuda/parameters.h	/^			string initial;$/;"	m	struct:_parameters::__anon19::__anon20
+insert_attribute	include/rapidxml/rapidxml.hpp	/^        void insert_attribute(xml_attribute<Ch> *where, xml_attribute<Ch> *attribute)$/;"	f	class:rapidxml::xml_node
+insert_coded_character	include/rapidxml/rapidxml.hpp	/^        static void insert_coded_character(Ch *&text, unsigned long code)$/;"	f	class:rapidxml::xml_document
+insert_node	include/rapidxml/rapidxml.hpp	/^        void insert_node(xml_node<Ch> *where, xml_node<Ch> *child)$/;"	f	class:rapidxml::xml_node
+internal	include/rapidxml/rapidxml.hpp	/^    namespace internal$/;"	n	namespace:rapidxml
+internal	include/rapidxml/rapidxml_print.hpp	/^    namespace internal$/;"	n	namespace:rapidxml
+isEqual	include/FVCell1D.h	/^inline bool isEqual(FVCell1D *c1, FVCell1D *c2)$/;"	f
+isEqual	include/FVCell2D.h	/^inline bool isEqual(FVCell2D *c1, FVCell2D *c2)$/;"	f
+isEqual	include/FVCell3D.h	/^inline bool isEqual(FVCell3D *c1, FVCell3D *c2)$/;"	f
+isEqual	include/FVEdge2D.h	/^inline bool isEqual(FVEdge2D *e1, FVEdge2D *e2)$/;"	f
+isEqual	include/FVEdge3D.h	/^inline bool isEqual(FVEdge3D *e1, FVEdge3D *e2)$/;"	f
+isEqual	include/FVFace3D.h	/^inline bool isEqual(FVFace3D *f1, FVFace3D *f2)$/;"	f
+isEqual	include/FVVertex1D.h	/^inline bool isEqual(FVVertex1D *v1, FVVertex1D *v2)$/;"	f
+isEqual	include/FVVertex2D.h	/^inline bool isEqual(FVVertex2D *v1, FVVertex2D *v2)$/;"	f
+isEqual	include/FVVertex3D.h	/^inline bool isEqual(FVVertex3D *v1, FVVertex3D *v2)$/;"	f
+iterations	src/bic.polu.clean/polu.clean.cpp	/^	} iterations;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon5	file:
+iterations	src/old/old.cuda_test/parameters.h	/^	} iterations;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon17
+iterations	src/old/old.polu.cuda.no_reduction/parameters.h	/^	} iterations;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon12
+iterations	src/old/old.polu.cuda/parameters.h	/^	} iterations;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon22
+iterator_category	include/rapidxml/rapidxml_iterators.hpp	/^        typedef std::bidirectional_iterator_tag iterator_category;$/;"	t	class:rapidxml::attribute_iterator
+iterator_category	include/rapidxml/rapidxml_iterators.hpp	/^        typedef std::bidirectional_iterator_tag iterator_category;$/;"	t	class:rapidxml::node_iterator
+jump	src/bic.polu.clean/polu.clean.cpp	/^		int jump;$/;"	m	struct:_parameters::__anon5	file:
+jump	src/old/old.cuda_test/parameters.h	/^		int jump;$/;"	m	struct:_parameters::__anon17
+jump	src/old/old.polu.cuda.no_reduction/parameters.h	/^		int jump;$/;"	m	struct:_parameters::__anon12
+jump	src/old/old.polu.cuda/parameters.h	/^		int jump;$/;"	m	struct:_parameters::__anon22
+label	include/FVCell1D.h	/^size_t label,code,nb_vertex;$/;"	m	class:FVCell1D
+label	include/FVCell2D.h	/^size_t label,code,nb_vertex,nb_edge;$/;"	m	class:FVCell2D
+label	include/FVCell3D.h	/^size_t label,code,nb_vertex,nb_face;$/;"	m	class:FVCell3D
+label	include/FVEdge2D.h	/^size_t label, code,nb_vertex,nb_cell;$/;"	m	class:FVEdge2D
+label	include/FVEdge3D.h	/^size_t label, code,nb_vertex;$/;"	m	class:FVEdge3D
+label	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+label	include/FVVertex1D.h	/^size_t label, code;$/;"	m	class:FVVertex1D
+label	include/FVVertex2D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex2D
+label	include/FVVertex3D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex3D
+label	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+last_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *last_attribute(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+last_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *last_node(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+leftCell	include/FVEdge2D.h	/^FVCell2D *leftCell,*rightCell;  \/\/ the two cells$/;"	m	class:FVEdge2D
+leftCell	include/FVFace3D.h	/^FVCell3D *leftCell,*rightCell;  \/\/ the two cells$/;"	m	class:FVFace3D
+leftCell	include/FVVertex1D.h	/^FVCell1D *leftCell,*rightCell;$/;"	m	class:FVVertex1D
+length	include/FVCell1D.h	/^double length;$/;"	m	class:FVCell1D
+length	include/FVDenseM.h	/^size_t nb_cols,nb_rows,length; \/\/ row and column$/;"	m	class:FVDenseM
+length	include/FVEdge2D.h	/^double length;$/;"	m	class:FVEdge2D
+length	include/FVEdge3D.h	/^double length;$/;"	m	class:FVEdge3D
+length	include/FVSparseM.h	/^size_t nb_cols,nb_rows,length; \/\/ number of rows and columns  , length of the matrix $/;"	m	class:FVSparseM
+linearExtrapolation	src/libfv/Table.cpp	/^double Table::linearExtrapolation(double x1)$/;"	f	class:Table
+linearExtrapolation	src/libfv/Table.cpp	/^double Table::linearExtrapolation(double x1, double x2)$/;"	f	class:Table
+linearExtrapolation	src/libfv/Table.cpp	/^double Table::linearExtrapolation(double x1, double x2,double x3)$/;"	f	class:Table
+linearInterpolation	src/libfv/Table.cpp	/^double Table::linearInterpolation(double x1)$/;"	f	class:Table
+linearInterpolation	src/libfv/Table.cpp	/^double Table::linearInterpolation(double x1, double x2)$/;"	f	class:Table
+linearInterpolation	src/libfv/Table.cpp	/^double Table::linearInterpolation(double x1, double x2, double x3)$/;"	f	class:Table
+log	include/FVL/FVLog.h	/^			static FVLog log;$/;"	m	class:FVL::FVLog
+log	src/libfv/FVLog.cpp	/^	FVLog FVLog::log;$/;"	m	class:FVL::FVLog	file:
+lookup_attribute_data_1	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_attribute_data_1[256];        \/\/ Attribute data table with single quote$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_attribute_data_1	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_attribute_data_1[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_attribute_data_1_pure	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_attribute_data_1_pure[256];   \/\/ Attribute data table with single quote$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_attribute_data_1_pure	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_attribute_data_1_pure[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_attribute_data_2	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_attribute_data_2[256];        \/\/ Attribute data table with double quotes$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_attribute_data_2	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_attribute_data_2[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_attribute_data_2_pure	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_attribute_data_2_pure[256];   \/\/ Attribute data table with double quotes$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_attribute_data_2_pure	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_attribute_data_2_pure[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_attribute_name	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_attribute_name[256];          \/\/ Attribute name table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_attribute_name	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_attribute_name[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_digits	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_digits[256];                  \/\/ Digits$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_digits	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_digits[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_node_name	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_node_name[256];               \/\/ Node name table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_node_name	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_node_name[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_tables	include/rapidxml/rapidxml.hpp	/^        struct lookup_tables$/;"	s	namespace:rapidxml::internal
+lookup_text	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_text[256];                    \/\/ Text table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_text	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_text[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_text_pure_no_ws	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_text_pure_no_ws[256];         \/\/ Text table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_text_pure_no_ws	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_text_pure_no_ws[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_text_pure_with_ws	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_text_pure_with_ws[256];       \/\/ Text table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_text_pure_with_ws	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_text_pure_with_ws[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_upcase	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_upcase[256];                  \/\/ To uppercase conversion table for ASCII characters$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_upcase	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_upcase[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lookup_whitespace	include/rapidxml/rapidxml.hpp	/^            static const unsigned char lookup_whitespace[256];              \/\/ Whitespace table$/;"	m	struct:rapidxml::internal::lookup_tables
+lookup_whitespace	include/rapidxml/rapidxml.hpp	/^        const unsigned char lookup_tables<Dummy>::lookup_whitespace[256] = $/;"	m	class:rapidxml::internal::lookup_tables
+lower_dim_list	src/old/old.msh_gen/main.cpp	/^	vector<unsigned int> lower_dim_list;$/;"	m	class:Edge	file:
+m_alloc_func	include/rapidxml/rapidxml.hpp	/^        alloc_func *m_alloc_func;                           \/\/ Allocator function, or 0 if default is to be used$/;"	m	class:rapidxml::memory_pool
+m_attribute	include/rapidxml/rapidxml_iterators.hpp	/^        xml_attribute<Ch> *m_attribute;$/;"	m	class:rapidxml::attribute_iterator
+m_begin	include/rapidxml/rapidxml.hpp	/^        char *m_begin;                                      \/\/ Start of raw memory making up current pool$/;"	m	class:rapidxml::memory_pool
+m_data	include/rapidxml/rapidxml_utils.hpp	/^        std::vector<Ch> m_data;   \/\/ File data$/;"	m	class:rapidxml::file
+m_end	include/rapidxml/rapidxml.hpp	/^        char *m_end;                                        \/\/ One past last available byte in current pool$/;"	m	class:rapidxml::memory_pool
+m_first_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *m_first_attribute;   \/\/ Pointer to first attribute of node, or 0 if none; always valid$/;"	m	class:rapidxml::xml_node
+m_first_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *m_first_node;             \/\/ Pointer to first child node, or 0 if none; always valid$/;"	m	class:rapidxml::xml_node
+m_free_func	include/rapidxml/rapidxml.hpp	/^        free_func *m_free_func;                             \/\/ Free function, or 0 if default is to be used$/;"	m	class:rapidxml::memory_pool
+m_last_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *m_last_attribute;    \/\/ Pointer to last attribute of node, or 0 if none; this value is only valid if m_first_attribute is non-zero$/;"	m	class:rapidxml::xml_node
+m_last_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *m_last_node;              \/\/ Pointer to last child node, or 0 if none; this value is only valid if m_first_node is non-zero$/;"	m	class:rapidxml::xml_node
+m_name	include/rapidxml/rapidxml.hpp	/^        Ch *m_name;                         \/\/ Name of node, or 0 if no name$/;"	m	class:rapidxml::xml_base
+m_name_size	include/rapidxml/rapidxml.hpp	/^        std::size_t m_name_size;            \/\/ Length of node name, or undefined of no name$/;"	m	class:rapidxml::xml_base
+m_next_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *m_next_attribute;        \/\/ Pointer to next sibling of attribute, or 0 if none; only valid if parent is non-zero$/;"	m	class:rapidxml::xml_attribute
+m_next_sibling	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *m_next_sibling;           \/\/ Pointer to next sibling of node, or 0 if none; this value is only valid if m_parent is non-zero$/;"	m	class:rapidxml::xml_node
+m_node	include/rapidxml/rapidxml_iterators.hpp	/^        xml_node<Ch> *m_node;$/;"	m	class:rapidxml::node_iterator
+m_parent	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *m_parent;             \/\/ Pointer to parent node, or 0 if none$/;"	m	class:rapidxml::xml_base
+m_prev_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *m_prev_attribute;        \/\/ Pointer to previous sibling of attribute, or 0 if none; only valid if parent is non-zero$/;"	m	class:rapidxml::xml_attribute
+m_prev_sibling	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *m_prev_sibling;           \/\/ Pointer to previous sibling of node, or 0 if none; this value is only valid if m_parent is non-zero$/;"	m	class:rapidxml::xml_node
+m_ptr	include/rapidxml/rapidxml.hpp	/^        char *m_ptr;                                        \/\/ First free byte in current pool$/;"	m	class:rapidxml::memory_pool
+m_static_memory	include/rapidxml/rapidxml.hpp	/^        char m_static_memory[RAPIDXML_STATIC_POOL_SIZE];    \/\/ Static raw memory$/;"	m	class:rapidxml::memory_pool
+m_type	include/rapidxml/rapidxml.hpp	/^        node_type m_type;                       \/\/ Type of node; always valid$/;"	m	class:rapidxml::xml_node
+m_value	include/rapidxml/rapidxml.hpp	/^        Ch *m_value;                        \/\/ Value of node, or 0 if no value$/;"	m	class:rapidxml::xml_base
+m_value_size	include/rapidxml/rapidxml.hpp	/^        std::size_t m_value_size;           \/\/ Length of node value, or undefined if no value$/;"	m	class:rapidxml::xml_base
+main	src/bic.fvcd/fvcd.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	src/bic.fvcm/fvcm.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	src/bic.polu.clean/polu.clean.cpp	/^int main()$/;"	f
+main	src/bic.velocity/main.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	src/old/bic.test.parameters/main.cpp	/^int main() {$/;"	f
+main	src/old/old.msh_gen/main.cpp	/^int main(int argc, char **argv) {$/;"	f
+main	src/old/old.rapidxml_test/main.cpp	/^int main() {$/;"	f
+main_loop	src/bic.polu.clean/polu.clean.cpp	/^void main_loop ($/;"	f
+makeMap	src/libfv/XML.cpp	/^void SparseXML::makeMap(string &attribute_string)$/;"	f	class:SparseXML
+mat	include/FVL/CFVMat.h	/^				vector<CFVArray<T> > mat;	\/\/\/< Matrix is stored as a single dimension array of vectors$/;"	m	class:FVL::CFVMat
+mat_size	include/FVL/CFVMat.h	/^				unsigned int w, h, mat_size;$/;"	m	class:FVL::CFVMat
+measure	include/rapidxml/rapidxml.hpp	/^        inline std::size_t measure(const Ch *p)$/;"	f	namespace:rapidxml::internal
+memory_pool	include/rapidxml/rapidxml.hpp	/^        memory_pool()$/;"	f	class:rapidxml::memory_pool
+memory_pool	include/rapidxml/rapidxml.hpp	/^    class memory_pool$/;"	c	namespace:rapidxml
+mesh	src/bic.polu.clean/polu.clean.cpp	/^		string mesh;$/;"	m	struct:_parameters::__anon2	file:
+mesh	src/bic.velocity/main.cpp	/^		string mesh;$/;"	m	struct:Parameters::__anon7	file:
+mesh	src/old/old.cuda_test/parameters.h	/^		string mesh;$/;"	m	struct:_parameters::__anon14
+mesh	src/old/old.polu.cuda.no_reduction/parameters.h	/^		string mesh;$/;"	m	struct:_parameters::__anon9
+mesh	src/old/old.polu.cuda/parameters.h	/^		string mesh;$/;"	m	struct:_parameters::__anon19
+msg	include/FVL/CFVProfile.h	/^		string msg;$/;"	m	class:FVL::CFVProfile
+msh2xml	src/bic.fvcm/fvcm.cpp	/^void msh2xml (string filename_in, string filename_out)$/;"	f
+name	include/rapidxml/rapidxml.hpp	/^        Ch *name() const$/;"	f	class:rapidxml::xml_base
+name	include/rapidxml/rapidxml.hpp	/^        void name(const Ch *name)$/;"	f	class:rapidxml::xml_base
+name	include/rapidxml/rapidxml.hpp	/^        void name(const Ch *name, std::size_t size)$/;"	f	class:rapidxml::xml_base
+name_size	include/rapidxml/rapidxml.hpp	/^        std::size_t name_size() const$/;"	f	class:rapidxml::xml_base
+nb_cell	include/FVEdge2D.h	/^size_t label, code,nb_vertex,nb_cell;$/;"	m	class:FVEdge2D
+nb_cell	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+nb_cell	include/FVVertex2D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex2D
+nb_cell	include/FVVertex3D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex3D
+nb_cols	include/FVDenseM.h	/^size_t nb_cols,nb_rows,length; \/\/ row and column$/;"	m	class:FVDenseM
+nb_cols	include/FVSparseM.h	/^size_t nb_cols,nb_rows,length; \/\/ number of rows and columns  , length of the matrix $/;"	m	class:FVSparseM
+nb_edge	include/FVCell2D.h	/^size_t label,code,nb_vertex,nb_edge;$/;"	m	class:FVCell2D
+nb_edge	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+nb_face	include/FVCell3D.h	/^size_t label,code,nb_vertex,nb_face;$/;"	m	class:FVCell3D
+nb_node	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+nb_rows	include/FVDenseM.h	/^size_t nb_cols,nb_rows,length; \/\/ row and column$/;"	m	class:FVDenseM
+nb_rows	include/FVSparseM.h	/^size_t nb_cols,nb_rows,length; \/\/ number of rows and columns  , length of the matrix $/;"	m	class:FVSparseM
+nb_vertex	include/FVCell1D.h	/^size_t label,code,nb_vertex;$/;"	m	class:FVCell1D
+nb_vertex	include/FVCell2D.h	/^size_t label,code,nb_vertex,nb_edge;$/;"	m	class:FVCell2D
+nb_vertex	include/FVCell3D.h	/^size_t label,code,nb_vertex,nb_face;$/;"	m	class:FVCell3D
+nb_vertex	include/FVEdge2D.h	/^size_t label, code,nb_vertex,nb_cell;$/;"	m	class:FVEdge2D
+nb_vertex	include/FVEdge3D.h	/^size_t label, code,nb_vertex;$/;"	m	class:FVEdge3D
+nb_vertex	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+nextBoundaryEdge	include/FVMesh2D.h	/^     FVEdge2D* nextBoundaryEdge()$/;"	f	class:FVMesh2D
+nextBoundaryFace	include/FVMesh3D.h	/^     FVFace3D* nextBoundaryFace()$/;"	f	class:FVMesh3D
+nextBoundaryVertex	include/FVMesh1D.h	/^     FVVertex1D* nextBoundaryVertex()$/;"	f	class:FVMesh1D
+nextCell	include/FVMesh1D.h	/^     FVCell1D* nextCell(){if(pos_c<_nb_cell) return&(_cell[pos_c++]);else return(NULL);} $/;"	f	class:FVMesh1D
+nextCell	include/FVMesh2D.h	/^     FVCell2D* nextCell(){if(pos_c<_nb_cell) return&(_cell[pos_c++]);else return(NULL);}    $/;"	f	class:FVMesh2D
+nextCell	include/FVMesh3D.h	/^     FVCell3D* nextCell(){if(pos_c<_nb_cell) return &(_cell[pos_c++]);else return(NULL);}    $/;"	f	class:FVMesh3D
+nextCell	include/FVVertex2D.h	/^     FVCell2D* nextCell(){if(pos_c<nb_cell) return (cell[pos_c++]);else return(NULL);}    $/;"	f	class:FVVertex2D
+nextCell	include/FVVertex3D.h	/^     FVCell3D* nextCell(){if(pos_c<nb_cell) return (cell[pos_c++]);else return(NULL);}        $/;"	f	class:FVVertex3D
+nextEdge	include/FVCell2D.h	/^     FVEdge2D* nextEdge(){if(pos_e<nb_edge) return(edge[pos_e++]);else return(NULL);} $/;"	f	class:FVCell2D
+nextEdge	include/FVFace3D.h	/^     FVEdge3D* nextEdge(){if(pos_e<nb_edge) return(edge[pos_e++]);else return(NULL);} $/;"	f	class:FVFace3D
+nextEdge	include/FVMesh2D.h	/^     FVEdge2D* nextEdge(){if(pos_e<_nb_edge) return&(_edge[pos_e++]);else return(NULL);}    $/;"	f	class:FVMesh2D
+nextEdge	include/FVMesh3D.h	/^     FVEdge3D* nextEdge(){if(pos_e<_nb_edge) return&(_edge[pos_e++]);else return(NULL);}   $/;"	f	class:FVMesh3D
+nextElement	include/FVVect.h	/^    T_ nextElement(){if(pos<this->size()) return((*this)[pos++]);else return(NULL);}  $/;"	f	class:FVVect
+nextFace	include/FVCell3D.h	/^     FVFace3D* nextFace(){if(pos_f<nb_face) return(face[pos_f++]);else return(NULL);}     $/;"	f	class:FVCell3D
+nextFace	include/FVMesh3D.h	/^     FVFace3D* nextFace(){if(pos_f<_nb_face) return&(_face[pos_f++]);else return(NULL);}   $/;"	f	class:FVMesh3D
+nextGeometry	include/FVStencil.h	/^     void* nextGeometry(){if(_pos<_nb_geometry) return((*_geometry)[_pos++]);else return(NULL);}   $/;"	f	class:FVStencil
+nextVertex	include/FVCell1D.h	/^     FVVertex1D* nextVertex(){$/;"	f	class:FVCell1D
+nextVertex	include/FVCell2D.h	/^     FVVertex2D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  $/;"	f	class:FVCell2D
+nextVertex	include/FVCell3D.h	/^     FVVertex3D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  $/;"	f	class:FVCell3D
+nextVertex	include/FVFace3D.h	/^     FVVertex3D* nextVertex(){if(pos_v<nb_vertex) return(vertex[pos_v++]);else return(NULL);}  $/;"	f	class:FVFace3D
+nextVertex	include/FVMesh1D.h	/^     FVVertex1D* nextVertex(){if(pos_v<_nb_vertex) return&(_vertex[pos_v++]);else return(NULL);}$/;"	f	class:FVMesh1D
+nextVertex	include/FVMesh2D.h	/^     FVVertex2D* nextVertex(){if(pos_v<_nb_vertex) return&(_vertex[pos_v++]);else return(NULL);}$/;"	f	class:FVMesh2D
+nextVertex	include/FVMesh3D.h	/^     FVVertex3D* nextVertex(){if(pos_v<_nb_vertex) return&(_vertex[pos_v++]);else return(NULL);}$/;"	f	class:FVMesh3D
+next_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *next_attribute(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_attribute
+next_sibling	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *next_sibling(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+node	include/Gmsh.h	/^size_t node[GMSH_NB_NODE_PER_ELEMENT];$/;"	m	class:GMElement
+node_cdata	include/rapidxml/rapidxml.hpp	/^        node_cdata,         \/\/!< A CDATA node. Name is empty. Value contains data text.$/;"	e	enum:rapidxml::node_type
+node_comment	include/rapidxml/rapidxml.hpp	/^        node_comment,       \/\/!< A comment node. Name is empty. Value contains comment text.$/;"	e	enum:rapidxml::node_type
+node_data	include/rapidxml/rapidxml.hpp	/^        node_data,          \/\/!< A data node. Name is empty. Value contains data text.$/;"	e	enum:rapidxml::node_type
+node_declaration	include/rapidxml/rapidxml.hpp	/^        node_declaration,   \/\/!< A declaration node. Name and value are empty. Declaration parameters (version, encoding and standalone) are in node attributes.$/;"	e	enum:rapidxml::node_type
+node_doctype	include/rapidxml/rapidxml.hpp	/^        node_doctype,       \/\/!< A DOCTYPE node. Name is empty. Value contains DOCTYPE text.$/;"	e	enum:rapidxml::node_type
+node_document	include/rapidxml/rapidxml.hpp	/^        node_document,      \/\/!< A document node. Name and value are empty.$/;"	e	enum:rapidxml::node_type
+node_element	include/rapidxml/rapidxml.hpp	/^        node_element,       \/\/!< An element node. Name contains element name. Value contains text of first data node.$/;"	e	enum:rapidxml::node_type
+node_iterator	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator()$/;"	f	class:rapidxml::node_iterator
+node_iterator	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator(xml_node<Ch> *node)$/;"	f	class:rapidxml::node_iterator
+node_iterator	include/rapidxml/rapidxml_iterators.hpp	/^    class node_iterator$/;"	c	namespace:rapidxml
+node_name_pred	include/rapidxml/rapidxml.hpp	/^        struct node_name_pred$/;"	s	class:rapidxml::xml_document
+node_pi	include/rapidxml/rapidxml.hpp	/^        node_pi             \/\/!< A PI node. Name contains target. Value contains instructions.$/;"	e	enum:rapidxml::node_type
+node_type	include/rapidxml/rapidxml.hpp	/^    enum node_type$/;"	g	namespace:rapidxml
+norm	include/FVL/FVPoint2D.h	/^			inline T norm() { return sqrt(x*x + y*y);}$/;"	f	class:FVL::FVPoint2D
+normal	include/FVEdge2D.h	/^FVPoint2D<double> normal;  \/\/ from left to right$/;"	m	class:FVEdge2D
+normal	include/FVFace3D.h	/^FVPoint3D<double> normal[NB_VERTEX_PER_FACE_3D];  \/\/ from left to right$/;"	m	class:FVFace3D
+normal	include/FVVertex1D.h	/^FVPoint1D<double> coord, normal;$/;"	m	class:FVVertex1D
+nullstr	include/rapidxml/rapidxml.hpp	/^        static Ch *nullstr()$/;"	f	class:rapidxml::xml_base
+num_cells	include/FVL/CFVMesh2D.h	/^			unsigned int num_cells;					\/\/\/< total number of cells$/;"	m	class:FVL::CFVMesh2D
+num_cells	include/FVL/CFVMesh2D.h	/^		unsigned int num_cells;			\/\/\/< total number of cells$/;"	m	struct:FVL::CFVMesh2D_cuda
+num_edges	include/FVL/CFVMesh2D.h	/^			unsigned int num_edges;					\/\/\/< total number of edges$/;"	m	class:FVL::CFVMesh2D
+num_edges	include/FVL/CFVMesh2D.h	/^		unsigned int num_edges;			\/\/\/< total number of edges$/;"	m	struct:FVL::CFVMesh2D_cuda
+num_vertex	include/FVL/CFVMesh2D.h	/^			unsigned int num_vertex;				\/\/\/< total number of vertex$/;"	m	class:FVL::CFVMesh2D
+num_vertex	include/FVL/CFVMesh2D.h	/^		unsigned int num_vertex;		\/\/\/< total number of vertex$/;"	m	struct:FVL::CFVMesh2D_cuda
+open	src/libfv/FVio.cpp	/^void FVio::open(const char *filename, int access )$/;"	f	class:FVio
+openBalise	src/libfv/XML.cpp	/^int  SparseXML::openBalise()$/;"	f	class:SparseXML
+openBalise	src/libfv/XML.cpp	/^int  SparseXML::openBalise(const char *name,size_t level)$/;"	f	class:SparseXML
+openBalise	src/libfv/XML.cpp	/^int  SparseXML::openBalise(const string &element,size_t level)$/;"	f	class:SparseXML
+operator !=	include/rapidxml/rapidxml_iterators.hpp	/^        bool operator !=(const attribute_iterator<Ch> &rhs)$/;"	f	class:rapidxml::attribute_iterator
+operator !=	include/rapidxml/rapidxml_iterators.hpp	/^        bool operator !=(const node_iterator<Ch> &rhs)$/;"	f	class:rapidxml::node_iterator
+operator *	include/FVDenseM.h	/^FVDenseM<T_> operator*(const FVDenseM<T_> &aa,const T_ &val)$/;"	f
+operator *	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator * (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x*b.x, a.y*b.y);}$/;"	f	namespace:FVL
+operator *	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator * (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x*x, a.y*x);}$/;"	f	namespace:FVL
+operator *	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator * (const T &x, const FVpoint2D<T> &a) {return FVPoint2D<T>(a.x*x, a.y*x);}$/;"	f	namespace:FVL
+operator *	include/FVPoint1D.h	/^FVPoint1D<T_> operator* (const FVPoint1D<T_> &b, const T_ &x) $/;"	f
+operator *	include/FVPoint1D.h	/^FVPoint1D<T_> operator* (const T_ &x, const FVPoint1D<T_> &b) $/;"	f
+operator *	include/FVPoint1D.h	/^T_ operator* (const FVPoint1D<T_> &b, const FVPoint1D<T_> &a) $/;"	f
+operator *	include/FVPoint2D.h	/^FVPoint2D<T_> operator* (const FVPoint2D<T_> &b, const T_ &x) $/;"	f
+operator *	include/FVPoint2D.h	/^FVPoint2D<T_> operator* (const T_ &x, const FVPoint2D<T_> &b) $/;"	f
+operator *	include/FVPoint2D.h	/^T_ operator* (const FVPoint2D<T_> &b, const FVPoint2D<T_> &a) $/;"	f
+operator *	include/FVPoint3D.h	/^FVPoint3D<T_> operator* (const FVPoint3D<T_> &b, const T_ &a) $/;"	f
+operator *	include/FVPoint3D.h	/^FVPoint3D<T_> operator* (const T_ &a, const FVPoint3D<T_> &b) $/;"	f
+operator *	include/FVPoint3D.h	/^T_ operator* (const FVPoint3D<T_> &b, const FVPoint3D<T_> &a) $/;"	f
+operator *	include/FVPoint4D.h	/^FVPoint4D<T_> operator* (const FVPoint4D<T_> &b, const T_ &a) $/;"	f
+operator *	include/FVPoint4D.h	/^FVPoint4D<T_> operator* (const T_ &a, const FVPoint4D<T_> &b) $/;"	f
+operator *	include/FVPoint4D.h	/^T_ operator* (const FVPoint4D<T_> &b, const FVPoint4D<T_> &a) $/;"	f
+operator *	include/FVVect.h	/^FVVect<T_> operator*(const T_ &a, const FVVect<T_> &x)$/;"	f
+operator *	include/rapidxml/rapidxml_iterators.hpp	/^        reference operator *() const$/;"	f	class:rapidxml::attribute_iterator
+operator *	include/rapidxml/rapidxml_iterators.hpp	/^        reference operator *() const$/;"	f	class:rapidxml::node_iterator
+operator *=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator*=(const T_ &val)$/;"	f	class:FVDenseM
+operator *=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator *=	(const T &a) { x *= a;	y *= a;	return *this;}$/;"	f	class:FVL::FVPoint2D
+operator *=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator*=(const T_ &a) { x*=a;  return *this; }$/;"	f	class:FVPoint1D
+operator *=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator*=(const T_ &a) { x*=a; y*=a;  return *this; }$/;"	f	class:FVPoint2D
+operator *=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator*=(const T_ &a) { x*=a; y*=a; z*=a; return *this; }$/;"	f	class:FVPoint3D
+operator *=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator*=(const T_ &a) { x*=a; y*=a; z*=a; t*=a;return *this; }$/;"	f	class:FVPoint4D
+operator *=	include/FVSparseM.h	/^FVSparseM<T_> & FVSparseM<T_>::operator*=(const T_ &val)$/;"	f	class:FVSparseM
+operator *=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator*=(const T_ &a)$/;"	f	class:FVVect
+operator +	include/FVDenseM.h	/^FVDenseM<T_> operator+(const FVDenseM<T_> &aa, const FVDenseM<T_> &bb)$/;"	f
+operator +	include/FVDenseM.h	/^FVDenseM<T_> operator+(const FVDenseM<T_> &aa,const T_ &val)$/;"	f
+operator +	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator + (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x+b.x, a.y+b.y);}$/;"	f	namespace:FVL
+operator +	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator + (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x+x, a.y+x);}$/;"	f	namespace:FVL
+operator +	include/FVPoint1D.h	/^FVPoint1D<T_> operator+ (const FVPoint1D<T_> &a, const FVPoint1D<T_> &b) $/;"	f
+operator +	include/FVPoint1D.h	/^FVPoint1D<T_> operator+ (const FVPoint1D<T_> &a, const T_ &x) $/;"	f
+operator +	include/FVPoint2D.h	/^FVPoint2D<T_> operator+ (const FVPoint2D<T_> &a, const FVPoint2D<T_> &b) $/;"	f
+operator +	include/FVPoint2D.h	/^FVPoint2D<T_> operator+ (const FVPoint2D<T_> &a, const T_ &x) $/;"	f
+operator +	include/FVPoint3D.h	/^FVPoint3D<T_> operator+ (const FVPoint3D<T_> &a, const FVPoint3D<T_> &b) $/;"	f
+operator +	include/FVPoint3D.h	/^FVPoint3D<T_> operator+ (const FVPoint3D<T_> &a, const T_ &x) $/;"	f
+operator +	include/FVPoint4D.h	/^FVPoint4D<T_> operator+ (const FVPoint4D<T_> &a, const FVPoint4D<T_> &b) $/;"	f
+operator +	include/FVPoint4D.h	/^FVPoint4D<T_> operator+ (const FVPoint4D<T_> &a, const T_ &x) $/;"	f
+operator +	include/FVVect.h	/^FVVect<T_> operator+(const FVVect<T_> &x, const FVVect<T_> &y)$/;"	f
+operator ++	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator operator++(int)$/;"	f	class:rapidxml::attribute_iterator
+operator ++	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator& operator++()$/;"	f	class:rapidxml::attribute_iterator
+operator ++	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator operator++(int)$/;"	f	class:rapidxml::node_iterator
+operator ++	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator& operator++()$/;"	f	class:rapidxml::node_iterator
+operator +=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator+=(const FVDenseM<T_> &m)$/;"	f	class:FVDenseM
+operator +=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator+=(const T_ &val)$/;"	f	class:FVDenseM
+operator +=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator +=	(const FVPoint2D<T> &p)	{ x += p.x; y += p.y; return *this;}$/;"	f	class:FVL::FVPoint2D
+operator +=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator +=	(const T &a) { x += a;	y += a;	return *this;}$/;"	f	class:FVL::FVPoint2D
+operator +=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator+=(const FVPoint1D<T_> &p) { x+=p.x; return *this; }$/;"	f	class:FVPoint1D
+operator +=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator+=(const T_ &a) { x+=a;  return *this; }$/;"	f	class:FVPoint1D
+operator +=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator+=(const FVPoint2D<T_> &p) { x+=p.x; y+=p.y; return *this; }$/;"	f	class:FVPoint2D
+operator +=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator+=(const T_ &a) { x+=a; y+=a;  return *this; }$/;"	f	class:FVPoint2D
+operator +=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator+=(const FVPoint3D<T_> &p) { x+=p.x; y+=p.y; z+=p.z; return *this; }$/;"	f	class:FVPoint3D
+operator +=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator+=(const T_ &a) { x+=a; y+=a; z+=a; return *this; }$/;"	f	class:FVPoint3D
+operator +=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator+=(const FVPoint4D<T_> &p) { x+=p.x; y+=p.y; z+=p.z; t+=p.t;return *this; }$/;"	f	class:FVPoint4D
+operator +=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator+=(const T_ &a) { x+=a; y+=a; z+=a; t+=a;return *this; }$/;"	f	class:FVPoint4D
+operator +=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator+=(const FVVect<T_> &x)$/;"	f	class:FVVect
+operator +=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator+=(const T_ &a)$/;"	f	class:FVVect
+operator -	include/FVDenseM.h	/^FVDenseM<T_> operator-(const FVDenseM<T_> &aa, const FVDenseM<T_> &bb)$/;"	f
+operator -	include/FVDenseM.h	/^FVDenseM<T_> operator-(const FVDenseM<T_> &aa,const T_ &val)$/;"	f
+operator -	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a) {return FVPoint2D<T>(-a.x, -a.y);}$/;"	f	namespace:FVL
+operator -	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x-b.x, a.y-b.y);}$/;"	f	namespace:FVL
+operator -	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator - (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x-x, a.y-x);}$/;"	f	namespace:FVL
+operator -	include/FVPoint1D.h	/^FVPoint1D<T_> operator- (const FVPoint1D<T_> &a) $/;"	f
+operator -	include/FVPoint1D.h	/^FVPoint1D<T_> operator- (const FVPoint1D<T_> &a, const FVPoint1D<T_> &b) $/;"	f
+operator -	include/FVPoint1D.h	/^FVPoint1D<T_> operator- (const FVPoint1D<T_> &a, const T_ &x) $/;"	f
+operator -	include/FVPoint2D.h	/^FVPoint2D<T_> operator- (const FVPoint2D<T_> &a) $/;"	f
+operator -	include/FVPoint2D.h	/^FVPoint2D<T_> operator- (const FVPoint2D<T_> &a, const FVPoint2D<T_> &b) $/;"	f
+operator -	include/FVPoint2D.h	/^FVPoint2D<T_> operator- (const FVPoint2D<T_> &a, const T_ &x) $/;"	f
+operator -	include/FVPoint3D.h	/^FVPoint3D<T_> operator- (const FVPoint3D<T_> &a) $/;"	f
+operator -	include/FVPoint3D.h	/^FVPoint3D<T_> operator- (const FVPoint3D<T_> &a, const FVPoint3D<T_> &b) $/;"	f
+operator -	include/FVPoint3D.h	/^FVPoint3D<T_> operator- (const FVPoint3D<T_> &a, const T_ &x) $/;"	f
+operator -	include/FVPoint4D.h	/^FVPoint4D<T_> operator- (const FVPoint4D<T_> &a) $/;"	f
+operator -	include/FVPoint4D.h	/^FVPoint4D<T_> operator- (const FVPoint4D<T_> &a, const FVPoint4D<T_> &b) $/;"	f
+operator -	include/FVPoint4D.h	/^FVPoint4D<T_> operator- (const FVPoint4D<T_> &a, const T_ &x) $/;"	f
+operator -	include/FVVect.h	/^FVVect<T_> operator-(const FVVect<T_> &x, const FVVect<T_> &y)$/;"	f
+operator --	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator operator--(int)$/;"	f	class:rapidxml::attribute_iterator
+operator --	include/rapidxml/rapidxml_iterators.hpp	/^        attribute_iterator& operator--()$/;"	f	class:rapidxml::attribute_iterator
+operator --	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator operator--(int)$/;"	f	class:rapidxml::node_iterator
+operator --	include/rapidxml/rapidxml_iterators.hpp	/^        node_iterator& operator--()$/;"	f	class:rapidxml::node_iterator
+operator -=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator-=(const FVDenseM<T_> &m)$/;"	f	class:FVDenseM
+operator -=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator-=(const T_ &val)$/;"	f	class:FVDenseM
+operator -=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator -=	(const FVPoint2D<T> &p)	{ x -= p.x; y -= p.y; return *this;}$/;"	f	class:FVL::FVPoint2D
+operator -=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator -=	(const T &a) { x -= a;	y -= a;	return *this;}$/;"	f	class:FVL::FVPoint2D
+operator -=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator-=(const FVPoint1D<T_> &p) { x-=p.x;   return *this; }$/;"	f	class:FVPoint1D
+operator -=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator-=(const T_ &a) { x-=a;  return *this; }$/;"	f	class:FVPoint1D
+operator -=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator-=(const FVPoint2D<T_> &p) { x-=p.x; y-=p.y;  return *this; }$/;"	f	class:FVPoint2D
+operator -=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator-=(const T_ &a) { x-=a; y-=a;  return *this; }$/;"	f	class:FVPoint2D
+operator -=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator-=(const FVPoint3D<T_> &p) { x-=p.x; y-=p.y; z-=p.z; return *this; }$/;"	f	class:FVPoint3D
+operator -=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator-=(const T_ &a) { x-=a; y-=a; z-=a; return *this; }$/;"	f	class:FVPoint3D
+operator -=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator-=(const FVPoint4D<T_> &p) { x-=p.x; y-=p.y; z-=p.z; t-=p.t;return *this; }$/;"	f	class:FVPoint4D
+operator -=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator-=(const T_ &a) { x-=a; y-=a; z-=a; t-=a;return *this; }$/;"	f	class:FVPoint4D
+operator -=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator-=(const FVVect<T_> &x)$/;"	f	class:FVVect
+operator -=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator-=(const T_ &a)$/;"	f	class:FVVect
+operator ->	include/rapidxml/rapidxml_iterators.hpp	/^        pointer operator->() const$/;"	f	class:rapidxml::attribute_iterator
+operator ->	include/rapidxml/rapidxml_iterators.hpp	/^        pointer operator->() const$/;"	f	class:rapidxml::node_iterator
+operator /	include/FVDenseM.h	/^FVDenseM<T_> operator\/(const FVDenseM<T_> &aa,const T_ &val)$/;"	f
+operator /	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator \/ (const FVPoint2D<T> &a, const FVPoint2D<T> &b) {return FVPoint2D<T>(a.x\/b.x, a.y\/b.y);}$/;"	f	namespace:FVL
+operator /	include/FVL/FVPoint2D.h	/^	template<class T> FVPoint2D<T> operator \/ (const FVPoint2D<T> &a, const T &x) {return FVPoint2D<T>(a.x\/x, a.y\/x);}$/;"	f	namespace:FVL
+operator /	include/FVPoint1D.h	/^FVPoint1D<T_> operator\/ (const FVPoint1D<T_> &b, const T_ &x) $/;"	f
+operator /	include/FVPoint2D.h	/^FVPoint2D<T_> operator\/ (const FVPoint2D<T_> &b, const T_ &x) $/;"	f
+operator /	include/FVPoint3D.h	/^FVPoint3D<T_> operator\/ (const FVPoint3D<T_> &b, const T_ &a) $/;"	f
+operator /	include/FVPoint4D.h	/^FVPoint4D<T_> operator\/ (const FVPoint4D<T_> &b, const T_ &a) $/;"	f
+operator /=	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator\/=(const T_ &val)$/;"	f	class:FVDenseM
+operator /=	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator \/=	(const T &a) { x \/= a;	y \/= a;	return *this;}$/;"	f	class:FVL::FVPoint2D
+operator /=	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator\/=(const T_ &a) { x\/=a;  return *this; }$/;"	f	class:FVPoint1D
+operator /=	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator\/=(const T_ &a) { x\/=a; y\/=a;  return *this; }$/;"	f	class:FVPoint2D
+operator /=	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator\/=(const T_ &a) { x\/=a; y\/=a; z\/=a; return *this; }$/;"	f	class:FVPoint3D
+operator /=	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator\/=(const T_ &a) { x\/=a; y\/=a; z\/=a; t\/=a;return *this; }$/;"	f	class:FVPoint4D
+operator /=	include/FVSparseM.h	/^FVSparseM<T_> & FVSparseM<T_>::operator\/=(const T_ &val)$/;"	f	class:FVSparseM
+operator /=	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator\/=(const T_ &a)$/;"	f	class:FVVect
+operator <<	include/FVL/FVPoint2D.h	/^	template<class T> std::ostream & operator << (std::ostream &s, const FVPoint2D<T> &p) {$/;"	f	namespace:FVL
+operator <<	include/FVPoint1D.h	/^std::ostream & operator<<(std::ostream &s, const FVPoint1D<T_> &a)$/;"	f
+operator <<	include/FVPoint2D.h	/^std::ostream & operator<<(std::ostream &s, const FVPoint2D<T_> &a)$/;"	f
+operator <<	include/FVPoint3D.h	/^std::ostream & operator<<(std::ostream &s, const FVPoint3D<T_> &a)$/;"	f
+operator <<	include/FVPoint4D.h	/^std::ostream & operator<<(std::ostream &s, const FVPoint4D<T_> &a)$/;"	f
+operator <<	include/rapidxml/rapidxml_print.hpp	/^    inline std::basic_ostream<Ch> &operator <<(std::basic_ostream<Ch> &out, const xml_node<Ch> &node)$/;"	f	namespace:rapidxml
+operator <<	src/old/old.msh_gen/main.cpp	/^ostream& operator << (ostream &stream, const Edge &e) {$/;"	f
+operator <<	src/old/old.msh_gen/main.cpp	/^ostream& operator << (ostream &stream, const Vertex &v) {$/;"	f
+operator =	include/FVDenseM.h	/^FVDenseM<T_> & FVDenseM<T_>::operator=(const T_ &val)$/;"	f	class:FVDenseM
+operator =	include/FVL/FVPoint2D.h	/^			FVPoint2D<T> & operator =	(const T &a) { x = a;	y = a;	return *this;}$/;"	f	class:FVL::FVPoint2D
+operator =	include/FVL/templates/FVArray.hpp	/^		const FVArray<T> & FVArray<T>::operator = (const FVArray<T> & copy) {$/;"	f	class:FVL::FVArray
+operator =	include/FVPoint1D.h	/^    FVPoint1D<T_> & operator=(const T_ &a)  { x = a; return *this; }$/;"	f	class:FVPoint1D
+operator =	include/FVPoint2D.h	/^    FVPoint2D<T_> & operator=(const T_ &a)  { x = y = a; return *this; }$/;"	f	class:FVPoint2D
+operator =	include/FVPoint3D.h	/^    FVPoint3D<T_> & operator=(const T_ &a)  { x = y = z = a; return *this; }$/;"	f	class:FVPoint3D
+operator =	include/FVPoint4D.h	/^    FVPoint4D<T_> & operator=(const T_ &a)  { x = y = z = t = a; return *this; }$/;"	f	class:FVPoint4D
+operator =	include/FVVect.h	/^FVVect<T_> &FVVect<T_>::operator=(const T_ &a)$/;"	f	class:FVVect
+operator ==	include/rapidxml/rapidxml_iterators.hpp	/^        bool operator ==(const attribute_iterator<Ch> &rhs)$/;"	f	class:rapidxml::attribute_iterator
+operator ==	include/rapidxml/rapidxml_iterators.hpp	/^        bool operator ==(const node_iterator<Ch> &rhs)$/;"	f	class:rapidxml::node_iterator
+operator []	include/FVL/templates/FVArray.hpp	/^		T & FVArray<T>::operator [] (int index) {$/;"	f	class:FVL::FVArray
+operator []	include/FVL/templates/FVArray.hpp	/^		const T & FVArray<T>::operator [] (int index) const {$/;"	f	class:FVL::FVArray
+out_stream	include/FVL/FVXMLWriter.h	/^			ofstream out_stream;$/;"	m	class:FVL::FVXMLWriter
+output	src/bic.polu.clean/polu.clean.cpp	/^			string output;$/;"	m	struct:_parameters::__anon2::__anon3	file:
+output	src/libfv/FVErr.cpp	/^	void FVErr::output(FV_LogType type, string &msg) {$/;"	f	class:FVL::FVErr
+output	src/old/old.cuda_test/parameters.h	/^			string output;$/;"	m	struct:_parameters::__anon14::__anon15
+output	src/old/old.polu.cuda.no_reduction/parameters.h	/^			string output;$/;"	m	struct:_parameters::__anon9::__anon10
+output	src/old/old.polu.cuda/parameters.h	/^			string output;$/;"	m	struct:_parameters::__anon19::__anon20
+param_list	include/FVL/FVParameters.h	/^		xml_node<> *param_list;$/;"	m	class:FVL::FVParameters
+parent	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parent() const$/;"	f	class:rapidxml::xml_base
+parse	include/rapidxml/rapidxml.hpp	/^        void parse(Ch *text)$/;"	f	class:rapidxml::xml_document
+parse_and_append_data	include/rapidxml/rapidxml.hpp	/^        Ch parse_and_append_data(xml_node<Ch> *node, Ch *&text, Ch *contents_start)$/;"	f	class:rapidxml::xml_document
+parse_bom	include/rapidxml/rapidxml.hpp	/^        void parse_bom(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_cdata	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_cdata(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_comment	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_comment(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_comment_nodes	include/rapidxml/rapidxml.hpp	/^    const int parse_comment_nodes = 0x40;$/;"	m	namespace:rapidxml
+parse_declaration_node	include/rapidxml/rapidxml.hpp	/^    const int parse_declaration_node = 0x20;$/;"	m	namespace:rapidxml
+parse_default	include/rapidxml/rapidxml.hpp	/^    const int parse_default = 0;$/;"	m	namespace:rapidxml
+parse_doctype	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_doctype(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_doctype_node	include/rapidxml/rapidxml.hpp	/^    const int parse_doctype_node = 0x80;$/;"	m	namespace:rapidxml
+parse_element	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_element(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_extension	src/bic.fvcm/fvcm.cpp	/^extension parse_extension (string ext_str)$/;"	f
+parse_fastest	include/rapidxml/rapidxml.hpp	/^    const int parse_fastest = parse_non_destructive | parse_no_data_nodes;$/;"	m	namespace:rapidxml
+parse_full	include/rapidxml/rapidxml.hpp	/^    const int parse_full = parse_declaration_node | parse_comment_nodes | parse_doctype_node | parse_pi_nodes | parse_validate_closing_tags;$/;"	m	namespace:rapidxml
+parse_no_data_nodes	include/rapidxml/rapidxml.hpp	/^    const int parse_no_data_nodes = 0x1;            $/;"	m	namespace:rapidxml
+parse_no_element_values	include/rapidxml/rapidxml.hpp	/^    const int parse_no_element_values = 0x2;$/;"	m	namespace:rapidxml
+parse_no_entity_translation	include/rapidxml/rapidxml.hpp	/^    const int parse_no_entity_translation = 0x8;$/;"	m	namespace:rapidxml
+parse_no_string_terminators	include/rapidxml/rapidxml.hpp	/^    const int parse_no_string_terminators = 0x4;$/;"	m	namespace:rapidxml
+parse_no_utf8	include/rapidxml/rapidxml.hpp	/^    const int parse_no_utf8 = 0x10;$/;"	m	namespace:rapidxml
+parse_node	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_node(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_node_attributes	include/rapidxml/rapidxml.hpp	/^        void parse_node_attributes(Ch *&text, xml_node<Ch> *node)$/;"	f	class:rapidxml::xml_document
+parse_node_contents	include/rapidxml/rapidxml.hpp	/^        void parse_node_contents(Ch *&text, xml_node<Ch> *node)$/;"	f	class:rapidxml::xml_document
+parse_non_destructive	include/rapidxml/rapidxml.hpp	/^    const int parse_non_destructive = parse_no_string_terminators | parse_no_entity_translation;$/;"	m	namespace:rapidxml
+parse_normalize_whitespace	include/rapidxml/rapidxml.hpp	/^    const int parse_normalize_whitespace = 0x800;$/;"	m	namespace:rapidxml
+parse_pi	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_pi(Ch *&text)$/;"	f	class:rapidxml::xml_document
+parse_pi_nodes	include/rapidxml/rapidxml.hpp	/^    const int parse_pi_nodes = 0x100;$/;"	m	namespace:rapidxml
+parse_trim_whitespace	include/rapidxml/rapidxml.hpp	/^    const int parse_trim_whitespace = 0x400;$/;"	m	namespace:rapidxml
+parse_validate_closing_tags	include/rapidxml/rapidxml.hpp	/^    const int parse_validate_closing_tags = 0x200;$/;"	m	namespace:rapidxml
+parse_xml_declaration	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *parse_xml_declaration(Ch *&text)$/;"	f	class:rapidxml::xml_document
+perimeter	include/FVCell2D.h	/^double perimeter,area;$/;"	m	class:FVCell2D
+perimeter	include/FVFace3D.h	/^double perimeter,area;$/;"	m	class:FVFace3D
+pointer	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_attribute<Ch> *pointer;$/;"	t	class:rapidxml::attribute_iterator
+pointer	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_node<Ch> *pointer;$/;"	t	class:rapidxml::node_iterator
+polution	src/bic.polu.clean/polu.clean.cpp	/^		} polution;$/;"	m	struct:_parameters::__anon2	typeref:struct:_parameters::__anon2::__anon3	file:
+polution	src/bic.velocity/main.cpp	/^		} polution;$/;"	m	struct:Parameters::__anon7	typeref:struct:Parameters::__anon7::__anon8	file:
+polution	src/old/old.cuda_test/parameters.h	/^		} polution;$/;"	m	struct:_parameters::__anon14	typeref:struct:_parameters::__anon14::__anon15
+polution	src/old/old.polu.cuda.no_reduction/parameters.h	/^		} polution;$/;"	m	struct:_parameters::__anon9	typeref:struct:_parameters::__anon9::__anon10
+polution	src/old/old.polu.cuda/parameters.h	/^		} polution;$/;"	m	struct:_parameters::__anon19	typeref:struct:_parameters::__anon19::__anon20
+pos	include/FVSparseM.h	/^    size_t pos;$/;"	m	class:SparseNode
+pos	include/FVVect.h	/^size_t  pos;$/;"	m	class:FVVect
+pos_bound_e	include/FVMesh2D.h	/^    size_t pos_v,pos_c,pos_e,pos_bound_e;$/;"	m	class:FVMesh2D
+pos_bound_f	include/FVMesh3D.h	/^    size_t pos_v,pos_c,pos_e,pos_f,pos_bound_f;$/;"	m	class:FVMesh3D
+pos_bound_v	include/FVMesh1D.h	/^    size_t pos_v,pos_c,pos_bound_v;$/;"	m	class:FVMesh1D
+pos_c	include/FVMesh1D.h	/^    size_t pos_v,pos_c,pos_bound_v;$/;"	m	class:FVMesh1D
+pos_c	include/FVMesh2D.h	/^    size_t pos_v,pos_c,pos_e,pos_bound_e;$/;"	m	class:FVMesh2D
+pos_c	include/FVMesh3D.h	/^    size_t pos_v,pos_c,pos_e,pos_f,pos_bound_f;$/;"	m	class:FVMesh3D
+pos_c	include/FVVertex2D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex2D
+pos_c	include/FVVertex3D.h	/^size_t label, code, nb_cell,pos_c;$/;"	m	class:FVVertex3D
+pos_e	include/FVCell2D.h	/^size_t pos_e,pos_v;$/;"	m	class:FVCell2D
+pos_e	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+pos_e	include/FVMesh2D.h	/^    size_t pos_v,pos_c,pos_e,pos_bound_e;$/;"	m	class:FVMesh2D
+pos_e	include/FVMesh3D.h	/^    size_t pos_v,pos_c,pos_e,pos_f,pos_bound_f;$/;"	m	class:FVMesh3D
+pos_f	include/FVCell3D.h	/^size_t pos_f,pos_v;$/;"	m	class:FVCell3D
+pos_f	include/FVMesh3D.h	/^    size_t pos_v,pos_c,pos_e,pos_f,pos_bound_f;$/;"	m	class:FVMesh3D
+pos_v	include/FVCell2D.h	/^size_t pos_e,pos_v;$/;"	m	class:FVCell2D
+pos_v	include/FVCell3D.h	/^size_t pos_f,pos_v;$/;"	m	class:FVCell3D
+pos_v	include/FVFace3D.h	/^size_t label, code,nb_vertex,nb_edge,nb_cell,pos_e,pos_v;$/;"	m	class:FVFace3D
+pos_v	include/FVMesh1D.h	/^    size_t pos_v,pos_c,pos_bound_v;$/;"	m	class:FVMesh1D
+pos_v	include/FVMesh2D.h	/^    size_t pos_v,pos_c,pos_e,pos_bound_e;$/;"	m	class:FVMesh2D
+pos_v	include/FVMesh3D.h	/^    size_t pos_v,pos_c,pos_e,pos_f,pos_bound_f;$/;"	m	class:FVMesh3D
+potential	src/bic.velocity/main.cpp	/^		string potential;$/;"	m	struct:Parameters::__anon7	file:
+prepend_attribute	include/rapidxml/rapidxml.hpp	/^        void prepend_attribute(xml_attribute<Ch> *attribute)$/;"	f	class:rapidxml::xml_node
+prepend_node	include/rapidxml/rapidxml.hpp	/^        void prepend_node(xml_node<Ch> *child)$/;"	f	class:rapidxml::xml_node
+previous_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute<Ch> *previous_attribute(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_attribute
+previous_begin	include/rapidxml/rapidxml.hpp	/^            char *previous_begin;$/;"	m	struct:rapidxml::memory_pool::header
+previous_sibling	include/rapidxml/rapidxml.hpp	/^        xml_node<Ch> *previous_sibling(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const$/;"	f	class:rapidxml::xml_node
+print	include/rapidxml/rapidxml_print.hpp	/^    inline OutIt print(OutIt out, const xml_node<Ch> &node, int flags = 0)$/;"	f	namespace:rapidxml
+print	include/rapidxml/rapidxml_print.hpp	/^    inline std::basic_ostream<Ch> &print(std::basic_ostream<Ch> &out, const xml_node<Ch> &node, int flags = 0)$/;"	f	namespace:rapidxml
+printArray	include/Table.h	/^void printArray()$/;"	f	class:Table
+print_attributes	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_attributes(OutIt out, const xml_node<Ch> *node, int flags)$/;"	f	namespace:rapidxml::internal
+print_cdata_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_cdata_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_children	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_children(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_comment_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_comment_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_data_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_data_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_declaration_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_declaration_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_doctype_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_doctype_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_element_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_element_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_no_indenting	include/rapidxml/rapidxml_print.hpp	/^    const int print_no_indenting = 0x1;   \/\/!< Printer flag instructing the printer to suppress indenting of XML. See print() function.$/;"	m	namespace:rapidxml
+print_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_pi_node	include/rapidxml/rapidxml_print.hpp	/^        inline OutIt print_pi_node(OutIt out, const xml_node<Ch> *node, int flags, int indent)$/;"	f	namespace:rapidxml::internal
+print_usage	src/bic.fvcm/fvcm.cpp	/^void print_usage (string command, ostream& out)$/;"	f
+put	src/libfv/FVio.cpp	/^void FVio::put(FVVect <FVPoint2D<double> >&u, const double time,const  string &name)$/;"	f	class:FVio
+put	src/libfv/FVio.cpp	/^void FVio::put(FVVect <FVPoint3D<double> >&u, const double time, const string &name)$/;"	f	class:FVio
+put	src/libfv/FVio.cpp	/^void FVio::put(FVVect <double> &u, const double time, const string &name)$/;"	f	class:FVio
+put	src/libfv/FVio.cpp	/^void FVio::put(FVVect <double> &u,FVVect <double> &v, const double time, const string &name)$/;"	f	class:FVio
+put	src/libfv/FVio.cpp	/^void FVio::put(FVVect <double> &u,FVVect <double> &v,FVVect <double> &w, const double time, const string &name)$/;"	f	class:FVio
+rapidxml	include/rapidxml/rapidxml.hpp	/^namespace rapidxml$/;"	n
+rapidxml	include/rapidxml/rapidxml_iterators.hpp	/^namespace rapidxml$/;"	n
+rapidxml	include/rapidxml/rapidxml_print.hpp	/^namespace rapidxml$/;"	n
+rapidxml	include/rapidxml/rapidxml_utils.hpp	/^namespace rapidxml$/;"	n
+read	src/libfv/FVMesh1D.cpp	/^size_t FVMesh1D::read(const char *filename)$/;"	f	class:FVMesh1D
+read	src/libfv/FVMesh2D.cpp	/^size_t FVMesh2D::read(const char *filename)$/;"	f	class:FVMesh2D
+read	src/libfv/FVMesh3D.cpp	/^size_t FVMesh3D::read(const char *filename)$/;"	f	class:FVMesh3D
+readMesh	src/libfv/Gmsh.cpp	/^void Gmsh::readMesh(const char *filename)$/;"	f	class:Gmsh
+readXML	src/libfv/XML.cpp	/^void SparseXML::readXML(const char * filename,string &xml)$/;"	f	class:SparseXML
+read_file	src/libfv/FVXMLReader.cpp	/^	string FVXMLReader::read_file(string filename) {$/;"	f	class:FVL::FVXMLReader
+read_parameters	src/bic.polu.clean/polu.clean.cpp	/^Parameters read_parameters ($/;"	f
+read_parameters	src/bic.velocity/main.cpp	/^void read_parameters($/;"	f
+read_parameters	src/old/old.cuda_test/parameters.cpp	/^Parameters read_parameters (string parameter_filename) {$/;"	f
+read_parameters	src/old/old.polu.cuda.no_reduction/parameters.cpp	/^Parameters read_parameters (string parameter_filename) {$/;"	f
+read_parameters	src/old/old.polu.cuda/parameters.cpp	/^Parameters read_parameters (string parameter_filename) {$/;"	f
+reference	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_attribute<Ch> &reference;$/;"	t	class:rapidxml::attribute_iterator
+reference	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_node<Ch> &reference;$/;"	t	class:rapidxml::node_iterator
+removeComment	src/libfv/XML.cpp	/^void SparseXML::removeComment()$/;"	f	class:SparseXML
+remove_all_attributes	include/rapidxml/rapidxml.hpp	/^        void remove_all_attributes()$/;"	f	class:rapidxml::xml_node
+remove_all_nodes	include/rapidxml/rapidxml.hpp	/^        void remove_all_nodes()$/;"	f	class:rapidxml::xml_node
+remove_attribute	include/rapidxml/rapidxml.hpp	/^        void remove_attribute(xml_attribute<Ch> *where)$/;"	f	class:rapidxml::xml_node
+remove_first_attribute	include/rapidxml/rapidxml.hpp	/^        void remove_first_attribute()$/;"	f	class:rapidxml::xml_node
+remove_first_node	include/rapidxml/rapidxml.hpp	/^        void remove_first_node()$/;"	f	class:rapidxml::xml_node
+remove_last_attribute	include/rapidxml/rapidxml.hpp	/^        void remove_last_attribute()$/;"	f	class:rapidxml::xml_node
+remove_last_node	include/rapidxml/rapidxml.hpp	/^        void remove_last_node()$/;"	f	class:rapidxml::xml_node
+remove_node	include/rapidxml/rapidxml.hpp	/^        void remove_node(xml_node<Ch> *where)$/;"	f	class:rapidxml::xml_node
+resize	include/FVDenseM.h	/^void FVDenseM<T_>::resize(size_t nr, size_t nc)$/;"	f	class:FVDenseM
+resize	include/FVDenseM.h	/^void FVDenseM<T_>::resize(size_t size)$/;"	f	class:FVDenseM
+resize	include/FVSparseM.h	/^void FVSparseM<T_>::resize(size_t nr, size_t nc)$/;"	f	class:FVSparseM
+resize	include/FVSparseM.h	/^void FVSparseM<T_>::resize(size_t size)$/;"	f	class:FVSparseM
+resizeAndsetValue	include/FVSparseM.h	/^void FVSparseM<T_>::resizeAndsetValue(size_t i, size_t j, const T_ &val)    $/;"	f	class:FVSparseM
+rightCell	include/FVEdge2D.h	/^FVCell2D *leftCell,*rightCell;  \/\/ the two cells$/;"	m	class:FVEdge2D
+rightCell	include/FVFace3D.h	/^FVCell3D *leftCell,*rightCell;  \/\/ the two cells$/;"	m	class:FVFace3D
+rightCell	include/FVVertex1D.h	/^FVCell1D *leftCell,*rightCell;$/;"	m	class:FVVertex1D
+root	include/FVL/FVXMLReader.h	/^			xml_node<> *root;$/;"	m	class:FVL::FVXMLReader
+root	include/FVL/FVXMLWriter.h	/^			xml_node<> *root;$/;"	m	class:FVL::FVXMLWriter
+row	include/FVSparseM.h	/^std::vector<Tab_index *> row,col; \/\/ index table$/;"	m	class:FVSparseM
+row_perm	include/FVDenseM.h	/^valarray<size_t> row_perm; \/\/ the row permutation index vector for the LU factorization$/;"	m	class:FVDenseM
+save	src/libfv/FVXMLWriter.cpp	/^	void FVXMLWriter::save(string filename) {$/;"	f	class:FVL::FVXMLWriter
+secondVertex	include/FVCell1D.h	/^FVVertex1D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVCell1D
+secondVertex	include/FVEdge2D.h	/^FVVertex2D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVEdge2D
+secondVertex	include/FVEdge3D.h	/^FVVertex3D *firstVertex,*secondVertex; \/\/ the two vertices$/;"	m	class:FVEdge3D
+second_normal	include/FVCell1D.h	/^FVPoint1D<double> first_normal,second_normal; \/\/ normal exterior$/;"	m	class:FVCell1D
+setCode2Edge	include/FVCell2D.h	/^     void setCode2Edge(size_t val=0)$/;"	f	class:FVCell2D
+setCode2Edge	include/FVCell3D.h	/^     void setCode2Edge(size_t val=0)$/;"	f	class:FVCell3D
+setCode2Edge	include/FVFace3D.h	/^     void setCode2Edge(size_t val=0)$/;"	f	class:FVFace3D
+setCode2Face	include/FVCell3D.h	/^     void setCode2Face(size_t val=0)$/;"	f	class:FVCell3D
+setCode2Vertex	include/FVCell1D.h	/^    void setCode2Vertex(size_t val=0)$/;"	f	class:FVCell1D
+setCode2Vertex	include/FVCell2D.h	/^     void setCode2Vertex(size_t val=0)$/;"	f	class:FVCell2D
+setCode2Vertex	include/FVCell3D.h	/^     void setCode2Vertex(size_t val=0)$/;"	f	class:FVCell3D
+setCode2Vertex	include/FVEdge2D.h	/^    void setCode2Vertex(size_t val=0)$/;"	f	class:FVEdge2D
+setCode2Vertex	include/FVEdge3D.h	/^void setCode2Vertex(size_t val=0)$/;"	f	class:FVEdge3D
+setCode2Vertex	include/FVFace3D.h	/^     void setCode2Vertex(size_t val=0)$/;"	f	class:FVFace3D
+setColumn	include/FVDenseM.h	/^void FVDenseM<T_>::setColumn(size_t j, const FVVect<T_> &column) $/;"	f	class:FVDenseM
+setLine	include/FVDenseM.h	/^void FVDenseM<T_>::setLine(size_t i, const FVVect<T_> &line) $/;"	f	class:FVDenseM
+setName	include/FVMesh1D.h	/^     void setName(const char * name){_name=name;}     $/;"	f	class:FVMesh1D
+setName	include/FVMesh2D.h	/^     void setName(const char * name){_name=name;}   $/;"	f	class:FVMesh2D
+setName	include/FVMesh3D.h	/^     void setName(const char * name){_name=name;}   $/;"	f	class:FVMesh3D
+setName	include/FVio.h	/^    void setName(string &name){_name=name;} $/;"	f	class:FVio
+setPolynomialDegree	include/FVRecons1D.h	/^void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=_degree;}    $/;"	f	class:FVRecons1D
+setPolynomialDegree	include/FVRecons2D.h	/^void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=((_degree+2)*(_degree+1))\/2-1;}    $/;"	f	class:FVRecons2D
+setPolynomialDegree	include/FVRecons3D.h	/^void setPolynomialDegree(size_t degree){_degree=degree;_Ncoef=((_degree+3)*(_degree)*(_degree+1))\/6-1;}    $/;"	f	class:FVRecons3D
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVCell1D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVCell2D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVCell3D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVEdge2D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVEdge3D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVFace3D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVVertex1D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVVertex2D *ptr )$/;"	f	class:FVStencil
+setReferenceGeometry	src/libfv/FVStencil.cpp	/^void FVStencil::setReferenceGeometry(FVVertex3D *ptr )$/;"	f	class:FVStencil
+setReferencePoint	include/FVRecons1D.h	/^void setReferencePoint(FVPoint1D<double> P){_ref_point=P;}$/;"	f	class:FVRecons1D
+setReferencePoint	include/FVRecons1D.h	/^void setReferencePoint(double x){_ref_point.x=x;}$/;"	f	class:FVRecons1D
+setReferencePoint	include/FVRecons2D.h	/^void setReferencePoint(FVPoint2D<double> P){_ref_point=P;}$/;"	f	class:FVRecons2D
+setReferencePoint	include/FVRecons3D.h	/^void setReferencePoint(FVPoint3D<double> P){_ref_point=P;}$/;"	f	class:FVRecons3D
+setStencil	include/FVRecons1D.h	/^void setStencil(FVStencil &st){ FVRecons1D::setStencil(&st); }      $/;"	f	class:FVRecons1D
+setStencil	include/FVRecons1D.h	/^void setStencil(FVStencil &st, size_t degree){ FVRecons1D::setStencil(&st,degree); }      $/;"	f	class:FVRecons1D
+setStencil	include/FVRecons1D.h	/^void setStencil(FVStencil *ptr_s)$/;"	f	class:FVRecons1D
+setStencil	include/FVRecons1D.h	/^void setStencil(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons1D
+setStencil	include/FVRecons2D.h	/^void setStencil(FVStencil &st){ FVRecons2D::setStencil(&st); }      $/;"	f	class:FVRecons2D
+setStencil	include/FVRecons2D.h	/^void setStencil(FVStencil &st, size_t degree){ FVRecons2D::setStencil(&st,degree); }      $/;"	f	class:FVRecons2D
+setStencil	include/FVRecons2D.h	/^void setStencil(FVStencil *ptr_s)$/;"	f	class:FVRecons2D
+setStencil	include/FVRecons2D.h	/^void setStencil(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons2D
+setStencil	include/FVRecons3D.h	/^void setStencil(FVStencil &st){ FVRecons3D::setStencil(&st); }     $/;"	f	class:FVRecons3D
+setStencil	include/FVRecons3D.h	/^void setStencil(FVStencil &st, size_t degree){ FVRecons3D::setStencil(&st,degree); }      $/;"	f	class:FVRecons3D
+setStencil	include/FVRecons3D.h	/^void setStencil(FVStencil *ptr_s)$/;"	f	class:FVRecons3D
+setStencil	include/FVRecons3D.h	/^void setStencil(FVStencil *ptr_s, size_t degree)$/;"	f	class:FVRecons3D
+setTime	include/FVio.h	/^    void setTime(double &time){_time=time;}$/;"	f	class:FVio
+setValue	include/FVDenseM.h	/^void FVDenseM<T_>::setValue(size_t i, size_t j, const T_ &val) $/;"	f	class:FVDenseM
+setValue	include/FVSparseM.h	/^void FVSparseM<T_>::setValue(size_t i, size_t j, const T_ &val)$/;"	f	class:FVSparseM
+setVectorCell1D	include/FVRecons1D.h	/^void setVectorCell1D( FVVect<double> & u){_Cell1DVect=&u;}$/;"	f	class:FVRecons1D
+setVectorCell2D	include/FVRecons2D.h	/^void setVectorCell2D( FVVect<double> & u)  {_Cell2DVect=&u;}$/;"	f	class:FVRecons2D
+setVectorCell3D	include/FVRecons3D.h	/^void setVectorCell3D( FVVect<double> & u){_Cell3DVect=&u;}$/;"	f	class:FVRecons3D
+setVectorEdge2D	include/FVRecons2D.h	/^void setVectorEdge2D( FVVect<double> & u)  {_Edge2DVect=&u;}$/;"	f	class:FVRecons2D
+setVectorEdge3D	include/FVRecons3D.h	/^void setVectorEdge3D( FVVect<double> & u){_Edge3DVect=&u;}$/;"	f	class:FVRecons3D
+setVectorFace3D	include/FVRecons3D.h	/^void setVectorFace3D( FVVect<double> & u){_Face3DVect=&u;}$/;"	f	class:FVRecons3D
+setVectorVertex1D	include/FVRecons1D.h	/^void setVectorVertex1D( FVVect<double> & u){_Vertex1DVect=&u;}$/;"	f	class:FVRecons1D
+setVectorVertex2D	include/FVRecons2D.h	/^void setVectorVertex2D( FVVect<double> & u){_Vertex2DVect=&u;}$/;"	f	class:FVRecons2D
+setVectorVertex3D	include/FVRecons3D.h	/^void setVectorVertex3D( FVVect<double> & u){_Vertex3DVect=&u;}$/;"	f	class:FVRecons3D
+set_allocator	include/rapidxml/rapidxml.hpp	/^        void set_allocator(alloc_func *af, free_func *ff)$/;"	f	class:rapidxml::memory_pool
+show	include/FVDenseM.h	/^void FVDenseM<T_>::show()$/;"	f	class:FVDenseM
+show	include/FVPoint1D.h	/^    void show()$/;"	f	class:FVPoint1D
+show	include/FVPoint2D.h	/^    void show()$/;"	f	class:FVPoint2D
+show	include/FVPoint3D.h	/^    void show()$/;"	f	class:FVPoint3D
+show	include/FVPoint4D.h	/^    void show()$/;"	f	class:FVPoint4D
+show	include/FVSparseM.h	/^void FVSparseM<T_>::show()$/;"	f	class:FVSparseM
+show	include/FVVect.h	/^void FVVect<T_>::show()$/;"	f	class:FVVect
+show	include/Gmsh.h	/^void show()$/;"	f	class:GMElement
+show	src/libfv/FVStencil.cpp	/^void FVStencil::show()$/;"	f	class:FVStencil
+showXML	include/FVio.h	/^    void showXML(){cout << _xml<<endl;}  \/\/ for internal purpose to check the string$/;"	f	class:FVio
+size	include/FVL/CFVMat.h	/^				unsigned int size() 	const { return mat_size; }$/;"	f	class:FVL::CFVMat
+size	include/FVL/CFVPoints2D.h	/^				unsigned int size() {$/;"	f	class:FVL::CFVPoints2D
+size	include/FVL/templates/FVArray.hpp	/^		unsigned int FVArray<T>::size() const {$/;"	f	class:FVL::FVArray
+size	include/rapidxml/rapidxml_utils.hpp	/^        std::size_t size() const$/;"	f	class:rapidxml::file
+skip	include/rapidxml/rapidxml.hpp	/^        static void skip(Ch *&text)$/;"	f	class:rapidxml::xml_document
+skip_and_expand_character_refs	include/rapidxml/rapidxml.hpp	/^        static Ch *skip_and_expand_character_refs(Ch *&text)$/;"	f	class:rapidxml::xml_document
+start	src/libfv/CFVProfile.cpp	/^	void CFVProfile::start() {$/;"	f	class:FVL::CFVProfile
+start_t	include/FVL/CFVProfile.h	/^		cudaEvent_t start_t, stop_t;$/;"	m	class:FVL::CFVProfile
+stop	src/libfv/CFVProfile.cpp	/^	void CFVProfile::stop() {$/;"	f	class:FVL::CFVProfile
+stop_t	include/FVL/CFVProfile.h	/^		cudaEvent_t start_t, stop_t;$/;"	m	class:FVL::CFVProfile
+str_cast	include/FVL/templates/FVXMLReader.hpp	/^		bool FVXMLReader::str_cast(T &t, const string &s) {$/;"	f	class:FVL::FVXMLReader
+stream	include/FVL/CFVProfile.h	/^		static FVLog stream; \/\/TODO por esta coisa privada$/;"	m	class:FVL::CFVProfile
+surface	include/FVCell3D.h	/^double surface,volume;$/;"	m	class:FVCell3D
+t	include/FVPoint4D.h	/^T_ x,y,z,t;$/;"	m	class:FVPoint4D
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::attribute_name_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::attribute_value_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::attribute_value_pure_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::node_name_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::text_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::text_pure_no_ws_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::text_pure_with_ws_pred
+test	include/rapidxml/rapidxml.hpp	/^            static unsigned char test(Ch ch)$/;"	f	struct:rapidxml::xml_document::whitespace_pred
+text_pred	include/rapidxml/rapidxml.hpp	/^        struct text_pred$/;"	s	class:rapidxml::xml_document
+text_pure_no_ws_pred	include/rapidxml/rapidxml.hpp	/^        struct text_pure_no_ws_pred$/;"	s	class:rapidxml::xml_document
+text_pure_with_ws_pred	include/rapidxml/rapidxml.hpp	/^        struct text_pure_with_ws_pred$/;"	s	class:rapidxml::xml_document
+threshold	src/bic.polu.clean/polu.clean.cpp	/^		double threshold;$/;"	m	struct:_parameters::__anon6	file:
+threshold	src/old/old.cuda_test/parameters.h	/^		double threshold;$/;"	m	struct:_parameters::__anon18
+threshold	src/old/old.polu.cuda.no_reduction/parameters.h	/^		double threshold;$/;"	m	struct:_parameters::__anon13
+threshold	src/old/old.polu.cuda/parameters.h	/^		double threshold;$/;"	m	struct:_parameters::__anon23
+time	include/FVL/CFVProfile.h	/^		float time;$/;"	m	class:FVL::CFVProfile
+time	src/bic.polu.clean/polu.clean.cpp	/^	} time;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon4	file:
+time	src/old/old.cuda_test/parameters.h	/^	} time;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon16
+time	src/old/old.polu.cuda.no_reduction/parameters.h	/^	} time;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon11
+time	src/old/old.polu.cuda/parameters.h	/^	} time;$/;"	m	struct:_parameters	typeref:struct:_parameters::__anon21
+timestamp	src/libfv/FVLog.cpp	/^	string FVLog::timestamp() {$/;"	f	class:FVL::FVLog
+type	include/rapidxml/rapidxml.hpp	/^        node_type type() const$/;"	f	class:rapidxml::xml_node
+type	include/rapidxml/rapidxml.hpp	/^        void type(node_type type)$/;"	f	class:rapidxml::xml_node
+type	src/old/old.msh_gen/main.cpp	/^	unsigned int type;$/;"	m	class:Edge	file:
+type	src/old/old.msh_gen/main.cpp	/^	unsigned int type;$/;"	m	class:Vertex	file:
+type_element	include/Gmsh.h	/^size_t label,type_element,code_physical, code_elementary,nb_node,dim;$/;"	m	class:GMElement
+update	src/bic.polu.clean/polu.clean.cpp	/^void update($/;"	f
+usage	src/bic.fvcm/fvcm.cpp	24;"	d	file:
+value	include/rapidxml/rapidxml.hpp	/^        Ch *value() const$/;"	f	class:rapidxml::xml_base
+value	include/rapidxml/rapidxml.hpp	/^        void value(const Ch *value)$/;"	f	class:rapidxml::xml_base
+value	include/rapidxml/rapidxml.hpp	/^        void value(const Ch *value, std::size_t size)$/;"	f	class:rapidxml::xml_base
+value_size	include/rapidxml/rapidxml.hpp	/^        std::size_t value_size() const$/;"	f	class:rapidxml::xml_base
+value_type	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_attribute<Ch> value_type;$/;"	t	class:rapidxml::attribute_iterator
+value_type	include/rapidxml/rapidxml_iterators.hpp	/^        typedef typename xml_node<Ch> value_type;$/;"	t	class:rapidxml::node_iterator
+velocity	src/bic.polu.clean/polu.clean.cpp	/^		string velocity;$/;"	m	struct:_parameters::__anon2	file:
+velocity	src/bic.velocity/main.cpp	/^		string velocity;$/;"	m	struct:Parameters::__anon7	file:
+velocity	src/old/old.cuda_test/parameters.h	/^		string velocity;$/;"	m	struct:_parameters::__anon14
+velocity	src/old/old.polu.cuda.no_reduction/parameters.h	/^		string velocity;$/;"	m	struct:_parameters::__anon9
+velocity	src/old/old.polu.cuda/parameters.h	/^		string velocity;$/;"	m	struct:_parameters::__anon19
+vertex	include/FVCell2D.h	/^FVVertex2D* vertex[NB_VERTEX_PER_CELL_2D] ; \/\/ the  vertices$/;"	m	class:FVCell2D
+vertex	include/FVCell3D.h	/^FVVertex3D* vertex[NB_VERTEX_PER_CELL_3D] ; \/\/ the  vertices$/;"	m	class:FVCell3D
+vertex	include/FVFace3D.h	/^FVVertex3D *vertex[NB_VERTEX_PER_FACE_3D]; \/\/ the vertices$/;"	m	class:FVFace3D
+vertex_coords	include/FVL/CFVMesh2D.h	/^			CFVPoints2D<double> vertex_coords;		\/\/\/< coords for each vertex$/;"	m	class:FVL::CFVMesh2D
+vertex_coords	include/FVL/CFVMesh2D.h	/^		double *vertex_coords[2];		\/\/\/< coords for each vertex$/;"	m	struct:FVL::CFVMesh2D_cuda
+volume	include/FVCell3D.h	/^double surface,volume;$/;"	m	class:FVCell3D
+vs	src/bic.polu.clean/polu.clean.cpp	/^double *vs;$/;"	v
+w	include/FVL/CFVMat.h	/^				unsigned int w, h, mat_size;$/;"	m	class:FVL::CFVMat
+warn	src/libfv/FVErr.cpp	/^	void FVErr::warn(string &msg) {$/;"	f	class:FVL::FVErr
+whitespace_pred	include/rapidxml/rapidxml.hpp	/^        struct whitespace_pred$/;"	s	class:rapidxml::xml_document
+width	include/FVL/CFVMat.h	/^				unsigned int width() 	const { return w; }$/;"	f	class:FVL::CFVMat
+write	src/libfv/FVMesh1D.cpp	/^size_t FVMesh1D::write(const char *filename)$/;"	f	class:FVMesh1D
+write	src/libfv/FVMesh2D.cpp	/^size_t FVMesh2D::write(const char *filename)$/;"	f	class:FVMesh2D
+write	src/libfv/FVMesh3D.cpp	/^size_t FVMesh3D::write(const char *filename)$/;"	f	class:FVMesh3D
+writeMesh	src/libfv/Gmsh.cpp	/^void Gmsh::writeMesh(const char *filename)$/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(FVVect<FVPoint1D<double> >&u, const size_t type, const char *name, double time)$/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(FVVect<FVPoint2D<double> >&u, const size_t type,const char *name, double time) $/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(FVVect<FVPoint3D<double> >&u, const size_t type,const char *name, double time)   $/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(FVVect<double> &u, const size_t type, const char *name, double time)$/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(const FVVect<double> &u,const FVVect<double> &v,  const size_t type,const char *name, double time) $/;"	f	class:Gmsh
+writeVector	src/libfv/Gmsh.cpp	/^void Gmsh::writeVector(const FVVect<double> &u,const FVVect<double> &v, const FVVect<double> &w, const size_t type,const char *name, double time)   $/;"	f	class:Gmsh
+x	include/FVL/CFVPoints2D.h	/^				CFVArray<T> x, y;	\/\/\/< Arrays for each coord$/;"	m	class:FVL::CFVPoints2D
+x	include/FVL/FVPoint2D.h	/^			T x; \/\/\/< X coord of the point$/;"	m	class:FVL::FVPoint2D
+x	include/FVPoint1D.h	/^T_ x;$/;"	m	class:FVPoint1D
+x	include/FVPoint2D.h	/^T_ x,y;$/;"	m	class:FVPoint2D
+x	include/FVPoint3D.h	/^T_ x,y,z;$/;"	m	class:FVPoint3D
+x	include/FVPoint4D.h	/^T_ x,y,z,t;$/;"	m	class:FVPoint4D
+x	src/old/old.msh_gen/main.cpp	/^	double x;$/;"	m	class:Vertex	file:
+xml2msh	src/bic.fvcm/fvcm.cpp	/^void xml2msh (string filename_in, string filename_out)$/;"	f
+xml_attribute	include/rapidxml/rapidxml.hpp	/^        xml_attribute()$/;"	f	class:rapidxml::xml_attribute
+xml_attribute	include/rapidxml/rapidxml.hpp	/^    class xml_attribute: public xml_base<Ch>$/;"	c	namespace:rapidxml
+xml_base	include/rapidxml/rapidxml.hpp	/^        xml_base()$/;"	f	class:rapidxml::xml_base
+xml_base	include/rapidxml/rapidxml.hpp	/^    class xml_base$/;"	c	namespace:rapidxml
+xml_data	include/FVL/FVXMLReader.h	/^			vector<char> xml_data;$/;"	m	class:FVL::FVXMLReader
+xml_document	include/rapidxml/rapidxml.hpp	/^        xml_document()$/;"	f	class:rapidxml::xml_document
+xml_document	include/rapidxml/rapidxml.hpp	/^    class xml_document: public xml_node<Ch>, public memory_pool<Ch>$/;"	c	namespace:rapidxml
+xml_node	include/rapidxml/rapidxml.hpp	/^        xml_node(node_type type)$/;"	f	class:rapidxml::xml_node
+xml_node	include/rapidxml/rapidxml.hpp	/^    class xml_node: public xml_base<Ch>$/;"	c	namespace:rapidxml
+y	include/FVL/CFVPoints2D.h	/^				CFVArray<T> x, y;	\/\/\/< Arrays for each coord$/;"	m	class:FVL::CFVPoints2D
+y	include/FVL/FVPoint2D.h	/^			T y; \/\/\/< Y coord of the point$/;"	m	class:FVL::FVPoint2D
+y	include/FVPoint2D.h	/^T_ x,y;$/;"	m	class:FVPoint2D
+y	include/FVPoint3D.h	/^T_ x,y,z;$/;"	m	class:FVPoint3D
+y	include/FVPoint4D.h	/^T_ x,y,z,t;$/;"	m	class:FVPoint4D
+y	src/old/old.msh_gen/main.cpp	/^	double y;$/;"	m	class:Vertex	file:
+z	include/FVPoint3D.h	/^T_ x,y,z;$/;"	m	class:FVPoint3D
+z	include/FVPoint4D.h	/^T_ x,y,z,t;$/;"	m	class:FVPoint4D
+~CFVArray	include/FVL/CFVArray.h	/^				~CFVArray() { }$/;"	f	class:FVL::CFVArray
+~CFVMat	include/FVL/CFVMat.h	/^				~CFVMat() { dealloc(); }$/;"	f	class:FVL::CFVMat
+~CFVProfile	src/libfv/CFVProfile.cpp	/^	CFVProfile::~CFVProfile() {$/;"	f	class:FVL::CFVProfile
+~FVArray	include/FVL/templates/FVArray.hpp	/^		FVArray<T>::~FVArray() {$/;"	f	class:FVL::FVArray
+~FVCell1D	include/FVCell1D.h	/^    ~FVCell1D(){;}  $/;"	f	class:FVCell1D
+~FVCell2D	include/FVCell2D.h	/^    ~FVCell2D(){;}  $/;"	f	class:FVCell2D
+~FVCell3D	include/FVCell3D.h	/^    ~FVCell3D(){;}  $/;"	f	class:FVCell3D
+~FVEdge2D	include/FVEdge2D.h	/^    ~FVEdge2D(){;}  $/;"	f	class:FVEdge2D
+~FVEdge3D	include/FVEdge3D.h	/^    ~FVEdge3D(){;} $/;"	f	class:FVEdge3D
+~FVFace3D	include/FVFace3D.h	/^    ~FVFace3D(){;}$/;"	f	class:FVFace3D
+~FVRecons1D	include/FVRecons1D.h	/^~FVRecons1D(){if(_A) delete(_A); if(_Q) delete(_Q);if(_coef) delete(_coef);if(_M) delete(_M);}  $/;"	f	class:FVRecons1D
+~FVRecons2D	include/FVRecons2D.h	/^~FVRecons2D(){if(_A) delete(_A); if(_Q) delete(_Q);if(_coef) delete(_coef);if(_M) delete(_M); }     $/;"	f	class:FVRecons2D
+~FVRecons3D	include/FVRecons3D.h	/^~FVRecons3D(){if(_A) delete(_A); if(_Q) delete(_Q);if(_coef) delete(_coef);if(_M) delete(_M);}  $/;"	f	class:FVRecons3D
+~FVSparseM	include/FVSparseM.h	/^FVSparseM<T_>::~FVSparseM()$/;"	f	class:FVSparseM
+~FVStencil	include/FVStencil.h	/^    ~FVStencil(){$/;"	f	class:FVStencil
+~FVVertex1D	include/FVVertex1D.h	/^    ~FVVertex1D(){;}  $/;"	f	class:FVVertex1D
+~FVVertex2D	include/FVVertex2D.h	/^    ~FVVertex2D(){;}  $/;"	f	class:FVVertex2D
+~FVVertex3D	include/FVVertex3D.h	/^    ~FVVertex3D(){;}  $/;"	f	class:FVVertex3D
+~FVio	src/libfv/FVio.cpp	/^FVio::~FVio() \/\/ le destructeur ferme le fichier$/;"	f	class:FVio
+~Gmsh	src/libfv/Gmsh.cpp	/^Gmsh::~Gmsh()$/;"	f	class:Gmsh
+~Parameter	include/Parameter.h	/^~Parameter(){;}$/;"	f	class:Parameter
+~SparseXML	include/XML.h	/^  ~SparseXML(){;}$/;"	f	class:SparseXML
+~Table	include/Table.h	/^~Table(){;}$/;"	f	class:Table
+~memory_pool	include/rapidxml/rapidxml.hpp	/^        ~memory_pool()$/;"	f	class:rapidxml::memory_pool
