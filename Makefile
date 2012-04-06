@@ -27,7 +27,6 @@ test-soa:	\
 	libpapipcc	\
 	polu.soa.brins	\
 	polu.soa.btm	\
-	polu.soa.flops	\
 	polu.soa.fnctime	\
 	polu.soa.fpins	\
 	polu.soa.l1ca	\
@@ -52,7 +51,6 @@ test-aos:	\
 	libpapipcc	\
 	polu.aos.brins	\
 	polu.aos.btm	\
-	polu.aos.flops	\
 	polu.aos.fnctime	\
 	polu.aos.fpins	\
 	polu.aos.l1ca	\

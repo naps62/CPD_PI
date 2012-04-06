@@ -33,6 +33,9 @@ void compute_flux(
 		PROFILE_COUNTER->start();
 #endif
 
+#ifdef _OPENMP
+	#pragma omp parallel for
+#endif
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
 		Edge &edge = edges[e];
@@ -85,6 +88,9 @@ void    update(
 		PROFILE_COUNTER->start();
 #endif
 
+#ifdef _OPENMP
+	#pragma omp parallel for
+#endif
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
 		Cell &cell = cells[ c ];

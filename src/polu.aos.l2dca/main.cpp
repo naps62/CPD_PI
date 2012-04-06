@@ -2,14 +2,14 @@
 #include <limits>
 
 #include <papi/papi.hpp>
-#include <papi/flops.hpp>
+#include <papi/cache.hpp>
 
 #define PROFILE_LIMITED 1000
 #define PROFILE_WARMUP   100
 
-#define PROFILE_COUNTER_CLASS papi::counters::FloatingPointOperationsCounter
+#define PROFILE_COUNTER_CLASS papi::counters::L2DataCacheAccessesCounter
 #define PROFILE_COUNTER_NAME  p
-#define PROFILE_COUNTER_FIELD operations
+#define PROFILE_COUNTER_FIELD accesses
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
 
 

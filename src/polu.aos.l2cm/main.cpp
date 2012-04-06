@@ -9,17 +9,21 @@
 
 
 
-#define PROFILE_COUNTER_CLASS papi::counters::L2TotalCacheMissesCounter
-#define PROFILE_COUNTER_NAME  p
-#define PROFILE_COUNTER_FIELD misses
-#define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
+#define PROFILE_COUNTER_CLASS   papi::counters::L2CacheMissesCounter
+#define PROFILE_COUNTER_NAME    p
+#define PROFILE_COUNTER_FIELD_0 data
+#define PROFILE_COUNTER_FIELD_1 instruction
+#define PROFILE_COUNTER_FIELD_2 total
+#define PROFILE_COUNTER         profile::PROFILE_COUNTER_NAME
 
 
 
 namespace profile
 {
 	PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
-	long long int PROFILE_COUNTER_FIELD;
+	long long int PROFILE_COUNTER_FIELD_0;
+	long long int PROFILE_COUNTER_FIELD_1;
+	long long int PROFILE_COUNTER_FIELD_2;
 
 	long long int cftotns;
 	long long int cfminns;
@@ -31,7 +35,9 @@ namespace profile
 
 	struct Overhead
 	{
-		long long int PROFILE_COUNTER_FIELD;
+		long long int PROFILE_COUNTER_FIELD_0;
+		long long int PROFILE_COUNTER_FIELD_1;
+		long long int PROFILE_COUNTER_FIELD_2;
 		long long int nanoseconds;
 	} overhead;
 
@@ -41,11 +47,15 @@ namespace profile
 
 		PROFILE_COUNTER_NAME = new PROFILE_COUNTER_CLASS();
 
-		PROFILE_COUNTER_FIELD = 0;
+		PROFILE_COUNTER_FIELD_0 = 0;
+		PROFILE_COUNTER_FIELD_1 = 0;
+		PROFILE_COUNTER_FIELD_2 = 0;
 		
 		PROFILE_COUNTER_NAME->start();
 		PROFILE_COUNTER_NAME->stop();
-		overhead.PROFILE_COUNTER_FIELD = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD();
+		overhead.PROFILE_COUNTER_FIELD_0 = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_0();
+		overhead.PROFILE_COUNTER_FIELD_1 = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_1();
+		overhead.PROFILE_COUNTER_FIELD_2 = PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_2();
 		overhead.nanoseconds = PROFILE_COUNTER_NAME->last();
 
 		cftotns = 0;
@@ -60,7 +70,9 @@ namespace profile
 	void output(std::ostream& out)
 	{
 		out
-			<<	PROFILE_COUNTER_FIELD	<<	';'
+			<<	PROFILE_COUNTER_FIELD_0	<<	';'
+			<<	PROFILE_COUNTER_FIELD_1	<<	';'
+			<<	PROFILE_COUNTER_FIELD_2	<<	';'
 			<<	cftotns	<<	';'
 			<<	cfminns	<<	';'
 			<<	cfmaxns	<<	';'
@@ -83,7 +95,9 @@ namespace profile
 	inline
 	void compute_flux()
 	{
-		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
+		PROFILE_COUNTER_FIELD_0 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_0() - overhead.PROFILE_COUNTER_FIELD_0;
+		PROFILE_COUNTER_FIELD_1 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_1() - overhead.PROFILE_COUNTER_FIELD_1;
+		PROFILE_COUNTER_FIELD_2 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_2() - overhead.PROFILE_COUNTER_FIELD_2;
 		long long int timens = PROFILE_COUNTER_NAME->last();
 		cftotns += timens;
 		cfminns = ( timens < cfminns ) ? timens : cfminns;
@@ -93,7 +107,9 @@ namespace profile
 	inline
 	void update()
 	{
-		PROFILE_COUNTER_FIELD += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD() - overhead.PROFILE_COUNTER_FIELD;
+		PROFILE_COUNTER_FIELD_0 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_0() - overhead.PROFILE_COUNTER_FIELD_0;
+		PROFILE_COUNTER_FIELD_1 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_1() - overhead.PROFILE_COUNTER_FIELD_1;
+		PROFILE_COUNTER_FIELD_2 += PROFILE_COUNTER_NAME->PROFILE_COUNTER_FIELD_2() - overhead.PROFILE_COUNTER_FIELD_2;
 		long long int timens = PROFILE_COUNTER_NAME->last();
 		uptotns += timens;
 		upminns = ( timens < upminns ) ? timens : upminns;
