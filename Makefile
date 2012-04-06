@@ -1,7 +1,7 @@
 ROOTD	=	.
 include $(ROOTD)/conf/config.mk
 
-.PHONY:	doc test-soa
+.PHONY:	doc test-soa test-aos
 
 %:
 	@echo "<<==::    $@    ::==>>"
@@ -56,8 +56,12 @@ test-aos:	\
 	polu.aos.fnctime	\
 	polu.aos.fpins	\
 	polu.aos.l1ca	\
-	polu.aos.l2ca	\
-	polu.aos.l1cm	\
+	polu.aos.l2dca	\
+	polu.aos.l2ica	\
+	polu.aos.l2tca	\
+	polu.aos.l1dcm	\
+	polu.aos.l1icm	\
+	polu.aos.l1tcm	\
 	polu.aos.l2cm	\
 	polu.aos.ldins	\
 	polu.aos.srins	\
