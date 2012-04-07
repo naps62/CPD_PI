@@ -30,7 +30,7 @@ void compute_flux(
 	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER->start();
+		PROFILE_START();
 #endif
 
 #ifdef _OPENMP
@@ -60,7 +60,7 @@ void compute_flux(
 	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER->stop();
+		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF();
 	#ifdef PROFILE_WARMUP
 	}
@@ -85,7 +85,7 @@ void    update(
 	#ifdef PROFILE_WARMUP
 	if ( mliters > PROFILE_WARMUP )
 	#endif
-		PROFILE_COUNTER->start();
+		PROFILE_START();
 #endif
 
 #ifdef _OPENMP
@@ -114,7 +114,7 @@ void    update(
 	if ( mliters > PROFILE_WARMUP )
 	{
 	#endif
-		PROFILE_COUNTER->stop();
+		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP();
 	#ifdef PROFILE_WARMUP
 	}
@@ -142,6 +142,7 @@ int main(int argc, char *argv[])
 #ifdef PROFILE
 	PROFILE_INIT();
 #endif
+
 	string parameter_filename;
 	
 	if ( argc > 1 )
