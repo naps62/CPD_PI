@@ -1,1 +1,1 @@
-include ../polu.aos.papi/Makefile
+include ../polu.aos/Makefile
