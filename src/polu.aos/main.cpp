@@ -15,6 +15,10 @@ using fv::cpu::Edge;
 unsigned mliters;
 #endif
 
+#ifdef _OPENMP
+int threads;
+#endif
+
 
 
 void compute_flux(
@@ -34,7 +38,7 @@ void compute_flux(
 #endif
 
 #ifdef _OPENMP
-	#pragma omp parallel for
+	#pragma omp parallel for num_threads(threads)
 #endif
 	for ( unsigned e = 0 ; e < edge_count ; ++e )
 	{
@@ -89,7 +93,7 @@ void    update(
 #endif
 
 #ifdef _OPENMP
-	#pragma omp parallel for
+	#pragma omp parallel for num_threads(threads)
 #endif
 	for ( unsigned c = 0 ; c < cell_count ; ++c )
 	{
@@ -149,6 +153,13 @@ int main(int argc, char *argv[])
 		parameter_filename = argv[1];
 	else
 		parameter_filename = "param.xml";
+
+#ifdef _OPENMP
+	if ( argc > 2 )
+		threads = atoi(argv[2]);
+	else
+		threads = omp_get_num_procs();
+#endif
 
 	string mesh_filename,velo_filename,pol_filename,pol_ini_filename;
 	string name;
