@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
 	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
 	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
 	FVL::CFVArray<double> edgePsi(mesh.num_edges);
-	FVL::CFVArray<double> cellPsi(mesh.num_edges);
+	FVL::CFVArray<double> cellPsi(mesh.num_cells);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -259,7 +259,7 @@ int main(int argc, char **argv) {
 			cout << "polution[ " << x << "] = " << setw(12) << polution[x] << "    { ";
 			cout << "a = " << setw(12) << vecABC.elem(0, 0, x) << ", ";
 			cout << "b = " << setw(12) << vecABC.elem(1, 0, x) << ", ";
-			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  ";
+			cout << "c = " << setw(12) << vecABC.elem(2, 0, x) << "}  " << endl;
 		}
 		cout << "--------------" << endl;
 
