@@ -44,7 +44,11 @@ namespace FVL {
 		unsigned int num_edges;			///< total number of edges
 		unsigned int num_cells;			///< total number of cells
 
+
 		double *vertex_coords[2];		///< coords for each vertex
+		double *vertex_cells_count;		///< number of cells adjacent to each vertex TODO
+		double *vertex_cells_index;		///< index of list of cells for each vertex TODO
+		double *vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
 
 		int *edge_types;				///< type associated with each edge
 		double *edge_normals[2];		///< normals for each edge

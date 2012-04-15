@@ -1,5 +1,7 @@
 #include <fstream>
 #include <string>
+#include <set>
+#include <map>
 
 #include "FVL/FVMesh2D_SOA.h"
 #include "FVLib_config.h"
@@ -30,8 +32,9 @@ namespace FVL {
 	 ***********************************************/
 
 	void FVMesh2D_SOA::import_FVMesh2D(FVMesh2D &msh) {
-		num_edges = msh.getNbEdge();
-		num_cells = msh.getNbCell();
+		num_vertex	= msh.getNbVertex();
+		num_edges	= msh.getNbEdge();
+		num_cells	= msh.getNbCell();
 
 		// allocs space for all needed data
 		alloc();
@@ -209,8 +212,6 @@ namespace FVL {
 				cell_areas[i] += fabs(Det(u,v)) * 0.5;
 			}
 
-			// update list of vertex->cell pointer
-			// TODO what is this???
 		}
 
 		for(unsigned int i = 0; i < num_edges; ++i) {
@@ -241,6 +242,41 @@ namespace FVL {
 			}
 		}
 
+		// update list of vertex->cell pointer
+		map<unsigned int, set<unsigned int> > tmp_vertex_cells;
+
+		// create a temporary map of (vertex, set(cells)) that map))
+		for(unsigned int cell = 0; cell < num_cells; ++cell) {
+			for(unsigned int edge_i = 0; edge_i < cell_edges_count[cell]; ++edge_i) {
+				unsigned int edge = cell_edges.elem(edge_i, 0, cell);
+				tmp_vertex_cells[edge_fst_vertex[edge]].insert(cell);
+				tmp_vertex_cells[edge_snd_vertex[edge]].insert(cell);
+			}
+		}
+
+		// computes total size of the created map
+		unsigned int total_count = 0;
+		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
+			vertex_cells_index[vertex] = total_count;
+			vertex_cells_count[vertex] = tmp_vertex_cells[vertex].size();
+			total_count += vertex_cells_count[vertex];
+		}
+
+		// converts the map to a sequential array
+		vertex_cells = CFVArray<double>(total_count);
+		unsigned int counter = 0;
+		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
+			set<unsigned int>::iterator cells_it;
+			for(cells_it = tmp_vertex_cells[vertex].begin(); cells_it != tmp_vertex_cells[vertex].end(); ++cells_it) {
+				vertex_cells[counter++] = *cells_it;
+			}
+		}
+
+		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
+			for(unsigned int i = vertex_cells_index[vertex]; i < vertex_cells_index[vertex] + vertex_cells_count[vertex]; ++i) {
+				cout << "vertex " << vertex << " connected to cell " << vertex_cells[i] << endl;
+			}
+		}
 	}
 
 	/************************************************
@@ -254,6 +290,8 @@ namespace FVL {
 
 		// alloc vertex info
 		vertex_coords		= CFVPoints2D<double>(num_vertex);
+		vertex_cells_count	= CFVArray<double>(num_vertex);
+		vertex_cells_index	= CFVArray<double>(num_vertex);
 
 		// alloc edge info
 		edge_types			= CFVArray<int>(num_edges);
