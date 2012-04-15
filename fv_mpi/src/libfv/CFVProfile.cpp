@@ -1,7 +1,5 @@
 #include "FVL/CFVProfile.h"
 
-#ifdef __CUDACC__
-
 namespace FVL {
 
 	FVLog CFVProfile::stream(FV_PROFILE);
@@ -37,5 +35,3 @@ namespace FVL {
 		cudaEventCreate(&stop_t);
 	}
 }
-
-#endif // __CUDACC__

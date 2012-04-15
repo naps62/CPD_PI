@@ -11,10 +11,12 @@
 #include "FVL/FVLog.h"
 #include "FVL/FVArray.h"
 
-#ifdef __CUDACC__
+#ifndef __CUDACC__
+#define CFVArray FVArray
+#else
+
 #include <cuda.h>
 #include <cuda_runtime.h>
-#endif
 
 namespace FVL {
 
@@ -60,7 +62,6 @@ namespace FVL {
 				/************************************************
 				 * CUDA
 				 ***********************************************/
-				#ifdef __CUDACC__
 
 				/**
 				 * Get pointer to CUDA memory of the array
@@ -105,11 +106,11 @@ namespace FVL {
 				 */
 				void cuda_load(cudaStream_t stream = 0);
 
-				#endif // __CUDACC__
 		};
 }
 
 #include "FVL/templates/CFVArray.hpp"
+#endif // __CUDACC__
 
 #endif // _H_CFVARRAY
 
