@@ -10,8 +10,11 @@
 
 #include <string>
 #include <vector>
-#include <cuda.h>
 using namespace std;
+
+#ifdef __CUDACC__
+#include <cuda.h>
+#endif
 
 #include "FVL/FVGlobal.h"
 #include "FVMesh2D.h"
@@ -23,6 +26,7 @@ using namespace std;
 namespace FVL {
 
 
+	#ifdef __CUDACC__
 	/**
 	 * 2D Mesh structure to use in a CUDA device
 	 *
@@ -57,6 +61,7 @@ namespace FVL {
 		unsigned int **cell_edges;		///< index of edges for each cell (unsigned int [MAX_EDGES_PER_CELL][num_cells])
 		double **cell_edges_normal;		///< distance of each cell to each edge (double [2*MAX_EDGES_PER_CELL][num_cells])
 	};
+	#endif // __CUDACC__
 
 
 	/**
@@ -66,7 +71,9 @@ namespace FVL {
 	 */
 	class CFVMesh2D {
 		private:
+			#ifdef __CUDACC__
 			CFVMesh2D_cuda *cuda_mesh;	///< CUDA structure holding the mesh (ptr to CUDA memory space). Set to NULL if cuda memory not allocated
+			#endif
 
 		public:
 
@@ -122,8 +129,9 @@ namespace FVL {
 			~CFVMesh2D();
 
 			/************************************************
-			 * GETTERS/SETTERS
+			 * CUDA
 			 ***********************************************/
+			#ifdef __CUDACC__
 
 			/**
 			 * Returns a pointer to device memory containing the mesh in #CFVMesh2D_cuda format
@@ -140,11 +148,6 @@ namespace FVL {
 			 * \return true if memory is allocated on the CUDA device, false otherwise
 			 */
 			bool cuda_is_alloc();
-
-
-			/************************************************
-			 * MEM MANAGEMENT
-			 ***********************************************/
 
 			/**
 			 * Allocate space on device memory for the entire mesh
@@ -166,6 +169,8 @@ namespace FVL {
 			 * Free all cuda storage of this mesh
 			 */
 			void cuda_free();
+
+			#endif // __CUDACC__
 		private:
 
 			/************************************************

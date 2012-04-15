@@ -343,3 +343,4 @@ if(end_data_position==string::npos)
 else
      {_data_length=end_data_position-_current_position;}     
 }
+

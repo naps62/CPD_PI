@@ -14,7 +14,7 @@ bins:	$(BINS)
 
 libs:	$(LIBS)
 
-$(DIRS):
+$(DIRS) $(LINKS):
 	@echo ">>>>> $@"
 	@cd $@; $_;
 	@echo "<<<<< $@"

@@ -118,6 +118,7 @@ namespace FVL {
 				/************************************************
 				 * CUDA
 				 ***********************************************/
+				#ifdef __CUDACC__
 
 				/**
 				 * Get the array of pointers for each elem in CUDA memory
@@ -160,6 +161,7 @@ namespace FVL {
 				 */
 				void cuda_load(cudaStream_t stream = 0);
 
+				#endif
 			private:
 
 				/************************************************

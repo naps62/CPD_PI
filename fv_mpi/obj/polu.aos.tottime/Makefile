@@ -1,1 +1,0 @@
-include ../polu.aos/Makefile

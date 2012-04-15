@@ -22,14 +22,14 @@ namespace FVL {
 	enum FVEdge2D_Type {
 		FV_EDGE			= 0,		///< regular internal edge
 		FV_EDGE_DIRICHLET	= 1,	///< border edge where dirichlet condition is applied
-		FV_EDGE_NEUMMAN	= 2,		///< border edge where neumman condition is applied
+		FV_EDGE_NEUMMAN	= 2			///< border edge where neumman condition is applied
 	};
 
 	/**
 	 * Types of cells in a 2D Mesh
 	 */
 	enum FVCell2D_Type {
-		FV_CELL = 10,				///< regular cell
+		FV_CELL = 10				///< regular cell
 	};
 
 	/************************************************

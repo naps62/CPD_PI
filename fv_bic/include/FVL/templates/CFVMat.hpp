@@ -15,11 +15,14 @@
 #ifndef _HPP_CFVMAT
 #define _HPP_CFVMAT
 
+#ifdef __CUDACC__
 #include <cuda_runtime_api.h>
 #include <cuda.h>
+#endif
 
 namespace FVL {
 
+	#ifdef __CUDACC__
 	template<class T>
 	T** CFVMat<T>::cuda_get() {
 		return cuda_mat.cuda_get();
@@ -66,6 +69,7 @@ namespace FVL {
 			for(unsigned int x = 0; x < w; ++x)
 				mat[y * w + x].cuda_load(stream);
 	}
+	#endif // __CUDACC__
 
 	/* ALLOC/DELETE */
 	template<class T>

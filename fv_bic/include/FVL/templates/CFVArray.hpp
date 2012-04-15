@@ -15,6 +15,7 @@ namespace FVL {
 	/************************************************
 	 * CUDA
 	 ***********************************************/
+	#ifdef __CUDACC__
 
 	template<class T>
 		T* CFVArray<T>::cuda_get() {
@@ -48,7 +49,8 @@ namespace FVL {
 		void CFVArray<T>::cuda_load(cudaStream_t stream) {
 			cudaMemcpy(this->arr, cuda_arr, sizeof(T) * this->arr_size, cudaMemcpyDeviceToHost);
 		}
-
+	
+	#endif // __CUDACC__
 }
 
 #endif // _HPP_CFVARRAY

@@ -254,7 +254,7 @@ for(size_t i=0;i<_nb_vertex;i++)
 // compute the centroid and length of edge
 for(size_t i=0;i<_nb_edge;i++)
     {
-    _edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*0.5;
+    _edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*(double)0.5;
     FVPoint3D<double> u;
     u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
     _edge[i].length=Norm(u);

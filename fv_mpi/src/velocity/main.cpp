@@ -1,5 +1,6 @@
 #include <iostream>
 #include "FVLib.h"
+#include "FVL/FVParameters.h"
 
 //	BEGIN TYPES
 
@@ -26,7 +27,9 @@ void read_parameters(
 	const char* filename,
 	Parameters& data)
 {
-	Parameter para( filename );
+	//Parameter para( filename );
+	string str_file(filename);
+	FVL::FVParameters para(str_file);
 
 	data.filenames.mesh = para.getString("MeshName");
 	data.filenames.velocity = para.getString("VelocityFile");
@@ -73,7 +76,8 @@ int main(int argc, char *argv[])
 	
 
 	// compute the potential
-	for (size_t i=0; i < mesh.getNbVertex(); ++i)
+	unsigned int max = mesh.getNbVertex();
+	for (size_t i=0; i < max; ++i)
 	{
 		dist = 1.e20;   
 		ptr_v = mesh.getVertex(i);
@@ -127,3 +131,4 @@ int main(int argc, char *argv[])
 	FVio polu_ini_file( data.filenames.polution.initial.c_str() , FVWRITE );
 	polu_ini_file.put(pol,0.0,"concentration");
 }
+

@@ -7,10 +7,14 @@
  ** Author:			Miguel Palhas, mpalhas@gmail.com
  ** Created:		13-02-2012
  ** Last Tested:	---
+ ** \todo for now this file does nothing when nvcc is not being used. maybe change that if it makes sense?
+ ** \todo documentation for the rest of this file
  ** -------------------------------------------------------------------------*/
 
-#ifndef _H_CPROFILE
-#define _H_CPROFILE
+#ifndef _H_CFVPROFILE
+#define _H_CFVPROFILE
+
+#ifdef __CUDACC__
 
 #include <cuda.h>
 #include <cuda_runtime.h>
@@ -42,4 +46,6 @@ namespace FVL {
 	};
 }
 
-#endif
+#endif // __CUDACC__
+
+#endif // _H_CFVPROFILE

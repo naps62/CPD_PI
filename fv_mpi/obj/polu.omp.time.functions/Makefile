@@ -1,1 +1,0 @@
-../polu.omp.time/Makefile

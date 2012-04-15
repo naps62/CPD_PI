@@ -212,7 +212,7 @@ void FVMesh2D::complete_data()
 	{
 		_edge[i].leftCell=NULL;_edge[i].rightCell=NULL;
 		_edge[i].nb_cell=2;
-		_edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*0.5;
+		_edge[i].centroid=(_edge[i].firstVertex->coord+_edge[i].secondVertex->coord)*(double)0.5;
 		FVPoint2D<double> u;
 		u=_edge[i].firstVertex->coord-_edge[i].secondVertex->coord;
 		_edge[i].length=Norm(u);
@@ -529,3 +529,4 @@ void FVMesh2D::Gmsh2FVMesh( Gmsh &m) // convert a Gmsh struct into a FVMesh2D
 	 */
 	FVMesh2D::complete_data();     
 }
+

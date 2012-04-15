@@ -162,7 +162,7 @@ void FVMesh1D::complete_data()
 	}  
 	for(size_t i=0;i<_nb_cell;i++)
 	{
-		_cell[i].centroid=(_cell[i].firstVertex->coord+_cell[i].secondVertex->coord)*0.5;
+		_cell[i].centroid=(_cell[i].firstVertex->coord+_cell[i].secondVertex->coord)*(double)0.5;
 		_cell[i].length=_cell[i].firstVertex->coord.x-_cell[i].secondVertex->coord.x;
 		if (_cell[i].length<0.) _cell[i].length*=-1.;
 		if((_cell[i].firstVertex->coord.x-_cell[i].centroid.x)<0.) 

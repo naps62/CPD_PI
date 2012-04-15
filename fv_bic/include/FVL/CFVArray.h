@@ -8,11 +8,13 @@
 #ifndef _H_CFVARRAY
 #define _H_CFVARRAY
 
-#include <cuda.h>
-#include <cuda_runtime.h>
-
 #include "FVL/FVLog.h"
 #include "FVL/FVArray.h"
+
+#ifdef __CUDACC__
+#include <cuda.h>
+#include <cuda_runtime.h>
+#endif
 
 namespace FVL {
 
@@ -58,6 +60,7 @@ namespace FVL {
 				/************************************************
 				 * CUDA
 				 ***********************************************/
+				#ifdef __CUDACC__
 
 				/**
 				 * Get pointer to CUDA memory of the array
@@ -100,7 +103,9 @@ namespace FVL {
 				 *
 				 * \param stream CUDA Stream to use (defaults to 0 to use no stream)
 				 */
-				void cuda_load(cudaStream_t stream = 0);	
+				void cuda_load(cudaStream_t stream = 0);
+
+				#endif // __CUDACC__
 		};
 }
 
