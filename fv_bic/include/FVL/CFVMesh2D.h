@@ -8,8 +8,10 @@
 #ifndef _H_CFVMESH2D
 #define _H_CFVMESH2D
 
+#include "FVL/FVMesh2D_SOA.h"
 #ifndef __CUDACC__
-#error CFVMesh2D is not supported outside of a CUDA environment
+//#define CFVMesh2D FVMesh2D_SOA
+#error CFVMesh2D is not available outside of a CUDA environment
 #endif
 
 #include <string>
@@ -27,8 +29,6 @@ using namespace std;
 
 namespace FVL {
 
-
-	#ifdef __CUDACC__
 	/**
 	 * 2D Mesh structure to use in a CUDA device
 	 *
@@ -63,8 +63,6 @@ namespace FVL {
 		unsigned int **cell_edges;		///< index of edges for each cell (unsigned int [MAX_EDGES_PER_CELL][num_cells])
 		double **cell_edges_normal;		///< distance of each cell to each edge (double [2*MAX_EDGES_PER_CELL][num_cells])
 	};
-	#endif // __CUDACC__
-
 
 	/**
 	 * A CUDA enabled 2D Mesh

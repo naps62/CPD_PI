@@ -21,7 +21,7 @@ INC		=	-I $(ROOTD)/$(INCD) -I $(CUDAD)/include
 
 #	Compiler flags
 XCOMPFLAGS	=	-Wall -Wextra
-CXXFLAGS	=	-arch sm_20
+CXXFLAGS	=	-arch sm_20 -x cu
 CXXFLAGS	+=	 $(INC)
 
 HOST	= $(shell hostname)

@@ -1,12 +1,12 @@
 #include "kernels.h"
 
 /* compute flux kernel */
-void compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double> &polution, CFVArray<double> &flux, double dc) {
+void compute_flux(FVMesh2D_SOA &mesh, CFVArray<double> &velocity, CFVArray<double> &polution, CFVArray<double> &flux, double dc) {
 	// TODO
 }
 
 /* update kernel */
-void update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
+void update(FVMesh2D_SOA &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
 
 	//cout << endl;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {

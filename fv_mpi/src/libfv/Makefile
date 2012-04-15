@@ -1,3 +1,3 @@
 ROOTD	=	../..
 LIB		=	fv
-include $(ROOTD)/conf/src.lib.mk
+include $(ROOTD)/conf/src.mk

@@ -1,11 +1,11 @@
 /**
- * \file CFVMesh2D.h
+ * \file FVMesh2D_SOA.h
  *
  * \author Miguel Palhas
  * \date 13-02-2012
  */
 
-#ifndef _H_FVMESH2D_SPA
+#ifndef _H_FVMESH2D_SOA
 #define _H_FVMESH2D_SOA
 
 #include <string>
@@ -25,14 +25,17 @@ namespace FVL {
 	 * An SOA implementation of a 2 dimensional Mesh
 	 *
 	 * 2 Dimensional mesh representation using 	Structure of Arrays instead of Array of Structures
-	 * This class is based on CFVArray instead of FVArray (which would be intuitively more adequate) for compatibility with CFVMesh2D
+	 * This class is based on CFVArray instead of FVArray (which would be intuitively more adequate) for compatibility with FVMesh2D_SOA
 	 */
 	class FVMesh2D_SOA {
 		public:
 			// VERTEX INFO
 			unsigned int num_vertex;				///< total number of vertex
 			CFVPoints2D<double> vertex_coords;		///< coords for each vertex
-			CFVArray<
+			/// \todo finish this
+			CFVArray<double> vertex_cells_count;	///< number of cells adjacent to each vertex TODO
+			CFVArray<double> vertex_cells_index;	///< index of list of cells for each vertex TODO
+			CFVArray<double> vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
 
 			// EDGE INFO
 			unsigned int num_edges;					///< total number of edges
@@ -65,14 +68,14 @@ namespace FVL {
 			 *
 			 * \param msh Mesh to import
 			 */
-			CFVMesh2D(FVMesh2D &msh);
+			FVMesh2D_SOA(FVMesh2D &msh);
 
 			/**
 			 * Constructor to import a mesh from a XML file
 			 *
 			 * \param filename XML file to import
 			 */
-			CFVMesh2D(const string &filename);
+			FVMesh2D_SOA(const string &filename);
 
 		private:
 

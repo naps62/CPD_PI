@@ -8,7 +8,7 @@ default:	\
 	fvcm	\
 	fvcd	\
 	velocity	\
-	bic.cuda.second_order
+	cuda.second_order
 
 %:
 	@echo "<<==::    $@    ::==>>"

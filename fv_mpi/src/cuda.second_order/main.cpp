@@ -3,7 +3,7 @@
 #include "FVL/FVArray.h"
 #include "FVio.h"
 #include "FVL/FVParameters.h"
-#include "FVL/CFVMesh2D.h"
+#include "FVL/FVMesh2D_SOA.h"
 #include "kernels.h"
 
 using namespace std;
@@ -36,7 +36,7 @@ Parameters read_parameters (string parameters_filename) {
 	return data;
 }
 
-double compute_mesh_parameter(FVL::CFVMesh2D mesh) {
+double compute_mesh_parameter(FVL::FVMesh2D_SOA mesh) {
 	double h;
 	double S;
 
@@ -54,7 +54,7 @@ double compute_mesh_parameter(FVL::CFVMesh2D mesh) {
 	return h;
 }
 
-void compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
+void compute_edge_velocities(FVMesh2D_SOA &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		unsigned int left	= mesh.edge_left_cells[i];
 		unsigned int right	= mesh.edge_right_cells[i];
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 		data = read_parameters(argv[1]);
 
 	// read mesh
-	FVL::CFVMesh2D mesh(data.mesh_file);
+	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
 	FVL::CFVArray<double> polution(mesh.num_cells);

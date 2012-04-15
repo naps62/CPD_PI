@@ -16,8 +16,9 @@
 #include "FVL/FVMacros.h"
 #include "FVL/FVEnum.h"
 
-#include "FVL/CFVPoints2D.h"
-#include "FVL/CFVMesh2D.h"
+//#include "FVL/CFVPoints2D.h"
+//#include "FVL/CFVMesh2D.h"
+#include "FVL/FVMesh2D_SOA.h"
 
 #include "FVL/FVErr.h"
 #include "FVL/FVLog.h"
@@ -25,6 +26,6 @@
 #include "FVL/FVXMLReader.h"
 #include "FVL/FVXMLWriter.h"
 
-#include "FVL/CFVLib.h"
+//#include "FVL/CFVLib.h"
 
 #endif // _H_FVLIB

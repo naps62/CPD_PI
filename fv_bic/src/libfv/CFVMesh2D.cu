@@ -17,7 +17,7 @@ namespace FVL {
 	 * CONSTRUCTORS
 	 ***********************************************/
 
-	CFVMesh2D::CFVMesh2D(FVMesh2D &msh) : FVMesh2D_SOA(msg) {
+	CFVMesh2D::CFVMesh2D(FVMesh2D &msh) : FVMesh2D_SOA(msh) {
 		cuda_mesh = NULL;
 	}
 

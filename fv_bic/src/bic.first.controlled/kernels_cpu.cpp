@@ -1,12 +1,12 @@
 #include "kernels_cpu.h"
 
-inline double min(double x, double y) {
+/*inline double min(double x, double y) {
 	return (x < y) ? x : y;
 }
 
 inline double max(double x, double y) {
 	return (x > y) ? x : y;
-}
+}*/
 
 /* Aux function for cpu_compute_vecResult - computes ghost cell centroid */
 void cpu_ghost_coords(CFVMesh2D &mesh, unsigned int edge, double &x, double &y) {
@@ -256,7 +256,7 @@ double cpu_edgePsi(double u_i, double u_j, double u_ij) {
 	double u_min = min(u_i, u_j);
 	double u_max = max(u_i, u_j);
 
-	if (u_ij - 
+	//if (u_ij - 
 	/*double ij_minus_i	= u_ij	- u_i;
 	double j_minus_i	= u_j	- u_i;
 	
