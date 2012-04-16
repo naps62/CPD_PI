@@ -130,9 +130,24 @@ namespace FVL {
 				FVErr::error(msg, 1);
 			}
 
+			set<unsigned int> tmp_cell_vertexes;
+
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
-				cell_ss >> cell_edges.elem(e, 0, i);	// reads e'th edge of cell i
-				cell_edges.elem(e, 0, i)--;				// change to 0-based index
+				unsigned int edge;
+				cell_ss >> edge;	// reads e'th edge of cell i
+				edge--;				// change to 0-based index
+				cell_edges.elem(e, 0, i) = edge;	
+
+				tmp_cell_vertexes.insert(edge_fst_vertex[edge]);
+				tmp_cell_vertexes.insert(edge_snd_vertex[edge]);
+			}
+
+			int v = 0;
+			set<unsigned int>::iterator it;
+			for(it = tmp_cell_vertexes.begin(); it != tmp_cell_vertexes.end(); ++it, ++v) {
+				cell_vertexes.elem(v, 0, i) = *it;
+			}
+			for(unsigned int v = 0; v < cell_edges_count[i]; ++v) {
 			}
 		}
 
@@ -236,10 +251,6 @@ namespace FVL {
 				edge_normals.x[i] *= -1. ;
 				edge_normals.y[i] *= -1. ;
 			}
-
-			if (edge_right_cells[i] == NO_CELL) {
-				// TODO push boundary edges
-			}
 		}
 
 		// update list of vertex->cell pointer
@@ -269,12 +280,6 @@ namespace FVL {
 			set<unsigned int>::iterator cells_it;
 			for(cells_it = tmp_vertex_cells[vertex].begin(); cells_it != tmp_vertex_cells[vertex].end(); ++cells_it) {
 				vertex_cells[counter++] = *cells_it;
-			}
-		}
-
-		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
-			for(unsigned int i = vertex_cells_index[vertex]; i < vertex_cells_index[vertex] + vertex_cells_count[vertex]; ++i) {
-				cout << "vertex " << vertex << " connected to cell " << vertex_cells[i] << endl;
 			}
 		}
 	}
@@ -313,6 +318,7 @@ namespace FVL {
 		for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 			cell_edges = CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
 			cell_edges_normal = CFVMat<double>(MAX_EDGES_PER_CELL, 2, num_cells);
+			cell_vertexes = CFVMat<unsigned int>(MAX_VERTEX_PER_CELL, 1, num_cells);
 		}
 	}
 }

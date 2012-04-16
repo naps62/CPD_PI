@@ -23,7 +23,8 @@
 /**
  * \todo move this to INI file
  */
-#define MAX_EDGES_PER_CELL 4	///< Maximum number of edges allowed for each cell
+#define MAX_EDGES_PER_CELL	4	///< Maximum number of edges allowed for each cell
+#define MAX_VERTEX_PER_CELL	4	///< Maximum number of verex for each cell (equal to MAX_EDGES_PER_CELL)
 
 /************************************************
  * STREAM MANIPULATION VALUES

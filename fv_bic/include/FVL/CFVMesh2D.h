@@ -66,6 +66,7 @@ namespace FVL {
 		unsigned int *cell_edges_count;	///< number of edges for each cell (to index cell_edges)
 		unsigned int **cell_edges;		///< index of edges for each cell (unsigned int [MAX_EDGES_PER_CELL][num_cells])
 		double **cell_edges_normal;		///< distance of each cell to each edge (double [2*MAX_EDGES_PER_CELL][num_cells])
+		unsigned int **cell_vertexes;	///< index of vertexes for each cell (unsigned int [MAX_VERTEX_PER_CELL][num_cells])
 	};
 
 	/**

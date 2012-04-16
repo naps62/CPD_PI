@@ -1,12 +1,12 @@
 #include "kernels_cpu.h"
 
-/*inline double min(double x, double y) {
+inline double _min(double x, double y) {
 	return (x < y) ? x : y;
 }
 
-inline double max(double x, double y) {
+inline double _max(double x, double y) {
 	return (x > y) ? x : y;
-}*/
+}
 
 /* Aux function for cpu_compute_vecResult - computes ghost cell centroid */
 void cpu_ghost_coords(CFVMesh2D &mesh, unsigned int edge, double &x, double &y) {
@@ -253,20 +253,14 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 
 /* Given the values of left edge (u_i), right edge (u_j) and edge value (u_ij) compute Psi value to bound flux between cells */
 double cpu_edgePsi(double u_i, double u_j, double u_ij) {
-	double u_min = min(u_i, u_j);
-	double u_max = max(u_i, u_j);
-
-	//if (u_ij - 
-	/*double ij_minus_i	= u_ij	- u_i;
+	double ij_minus_i	= u_ij	- u_i;
 	double j_minus_i	= u_j	- u_i;
 	
-	if (ij_minus_i * j_minus_i < 0) {
+	if (ij_minus_i * j_minus_i <= 0) {
 		return 0;
 	} else {
-		// min(1, (u_j - u_i)/(u_ij - u_i))
-		double psi = j_minus_i / ij_minus_i;
-		return (psi < 1) ? psi : 1;
-	}*/
+		return _min(1, j_minus_i / ij_minus_i);
+	}
 }
 
 /* compute flux kernel */
@@ -301,20 +295,20 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				
 				u_i = polution[cell_orig];
 
-				// está a sair (velocidade positiva)
+				// flux is exiting (positive velocity)
 				if (v > 0) {
 					// TODO caso em que a velocidade indica que está a sair, isto esta correcto?
-					u_j = dc;
+					u_j = 0;
 					partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig);
 
-				// está a entrar (velocidade negativa)
+				// flux is entering (negative velocity)
 				} else {
 					u_j = u_i;
 					u_i	= dc; // TODO caso em que a velocidade indica que está a entrar, isto esta correcto?
 					partial_u_ij = dc;
 				}
 
-				u_ij		 = u_i + partial_u_ij;
+				u_ij		 = partial_u_ij;
 				psi = cpu_edgePsi(u_i, u_j, u_ij);
 				break;
 

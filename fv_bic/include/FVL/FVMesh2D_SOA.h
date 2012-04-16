@@ -57,6 +57,7 @@ namespace FVL {
 			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
 			CFVMat<double> cell_edges_normal;		///< distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 2, num_cells)
+			CFVMat<unsigned int> cell_vertexes;		///< index of cells for each vertex (CFVMat(MAX_VERTEX_PER_CELL, 1, num_cells)
 
 
 			/************************************************

@@ -7,7 +7,7 @@ ij = 3;
 %c = 3;
 
 %ABC = [-1 0 0.2]
-u = [2 3 1];
+u = [1 0 1];
 
 u_min = min(u(i), u(j));
 u_max = max(u(i), u(j));
