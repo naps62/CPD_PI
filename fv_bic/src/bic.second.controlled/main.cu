@@ -45,7 +45,7 @@ Parameters read_parameters (string parameters_filename) {
 }
 
 // TODO: convert to cuda
-double cpu_compute_mesh_parameter(CFVMesh2D &mesh) {
+double cpu_compute_mesh_parameter(CFVMesh2D mesh) {
 	double h;
 	double S;
 
@@ -79,6 +79,7 @@ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocitie
 		if (abs(v) > v_max || i == 0) {
 			v_max = abs(v);
 		}
+		cout << "vs[" << i << "] = " << vs[i] << endl;
 	}
 }
 
@@ -125,7 +126,7 @@ int main(int argc, char **argv) {
 	FVL::CFVMat<double> matA(3, 3, mesh.num_cells);
 	FVL::CFVMat<double> vecABC(3, 1, mesh.num_cells);
 	FVL::CFVMat<double> vecResult(3, 1, mesh.num_cells);
-	FVL::CFVArray<double> edgePsi(mesh.num_edges);
+	FVL::CFVArray<double> vertexPsi(mesh.num_vertex);
 	FVL::CFVArray<double> cellPsi(mesh.num_cells);
 
 	// read other input files
@@ -155,7 +156,7 @@ int main(int argc, char **argv) {
 	matA.cuda_malloc();
 	vecABC.cuda_malloc();
 	vecResult.cuda_malloc();
-	edgePsi.cuda_malloc();
+	vertexPsi.cuda_malloc();
 	cellPsi.cuda_malloc();
 
 	// data copy
@@ -207,10 +208,10 @@ int main(int argc, char **argv) {
 			cpu_vecABC(mesh, matA, vecResult, vecABC);
 
 			/* compute flux */
-			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, edgePsi, data.dirichlet);
+			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, data.dirichlet);
 
 			/* compute Psi bounder for each cell */
-			cpu_cellPsi(mesh, edgePsi, cellPsi);
+			cpu_cellPsi(mesh, vertexPsi, cellPsi);
 
 			/* bound previously calculated flux with using psi values */
 			cpu_bound_flux(mesh, vs, cellPsi, polution, flux, data.dirichlet);
@@ -290,7 +291,5 @@ int main(int argc, char **argv) {
 	matA.cuda_free();
 	mesh.cuda_free();
 	#endif
-
-	cout << "exiting" << endl;
 }
 
