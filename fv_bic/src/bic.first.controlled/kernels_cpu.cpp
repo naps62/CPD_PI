@@ -350,7 +350,7 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
 		unsigned int cell_orig;
-		double v, u_ij, u_i, psi;
+		double v, delta_u_ij, u_i, psi;
 
 		// recover velocity value for this edge
 		v = velocity[edge];
@@ -386,10 +386,10 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 		}
 
 		// recover u_ij value
-		u_ij = flux[edge];
+		delta_u_ij = flux[edge];
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
-		flux[edge] = v * (u_i + psi * u_ij);
+		flux[edge] = v * (u_i + psi * delta_u_ij);
 		//cout << "flux[" << edge << "] = " << flux[edge] /*<< " (using cell " << cell << ")"*/ << endl;
 	}
 }

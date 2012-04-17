@@ -40,6 +40,7 @@ namespace FVL {
 		if (! filename.empty())
 			this->filename = filename;
 		ofstream out(this->filename.c_str());
+		out << *this;
 	}
 
 	void FVXMLWriter::close() {

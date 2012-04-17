@@ -1,5 +1,7 @@
 #include <fstream>
 #include <string>
+#include <set>
+#include <map>
 
 #include "FVL/FVMesh2D_SOA.h"
 #include "FVLib_config.h"
@@ -30,8 +32,9 @@ namespace FVL {
 	 ***********************************************/
 
 	void FVMesh2D_SOA::import_FVMesh2D(FVMesh2D &msh) {
-		num_edges = msh.getNbEdge();
-		num_cells = msh.getNbCell();
+		num_vertex	= msh.getNbVertex();
+		num_edges	= msh.getNbEdge();
+		num_cells	= msh.getNbCell();
 
 		// allocs space for all needed data
 		alloc();
@@ -127,9 +130,24 @@ namespace FVL {
 				FVErr::error(msg, 1);
 			}
 
+			set<unsigned int> tmp_cell_vertexes;
+
 			for(unsigned int e = 0; e < cell_edges_count[i]; ++e) {
-				cell_ss >> cell_edges.elem(e, 0, i);	// reads e'th edge of cell i
-				cell_edges.elem(e, 0, i)--;				// change to 0-based index
+				unsigned int edge;
+				cell_ss >> edge;	// reads e'th edge of cell i
+				edge--;				// change to 0-based index
+				cell_edges.elem(e, 0, i) = edge;	
+
+				tmp_cell_vertexes.insert(edge_fst_vertex[edge]);
+				tmp_cell_vertexes.insert(edge_snd_vertex[edge]);
+			}
+
+			int v = 0;
+			set<unsigned int>::iterator it;
+			for(it = tmp_cell_vertexes.begin(); it != tmp_cell_vertexes.end(); ++it, ++v) {
+				cell_vertexes.elem(v, 0, i) = *it;
+			}
+			for(unsigned int v = 0; v < cell_edges_count[i]; ++v) {
 			}
 		}
 
@@ -209,8 +227,6 @@ namespace FVL {
 				cell_areas[i] += fabs(Det(u,v)) * 0.5;
 			}
 
-			// update list of vertex->cell pointer
-			// TODO what is this???
 		}
 
 		for(unsigned int i = 0; i < num_edges; ++i) {
@@ -235,12 +251,37 @@ namespace FVL {
 				edge_normals.x[i] *= -1. ;
 				edge_normals.y[i] *= -1. ;
 			}
+		}
 
-			if (edge_right_cells[i] == NO_CELL) {
-				// TODO push boundary edges
+		// update list of vertex->cell pointer
+		map<unsigned int, set<unsigned int> > tmp_vertex_cells;
+
+		// create a temporary map of (vertex, set(cells)) that map))
+		for(unsigned int cell = 0; cell < num_cells; ++cell) {
+			for(unsigned int edge_i = 0; edge_i < cell_edges_count[cell]; ++edge_i) {
+				unsigned int edge = cell_edges.elem(edge_i, 0, cell);
+				tmp_vertex_cells[edge_fst_vertex[edge]].insert(cell);
+				tmp_vertex_cells[edge_snd_vertex[edge]].insert(cell);
 			}
 		}
 
+		// computes total size of the created map
+		unsigned int total_count = 0;
+		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
+			vertex_cells_index[vertex] = total_count;
+			vertex_cells_count[vertex] = tmp_vertex_cells[vertex].size();
+			total_count += vertex_cells_count[vertex];
+		}
+
+		// converts the map to a sequential array
+		vertex_cells = CFVArray<double>(total_count);
+		unsigned int counter = 0;
+		for(unsigned int vertex = 0; vertex < num_vertex; ++vertex) {
+			set<unsigned int>::iterator cells_it;
+			for(cells_it = tmp_vertex_cells[vertex].begin(); cells_it != tmp_vertex_cells[vertex].end(); ++cells_it) {
+				vertex_cells[counter++] = *cells_it;
+			}
+		}
 	}
 
 	/************************************************
@@ -254,6 +295,8 @@ namespace FVL {
 
 		// alloc vertex info
 		vertex_coords		= CFVPoints2D<double>(num_vertex);
+		vertex_cells_count	= CFVArray<double>(num_vertex);
+		vertex_cells_index	= CFVArray<double>(num_vertex);
 
 		// alloc edge info
 		edge_types			= CFVArray<int>(num_edges);
@@ -275,6 +318,7 @@ namespace FVL {
 		for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i) {
 			cell_edges = CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
 			cell_edges_normal = CFVMat<double>(MAX_EDGES_PER_CELL, 2, num_cells);
+			cell_vertexes = CFVMat<unsigned int>(MAX_VERTEX_PER_CELL, 1, num_cells);
 		}
 	}
 }
