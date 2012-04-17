@@ -8,7 +8,7 @@ default:	\
 	fvcm	\
 	fvcd	\
 	velocity	\
-	cuda.second_order
+	mpi.sequential
 
 %:
 	@echo "<<==::    $@    ::==>>"

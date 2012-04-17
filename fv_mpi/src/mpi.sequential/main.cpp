@@ -63,14 +63,13 @@ void compute_edge_velocities(FVMesh2D_SOA &mesh, CFVPoints2D<double> &velocities
 			right = left;
 
 		double v	= ((velocities.x[left] + velocities.x[right]) * 0.5 * mesh.edge_normals.x[i])
-					+ ((velocities.y[left] + velocities.y[right]) * 0.5 * mesh.edge_normals.y[i]);
+			+ ((velocities.y[left] + velocities.y[right]) * 0.5 * mesh.edge_normals.y[i]);
 
 		vs[i] = v;
 
 		if (abs(v) > v_max || i == 0) {
 			v_max = abs(v);
 		}
-		cout << "vs[" << i << "] = " << vs[i] << endl;
 	}
 }
 
@@ -93,9 +92,9 @@ int main(int argc, char **argv) {
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
-	FVL::CFVArray<double> polution(mesh.num_cells);
-	FVL::CFVArray<double> flux(mesh.num_edges);
-	FVL::CFVArray<double> vs(mesh.num_edges);
+	FVL::FVArray<double> polution(mesh.num_cells);
+	FVL::FVArray<double> flux(mesh.num_edges);
+	FVL::FVArray<double> vs(mesh.num_edges);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -109,7 +108,6 @@ int main(int argc, char **argv) {
 	polution_writer.append(polution, t, "polution");
 
 	// compute velocity vector
-	// TODO: Convert to CUDA
 	compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = compute_mesh_parameter(mesh);
 	dt	= 1.0 / v_max * h;
@@ -119,13 +117,10 @@ int main(int argc, char **argv) {
 		update(mesh, polution, flux, dt);
 
 		t += dt;
-
-		if (i % data.anim_jump == 0) {
+		if (i % data.anim_jump == 0)
 			polution_writer.append(polution, t, "polution");
-		}
-
 		++i;
-}
+	}
 
 	polution_writer.append(polution, t, "polution");
 	polution_writer.save();
