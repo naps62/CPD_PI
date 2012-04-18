@@ -16,6 +16,12 @@ void compute_flux(FVMesh2D_SOA &mesh, FVArray<double> &velocity, CFVArray<double
 		else		flux[edge] = v * polu_right;
 
 		/*
+		if (v >= 0) flux[edge] = polution[ mesh.edge_left_cells[edge] ];
+		else		flux[edge] = ((mesh.edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : polution[ mesh.edge_right_cells[edge] ]);
+		flux[edge] *= v;
+		*/
+
+		/*
 		   polu_left	= polution[ mesh.edge_left_cells[edge] ];
 		   polu_right	= _choose(mesh.edge_right_cells[edge] == NO_RIGHT_CELL, dc, polution[ mesh.edge_right_cells[edge] ]);
 		   flux		= _choose(v >= 0, v * polu_left, v * polu_right)
@@ -41,8 +47,8 @@ void update(FVMesh2D_SOA &mesh, FVArray<double> &polution, FVArray<double> &flux
 			}
 
 			/*
-			   polution[cell] += _choose(mesh.edge_left_cells[edge] == cell, -var, var);
-			   */
+			polution[cell] += _choose(mesh.edge_left_cells[edge] == cell, -var, var);
+			*/
 		}
 	}
 }

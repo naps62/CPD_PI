@@ -65,6 +65,17 @@ namespace FVL {
 			 ***********************************************/
 
 			/**
+			 * Constructor to create an empty mesh, given its dimensions
+			 *
+			 * When using this constructor, vertex_cells is unavailable (allocated as size 0 array)
+			 *
+			 * \param num_vertex Number of vertexes to alloc
+			 * \param num_edges Number of edges to alloc
+			 * \param num_cells Number of cells to alloc
+			 */
+			FVMesh2D_SOA(unsigned int num_vertex, unsigned int num_edges, unsigned int num_cells);
+
+			/**
 			 * Constructor to import a mesh on original FVMesh2D format
 			 *
 			 * \param msh Mesh to import

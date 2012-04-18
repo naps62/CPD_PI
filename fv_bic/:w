@@ -23,10 +23,6 @@ namespace FVL {
 		this->num_vertex = num_vertex;
 		this->num_edges	 = num_edges;
 		this->num_cells  = num_cells;
-
-		vertex_cells = CFVArray<double>(0);
-
-		alloc();
 	}
 
 	FVMesh2D_SOA::FVMesh2D_SOA(FVMesh2D &msh) {

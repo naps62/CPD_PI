@@ -56,7 +56,27 @@ void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 	}
 }
 
-std::vector<FVMesh2D_SOA> generate_partitions(FVMesh2D_SOA &mesh, int num_partitions) {
+void alloc_partitions(FVMesh2D_SOA &result, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite> &result) {
+	/* allocate each partition */
+	unsigned int part = 0
+	for(vector<PartitionData>::iterator it = partitions.begin(); it != partitions.end(); ++it) {
+		result.push_back(CFVMesh2D_SOA_Lite(0, it->num_edges, it->num_cells));
+
+		/* save cell data for this part */
+		for(unsigned int cell = 0; cell < it->num_cells; ++cell) {
+			result.back().cell_centroids.x[cell] = mesh.cell_centroids.x[ it->cells[cell] ];
+			result.back().cell_centroids.y[cell] = mesh.cell_centroids.y[ it->cells[cell] ];
+		}
+
+		for(unsigned int edge = 0; edge < it->num_edges; ++edge) {
+
+		}
+	}
+
+
+}
+
+void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite> &result) {
 
 	/* this struct will hold paramteres of each partition while generating them */
 	vector<PartitionData> partitions(num_partitions);
@@ -64,8 +84,10 @@ std::vector<FVMesh2D_SOA> generate_partitions(FVMesh2D_SOA &mesh, int num_partit
 	distribute_cells(mesh, partitions);
 	distribute_edges(mesh, partitions);
 
-	for(int i = 0; i < partitions.size(); ++i)
+	alloc_partitions(partitions, result);
+
+	/*for(int i = 0; i < partitions.size(); ++i)
 		partitions[i].dump();
 
-	return vector<FVMesh2D_SOA>();
+	return vector<FVMesh2D_SOA>();*/
 }

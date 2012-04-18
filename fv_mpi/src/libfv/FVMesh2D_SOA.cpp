@@ -19,6 +19,16 @@ namespace FVL {
 	 * CONSTRUCTORS
 	 ***********************************************/
 
+	FVMesh2D_SOA::FVMesh2D_SOA(unsigned int num_vertex, unsigned int num_edges, unsigned int num_cells) {
+		this->num_vertex = num_vertex;
+		this->num_edges	 = num_edges;
+		this->num_cells  = num_cells;
+
+		vertex_cells = CFVArray<double>(0);
+
+		alloc();
+	}
+
 	FVMesh2D_SOA::FVMesh2D_SOA(FVMesh2D &msh) {
 		import_FVMesh2D(msh);
 	}

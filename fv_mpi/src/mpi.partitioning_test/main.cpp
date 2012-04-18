@@ -4,6 +4,7 @@
 #include "FVio.h"
 #include "FVL/FVParameters.h"
 #include "FVL/FVMesh2D_SOA.h"
+#include "FVL/FVMesh2D_SOA_Lite.h"
 #include "kernels.h"
 
 #include "partitioner.h"
@@ -51,6 +52,6 @@ int main(int argc, char **argv) {
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 
-	vector<FVL::FVMesh2D_SOA> partitions = generate_partitions(mesh, 3);
+	vector<FVL::FVMesh2D_SOA_Lite> partitions;
+	generate_partitions(mesh, 3, partitions);
 }
-
