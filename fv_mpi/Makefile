@@ -8,7 +8,8 @@ default:	\
 	fvcm	\
 	fvcd	\
 	velocity	\
-	mpi.sequential
+	mpi.sequential	\
+	mpi.partitioning_test
 
 %:
 	@echo "<<==::    $@    ::==>>"
