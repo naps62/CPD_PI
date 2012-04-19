@@ -63,17 +63,28 @@ void alloc_partitions(FVMesh2D_SOA &result, vector<PartitionData> &partitions, v
 		result.push_back(CFVMesh2D_SOA_Lite(0, it->num_edges, it->num_cells));
 
 		/* save cell data for this part */
-		for(unsigned int cell = 0; cell < it->num_cells; ++cell) {
-			result.back().cell_centroids.x[cell] = mesh.cell_centroids.x[ it->cells[cell] ];
-			result.back().cell_centroids.y[cell] = mesh.cell_centroids.y[ it->cells[cell] ];
+		for(unsigned int cell_i = 0; cell_i < it->num_cells; ++cell_i) {
+			unsigned int cell = it->cells[cell_i];
+
+			result.back().cell_index[cell_i] 		= cell;
+			result.back().cell_areas[cell_i] 		= mesh.cell_areas[cell];
+			result.back().cell_edges_count[cell_i]	= mesh.cell_edges_count[cell];
+			
+			/* copy edge list for each cell */
+			for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
+				result.back().cell_edges.elem(edge_i, 0, cell_i) = mesh.cell_edges.elem(edge_i, 0, cell);
+			}
 		}
 
-		for(unsigned int edge = 0; edge < it->num_edges; ++edge) {
+		for(unsigned int edge_i = 0; edge_i < it->num_edges; ++edge_i) {
+			unsigned int edge = it->edges[edge_i];
 
+			result.back().edge_index[edge_i]	= edge;
+			result.back().edge_lengths[edge_i]	= mesh.edge_lenghts[edge];
+			result.back().edge_left_cells[edge_i]	= mesh.edge_left_cells[edge_i];
+			result.back().edge_right_cells[edge_i]	= mesh.edge_right_cells[edge_i];
 		}
 	}
-
-
 }
 
 void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite> &result) {
