@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- File Parameter -->
-<!-- december 2010 --> 
-<FVLIB>
-    <PARAMETER>   
-           <parameter MeshName="foz.xml"/>
-           <parameter VelocityFile="velocity.xml" PotentialFile="potential.xml" FactorNorm="1"/>
-           <parameter PoluInitFile="concentration_ini.xml" PoluFile="concentration.xml"/>           
-           <parameter ConcentrationMax="1" DirichletCondition="1" />
-           <parameter FinalTime="8" NbJump="5"/>
-    </PARAMETER>
-</FVLIB>  
+<fvlib>
+	<parameters>
+		<MeshName 		value="mesh.xml" />
+		<OutputFile 	value="polution.xml" />
+		<VelocityFile 	value="velocity.xml" />
+		<PoluInitFile 	value="concentration_ini.xml" />
+		<PotentialFile 	value="v_potential.xml" />
+		<FactorNorm 	value="1" />
+		<ConcentrationMax value="1" />
+		<DirichletCondition value="1" />
+		<FinalTime 		value="10" />
+		<NbJump 		value="5" />
+		<CFL 			value="0.3" />
+	</parameters>
+</fvlib>
