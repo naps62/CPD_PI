@@ -4,8 +4,6 @@
 
 #include "FVL/FVErr.h"
 
-using namespace rapidxml;
-
 namespace FVL {
 
 	/************************************************
@@ -23,7 +21,7 @@ namespace FVL {
 	 * MEMORY MANAGEMENT METHODS
 	 ***********************************************/
 	void FVMesh2D_SOA_Lite::alloc() {
-		if (num_vertex <= 0 || num_edges <= 0 || num_cells <= 0) {
+		if (num_edges <= 0 || num_cells <= 0) {
 			string msg = "num edges/cells not valid for allocation";
 			FVErr::error(msg, -1);
 		}

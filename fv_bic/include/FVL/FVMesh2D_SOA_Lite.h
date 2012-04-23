@@ -58,7 +58,7 @@ namespace FVL {
 			 * \param num_edges Number of edges to alloc
 			 * \param num_cells Number of cells to alloc
 			 */
-			FVMesh2D_SOA(unsigned int num_edges, unsigned int num_cells);
+			FVMesh2D_SOA_Lite(unsigned int num_edges, unsigned int num_cells);
 
 		private:
 
