@@ -5,8 +5,8 @@
  * \date 13-02-2012
  */
 
-#ifndef _H_FVMESH2D_SOA
-#define _H_FVMESH2D_SOA
+#ifndef _H_FVMESH2D_SOA_LITE
+#define _H_FVMESH2D_SOA_LITE
 
 #include <string>
 #include <vector>
@@ -74,7 +74,7 @@ namespace FVL {
 
 }
 
-#endif // define _H_FVMESH2D_SOA
+#endif // define _H_FVMESH2D_SOA_LITE
 
 
 

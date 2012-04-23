@@ -39,8 +39,6 @@ void distribute_cells(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 	}
 }
 
-#define foreach(C, x, y) for(C::iterator x = y.begin(); x != y.end(); ++y)
-
 void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 
 	/* for each partition, create list of edges required */
@@ -56,49 +54,45 @@ void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 	}
 }
 
-void alloc_partitions(FVMesh2D_SOA &result, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite> &result) {
+void alloc_partitions(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite *> &result) {
+
 	/* allocate each partition */
-	unsigned int part = 0
 	for(vector<PartitionData>::iterator it = partitions.begin(); it != partitions.end(); ++it) {
-		result.push_back(CFVMesh2D_SOA_Lite(0, it->num_edges, it->num_cells));
+		result.push_back(new FVMesh2D_SOA_Lite(it->edges.size(), it->cells.size()));
 
 		/* save cell data for this part */
-		for(unsigned int cell_i = 0; cell_i < it->num_cells; ++cell_i) {
-			unsigned int cell = it->cells[cell_i];
+		unsigned int cell_i = 0;
+		for(set<unsigned int>::iterator cell_it = it->cells.begin(); cell_it != it->cells.end(); ++cell_it, ++cell_i) {
+			unsigned int cell = *cell_it;
 
-			result.back().cell_index[cell_i] 		= cell;
-			result.back().cell_areas[cell_i] 		= mesh.cell_areas[cell];
-			result.back().cell_edges_count[cell_i]	= mesh.cell_edges_count[cell];
+			result.back()->cell_index[cell_i] 		= cell;
+			result.back()->cell_areas[cell_i] 		= mesh.cell_areas[cell];
+			result.back()->cell_edges_count[cell_i]	= mesh.cell_edges_count[cell];
 			
 			/* copy edge list for each cell */
 			for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
-				result.back().cell_edges.elem(edge_i, 0, cell_i) = mesh.cell_edges.elem(edge_i, 0, cell);
+				result.back()->cell_edges.elem(edge_i, 0, cell_i) = mesh.cell_edges.elem(edge_i, 0, cell);
 			}
 		}
 
-		for(unsigned int edge_i = 0; edge_i < it->num_edges; ++edge_i) {
-			unsigned int edge = it->edges[edge_i];
+		unsigned int edge_i = 0;
+		for(set<unsigned int>::iterator edge_it = it->edges.begin(); edge_it != it->edges.end(); ++edge_it, ++edge_i) {
+			unsigned int edge = *edge_it;
 
-			result.back().edge_index[edge_i]	= edge;
-			result.back().edge_lengths[edge_i]	= mesh.edge_lenghts[edge];
-			result.back().edge_left_cells[edge_i]	= mesh.edge_left_cells[edge_i];
-			result.back().edge_right_cells[edge_i]	= mesh.edge_right_cells[edge_i];
+			result.back()->edge_index[edge_i]		= edge;
+			result.back()->edge_lengths[edge_i]		= mesh.edge_lengths[edge];
+			result.back()->edge_left_cells[edge_i]	= mesh.edge_left_cells[edge_i];
+			result.back()->edge_right_cells[edge_i]	= mesh.edge_right_cells[edge_i];
 		}
 	}
 }
 
-void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite> &result) {
+void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite *> &result) {
 
 	/* this struct will hold paramteres of each partition while generating them */
 	vector<PartitionData> partitions(num_partitions);
 
 	distribute_cells(mesh, partitions);
 	distribute_edges(mesh, partitions);
-
-	alloc_partitions(partitions, result);
-
-	/*for(int i = 0; i < partitions.size(); ++i)
-		partitions[i].dump();
-
-	return vector<FVMesh2D_SOA>();*/
+	alloc_partitions(mesh, partitions, result);
 }

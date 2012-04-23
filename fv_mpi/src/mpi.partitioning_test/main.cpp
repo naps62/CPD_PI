@@ -39,6 +39,10 @@ Parameters read_parameters (string parameters_filename) {
 	return data;
 }
 
+void dump_partitions(vector<FVL::FVMesh2D_SOA_Lite *> &parts) {
+	cout << parts.size() << endl;
+}
+
 int main(int argc, char **argv) {
 
 	// read params
@@ -52,6 +56,8 @@ int main(int argc, char **argv) {
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 
-	vector<FVL::FVMesh2D_SOA_Lite> partitions;
-	generate_partitions(mesh, 3, partitions);
+	vector<FVL::FVMesh2D_SOA_Lite *> partitions;
+	generate_partitions(mesh, 2, partitions);
+
+	dump_partitions(partitions);
 }

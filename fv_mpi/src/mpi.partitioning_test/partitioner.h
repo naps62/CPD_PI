@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include "FVL/FVMesh2D_SOA.h"
+#include "FVL/FVMesh2D_SOA_Lite.h"
 using namespace FVL;
 using namespace std;
 
@@ -29,8 +30,8 @@ struct PartitionData {
 
 void distribute_cells(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions);
 void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions);
-vector<FVMesh2D_SOA> alloc_partitions(vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite> &result);
+void alloc_partitions(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite *> &result);
 
-vector<FVMesh2D_SOA> generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite> &result);
+void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite *> &result);
 
 #endif // _H_PARTITIONER
