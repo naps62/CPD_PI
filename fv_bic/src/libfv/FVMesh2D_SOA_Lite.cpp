@@ -27,10 +27,15 @@ namespace FVL {
 		}
 
 		// alloc edge info
-		edge_index			= CFVArray<double>(num_edges);
-		edge_lengths		= CFVArray<double>(num_edges);
-		edge_left_cells		= CFVArray<unsigned int>(num_edges);
-		edge_right_cells	= CFVArray<unsigned int>(num_edges);
+		edge_index			  = CFVArray<double>(num_edges);
+		edge_lengths		  = CFVArray<double>(num_edges);
+		edge_velocity		  = CFVArray<double>(num_edges);
+		edge_left_cells		  = CFVArray<unsigned int>(num_edges);
+		edge_right_cells	  = CFVArray<unsigned int>(num_edges);
+		edge_left_part		  = CFVArray<unsigned int>(num_edges);
+		edge_left_part_index  = CFVArray<unsigned int>(num_edges);
+		edge_right_part		  = CFVArray<unsigned int>(num_edges);
+		edge_right_part_index = CFVArray<unsigned int>(num_edges);
 
 		// alloc cell info
 		cell_index			= CFVArray<double>(num_cells);

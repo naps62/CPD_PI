@@ -55,9 +55,10 @@ int main(int argc, char **argv) {
 
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
+	FVL::FVArray velocities(mesh.num_edges);
 
 	vector<FVL::FVMesh2D_SOA_Lite *> partitions;
-	generate_partitions(mesh, 2, partitions);
+	generate_partitions(mesh, velocities, 2, partitions);
 
 	dump_partitions(partitions);
 }

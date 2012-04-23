@@ -54,35 +54,81 @@ void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 	}
 }
 
-void alloc_partitions(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite *> &result) {
+void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite *> &result) {
 
 	/* allocate each partition */
-	for(vector<PartitionData>::iterator it = partitions.begin(); it != partitions.end(); ++it) {
-		result.push_back(new FVMesh2D_SOA_Lite(it->edges.size(), it->cells.size()));
+	unsigned int current_part = 0;
+	for(unsigned current_part = 0; current_part < partitions.size(); ++current_part) {
+		PartitionData part_data = partitions[current_part];
+	//for(vector<PartitionData>::iterator it = partitions.begin(); it != partitions.end(); ++it, ++current_part) {
+		result.push_back(new FVMesh2D_SOA_Lite(part_data.edges.size(), part_data.cells.size()));
+
+		FVMesh2D_SOA_Lite part = *(result.back());
 
 		/* save cell data for this part */
 		unsigned int cell_i = 0;
-		for(set<unsigned int>::iterator cell_it = it->cells.begin(); cell_it != it->cells.end(); ++cell_it, ++cell_i) {
+		for(set<unsigned int>::iterator cell_it = part_data.cells.begin(); cell_it != part_data.cells.end(); ++cell_it, ++cell_i) {
 			unsigned int cell = *cell_it;
 
-			result.back()->cell_index[cell_i] 		= cell;
-			result.back()->cell_areas[cell_i] 		= mesh.cell_areas[cell];
-			result.back()->cell_edges_count[cell_i]	= mesh.cell_edges_count[cell];
+			part.cell_index[cell_i] 		= cell;
+			part.cell_areas[cell_i] 		= mesh.cell_areas[cell];
+			part.cell_edges_count[cell_i]	= mesh.cell_edges_count[cell];
 			
 			/* copy edge list for each cell */
 			for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
-				result.back()->cell_edges.elem(edge_i, 0, cell_i) = mesh.cell_edges.elem(edge_i, 0, cell);
+				part.cell_edges.elem(edge_i, 0, cell_i) = mesh.cell_edges.elem(edge_i, 0, cell);
 			}
 		}
 
+		/* save edge data */
 		unsigned int edge_i = 0;
-		for(set<unsigned int>::iterator edge_it = it->edges.begin(); edge_it != it->edges.end(); ++edge_it, ++edge_i) {
+		for(set<unsigned int>::iterator edge_it = part_data.edges.begin(); edge_it != part_data.edges.end(); ++edge_it, ++edge_i) {
 			unsigned int edge = *edge_it;
 
-			result.back()->edge_index[edge_i]		= edge;
-			result.back()->edge_lengths[edge_i]		= mesh.edge_lengths[edge];
-			result.back()->edge_left_cells[edge_i]	= mesh.edge_left_cells[edge_i];
-			result.back()->edge_right_cells[edge_i]	= mesh.edge_right_cells[edge_i];
+			part.edge_index[edge_i]			= edge;
+			part.edge_lengths[edge_i]		= mesh.edge_lengths[edge];
+			part.edge_velocity[edge_i]		= v[edge];
+			part.edge_left_cells[edge_i]	= mesh.edge_left_cells[edge_i];
+			part.edge_right_cells[edge_i]	= mesh.edge_right_cells[edge_i];
+		}
+
+		/* save edge partition reference */
+		for(unsigned int edge = 0; edge < part->num_edges; 
+	}
+
+	/* save edge partition references */
+	unsigned int current_part = 0;
+	unsigned int left_index = 0, right_index = 0;
+	for(vector<FVMesh2D_SOA_Lite *>::iterator it = result.begin(); it != result.end(); ++result, ++current_part) {
+		FVMesh2D_SOA_Lite part = *it;
+		for(unsigned int edge = 0; edge < part.num_edges; ++edge) {
+			unsigned int cell;
+
+			/* if left cell is not in the current mesh, swap left and right cells, to mantain mesh rules (left cell must always exist */
+			cell = mesh.edge_left_cells[edge];
+			if (part_data.cells.find(l_cell) == part_data.cells.end()) {
+				mesh.edge_left_cells[edge]	= mesh.edge_right_cells[edge];
+				mesh.edge_right_cells[edge] = cell;
+				cell = mesh.edge_left_cell[edge];
+			}
+	
+			/* if right edge exists, checks its partition */
+			if (part.edge_types[edge] != FV_EDGE_DIRICHLET) {
+				/*  cell exists in current partition */
+				if (part_data.cells.find(cell) != part_data.cells.end())
+					part.edge_left_part = 0;
+				/* else if it exists in left partition */
+				else if (current_part > 0 && 				 partitions[current_part - 1].cells.find(cell) != part_data.cells.end()) {
+					part.edge_left_part = -1;
+					part.edge_left_part_index = left_index++;
+				}
+				else if (current_part < partitions.size() && partitions[current_part + 1].cells.find(cell) != part_data.cells.end()) {
+					part.edge_left_part =  1;
+					part.edge_right_part_index = right_index++;
+				}
+				else
+					cout << "error finding right cell " << cell << " in partition " << current_part << endl;
+			}
 		}
 	}
 }
