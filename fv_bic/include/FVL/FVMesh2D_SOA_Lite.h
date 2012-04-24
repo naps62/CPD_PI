@@ -34,22 +34,22 @@ namespace FVL {
 
 			// EDGE INFO
 			unsigned int num_edges;						///< total number of edges
-			CFVArray<unsigned int> edge_index;
+			CFVArray<unsigned int> edge_index;			///< for each edge in this partition, gives it's index in the global mesh
 			CFVArray<double> edge_lengths;				///< length for each edge
-			CFVArray<double> edge_velocity;
+			CFVArray<double> edge_velocity;				///< edge velocities. moved here to better handle partition generation (velocity is also partitioned)
 			CFVArray<unsigned int> edge_left_cells;		///< left cell of each edge
 			CFVArray<unsigned int> edge_right_cells;	///< right cell of each edge (NO_RIGHT_CELL indicates a border edge where no right cell exists)
 
-			CFVArray<int> edge_part;					///< partition where the right cell is located
-			CFVArray<unsigned int> edge_part_index;
-			CFVArray<unsigned int>* left_index_to_edge;	///< for each index, the corresponding edge
-			CFVArray<unsigned int>* right_index_to_edge;
+			CFVArray<int> edge_part;					///< for each edge, 0 if it's right cell is in this partition, -1 if it's to the left, 1 if it's to the right
+			CFVArray<unsigned int> edge_part_index;		///< for each edge with edge_part == -1 or 1, gives it's the index on the communication array (where neighbor polution is read from)
+			CFVArray<unsigned int>* left_index_to_edge;	///< for each index in the communication array from the left partition, the corresponding edge
+			CFVArray<unsigned int>* right_index_to_edge;///< same thing, but for right side communication array
 			unsigned int left_cells;					///< number of cells from left partition
 			unsigned int right_cells;					///< number of cells from right partition
 
 			// CELL INFO
 			unsigned int num_cells;					///< total number of cells
-			CFVArray<unsigned int> cell_index;
+			CFVArray<unsigned int> cell_index;		///< for each cell, gives it's index in the global mesh
 			CFVArray<double> cell_areas;			///< area for each cell
 			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
