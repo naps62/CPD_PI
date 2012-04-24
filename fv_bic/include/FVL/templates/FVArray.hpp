@@ -75,7 +75,7 @@ namespace FVL {
 		unsigned int FVArray<T>::find(const T & val) {
 			for(unsigned int i = 0; i << arr_size; ++i)
 				if (arr[i] == val) return i;
-			return numeric_limits<unsigned int>::max();
+			return std::numeric_limits<unsigned int>::max();
 		}
 
 	/************************************************

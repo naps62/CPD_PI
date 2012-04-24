@@ -129,21 +129,24 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionDa
 			// if cell exists
 			if (cell != NO_RIGHT_CELL) {
 				// if cell exists in current partition, nothing to do here
-				if (part_data.cells.find(cell) != part_data.cells.end())
-					continue;
+				if (part_data.cells.find(cell) != part_data.cells.end()) {
+					part->edge_part[e] = 0;
+				}
 
 				// if cell exists in left partition
-				if (part_i > 0 && partitions[part_i - 1].cells.find(cell) != partitions[part_i - 1].cells.end()) {
-					part->edge_part = -1;
-					part->edge_part_index = part->left_cells++;
+				else if (part_i > 0 && partitions[part_i - 1].cells.find(cell) != partitions[part_i - 1].cells.end()) {
+					part->edge_part[e] = -1;
+					part->edge_part_index[e] = part->left_cells++;
 				}
 
 				// by exclusion, it can only exist in the right partition
 				else {
-					part->edge_part = 1;
-					part->edge_part_index = part->right_cells++;
-					// TODO keep it up!! almost!!
+					part->edge_part[e] = 1;
+					part->edge_part_index[e] = part->right_cells++;
 				}
+			}
+			else {
+				part->edge_part[e] = 0;
 			}
 		}
 	}

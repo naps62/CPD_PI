@@ -39,7 +39,7 @@ namespace FVL {
 			CFVArray<double> edge_velocity;
 			CFVArray<unsigned int> edge_left_cells;	///< left cell of each edge
 			CFVArray<unsigned int> edge_right_cells;	///< right cell of each edge (NO_RIGHT_CELL indicates a border edge where no right cell exists)
-			CFVArray<unsigned int> edge_part;	///< partition where the right cell is located
+			CFVArray<int> edge_part;					///< partition where the right cell is located
 			CFVArray<unsigned int> edge_part_index;
 			unsigned int left_cells;	///< number of cells from left partition
 			unsigned int right_cells;	///< number of cells from right partition

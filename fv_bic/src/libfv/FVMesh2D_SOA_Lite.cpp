@@ -14,6 +14,8 @@ namespace FVL {
 		this->num_edges	 = num_edges;
 		this->num_cells  = num_cells;
 
+		this->left_cells = 0;
+		this->right_cells = 0;
 		alloc();
 	}
 
@@ -27,18 +29,16 @@ namespace FVL {
 		}
 
 		// alloc edge info
-		edge_index			  = CFVArray<double>(num_edges);
-		edge_lengths		  = CFVArray<double>(num_edges);
-		edge_velocity		  = CFVArray<double>(num_edges);
-		edge_left_cells		  = CFVArray<unsigned int>(num_edges);
-		edge_right_cells	  = CFVArray<unsigned int>(num_edges);
-		edge_left_part		  = CFVArray<unsigned int>(num_edges);
-		edge_left_part_index  = CFVArray<unsigned int>(num_edges);
-		edge_right_part		  = CFVArray<unsigned int>(num_edges);
-		edge_right_part_index = CFVArray<unsigned int>(num_edges);
+		edge_index			= CFVArray<unsigned int>(num_edges);
+		edge_lengths		= CFVArray<double>(num_edges);
+		edge_velocity		= CFVArray<double>(num_edges);
+		edge_left_cells		= CFVArray<unsigned int>(num_edges);
+		edge_right_cells	= CFVArray<unsigned int>(num_edges);
+		edge_part			= CFVArray<int>(num_edges);
+		edge_part_index 	= CFVArray<unsigned int>(num_edges);
 
 		// alloc cell info
-		cell_index			= CFVArray<double>(num_cells);
+		cell_index			= CFVArray<unsigned int>(num_cells);
 		cell_areas			= CFVArray<double>(num_cells);
 		cell_edges_count	= CFVArray<unsigned int>(num_cells);
 		cell_edges			= CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
