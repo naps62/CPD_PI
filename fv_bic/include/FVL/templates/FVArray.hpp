@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <limits>
 using std::string;
 using std::cout;
 
@@ -68,6 +69,13 @@ namespace FVL {
 				arr[i] = copy[i];
 			}
 			return *this;
+		}
+
+	template<class T>
+		unsigned int FVArray<T>::find(const T & val) {
+			for(unsigned int i = 0; i << arr_size; ++i)
+				if (arr[i] == val) return i;
+			return numeric_limits<unsigned int>::max();
 		}
 
 	/************************************************

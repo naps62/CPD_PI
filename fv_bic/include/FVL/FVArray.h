@@ -84,6 +84,16 @@ namespace FVL {
 				 */
 				const FVArray<T> & operator = (const FVArray<T> & copy);
 
+				/**
+				 * Search
+				 *
+				 * Given a T value, returns the index of the first ocurrente of that value
+				 *
+				 * \param val The value to search
+				 * \return index of the first ocurrence or numeric_limits<unsigned int>::max() if not found
+				 */
+				unsigned int find(const T & val);
+
 				/************************************************
 				 * GETTERS/SETTERS
 				 ***********************************************/

@@ -91,8 +91,8 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionDa
 				part_data.edges_current++;
 			}
 		}
-
 	}
+
 
 	// assign each cell to the right partition. each cell belongs only to a single partition
 	for(unsigned int cell_i = 0; cell_i < mesh.num_cells; ++cell_i) {
@@ -114,69 +114,6 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionDa
 					part->cell_edges.elem(e, 0, part_data.cells_current) = mesh.cell_edges.elem(e, 0, *cell_it);
 				}
 				part_data.cells_current++;
-			}
-		}
-	}
-
-	// fill partition neighbors data
-	for(unsigned int part_i = 0; part_i < result.size(); ++part_i) {
-		PartitionData & part_data = partitions[part_i];
-		FVMesh2D_SOA_Lite * part  = result[part_i];
-
-		for(unsigned int e = 0; e < part->num_edges; ++e) {
-			unsigned int cell = part->edge_right_cells[e];
-
-			// if cell exists
-			if (cell != NO_RIGHT_CELL) {
-				// if cell exists in current partition, nothing to do here
-				if (part_data.cells.find(cell) != part_data.cells.end())
-					continue;
-
-				// if cell exists in left partition
-				if (part_i > 0 && partitions[part_i - 1].cells.find(cell) != partitions[part_i - 1].cells.end()) {
-					part->edge_part = -1;
-					part->edge_part_index = part->left_cells++;
-				}
-
-				// by exclusion, it can only exist in the right partition
-				else {
-					part->edge_part = 1;
-					part->edge_part_index = part->right_cells++;
-					// TODO keep it up!! almost!!
-				}
-			}
-		}
-	}
-
-	// fix edge and cell indexing, to be relative to the partition and not the global mesh
-	for(unsigned int part_i = 0; part_i < result.size(); ++part_i) {
-		FVMesh2D_SOA_Lite * part = result[part_i];
-
-		// fix edges
-		for(unsigned int e = 0; e < part->num_edges; ++e) {
-			unsigned int edge_val = part->edge_index[e];
-
-			// fix cell_edges
-			for(unsigned int c = 0; c < part->num_cells; ++c) {
-				for(unsigned int e2 = 0; e2 < part->cell_edges_count[c]; ++e2) {
-					if (part->cell_edges.elem(e2, 0, c) == edge_val)
-						part->cell_edges.elem(e2, 0, c) = e;
-				}
-			}
-		}
-
-		// fix cells
-		for(unsigned int c = 0; c < part->num_cells; ++c) {
-			unsigned int cell_val = part->cell_index[c];
-
-			// fix edge_left_cell, and some right cells
-			for(unsigned int e = 0; e < part->num_edges; ++e) {
-				if (part->edge_left_cells[e] == cell_val)
-					part->edge_left_cells[e] = c;
-				else if (part->edge_right_cells[e] == cell_val)
-					part->edge_right_cells[e] = c;
-
-				// TODO how to fill edge_left_part, edge_left_part_index, etc????
 			}
 		}
 	}
@@ -254,8 +191,8 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionDa
 		}
 	}
 
-	// save edge partition references
-	current_part = 0;
+	/* save edge partition references */
+	/*current_part = 0;
 	for(vector<FVMesh2D_SOA_Lite *>::iterator it = result.begin(); it != result.end(); ++it, ++current_part) {
 		PartitionData part_data = partitions[current_part];
 		FVMesh2D_SOA_Lite * part = *it;
