@@ -1,18 +1,18 @@
 // gmsh2.geo
 
 // variables
-H=1.;			// max height of the mesh
+H=.1;			// max height of the mesh
 W=H*10;			// max width
 
-X=100;			// number of columns
-Y=10;			// number of lines
+Y=20;			// number of lines
+X=Y*10;			// number of columns
 
-lx = 1/X;		// width of each cell
-ly = 1/(Y+1);	// height of each cell
+lx = H/Y;		// width of each cell
+ly = W/(Y+1);	// height of each cell
 
 // initial points and line
-Point(1) = {0.0, 0.0, 0.0, ly};
-Point(2) = {0.0, H,	  0.0, ly};
+Point(1) = {0.0, 0.0, 0.0, lx};
+Point(2) = {0.0, H,	  0.0, lx};
 Line(1) = {1, 2};
 
 out[] = Extrude {W, 0, 0} { Line{1}; Layers{{X},{1}}; Recombine; };

@@ -5,9 +5,9 @@ include $(ROOTD)/conf/config.mk
 
 default:	\
 	libfv	\
-	fvcm	\
-	fvcd	\
-	velocity	\
+	mpi.fvcm	\
+	mpi.fvcd	\
+	mpi.velocity	\
 	mpi.sequential	\
 	mpi.partitioning_test
 

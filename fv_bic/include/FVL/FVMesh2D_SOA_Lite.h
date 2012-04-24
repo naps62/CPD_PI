@@ -34,7 +34,7 @@ namespace FVL {
 
 			// EDGE INFO
 			unsigned int num_edges;					///< total number of edges
-			CFVArray<double> edge_index;
+			CFVArray<unsigned int> edge_index;
 			CFVArray<double> edge_lengths;			///< length for each edge
 			CFVArray<double> edge_velocity;
 			CFVArray<unsigned int> edge_left_cells;	///< left cell of each edge
@@ -46,7 +46,7 @@ namespace FVL {
 
 			// CELL INFO
 			unsigned int num_cells;					///< total number of cells
-			CFVArray<double> cell_index;
+			CFVArray<unsigned int> cell_index;
 			CFVArray<double> cell_areas;			///< area for each cell
 			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)

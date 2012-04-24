@@ -9,8 +9,8 @@ using namespace FVL;
 using namespace std;
 
 struct PartitionData {
-	unsigned int cells_left;
-	unsigned int edges_left;
+	unsigned int cells_current;
+	unsigned int edges_current;
 	set<unsigned int> cells;
 	set<unsigned int> edges;
 
@@ -32,6 +32,6 @@ void distribute_cells(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions);
 void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions);
 void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, vector<PartitionData> &partitions, vector<FVMesh2D_SOA_Lite *> &result);
 
-void generate_partitions(FVMesh2D_SOA &mesh, int num_partitions, vector<FVMesh2D_SOA_Lite *> &result);
+void generate_partitions(FVMesh2D_SOA &mesh, FVArray<double> &velocity, int num_partitions, vector<FVMesh2D_SOA_Lite *> &result);
 
 #endif // _H_PARTITIONER

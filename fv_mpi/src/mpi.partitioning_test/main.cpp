@@ -40,7 +40,7 @@ Parameters read_parameters (string parameters_filename) {
 }
 
 void dump_partitions(vector<FVL::FVMesh2D_SOA_Lite *> &parts) {
-	cout << parts.size() << endl;
+	cout << parts[0] << endl;
 }
 
 int main(int argc, char **argv) {
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
-	FVL::FVArray velocities(mesh.num_edges);
+	FVL::FVArray<double> velocities(mesh.num_edges);
 
 	vector<FVL::FVMesh2D_SOA_Lite *> partitions;
 	generate_partitions(mesh, velocities, 2, partitions);
