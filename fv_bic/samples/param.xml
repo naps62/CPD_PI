@@ -10,6 +10,7 @@
 		<ConcentrationMax value="1" />
 		<DirichletCondition value="1" />
 		<FinalTime 		value="10" />
+		<AnimTimeStep 	value="1" />
 		<NbJump 		value="5" />
 		<CFL 			value="0.3" />
 	</parameters>

@@ -4,7 +4,7 @@
 H=.1;			// max height of the mesh
 W=H*10;			// max width
 
-Y=20;			// number of lines
+Y=10;			// number of lines
 X=Y*10;			// number of columns
 
 lx = H/Y;		// width of each cell

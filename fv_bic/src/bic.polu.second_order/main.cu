@@ -22,6 +22,7 @@ typedef struct _parameters {
 	string initial_file;
 	string output_file;
 	double final_time;
+	int anim_time;
 	int anim_jump;
 	double dirichlet;
 	double CFL;
@@ -103,6 +104,7 @@ Parameters read_parameters (string parameters_filename) {
 	data.initial_file	= para.getString("PoluInitFile");
 	data.output_file	= para.getString("OutputFile");
 	data.final_time		= para.getDouble("FinalTime");
+	data.anim_time		= para.getDouble("AnimTimeStep");
 	data.anim_jump		= para.getInteger("NbJump");
 	data.dirichlet		= para.getDouble("DirichletCondition");
 	data.CFL			= para.getDouble("CFL");
@@ -264,9 +266,17 @@ int main(int argc, char **argv) {
 		_D(cudaCheckError("cuda[compute_reverseA]"));
 	#endif
 
-	while(t < data.final_time) {
+	bool finished = false;
+	double anim_next_step = data.anim_time;
+	while (!finished) {
+	//while(t <= data.final_time) {
 		cout << "time: " << t << "   iteration: " << i << "\r";
 		
+		if (t + dt > data.final_time) {
+			cout << "Final iteration, adjusting dt" << endl;
+			dt = data.final_time - t;
+			finished = true;
+		}
 
 		// Cpu version
 		#ifdef NO_CUDA
@@ -325,7 +335,7 @@ int main(int argc, char **argv) {
 		#endif
 
 	t += dt;
-
+/*
 	if (i % data.anim_jump == 0) {
 		#ifndef NO_CUDA
 		polution.cuda_get();
@@ -333,15 +343,18 @@ int main(int argc, char **argv) {
 
 		polution_writer.append(polution, t, "polution");
 	}
+*/
+	if (t >= anim_next_step) {
+		#ifndef NO_CUDA
+		polution.cuda_get();
+		#endif
 
+		polution_writer.append(polution, t, "polution");
+		anim_next_step += data.anim_time;
+	}
 	++i;
 }
 
-	// dump final iteration
-	#ifndef NO_CUDA
-	polution.cuda_get();
-	#endif
-	polution_writer.append(polution, t, "polution");
 	polution_writer.save();
 	polution_writer.close();
 

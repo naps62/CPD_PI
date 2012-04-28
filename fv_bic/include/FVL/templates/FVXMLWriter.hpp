@@ -53,7 +53,7 @@ namespace FVL {
 	template<class T>
 	void FVXMLWriter::add_attribute(xml_node<> *node, string name, T value) {
 		stringstream ss;
-		ss << scientific << setprecision(FV_PRECISION) << setw(FV_CHAMP) << value;
+		ss << scientific << setprecision(FV_PRECISION) << value;
 		string str_value(ss.str());
 		node->append_attribute(
 				this->allocate_attribute(
