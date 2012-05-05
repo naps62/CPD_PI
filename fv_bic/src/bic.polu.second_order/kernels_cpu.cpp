@@ -335,7 +335,10 @@ void cpu_cellPsi(CFVMesh2D &mesh, CFVArray<double> &edgePsi, CFVArray<double> &c
 				minPsi = current_edgePsi;
 		}
 		cellPsi[cell] = minPsi;
+		cout << "cellPsi[" << cell << "] = " << minPsi << endl;
 	}
+
+	cout << "----------------------------" << endl << endl;
 }
 
 /* finalize flux calculation, using cellPsi to bound values */

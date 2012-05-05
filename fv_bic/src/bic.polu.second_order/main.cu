@@ -35,8 +35,6 @@ typedef struct _parameters {
 #include <set>
 
 void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
-	cout << endl << "Generating test polution values based on sin(x)" << endl;
-
 	double min_x = std::numeric_limits<double>::max();
 	double max_x = std::numeric_limits<double>::min();
 
@@ -45,15 +43,6 @@ void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
 		double current = mesh.edge_centroids.x[i];
 		if (current < min_x) min_x = current;
 		if (current > max_x) max_x = current;
-	}
-
-	double range = max_x - min_x;
-	cout << "Mesh range is: [" << min_x << ", " << max_x << "] width of " << range << endl;
-
-	double coef = 2 * M_PI / range;
-	cout << "Polutions based on sin(" << coef << " * x)" << endl;
-	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
-		polution[i] = sin(coef * mesh.cell_centroids.x[i]);
 	}
 
 	cout << endl << "Linking mesh ends" << endl;
@@ -198,10 +187,10 @@ int main(int argc, char **argv) {
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
-	//FVL::FVXMLReader polu_ini_reader(data.initial_file);
-	//polu_ini_reader.getVec(polution, t, name);
+	FVL::FVXMLReader polu_ini_reader(data.initial_file);
+	polu_ini_reader.getVec(polution, t, name);
 	velocity_reader.getPoints2D(velocities, t, name);
-	//polu_ini_reader.close();
+	polu_ini_reader.close();
 	velocity_reader.close();
 
 	/* assign test value for polution */
@@ -270,7 +259,7 @@ int main(int argc, char **argv) {
 	double anim_next_step = data.anim_time;
 	while (!finished) {
 	//while(t <= data.final_time) {
-		cout << "time: " << t << "   iteration: " << i << "\r";
+		cout << "time: " << t << "   iteration: " << i << endl;
 		
 		if (t + dt > data.final_time) {
 			cout << "Final iteration, adjusting dt" << endl;
