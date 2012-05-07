@@ -30,6 +30,8 @@
  * STREAM MANIPULATION VALUES
  ***********************************************/
 
+#include <iomanip>
+
 #define FV_PRECISION	12	///< Precision to be used when outputing to a stream
 #define FV_CHAMP		20	///< \todo comment this
 

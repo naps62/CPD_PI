@@ -8,7 +8,9 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include "FVL/FVGlobal.h"
 using namespace std;
+using namespace FVL;
 
 // TODO for now only SQUARE IS IMPLEMENTED
 enum MESH_TYPE {
@@ -19,12 +21,12 @@ enum MESH_TYPE {
 };
 
 class Vertex {
+	public:
 	unsigned int id;
 	unsigned int type;
 	double x;
 	double y;
 
-	public:
 	Vertex(unsigned int newid, int newtype, double newx, double newy)
 		{  id=newid; type=newtype; x=newx; y=newy; }
 
@@ -35,20 +37,26 @@ ostream& operator << (ostream &stream, const Vertex &v) {
 	stream
 		<< "\t\t\t" << v.id		// vertex label
 		<< "\t"		<< v.type	// vertex type
-		<< "\t"		<< v.x		// x coord	
-		<< "\t"		<< v.y	 	// y coord
+		<< "\t"		<< scientific << setprecision(FV_PRECISION) << setw(FV_CHAMP) << v.x		// x coord	
+		<< "\t"		<< scientific << setprecision(FV_PRECISION) << setw(FV_CHAMP) << v.y	 	// y coord
 		<< endl;
 	return stream;
 }
 
 class Edge {
+	public:
 	unsigned int id;
 	unsigned int type;
 	vector<unsigned int> lower_dim_list;
 
-	public:
 	Edge(unsigned int newid, unsigned int newtype, vector<unsigned int> new_lower_dim_list)
 		{ id=newid; type=newtype; lower_dim_list=new_lower_dim_list; }
+
+	Edge(unsigned int newid, unsigned int newtype, unsigned int list1, unsigned int list2)
+		{ id=newid; type=newtype; lower_dim_list.push_back(list1); lower_dim_list.push_back(list2); }
+
+	Edge(unsigned int newid, unsigned int newtype, unsigned int list1, unsigned int list2, unsigned int list3, unsigned int list4)
+		{ id=newid; type=newtype; lower_dim_list.push_back(list1); lower_dim_list.push_back(list2); lower_dim_list.push_back(list3); lower_dim_list.push_back(list4); }
 
 	friend ostream& operator << (ostream &stream, const Edge &e);
 };
@@ -67,90 +75,80 @@ ostream& operator << (ostream &stream, const Edge &e) {
 
 typedef Edge Cell;
 
-
 int main(int argc, char **argv) {
-	if (argc != 6) {
+	if (argc != 4) {
 		cout
 			<< "Invalid usage. Correct parameters: " << endl
-			<< "msg_gen file_name Lx Ly wX wY" << endl;
+			<< "msg_gen file_name X Y" << endl;
 		exit(-1);
 	}
 
 	// argument read
 	string name 	= string(argv[1]);
-	double Lx = strtod(argv[2], NULL);
-	double Ly = strtod(argv[3], NULL);
-	double Wx = strtod(argv[4], NULL);
-	double Wy = strtod(argv[5], NULL);
+	double cX = strtod(argv[2], NULL);	
+	double cY = strtod(argv[3], NULL);
+	double vX = cX + 1;
+	double vY = cY + 1;
 
-	unsigned int num_vertex	= (Lx +1) * (Ly + 1);
-	unsigned int num_edges	= (Lx * Ly * 2) + Lx + Ly;
-	unsigned int num_cells	= Lx * Ly;
+	double cW = 1 / cX;
+
+	unsigned int num_cells	= cX * cY;
+	unsigned int num_vertex	= vX * vY;
+	unsigned int num_edges  = num_vertex + num_cells;
 	
 	ofstream		output(name.c_str());
 	stringstream 	vertex_stream;
 	stringstream	edge_stream;
 	stringstream	cell_stream;
 
-	unsigned int i_vertex	= 1;
-	unsigned int i_edge		= 1;
-	unsigned int i_cell		= 1;
+
+#define VERTEX(x,y) (vertex_stream		 << Vertex(++i_vertex, 0,   (x), (y)))
+#define EDGE(t,x,y) (edge_stream 		 <<   Edge(++i_edge,   (t), (x), (y)))
+#define CELL(t,x1,x2,x3,x4) (cell_stream <<   Cell(++i_cell,   (t), (x1), (x2), (x3), (x4)))
+
+	unsigned int i_vertex	= 0;
+	unsigned int i_edge		= 0;
+	unsigned int i_cell		= 0;
 
 	unsigned int x, y;
+
 	// create first line of vertexes (edge vertex)
-	for(x = 0; x <= Lx; ++x) {
-		vertex_stream << Vertex(i_vertex++, 2, x * Wx, 0);
-	}
+	for(x = 0; x < vX; ++x) VERTEX(x * cW, 0.0);
 
 	// create first line of edges
-	for(x = 1; x <= Lx; ++x) {
-		vector<unsigned int> vertex_list;
-		vertex_list.push_back(x);
-		vertex_list.push_back(x+1);
-		edge_stream << Edge(i_edge++, 0, vertex_list);
-	}
+	for(x = 0; x < cX; ++x)	EDGE(2, x+1, x+2);
 
-	for(y = 0; y < Ly; ++y) {
+	for(y = 0; y < cY; ++y) {
 		// Next line of vertex (first and last are tagged as edge vertexes
-		vertex_stream << Vertex(i_vertex++, 2, 0, (y+1) * Wy);
-		int edge_type = (y == Ly - 1) ? 2 : 0;
-		for(x = 1; x < Lx; ++x) {
-			vertex_stream << Vertex(i_vertex++, edge_type, x * Wx, (y+1) * Wy);
+		//int edge_type = (y == cY - 1) ? 2 : 0;
+		for(x = 0; x < vX; ++x) {
+			VERTEX(x * cW, (y+1) * cW);
 		}
-		vertex_stream << Vertex(i_vertex++, 2, Lx * Wx, (y+1) * Wy);
 
 		// Vertical edges
-		for(x = 0; x <= Lx; ++x) {
-			unsigned int v1 = (Lx + 1) * y + x + 1;
-			unsigned int v2 = v1 + Lx + 1;
-			vector<unsigned int> vertex_list;
-			vertex_list.push_back(v1);
-			vertex_list.push_back(v2);
-			edge_stream << Edge(i_edge++, 0, vertex_list);
+		for(x = 0; x <= cX; ++x) {
+			int edge_type = (x == 0 || x == cX) ? 1 : 0;
+			unsigned int v1 = vX * y + x + 1;
+			unsigned int v2 = v1 + vX;
+			EDGE(edge_type, v1, v2);
 		}
 
-		// y'th line of horizontal edges (not counting top one) and cells
-		// (last line of vertex is edge-type)
-		for(x = 1; x <= Lx; ++x) {
+		// y'th line of horizontal edges and cells
+		// (last line of edge is edge-type)
+		int edge_type = (y == cY - 1) ? 2 : 0;
+		for(x = 0; x < cX; ++x) {
+
 			// edge
-			unsigned int v1 = (Lx + 1) * (y + 1) + x;
+			unsigned int v1 = vX * (y+1) + x + 1;
 			unsigned int v2 = v1 + 1;
-			vector<unsigned int> vertex_list;
-			vertex_list.push_back(v1);
-			vertex_list.push_back(v2);
-			edge_stream << Edge(i_edge++, 1, vertex_list);
+			EDGE(edge_type, v1, v2);
 
 			// cell
-			unsigned int e1 = y * Lx + y * (Lx + 1) + x;
-			unsigned int e2 = e1 + Lx;
+			unsigned int e1 = y * cX + y * vX + x + 1;
+			unsigned int e2 = e1 + cX;
 			unsigned int e3 = e2 + 1;
-			unsigned int e4 = e3 + Lx;
-			vector<unsigned int> edge_list;
-			edge_list.push_back(e1);
-			edge_list.push_back(e2);
-			edge_list.push_back(e3);
-			edge_list.push_back(e4);
-			cell_stream << Cell(i_cell++, 0, edge_list);
+			unsigned int e4 = e3 + cX;
+			CELL(0, e1, e2, e3, e4);
 		}
 	}
 
@@ -158,13 +156,13 @@ int main(int argc, char **argv) {
 		<< "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" 	<< endl
 		<< "<FVLIB>" 											<< endl
 		<< "\t<MESH dim=\"2\"	name=\"fvcm convertor\">" 		<< endl
-		<< "\t\t<VERTEX nbvertex=\""	<< num_vertex << "\">" 	<< endl
+		<< "\t\t<VERTEX nbvertex=\""	<< i_vertex << "\">" 	<< endl
 		<< vertex_stream.str()									
 		<< "\t\t</VERTEX>" 										<< endl
-		<< "\t\t<EDGE nbedge=\"" 		<< num_edges << "\">"	<< endl
+		<< "\t\t<EDGE nbedge=\"" 		<< i_edge << "\">"		<< endl
 		<< edge_stream.str()									
 		<< "\t\t</EDGE>"										<< endl
-		<< "\t\t<CELL nbcell=\""		<< num_cells << "\">"	<< endl
+		<< "\t\t<CELL nbcell=\""		<< i_cell << "\">"		<< endl
 		<< cell_stream.str()									
 		<< "\t\t</CELL>"										<< endl
 		<< "\t</MESH>"											<< endl
