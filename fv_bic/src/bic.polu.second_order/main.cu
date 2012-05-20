@@ -257,55 +257,40 @@ int main(int argc, char **argv) {
 
 	bool finished = false;
 	double anim_next_step = data.anim_time;
+	cout << "dt= " << dt << endl;
 	while (!finished) {
 	//while(t <= data.final_time) {
-		cout << "time: " << t << "   iteration: " << i << endl;
+		cout << "time: " << t << "   iteration: " << i << "\r";
 		
 		if (t + dt > data.final_time) {
-			cout << "Final iteration, adjusting dt" << endl;
+			cout << endl << "Final iteration, adjusting dt" << endl;
 			dt = data.final_time - t;
 			finished = true;
 		}
 
 		// Cpu version
 		#ifdef NO_CUDA
-			/* compute system polution coeficients for system solve */
-			cpu_vecResult(mesh, polution, vecResult, data.dirichlet);
-
-			/* compute (a,b,c) vector */
-			cpu_vecABC(mesh, matA, vecResult, vecABC);
-
-			/* compute flux */
-			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, edgePsi, data.dirichlet);
-
-			/* compute Psi bounder for each cell */
-			cpu_cellPsi(mesh, edgePsi, cellPsi);
-
-			/* bound previously calculated flux with using psi values */
-			cpu_bound_flux(mesh, vs, cellPsi, polution, flux, data.dirichlet);
-
-			/* update */
-			cpu_update(mesh, polution, flux, dt);
-
+			cpu_vecResult(mesh, polution, vecResult, data.dirichlet);								// compute system polution coeficients for system solve
+			cpu_vecABC(mesh, matA, vecResult, vecABC);												// compute (a,b,c) vector
+			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, edgePsi, data.dirichlet);	// compute flux
+			cpu_cellPsi(mesh, edgePsi, cellPsi);													// compute Psi bounder for each cell
+			cpu_bound_flux(mesh, vs, cellPsi, polution, flux, data.dirichlet); 						// bound previously calculated flux using psi values
+			cpu_update(mesh, polution, flux, dt); 													// update
 		#else
 
 			kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
-
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[compute_vecResult] i=" << i;
 				cudaCheckError(ss.str());
 			}
-	
 			kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(mesh.num_cells, matA.cuda_get(), vecResult.cuda_get(), vecABC.cuda_get());
-	
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[compute_vectABC] i=" << i;
 				cudaCheckError(ss.str());
 			}
 			kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(mesh.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), vecValidResult.cuda_get());
-	
 			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet);
 	
 			_DEBUG {
@@ -313,9 +298,7 @@ int main(int argc, char **argv) {
 				ss << "cuda[compute_flux] i=" << i;
 				cudaCheckError(ss.str());
 			}
-	
 			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-	
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[update] i=" << i;
@@ -324,16 +307,8 @@ int main(int argc, char **argv) {
 		#endif
 
 	t += dt;
-/*
-	if (i % data.anim_jump == 0) {
-		#ifndef NO_CUDA
-		polution.cuda_get();
-		#endif
 
-		polution_writer.append(polution, t, "polution");
-	}
-*/
-	if (t >= anim_next_step) {
+	if (t >= anim_next_step || i % 10 == 0) {
 		#ifndef NO_CUDA
 		polution.cuda_get();
 		#endif
@@ -341,6 +316,7 @@ int main(int argc, char **argv) {
 		polution_writer.append(polution, t, "polution");
 		anim_next_step += data.anim_time;
 	}
+	if ( i == 1000) break;
 	++i;
 }
 

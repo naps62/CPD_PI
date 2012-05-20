@@ -41,12 +41,13 @@ int gen_menu(Parameters data) {
 	cout << "What model do you want for " << data.initial_file << " ?" << endl << endl
 			<< " 1. sinusoidal - f(x) = sin(x)" << endl
 			<< " 2. half full  - f(x) = (x < 0.5) ? 1 : 0" << endl
-			<< " 3. triangle   - f(x) = (x < 0.5) ? 0.2x : -0.2x + 0.2not yet implemented" << endl;
+			<< " 3. triangle   - f(x) = (x < 0.5) ? 2x : -2x + 2" << endl
+			<< " 4. constant   - f(x) = 1" << endl;
 
 	int res;
 	cin >> res;
 	cout << "choose " << res << endl;
-	if (res < 1 && res > 3) {
+	if (res < 1 && res > 4) {
 		cout << "Invalid option!" << endl;
 		exit(-1);
 	}
@@ -68,7 +69,10 @@ void fill_polu(CFVMesh2D &mesh, CFVArray<double> &polu, int op) {
 				polu[i] = (x < 0.5) ? 1.0 : 0.0;
 				break;
 			case 3:
-				polu[i] = (x < 0.5) ? 5 * x : -5 * x + 5;
+				polu[i] = (x < 0.5) ? 2 * x : -2 * x + 2;
+				break;
+			case 4:
+				polu[i] = 1.0;
 				break;
 		}
 	}

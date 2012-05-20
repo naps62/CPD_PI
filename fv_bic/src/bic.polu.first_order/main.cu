@@ -227,12 +227,13 @@ int main(int argc, char **argv) {
 
 	bool finished = false;
 	double anim_next_step = data.anim_time;
+	cout << "dt= " << dt << endl;
 	while (!finished) {
 	//while(t < data.final_time) {
 		cout << "time: " << t << "   iteration: " << i << "\r";
 
 		if (t + dt > data.final_time) {
-			cout << "Final iteration, adjusting dt" << endl;
+			cout << endl << "Final iteration, adjusting dt" << endl;
 			dt = data.final_time - t;
 			finished = true;
 		}

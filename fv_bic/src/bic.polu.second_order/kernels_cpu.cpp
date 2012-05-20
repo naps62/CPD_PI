@@ -80,6 +80,7 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 
 				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
 				case FV_EDGE_DIRICHLET:
+					cout << "oh shit" << endl;
 				case FV_EDGE_NEUMMAN:
 					// get coords of current cell i, and compute ghost coords
 					x = x0;
@@ -136,9 +137,12 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 	}
 }
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 /* Compute vecABC */
 void cpu_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecABC) {
 
+	cout << endl << endl;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		// A
 		vecABC.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecResult.elem(0, 0, cell)
@@ -154,7 +158,14 @@ void cpu_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult
 		vecABC.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecResult.elem(0, 0, cell)
 								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
 								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
+
+		cout << "vecABC[" << cell << "] = " << vecABC.elem(0,0,cell)
+			 << "\t" << cos(2*M_PI*mesh.cell_centroids.x[cell])
+			 << "\t" << (vecABC.elem(0,0,cell) / cos(2*M_PI*mesh.cell_centroids.x[cell])) << endl;
+
 	}
+
+	cout << endl << endl;
 }
 
 /* Compute system polution coeficients for system solve */
@@ -320,7 +331,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 
 		partial_flux[edge]	= partial_u_ij;
 		edgePsi[edge]		= psi;
-	};
+	}
 }
 
 /* For each cell, compute min(edgePsi) */
@@ -385,8 +396,12 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 		delta_u_ij = flux[edge];
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
-		flux[edge] = v * (u_i + /*psi * */ delta_u_ij);
+		flux[edge] = v * (u_i + 1 * delta_u_ij);
+
+		//cout << "flux[" << edge << "]= " << flux[edge] << "\t\t" << "u_i=" << u_i << "\t\t" << "delta_u_ij=" << delta_u_ij << endl;
 	}
+
+	//cout << endl << endl << endl;
 }
 
 /* update kernel */
