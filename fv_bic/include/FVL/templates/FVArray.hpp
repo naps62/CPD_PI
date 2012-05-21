@@ -94,9 +94,11 @@ namespace FVL {
 
 	template<class T>
 		void FVArray<T>::dump() {
+			cout << "[";
 			for(unsigned int elem = 0; elem < arr_size; ++elem) {
-				cout << "[" << elem << "] = " << arr[elem] << endl;
+				cout << arr[elem] << ", ";
 			}
+			cout << "]" << endl;
 		}
 
 	/************************************************

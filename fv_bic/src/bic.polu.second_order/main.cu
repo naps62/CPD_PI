@@ -136,6 +136,9 @@ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocitie
 		if (abs(v) > v_max || i == 0) {
 			v_max = abs(v);
 		}
+
+		// TODO better fix for this
+		//vs[i] = 1.0;
 	}
 }
 
@@ -260,7 +263,7 @@ int main(int argc, char **argv) {
 	cout << "dt= " << dt << endl;
 	while (!finished) {
 	//while(t <= data.final_time) {
-		cout << "time: " << t << "   iteration: " << i << "\r";
+		cout << "time: " << t << "   iteration: " << i << endl;
 		
 		if (t + dt > data.final_time) {
 			cout << endl << "Final iteration, adjusting dt" << endl;
@@ -308,7 +311,7 @@ int main(int argc, char **argv) {
 
 	t += dt;
 
-	if (t >= anim_next_step || i % 10 == 0) {
+	if (t >= anim_next_step) {
 		#ifndef NO_CUDA
 		polution.cuda_get();
 		#endif

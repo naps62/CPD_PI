@@ -16,10 +16,10 @@ DIR		=	$(shell pwd | egrep -o "[[:alnum:]_.:\-]+$$")
 MODE	?=	DBG
 
 #	C Compil[ator]
-CC		=	gcc
+CC		=	mpicc
 
 #	C++ Compil[ator]
-CXX		=	g++
+CXX		=	mpic++
 
 #	Compiler flags
 

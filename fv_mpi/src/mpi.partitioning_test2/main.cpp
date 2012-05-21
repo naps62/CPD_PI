@@ -41,12 +41,18 @@ Parameters read_parameters (string parameters_filename) {
 	return data;
 }
 
-void dump_partitions(vector<FVL::FVMesh2D_SOA_Lite *> &parts) {
-	cout << parts[0] << endl;
+int id, size;
+
+void dump_partition(FVL::FVMesh2D_SOA_Lite * &part) {
+	for(int i = 0; i < size; ++i) {
+		if (id == i)
+			part->cell_index.dump();
+		MPI_Barrier(MPI_COMM_WORLD);
+	}
 }
 
-void mpi_polu_simulation(vector<FVMesh2D_SOA_Lite *> &partitions, Parameters &data, FVXMLWriter &polu_writer) {
-}
+//void mpi_polu_simulation(FVMesh2D_SOA_Lite * &partitions, Parameters &data, FVXMLWriter &polu_writer) {
+//}
 
 int main(int argc, char **argv) {
 
@@ -59,21 +65,20 @@ int main(int argc, char **argv) {
 		data = read_parameters(argv[1]);
 	}
 
-	int rank;
-	MPI_Status status;
+	//MPI_Status status;
 	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	MPI_Comm_rank(MPI_COMM_WORLD, &id);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 	FVL::FVArray<double> velocities(mesh.num_edges);
 
-	vector<FVL::FVMesh2D_SOA_Lite *> partitions;
-	generate_partitions(mesh, velocities, 2, partitions);
+	FVL::FVMesh2D_SOA_Lite* partition;
+	generate_partitions(mesh, velocities, id, size, partition);
 
-	dump_partitions(partitions);
+	dump_partition(partition);
 
-	mpi_polu_simulation(partitions);
+	//mpi_polu_simulation(partition);
 }
 

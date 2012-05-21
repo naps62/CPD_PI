@@ -1,0 +1,4 @@
+#!/bin/bash
+
+bic.fvcd mesh.xml polution.xml polution.msh -c
+gmsh polution.msh
