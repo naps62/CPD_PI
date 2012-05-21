@@ -71,13 +71,13 @@ void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
 		unsigned int r = *right_it;
 
 		/* set edges type to regular */
-		mesh.edge_types[l] = FV_EDGE;
-		mesh.edge_types[r] = FV_EDGE;
+		mesh.edge_types[l] = FV_EDGE_FAKE;
+		mesh.edge_types[r] = FV_EDGE_FAKE;
 
 		/* link both edges */
 		mesh.edge_right_cells[l] = mesh.edge_left_cells[r];
 		mesh.edge_right_cells[r] = mesh.edge_left_cells[l];
-		cout << "linking edge " << *left_it << " with " << *right_it << endl;
+		cout << "linking edge " << l << " with " << r << endl;
 	}
 
 	cout << "Linked " << left_cells.size() << " pairs of edges " << endl << endl;

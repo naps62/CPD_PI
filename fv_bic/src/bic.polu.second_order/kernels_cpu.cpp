@@ -80,7 +80,9 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 
 				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
 				case FV_EDGE_DIRICHLET:
-					cout << "oh shit" << endl;
+					cout << "this shouldnt happen" << endl;
+					break;
+				case FV_EDGE_FAKE:
 				case FV_EDGE_NEUMMAN:
 					// get coords of current cell i, and compute ghost coords
 					x = x0;
@@ -159,13 +161,16 @@ void cpu_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult
 								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
 								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
 
-		cout << "vecABC[" << cell << "] = " << vecABC.elem(0,0,cell)
-			 << "\t" << cos(2*M_PI*mesh.cell_centroids.x[cell])
-			 << "\t" << (vecABC.elem(0,0,cell) / cos(2*M_PI*mesh.cell_centroids.x[cell])) << endl;
+		cout << "vecABC[" << cell << "] = [" << setw(12) << vecABC.elem(0,0,cell) << ", " << setw(12) << vecABC.elem(1,0,cell) << endl;
+		for(int x = 0; x < 3; ++x) {
+			cout << "\t";
+			for(int y = 0; y < 3; ++y)
+				cout << setw(12) << matA.elem(x,y,cell) << "\t";
+			cout << setw(12) << vecResult.elem(x,0,cell) << endl;
+		}
+		cout << endl;
 
 	}
-
-	cout << endl << endl;
 }
 
 /* Compute system polution coeficients for system solve */
@@ -206,6 +211,22 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 					y = mesh.cell_centroids.y[cell_j];
 					u = polution[cell_j];
 					break;
+
+				case FV_EDGE_FAKE:
+					// get right cell of this edge
+					cell_j = mesh.edge_right_cells[edge];
+
+					// if right cell is the current one (cell i), we want the left instead
+					if (cell_j == cell)
+						cell_j = mesh.edge_left_cells[edge];
+					
+					// get coords for this cell
+					x = x0;
+					y = y0;
+					cpu_ghost_coords(mesh, edge, x, y);
+					u = polution[cell_j];
+					break;
+
 
 				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
 				case FV_EDGE_DIRICHLET:
@@ -285,6 +306,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				
 		switch (mesh.edge_types[edge]) {
 			case FV_EDGE:
+			case FV_EDGE_FAKE:
 				if (v >= 0) {
 					cell_orig = mesh.edge_left_cells[edge];
 					cell_dest = mesh.edge_right_cells[edge];
@@ -365,6 +387,7 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 		// recover u_i and psi values
 		switch(mesh.edge_types[edge]) {
 			case FV_EDGE:
+			case FV_EDGE_FAKE:
 				if (v >= 0)
 					cell_orig = mesh.edge_left_cells[edge];
 				else
