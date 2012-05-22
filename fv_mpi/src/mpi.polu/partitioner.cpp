@@ -1,5 +1,6 @@
 #include "partitioner.h"
 
+#include <mpi.h>
 #include <set>
 #include <map>
 
@@ -46,12 +47,14 @@ void distribute_edges(FVMesh2D_SOA &mesh, vector<PartitionData> &partitions) {
 		
 		// for each cell in the partition, add the required edges to the set
 		for(set<unsigned int>::iterator cell_it = part_it->cells.begin(); cell_it != part_it->cells.end(); ++cell_it) {
+			unsigned int cell = *cell_it;
 
 			// iterate edges of a cell, and add them to the set
-			for(unsigned int i = 0; i < MAX_EDGES_PER_CELL; ++i)
-				part_it->edges.insert( mesh.cell_edges.elem(i, 0, *cell_it) );
+			for(unsigned int i = 0; i < mesh.cell_edges_count[cell]; ++i)
+				part_it->edges.insert( mesh.cell_edges.elem(i, 0, cell) );
 		}
 	}
+
 }
 
 void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, FVArray<double> &polu, vector<PartitionData> &partitions, FVMesh2D_SOA_Lite &result, int id) {
@@ -65,10 +68,10 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, FVArray<double> &p
 		unsigned int edge = *edge_it;
 
 		result.edge_index		[edges_current] = edge;
-		result.edge_lengths	[edges_current] = mesh.edge_lengths[edge];
+		result.edge_lengths	    [edges_current] = mesh.edge_lengths[edge];
 		result.edge_velocity	[edges_current] = v[edge];
 		result.edge_left_cells	[edges_current] = mesh.edge_left_cells[edge];
-		result.edge_right_cells[edges_current] = mesh.edge_right_cells[edge];
+		result.edge_right_cells [edges_current] = mesh.edge_right_cells[edge];
 
 
 		// fix left-rigth cells, if necessary
@@ -80,6 +83,12 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, FVArray<double> &p
 			result.edge_right_cells[edges_current] = tmp;
 			result.edge_velocity   [edges_current] *= -1.0;
 		}
+		/*for(int x = 0; x < partitions.size(); ++x) {
+			if (x == id) {
+			cerr << id << " " << result.num_edges << " " << edges_current << "   -   " << edge << " " << endl;
+			}
+			MPI_Barrier(MPI_COMM_WORLD);
+		}*/
 		edges_current++;
 	}
 

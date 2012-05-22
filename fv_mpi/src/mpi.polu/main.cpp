@@ -137,15 +137,17 @@ int main(int argc, char **argv) {
 	FVL::FVArray<double> flux(partition.num_edges);
 
 	//dump_partition(partition);
-
 	while (t < data.final_time) {
 		communication(id, size, partition, polution);
 
 		compute_flux(partition, flux, data.dirichlet);
 
 		update(partition, flux, dt);
-		// TODO compute_flux & update
 
+		for(unsigned int i = 0; i < partition.num_cells; ++i)
+			cout << "polution[" << partition.cell_index[i] << "] = " << partition.polution[i] << endl;
+
+		exit(0);
 		t += dt;
 		//if (i % data.anim_jump == 0)
 		//	polution_writer.append(polution, t, "polution");

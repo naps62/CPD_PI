@@ -116,6 +116,11 @@ int main(int argc, char **argv) {
 		compute_flux(mesh, vs, polution, flux, data.dirichlet);
 		update(mesh, polution, flux, dt);
 
+		for(unsigned int j = 0; j < mesh.num_cells; ++j)
+			cout << "polution[" << j << "] = " << polution[j] << endl;
+
+		exit(0);
+
 		t += dt;
 		if (i % data.anim_jump == 0)
 			polution_writer.append(polution, t, "polution");
