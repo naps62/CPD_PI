@@ -136,7 +136,7 @@ int main(int argc, char **argv) {
 
 	FVL::FVArray<double> flux(partition.num_edges);
 
-	dump_partition(partition);
+	//dump_partition(partition);
 
 	while (t < data.final_time) {
 		communication(id, size, partition, polution);
@@ -153,7 +153,6 @@ int main(int argc, char **argv) {
 		cout << i << endl;
 	}
 
-	exit(0);
 	//mpi_polu_simulation(partition);
 }
 

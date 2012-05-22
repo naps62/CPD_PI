@@ -16,7 +16,7 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 
 	MPI_Status status;
 	// each proc sends to the left side
-	if (id > 0) {
+	if (id > 0 && mesh.left_cell_count > 0) {
 		for(unsigned int i = 0; i < mesh.left_cell_count; ++i) {
 			unsigned int edge = mesh.left_index_to_edge[0][i];
 			unsigned int cell = mesh.edge_left_cells[edge];
@@ -29,7 +29,7 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 	}
 
 	// and each proc receives from the right side
-	if (id < size - 1) {
+	if (id < size - 1 && mesh.right_cell_count > 0) {
 		//cout << id <<" receiving " << mesh.right_cell_count << " from " << id + 1 << " to " << id << endl;
 		MPI_Recv(&mesh.right_cells_recv[0][0], mesh.right_cells_recv->size(), MPI_DOUBLE, id + 1, TAG_LEFT_COMM, MPI_COMM_WORLD, &status);
 	}
@@ -39,11 +39,11 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 	//
 	
 	// each proc sends to the right side
-	if (id < size - 1) {
+	if (id < size - 1 && mesh.right_cell_count > 0) {
 		for(unsigned int i = 0; i < mesh.right_cell_count; ++i) {
 			unsigned int edge = mesh.right_index_to_edge[0][i];
 			unsigned int cell = mesh.edge_left_cells[edge];
-			mesh.right_cells_send[i] = polution[cell];
+			mesh.right_cells_send[0][i] = polution[cell];
 		}
 		
 		// TODO send to id + 1
@@ -51,7 +51,7 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 		MPI_Send(&mesh.right_cells_send[0][0], mesh.right_cells_send->size(), MPI_DOUBLE, id + 1, TAG_RIGHT_COMM, MPI_COMM_WORLD);
 	}
 
-	if (id > 0) {
+	if (id > 0 && mesh.left_cell_count > 0) {
 		// TODO recv from left side
 		//cout << id <<  " receiving " << mesh.left_cell_count << " from " << id - 1 << " to " << id << endl;
 		MPI_Recv(&mesh.left_cells_recv[0][0], mesh.left_cells_recv->size(), MPI_DOUBLE, id - 1, TAG_RIGHT_COMM, MPI_COMM_WORLD, &status);
@@ -71,15 +71,9 @@ void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc) {
 			polu = mesh.polution[ mesh.edge_left_cells[edge] ];
 		} else {
 			switch (mesh.edge_part[edge]) {
-				case 0:
-					polu = (mesh.edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : mesh.polution[ mesh.edge_right_cells[edge] ];
-					break;
-				case -1:
-					polu = mesh.left_cells_recv[0][ mesh.edge_part_index[edge] ];
-					break;
-				case 1:
-					polu = mesh.right_cells_recv[0][ mesh.edge_part_index[edge] ];
-					break;
+				case  0: polu = (mesh.edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : mesh.polution[ mesh.edge_right_cells[edge] ]; break;
+				case -1: polu = mesh.left_cells_recv[0][ mesh.edge_part_index[edge] ]; break;
+				case  1: polu = mesh.right_cells_recv[0][ mesh.edge_part_index[edge] ]; break;
 			}
 		}
 
