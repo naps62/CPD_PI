@@ -44,8 +44,12 @@ namespace FVL {
 			CFVArray<unsigned int> edge_part_index;		///< for each edge with edge_part == -1 or 1, gives it's the index on the communication array (where neighbor polution is read from)
 			CFVArray<unsigned int>* left_index_to_edge;	///< for each index in the communication array from the left partition, the corresponding edge
 			CFVArray<unsigned int>* right_index_to_edge;///< same thing, but for right side communication array
-			unsigned int left_cells;					///< number of cells from left partition
-			unsigned int right_cells;					///< number of cells from right partition
+			unsigned int left_cell_count;				///< number of cells from left partition
+			unsigned int right_cell_count;				///< number of cells from right partition
+			CFVArray<double>* left_cells_send;	///< array to send data to left partition
+			CFVArray<double>* right_cells_send;	///< array to send data to right partition
+			CFVArray<double>* left_cells_recv;	///< array to receive data from left partition
+			CFVArray<double>* right_cells_recv;	///< array to receive data from right partition
 
 			// CELL INFO
 			unsigned int num_cells;					///< total number of cells
@@ -53,6 +57,7 @@ namespace FVL {
 			CFVArray<double> cell_areas;			///< area for each cell
 			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
+			CFVArray<double> polution;
 
 			/************************************************
 			 * CONSTRUCTORS

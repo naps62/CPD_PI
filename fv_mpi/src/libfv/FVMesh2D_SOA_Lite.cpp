@@ -14,8 +14,8 @@ namespace FVL {
 		this->num_edges	 = num_edges;
 		this->num_cells  = num_cells;
 
-		this->left_cells = 0;
-		this->right_cells = 0;
+		this->left_cell_count = 0;
+		this->right_cell_count = 0;
 		alloc();
 	}
 
@@ -42,6 +42,7 @@ namespace FVL {
 		cell_areas			= CFVArray<double>(num_cells);
 		cell_edges_count	= CFVArray<unsigned int>(num_cells);
 		cell_edges			= CFVMat<unsigned int>(MAX_EDGES_PER_CELL, 1, num_cells);
+		polution			= CFVArray<double>(num_cells);
 	}
 }
 

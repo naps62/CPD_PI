@@ -4,6 +4,7 @@
 #include <vector>
 #include "FVL/FVGlobal.h"
 #include "FVL/FVMesh2D_SOA.h"
+#include "FVL/FVMesh2D_SOA_Lite.h"
 #include "FVL/FVArray.h"
 using namespace FVL;
 
@@ -14,8 +15,10 @@ enum FVEdgeType {
 	FV_MPI_EDGE	= 1
 };
 
-void compute_flux(FVMesh2D_SOA &mesh, FVArray<double> &velocity, FVArray<double> &polution, FVArray<double> &flux, double dc);
+void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &polution);
 
-void update(FVMesh2D_SOA &mesh, FVArray<double> &polution, FVArray<double> &flux, double dt);
+void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc);
+
+void update(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dt);
 
 #endif // _H_KERNELS_CPU
