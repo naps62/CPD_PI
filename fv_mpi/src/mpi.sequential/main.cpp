@@ -106,26 +106,33 @@ int main(int argc, char **argv) {
 
 	FVL::FVXMLWriter polution_writer(data.output_file);
 	polution_writer.append(polution, t, "polution");
+	polution.dump();
+	cout << "end polution" << endl;
 
 	// compute velocity vector
 	compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = compute_mesh_parameter(mesh);
 	dt	= 1.0 / v_max * h;
 
+	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge)
+		cout << " edge " << edge << " v " << vs[edge] << " left " << setw(3) << mesh.edge_left_cells[edge] << " right " << setw(3) << mesh.edge_right_cells[edge] <<  endl;
+
 	while(t < data.final_time) {
+		cout << endl << "iteration " << i << endl;
+
+		//for(unsigned int i = 0; i < mesh.num_cells; ++i)
+		//	cout << "polu[" << i << "] = " << polution[i] << endl;
+
 		compute_flux(mesh, vs, polution, flux, data.dirichlet);
 		update(mesh, polution, flux, dt);
-
-		for(unsigned int j = 0; j < mesh.num_cells; ++j)
-			cout << "polution[" << j << "] = " << polution[j] << endl;
-
-		exit(0);
 
 		t += dt;
 		if (i % data.anim_jump == 0)
 			polution_writer.append(polution, t, "polution");
 		++i;
 	}
+		for(unsigned int j = 0; j < mesh.num_cells; ++j)
+			cout << "polution[" << j << "] = " << polution[j] << endl;
 
 	polution_writer.append(polution, t, "polution");
 	polution_writer.save();

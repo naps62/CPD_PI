@@ -122,6 +122,9 @@ int main(int argc, char **argv) {
 	polu_ini_reader.close();
 	velocity_reader.close();
 
+	polution.dump();
+	cout << "end polution" << endl;
+
 	compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = compute_mesh_parameter(mesh);
 	dt = 1.0 / v_max * h;
@@ -136,24 +139,30 @@ int main(int argc, char **argv) {
 
 	FVL::FVArray<double> flux(partition.num_edges);
 
+	for(unsigned int edge = 0; edge < partition.num_edges; ++edge)
+		cout << id << " edge " << setw(3) << edge << " global " << setw(3) << partition.edge_index[edge] << setw(2) << " part " << partition.edge_part[edge] <<  " v " << partition.edge_velocity[edge] << " left " << partition.cell_index[partition.edge_left_cells[edge]] << " right " << setw(3) << (partition.edge_right_cells[edge] == NO_RIGHT_CELL ? NO_RIGHT_CELL : partition.cell_index[partition.edge_right_cells[edge]]) << " other part ";
+
+	sleep(1);
 	//dump_partition(partition);
 	while (t < data.final_time) {
+		if (id == 0) cout << endl << "iteration " << i << endl;
 		communication(id, size, partition, polution);
 
 		compute_flux(partition, flux, data.dirichlet);
 
 		update(partition, flux, dt);
 
-		for(unsigned int i = 0; i < partition.num_cells; ++i)
-			cout << "polution[" << partition.cell_index[i] << "] = " << partition.polution[i] << endl;
 
-		exit(0);
 		t += dt;
 		//if (i % data.anim_jump == 0)
 		//	polution_writer.append(polution, t, "polution");
 		++i;
-		cout << i << endl;
 	}
+
+		for(unsigned int i = 0; i < partition.num_cells; ++i)
+			cout << "polution[" << partition.cell_index[i] << "] = " << partition.polution[i] << endl;
+
+		sleep(2);
 
 	//mpi_polu_simulation(partition);
 }

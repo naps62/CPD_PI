@@ -23,7 +23,7 @@ namespace FVL {
 		FV_EDGE			= 0,		///< regular internal edge
 		FV_EDGE_DIRICHLET	= 1,	///< border edge where dirichlet condition is applied
 		FV_EDGE_NEUMMAN	= 2,		///< border edge where neumman condition is applied
-		FV_EDGE_FAKE = 3,			///< fake regular edge. used as a patch to link an edge to a cell that is not physically connected (to simulate cycling flux)
+		FV_EDGE_FAKE = 3			///< fake regular edge. used as a patch to link an edge to a cell that is not physically connected (to simulate cycling flux)
 	};
 
 	/**
