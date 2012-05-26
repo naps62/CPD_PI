@@ -83,7 +83,6 @@ void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
 	cout << "Linked " << left_cells.size() << " pairs of edges " << endl << endl;
 }
 
-// TODO: interface decente para paremetros xml
 Parameters read_parameters (string parameters_filename) {
 	Parameters data;
 	FVParameters para(parameters_filename);
@@ -263,7 +262,7 @@ int main(int argc, char **argv) {
 	cout << "dt= " << dt << endl;
 	while (!finished) {
 	//while(t <= data.final_time) {
-		cout << "time: " << t << "   iteration: " << i << endl;
+		cout << "time: " << t << "   iteration: " << i << '\r';
 		
 		if (t + dt > data.final_time) {
 			cout << endl << "Final iteration, adjusting dt" << endl;

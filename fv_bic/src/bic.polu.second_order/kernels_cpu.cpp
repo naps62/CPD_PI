@@ -272,6 +272,32 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 /* Return result of (A(x-x0) + B(y-y0)) portion of the linear system to compute the flux of an edge */
 double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned int edge, unsigned int cell) {
 
+	if (mesh.edge_types[edge] == FV_EDGE_FAKE) {
+		// check if this edge is actually connected to this cell
+		bool correct = false;
+		for(unsigned int i = 0; i < mesh.cell_edges_count[cell] && !correct; ++i)
+			if (mesh.cell_edges.elem(i, 0, cell) == edge) correct = true;
+
+		// if not, then we're using the fake edge, and should use the right one instead
+		//   that is, given the current (fake) edge of the cell, find the corresponding right cell
+		if (!correct) {
+			unsigned int left  = mesh.edge_left_cells[edge];
+			unsigned int right = mesh.edge_right_cells[edge];
+
+			// iterate all real edges of this cell, and find the one connected to the given edge
+			for (unsigned int i = 0; i < mesh.cell_edges_count[cell] && !correct; ++i) {
+				unsigned int new_edge = mesh.cell_edges.elem(i, 0, cell);
+				unsigned int new_left  = mesh.edge_left_cells[new_edge];
+				unsigned int new_right = mesh.edge_right_cells[new_edge];
+
+				if (left == new_right && right == new_left) {
+					edge = new_edge;
+					correct = true;
+				}
+			}
+		}
+	}
+
 	// get centroid coords for origin cell and edge
 	double x = mesh.edge_centroids.x[edge];
 	double y = mesh.edge_centroids.y[edge];
@@ -280,8 +306,10 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 
 	// compute partial system result
 	// Delta(u_i) . B_i . M_ij
-	if (cell == 0) cout << "distancia 0 " << (x - x0) << endl;
-	if (cell == 99) cout << "distancia 99 " << (x - x0) << endl;
+	/*if (mesh.edge_types[edge] == FV_EDGE_FAKE) {
+		if (cell == 0) cout << "distancia 0 " << (x - x0) << " edge " << edge << " cell " << cell <<  endl;
+		if (cell == 99) cout << "distancia 99 " << (x - x0) << " edge " << edge << " cell " << cell << endl;
+	}*/
 	return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0);
 }
 
@@ -323,7 +351,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig);
 				u_ij		 = u_i + partial_u_ij;
 				psi			 = cpu_edgePsi(u_i, u_j, u_ij);
-				if (edge == 100 || edge == 200) cout << "u_i[" << edge << "] = " << u_i << "; u_j = " << u_j << endl;
+				//if (edge == 100 || edge == 200) cout << "u_i[" << edge << "] = " << u_i << "; u_j = " << u_j << endl;
 				break;
 
 			case FV_EDGE_DIRICHLET:
@@ -334,14 +362,13 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 
 				// flux is exiting (positive velocity)
 				if (v > 0) {
-					// TODO caso em que a velocidade indica que está a sair, isto esta correcto?
 					u_j = 0;
 					partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig);
 
 				// flux is entering (negative velocity)
 				} else {
 					u_j = u_i;
-					u_i	= dc; // TODO caso em que a velocidade indica que está a entrar, isto esta correcto?
+					u_i	= dc; 
 					partial_u_ij = 0;
 				}
 
@@ -421,15 +448,15 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 		delta_u_ij = flux[edge];
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
-		flux[edge] = v * (u_i + 1 * delta_u_ij);
+		flux[edge] = v * (u_i + psi * delta_u_ij);
 	}
 }
 
 /* update kernel */
-void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
+void cpu_update(CFVMesh2 &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
 
-	cout << "polution[0] " << polution[0] << endl;
-	cout << "flux[100] " << flux[100] << " flux[200] " << flux[200] << " flux[101] " << flux[101] << endl;
+	//cout << "polution[0] " << polution[0] << endl;
+	//cout << "flux[100] " << flux[100] << " flux[200] " << flux[200] << " flux[101] " << flux[101] << endl;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
 		for(unsigned int e = 0; e < edge_limit; ++e) {
@@ -444,5 +471,5 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 			}
 		}
 	}
-	cout << "polution[0] " << polution[0] << endl;
+	//cout << "polution[0] " << polution[0] << endl;
 }
