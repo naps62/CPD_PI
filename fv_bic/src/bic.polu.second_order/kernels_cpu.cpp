@@ -161,7 +161,7 @@ void cpu_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult
 								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
 								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
 
-		/*cout << "vecABC[" << cell << "] = a: " << vecABC.elem(0,0,cell) << ", cos(x) = " << 6*cos(2*M_PI*mesh.cell_centroids.x[cell]) << endl;
+		/*cout << "cell " << cell << endl;
 		for(int x = 0; x < 3; ++x) {
 			cout << "\t";
 			for(int y = 0; y < 3; ++y)
@@ -253,7 +253,7 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 					cpu_ghost_coords(mesh, edge, x, y);
 
 					// polution in this ghost cell is equal to the current cell (neumman condition)
-					u = polution[cell_j];
+					u = polution[cell_j]; //u = 0; // TODO sera que deveria ser 0 aqui?
 					break;
 			}
 
@@ -265,6 +265,13 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 			vecResult.elem(0, 0, cell) += u * x;
 			vecResult.elem(1, 0, cell) += u * y;
 			vecResult.elem(2, 0, cell) += u;
+
+			/*cout << endl;
+			cout << "cell " << cell << endl;
+			for(int x = 0; x < 3; ++x) {
+				cout << "\t";
+				cout << setw(12) << vecResult.elem(x,0,cell) << endl;
+			}*/
 		}
 	}
 }
@@ -290,7 +297,7 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 				unsigned int new_left  = mesh.edge_left_cells[new_edge];
 				unsigned int new_right = mesh.edge_right_cells[new_edge];
 
-				if (left == new_right && right == new_left) {
+				if (left == new_left && right == new_right) {
 					edge = new_edge;
 					correct = true;
 				}
@@ -310,6 +317,7 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 		if (cell == 0) cout << "distancia 0 " << (x - x0) << " edge " << edge << " cell " << cell <<  endl;
 		if (cell == 99) cout << "distancia 99 " << (x - x0) << " edge " << edge << " cell " << cell << endl;
 	}*/
+	//cout << "cell " << cell << " edge " << edge << endl;
 	return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0);
 }
 
@@ -328,6 +336,7 @@ double cpu_edgePsi(double u_i, double u_j, double u_ij) {
 /* compute flux kernel */
 void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double> &vecABC, CFVArray<double> &polution,CFVArray<double> &partial_flux, CFVArray<double> &edgePsi, double dc) {
 
+	//cout << endl;
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
 		double v = velocity[edge];
 		unsigned int cell_orig, cell_dest;
@@ -351,7 +360,6 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig);
 				u_ij		 = u_i + partial_u_ij;
 				psi			 = cpu_edgePsi(u_i, u_j, u_ij);
-				//if (edge == 100 || edge == 200) cout << "u_i[" << edge << "] = " << u_i << "; u_j = " << u_j << endl;
 				break;
 
 			case FV_EDGE_DIRICHLET:
@@ -384,7 +392,6 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 
 		partial_flux[edge]	= partial_u_ij;
 		edgePsi[edge]		= psi;
-
 	}
 }
 
@@ -448,12 +455,15 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 		delta_u_ij = flux[edge];
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
+		//if (edge >= 100 && edge <= 200) cout << "flux[" << edge << "] = " << flux[edge] << endl;
 		flux[edge] = v * (u_i + psi * delta_u_ij);
+		//if (edge < 4)
+		//	cout << "v = " << v << " partial = " << delta_u_ij << " flux[" << edge << "] = " << flux[edge] << endl;
 	}
 }
 
 /* update kernel */
-void cpu_update(CFVMesh2 &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
+void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
 
 	//cout << "polution[0] " << polution[0] << endl;
 	//cout << "flux[100] " << flux[100] << " flux[200] " << flux[200] << " flux[101] " << flux[101] << endl;
@@ -466,8 +476,10 @@ void cpu_update(CFVMesh2 &mesh, CFVArray<double> &polution, CFVArray<double> &fl
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;
+				if (edge >= 10 && edge <= 20) cout << var << " exiting from " << cell << " through " << edge << endl;
 			} else {
 				polution[cell] += var;
+				if (edge >= 10 && edge <= 20) cout << var << " entering to  " << cell << " through " << edge << endl;
 			}
 		}
 	}

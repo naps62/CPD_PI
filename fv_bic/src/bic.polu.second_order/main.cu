@@ -75,8 +75,10 @@ void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
 		mesh.edge_types[r] = FV_EDGE_FAKE;
 
 		/* link both edges */
-		mesh.edge_right_cells[l] = mesh.edge_left_cells[r];
-		mesh.edge_right_cells[r] = mesh.edge_left_cells[l];
+		mesh.edge_right_cells[l] = mesh.edge_left_cells[l];
+		mesh.edge_left_cells[l]  = mesh.edge_left_cells[r];
+
+		mesh.edge_right_cells[r] = mesh.edge_right_cells[l];
 		cout << "linking edge " << l << " with " << r << endl;
 	}
 
@@ -137,7 +139,7 @@ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocitie
 		}
 
 		// TODO better fix for this
-		//vs[i] = 1.0;
+		vs[i] = 1.0;
 	}
 }
 
@@ -317,8 +319,15 @@ int main(int argc, char **argv) {
 
 		polution_writer.append(polution, t, "polution");
 		anim_next_step += data.anim_time;
+
+		/*for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+			//double c = 2*M_PI*cos(2*M_PI*mesh.cell_centroids.x[cell]);
+			//cout << "ratio = " << (c / vecABC.elem(0,0,cell)) << " vecABC[" << cell << "] = " << vecABC.elem(0,0,cell) << ", cos(x) = " << c <<  endl;
+			cout << "polu[" << cell << "] = " << polution[cell] << endl;
+		}*/
+
 	}
-	if ( i == 1000) break;
+	//if ( i == 1000) break;
 	++i;
 }
 
