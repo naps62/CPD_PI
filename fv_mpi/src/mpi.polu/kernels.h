@@ -8,6 +8,14 @@
 #include "FVL/FVArray.h"
 using namespace FVL;
 
+enum TAGS {
+	TAG_LEFT_COMM,
+	TAG_RIGHT_COMM,
+	TAG_WRITER_SIZE,
+	TAG_WRITER_INDEX,
+	TAG_WRITER_POLU
+};
+
 #define _choose(cond, true_val, false_val) ((cond) * (true_val) + (!(cond)) * (false_val))
 
 enum FVEdgeType {

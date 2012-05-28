@@ -120,9 +120,6 @@ int main(int argc, char **argv) {
 	while(t < data.final_time) {
 		cout << endl << "iteration " << i << endl;
 
-		//for(unsigned int i = 0; i < mesh.num_cells; ++i)
-		//	cout << "polu[" << i << "] = " << polution[i] << endl;
-
 		compute_flux(mesh, vs, polution, flux, data.dirichlet);
 		update(mesh, polution, flux, dt);
 

@@ -33,7 +33,7 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 		for(unsigned int i = 0; i < mesh.left_cell_count; ++i) {
 			unsigned int edge = mesh.left_index_to_edge[0][i];
 			unsigned int cell = mesh.edge_left_cells[edge];
-			mesh.left_cells_send[0][i] = polution[cell];
+			mesh.left_cells_send[0][i] = mesh.polution[cell];
 		}
 
 		// TODO send to left side
@@ -60,14 +60,14 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 		for(unsigned int i = 0; i < mesh.right_cell_count; ++i) {
 			unsigned int edge = mesh.right_index_to_edge[0][i];
 			unsigned int cell = mesh.edge_left_cells[edge];
-			mesh.right_cells_send[0][i] = polution[cell];
+			mesh.right_cells_send[0][i] = mesh.polution[cell];
 		}
 		
 		// TODO send to id + 1
 		//cout << id << " sending   " << mesh.right_cell_count << " to   " << id + 1 << " "; mesh.right_cells_send->dump();
 		MPI_Send(&mesh.right_cells_send[0][0], mesh.right_cells_send->size(), MPI_DOUBLE, id + 1, TAG_RIGHT_COMM, MPI_COMM_WORLD);
 
-		//cout << id << " received "; mesh.right_cells_send->dump();
+		//cout << id << " sent "; mesh.right_cells_send->dump();
 	}
 
 	if (id > 0 && mesh.left_cell_count > 0) {
@@ -81,6 +81,9 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 	MPI_Barrier(MPI_COMM_WORLD);
 
 	//sleep(1);
+	//exit(0);
+
+	//sleep(1);
 }
 
 /* compute flux kernel */
@@ -88,8 +91,8 @@ void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc) {
 
 	int id;
 	MPI_Comm_rank(MPI_COMM_WORLD, &id);
-	if (id == 0)
-		cout << "flux " << endl;
+	//if (id == 0)
+	//	cout << "flux " << endl;
 	for(unsigned edge = 0; edge < mesh.num_edges; ++edge) {
 		double polu;
 		double v = mesh.edge_velocity[edge];
