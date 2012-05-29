@@ -1,0 +1,84 @@
+\documentclass[abstract=on,9pt,twocolumn]{scrartcl}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+%\usepackage{graphics}%	images other than eps
+
+\usepackage[paper=a4paper,top=2cm,left=1.5cm,right=1.5cm,bottom=2cm,foot=1cm]{geometry}
+
+\usepackage{relsize}%	relative font sizes
+
+\usepackage[retainorgcmds]{IEEEtrantools}%	IEEEeqnarray
+\setlength{\IEEEnormaljot}{4\IEEEnormaljot}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{cleveref}
+%\usepackage[noabbrev]{cleveref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{todonotes}
+
+%%%%%%%%%%%%%%%%
+%  title page  %
+%%%%%%%%%%%%%%%%
+\titlehead{University of Minho \hfill Master's Degree in Informatics Engineering\\	Department of Informatics \hfill Parallel and Distributed Computing}
+
+\title{A finite volume case study from an industrial application}
+
+\subtitle{MPI: Implementation and Analysis}
+
+\author{{\larger Group 1}\\Miguel Palhas \hfill--- \texttt{\smaller pg19808@alunos.uminho.pt}\\Pedro Costa \hfill--- \texttt{\smaller pg19830@alunos.uminho.pt}\\\smaller Stéphane Clain (co-Advisor)\\
+}
+
+\date{Braga, May 2012}
+
+\subject{Integrated Project}
+
+
+%%%%%%%%%%%
+%  Hacks  %
+%%%%%%%%%%%
+
+%	Paragraph (title) with linebreak
+\newcommand{\paragraphh}[1]{\paragraph{#1\hfill}\hfill
+
+}
+
+%	Add "Appendix" to the appendices titles, but not to the references
+\usepackage{ifthen}
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
+
+
+
+\begin{document}
+\maketitle
+
+\input{report.may/00_abstract}		% Abstract
+\input{report.may/01_intro}			% Introduction
+\input{report.may/03_partitioning}	% Partitioning
+\input{report.may/04_implementation}% Implementation
+\input{report.may/06_results}		% Test Results
+\input{report.may/89_conclusion}	% Conclusions
+
+\appendix
+
+\input{report.may/90_environment}	% Test Env...
+\input{report.may/91_methodology}	% Test Method...
+
+\bibliographystyle{IEEE}
+\bibliography{report.may}
+
+\end{document}
