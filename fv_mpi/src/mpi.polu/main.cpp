@@ -162,7 +162,6 @@ int main(int argc, char **argv) {
 	FVL::FVArray<double> global_polu;
 	if (id == 0) {
 		polution_writer.open(data.output_file);
-		//polution_writer = FVL::FVXMLWriter(data.output_file);
 		global_polu = FVL::FVArray<double>(mesh.num_cells);
 	}
 
@@ -180,15 +179,13 @@ int main(int argc, char **argv) {
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
 	while (t < data.final_time) {
-		if (id == 0) cout << "iteration " << i << '\r';
 		communication(id, size, partition, polution);
-		compute_flux(partition, flux, data.dirichlet);
+		compute_flux(partition, flux, data.dirichlet, id);
 		update(partition, flux, dt);
 
 		t += dt;
 		if (i % data.anim_jump == 0)
 			append_anim(polution_writer, "polution", t, partition, global_polu, size);
-			//polution_writer.append(polution, t, "polution");
 		++i;
 	}
 

@@ -25,7 +25,7 @@ enum FVEdgeType {
 
 void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &polution);
 
-void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc);
+void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc, int id);
 
 void update(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dt);
 
