@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
 		//cout << " edge " << edge << " v " << vs[edge] << " left " << setw(3) << mesh.edge_left_cells[edge] << " right " << setw(3) << mesh.edge_right_cells[edge] <<  endl;
 
 	while(t < data.final_time) {
-		cout << "iteration " << i << endl;
+		cout << "iteration " << i << '\r';
 
 		compute_flux(mesh, vs, polution, flux, data.dirichlet);
 		update(mesh, polution, flux, dt);
@@ -131,6 +131,8 @@ int main(int argc, char **argv) {
 
 	//for(unsigned int j = 0; j < mesh.num_cells; ++j)
 	//		cout << "polution[" << j << "] = " << polution[j] << endl;
+	
+	cout << endl << "finished" << endl;
 
 	polution_writer.append(polution, t, "polution");
 	polution_writer.save();

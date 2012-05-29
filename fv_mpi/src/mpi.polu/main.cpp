@@ -180,7 +180,7 @@ int main(int argc, char **argv) {
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
 	while (t < data.final_time) {
-		if (id == 0) cout << "iteration " << i << "\r";
+		if (id == 0) cout << "iteration " << i << '\r';
 		communication(id, size, partition, polution);
 		compute_flux(partition, flux, data.dirichlet);
 		update(partition, flux, dt);
@@ -197,6 +197,7 @@ int main(int argc, char **argv) {
 	if (id == 0) {
 		polution_writer.save();
 		polution_writer.close();
+		cout << endl << "finished" << endl;
 	}
 
 	sleep(1);
