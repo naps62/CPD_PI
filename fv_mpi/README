@@ -1,0 +1,9 @@
+crashcourse da versao MPI:
+mpi.sequential -> exe da versao sequential
+mpi.polu -> exe da versao mpi
+	esta coisa acaba com uma Barrier e um sleep. não perguntes porque. está lá, funciona, NÂO MEXE
+
+param.xml -> 
+	fiz push para esta mesma pasta do sample.param.xml, que é o xml no novo formato que a fvlib usa. o anterior nao vai funcionar
+	mudar o NbJump para definir de quantas em quantas iteraçoes é feita a animaçao
+	mudar o FinalTime para definir o numero de segundos que dura a animaçao (usa o mesmo para todas, ja nao me lembro quanto é que usamos nos outros testes)

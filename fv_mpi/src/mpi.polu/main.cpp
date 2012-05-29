@@ -197,6 +197,7 @@ int main(int argc, char **argv) {
 		cout << endl << "finished" << endl;
 	}
 
+	MPI_Barrier(MPI_COMM_WORLD);
 	sleep(1);
 }
 
