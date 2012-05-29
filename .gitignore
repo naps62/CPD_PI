@@ -1,14 +1,29 @@
+#	System files
+.DS_Store
+
+#	Object files
 *.o
-*.a
-*/bin/*
-*/.svn
+
+#	Temporary files
 *.swp
 *.swo
 *.tmp
-*.log
-*.err
+
+#	LaTeX generated files
+*.out
+*.pdf
+*.synctex.gz
 *.aux
+*.log
+*.nav
+*.snm
 *.toc
+
+#	Others
+*.a
+*/bin/*
+*/.svn
+*.err
 doc/doxygen-fv_default
 fvlib/data
 *.xml
