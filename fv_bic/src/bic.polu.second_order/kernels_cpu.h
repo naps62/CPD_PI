@@ -32,7 +32,7 @@ void cpu_compute_unbounded_flux(
 		CFVArray<double> &polution,
 		CFVArray<double> &partial_flux,
 		CFVArray<double> &edgePsi,
-		double dc);
+		double dc, double t,double dt);
 
 void cpu_cellPsi(
 		CFVMesh2D &mesh,
@@ -45,7 +45,7 @@ void cpu_bound_flux(
 		CFVArray<double> &cellPsi,
 		CFVArray<double> &polution,
 		CFVArray<double> &flux,
-		double dc);
+		double dc, double t);
 
 void cpu_update(
 		CFVMesh2D &mesh,

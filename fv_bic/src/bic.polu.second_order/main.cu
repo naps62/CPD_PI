@@ -22,7 +22,7 @@ typedef struct _parameters {
 	string initial_file;
 	string output_file;
 	double final_time;
-	int anim_time;
+	double anim_time;
 	int anim_jump;
 	double dirichlet;
 	double CFL;
@@ -139,7 +139,8 @@ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocitie
 		}
 
 		// TODO better fix for this
-		vs[i] = 1.0;
+		if (mesh.edge_types[i] == FV_EDGE_FAKE)
+			vs[i] = 1.0;
 	}
 }
 
@@ -276,9 +277,9 @@ int main(int argc, char **argv) {
 		#ifdef NO_CUDA
 			cpu_vecResult(mesh, polution, vecResult, data.dirichlet);								// compute system polution coeficients for system solve
 			cpu_vecABC(mesh, matA, vecResult, vecABC);												// compute (a,b,c) vector
-			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, edgePsi, data.dirichlet);	// compute flux
+			cpu_compute_unbounded_flux(mesh, vs, vecABC, polution, flux, edgePsi, data.dirichlet, t,dt);	// compute flux
 			cpu_cellPsi(mesh, edgePsi, cellPsi);													// compute Psi bounder for each cell
-			cpu_bound_flux(mesh, vs, cellPsi, polution, flux, data.dirichlet); 						// bound previously calculated flux using psi values
+			cpu_bound_flux(mesh, vs, cellPsi, polution, flux, data.dirichlet, t); 						// bound previously calculated flux using psi values
 			cpu_update(mesh, polution, flux, dt); 													// update
 		#else
 

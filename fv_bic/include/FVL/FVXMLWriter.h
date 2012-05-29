@@ -38,6 +38,7 @@ namespace FVL {
 		private:
 			string filename;
 			ofstream out_stream;
+			bool opened;
 
 			xml_node<> *root;
 
@@ -49,11 +50,25 @@ namespace FVL {
 			/**
 			 * Default constructor
 			 *
+			 * Initializes a Writer with no file specified. Open function should be called later to open a file
+			 */
+			FVXMLWriter();
+
+			/**
+			 * Default constructor
+			 *
 			 * Initializes a Writer for file specified in filename. If no file is specified, it is initialized to an empty string, and must later be give when saving the output
 			 *
-			 * \param filename The output file (can be left unspecified)
+			 * \param filename The output file
 			 */
-			FVXMLWriter(string filename = string());
+			FVXMLWriter(string filename);
+
+			/**
+			 * Binds a file to the Writer
+			 *
+			 * \param filename The output file
+			 */
+			void open(string filename);
 
 			/**
 			 * Saves current output data to XML file

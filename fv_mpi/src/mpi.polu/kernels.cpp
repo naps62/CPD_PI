@@ -3,10 +3,6 @@
 #include <mpi.h>
 #include <limits>
 
-enum TAGS {
-	TAG_LEFT_COMM,
-	TAG_RIGHT_COMM
-};
 
 /* communication step */
 void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &polution) {
@@ -77,8 +73,8 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 
 		//cout << id << " received "; mesh.left_cells_recv->dump();
 	}
-	cout.flush();
-	MPI_Barrier(MPI_COMM_WORLD);
+	//cout.flush();
+	//MPI_Barrier(MPI_COMM_WORLD);
 
 	//sleep(1);
 	//exit(0);

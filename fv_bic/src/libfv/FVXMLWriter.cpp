@@ -19,7 +19,18 @@ using std::ofstream;
 
 namespace FVL {
 
+	FVXMLWriter::FVXMLWriter() {
+		opened = false;
+	}
+
 	FVXMLWriter::FVXMLWriter(string filename) {
+		this->open(filename);
+	}
+
+	void FVXMLWriter::open(string filename) {
+		if (opened)
+			return;
+
 		this->filename = filename;
 		init();
 	}

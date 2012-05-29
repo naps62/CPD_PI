@@ -86,38 +86,41 @@ void dump_partition(FVL::FVMesh2D_SOA_Lite &part) {
 	}
 }
 
-//void mpi_polu_simulation(FVMesh2D_SOA_Lite * &partitions, Parameters &data, FVXMLWriter &polu_writer) {
-//}
-
 void append_anim(FVL::FVXMLWriter &writer, string name, double t, FVL::FVMesh2D_SOA_Lite &partition, FVL::CFVArray<double> &global_polu, int num_procs) {
 	// slaves send their polution values to master
 	if (id != 0) {
-		MPI_Send(&partition.num_cells, 1, MPI_INT, 0, TAG_WRITER_SIZE, MPI_COMM_WORLD);							// first send cell count
-		MPI_Send(&partition.cell_index[0], partition.num_cells, MPI_INT, 0, TAG_WRITER_INDEX, MPI_COMM_WORLD);// then send cell_index array
-		MPI_Send(&partition.polution[0], partition.num_cells, MPI_DOUBLE, 0, TAG_WRITER_POLU, MPI_COMM_WORLD);// finally send polution values
+		MPI_Send(&partition.num_cells,     1,                   MPI_INT,    0, TAG_WRITER_SIZE,  MPI_COMM_WORLD);// first send cell count
+		MPI_Send(&partition.cell_index[0], partition.num_cells, MPI_INT,    0, TAG_WRITER_INDEX, MPI_COMM_WORLD);// then send cell_index array
+		MPI_Send(&partition.polution[0],   partition.num_cells, MPI_DOUBLE, 0, TAG_WRITER_POLU,  MPI_COMM_WORLD);// finally send polution values
 	} else {
+		// master receives all and outputs to writer
+
 		// copies it's own polution to global array
 		for(unsigned int x = 0; x < partition.num_cells; ++x)
 			global_polu[ partition.cell_index[x] ] = partition.polution[x];
 
-
-		// master receives all and outputs to writer
 		unsigned int count;
-
 		MPI_Status status;
+		FVL::CFVArray<unsigned int>* tmp_cell_index;
+		FVL::CFVArray<double>* tmp_polu;
 		for(int i = 1; i < num_procs; ++i) {
 			MPI_Recv(&count, 1, MPI_INT, i, TAG_WRITER_SIZE, MPI_COMM_WORLD, &status);					// recv array size
-			FVL::CFVArray<unsigned int> tmp_cell_index(count), tmp_polu(count);
+			cout << count << endl;
+			tmp_cell_index = new FVL::CFVArray<unsigned int>(count);
+			tmp_polu       = new FVL::CFVArray<double>(count);
 
-			MPI_Recv(&tmp_cell_index[0], count, MPI_INT, i, TAG_WRITER_INDEX, MPI_COMM_WORLD, &status);	// recv cell_index
-			MPI_Recv(&tmp_polu[0], count, MPI_DOUBLE, i, TAG_WRITER_POLU, MPI_COMM_WORLD, &status);		// recv polu
+			MPI_Recv(&tmp_cell_index[0][0], count, MPI_INT,    i, TAG_WRITER_INDEX, MPI_COMM_WORLD, &status);	// recv cell_index
+			MPI_Recv(&tmp_polu[0][0],       count, MPI_DOUBLE, i, TAG_WRITER_POLU,  MPI_COMM_WORLD, &status);		// recv polu
 
 			// save polu to global array
 			for(unsigned int x = 0; x < count; ++x)
-				global_polu[ tmp_cell_index[x] ] = tmp_polu[x];
+				global_polu[ tmp_cell_index[0][x] ] = tmp_polu[0][x];
+
+			delete tmp_cell_index;
+			delete tmp_polu;
 		}
 
-		//writer.append(global_polu, t, name);
+		writer.append(global_polu, t, name);
 	}
 }
 
@@ -156,20 +159,16 @@ int main(int argc, char **argv) {
 
 
 	FVL::FVXMLWriter polution_writer;
-	vector<double> global_polu;
+	FVL::FVArray<double> global_polu;
 	if (id == 0) {
+		polution_writer.open(data.output_file);
 		//polution_writer = FVL::FVXMLWriter(data.output_file);
 		global_polu = FVL::FVArray<double>(mesh.num_cells);
 	}
 
-	polution.dump();
-	cout << "end polution" << endl;
-
 	compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = compute_mesh_parameter(mesh);
 	dt = 1.0 / v_max * h;
-
-	// watch out for velocities and polution read, need to revert velocity when rigth cell is swaped TODO
 
 	// PARTITION THE MESH
 	vector<PartitionData> part_data(size);
@@ -179,19 +178,12 @@ int main(int argc, char **argv) {
 
 	FVL::CFVArray<double> flux(partition.num_edges);
 
-	//for(unsigned int edge = 0; edge < partition.num_edges; ++edge)
-	//	cout << id << " edge " << setw(3) << edge << " global " << setw(3) << partition.edge_index[edge] << setw(2) << " part " << partition.edge_part[edge] <<  " v " << partition.edge_velocity[edge] << " left " << partition.cell_index[partition.edge_left_cells[edge]] << " right " << setw(3) << (partition.edge_right_cells[edge] == NO_RIGHT_CELL ? NO_RIGHT_CELL : partition.cell_index[partition.edge_right_cells[edge]]) << " other part " << endl;
-
+	append_anim(polution_writer, "polution", t, partition, global_polu, size);
 	while (t < data.final_time) {
-		if (id == 0) cout << endl << "iteration " << i << endl;
+		if (id == 0) cout << "iteration " << i << "\r";
 		communication(id, size, partition, polution);
-
 		compute_flux(partition, flux, data.dirichlet);
-
 		update(partition, flux, dt);
-
-		cout.flush();
-		MPI_Barrier(MPI_COMM_WORLD);
 
 		t += dt;
 		if (i % data.anim_jump == 0)
@@ -199,13 +191,14 @@ int main(int argc, char **argv) {
 			//polution_writer.append(polution, t, "polution");
 		++i;
 	}
-		//for(unsigned int j = 0; j < partition.num_cells; ++j)
-		//	cout << i << " " << id  << " polution[" << partition.cell_index[j] << "] = " << partition.polution[j] << endl;
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
-	if (id == 0)
-		polution_writer.close();
 
-	//mpi_polu_simulation(partition);
+	if (id == 0) {
+		polution_writer.save();
+		polution_writer.close();
+	}
+
+	sleep(1);
 }
 

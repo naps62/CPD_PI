@@ -9,7 +9,6 @@ default:	\
 	mpi.fvcd	\
 	mpi.velocity	\
 	mpi.sequential	\
-	mpi.partitioning_test	\
 	mpi.polu
 
 %:
