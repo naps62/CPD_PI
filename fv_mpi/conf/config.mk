@@ -27,8 +27,6 @@ ifndef CXXFLAGS
 CXXFLAGS	=	-Wall \
 				-Wextra \
 				-Wfatal-errors \
-				-ansi \
-				-pedantic	\
 				-I$(INCD)
 ifeq ($(MODE),DBG)
 CXXFLAGS	+=	-g

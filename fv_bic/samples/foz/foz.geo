@@ -1,7 +1,7 @@
 MINUS_THREE_DIM = 2147483648;
 MINUS_TWO_DIM   = 1073741824;
 MINUS_ONE_DIM   =  536870912;
-cl1 = 0.1;
+cl1 = 0.04;
 Point(1) = {-1, 0.5, 0, cl1/2};
 Point(2) = {-0.9, 0.4, 0, cl1};
 Point(3) = {-0.8, 0.4, 0, cl1};
