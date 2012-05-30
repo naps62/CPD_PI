@@ -83,12 +83,6 @@ void alloc_partitions(FVMesh2D_SOA &mesh, FVArray<double> &v, FVArray<double> &p
 			result.edge_right_cells[edges_current] = tmp;
 			result.edge_velocity   [edges_current] *= -1.0;
 		}
-		/*for(int x = 0; x < partitions.size(); ++x) {
-			if (x == id) {
-			cerr << id << " " << result.num_edges << " " << edges_current << "   -   " << edge << " " << endl;
-			}
-			MPI_Barrier(MPI_COMM_WORLD);
-		}*/
 		edges_current++;
 	}
 

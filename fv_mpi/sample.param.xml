@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fvlib>
+	<parameters>
+		<MeshName 		value="foz.xml" />
+		<OutputFile 	value="polution.xml" />
+		<VelocityFile 	value="velocity.xml" />
+		<PoluInitFile 	value="concentration_ini.xml" />
+		<PotentialFile 	value="v_potential.xml" />
+		<FactorNorm 	value="1" />
+		<ConcentrationMax value="1" />
+		<DirichletCondition value="1" />
+		<FinalTime 		value="10" />
+		<AnimTimeStep 	value="1" />
+		<NbJump 		value="5" />
+		<CFL 			value="0.3" />
+	</parameters>
+</fvlib>
