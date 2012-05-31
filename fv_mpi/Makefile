@@ -9,7 +9,9 @@ default:	\
 	mpi.fvcd	\
 	mpi.velocity	\
 	mpi.sequential	\
-	mpi.polu
+	mpi.polu \
+	mpi.polu.time0	\
+	mpi.polu.time1
 
 %:
 	@echo "<<==::    $@    ::==>>"

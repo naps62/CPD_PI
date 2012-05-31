@@ -1,1 +1,1 @@
-../mpi.polu/partitioner.cpp
+../mpi.polu.time/partitioner.cpp

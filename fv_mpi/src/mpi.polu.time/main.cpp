@@ -16,6 +16,10 @@ using namespace FVL;
 
 int id, size;
 
+#ifdef PROFILE_LIMITED
+	long unsigned mliters;
+#endif
+
 struct Parameters {
 	string mesh_file;
 	string velocity_file;
@@ -144,6 +148,11 @@ int main(int argc, char **argv) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &id);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+#ifdef PROFILE
+	if (!id)
+		PROFILE_INIT();
+#endif
+
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
@@ -179,7 +188,16 @@ int main(int argc, char **argv) {
 
 	//	main loop
 	//append_anim(polution_writer, "polution", t, partition, global_polu, size);
-	while (t < data.final_time) {
+#ifdef PROFILE1
+	if (!id)
+		PROFILE_START();
+#endif
+#ifdef PROFILE_LIMITED
+	for (mliters = 0; mliters < PROFILE_LIMITED; ++mliters)
+#else
+	while (t < data.final_time)
+#endif
+	{
 		communication(id, size, partition, polution);
 		compute_flux(partition, flux, data.dirichlet, id);
 		update(partition, flux, dt);
@@ -192,6 +210,10 @@ int main(int argc, char **argv) {
 		}
 		++i;
 	}
+#ifdef PROFILE1
+	if (!id)
+		PROFILE_STOP();
+#endif
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
 
@@ -200,6 +222,13 @@ int main(int argc, char **argv) {
 		polution_writer.close();
 		cout << endl << "finished" << endl;
 	}
+
+#ifdef PROFILE
+	if (!id) {
+		PROFILE_OUTPUT();
+		PROFILE_CLEANUP();
+	}
+#endif
 
 	MPI_Finalize();
 }
