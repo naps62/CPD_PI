@@ -1,1 +1,0 @@
-../mpi.polu.time/kernels.cpp
