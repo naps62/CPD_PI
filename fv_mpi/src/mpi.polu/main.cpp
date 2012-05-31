@@ -130,7 +130,7 @@ void append_anim(FVL::FVXMLWriter &writer, string name, double t, FVL::FVMesh2D_
 
 int main(int argc, char **argv) {
 
-	int i = 0;
+	int i = 1;
 	double h, t, dt, v_max = 0;
 	string name;
 
@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
 #ifdef PROFILE
-	profile::init();
+		PROFILE_INIT();
 #endif
 
 	// read mesh
