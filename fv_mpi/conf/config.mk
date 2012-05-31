@@ -13,7 +13,7 @@ TEMPLATED	=	$(ROOTD)/templates
 DIR		=	$(shell pwd | egrep -o "[[:alnum:]_.:\-]+$$")
 
 #	Compile mode
-MODE	?=	DBG
+MODE	?=	RLS
 
 #	C Compil[ator]
 CC		=	mpicc
