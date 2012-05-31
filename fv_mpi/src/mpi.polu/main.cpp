@@ -211,10 +211,8 @@ int main(int argc, char **argv) {
 		++i;
 	}
 #ifdef PROFILE1
-	if (!id) {
+	if (!id)
 		PROFILE_STOP();
-		PROFILE_RETRIEVE_ML();
-	}
 #endif
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
