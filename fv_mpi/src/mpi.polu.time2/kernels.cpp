@@ -6,12 +6,6 @@
 
 /* communication step */
 void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &polution) {
-
-#ifdef PROFILE2
-	if (!id)
-		PROFILE_START();
-#endif
-
 	MPI_Barrier(MPI_COMM_WORLD);
 
 	//
@@ -55,23 +49,13 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 		//recv from left side
 		MPI_Recv(&mesh.left_cells_recv[0][0], mesh.left_cells_recv->size(), MPI_DOUBLE, id - 1, TAG_RIGHT_COMM, MPI_COMM_WORLD, &status);
 	}
-
-#ifdef PROFILE2
-	if (!id) {
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_CM();
-	}
-#endif
-
 }
 
 /* compute flux kernel */
 void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc, int id) {
 
-#ifdef PROFILE2
-	if (!id)
-		PROFILE_START();
-#endif
+	//int id;
+	//MPI_Comm_rank(MPI_COMM_WORLD, &id);
 
 	for(unsigned edge = 0; edge < mesh.num_edges; ++edge) {
 		double polu;
@@ -91,23 +75,10 @@ void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc, int
 
 		flux[edge] = v * polu;
 	}
-
-#ifdef PROFILE2
-	if (!id) {
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_CF();
-	}
-#endif
-
 }
 
 /* update kernel */
 void update(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dt) {
-
-#ifdef PROFILE2
-	if (!id)
-		PROFILE_START();
-#endif
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
@@ -123,12 +94,4 @@ void update(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dt) {
 			}
 		}
 	}
-
-#ifdef PROFILE2
-	if (!id) {
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_UP();
-	}
-#endif
-
 }

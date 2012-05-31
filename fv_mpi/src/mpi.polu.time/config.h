@@ -1,0 +1,2 @@
+#define PROFILE_LIMITED 2000
+#define PROFILE_WARMUP    20

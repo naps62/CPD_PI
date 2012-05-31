@@ -4,9 +4,6 @@ using std::endl;
 
 #include <tk/stopwatch.hpp>
 
-#define PROFILE_LIMITED 2000
-#define PROFILE_WARMUP   100
-
 #define PROFILE_COUNTER_CLASS tk::Stopwatch
 #define PROFILE_COUNTER_NAME  s
 #define PROFILE_COUNTER       profile::PROFILE_COUNTER_NAME
@@ -19,7 +16,6 @@ namespace profile {
 	void init()
 	{
 		PROFILE_COUNTER_NAME = new PROFILE_COUNTER_CLASS();
-		mntotus = 0;
 		PROFILE_COUNTER_NAME->start();
 	}
 
@@ -44,4 +40,5 @@ namespace profile {
 #define PROFILE_START() {;}
 #define PROFILE_STOP() {;}
 
-#include "../mpi.polu/main.cpp"
+#include "../mpi.polu.time/config.h"
+#include "../mpi.polu.time/main.cpp"
