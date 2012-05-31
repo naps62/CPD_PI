@@ -188,6 +188,10 @@ int main(int argc, char **argv) {
 
 	//	main loop
 	//append_anim(polution_writer, "polution", t, partition, global_polu, size);
+#ifdef PROFILE1
+	if (!id)
+		PROFILE_START();
+#endif
 #ifdef PROFILE_LIMITED
 	for (mliters = 0; mliters < PROFILE_LIMITED; ++mliters)
 #else
@@ -206,6 +210,12 @@ int main(int argc, char **argv) {
 		}
 		++i;
 	}
+#ifdef PROFILE1
+	if (!id) {
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_ML();
+	}
+#endif
 
 	append_anim(polution_writer, "polution", t, partition, global_polu, size);
 
