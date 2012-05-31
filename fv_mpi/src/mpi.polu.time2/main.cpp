@@ -2,6 +2,9 @@
 using std::cout;
 using std::endl;
 
+#include <limits>
+using std::numeric_limits;
+
 #include <tk/stopwatch.hpp>
 
 #define PROFILE_COUNTER_CLASS tk::Stopwatch
@@ -27,16 +30,16 @@ namespace profile {
 		PROFILE_COUNTER_NAME = new PROFILE_COUNTER_CLASS();
 
 		cftotus = 0;
-		cfminus = numerical_limits<long long>::max();
-		cfmaxus = numerical_limits<long long>::min();
+		cfminus = numeric_limits<long long>::max();
+		cfmaxus = numeric_limits<long long>::min();
 
 		uptotus = 0;
-		upminus = numerical_limits<long long>::max();
-		upmaxus = numerical_limits<long long>::min();
+		upminus = numeric_limits<long long>::max();
+		upmaxus = numeric_limits<long long>::min();
 
 		cmtotus = 0;
-		cmminus = numerical_limits<long long>::max();
-		cmmaxus = numerical_limits<long long>::min();
+		cmminus = numeric_limits<long long>::max();
+		cmmaxus = numeric_limits<long long>::min();
 	}
 
 	inline void output(std::ostream& out) {
