@@ -149,6 +149,7 @@ int main(int argc, char **argv) {
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
 #ifdef PROFILE
+	if (!id)
 		PROFILE_INIT();
 #endif
 
@@ -215,8 +216,10 @@ int main(int argc, char **argv) {
 	}
 
 #ifdef PROFILE
+	if (!id) {
 		PROFILE_OUTPUT();
 		PROFILE_CLEANUP();
+	}
 #endif
 
 	MPI_Finalize();
