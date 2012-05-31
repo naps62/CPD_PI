@@ -105,7 +105,7 @@ void append_anim(FVL::FVXMLWriter &writer, string name, double t, FVL::FVMesh2D_
 		FVL::CFVArray<double>* tmp_polu;
 		for(int i = 1; i < num_procs; ++i) {
 			MPI_Recv(&count, 1, MPI_INT, i, TAG_WRITER_SIZE, MPI_COMM_WORLD, &status);					// recv array size
-			cout << count << endl;
+			//cout << count << endl;
 			tmp_cell_index = new FVL::CFVArray<unsigned int>(count);
 			tmp_polu       = new FVL::CFVArray<double>(count);
 
@@ -132,7 +132,7 @@ int main(int argc, char **argv) {
 
 	// read params
 	Parameters data;
-	if (argc != 3) {
+	if (argc != 2) {
 		cerr << "Arg warning: no xml param filename specified. Defaulting to param.xml and 2 nodes" << endl;
 		data = read_parameters("param.xml");
 	} else {
@@ -184,8 +184,11 @@ int main(int argc, char **argv) {
 		update(partition, flux, dt);
 
 		t += dt;
-		if (i % data.anim_jump == 0)
+		if (i % data.anim_jump == 0) {
+			if (!id)
+				cerr << "Animation frame " << i / data.anim_jump << endl;
 			append_anim(polution_writer, "polution", t, partition, global_polu, size);
+		}
 		++i;
 	}
 
@@ -197,7 +200,9 @@ int main(int argc, char **argv) {
 		cout << endl << "finished" << endl;
 	}
 
-	MPI_Barrier(MPI_COMM_WORLD);
-	sleep(1);
+	//MPI_Barrier(MPI_COMM_WORLD);
+	//sleep(1);
+
+	MPI_Finalize();
 }
 
