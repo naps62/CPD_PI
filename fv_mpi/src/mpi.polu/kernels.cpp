@@ -54,8 +54,8 @@ void communication(int id, int size, FVMesh2D_SOA_Lite &mesh, FVArray<double> &p
 /* compute flux kernel */
 void compute_flux(FVMesh2D_SOA_Lite &mesh, FVArray<double> &flux, double dc, int id) {
 
-	int id;
-	MPI_Comm_rank(MPI_COMM_WORLD, &id);
+	//int id;
+	//MPI_Comm_rank(MPI_COMM_WORLD, &id);
 
 	for(unsigned edge = 0; edge < mesh.num_edges; ++edge) {
 		double polu;
