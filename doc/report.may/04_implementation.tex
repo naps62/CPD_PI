@@ -1,4 +1,40 @@
 \section{MPI Implementation}
 \label{sec:implementation}
 
-\todo[inline]{Write this \ldots please \tiny{dumbass}}
+\subsection{Data Structures}
+\label{subsec:structs}
+
+The first concern with a distributed memory implementation was the mesh partitioning process, which should be executed at the start of the program, guaranteeing that after it, each process will contain a local copy of a partition of the mesh, as well as the indexing strucutures that are necessary to describe how that partition connects with the rest of the mesh.
+
+The partitioning process was already explained in \cref{sec:partitioning}. As for the indexing structures, they are generated while the partitioning process is being done.
+
+First of all, when partitioning the mesh, if a given edge would be placed in the new border of the partition, with only its right cell existing, it should be swapped so that it is declared as its left cell. This was required, mostly for simplification process, as the whole \texttt{polu} has always had the assumption that the left cell always exist, and onyl the right cell should have the possibility of not existing, for the border edges. This is usually a common practise in Finite Volume Methods.
+
+With that considered, the following indexing structures were required:
+\begin{description}
+
+	\item[\textbf\texttt{cell\_index}:] Stores, for each cell, the global index in the original mesh.
+	\item[\textbf\texttt{edge\_index}:] Same as \texttt{cell\_index}, but for the edges.
+
+	\item[\textbf\texttt{edge\_part}:] Can have the following values:
+		\begin{description}
+			\item[$0$:]  The right cell of this edge is in the same partition;
+			\item[$-1$:] The right cell is in the left neighbour partition;
+			\item[$1$:]  The right cell is in the right neighbour partition.
+		\end{description}
+
+	\item[\textbf\texttt{edge\_part\_index}:] For every edge with an \texttt{edge\_part} value of $-1$ or $1$, will give the corresponding index on the communication array that is received from either the left or right neighbour, according to which is connected to this edge.
+
+	\item[\textbf\texttt{index\_to\_edge}:] Two arrays of this type exist for each partition, one for the left side and one for the right side. Unlike the previuos ones, their size is equal to the size of the communication array instead of the total number of edges, and indicates for each value in the communication array, what is the corresponding edge that it refers to.
+
+	\item[\textbf\texttt{cells\_send}:] Array used to send data to the neighbour partitions (one for the left, and one for the right)
+	\item[\textbf\texttt{cells\_recv}:] Array used to receive data from the neighbours (one for the left, and one for the right)
+
+\end{description}
+
+\subsection{HeartBeat Communication}
+\label{subsec:heartbeat_comm}
+
+The original implementation iterates over two basic functions: \texttt{compute\_flux} and \texttt{update}, with each one iterating over all the cells and edges, respectively, and performing one of the steps of the heartbeat algorithm. To implement the required communication, an additional step was added to the beginning of the cycle, calling the function \texttt{communication}, which every iteration, copies polution data from the border cells to their corresponding locations on the communication array. These arrays are then sent to their corresponding destinations, and the process then waits to receive the arrays that those neighbours also sent him.
+
+After this step, the \texttt{compute\_flux} function is similar to the original function, with the exception that, when reading the polution value for a right cell, it now has to check wether that right cell is stored in its own partition, or in a neighbour, in which case it will be required to read the value from the arrays received at the communication step. As for the \texttt{update} function, its implementation is exactly the same as the sequential version, since all the computed values for the flux of each edge is already locally computed. There is however some redundancy here, as different partitions will compute the flux for the same edge, when this edge is located in the border between them.
