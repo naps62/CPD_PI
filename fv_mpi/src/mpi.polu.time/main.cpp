@@ -220,7 +220,6 @@ int main(int argc, char **argv) {
 	if (id == 0) {
 		polution_writer.save();
 		polution_writer.close();
-		cout << endl << "finished" << endl;
 	}
 
 #ifdef PROFILE

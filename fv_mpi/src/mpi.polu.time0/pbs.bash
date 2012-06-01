@@ -13,5 +13,4 @@
 #
 cd "$PBS_O_WORKDIR";
 PROCESSES=`cat $PBS_NODEFILE | wc -l`
-echo "${PROCESSES} processes";
 mpirun -np $PROCESSES -machinefile "$PBS_NODEFILE" -loadbalance bin/mpi.polu.time0 data/xml/new.huge.param.xml

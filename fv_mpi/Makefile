@@ -11,7 +11,8 @@ default:	\
 	mpi.sequential	\
 	mpi.polu \
 	mpi.polu.time0	\
-	mpi.polu.time1
+	mpi.polu.time1	\
+	mpi.polu.time2
 
 %:
 	@echo "<<==::    $@    ::==>>"

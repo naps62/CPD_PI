@@ -89,3 +89,4 @@ namespace profile {
 
 #include "../mpi.polu.time/config.h"
 #include "../mpi.polu.time/main.cpp"
+#include "../mpi.polu.time/kernels.cpp"
