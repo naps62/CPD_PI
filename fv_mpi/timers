@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TIMER=$1;
+FIRST=$2;
+LAST=$3;
+
+for ((N=$FIRST; N<=$LAST; ++N));
+do
+	NAME="time${TIMER}_${N}";
+	qsub -V -o "data/out/mpi/${NAME}.out" -e "data/out/mpi/${NAME}.err" -N "mpi.polu.${NAME}" "src/mpi.polu.time${TIMER}/mini.bash";
+done;
