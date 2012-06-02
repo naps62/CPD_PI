@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TIMER=$1;
+FIRST=$2;
+LAST=$3;
+
+for ((N=$FIRST; N<=$LAST; ++N));
+do
+	NAME="time${TIMER}_${N}";
+	qsub -V -l nodes="6:hex:f2.66:ppn=24" -o "data/out/mpi/hex/${NAME}.out" -e "data/out/mpi/hex/${NAME}.err" -N "mpi.polu.hex_${NAME}" "src/mpi.polu.time${TIMER}/mini.bash";
+done;

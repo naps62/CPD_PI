@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TIMER=$1;
+FIRST=$2;
+LAST=$3;
+
+for (( N=$FIRST; N<=$LAST; ++N ));
+do
+	NAME="time${TIMER}_5_${N}";
+	qsub -V -l nodes="compute-101-22:ppn=4+compute-101-23:ppn=4+compute-101-24:ppn=4+compute-101-25:ppn=4+compute-101-26:ppn=4" -o "data/out/mpi/${NAME}.out" -e "data/out/mpi/${NAME}.err" -N "mpi.polu.${NAME}" "src/mpi.polu.time${TIMER}/mini.bash";
+done;

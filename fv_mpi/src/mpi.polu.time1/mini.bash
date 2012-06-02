@@ -2,8 +2,7 @@
 #
 #	SeARCH Job Script
 #
-#PBS -l nodes=6:r101:ppn=4
-#PBS -l walltime=30:00
+#PBS -l walltime=10:00
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
 #PBS -V
