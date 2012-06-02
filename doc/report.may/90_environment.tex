@@ -1,4 +1,57 @@
 \section{Environmental Setup}
 \label{sec:environment}
 
-\todo[inline]{Write this \ldots please \tiny{dumbass}}
+\todo[inline]{ATENTION: Se não chegarmos a testar nos HEX, rever esta secção}
+
+Two different types of nodes from the SeARCH cluster\footnote{\url{http://search.di.uminho.pt}} were used for the required measurements.
+
+The nodes of the first type, referred to in this document as SeARCH Group 101, possess two dual-core processors with a clock frequency of 3.2 GHz and 2 GB of RAM (see \cref{tab:group101}) for further detail regarding the hardware).
+
+\todo[inline]{here}
+
+The second type -- SeARCH Group Hex -- refers to the 601 nodes and the two aditional 611 nodes, each one having two hexa-core processors (with Intel\textregistered Hyper-Threading Technology) and 12 GB of RAM (48 GB for the 611 nodes) (see \cref{tab:group601} for further details regarding this hardware).
+
+Both groups were used to perform tests using up to 6 nodes, and spawning one process per core, which means 4 processes per node on SeARCH Group 101, and 12 processes per core on SeARCH Group 601 (Hyper-Threading was avoided), with each test being performed with the nodes fully reserved
+
+\begin{table}[!htp]
+	\begin{center}
+		\begin{tabular}{ll}
+			\hline
+			Processors per node: & 2	\\
+			Processor model: & 64-bit Intel\textregistered Xeon\texttrademark	\\
+			Cores per processor: & 1	\\
+			Threads per core: & 2	\\
+			Clock frequency: & 3.2 GHz	\\
+			\hline
+			L1 cache: & 16 KB (Data)	\\
+			L2 cache: & 2 MB	\\
+			L3 cache: & N/A	\\
+			RAM: & 2 GB	\\
+			\hline
+		\end{tabular}
+		\caption[SeARCH Group 101 hardware description]{SeARCH Group 101 hardware description. See \cite{xeon32} for further detail about this processor.}
+		\label{tab:group101}
+	\end{center}
+\end{table}
+	
+
+\begin{table}[!htp]
+	\begin{center}
+		\begin{tabular}{ll}
+			\hline
+			Processors per node: & 2	\\
+			Processor model: & Intel\textregistered Xeon\textregistered X5650\\
+			Cores per processor: & 6	\\
+			Threads per core: & 2	\\
+			Clock frequency: & 2.66 GHz	\\
+			\hline
+			L1 cache: & 32 KB + 32 KB per core	\\
+			L2 cache: & 256 KB per core	\\
+			L3 cache: & 12 MB shared	\\
+			RAM: & 12 to 48 GB	\\
+			\hline
+		\end{tabular}
+		\caption[SeARCH Group Hex hardware description]{SeARCH Group Hex hardware description. See \cite{xeon5600} for further detail about this processor.}
+		\label{tab:grouphex}
+	\end{center}
+\end{table}

@@ -3,45 +3,45 @@ The top-level auxiliary file: report.may.aux
 The style file: IEEE.bst
 Database file #1: report.may.bib
 Warning--empty journal in metis
-You've used 1 entry,
+You've used 3 entries,
             1821 wiz_defined-function locations,
-            457 strings with 3618 characters,
-and the built_in function-call counts, 166 in all, are:
-= -- 11
-> -- 8
+            467 strings with 3854 characters,
+and the built_in function-call counts, 366 in all, are:
+= -- 31
+> -- 10
 < -- 0
-+ -- 3
++ -- 5
 - -- 2
-* -- 11
-:= -- 35
-add.period$ -- 1
-call.type$ -- 1
+* -- 25
+:= -- 61
+add.period$ -- 3
+call.type$ -- 3
 change.case$ -- 1
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 7
-empty$ -- 15
+cite$ -- 4
+duplicate$ -- 19
+empty$ -- 41
 format.name$ -- 2
-if$ -- 32
+if$ -- 80
 int.to.chr$ -- 0
-int.to.str$ -- 1
+int.to.str$ -- 3
 missing$ -- 1
-newline$ -- 8
+newline$ -- 18
 num.names$ -- 1
-pop$ -- 4
+pop$ -- 8
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 4
+skip$ -- 8
 stack$ -- 0
 substring$ -- 0
-swap$ -- 0
+swap$ -- 2
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
 while$ -- 1
-width$ -- 2
-write$ -- 11
+width$ -- 4
+write$ -- 31
 (There was 1 warning)
