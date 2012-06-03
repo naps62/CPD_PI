@@ -1,0 +1,273 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBrown.sty,v 1.3 05/01/2007 Exp $
+
+%-----------------------------------------------------------------
+% Brown University Beamer Theme
+%  version 0.1
+%
+% This is a preliminary version of a Brown beamer theme. Right 
+% now only a few features are enabled. 
+%
+% The current version provides a titlepage with a Brown logo,
+% and a footer at the bottom of the page. It requires the 
+% tangocolors style file, which is distributed with this file.
+%
+% Please contact me at mcnees@gmail.com or mcnees@het.brown.edu
+% with questions or comments.
+%
+%     Robert McNees
+%     April 2007
+%
+%-----------------------------------------------------------------
+
+\mode<presentation>
+
+%\useinnertheme[shadow=true]{rounded}
+%\useinnertheme{rounded}
+%\useinnertheme{circles}
+\usepackage{tangocolors}
+\usepackage{tikz}
+
+%------------------------------------------------------------
+% Set some color schemes that we will use throughout the
+% theme. Not all of these are being used yet. Note that
+% "bg=" sets the background to transparent, so that the
+% the background canvas or image shows through.
+%------------------------------------------------------------
+\setbeamercolor{Brown logo}{fg=white,bg=}
+\setbeamercolor{Brown footer}{fg=black,bg=}
+\setbeamercolor{Brown footer 2}{fg=black,bg=taskyblue!20!white}
+\setbeamercolor{Brown header}{fg=white,bg=}
+\setbeamercolor{Brown header}{fg=white,bg=blue!25!white}
+
+%------------------------------------------------------------
+% Set some fonts to be used. Note that the list of papers
+% in the lower right-hand corner of the title page are
+% displayed using the teletype font - like a typewrite.
+%------------------------------------------------------------
+\setbeamerfont{details in Brown foot}{size=\tiny}
+\setbeamerfont{logo in Brown foot}{size=\normalsize}
+\setbeamerfont{page number in Brown foot}{size=\tiny}
+\setbeamerfont{Brown title}{size=\LARGE}
+\setbeamerfont{Brown subtitle}{size=\large}
+\setbeamerfont{Brown institute}{size=\footnotesize}
+\setbeamerfont{Brown papers}{size=\scriptsize, family = \ttfamily}
+
+%------------------------------------------------------------
+% This sets the font size for frame titles to \normalsize.
+% Otherwise they are too big.
+%------------------------------------------------------------
+\setbeamerfont{frametitle}{size=\normalsize}
+
+
+%------------------------------------------------------------
+% This sets the margins.
+%------------------------------------------------------------
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+
+
+
+%------------------------------------------------------------
+% Declare an alias for the Brown logo. The file 
+% Brown_Logo.pdf should be in the same directory
+% or somewhere that TeX can find it.
+%------------------------------------------------------------
+\pgfdeclareimage[height=1cm]{BrownLogo}{Brown_Logo}
+
+
+%------------------------------------------------------------
+% This defines a command "\papers" that takes a block of text
+% and places it in the lower right-hand corner of the title
+% page. It is meant to be a list of references relevant to
+% the content of the talk. 
+%------------------------------------------------------------
+\newcommand{\papers}{\@dblarg\beamer@papers}
+\long\def\beamer@papers[#1]#2{%
+  \def\insertpapers{#2}%
+  \def\beamer@shortpapers{#1}%
+  }
+\papers{}
+
+\newcommand\insertshortpapers[1][]{%
+  \beamer@setupshort{#1}%
+  \let\thanks=\@gobble%
+  \ifnum\c@page=1%
+    \hyperlinkpresentationend{\beamer@insertshort{\beamer@shortpapers}}%
+  \else%
+    \hyperlinkpresentationstart{\beamer@insertshort{\beamer@shortpapers}}%
+  \fi}
+
+%------------------------------------------------------------
+% Now we define a bunch of new commands for drawing boxes,
+% gradients, and other good things.
+%------------------------------------------------------------
+
+
+
+\tikzstyle{mybox} = [draw=ta3skyblue, fill=taorange!10, thick,
+    rectangle, rounded corners, inner sep=10pt]
+
+\tikzstyle{mydisplaybox} = [draw=ta3skyblue, fill=taorange!10,
+    rectangle, rounded corners, thick, inner sep=5pt]
+
+\tikzstyle{myslimbox} = [draw=ta3skyblue, fill=taorange!10, thick,
+    rectangle, rounded corners, inner sep=4pt, inner ysep=2pt]
+
+\tikzstyle{mydoublebox} = [draw=ta3skyblue, fill=taorange!10, thick, double,
+    rectangle, rounded corners, inner sep=10pt]
+
+\tikzstyle{mybox2} = [fill=taorange!10, draw=ta3skyblue, very thick,
+    rectangle, rounded corners, inner sep=10pt]
+
+\tikzstyle{fancytitle} =[fill=taskyblue!10, draw=ta3skyblue, rounded corners, very thick,inner sep=5pt]
+
+\tikzstyle{fancytitle2} =[fill=taskyblue, draw=ta3skyblue, text=white,rounded corners, very thick,inner sep=5pt]
+
+\newcommand{\titlebox}[3]{\begin{tikzpicture}
+\node [mybox2] (tbox){
+    \begin{minipage}{#1} \vspace{5pt}
+	#3    
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (tbox.north west) {#2};
+\end{tikzpicture}	
+}
+
+\newcommand{\ctitlebox}[3]{\begin{tikzpicture}
+\node [mybox2] (tbox){
+    \begin{minipage}{#1} \vspace{5pt}
+	#3    
+    \end{minipage}
+};
+\node[fancytitle] at (tbox.north) {#2};
+\end{tikzpicture}	
+}
+
+\newcommand{\eqnbox}[2]{
+	\begin{tikzpicture}
+		\node [mybox] (ebox)
+		{%
+    		\begin{minipage}{#1}
+			#2    
+    		\end{minipage}
+		};
+	\end{tikzpicture}	
+}
+
+\newcommand{\displaybox}[1]{
+	\begin{tikzpicture}
+		\node [mydisplaybox] (dbox)
+		{#1
+		};
+	\end{tikzpicture}	
+}
+
+
+\newcommand{\slimeqnbox}[2]{
+	\begin{tikzpicture}
+		\node [myslimbox] (ebox)
+		{%
+    		\begin{minipage}{#1}
+			#2    
+    		\end{minipage}
+		};
+	\end{tikzpicture}	
+}
+
+
+\newcommand{\custombox}[6]{
+	\begin{tikzpicture}
+	\node [draw=#1, line width=#2, fill=#3, rectangle, rounded corners, inner sep=#4] (custombox)
+	{%
+    	    \begin{minipage}{#5}
+		#6    
+    	    \end{minipage}
+	};
+	\end{tikzpicture}	
+}
+
+\newcommand{\customdisplaybox}[5]{
+	\begin{tikzpicture}
+	\node [draw=#1, line width=#2, fill=#3, rectangle, rounded corners, inner sep=#4] (custombox)
+	{#5};
+	\end{tikzpicture}	
+}
+
+
+\newcommand{\bggradient}[2]{
+\setbeamertemplate{background canvas}[vertical shading][top=#1,bottom=#2]
+}
+
+
+
+%------------------------------------------------------------
+% This is similar to the title page of the default theme, 
+% except we place the Brown logo in the lower left hand 
+% corner. You can add \vskipNem between elements to add
+% extra space, where "N" is a number. One "em" is the 
+% height of a letter "m".
+%------------------------------------------------------------
+\setbeamertemplate{title page}
+{
+  \vskip0pt plus 1filll
+  \begin{center}
+    {\usebeamerfont{Brown title}\usebeamercolor[fg]{title}\inserttitle \vskip2pt
+	\usebeamerfont{Brown subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}%\\
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{Brown institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+  \end{center}
+  \vskip0pt plus 1filll
+  \begin{minipage}[b]{\paperwidth-1cm}
+    %\pgfuseimage{BrownLogo}
+    \hfill
+    \usebeamerfont{Brown papers}
+    \begin{minipage}[b]{4cm}
+	  \raggedleft \insertpapers    	    	
+    \end{minipage}	
+  \end{minipage}
+  \vskip10pt
+}
+
+
+%----------------------------------------------------------------
+% Here is where we define the footer that appears at the bottom
+% of the page. It contains three elements: author and title,
+% title of section, and slide number/total number. The short name
+% and short title are used here. 
+%----------------------------------------------------------------
+
+\defbeamertemplate*{footline}{Brown theme}
+{
+\linethickness{0.5pt}
+\framelatex{
+\begin{beamercolorbox}[leftskip=.3cm,wd=\paperwidth,ht=4.5ex,sep=0.1cm]{Brown footer 2}
+  \usebeamerfont{details in Brown foot}%
+  \insertshortauthor~|~\insertshorttitle
+  \hfill
+  \insertsection
+  \hfill\hfill
+  \insertframenumber/\inserttotalframenumber~~
+\end{beamercolorbox}}
+}
+
+
+%------------------------------------------------------------
+% Beamer can place navigation icons on each page. I think
+% that they are obtrusive, so this command tells beamer not
+% to include them for presentations, transparencies, or
+% handouts. If you want them, comment out the first line
+% and uncomment the second line.
+%------------------------------------------------------------
+\only<handout| trans| presentation>{\setbeamertemplate{navigation symbols}{}}
+%\only<handout| trans>{\setbeamertemplate{navigation symbols}{}}
+
+\mode
+<all>

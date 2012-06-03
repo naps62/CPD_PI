@@ -338,7 +338,7 @@ double cpu_edgePsi(double u_i, double u_j, double u_ij) {
 /* compute flux kernel */
 void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double> &vecABC, CFVArray<double> &polution,CFVArray<double> &partial_flux, CFVArray<double> &edgePsi, double dc,double t, double dt) {
 
-	cout << endl;
+	//cout << endl;
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
 		double v = velocity[edge];
 		unsigned int cell_orig, cell_dest;
@@ -366,7 +366,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				break;
 
 			case FV_EDGE_DIRICHLET:
-				cout << "should not enter here" << endl;
+				//cout << "should not enter here" << endl;
 				cell_orig = mesh.edge_left_cells[edge];
 				
 				u_i = polution[cell_orig];
@@ -476,7 +476,7 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 
 	//cout << "polution[0] " << polution[0] << endl;
 	//cout << "flux[100] " << flux[100] << " flux[200] " << flux[200] << " flux[101] " << flux[101] << endl;
-	cout << endl;
+	//cout << endl;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
 		for(unsigned int e = 0; e < edge_limit; ++e) {
@@ -486,13 +486,13 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;
-				if (var != 0) cout << var << " exiting from " << cell << " through " << edge << endl;
+				//if (var != 0) cout << var << " exiting from " << cell << " through " << edge << endl;
 			} else {
 				polution[cell] += var;
-				if (var != 0) cout << var << " entering to  " << cell << " through " << edge << endl;
+				//if (var != 0) cout << var << " entering to  " << cell << " through " << edge << endl;
 			}
 		}
 	}
-	cout << endl;
+	//cout << endl;
 	//cout << "polution[0] " << polution[0] << endl;
 }

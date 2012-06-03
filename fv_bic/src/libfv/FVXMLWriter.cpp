@@ -32,6 +32,7 @@ namespace FVL {
 			return;
 
 		this->filename = filename;
+		opened = true;
 		init();
 	}
 

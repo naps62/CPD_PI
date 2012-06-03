@@ -26,7 +26,8 @@ namespace FVL {
 	}
 
 	CFVMesh2D::~CFVMesh2D() {
-		cuda_free();
+		if (cuda_is_alloc())
+			cuda_free();
 	}
 
 	/************************************************

@@ -1,4 +1,4 @@
-default: report_may
+default: slides_may
 
 vim: default
 
@@ -33,6 +33,10 @@ slides_march:
 slides_april:
 	pdflatex --shel-escape slides.april.tex
 	xdg-open slides.april.pdf
+
+slides_may:
+	pdflatex --shel-escape slides.may.tex
+	xdg-open slides.may.pdf
 
 clean:
 	$(RM) *.log *.aux *.toc *.out *.blg *.bbl

@@ -76,7 +76,7 @@ ostream& operator << (ostream &stream, const Edge &e) {
 typedef Edge Cell;
 
 int main(int argc, char **argv) {
-	if (argc != 4) {
+	if (argc < 4) {
 		cout
 			<< "Invalid usage. Correct parameters: " << endl
 			<< "msg_gen file_name X Y" << endl;
@@ -91,6 +91,9 @@ int main(int argc, char **argv) {
 	double vY = cY + 1;
 
 	double cW = 1 / cX;
+
+	if (argc == 5)
+		cW = atoi(argv[4]) / cX;
 
 	unsigned int num_cells	= cX * cY;
 	unsigned int num_vertex	= vX * vY;

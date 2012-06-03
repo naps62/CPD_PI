@@ -2,7 +2,7 @@
 
 // variables
 H=.1;			// max height of the mesh
-W=H*10;			// max width
+W=H*30;			// max width
 
 Y=10;			// number of lines
 X=Y*10;			// number of columns
