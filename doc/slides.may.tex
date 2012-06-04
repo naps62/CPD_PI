@@ -16,6 +16,7 @@
 \usepackage{todonotes}
 \usepackage{tangocolors}
 \usepackage{tikz}
+%\usepackage{enumitem}
 %\usepackage{pgflibrarytikzbackgrounds}
 
 
@@ -162,16 +163,43 @@
 %
 %
 
-\section{Testing Methodology}
+\section{Profiling}
 
 \begin{frame}
 	\frametitle{Index}
 	\tableofcontents[currentsection]
 \end{frame}
 
+\subsection{Methodology}
 \begin{frame}
-	\todo[inline]{Add Stuff}
-
+%	\frametitle{Methodology}
+	\begin{block}{Environmental Setup}
+		\begin{itemize}
+			\item{SeARCH Group 101
+			\begin{description}
+				\item{64-bit Intel\textregistered Xeon\texttrademark @ 3.2 GHz;}
+				\item{4 threads per node;}
+				\item{16 KB L1 data cache, 2 MB L2 cache, 2 GB RAM;}
+			\end{description}
+			}
+			\item{6 nodes (21 to 26);}
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{Methodology}
+		\begin{itemize}
+			\item{Three timers per version:
+			\begin{enumerate}
+				\setcounter{enumi}{-1}
+				\item{Full program;}
+				\item{Main loop;}
+				\item{Functions;}
+			\end{enumerate}
+			}
+			\item{2000 iterations;}
+			\item{10 executions per timer.}
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 
@@ -189,9 +217,25 @@
 	\tableofcontents[currentsection]
 \end{frame}
 
-\begin{frame}
-	\todo[inline]{Add Stuff}
 
+
+\subsection{Speedups}
+\begin{frame}
+	\todo[inline]{Add speedup graph}
+\end{frame}
+
+
+
+\subsection{Execution times}
+\begin{frame}
+	\todo[inline]{Add bathtub graph}
+\end{frame}
+
+
+
+\subsection{Bottlenecks}
+\begin{frame}
+	\todo[inline]{Add bathtub graph}
 \end{frame}
 
 
