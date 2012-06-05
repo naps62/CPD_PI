@@ -176,11 +176,11 @@
 	\begin{block}{Environmental Setup}
 		\begin{itemize}
 			\item{SeARCH Group 101
-			\begin{description}
-				\item{64-bit Intel\textregistered Xeon\texttrademark @ 3.2 GHz;}
-				\item{4 threads per node;}
-				\item{16 KB L1 data cache, 2 MB L2 cache, 2 GB RAM;}
-			\end{description}
+			\begin{itemize}
+				\item[-]{64-bit Intel\textregistered Xeon\texttrademark @ 3.2 GHz;}
+				\item[-]{4 hardware threads per node;}
+				\item[-]{16 KB L1 data cache, 2 MB L2 cache, 2 GB RAM;}
+			\end{itemize}
 			}
 			\item{6 nodes (21 to 26);}
 		\end{itemize}
@@ -188,16 +188,16 @@
 	\pause
 	\begin{block}{Methodology}
 		\begin{itemize}
-			\item{Three timers per version:
+			\item{Two timers per version:
 			\begin{enumerate}
 				\setcounter{enumi}{-1}
 				\item{Full program;}
-				\item{Main loop;}
 				\item{Functions;}
 			\end{enumerate}
 			}
 			\item{2000 iterations;}
-			\item{10 executions per timer.}
+			\item{10 executions per timer;}
+			\item{Single test case: 62 MB.}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -210,32 +210,74 @@
 %
 %
 
-\section{Results}
+\subsection{Results}
+%\section{Results}
+%
+%\begin{frame}
+%	\frametitle{Index}
+%	\tableofcontents[currentsection]
+%\end{frame}
+
+
 
 \begin{frame}
-	\frametitle{Index}
-	\tableofcontents[currentsection]
+	\frametitle{Speedups}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[height=\textheight]{images/may/speedups.png}
+		\end{center}
+	\end{figure}
 \end{frame}
 
 
 
-\subsection{Speedups}
+
 \begin{frame}
-	\todo[inline]{Add speedup graph}
+	\frametitle{Execution time}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[width=0.95\textwidth]{images/may/exectime.png}
+		\end{center}
+	\end{figure}
 \end{frame}
 
 
 
-\subsection{Execution times}
 \begin{frame}
-	\todo[inline]{Add bathtub graph}
+	\frametitle{Bottlenecks}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[height=0.75\textheight]{images/may/loadseq.png}
+			
+			\includegraphics[width=0.5\textwidth]{images/may/legend.png}
+		\end{center}
+	\end{figure}
 \end{frame}
 
 
 
-\subsection{Bottlenecks}
 \begin{frame}
-	\todo[inline]{Add bathtub graph}
+	\frametitle{Bottlenecks}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[height=0.75\textheight]{images/may/load24.png}
+			
+			\includegraphics[width=0.5\textwidth]{images/may/legend.png}
+		\end{center}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Bottlenecks}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[height=0.75\textheight]{images/may/load48.png}
+			
+			\includegraphics[width=0.5\textwidth]{images/may/legend.png}
+		\end{center}
+	\end{figure}
 \end{frame}
 
 
