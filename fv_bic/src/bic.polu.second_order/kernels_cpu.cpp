@@ -323,15 +323,17 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 }
 
 /* Given the values of left edge (u_i), right edge (u_j) and edge value (u_ij) compute Psi value to bound flux between cells */
-double cpu_edgePsi(double u_i, double u_j, double u_ij) {
+double cpu_edgePsi(double u_i, double u_j, double u_ij, double u_ji) {
 	double ij_minus_i	= u_ij	- u_i;
+	double j_minus_ji   = u_j   - u_ji;
 	double j_minus_i	= u_j	- u_i;
 	
-	if (ij_minus_i * j_minus_i <= 0) {
+	if (ij_minus_i * j_minus_i <= 0 || j_minus_ji * j_minus_i <= 0) {
 		return 0;
 	} else {
 		//cout << "_min(1, " << j_minus_i << " / " << ij_minus_i << ")" << endl;
-		return _min(1, j_minus_i / ij_minus_i);
+		//cout << (ij_minus_i) << " " << j_minus_i << " " << ij_minus_i / j_minus_i <<  endl;
+		return _min(1, _min(ij_minus_i / j_minus_i, j_minus_ji / j_minus_i));
 	}
 }
 
@@ -343,6 +345,8 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 		double v = velocity[edge];
 		unsigned int cell_orig, cell_dest;
 		double u_i, u_j, u_ij, partial_u_ij, psi;
+
+		double u_ji, partial_u_ji;
 
 				
 		switch (mesh.edge_types[edge]) {
@@ -361,7 +365,11 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 
 				partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig, t,dt);
 				u_ij		 = u_i + partial_u_ij;
-				psi			 = cpu_edgePsi(u_i, u_j, u_ij);
+
+				partial_u_ji = cpu_ABC_partial_result(mesh, vecABC, edge, cell_dest, t,dt);
+				u_ji         = u_j + partial_u_ji;
+
+				psi			 = cpu_edgePsi(u_i, u_j, u_ij, u_ji);
 				//cout << "edge " << edge << " psi " << psi << " u_i " << u_i << " u_j " << u_j << " u_ij " << u_ij << endl;
 				break;
 
@@ -375,6 +383,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				if (v > 0) {
 					u_j = 0;
 					partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig, t,dt);
+					
 
 				// flux is entering (negative velocity)
 				} else {
@@ -384,7 +393,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 				}
 
 				u_ij = u_i + partial_u_ij;
-				psi = cpu_edgePsi(u_i, u_j, u_ij);
+				psi = cpu_edgePsi(u_i, u_j, u_ij, 0); // TODO corrigir este 0
 				break;
 
 			case FV_EDGE_NEUMMAN:
@@ -405,19 +414,21 @@ void cpu_cellPsi(CFVMesh2D &mesh, CFVArray<double> &edgePsi, CFVArray<double> &c
 		double minPsi = 1;
 		for(unsigned int edge = 0; edge < mesh.cell_edges_count[cell]; ++edge) {
 			double current_edgePsi = edgePsi[ mesh.cell_edges.elem(edge, 0, cell) ];
+			cout << "edgePsi " << current_edgePsi << endl;
 
 			//cout << "edge " << mesh.cell_edges.elem(edge,0,cell) << " psi " << current_edgePsi << endl;
 			if (current_edgePsi < minPsi && mesh.edge_types[edge] != FV_EDGE_NEUMMAN)
 				minPsi = current_edgePsi;
 		}
 		cellPsi[cell] = minPsi;
+		cout << "cellPsi " << minPsi << endl;
 	}
 }
 
 /* finalize flux calculation, using cellPsi to bound values */
 void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double> &cellPsi, CFVArray<double> &polution, CFVArray<double> &flux, double dc, double t) {
 
-	cout << endl;
+	//cout << endl;
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
 		unsigned int cell_orig;
 		double v, delta_u_ij, u_i, psi;
@@ -461,7 +472,8 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
 		//if (edge >= 100 && edge <= 200) cout << "flux[" << edge << "] = " << flux[edge] << endl;
-		flux[edge] = v * (u_i + 1 * delta_u_ij);
+		cout << cell_orig << " psi = " << psi << endl;
+		flux[edge] = v * (u_i + psi * delta_u_ij);
 		/*if (mesh.edge_types[edge] != FV_EDGE_NEUMMAN)
 			flux[edge] = sin(2*M_PI*mesh.edge_centroids.x[edge] - 2*M_PI*t);
 		else

@@ -32,7 +32,7 @@
 	Department of Informatics
 }
 
-\date{Braga, April 2012}
+\date{Braga, June 2012}
 
 
 %	beamer options
@@ -68,11 +68,8 @@
 	\begin{block}{Objective}
 		\begin{enumerate}\itemsep=10pt
 			\item Divide the mesh into $P$ partitions
-			\pause
 			\item Achieve good balance between partition sizes
-			\pause
 			\item Keep information about how they connect
-			\pause
 			\item Minimize border between them, without compromising (2)
 		\end{enumerate}
 	\end{block}
@@ -136,7 +133,6 @@
 	\begin{block}{Advantages}
 		\begin{enumerate}\itemsep=10pt
 			\item Simple concept and implementation
-			\pause
 			\item Each partition has at most a left and a right neighbour
 			\begin{itemize}
 				\item[-] Easy communication
@@ -144,11 +140,9 @@
 		\end{enumerate}
 	\end{block}
 
-	\pause
 	\begin{block}{Disadvantages}
 		\begin{enumerate}\itemsep=10pt
 			\item Sequential sort and distribution are slow
-			\pause
 			\item No control over size of border between partitions (communication)
 		\end{enumerate}
 	\end{block}
@@ -224,7 +218,7 @@
 	\frametitle{Speedups}
 	\begin{figure}
 		\begin{center}
-			\includegraphics[height=\textheight]{images/may/speedups.png}
+			\includegraphics[height=0.85\textheight]{images/may/speedups.png}
 		\end{center}
 	\end{figure}
 \end{frame}
@@ -308,7 +302,6 @@
 			\item{< 24 larger partitions;
 			\begin{itemize}
 				\item{Partitioning takes more time;}
-				\item{More data to transfer;}
 			\end{itemize}
 			}
 			\item{Does not scale well,
