@@ -1,15 +1,16 @@
 UNAME	=	$(shell uname)
 PDFTEX	=	pdflatex --shell-escape
 BIBTEX	=	bibtex
+PDFOPN	=	open
 
-DOCS	=	report.february	\
+DOCS	=	abstract	\
+			report.february	\
 			report.april	\
 			report.may		\
 			slides.naps	\
 			slides.pfac	\
 			slides.april	\
-			slides.may	\
-			abstract
+			slides.may
 
 .PHONY: clean
 
@@ -23,8 +24,17 @@ default:	report.may slides.may
 
 all: $(DOCS)
 
+abstract:	abstract.pdf
+	$(PDFOPN) $<
+
+report.february:	report.february.pdf
+	$(PDFOPN) $<
+
+report.april:	report.april.pdf
+	$(PDFOPN) $<
+
 report.may:	report.may.pdf
-	$(PDFOPN) $@
+	$(PDFOPN) $<
 
 report.may.pdf:	report.may.bib
 report.may.pdf:	report.may/01_intro.tex
@@ -38,8 +48,17 @@ report.may.pdf:	report.may/images/foz_msh.png
 report.may.pdf:	report.may/images/foz_p2_msh.png
 report.may.pdf:	report.may/images/foz_p4_msh.png
 
+slides.naps:	slides.naps.pdf
+	$(PDFOPN) $<
+
+slides.pfac:	slides.pfac.pdf
+	$(PDFOPN) $<
+
+slides.april:	slides.april.pdf
+	$(PDFOPN) $<
+
 slides.may:	slides.may.pdf
-	$(PDFOPN) $@
+	$(PDFOPN) $<
 
 clean:
 	$(RM) *.log *.aux *.toc *.out *.blg *.bbl *.nav *.snm *.synctex.gz
