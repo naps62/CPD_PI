@@ -32,7 +32,7 @@
 	Department of Informatics
 }
 
-\date{Braga, June 2012}
+\date{Braga, April 2012}
 
 
 %	beamer options
@@ -296,8 +296,55 @@
 \end{frame}
 
 \begin{frame}
-	\todo[inline]{Add Stuff}
+	\frametitle{Conclusion}
+	\begin{block}{MPI presents speedups}
+		\begin{itemize}
+			\item{Up to 2.72 with 24 processes;}
+			\item{> 24 not all processes in the node can run in parallel;
+			\begin{itemize}
+				\item{Process scheduling hurt syncronization points;}
+			\end{itemize}
+			}
+			\item{< 24 larger partitions;
+			\begin{itemize}
+				\item{Partitioning takes more time;}
+				\item{More data to transfer;}
+			\end{itemize}
+			}
+			\item{Does not scale well,
+			\begin{itemize}
+				\item{27\% of the possible speedup was achieved;}
+			\end{itemize}
+			}
+			\item{Limited by communication;}
+			\item{Significant partitioning overhead;}
+		\end{itemize}
+	\end{block}
+\end{frame}
 
+\begin{frame}
+	\frametitle{Summary}
+	\begin{table}
+		\smaller
+		\begin{center}
+			\begin{tabular}{c r ll}
+			\hline
+			\textbf{Implementation} & \textbf{Best speedup} & \textbf{Environmental Setup} & \textbf{Methodology}	\\
+			\hline
+			OpenMP AOS & 2.47 & SeARCH Group 511 & Full execution	\\
+			CUDA & 49.13 & SeARCH Group 511 & Full execution	\\
+			OpenMP SOA & 3.04 & SeARCH Group Hex & 1000 iterations	\\
+			MPI & 2.72 & SeARCH Group 101 & 2000 iterations	\\
+			\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+	\begin{block}{Next step}
+		\begin{itemize}
+			\item{Best speedups with the CUDA implementation;}
+			\item{Locality improvements are still possible;}
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \section{} % To hide "Conclusions" from the header of the last slide

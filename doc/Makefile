@@ -1,3 +1,13 @@
+UNAME	=	$(shell uname)
+PDFTEX	=	pdftex --shell-escape
+BIBTEX	=	bibtex
+
+%.pdf: %.tex
+	$(PDFTEX) $<
+	$(BIBTEX) $(*F)
+	$(PDFTEX) $<
+	$(PDFTEX) $<
+
 default: slides_may
 
 vim: default
@@ -17,10 +27,6 @@ report_april:
 report_naps:
 	pdflatex report.tex
 	xdg-open report.pdf
-
-pfac:
-	pdflatex slides.pfac.tex
-	open slides.pfac.pdf
 
 naps:
 	pdflatex slides.naps.tex
