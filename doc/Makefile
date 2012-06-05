@@ -1,48 +1,46 @@
 UNAME	=	$(shell uname)
-PDFTEX	=	pdftex --shell-escape
+PDFTEX	=	pdflatex --shell-escape
 BIBTEX	=	bibtex
+
+DOCS	=	report.february	\
+			report.april	\
+			report.may		\
+			slides.naps	\
+			slides.pfac	\
+			slides.april	\
+			slides.may	\
+			abstract
+
+.PHONY: clean
 
 %.pdf: %.tex
 	$(PDFTEX) $<
-	$(BIBTEX) $(*F)
+	-$(BIBTEX) $(*F)
 	$(PDFTEX) $<
 	$(PDFTEX) $<
 
-default: slides_may
+default:	report.may slides.may
 
-vim: default
+all: $(DOCS)
 
-report:
-	pdflatex report.tex
-	open report.pdf
+report.may:	report.may.pdf
+	$(PDFOPN) $@
 
-report_may:
-	pdflatex --shell-escape report.may.tex
-	xdg-open report.may.pdf
+report.may.pdf:	report.may.bib
+report.may.pdf:	report.may/01_intro.tex
+report.may.pdf:	report.may/03_partitioning.tex
+report.may.pdf:	report.may/04_implementation.tex
+report.may.pdf:	report.may/06_results.tex
+report.may.pdf:	report.may/89_conclusion.tex
+report.may.pdf:	report.may/90_environment.tex
+report.may.pdf:	report.may/91_methodology.tex
+report.may.pdf:	report.may/images/foz_msh.png
+report.may.pdf:	report.may/images/foz_p2_msh.png
+report.may.pdf:	report.may/images/foz_p4_msh.png
 
-report_april:
-	pdflatex --shell-escape report.april.tex
-	open report.april.pdf
-
-report_naps:
-	pdflatex report.tex
-	xdg-open report.pdf
-
-naps:
-	pdflatex slides.naps.tex
-	xdg-open slides.naps.pdf
-
-slides_march:
-	pdflatex --shell-escape slides.march.tex
-	xdg-open slides.march.pdf
-
-slides_april:
-	pdflatex --shel-escape slides.april.tex
-	xdg-open slides.april.pdf
-
-slides_may:
-	pdflatex --shel-escape slides.may.tex
-	xdg-open slides.may.pdf
+slides.may:	slides.may.pdf
+	$(PDFOPN) $@
 
 clean:
-	$(RM) *.log *.aux *.toc *.out *.blg *.bbl
+	$(RM) *.log *.aux *.toc *.out *.blg *.bbl *.nav *.snm *.synctex.gz
+	$(RM) $(DOCS:%=%.pdf)
