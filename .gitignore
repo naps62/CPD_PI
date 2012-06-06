@@ -18,6 +18,8 @@
 *.nav
 *.snm
 *.toc
+*.bbl
+*.blg
 
 #	Others
 *.a

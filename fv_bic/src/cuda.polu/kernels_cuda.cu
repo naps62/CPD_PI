@@ -1,266 +1,103 @@
 #include "kernels_cuda.cuh"
 
-/* Aux function for kernel_compute_vecResult - computes ghost cell centroid */
-__device__
-void cuda_ghost_coords(
-		unsigned int *edge_fst_vertex,
-		unsigned int *edge_snd_vertex,
-		double *vertex_coords_x,
-		double *vertex_coords_y,
-		unsigned int edge,
-		double &x,
-		double &y) {
-
-	unsigned int v1 = edge_fst_vertex[edge];
-	unsigned int v2 = edge_snd_vertex[edge];
-
-	double v1_x = vertex_coords_x[v1];
-	double v2_x = vertex_coords_x[v2];
-	double v1_y = vertex_coords_y[v1];
-	double v2_y = vertex_coords_y[v2];
-
-	double v1v2_x = v2_x - v1_x;
-	double v1v2_y = v2_y - v1_x;
-
-	double lambda	= ((x - v1_x) * v1v2_x	+ (y - v1_y) * v1v2_y)
-					/ (v1v2_x * v1v2_x		+ v1v2_y * v1v2_y);
-
-	// compute AB vector
-	double ab_x = x - (v1_x + lambda * v1v2_x);
-	double ab_y = y - (v1_y + lambda * v1v2_y);
-
-	x -= 2 * ab_x;
-	y -= 2 * ab_y;
+__host__ void cudaSafe(cudaError_t error, const string msg) {
+	if (error != cudaSuccess) {
+		cerr << "Error: " << msg << " : " << error << endl;
+		exit(-1);
+	}
 }
 
-__global__
-void cuda_compute_reverseA(
-		CFVMesh2D_cuda *mesh,
-		double **matA) {
+__host__ void cudaCheckError(const string msg) {
+	cudaError_t error = cudaGetLastError();
+	if (error != cudaSuccess) {
+		cerr << "Error: " << msg << " : " << cudaGetErrorString(error) << endl;
+		exit(-1);
+	}
+}
 
-	// get thread id
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid >= num_cells) return;
+// TODO: convert to cudaa
+__host__  double cpu_compute_mesh_parameter(CFVMesh2D &mesh) {
+	double h;
+	double S;
 
-	double x0 = cell_centroids_x[tid];
-	double y0 = cell_centroids_y[tid];
+	h = 1.e20;
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+		S = mesh.cell_areas[cell];
 
-	matA[0][tid] = 0;		// elem (0, 0, tid)
-	matA[1][tid] = 0;		// elem (1, 0, tid)
-	matA[2][tid] = 0;		// elem (2, 0, tid)
-
-	matA[3][tid] = 0;		// elem (0, 1, tid)
-	matA[4][tid] = 0;		// elem (1, 1, tid)
-	matA[5][tid] = 0;		// elem (2, 1, tid)
-
-	matA[6][tid] = 0;		// elem (0, 2, tid)
-	matA[7][tid] = 0;		// elem (1, 2, tid)
-	matA[8][tid] = cell_edges_count[tid];		// elem (2, 2, tid)
-
-	unsigned int edge_limit = cell_edges_count[tid];
-	for(unsigned int j = 0; j < edge_limit; ++j) {
-		// get current edge
-		unsigned int edge = cell_edges[j][tid];
-
-		// get left cell of this edge
-		unsigned int cell_j = edge_right_cells[edge];
-		// if right cell is current one...
-		if (cell_j == tid || cell_j == NO_RIGHT_CELL)
-			cell_j = edge_left_cells[edge];
-
-		double x = cell_centroids_x[cell_j];
-		double y = cell_centroids_y[cell_j];
-
-		if (cell_j == tid)
-			gpu_ghost_coords(edge_fst_vertex, edge_snd_vertex, vertex_coords_x, vertex_coords_y, edge, x, y);
-
-		x -= x0;
-		y -= y0;
-
-		//TODO: was the 2 factor forgotten in the formulas?
-		x = cell_centroids_x[cell_j];
-		y = cell_centroids_y[cell_j];
-
-		matA[0][tid] += x * x;
-		matA[1][tid] += x * y;
-		matA[2][tid] += x;
-
-		matA[3][tid] += x * y;
-		matA[4][tid] += y * y;
-		matA[5][tid] += y;
-
-		matA[6][tid] += x;
-		matA[7][tid] += y;
+		for(unsigned int edge = 0; edge < mesh.cell_edges_count[cell]; ++edge) {
+			double length = mesh.edge_lengths[edge];
+			if (h * length > S)
+				h = S / length;
+		}
 	}
 
-	double det =	matA[0][tid] * (matA[4][tid] * matA[8][tid] -
-									matA[7][tid] * matA[5][tid])
-				-	matA[1][tid] * (matA[3][tid] * matA[8][tid] -
-									matA[6][tid] * matA[5][tid])
-				+	matA[2][tid] * (matA[3][tid] * matA[7][tid] -
-									matA[6][tid] * matA[4][tid]);
-	double invDet = 1.0 / det;
-
-	double tmpA[9];
-	tmpA[0] = (matA[4][tid] * matA[8][tid] - matA[7][tid] * matA[5][tid]) * invDet;
-	tmpA[1] = (matA[3][tid] * matA[8][tid] - matA[6][tid] * matA[5][tid]) * invDet;
-	tmpA[2] = (matA[3][tid] * matA[7][tid] - matA[6][tid] * matA[4][tid]) * invDet;
-
-	tmpA[3] = (matA[1][tid] * matA[8][tid] - matA[7][tid] * matA[2][tid]) * invDet;
-	tmpA[4] = (matA[0][tid] * matA[8][tid] - matA[6][tid] * matA[2][tid]) * invDet;
-	tmpA[5] = (matA[0][tid] * matA[7][tid] - matA[6][tid] * matA[1][tid]) * invDet;
-
-	tmpA[6] = (matA[1][tid] * matA[5][tid] - matA[4][tid] * matA[2][tid]) * invDet;
-	tmpA[7] = (matA[0][tid] * matA[5][tid] - matA[3][tid] * matA[2][tid]) * invDet;
-	tmpA[8] = (matA[0][tid] * matA[4][tid] - matA[3][tid] * matA[1][tid]) * invDet;
-
-	for(unsigned int j = 0; j < 9; ++j)
-		matA[j][tid] = tmpA[j];
+	return h;
 }
 
-/* Compute vecABC */
-__global__
-void kernel_compute_vecABC(
-		unsigned int num_cells,
-		double **matA,
-		double **vecResult,
-		double **vecABC) {
+__host__
+void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
+	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
+		unsigned int left	= mesh.edge_left_cells[i];
+		unsigned int right	= mesh.edge_right_cells[i];
 
-	// get thread id
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid >= num_cells) return;
+		if (right == NO_RIGHT_CELL)
+			right = left;
 
-	vecABC[0][tid]	= matA[0][tid] * vecResult[0][tid]
-					+ matA[3][tid] * vecResult[1][tid]
-					+ matA[6][tid] * vecResult[2][tid];
+		double v	= ((velocities.x[left] + velocities.x[right]) * 0.5 * mesh.edge_normals.x[i])
+					+ ((velocities.y[left] + velocities.y[right]) * 0.5 * mesh.edge_normals.y[i]);
 
-	vecABC[1][tid]	= matA[1][tid] * vecResult[0][tid]
-					+ matA[4][tid] * vecResult[1][tid]
-					+ matA[7][tid] * vecResult[2][tid];
+		vs[i] = v;
 
-	vecABC[2][tid]	= matA[2][tid] * vecResult[0][tid]
-					+ matA[5][tid] * vecResult[1][tid]
-					+ matA[8][tid] * vecResult[2][tid];
-}
-
-/* Compute system polution coeficients for system solve */
-__global__
-void kernel_compute_vecResult(
-		CFVMesh2D_cuda *mesh,
-		double *polution,
-		double **vecResult,
-		double dc) {
-
-	// get thread id
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid >= num_cells) return;
-
-	double x0 = cell_centroids_x[tid];
-	double y0 = cell_centroids_y[tid];
-	double u = polution[tid];
-
-	vecResult[0][tid] = 0;
-	vecResult[1][tid] = 0;
-	vecResult[2][tid] = u;
-
-	unsigned int edge_limit = cell_edges_count[tid];
-	for(unsigned int j = 0; j < edge_limit; ++j) {
-		// get edge
-		unsigned int edge = cell_edges[j][tid];
-
-		// get right neighbor
-		unsigned int neighbor = edge_right_cells[edge];
-
-		// TODO ghost cell?
-		if (neighbor == tid || neighbor == NO_RIGHT_CELL)
-			neighbor = edge_left_cells[edge];
-
-		double x = cell_centroids_x[neighbor];
-		double y = cell_centroids_y[neighbor];
-		u = polution[neighbor];
-
-		// if neighbor is still equal to cell, this is a ghost cell, compute centroid
-		if (neighbor == tid)
-			gpu_ghost_coords(edge_fst_vertex, edge_snd_vertex, vertex_coords_x, vertex_coords_y, edge, x, y);
-
-		vecResult[0][tid] += u * (x - x0);
-		vecResult[1][tid] += u * (y - y0);
-		vecResult[2][tid] += u;
-		
+		if (abs(v) > v_max || i == 0) {
+			v_max = abs(v);
+		}
 	}
 }
 
 __global__
-void kernel_compute_flux(
-		CFVMesh2D_cuda *mesh,
-		double *polution,
-		double *velocity,
-		double **vecABC,
-		double *flux,
-		double dc) {
+void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
+	// thread id = edge index
+	unsigned int edge = blockIdx.x * blockDim.x + threadIdx.x;
 
-	// get thread id
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
+	// check boundaries
+	if (edge >= mesh->num_edges) return;
 
-	if (tid >= num_edges) return;
-
-	unsigned int i_left		= edge_left_cells[tid];
-	unsigned int i_right	= edge_right_cells[tid];
-
-	double p_left, p_right;
-	double v;
-
-	p_left		= polution[i_left];
-	v			= velocity[tid];
-
-	if (i_right != NO_RIGHT_CELL) {
-		p_right	 	= polution[i_right];
-	} else {
-		p_right		= dc;
-	}
-
-	double x = edge_centroids_x[tid];
-	double y = edge_centroids_y[tid];
-	// TODupdate aqui
-	double system_result = vecABC[0][tid] * x + vecABC[1][tid] * y + vecABC[2][tid];
+	// velocity of current edge
+	double v = velocity[edge];
 
 	if (v < 0)
-		flux[tid] = v * p_right;
+		flux[edge] = v * polution[ mesh->edge_left_cells[edge] ];
 	else
-		flux[tid] = v * p_left;
-
-	//vs[tid] = v;
+		flux[edge] = v * ((mesh->edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : polution[ mesh->edge_right_cells[edge] ]);
 }
 
 __global__
-void kernel_update(
-		CFVMesh2D_cuda *mesh,
-		double *polution,
-		double *flux,
-		double dt) {
+void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt) {
 
-	unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid >= num_cells) return;
+	// thread id (cell index)
+	unsigned int cell = blockIdx.x * blockDim.x + threadIdx.x;
+
+	// check boundaries
+	if (cell >= num_cells) return;
 
 	// define start and end of neighbor edges
-	//unsigned int* edge_index = cell_edges_index[tid];
-	unsigned int edge_limit = cell_edges_count[tid];
+	unsigned int edge_limit = mesh->cell_edges_count[cell];
 
 	// get current polution value for this cell
 	double new_polution	= 0;
 
 	// for each edge of this cell
-	for(unsigned int i = 0; i < edge_limit; ++i) {
-		unsigned int edge = cell_edges[i][tid];
+	for(unsigned int edge_i = 0; edge_i < edge_limit; ++i) {
+		unsigned int edge = mesh->cell_edges[edge_i][cell];
 		// if this cell is at the left of the edge
 
 		// amount of polution transfered through the edge
 		double aux = dt * flux[edge] *
-			edge_lengths[edge] /
-			cell_areas[tid];
+			mesh->edge_lengths[edge] /
+			mesh->cell_areas[cell];
 
 		// if this cell is on the left or the right of the edge
-		if (edge_left_cells[edge] == tid) {
+		if (mesh->edge_left_cells[edge] == cell) {
 			new_polution -= aux;
 		} else {
 			new_polution += aux;
@@ -268,7 +105,7 @@ void kernel_update(
 	}
 
 	// update global value
-	polution[tid] += new_polution;
+	polution[cell] += new_polution;
 }
 
 

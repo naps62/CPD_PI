@@ -1,7 +1,7 @@
 UNAME	=	$(shell uname)
 PDFTEX	=	pdflatex --shell-escape
 BIBTEX	=	bibtex
-PDFOPN	=	open
+PDFOPN	=	xdg-open
 
 DOCS	=	abstract	\
 			report.february	\
@@ -20,7 +20,7 @@ DOCS	=	abstract	\
 	$(PDFTEX) $<
 	$(PDFTEX) $<
 
-default:	report.may slides.may
+default:	report.may
 
 all: $(DOCS)
 
