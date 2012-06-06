@@ -33,8 +33,7 @@ __host__ void cudaCheckError(const string msg);
  *
  * \param mesh
  */
-__host__
-double cpu_compute_mesh_parameter(CFVMesh2D &mesh);
+__host__ double kernel_compute_mesh_parameter(CFVMesh2D &mesh);
 
 /**
  * cpu_compute_edge_velocities
@@ -44,8 +43,7 @@ double cpu_compute_mesh_parameter(CFVMesh2D &mesh);
  * \param vs
  * \param v_max
  */
-__host__
-void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
+__host__ void kernel_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
 
 
 /*****************

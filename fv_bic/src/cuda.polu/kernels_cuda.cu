@@ -16,7 +16,7 @@ __host__ void cudaCheckError(const string msg) {
 }
 
 // TODO: convert to cudaa
-__host__  double cpu_compute_mesh_parameter(CFVMesh2D &mesh) {
+__host__  double kernel_compute_mesh_parameter(CFVMesh2D &mesh) {
 	double h;
 	double S;
 
@@ -34,8 +34,7 @@ __host__  double cpu_compute_mesh_parameter(CFVMesh2D &mesh) {
 	return h;
 }
 
-__host__
-void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
+__host__ void kernel_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max) {
 	for(unsigned int i = 0; i < mesh.num_edges; ++i) {
 		unsigned int left	= mesh.edge_left_cells[i];
 		unsigned int right	= mesh.edge_right_cells[i];
@@ -78,7 +77,7 @@ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double 
 	unsigned int cell = blockIdx.x * blockDim.x + threadIdx.x;
 
 	// check boundaries
-	if (cell >= num_cells) return;
+	if (cell >= mesh->num_cells) return;
 
 	// define start and end of neighbor edges
 	unsigned int edge_limit = mesh->cell_edges_count[cell];
@@ -87,7 +86,7 @@ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double 
 	double new_polution	= 0;
 
 	// for each edge of this cell
-	for(unsigned int edge_i = 0; edge_i < edge_limit; ++i) {
+	for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
 		unsigned int edge = mesh->cell_edges[edge_i][cell];
 		// if this cell is at the left of the edge
 
