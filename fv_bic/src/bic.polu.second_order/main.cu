@@ -295,7 +295,7 @@ int main(int argc, char **argv) {
 				ss << "cuda[compute_vectABC] i=" << i;
 				cudaCheckError(ss.str());
 			}
-			kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(mesh.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), vecValidResult.cuda_get());
+			//kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(mesh.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), vecValidResult.cuda_get());
 			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet);
 	
 			_DEBUG {
