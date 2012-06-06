@@ -186,7 +186,7 @@ int main(int argc, char **argv) {
 		flux.cuda_free();
 		mesh.cuda_free();
 
-		_DEBUG cudaCheckckErroeError(string("final check"));
+		_DEBUG cudaCheckError(string("final check"));
 	#endif
 }
 
