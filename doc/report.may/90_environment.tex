@@ -1,17 +1,13 @@
 \section{Environmental Setup}
 \label{sec:environment}
 
-\todo[inline]{ATENTION: Se não chegarmos a testar nos HEX, rever esta secção}
+Two different types of nodes from the SeARCH cluster\footnote{\url{http://search.di.uminho.pt}} were used for the measurements reported in this document.
 
-Two different types of nodes from the SeARCH cluster\footnote{\url{http://search.di.uminho.pt}} were used for the required measurements.
+The nodes of the first type, referred to in this document as SeARCH Group 101, possess two single-core processors (with Intel\textregistered Hyper-Threading Technology) at a clock frequency of 3.2 GHz and 2 GB of RAM (see \cref{tab:group101}) for further detail regarding the hardware).
 
-The nodes of the first type, referred to in this document as SeARCH Group 101, possess two dual-core processors with a clock frequency of 3.2 GHz and 2 GB of RAM (see \cref{tab:group101}) for further detail regarding the hardware).
+The second type -- SeARCH Group Hex -- contains nodes which have two hexa-core processors (with Intel\textregistered Hyper-Threading Technology) and 12 to 48 GB of RAM (see \cref{tab:group601} for further details regarding this hardware).
 
-\todo[inline]{here}
-
-The second type -- SeARCH Group Hex -- refers to the 601 nodes and the two aditional 611 nodes, each one having two hexa-core processors (with Intel\textregistered Hyper-Threading Technology) and 12 GB of RAM (48 GB for the 611 nodes) (see \cref{tab:group601} for further details regarding this hardware).
-
-Both groups were used to perform tests using up to 6 nodes, and spawning one process per core, which means 4 processes per node on SeARCH Group 101, and 12 processes per core on SeARCH Group 601 (Hyper-Threading was avoided), with each test being performed with the nodes fully reserved
+The first group was used to perform tests using 6 fully reserved specific nodes\footnote{Some nodes in the SeARCH Group 101 showed odd behaviours. As such, the tests were limited to the six specially reserved nodes (21 to 26).}. As for the second group, the tests performed were limited to 2 non-specified nodes with a clock frequency of 2.66 GHz.
 
 \begin{table}[!htp]
 	\begin{center}
@@ -37,13 +33,13 @@ Both groups were used to perform tests using up to 6 nodes, and spawning one pro
 
 \begin{table}[!htp]
 	\begin{center}
-		\begin{tabular}{ll}
+		\begin{tabular}{lcc}
 			\hline
 			Processors per node: & 2	\\
 			Processor model: & Intel\textregistered Xeon\textregistered X5650\\
 			Cores per processor: & 6	\\
 			Threads per core: & 2	\\
-			Clock frequency: & 2.66 GHz	\\
+			Clock frequency: & 2.53 to 2.66 GHz	\\
 			\hline
 			L1 cache: & 32 KB + 32 KB per core	\\
 			L2 cache: & 256 KB per core	\\

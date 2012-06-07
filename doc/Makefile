@@ -1,6 +1,8 @@
 UNAME	=	$(shell uname)
-PDFTEX	=	pdflatex --shell-escape
+PDFTEX	=	pdflatex --shell-escape -halt-on-error
+PDFBLD	=	$(PDFTEX) $(*F).tex > /dev/null
 BIBTEX	=	bibtex
+BIBBLD	=	-$(BIBTEX) $(*F) > /dev/null
 PDFOPN	=	open
 
 DOCS	=	abstract	\
@@ -14,11 +16,16 @@ DOCS	=	abstract	\
 
 .PHONY: clean
 
-%.pdf: %.tex
-	$(PDFTEX) $<
-	-$(BIBTEX) $(*F)
-	$(PDFTEX) $<
-	$(PDFTEX) $<
+
+%.aux: %.tex
+	$(PDFBLD)
+
+%.pdf: %.aux %.bbl
+	$(PDFBLD)
+
+%.bbl: %.aux
+	$(BIBBLD)
+	$(PDFBLD)
 
 default:	report.may slides.may
 
@@ -36,7 +43,7 @@ report.april:	report.april.pdf
 report.may:	report.may.pdf
 	$(PDFOPN) $<
 
-report.may.pdf:	report.may.bib
+report.may.bbl:	report.may.bib
 report.may.pdf:	report.may/01_intro.tex
 report.may.pdf:	report.may/03_partitioning.tex
 report.may.pdf:	report.may/04_implementation.tex

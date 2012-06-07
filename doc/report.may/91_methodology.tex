@@ -1,4 +1,8 @@
 \section{Methodology}
 \label{sec:methodology}
 
-\todo[inline]{Write this \ldots please \tiny{dumbass}}
+Only one kind of tests was performed with each version mentioned in this document, regarding execution time. Two timers were separatly measured: the first measured the total execution time, from the initialization of the MPI library to the respective finalization function; the second measured the execution time of each core function (\texttt{compute\_flux}, \texttt{update} and \texttt{communication}, except in the sequential version where no communication is performed). The main loop execution time is defined to be the sum of the times measured with the second timer, and aditional code to control the loop is neglected.
+
+Several tests were performed for different numbers of processes with the MPI version. Using a fixed number of nodes (6 for SeARCH Group 101 and 2 for SeARCH Group Hex) and forcing the runtime tools to keep the load balanced between all the nodes, tests were performed for \texttt{2:1}, \texttt{1:1} and \texttt{1:2} (\texttt{processes:hardware threads}).
+
+For each test 10 executions were performed (with 10 extra executions if the values presented high variation or were displaced) and the final results considered are the medians of the total values gathered by each timer.
