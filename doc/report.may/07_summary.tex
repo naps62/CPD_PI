@@ -1,0 +1,29 @@
+\section{Summary}
+\label{sec:summary}
+
+\cref{tab:summary} shows a summary of all implemented versions of the algorithm so far. It should be highlighted that both the Environmental Setup and the testing Methodology differ between some tests. For instance. the initial tests, with the Original, OpenMP AOS and CUDA implementations were performed using the SeARCH Group 511, and a full execution of the program (which, for the largest test case used, does around 30000 iterations of the main loop).
+
+The last two versions, OpenMP SOA and MPI, gave the best results on SeARCH Group Hex (601 and 611 nodes), and were only tested for a fixed amount of iterations, due to issues of availability of the nodes, which required a smaller amount of time to be requested. Besides, since the amount of iterations is much smaller than the full execution would be, the impact of the preprocessing is much higher, especially in the MPI implementation, where the mesh partitioning introduces an even larger preprocessing time, when compared to the other versions.
+
+\begin{table}[!htp]
+		\smaller
+		\begin{center}
+			\begin{tabular}{l r ll}
+			\hline
+			\textbf{Implementation} & \textbf{\~ Time (s)}  & \textbf{Node Type}	& \textbf{Execution}	\\ \hline
+			Original				& 6200				& 511				& Full							\\
+			OpenMP AOS				& 1900				& 511				& Full							\\
+			CUDA 					& 200				& 511 				& Full							\\ \hline
+			OpenMP SOA 				& 36				& Hex 				& 1000 iter.					\\
+			MPI 					& 38				& Hex 				& 2000 iter.					\\
+			\hline
+			\end{tabular}
+		\end{center}
+		\caption{Summary of all implemented \texttt{polu} versions implemented}
+	\end{table}
+
+Taking into account the differences in the methodology, the CUDA implementation appears to be the one with the best performance gain. It is possible that the OpenMP SOA and the MPI implementations actually provide better execution times for a full execution, if it is considered that an amount of the time shown is spent in preprocessing. However, \cref{tab:summary} shows only the values for a best case scenario, with the ideal number of processes and/or nodes. When the amount of processing units is increased, the speedups were shown not to be linear
+
+\todo[inline]{adicionar aqui referencia á parte do relatorio que justifica isto, ou entao corrigir o texto. acho que já nao tou a escrever nada de jeito}
+
+\todo[inline]{faltam-me as palavras, explicar aqui que a versao CUDA é naive, e que portanto, tem mais margem de manobra}
