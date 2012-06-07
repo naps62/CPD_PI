@@ -5,4 +5,4 @@ Only one kind of tests was performed with each version mentioned in this documen
 
 Several tests were performed for different numbers of processes with the MPI version. Using a fixed number of nodes (6 for SeARCH Group 101 and 2 for SeARCH Group Hex) and forcing the runtime tools to keep the load balanced between all the nodes, tests were performed for \texttt{2:1}, \texttt{1:1} and \texttt{1:2} (\texttt{processes:hardware threads}).
 
-For each test 10 executions were performed (with 10 extra executions if the values presented high variation or were displaced) and the final results considered are the medians of the total values gathered by each timer.
+For each test 10 executions were performed (with 10 extra executions if the values presented high variation or were displaced) and the final results considered are the medians of the total values gathered by each timer. The measured executions were limited to 2000 main loop iterations (near 10\%) to keep the execution times under intervals which would allow to perform tests more quickly, but without compromising the information retrieved.

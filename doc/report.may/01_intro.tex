@@ -10,9 +10,8 @@ The original \texttt{polu} application works like a heartbeat algorithm with no 
 	\item[Pollution Update] Using the previously calculated flux values, the pollution for each cell is updated (performed by the \texttt{update} function)
 \end{description}
 
-Several changes were performed in the original \texttt{polu} code in order to allow parallelization and/or improve performance. The most important of these optimizations involved changing the data structures (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures}. This change removed the excessive dereferencing caused by deep chains of pointers in the original structures, which effectively reduced data access time and improved locality.
+Several changes were performed in the original \texttt{polu} code in order to allow parallelization and/or improve performance. The most important of these optimizations involved changing the data structures (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures} at first, and then to \textit{Structure-of-Arrays}. The former removed the excessive dereferencing caused by deep chains of pointers in the original structures, which effectively reduced data access time and improved locality, and the latter improved the memory access pattern by preventing unnecessary data pieces from being loaded in the core functions.
 
-The goal of this stage is to study attempt an implementation of the same application, using a distributed memory model with MPI, and analyze the scalability of the algorithm when testing with different amounts of processes and nodes.
+The goal of this stage is to attempt and an implementation of the same application, using a distributed memory model with MPI, and analyze the scalability of the algorithm when testing with different amounts of processes and nodes.
 
-
-\todo[inline]{Ate aqui esta copiado da intro do outro, com poucas alteraçoes}
+\Cref{sec:partitioning} describes the main problem in implementing the \texttt{polu} program in distributed memory, and \cref{sec:implementation} proceeds in explaining how it was implemented. Profiling results are presented in \cref{sec:results}, and the final conclusions for this document in \cref{sec:conclusions}. \Cref{sec:summary} summarizes the results achieved so far with this project, which are the motivation for the next and final step.

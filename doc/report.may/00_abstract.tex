@@ -1,4 +1,3 @@
 \begin{abstract}
-
-\todo[inline]{Write this \ldots please \tiny{dumbass}}
+This document presents a distributed memory implementation of the \texttt{polu} program using MPI and its analysis. The main problem of this implementation was partioning the mesh, which was solved using a naive approach. The resulting implementation presents clear speedups in the computational steps, but the results indicate that it is communication-bound. It presents good scalabilty in processors with a high amount of cores. The best results achieved are close to those of previous phases of this project, but the CUDA implementation stands out as the most promising for the final stage.
 \end{abstract}

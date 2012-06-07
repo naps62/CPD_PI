@@ -3,7 +3,7 @@ PDFTEX	=	pdflatex --shell-escape -halt-on-error
 PDFBLD	=	$(PDFTEX) $(*F).tex > /dev/null
 BIBTEX	=	bibtex
 BIBBLD	=	-$(BIBTEX) $(*F) > /dev/null
-PDFOPN	=	xdg-open
+PDFOPN	=	open
 
 DOCS	=	abstract	\
 			report.february	\
@@ -44,10 +44,13 @@ report.may:	report.may.pdf
 	$(PDFOPN) $<
 
 report.may.bbl:	report.may.bib
+report.may.pdf:	report.may/00_abstract.tex
 report.may.pdf:	report.may/01_intro.tex
 report.may.pdf:	report.may/03_partitioning.tex
 report.may.pdf:	report.may/04_implementation.tex
 report.may.pdf:	report.may/06_results.tex
+report.may.pdf:	report.may/07_summary.tex
+report.may.pdf:	report.may/071_future.tex
 report.may.pdf:	report.may/89_conclusion.tex
 report.may.pdf:	report.may/90_environment.tex
 report.may.pdf:	report.may/91_methodology.tex
