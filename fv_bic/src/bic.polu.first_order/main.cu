@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
 			cpu_update(mesh, polution, flux, dt);
 
 		#else
-			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+			//kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 	
 			_DEBUG {
 				stringstream ss;

@@ -27,7 +27,7 @@ DOCS	=	abstract	\
 	$(BIBBLD)
 	$(PDFBLD)
 
-default:	report.may slides.may
+default:	report.may
 
 all: $(DOCS)
 

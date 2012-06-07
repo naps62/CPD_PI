@@ -256,7 +256,7 @@ int main(int argc, char **argv) {
 	#ifdef NO_CUDA
 		cpu_reverseA(mesh, matA);
 	#else
-		kernel_compute_reverseA<<< grid_matA, block_matA >>>(mesh.cuda_get(), matA.cuda_get());
+		//kernel_compute_reverseA<<< grid_matA, block_matA >>>(mesh.cuda_get(), matA.cuda_get());
 		_D(cudaCheckError("cuda[compute_reverseA]"));
 	#endif
 
@@ -283,20 +283,20 @@ int main(int argc, char **argv) {
 			cpu_update(mesh, polution, flux, dt); 													// update
 		#else
 
-			kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
+			//kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[compute_vecResult] i=" << i;
 				cudaCheckError(ss.str());
 			}
-			kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(mesh.num_cells, matA.cuda_get(), vecResult.cuda_get(), vecABC.cuda_get());
+			//kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(mesh.num_cells, matA.cuda_get(), vecResult.cuda_get(), vecABC.cuda_get());
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[compute_vectABC] i=" << i;
 				cudaCheckError(ss.str());
 			}
-			kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(mesh.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), vecValidResult.cuda_get());
-			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet);
+			//kernel_validate_ABC<<< grid_vecValidResult, block_vecValidResult >>>(mesh.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), vecValidResult.cuda_get());
+			//kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet);
 	
 			_DEBUG {
 				stringstream ss;
