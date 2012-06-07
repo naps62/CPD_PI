@@ -1,9 +1,9 @@
 \section{Mesh Partitioning}
 \label{sec:partitioning}
 
-The hardest task that needs to be done in order to allow a distributed memory implementation of the application is the partitioning of the data. The input consists solely of a two dimensional mesh, constituted by interconnected edges and cells. In each step, every edge and cell needs to access its neighbour cells or edges, respectively.
+The hardest task that needs to be done in order to allow a distributed memory implementation of the application is the partitioning of the data. The input consists solely of a two dimensional mesh, constituted by interconnected edges and cells. In each step, every edge and cell needs to access its neighbor cells or edges, respectively.
 
-In order to distribute processing payload across each process, the input mesh, and all of the data associated with it, also needs to be distributed. A mesh partitioning algorithm is required. This algorithm must generate $P$ different partitions (where $P$ is the number of processors), each one corresponding to a subset of the original mesh. Each partition is then assigned to a single processor. Some aditional data is also required for each partition so that each process knows how it should communicate with the other partitions, so that the behavior can be simulated as if the mesh is being processed as a whole.
+In order to distribute processing payload across each process, the input mesh, and all of the data associated with it, also needs to be distributed. A mesh partitioning algorithm is required. This algorithm must generate $P$ different partitions (where $P$ is the number of processors), each one corresponding to a subset of the original mesh. Each partition is then assigned to a single processor. Some additional data is also required for each partition so that each process knows how it should communicate with the other partitions, so that the behavior can be simulated as if the mesh is being processed as a whole.
 
 \subsection{Research in Mesh Partitioning}
 \label{subsec:part_research}
@@ -33,10 +33,10 @@ The algorithm created to partition the mesh works by dividing the input based on
 	\label{fig:tasktimeAOS}
 \end{figure}
 
-This sequential distribution, along with the need to sequentially order every cell of the mesh in order to distribute them, creates a rather large overhead in precomputational time.
+This sequential distribution, along with the need to sequentially order every cell of the mesh in order to distribute them, creates a rather large overhead in pre-computational time.
 
-After each cell is assigned, every partition then receives all the edges that are attached to their cells. At this point, some redundancy is created, as edges in the border of one partition will also exist in the neighbour partition.
+After each cell is assigned, every partition then receives all the edges that are attached to their cells. At this point, some redundancy is created, as edges in the border of one partition will also exist in the neighbor partition.
 
-Some preprocessing is also done at this stage, to index, for each partition, the subset of edges that connect to the left and right neighbours. Since the division is done vertically, by the $x$ coordinate of each cell, it is guaranteed that every partition will have at most two neighbours, one at the left side, and one at the right side (the only exception are the first and last partition which will only have one neighbour). It is also assumed that the width of the global mesh is big enough so that there are never any jumps between partitions, with a partition sharing an edge with another one which is not a direct neighbour of it.
+Some preprocessing is also done at this stage, to index, for each partition, the subset of edges that connect to the left and right neighbors. Since the division is done vertically, by the $x$ coordinate of each cell, it is guaranteed that every partition will have at most two neighbors, one at the left side, and one at the right side (the only exception are the first and last partition which will only have one neighbor). It is also assumed that the width of the global mesh is big enough so that there are never any jumps between partitions, with a partition sharing an edge with another one which is not a direct neighbor of it.
 
 This partitioning method, while guaranteeing that the load balancing is good in terms of amount of work per process, also suffers from not considering the size of the frontier of each partition, which will directly affect the size and overhead of the communication required between partitions.

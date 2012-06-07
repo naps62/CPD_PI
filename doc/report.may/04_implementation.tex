@@ -4,7 +4,7 @@
 \subsection{Data Structures}
 \label{subsec:structs}
 
-The first concern with a distributed memory implementation was the mesh partitioning process, which should be executed at the start of the program, guaranteeing that after it, each process will contain a local copy of a partition of the mesh, as well as the indexing strucutures that are necessary to describe how that partition connects with the rest of the mesh.
+The first concern with a distributed memory implementation was the mesh partitioning process, which should be executed at the start of the program, guaranteeing that after it, each process will contain a local copy of a partition of the mesh, as well as the indexing structures that are necessary to describe how that partition connects with the rest of the mesh.
 
 The partitioning process was already explained in \cref{sec:partitioning}. As for the indexing structures, they are generated while the partitioning process is being done.
 
@@ -19,22 +19,22 @@ With that considered, the following indexing structures were required:
 	\item[\textbf\texttt{edge\_part}:] Can have the following values:
 		\begin{description}
 			\item[$0$:]  The right cell of this edge is in the same partition;
-			\item[$-1$:] The right cell is in the left neighbour partition;
-			\item[$1$:]  The right cell is in the right neighbour partition.
+			\item[$-1$:] The right cell is in the left neighbor partition;
+			\item[$1$:]  The right cell is in the right neighbor partition.
 		\end{description}
 
-	\item[\textbf\texttt{edge\_part\_index}:] For every edge with an \texttt{edge\_part} value of $-1$ or $1$, will give the corresponding index on the communication array that is received from either the left or right neighbour, according to which is connected to this edge.
+	\item[\textbf\texttt{edge\_part\_index}:] For every edge with an \texttt{edge\_part} value of $-1$ or $1$, will give the corresponding index on the communication array that is received from either the left or right neighbor, according to which is connected to this edge.
 
-	\item[\textbf\texttt{index\_to\_edge}:] Two arrays of this type exist for each partition, one for the left side and one for the right side. Unlike the previuos ones, their size is equal to the size of the communication array instead of the total number of edges, and indicates for each value in the communication array, what is the corresponding edge that it refers to.
+	\item[\textbf\texttt{index\_to\_edge}:] Two arrays of this type exist for each partition, one for the left side and one for the right side. Unlike the previous ones, their size is equal to the size of the communication array instead of the total number of edges, and indicates for each value in the communication array, what is the corresponding edge that it refers to.
 
-	\item[\textbf\texttt{cells\_send}:] Array used to send data to the neighbour partitions (one for the left, and one for the right)
-	\item[\textbf\texttt{cells\_recv}:] Array used to receive data from the neighbours (one for the left, and one for the right)
+	\item[\textbf\texttt{cells\_send}:] Array used to send data to the neighbor partitions (one for the left, and one for the right)
+	\item[\textbf\texttt{cells\_recv}:] Array used to receive data from the neighbors (one for the left, and one for the right)
 
 \end{description}
 
-\subsection{HeartBeat Communication}
+\subsection{Heart-beat Communication}
 \label{subsec:heartbeat_comm}
 
-The original implementation iterates over two basic functions: \texttt{compute\_flux} and \texttt{update}, with each one iterating over all the cells and edges, respectively, and performing one of the steps of the heartbeat algorithm. To implement the required communication, an additional step was added to the beginning of the loop, calling the function \texttt{communication}, which copies the polution data from the border cells to their corresponding locations on the communication array in each iteration. These arrays are then sent to their corresponding destinations, and the process then waits to receive the arrays that those neighbours also sent him.
+The original implementation iterates over two basic functions: \texttt{compute\_flux} and \texttt{update}, with each one iterating over all the cells and edges, respectively, and performing one of the steps of the heartbeat algorithm. To implement the required communication, an additional step was added to the beginning of the loop, calling the function \texttt{communication}, which copies the pollution data from the border cells to their corresponding locations on the communication array in each iteration. These arrays are then sent to their corresponding destinations, and the process then waits to receive the arrays that those neighbors also sent him.
 
-After this step, the \texttt{compute\_flux} function is similar to the original function, with the exception that, when reading the polution value for a right cell, it now has to check wether that right cell is stored in its own partition, or in a neighbour, in which case it will be required to read the value from the arrays received at the communication step. As for the \texttt{update} function, its implementation is exactly the same as the sequential version, since all the values for the flux of each edge are locally computed. There is, however, some redundancy here, as different partitions will compute the flux for the same edge, when this edge is located in the border between them.
+After this step, the \texttt{compute\_flux} function is similar to the original function, with the exception that, when reading the pollution value for a right cell, it now has to check whether that right cell is stored in its own partition, or in a neighbor, in which case it will be required to read the value from the arrays received at the communication step. As for the \texttt{update} function, its implementation is exactly the same as the sequential version, since all the values for the flux of each edge are locally computed. There is, however, some redundancy here, as different partitions will compute the flux for the same edge, when this edge is located in the border between them.
