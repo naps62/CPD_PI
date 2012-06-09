@@ -115,14 +115,16 @@ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double 
 
 		// if this cell is on the left or the right of the edge
 		if (mesh->edge_left_cells[edge] == cell) {
-			new_polution -= aux;
+			//new_polution -= aux;
+			polution[cell] -= aux;
 		} else {
-			new_polution += aux;
+			//new_polution += aux;
+			polution[cell] += aux;
 		}
 	}
 
 	// update global value
-	polution[cell] += new_polution;
+	//polution[cell] += new_polution;
 }
 
 
