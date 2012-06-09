@@ -303,7 +303,7 @@ int main(int argc, char **argv) {
 				ss << "cuda[compute_flux] i=" << i;
 				cudaCheckError(ss.str());
 			}
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+			//kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
 			_DEBUG {
 				stringstream ss;
 				ss << "cuda[update] i=" << i;
