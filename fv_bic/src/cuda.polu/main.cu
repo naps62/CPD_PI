@@ -188,7 +188,11 @@ int main(int argc, char **argv) {
 			#endif
 			for(unsigned int i = 0; i < flux.size(); ++i)
 				cout << "flux[" << i << "] = " << flux[i] << endl;
-			polution_writer.append(polution, t, "polution");
+
+			cout << "polution" << endl;
+			for(unsigned int i = 0; i < polution.size(); ++i)
+				cout << "polution[" << i << "] = " << polution[i] << endl;
+			//polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
 		}
 
