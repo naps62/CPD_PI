@@ -185,7 +185,8 @@ int main(int argc, char **argv) {
 			#ifdef _CUDA
 				polution.cuda_load();
 				flux.cuda_load();
-				mesh.cuda_load();
+				mesh.edge_lengths.cuda_load();
+				mesh.cell_areas.cuda_load();
 			#endif
 			for(unsigned int i = 0; i < 50; ++i)
 				cout << "edge_lengths[" << i << "] = " << mesh.edge_lengths[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
@@ -221,7 +222,6 @@ int main(int argc, char **argv) {
 		vs.cuda_free();
 		polution.cuda_free();
 		flux.cuda_free();
-		mesh.cuda_free();
 
 		_DEBUG cudaCheckError(string("final check"));
 	#endif
