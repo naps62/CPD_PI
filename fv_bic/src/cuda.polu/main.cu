@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
 				//mesh.cell_areas.cuda_load();
 			#endif
 			for(unsigned int i = 0; i < 50; ++i)
-				cout << i << " " << polution[i] << endl;
+				cout << dt << " " << i << " " << polution[i] << endl;
 				//cout << "edge_lengths[" << i << "] = " << mesh.edge_lengths[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
 
 			//polution_writer.append(polution, t, "polution");
