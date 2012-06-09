@@ -82,7 +82,7 @@ void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, double *velocit
 		flux[edge] = v * polution[ mesh->edge_left_cells[edge] ];
 	else
 		flux[edge] = v * ((mesh->edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : polution[ mesh->edge_right_cells[edge] ]);*/
-	if (v < 0)
+	if (v >= 0)
 		flux[edge] = v * p_left;
 	else
 		flux[edge] = v * p_right;
