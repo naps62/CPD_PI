@@ -13,9 +13,8 @@ namespace profile {
 	void init() {
 		s = new tk::Stopwatch();
 
-		time_pre       = 0;
-		time_main_loop = 0;
-		time_pos       = 0;
+		for(unsigned int i = 0; i < COUNT; ++i)
+			cf[i] = count[i] = 0;
 	}
 
 	inline void output(std::ostream& out) {
