@@ -188,14 +188,9 @@ int main(int argc, char **argv) {
 	#endif
 
 	// PROFILE ZONE --- measure postprocessing time
-	#ifdef PROFILE_COMPUTE_FLUX
-		PROFILE_STOP();
-		PROFILE_OUTPUT();
-	#endif
-
-	#ifdef PROFILE
-		PROFILE_CLEANUP();
-	#endif
-
+	
+	PROFILE_STOP();
+	PROFILE_OUTPUT();
+	PROFILE_CLEANUP();
 }
 
