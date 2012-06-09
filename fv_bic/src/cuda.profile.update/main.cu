@@ -60,7 +60,7 @@ using namespace std;
 #include <cuda.h>
 #include "kernels_cuda.cuh"
 
-#define BLOCK_SIZE_FLUX				512
+#define BLOCK_SIZE_UPDATE			512
 #define GRID_SIZE(elems, threads)	((int) std::ceil((double)elems/threads))
 
 #define _CUDA_ONLY      if (_CUDA)
@@ -157,8 +157,8 @@ int main(int argc, char **argv) {
 		vs.cuda_save(stream);
 	
 		// block and grid sizes for each kernel
-		dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
-		dim3 block_flux(BLOCK_SIZE_FLUX, 1, 1);
+		dim3 grid_update(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_UPDATE), 1, 1);
+		dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
 	#endif
 
 	PROFILE_INIT();
