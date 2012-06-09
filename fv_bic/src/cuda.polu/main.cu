@@ -64,9 +64,9 @@ int main(int argc, char **argv) {
 	// print cuda mode
 	#ifndef PROFILE
 		#ifdef _CUDA
-			cout << "CUDA mode: disabled" << endl;
-		#else
 			cout << "CUDA mode: enabled" << endl;
+		#else
+			cout << "CUDA mode: disabled" << endl;
 		#endif
 	#endif
 
