@@ -98,9 +98,7 @@ struct Parameters {
 };
 
 int main(int argc, char **argv) {
-	#ifdef PROFILE
-		PROFILE_INIT();
-	#endif
+	
 
 	// var declaration
 	int i = 0;
@@ -163,6 +161,7 @@ int main(int argc, char **argv) {
 		dim3 block_flux(BLOCK_SIZE_FLUX, 1, 1);
 	#endif
 
+	PROFILE_INIT();
 	//
 	// main loop start
 	//
@@ -173,7 +172,7 @@ int main(int argc, char **argv) {
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(0);
-		
+
 		PROFILE_START();
 		kernel_compute_flux2<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 		PROFILE_STOP();
