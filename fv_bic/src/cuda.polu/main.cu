@@ -185,13 +185,11 @@ int main(int argc, char **argv) {
 			#ifdef _CUDA
 				polution.cuda_load();
 				flux.cuda_load();
+				mesh.cuda_load();
 			#endif
-			for(unsigned int i = 0; i < flux.size(); ++i)
-				cout << "flux[" << i << "] = " << flux[i] << endl;
+			for(unsigned int i = 0; i < 50; ++i)
+				cout << "edge_lengths[" << i << "] = " << mesh.edge_lengths[i] << " " << "cell_area[" << i " ] = " << mesh.cell_areas[i] << endl;
 
-			cout << "polution" << endl;
-			for(unsigned int i = 0; i < polution.size(); ++i)
-				cout << "polution[" << i << "] = " << polution[i] << endl;
 			//polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
 		}
