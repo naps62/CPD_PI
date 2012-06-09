@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
 			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 			_DEBUG cudaCheckError(string("compute_flux"));
 	
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), data.dirichlet);
+			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
 			_DEBUG cudaCheckError(string("update"));
 		#else
 			cpu_compute_flux(mesh, vs, polution, flux, data.dirichlet); // compute_flux
@@ -184,13 +184,13 @@ int main(int argc, char **argv) {
 		if (t >= anim_next_step || 1==1) {
 			#ifdef _CUDA
 				polution.cuda_load();
-				flux.cuda_load();
+				//flux.cuda_load();
 				//mesh.edge_lengths.cuda_load();
-				mesh.cell_areas.cuda_load();
+				//mesh.cell_areas.cuda_load();
 			#endif
-			for(unsigned int i = 0; i < 50; ++i)
+			//for(unsigned int i = 0; i < 50; ++i)
 				//cout << dt << " " << i << " " << polution[i] << endl;
-				cout << "polution[" << i << "] = " << polution[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
+				//cout << "polution[" << i << "] = " << polution[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
 
 			//polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
