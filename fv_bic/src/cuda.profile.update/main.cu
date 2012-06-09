@@ -45,7 +45,7 @@ namespace profile {
 #define PROFILE_START() profile::s->start()
 #define PROFILE_STOP()  profile::s->stop()
 
-#define PROFILE_RETRIEVE_CF(x) profile::time_up(x)
+#define PROFILE_RETRIEVE_UP(x) profile::time_up(x)
 
 
 #include "FVL/CFVMesh2D.h"
@@ -169,12 +169,12 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 		kernel_update1<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
 		PROFILE_STOP();
-		PROFILE_RETRIEVE_CF(0);
+		PROFILE_RETRIEVE_UP(0);
 
 		PROFILE_START();
 		kernel_update2<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
 		PROFILE_STOP();
-		PROFILE_RETRIEVE_CF(1);
+		PROFILE_RETRIEVE_UP(1);
 	}
 
 	#ifdef _CUDA
