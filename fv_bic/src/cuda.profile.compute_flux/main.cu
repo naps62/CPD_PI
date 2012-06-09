@@ -36,6 +36,8 @@ namespace profile {
 	}
 }
 
+#define NUM_ITERATIONS  200
+
 #define PROFILE_COUNTER              profile::s
 #define PROFILE_INIT()               profile::init()
 #define PROFILE_RETRIEVE_PRE()       profile::pre()
