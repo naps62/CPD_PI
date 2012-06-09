@@ -19,8 +19,9 @@ namespace profile {
 
 	inline void output(std::ostream& out) {
 		for(unsigned int i = 0; i < COUNT; ++i) {
-			if (i > 0) out << ';';
 			out << ((double)cf[i]/(double)count[i]);
+			if (i > 0)
+				out << ';';
 		}
 		out << endl;
 	}
@@ -166,7 +167,7 @@ int main(int argc, char **argv) {
 	// main loop start
 	//
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {
-
+		cout << "iteration " << i << '\r';
 		
 		PROFILE_START();
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
