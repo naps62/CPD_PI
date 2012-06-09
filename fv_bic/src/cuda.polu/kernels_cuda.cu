@@ -122,6 +122,7 @@ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double 
 			polution[cell] += aux;
 		}
 	}
+	polution[cell] = mesh->cell_areas[cell];
 
 	// update global value
 	//polution[cell] += new_polution;

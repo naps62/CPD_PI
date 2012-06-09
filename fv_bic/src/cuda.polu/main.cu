@@ -186,11 +186,11 @@ int main(int argc, char **argv) {
 				polution.cuda_load();
 				flux.cuda_load();
 				//mesh.edge_lengths.cuda_load();
-				//mesh.cell_areas.cuda_load();
+				mesh.cell_areas.cuda_load();
 			#endif
 			for(unsigned int i = 0; i < 50; ++i)
-				cout << dt << " " << i << " " << polution[i] << endl;
-				//cout << "edge_lengths[" << i << "] = " << mesh.edge_lengths[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
+				//cout << dt << " " << i << " " << polution[i] << endl;
+				cout << "polution[" << i << "] = " << polution[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
 
 			//polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
