@@ -29,7 +29,7 @@ namespace profile {
 		delete s;
 	}
 
-	inline void cf(int x) {
+	inline void time_cf(int x) {
 		cf[x] = s->last().microseconds();
 		count[x]++;
 	}
@@ -44,7 +44,7 @@ namespace profile {
 #define PROFILE_START() profile::s->start()
 #define PROFILE_STOP()  profile::s->stop()
 
-#define PROFILE_RETRIEVE_CF(x) profile::cf_original(x)
+#define PROFILE_RETRIEVE_CF(x) profile::time_cf(x)
 
 
 #include "FVL/CFVMesh2D.h"
