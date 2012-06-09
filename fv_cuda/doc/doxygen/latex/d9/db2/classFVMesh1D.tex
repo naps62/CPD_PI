@@ -1,0 +1,220 @@
+\hypertarget{classFVMesh1D}{
+\section{FVMesh1D Class Reference}
+\label{d9/db2/classFVMesh1D}\index{FVMesh1D@{FVMesh1D}}
+}
+
+
+{\ttfamily \#include $<$FVMesh1D.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVMesh1D_aa41066d30c6a4be1b3f652a8a99fba6e}{FVMesh1D} ()
+\item 
+\hyperlink{classFVMesh1D_ad33d32b1018a9b7f8e849a2a165f1bfd}{FVMesh1D} (const char $\ast$)
+\item 
+size\_\-t \hyperlink{classFVMesh1D_a25c8ba5048b8d53613b14c9e0f0e4a34}{read} (const char $\ast$)
+\item 
+size\_\-t \hyperlink{classFVMesh1D_a4afe5a96e4659fea7ca076ddf1da3620}{write} (const char $\ast$)
+\item 
+size\_\-t \hyperlink{classFVMesh1D_a8197b8765302aecf9e815d0a29e14a8d}{getNbVertex} ()
+\item 
+size\_\-t \hyperlink{classFVMesh1D_abc48c18bd3e38734ab97c274629d96a7}{getNbBoundaryVertex} ()
+\item 
+size\_\-t \hyperlink{classFVMesh1D_a64ae6d6814ef01f53f6fd2f2f9ff8a0c}{getNbCell} ()
+\item 
+\hyperlink{classFVVertex1D}{FVVertex1D} $\ast$ \hyperlink{classFVMesh1D_ae991d8306b8ed53febb720935c006ed7}{getVertex} (size\_\-t i)
+\item 
+\hyperlink{classFVCell1D}{FVCell1D} $\ast$ \hyperlink{classFVMesh1D_a313d92268f24a70a97e2a007cdc3ed4f}{getCell} (size\_\-t i)
+\item 
+string \hyperlink{classFVMesh1D_a11335e13e50af74108bf926dc1340b4b}{getName} ()
+\item 
+void \hyperlink{classFVMesh1D_ab3a256e7d9fad73fa57de7c1fedf51c5}{setName} (const char $\ast$name)
+\item 
+\hyperlink{classFVVertex1D}{FVVertex1D} $\ast$ \hyperlink{classFVMesh1D_ad4fad0e0941476b665cf09b20c6f3d93}{beginVertex} ()
+\item 
+\hyperlink{classFVVertex1D}{FVVertex1D} $\ast$ \hyperlink{classFVMesh1D_ab7a9cc3e82cb21cd210ff298bb9b4794}{nextVertex} ()
+\item 
+\hyperlink{classFVCell1D}{FVCell1D} $\ast$ \hyperlink{classFVMesh1D_a16433441f757af65502237e430be883e}{beginCell} ()
+\item 
+\hyperlink{classFVCell1D}{FVCell1D} $\ast$ \hyperlink{classFVMesh1D_a3fe055246591c22cd2a0e9597af217c1}{nextCell} ()
+\item 
+\hyperlink{classFVVertex1D}{FVVertex1D} $\ast$ \hyperlink{classFVMesh1D_aadd42e52eaeeaa5a721e83d71e959337}{beginBoundaryVertex} ()
+\item 
+\hyperlink{classFVVertex1D}{FVVertex1D} $\ast$ \hyperlink{classFVMesh1D_a33b4c8fa39471a70f66fd8fed9d07489}{nextBoundaryVertex} ()
+\item 
+void \hyperlink{classFVMesh1D_a0e92c55aa6380dc0f928e8dbc43ebe49}{Gmsh2FVMesh} (\hyperlink{classGmsh}{Gmsh} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVMesh1D_aa41066d30c6a4be1b3f652a8a99fba6e}{
+\index{FVMesh1D@{FVMesh1D}!FVMesh1D@{FVMesh1D}}
+\index{FVMesh1D@{FVMesh1D}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{FVMesh1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVMesh1D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/db2/classFVMesh1D_aa41066d30c6a4be1b3f652a8a99fba6e}
+\hypertarget{classFVMesh1D_ad33d32b1018a9b7f8e849a2a165f1bfd}{
+\index{FVMesh1D@{FVMesh1D}!FVMesh1D@{FVMesh1D}}
+\index{FVMesh1D@{FVMesh1D}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{FVMesh1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVMesh1D} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/db2/classFVMesh1D_ad33d32b1018a9b7f8e849a2a165f1bfd}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVMesh1D_aadd42e52eaeeaa5a721e83d71e959337}{
+\index{FVMesh1D@{FVMesh1D}!beginBoundaryVertex@{beginBoundaryVertex}}
+\index{beginBoundaryVertex@{beginBoundaryVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{beginBoundaryVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex1D}$\ast$ beginBoundaryVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_aadd42e52eaeeaa5a721e83d71e959337}
+\hypertarget{classFVMesh1D_a16433441f757af65502237e430be883e}{
+\index{FVMesh1D@{FVMesh1D}!beginCell@{beginCell}}
+\index{beginCell@{beginCell}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{beginCell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVCell1D}$\ast$ beginCell (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a16433441f757af65502237e430be883e}
+\hypertarget{classFVMesh1D_ad4fad0e0941476b665cf09b20c6f3d93}{
+\index{FVMesh1D@{FVMesh1D}!beginVertex@{beginVertex}}
+\index{beginVertex@{beginVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{beginVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex1D}$\ast$ beginVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_ad4fad0e0941476b665cf09b20c6f3d93}
+\hypertarget{classFVMesh1D_a313d92268f24a70a97e2a007cdc3ed4f}{
+\index{FVMesh1D@{FVMesh1D}!getCell@{getCell}}
+\index{getCell@{getCell}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getCell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVCell1D}$\ast$ getCell (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a313d92268f24a70a97e2a007cdc3ed4f}
+\hypertarget{classFVMesh1D_a11335e13e50af74108bf926dc1340b4b}{
+\index{FVMesh1D@{FVMesh1D}!getName@{getName}}
+\index{getName@{getName}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getName}]{\setlength{\rightskip}{0pt plus 5cm}string getName (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a11335e13e50af74108bf926dc1340b4b}
+\hypertarget{classFVMesh1D_abc48c18bd3e38734ab97c274629d96a7}{
+\index{FVMesh1D@{FVMesh1D}!getNbBoundaryVertex@{getNbBoundaryVertex}}
+\index{getNbBoundaryVertex@{getNbBoundaryVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getNbBoundaryVertex}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbBoundaryVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_abc48c18bd3e38734ab97c274629d96a7}
+\hypertarget{classFVMesh1D_a64ae6d6814ef01f53f6fd2f2f9ff8a0c}{
+\index{FVMesh1D@{FVMesh1D}!getNbCell@{getNbCell}}
+\index{getNbCell@{getNbCell}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getNbCell}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbCell (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a64ae6d6814ef01f53f6fd2f2f9ff8a0c}
+\hypertarget{classFVMesh1D_a8197b8765302aecf9e815d0a29e14a8d}{
+\index{FVMesh1D@{FVMesh1D}!getNbVertex@{getNbVertex}}
+\index{getNbVertex@{getNbVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getNbVertex}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a8197b8765302aecf9e815d0a29e14a8d}
+\hypertarget{classFVMesh1D_ae991d8306b8ed53febb720935c006ed7}{
+\index{FVMesh1D@{FVMesh1D}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{getVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex1D}$\ast$ getVertex (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_ae991d8306b8ed53febb720935c006ed7}
+\hypertarget{classFVMesh1D_a0e92c55aa6380dc0f928e8dbc43ebe49}{
+\index{FVMesh1D@{FVMesh1D}!Gmsh2FVMesh@{Gmsh2FVMesh}}
+\index{Gmsh2FVMesh@{Gmsh2FVMesh}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{Gmsh2FVMesh}]{\setlength{\rightskip}{0pt plus 5cm}void Gmsh2FVMesh (
+\begin{DoxyParamCaption}
+\item[{{\bf Gmsh} \&}]{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/db2/classFVMesh1D_a0e92c55aa6380dc0f928e8dbc43ebe49}
+\hypertarget{classFVMesh1D_a33b4c8fa39471a70f66fd8fed9d07489}{
+\index{FVMesh1D@{FVMesh1D}!nextBoundaryVertex@{nextBoundaryVertex}}
+\index{nextBoundaryVertex@{nextBoundaryVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{nextBoundaryVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex1D}$\ast$ nextBoundaryVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a33b4c8fa39471a70f66fd8fed9d07489}
+\hypertarget{classFVMesh1D_a3fe055246591c22cd2a0e9597af217c1}{
+\index{FVMesh1D@{FVMesh1D}!nextCell@{nextCell}}
+\index{nextCell@{nextCell}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{nextCell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVCell1D}$\ast$ nextCell (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_a3fe055246591c22cd2a0e9597af217c1}
+\hypertarget{classFVMesh1D_ab7a9cc3e82cb21cd210ff298bb9b4794}{
+\index{FVMesh1D@{FVMesh1D}!nextVertex@{nextVertex}}
+\index{nextVertex@{nextVertex}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{nextVertex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex1D}$\ast$ nextVertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_ab7a9cc3e82cb21cd210ff298bb9b4794}
+\hypertarget{classFVMesh1D_a25c8ba5048b8d53613b14c9e0f0e4a34}{
+\index{FVMesh1D@{FVMesh1D}!read@{read}}
+\index{read@{read}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t read (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/db2/classFVMesh1D_a25c8ba5048b8d53613b14c9e0f0e4a34}
+\hypertarget{classFVMesh1D_ab3a256e7d9fad73fa57de7c1fedf51c5}{
+\index{FVMesh1D@{FVMesh1D}!setName@{setName}}
+\index{setName@{setName}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{setName}]{\setlength{\rightskip}{0pt plus 5cm}void setName (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d9/db2/classFVMesh1D_ab3a256e7d9fad73fa57de7c1fedf51c5}
+\hypertarget{classFVMesh1D_a4afe5a96e4659fea7ca076ddf1da3620}{
+\index{FVMesh1D@{FVMesh1D}!write@{write}}
+\index{write@{write}!FVMesh1D@{FVMesh1D}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t write (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/db2/classFVMesh1D_a4afe5a96e4659fea7ca076ddf1da3620}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{FVMesh1D_8h}{FVMesh1D.h}\end{DoxyCompactItemize}

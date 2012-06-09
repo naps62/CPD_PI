@@ -3,7 +3,7 @@ PDFTEX	=	pdflatex --shell-escape -halt-on-error
 PDFBLD	=	$(PDFTEX) $(*F).tex > /dev/null
 BIBTEX	=	bibtex
 BIBBLD	=	-$(BIBTEX) $(*F) > /dev/null
-PDFOPN	=	open
+PDFOPN	=	xdg-open
 
 DOCS	=	abstract	\
 			report.february	\

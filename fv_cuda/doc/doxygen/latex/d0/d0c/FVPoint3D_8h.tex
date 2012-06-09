@@ -1,0 +1,174 @@
+\hypertarget{FVPoint3D_8h}{
+\section{include/FVPoint3D.h File Reference}
+\label{d0/d0c/FVPoint3D_8h}\index{include/FVPoint3D.h@{include/FVPoint3D.h}}
+}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$iomanip$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include \char`\"{}FVLib\_\-config.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFVPoint3D}{FVPoint3D$<$ T\_\- $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_a511f8efce26ffc6d0a3b55178d57fa99}{operator+} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_acbea7ba78c488c691f0d1972fbfca26c}{operator+} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a, const T\_\- \&x)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_ae92e58538cfc91d8556b4a945d668607}{operator-\/} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_a925239acb3783684983869e447f6902b}{operator-\/} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_a5a7bca35c3408cb7624a188717b0760f}{operator-\/} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a, const T\_\- \&x)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_a4bb45aff5dc5ec1ee994965f79d12eee}{operator$\ast$} (const T\_\- \&a, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_aba78ffbd47301e9fcc648a7d8a5809ec}{operator$\ast$} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b, const T\_\- \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\T\_\- \hyperlink{FVPoint3D_8h_a4b6da10a80b0bd44b4b028d7f748a0d9}{operator$\ast$} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \hyperlink{FVPoint3D_8h_a4cdb467ec2a487b731c2d3165ff927ee}{operator/} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&b, const T\_\- \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\std::ostream \& \hyperlink{FVPoint3D_8h_a38bfadf34d377d9cef4ecd33559a97af}{operator$<$$<$} (std::ostream \&s, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ T\_\- $>$ \&a)
+\item 
+\hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \hyperlink{FVPoint3D_8h_abf6151e97e7abd8e14221553476b483c}{CrossProduct} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&u, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&v)
+\item 
+double \hyperlink{FVPoint3D_8h_a00c75ab4656f5702e81e3e35b8732911}{Det} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&u, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&v, const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&w)
+\item 
+double \hyperlink{FVPoint3D_8h_a83834208ef62f85e3f6bfabc0a9849c0}{Norm} (const \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ \&u)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{FVPoint3D_8h_abf6151e97e7abd8e14221553476b483c}{
+\index{FVPoint3D.h@{FVPoint3D.h}!CrossProduct@{CrossProduct}}
+\index{CrossProduct@{CrossProduct}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{CrossProduct}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$double$>$ CrossProduct (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ u, }
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d0/d0c/FVPoint3D_8h_abf6151e97e7abd8e14221553476b483c}
+\hypertarget{FVPoint3D_8h_a00c75ab4656f5702e81e3e35b8732911}{
+\index{FVPoint3D.h@{FVPoint3D.h}!Det@{Det}}
+\index{Det@{Det}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{Det}]{\setlength{\rightskip}{0pt plus 5cm}double Det (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ u, }
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ v, }
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d0/d0c/FVPoint3D_8h_a00c75ab4656f5702e81e3e35b8732911}
+\hypertarget{FVPoint3D_8h_a83834208ef62f85e3f6bfabc0a9849c0}{
+\index{FVPoint3D.h@{FVPoint3D.h}!Norm@{Norm}}
+\index{Norm@{Norm}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{Norm}]{\setlength{\rightskip}{0pt plus 5cm}double Norm (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ double $>$ \&}]{ u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d0/d0c/FVPoint3D_8h_a83834208ef62f85e3f6bfabc0a9849c0}
+\hypertarget{FVPoint3D_8h_a4bb45aff5dc5ec1ee994965f79d12eee}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const T\_\- \&}]{ a, }
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a4bb45aff5dc5ec1ee994965f79d12eee}
+\hypertarget{FVPoint3D_8h_a4b6da10a80b0bd44b4b028d7f748a0d9}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a4b6da10a80b0bd44b4b028d7f748a0d9}
+\hypertarget{FVPoint3D_8h_aba78ffbd47301e9fcc648a7d8a5809ec}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const T\_\- \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_aba78ffbd47301e9fcc648a7d8a5809ec}
+\hypertarget{FVPoint3D_8h_acbea7ba78c488c691f0d1972fbfca26c}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator+@{operator+}}
+\index{operator+@{operator+}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const T\_\- \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_acbea7ba78c488c691f0d1972fbfca26c}
+\hypertarget{FVPoint3D_8h_a511f8efce26ffc6d0a3b55178d57fa99}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator+@{operator+}}
+\index{operator+@{operator+}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a511f8efce26ffc6d0a3b55178d57fa99}
+\hypertarget{FVPoint3D_8h_a925239acb3783684983869e447f6902b}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a925239acb3783684983869e447f6902b}
+\hypertarget{FVPoint3D_8h_a5a7bca35c3408cb7624a188717b0760f}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const T\_\- \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a5a7bca35c3408cb7624a188717b0760f}
+\hypertarget{FVPoint3D_8h_ae92e58538cfc91d8556b4a945d668607}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_ae92e58538cfc91d8556b4a945d668607}
+\hypertarget{FVPoint3D_8h_a4cdb467ec2a487b731c2d3165ff927ee}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator/@{operator/}}
+\index{operator/@{operator/}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint3D}$<$T\_\-$>$ operator/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const T\_\- \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a4cdb467ec2a487b731c2d3165ff927ee}
+\hypertarget{FVPoint3D_8h_a38bfadf34d377d9cef4ecd33559a97af}{
+\index{FVPoint3D.h@{FVPoint3D.h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!FVPoint3D.h@{FVPoint3D.h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std::ostream \&}]{ s, }
+\item[{const {\bf FVPoint3D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d0c/FVPoint3D_8h_a38bfadf34d377d9cef4ecd33559a97af}

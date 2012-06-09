@@ -1,0 +1,152 @@
+\hypertarget{classFVL_1_1FVXMLReader}{
+\section{FVXMLReader Class Reference}
+\label{d2/d9a/classFVL_1_1FVXMLReader}\index{FVL::FVXMLReader@{FVL::FVXMLReader}}
+}
+
+
+XML Reader class for \hyperlink{namespaceFVL}{FVL}.  
+
+
+
+
+{\ttfamily \#include $<$FVXMLReader.h$>$}
+
+Inheritance diagram for FVXMLReader:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d2/d9a/classFVL_1_1FVXMLReader}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVL_1_1FVXMLReader_ad64566c91703b6facc7e8abb99bd592f}{FVXMLReader} (string filename)
+\begin{DoxyCompactList}\small\item\em Constructor to create a XML Reader to parse a given file. \item\end{DoxyCompactList}\item 
+xml\_\-node $\ast$ \hyperlink{classFVL_1_1FVXMLReader_af32db3b332fc7072762a13ced879f55a}{getRootNode} ()
+\begin{DoxyCompactList}\small\item\em Returns node pointing to the root of the XML file. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classFVL_1_1FVXMLReader_a942ee6c1f6d520aa22106044984d8677}{getVec} (\hyperlink{classFVL_1_1CFVArray}{CFVArray}$<$ T $>$ \&vec, double \&time, string \&name)
+\begin{DoxyCompactList}\small\item\em Reads next child node to a vector from the XML file. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classFVL_1_1FVXMLReader_a40dd2b3c9977316e8f3be7ea51db4d0c}{getPoints2D} (\hyperlink{classFVL_1_1CFVPoints2D}{CFVPoints2D}$<$ T $>$ \&vec, double \&time, string \&name)
+\begin{DoxyCompactList}\small\item\em Reads next child node to a vector of 2-\/dimensional points from the XML file. \item\end{DoxyCompactList}\item 
+void \hyperlink{classFVL_1_1FVXMLReader_a5ae591df94fc66ccb85cbb6565368bca}{close} ()
+\begin{DoxyCompactList}\small\item\em Closes the parser, releasing all memory saved for it. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\static bool \hyperlink{classFVL_1_1FVXMLReader_ac0466143984e67ba108883aa9d569eaa}{str\_\-cast} (T \&t, const string \&s)
+\begin{DoxyCompactList}\small\item\em Helper function to cast a string to any given type Cast will be supported as long as stream operator is implemented for that type, allowing the operation (s $>$$>$ t) to be performed. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+XML Reader class for \hyperlink{namespaceFVL}{FVL}. Used to parse a XML file for input 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVL_1_1FVXMLReader_ad64566c91703b6facc7e8abb99bd592f}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!FVXMLReader@{FVXMLReader}}
+\index{FVXMLReader@{FVXMLReader}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{FVXMLReader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVXMLReader} (
+\begin{DoxyParamCaption}
+\item[{string}]{ filename}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_ad64566c91703b6facc7e8abb99bd592f}
+
+
+Constructor to create a XML Reader to parse a given file. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em filename}]XML file to be parsed \end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVL_1_1FVXMLReader_a5ae591df94fc66ccb85cbb6565368bca}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!close@{close}}
+\index{close@{close}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_a5ae591df94fc66ccb85cbb6565368bca}
+
+
+Closes the parser, releasing all memory saved for it. 
+
+\hypertarget{classFVL_1_1FVXMLReader_a40dd2b3c9977316e8f3be7ea51db4d0c}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!getPoints2D@{getPoints2D}}
+\index{getPoints2D@{getPoints2D}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{getPoints2D}]{\setlength{\rightskip}{0pt plus 5cm}void getPoints2D (
+\begin{DoxyParamCaption}
+\item[{{\bf CFVPoints2D}$<$ T $>$ \&}]{ vec, }
+\item[{double \&}]{ time, }
+\item[{string \&}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_a40dd2b3c9977316e8f3be7ea51db4d0c}
+
+
+Reads next child node to a vector of 2-\/dimensional points from the XML file. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em vec}]Reference to the array where the points will be stored \item[{\em time}]Reference to where the timestamp associated with the XML vector will be stored \item[{\em name}]Reference to where the name of the vector will be stored \end{DoxyParams}
+\hypertarget{classFVL_1_1FVXMLReader_af32db3b332fc7072762a13ced879f55a}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!getRootNode@{getRootNode}}
+\index{getRootNode@{getRootNode}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{getRootNode}]{\setlength{\rightskip}{0pt plus 5cm}xml\_\-node$\ast$ getRootNode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_af32db3b332fc7072762a13ced879f55a}
+
+
+Returns node pointing to the root of the XML file. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to root node 
+\end{DoxyReturn}
+\hypertarget{classFVL_1_1FVXMLReader_a942ee6c1f6d520aa22106044984d8677}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!getVec@{getVec}}
+\index{getVec@{getVec}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{getVec}]{\setlength{\rightskip}{0pt plus 5cm}void getVec (
+\begin{DoxyParamCaption}
+\item[{{\bf CFVArray}$<$ T $>$ \&}]{ vec, }
+\item[{double \&}]{ time, }
+\item[{string \&}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_a942ee6c1f6d520aa22106044984d8677}
+
+
+Reads next child node to a vector from the XML file. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em vec}]Reference to the array where the values will be stored \item[{\em time}]Reference to where the timestamp associated with the XML vector will be stored \item[{\em name}]Reference to where the name of the vector will be stored \end{DoxyParams}
+\hypertarget{classFVL_1_1FVXMLReader_ac0466143984e67ba108883aa9d569eaa}{
+\index{FVL::FVXMLReader@{FVL::FVXMLReader}!str\_\-cast@{str\_\-cast}}
+\index{str\_\-cast@{str\_\-cast}!FVL::FVXMLReader@{FVL::FVXMLReader}}
+\subsubsection[{str\_\-cast}]{\setlength{\rightskip}{0pt plus 5cm}static bool str\_\-cast (
+\begin{DoxyParamCaption}
+\item[{T \&}]{ t, }
+\item[{const string \&}]{ s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{d2/d9a/classFVL_1_1FVXMLReader_ac0466143984e67ba108883aa9d569eaa}
+
+
+Helper function to cast a string to any given type Cast will be supported as long as stream operator is implemented for that type, allowing the operation (s $>$$>$ t) to be performed. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em t}]Reference to where the value (of type T) shall be stored \item[{\em s}]Reference to the string to parse \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the operation was successfull, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/FVL/\hyperlink{FVXMLReader_8h}{FVXMLReader.h}\end{DoxyCompactItemize}

@@ -32,7 +32,7 @@ With that considered, the following indexing structures were required:
 
 \end{description}
 
-\subsection{Heart-beat Communication}
+\subsection{Communication Strategy}
 \label{subsec:heartbeat_comm}
 
 The original implementation iterates over two basic functions: \texttt{compute\_flux} and \texttt{update}, with each one iterating over all the cells and edges, respectively, and performing one of the steps of the heartbeat algorithm. To implement the required communication, an additional step was added to the beginning of the loop, calling the function \texttt{communication}, which copies the pollution data from the border cells to their corresponding locations on the communication array in each iteration. These arrays are then sent to their corresponding destinations, and the process then waits to receive the arrays that those neighbors also sent him.

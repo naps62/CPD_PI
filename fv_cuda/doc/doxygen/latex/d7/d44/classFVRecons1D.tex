@@ -1,0 +1,291 @@
+\hypertarget{classFVRecons1D}{
+\section{FVRecons1D Class Reference}
+\label{d7/d44/classFVRecons1D}\index{FVRecons1D@{FVRecons1D}}
+}
+
+
+{\ttfamily \#include $<$FVRecons1D.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVRecons1D_a6146b6ee0af1a92509e45a9261786e93}{FVRecons1D} ()
+\item 
+\hyperlink{classFVRecons1D_a6a3f5e98edc9b452300f64e12dec81fb}{FVRecons1D} (\hyperlink{classFVStencil}{FVStencil} $\ast$ptr\_\-s)
+\item 
+\hyperlink{classFVRecons1D_a34b28ffea07632ac9f4927a15d98e8ee}{FVRecons1D} (\hyperlink{classFVStencil}{FVStencil} $\ast$ptr\_\-s, size\_\-t degree)
+\item 
+\hyperlink{classFVRecons1D_a0b1a51af09a9736dd87796cad9c4409c}{$\sim$FVRecons1D} ()
+\item 
+\hyperlink{classFVRecons1D_a1b5dd39ac32ef8c0bda1824fc0c087b4}{FVRecons1D} (const \hyperlink{classFVRecons1D}{FVRecons1D} \&rec)
+\item 
+void \hyperlink{classFVRecons1D_a34d8474a5f5470cab6f077871c7387da}{setStencil} (\hyperlink{classFVStencil}{FVStencil} \&st)
+\item 
+void \hyperlink{classFVRecons1D_a9fd35e2a4d7096ce3fec84bfc30bf095}{setStencil} (\hyperlink{classFVStencil}{FVStencil} $\ast$ptr\_\-s)
+\item 
+void \hyperlink{classFVRecons1D_a82cbc1bab2638e760ea3ca50bd393ba6}{setStencil} (\hyperlink{classFVStencil}{FVStencil} \&st, size\_\-t degree)
+\item 
+void \hyperlink{classFVRecons1D_a6d820346769771af609dbdaa7b1f3021}{setStencil} (\hyperlink{classFVStencil}{FVStencil} $\ast$ptr\_\-s, size\_\-t degree)
+\item 
+void \hyperlink{classFVRecons1D_a277a64063b5e54974f88aa36f01dd729}{setPolynomialDegree} (size\_\-t degree)
+\item 
+size\_\-t \hyperlink{classFVRecons1D_a51ced9e32566282ad2c8aa54e23f3cc5}{getPolynomialDegree} ()
+\item 
+void \hyperlink{classFVRecons1D_ade06e8c8d61be70bf976ab2ee71fe9da}{setReferencePoint} (double x)
+\item 
+void \hyperlink{classFVRecons1D_ad9a78c6c24ce1ef1e1e66ee793b71ca7}{setReferencePoint} (\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ P)
+\item 
+void \hyperlink{classFVRecons1D_a293c577ccab7096a617b07f0da0815f4}{setVectorVertex1D} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&u)
+\item 
+void \hyperlink{classFVRecons1D_a3123586ee3e9ab48cb5c7bee851a368b}{setVectorCell1D} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&u)
+\item 
+void \hyperlink{classFVRecons1D_ace350e893da1fc1e34121063885b4d66}{doConservativeMatrix} ()
+\item 
+void \hyperlink{classFVRecons1D_a8d6d0de3223ec5b38427aac5a0b4b2a0}{computeConservativeCoef} ()
+\item 
+void \hyperlink{classFVRecons1D_a778ff476790db0a772b0de4670138fd1}{doMatrix} ()
+\item 
+void \hyperlink{classFVRecons1D_a542380877cfbecb217d6079b325bcc9b}{computeCoef} ()
+\item 
+double \hyperlink{classFVRecons1D_a30a9b7e0aaa2e1f1c80ce4c6f017cfe1}{getValue} (\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ P, size\_\-t degree)
+\item 
+double \hyperlink{classFVRecons1D_a1a9db4cdf1a4cbf5990d512475cd4a9b}{getValue} (\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ P)
+\item 
+\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ \hyperlink{classFVRecons1D_a857a7b5576853dfb299e4fa53e786ac8}{getDerivative} (\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ P, size\_\-t degree)
+\item 
+\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ \hyperlink{classFVRecons1D_ae00c034b95574c81dbc8a7726d9cdecc}{getDerivative} (\hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ P)
+\item 
+void \hyperlink{classFVRecons1D_a2bbe646c052baf99f04a367ef6031d74}{clean} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVRecons1D_a6146b6ee0af1a92509e45a9261786e93}{
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{FVRecons1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVRecons1D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a6146b6ee0af1a92509e45a9261786e93}
+\hypertarget{classFVRecons1D_a6a3f5e98edc9b452300f64e12dec81fb}{
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{FVRecons1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVRecons1D} (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} $\ast$}]{ ptr\_\-s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a6a3f5e98edc9b452300f64e12dec81fb}
+\hypertarget{classFVRecons1D_a34b28ffea07632ac9f4927a15d98e8ee}{
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{FVRecons1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVRecons1D} (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} $\ast$}]{ ptr\_\-s, }
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a34b28ffea07632ac9f4927a15d98e8ee}
+\hypertarget{classFVRecons1D_a0b1a51af09a9736dd87796cad9c4409c}{
+\index{FVRecons1D@{FVRecons1D}!$\sim$FVRecons1D@{$\sim$FVRecons1D}}
+\index{$\sim$FVRecons1D@{$\sim$FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{$\sim$FVRecons1D}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf FVRecons1D} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a0b1a51af09a9736dd87796cad9c4409c}
+\hypertarget{classFVRecons1D_a1b5dd39ac32ef8c0bda1824fc0c087b4}{
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\index{FVRecons1D@{FVRecons1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{FVRecons1D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVRecons1D} (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVRecons1D} \&}]{ rec}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a1b5dd39ac32ef8c0bda1824fc0c087b4}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVRecons1D_a2bbe646c052baf99f04a367ef6031d74}{
+\index{FVRecons1D@{FVRecons1D}!clean@{clean}}
+\index{clean@{clean}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{clean}]{\setlength{\rightskip}{0pt plus 5cm}void clean (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a2bbe646c052baf99f04a367ef6031d74}
+\hypertarget{classFVRecons1D_a542380877cfbecb217d6079b325bcc9b}{
+\index{FVRecons1D@{FVRecons1D}!computeCoef@{computeCoef}}
+\index{computeCoef@{computeCoef}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{computeCoef}]{\setlength{\rightskip}{0pt plus 5cm}void computeCoef (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a542380877cfbecb217d6079b325bcc9b}
+\hypertarget{classFVRecons1D_a8d6d0de3223ec5b38427aac5a0b4b2a0}{
+\index{FVRecons1D@{FVRecons1D}!computeConservativeCoef@{computeConservativeCoef}}
+\index{computeConservativeCoef@{computeConservativeCoef}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{computeConservativeCoef}]{\setlength{\rightskip}{0pt plus 5cm}void computeConservativeCoef (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a8d6d0de3223ec5b38427aac5a0b4b2a0}
+\hypertarget{classFVRecons1D_ace350e893da1fc1e34121063885b4d66}{
+\index{FVRecons1D@{FVRecons1D}!doConservativeMatrix@{doConservativeMatrix}}
+\index{doConservativeMatrix@{doConservativeMatrix}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{doConservativeMatrix}]{\setlength{\rightskip}{0pt plus 5cm}void doConservativeMatrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_ace350e893da1fc1e34121063885b4d66}
+\hypertarget{classFVRecons1D_a778ff476790db0a772b0de4670138fd1}{
+\index{FVRecons1D@{FVRecons1D}!doMatrix@{doMatrix}}
+\index{doMatrix@{doMatrix}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{doMatrix}]{\setlength{\rightskip}{0pt plus 5cm}void doMatrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a778ff476790db0a772b0de4670138fd1}
+\hypertarget{classFVRecons1D_a857a7b5576853dfb299e4fa53e786ac8}{
+\index{FVRecons1D@{FVRecons1D}!getDerivative@{getDerivative}}
+\index{getDerivative@{getDerivative}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{getDerivative}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint1D}$<$double$>$ getDerivative (
+\begin{DoxyParamCaption}
+\item[{{\bf FVPoint1D}$<$ double $>$}]{ P, }
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a857a7b5576853dfb299e4fa53e786ac8}
+\hypertarget{classFVRecons1D_ae00c034b95574c81dbc8a7726d9cdecc}{
+\index{FVRecons1D@{FVRecons1D}!getDerivative@{getDerivative}}
+\index{getDerivative@{getDerivative}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{getDerivative}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint1D}$<$double$>$ getDerivative (
+\begin{DoxyParamCaption}
+\item[{{\bf FVPoint1D}$<$ double $>$}]{ P}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_ae00c034b95574c81dbc8a7726d9cdecc}
+\hypertarget{classFVRecons1D_a51ced9e32566282ad2c8aa54e23f3cc5}{
+\index{FVRecons1D@{FVRecons1D}!getPolynomialDegree@{getPolynomialDegree}}
+\index{getPolynomialDegree@{getPolynomialDegree}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{getPolynomialDegree}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getPolynomialDegree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a51ced9e32566282ad2c8aa54e23f3cc5}
+\hypertarget{classFVRecons1D_a1a9db4cdf1a4cbf5990d512475cd4a9b}{
+\index{FVRecons1D@{FVRecons1D}!getValue@{getValue}}
+\index{getValue@{getValue}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{getValue}]{\setlength{\rightskip}{0pt plus 5cm}double getValue (
+\begin{DoxyParamCaption}
+\item[{{\bf FVPoint1D}$<$ double $>$}]{ P}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a1a9db4cdf1a4cbf5990d512475cd4a9b}
+\hypertarget{classFVRecons1D_a30a9b7e0aaa2e1f1c80ce4c6f017cfe1}{
+\index{FVRecons1D@{FVRecons1D}!getValue@{getValue}}
+\index{getValue@{getValue}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{getValue}]{\setlength{\rightskip}{0pt plus 5cm}double getValue (
+\begin{DoxyParamCaption}
+\item[{{\bf FVPoint1D}$<$ double $>$}]{ P, }
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)}}
+\label{d7/d44/classFVRecons1D_a30a9b7e0aaa2e1f1c80ce4c6f017cfe1}
+\hypertarget{classFVRecons1D_a277a64063b5e54974f88aa36f01dd729}{
+\index{FVRecons1D@{FVRecons1D}!setPolynomialDegree@{setPolynomialDegree}}
+\index{setPolynomialDegree@{setPolynomialDegree}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setPolynomialDegree}]{\setlength{\rightskip}{0pt plus 5cm}void setPolynomialDegree (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a277a64063b5e54974f88aa36f01dd729}
+\hypertarget{classFVRecons1D_ad9a78c6c24ce1ef1e1e66ee793b71ca7}{
+\index{FVRecons1D@{FVRecons1D}!setReferencePoint@{setReferencePoint}}
+\index{setReferencePoint@{setReferencePoint}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setReferencePoint}]{\setlength{\rightskip}{0pt plus 5cm}void setReferencePoint (
+\begin{DoxyParamCaption}
+\item[{{\bf FVPoint1D}$<$ double $>$}]{ P}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_ad9a78c6c24ce1ef1e1e66ee793b71ca7}
+\hypertarget{classFVRecons1D_ade06e8c8d61be70bf976ab2ee71fe9da}{
+\index{FVRecons1D@{FVRecons1D}!setReferencePoint@{setReferencePoint}}
+\index{setReferencePoint@{setReferencePoint}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setReferencePoint}]{\setlength{\rightskip}{0pt plus 5cm}void setReferencePoint (
+\begin{DoxyParamCaption}
+\item[{double}]{ x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_ade06e8c8d61be70bf976ab2ee71fe9da}
+\hypertarget{classFVRecons1D_a34d8474a5f5470cab6f077871c7387da}{
+\index{FVRecons1D@{FVRecons1D}!setStencil@{setStencil}}
+\index{setStencil@{setStencil}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setStencil}]{\setlength{\rightskip}{0pt plus 5cm}void setStencil (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} \&}]{ st}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a34d8474a5f5470cab6f077871c7387da}
+\hypertarget{classFVRecons1D_a6d820346769771af609dbdaa7b1f3021}{
+\index{FVRecons1D@{FVRecons1D}!setStencil@{setStencil}}
+\index{setStencil@{setStencil}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setStencil}]{\setlength{\rightskip}{0pt plus 5cm}void setStencil (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} $\ast$}]{ ptr\_\-s, }
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a6d820346769771af609dbdaa7b1f3021}
+\hypertarget{classFVRecons1D_a82cbc1bab2638e760ea3ca50bd393ba6}{
+\index{FVRecons1D@{FVRecons1D}!setStencil@{setStencil}}
+\index{setStencil@{setStencil}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setStencil}]{\setlength{\rightskip}{0pt plus 5cm}void setStencil (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} \&}]{ st, }
+\item[{size\_\-t}]{ degree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a82cbc1bab2638e760ea3ca50bd393ba6}
+\hypertarget{classFVRecons1D_a9fd35e2a4d7096ce3fec84bfc30bf095}{
+\index{FVRecons1D@{FVRecons1D}!setStencil@{setStencil}}
+\index{setStencil@{setStencil}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setStencil}]{\setlength{\rightskip}{0pt plus 5cm}void setStencil (
+\begin{DoxyParamCaption}
+\item[{{\bf FVStencil} $\ast$}]{ ptr\_\-s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a9fd35e2a4d7096ce3fec84bfc30bf095}
+\hypertarget{classFVRecons1D_a3123586ee3e9ab48cb5c7bee851a368b}{
+\index{FVRecons1D@{FVRecons1D}!setVectorCell1D@{setVectorCell1D}}
+\index{setVectorCell1D@{setVectorCell1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setVectorCell1D}]{\setlength{\rightskip}{0pt plus 5cm}void setVectorCell1D (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ double $>$ \&}]{ u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a3123586ee3e9ab48cb5c7bee851a368b}
+\hypertarget{classFVRecons1D_a293c577ccab7096a617b07f0da0815f4}{
+\index{FVRecons1D@{FVRecons1D}!setVectorVertex1D@{setVectorVertex1D}}
+\index{setVectorVertex1D@{setVectorVertex1D}!FVRecons1D@{FVRecons1D}}
+\subsubsection[{setVectorVertex1D}]{\setlength{\rightskip}{0pt plus 5cm}void setVectorVertex1D (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ double $>$ \&}]{ u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d7/d44/classFVRecons1D_a293c577ccab7096a617b07f0da0815f4}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{FVRecons1D_8h}{FVRecons1D.h}\end{DoxyCompactItemize}

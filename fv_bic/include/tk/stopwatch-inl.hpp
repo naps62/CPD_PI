@@ -50,6 +50,19 @@ Time::Time(const Time& original) { this->set( original ); }
 //
 
 inline
+time_t
+Time::get_seconds()
+const
+{ return this->tv_sec; }
+
+
+inline
+suseconds_t
+Time::get_microseconds()
+const
+{ return this->tv_usec; }
+
+inline
 long long int
 Time::microseconds()
 const

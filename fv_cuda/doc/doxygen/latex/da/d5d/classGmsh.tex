@@ -1,0 +1,263 @@
+\hypertarget{classGmsh}{
+\section{Gmsh Class Reference}
+\label{da/d5d/classGmsh}\index{Gmsh@{Gmsh}}
+}
+
+
+{\ttfamily \#include $<$Gmsh.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGmsh_ad2da23d7e35b9fc76f58743cc549a22f}{Gmsh} ()
+\item 
+\hyperlink{classGmsh_a175d9c6b456585002d1d61649dcf732d}{$\sim$Gmsh} ()
+\item 
+\hyperlink{classGmsh_a82bfb712b8a045ca0511bb0d03bf55f6}{Gmsh} (const char $\ast$)
+\item 
+size\_\-t \hyperlink{classGmsh_a57250e339214b20036c3519ccee1e559}{getNbNode} ()
+\item 
+size\_\-t \hyperlink{classGmsh_ac6f522399e1d4bf255253de3c6e0063f}{getNbElement} ()
+\item 
+size\_\-t \hyperlink{classGmsh_a890ccac161f0becd266252b4cd3b9584}{getDim} ()
+\item 
+void \hyperlink{classGmsh_aa0f64160e12b798d9e199b44efaa5981}{readMesh} (const char $\ast$)
+\item 
+void \hyperlink{classGmsh_abe80c38932f08b4c551980dab40b6de3}{writeMesh} (const char $\ast$)
+\item 
+void \hyperlink{classGmsh_a5ae591df94fc66ccb85cbb6565368bca}{close} ()
+\item 
+void \hyperlink{classGmsh_a387ef615b882b4cc4bc304030ede5991}{FVMesh2Gmsh} (\hyperlink{classFVMesh1D}{FVMesh1D} \&)
+\item 
+void \hyperlink{classGmsh_a404e3317b60cbe65ac7ca20cd5bb0dcb}{FVMesh2Gmsh} (\hyperlink{classFVMesh2D}{FVMesh2D} \&)
+\item 
+void \hyperlink{classGmsh_adc58fe3881b7ac8ad547c7f3993039c0}{FVMesh2Gmsh} (\hyperlink{classFVMesh3D}{FVMesh3D} \&)
+\item 
+\hyperlink{classFVVertex3D}{FVVertex3D} $\ast$ \hyperlink{classGmsh_afc5e0f58e35a293293d3ad54990b8f39}{getNode} (const size\_\-t i)
+\item 
+\hyperlink{classGMElement}{GMElement} $\ast$ \hyperlink{classGmsh_a1be870d8aeb5e81879d8c5fcee057815}{getElement} (const size\_\-t i)
+\item 
+void \hyperlink{classGmsh_a08dad2ee34abbc61f49d177b127dd66c}{writeVector} (\hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\item 
+void \hyperlink{classGmsh_ab5a9ab67d5c0defc304b912832916f98}{writeVector} (const \hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const \hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\item 
+void \hyperlink{classGmsh_a70c1eb0ea4541a96417c7be9ef1326a2}{writeVector} (const \hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const \hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const \hyperlink{classFVVect}{FVVect}$<$ double $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\item 
+void \hyperlink{classGmsh_a1e980b0bcfcdf66da0dd091765102477}{writeVector} (\hyperlink{classFVVect}{FVVect}$<$ \hyperlink{classFVPoint1D}{FVPoint1D}$<$ double $>$ $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\item 
+void \hyperlink{classGmsh_a14e065398cfc6b8225c5aff82678b542}{writeVector} (\hyperlink{classFVVect}{FVVect}$<$ \hyperlink{classFVPoint2D}{FVPoint2D}$<$ double $>$ $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\item 
+void \hyperlink{classGmsh_acd9861f26525833b58ea5ac69001516e}{writeVector} (\hyperlink{classFVVect}{FVVect}$<$ \hyperlink{classFVPoint3D}{FVPoint3D}$<$ double $>$ $>$ \&, const size\_\-t type, const char $\ast$name, double time)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classGmsh_ad2da23d7e35b9fc76f58743cc549a22f}{
+\index{Gmsh@{Gmsh}!Gmsh@{Gmsh}}
+\index{Gmsh@{Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Gmsh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_ad2da23d7e35b9fc76f58743cc549a22f}
+\hypertarget{classGmsh_a175d9c6b456585002d1d61649dcf732d}{
+\index{Gmsh@{Gmsh}!$\sim$Gmsh@{$\sim$Gmsh}}
+\index{$\sim$Gmsh@{$\sim$Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{$\sim$Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf Gmsh} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a175d9c6b456585002d1d61649dcf732d}
+\hypertarget{classGmsh_a82bfb712b8a045ca0511bb0d03bf55f6}{
+\index{Gmsh@{Gmsh}!Gmsh@{Gmsh}}
+\index{Gmsh@{Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Gmsh} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a82bfb712b8a045ca0511bb0d03bf55f6}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classGmsh_a5ae591df94fc66ccb85cbb6565368bca}{
+\index{Gmsh@{Gmsh}!close@{close}}
+\index{close@{close}!Gmsh@{Gmsh}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a5ae591df94fc66ccb85cbb6565368bca}
+\hypertarget{classGmsh_a404e3317b60cbe65ac7ca20cd5bb0dcb}{
+\index{Gmsh@{Gmsh}!FVMesh2Gmsh@{FVMesh2Gmsh}}
+\index{FVMesh2Gmsh@{FVMesh2Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{FVMesh2Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}void FVMesh2Gmsh (
+\begin{DoxyParamCaption}
+\item[{{\bf FVMesh2D} \&}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a404e3317b60cbe65ac7ca20cd5bb0dcb}
+\hypertarget{classGmsh_adc58fe3881b7ac8ad547c7f3993039c0}{
+\index{Gmsh@{Gmsh}!FVMesh2Gmsh@{FVMesh2Gmsh}}
+\index{FVMesh2Gmsh@{FVMesh2Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{FVMesh2Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}void FVMesh2Gmsh (
+\begin{DoxyParamCaption}
+\item[{{\bf FVMesh3D} \&}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_adc58fe3881b7ac8ad547c7f3993039c0}
+\hypertarget{classGmsh_a387ef615b882b4cc4bc304030ede5991}{
+\index{Gmsh@{Gmsh}!FVMesh2Gmsh@{FVMesh2Gmsh}}
+\index{FVMesh2Gmsh@{FVMesh2Gmsh}!Gmsh@{Gmsh}}
+\subsubsection[{FVMesh2Gmsh}]{\setlength{\rightskip}{0pt plus 5cm}void FVMesh2Gmsh (
+\begin{DoxyParamCaption}
+\item[{{\bf FVMesh1D} \&}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a387ef615b882b4cc4bc304030ede5991}
+\hypertarget{classGmsh_a890ccac161f0becd266252b4cd3b9584}{
+\index{Gmsh@{Gmsh}!getDim@{getDim}}
+\index{getDim@{getDim}!Gmsh@{Gmsh}}
+\subsubsection[{getDim}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getDim (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{da/d5d/classGmsh_a890ccac161f0becd266252b4cd3b9584}
+\hypertarget{classGmsh_a1be870d8aeb5e81879d8c5fcee057815}{
+\index{Gmsh@{Gmsh}!getElement@{getElement}}
+\index{getElement@{getElement}!Gmsh@{Gmsh}}
+\subsubsection[{getElement}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GMElement}$\ast$ getElement (
+\begin{DoxyParamCaption}
+\item[{const size\_\-t}]{ i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{da/d5d/classGmsh_a1be870d8aeb5e81879d8c5fcee057815}
+\hypertarget{classGmsh_ac6f522399e1d4bf255253de3c6e0063f}{
+\index{Gmsh@{Gmsh}!getNbElement@{getNbElement}}
+\index{getNbElement@{getNbElement}!Gmsh@{Gmsh}}
+\subsubsection[{getNbElement}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbElement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{da/d5d/classGmsh_ac6f522399e1d4bf255253de3c6e0063f}
+\hypertarget{classGmsh_a57250e339214b20036c3519ccee1e559}{
+\index{Gmsh@{Gmsh}!getNbNode@{getNbNode}}
+\index{getNbNode@{getNbNode}!Gmsh@{Gmsh}}
+\subsubsection[{getNbNode}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbNode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{da/d5d/classGmsh_a57250e339214b20036c3519ccee1e559}
+\hypertarget{classGmsh_afc5e0f58e35a293293d3ad54990b8f39}{
+\index{Gmsh@{Gmsh}!getNode@{getNode}}
+\index{getNode@{getNode}!Gmsh@{Gmsh}}
+\subsubsection[{getNode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVVertex3D}$\ast$ getNode (
+\begin{DoxyParamCaption}
+\item[{const size\_\-t}]{ i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{da/d5d/classGmsh_afc5e0f58e35a293293d3ad54990b8f39}
+\hypertarget{classGmsh_aa0f64160e12b798d9e199b44efaa5981}{
+\index{Gmsh@{Gmsh}!readMesh@{readMesh}}
+\index{readMesh@{readMesh}!Gmsh@{Gmsh}}
+\subsubsection[{readMesh}]{\setlength{\rightskip}{0pt plus 5cm}void readMesh (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_aa0f64160e12b798d9e199b44efaa5981}
+\hypertarget{classGmsh_abe80c38932f08b4c551980dab40b6de3}{
+\index{Gmsh@{Gmsh}!writeMesh@{writeMesh}}
+\index{writeMesh@{writeMesh}!Gmsh@{Gmsh}}
+\subsubsection[{writeMesh}]{\setlength{\rightskip}{0pt plus 5cm}void writeMesh (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_abe80c38932f08b4c551980dab40b6de3}
+\hypertarget{classGmsh_a1e980b0bcfcdf66da0dd091765102477}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ {\bf FVPoint1D}$<$ double $>$ $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a1e980b0bcfcdf66da0dd091765102477}
+\hypertarget{classGmsh_a70c1eb0ea4541a96417c7be9ef1326a2}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const {\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const {\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a70c1eb0ea4541a96417c7be9ef1326a2}
+\hypertarget{classGmsh_acd9861f26525833b58ea5ac69001516e}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ {\bf FVPoint3D}$<$ double $>$ $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_acd9861f26525833b58ea5ac69001516e}
+\hypertarget{classGmsh_a14e065398cfc6b8225c5aff82678b542}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ {\bf FVPoint2D}$<$ double $>$ $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a14e065398cfc6b8225c5aff82678b542}
+\hypertarget{classGmsh_a08dad2ee34abbc61f49d177b127dd66c}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{{\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_a08dad2ee34abbc61f49d177b127dd66c}
+\hypertarget{classGmsh_ab5a9ab67d5c0defc304b912832916f98}{
+\index{Gmsh@{Gmsh}!writeVector@{writeVector}}
+\index{writeVector@{writeVector}!Gmsh@{Gmsh}}
+\subsubsection[{writeVector}]{\setlength{\rightskip}{0pt plus 5cm}void writeVector (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const {\bf FVVect}$<$ double $>$ \&}]{, }
+\item[{const size\_\-t}]{ type, }
+\item[{const char $\ast$}]{ name, }
+\item[{double}]{ time}
+\end{DoxyParamCaption}
+)}}
+\label{da/d5d/classGmsh_ab5a9ab67d5c0defc304b912832916f98}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{Gmsh_8h}{Gmsh.h}\end{DoxyCompactItemize}

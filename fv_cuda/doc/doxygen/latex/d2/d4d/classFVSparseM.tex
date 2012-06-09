@@ -1,0 +1,292 @@
+\hypertarget{classFVSparseM}{
+\section{FVSparseM$<$ T\_\- $>$ Class Template Reference}
+\label{d2/d4d/classFVSparseM}\index{FVSparseM@{FVSparseM}}
+}
+
+
+{\ttfamily \#include $<$FVSparseM.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFVSparseM_a04619c49ecf6808288fc10d0aaad70e1}{FVSparseM} ()
+\item 
+\hyperlink{classFVSparseM_a0df0d4878e3fb5bdae16f941b3154260}{$\sim$FVSparseM} ()
+\item 
+\hyperlink{classFVSparseM_a7c14fc91b113dd18acba072ba1288553}{FVSparseM} (size\_\-t)
+\item 
+\hyperlink{classFVSparseM_a0056e1e81f3b707ff99b988af48d0503}{FVSparseM} (size\_\-t, size\_\-t)
+\item 
+\hyperlink{classFVSparseM_a4c75a856ea17c80c2c2c1ed799711f9d}{FVSparseM} (const \hyperlink{classFVSparseM}{FVSparseM}$<$ T\_\- $>$ \&m)
+\item 
+size\_\-t \hyperlink{classFVSparseM_ae66137e8cb36be98d9d2bd139d4ac021}{getNbColumns} ()
+\item 
+size\_\-t \hyperlink{classFVSparseM_a33f9a9828a0dd36b3aac2b519e621247}{getNbRows} ()
+\item 
+size\_\-t \hyperlink{classFVSparseM_a600073d563962412f8873bb598d52be7}{getLength} ()
+\item 
+void \hyperlink{classFVSparseM_a572d8018b3c8e381d4a8c924bfae3bc6}{resize} (size\_\-t)
+\item 
+void \hyperlink{classFVSparseM_aa4d3517d2f731ae2943983293a5b1103}{resize} (size\_\-t, size\_\-t)
+\item 
+void \hyperlink{classFVSparseM_a5145b2a41ccf168751d1dd9972859e32}{setValue} (size\_\-t i, size\_\-t j, const T\_\- \&val)
+\item 
+void \hyperlink{classFVSparseM_a53fdc14c5ce8e45b80846954c3cc0fbb}{addValue} (size\_\-t i, size\_\-t j, const T\_\- \&val)
+\item 
+void \hyperlink{classFVSparseM_a8c644f60a185c582b8eaa259d7b65aea}{resizeAndsetValue} (size\_\-t i, size\_\-t j, const T\_\- \&val)
+\item 
+T\_\- \hyperlink{classFVSparseM_a89d9927485d8a33c508e8caf871ca117}{getValue} (size\_\-t i, size\_\-t j)
+\item 
+void \hyperlink{classFVSparseM_a4b148f40a95444d5669406b918ad2f52}{show} ()
+\item 
+\hyperlink{classFVSparseM}{FVSparseM}$<$ T\_\- $>$ \& \hyperlink{classFVSparseM_af82b4e06becaf94b9a98c445a0bcd2f8}{operator/=} (const T\_\- \&val)
+\item 
+\hyperlink{classFVSparseM}{FVSparseM}$<$ T\_\- $>$ \& \hyperlink{classFVSparseM_ab7ff4e84f06afbf9b1190381e4fabde2}{operator$\ast$=} (const T\_\- \&val)
+\item 
+void \hyperlink{classFVSparseM_aa8b4d864372618ec7e35dc7be2dc59ef}{Mult} (const \hyperlink{classFVVect}{FVVect}$<$ T\_\- $>$ \&, \hyperlink{classFVVect}{FVVect}$<$ T\_\- $>$ \&) const 
+\item 
+void \hyperlink{classFVSparseM_a18ce25ba57af55caad2dac42ae0ca2aa}{TransMult} (const \hyperlink{classFVVect}{FVVect}$<$ T\_\- $>$ \&, \hyperlink{classFVVect}{FVVect}$<$ T\_\- $>$ \&) const 
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+size\_\-t \hyperlink{classFVSparseM_a4451904bc3a87b7e94ba9967cfe5acc9}{nb\_\-cols}
+\item 
+size\_\-t \hyperlink{classFVSparseM_a660778a5412448cf6b641e67d1d70011}{nb\_\-rows}
+\item 
+size\_\-t \hyperlink{classFVSparseM_ae809d5359ac030c60a30a8f0b2294b82}{length}
+\item 
+std::vector$<$ \hyperlink{FVSparseM_8h_a75e12c6bf84f6847b73ab5ab713bf39c}{Tab\_\-index} $\ast$ $>$ \hyperlink{classFVSparseM_ad5e348a06667f83ce7654e382e90ce57}{row}
+\item 
+std::vector$<$ \hyperlink{FVSparseM_8h_a75e12c6bf84f6847b73ab5ab713bf39c}{Tab\_\-index} $\ast$ $>$ \hyperlink{classFVSparseM_a075a80b2189de3b24e0c89b98cf4ddb9}{col}
+\item 
+std::vector$<$ T\_\- $>$ \hyperlink{classFVSparseM_aba6347ed10b77e06dd559a865724cfa6}{a}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$class T\_\-$>$ class FVSparseM$<$ T\_\- $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFVSparseM_a04619c49ecf6808288fc10d0aaad70e1}{
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\subsubsection[{FVSparseM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a04619c49ecf6808288fc10d0aaad70e1}
+\hypertarget{classFVSparseM_a0df0d4878e3fb5bdae16f941b3154260}{
+\index{FVSparseM@{FVSparseM}!$\sim$FVSparseM@{$\sim$FVSparseM}}
+\index{$\sim$FVSparseM@{$\sim$FVSparseM}!FVSparseM@{FVSparseM}}
+\subsubsection[{$\sim$FVSparseM}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf FVSparseM} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a0df0d4878e3fb5bdae16f941b3154260}
+\hypertarget{classFVSparseM_a7c14fc91b113dd18acba072ba1288553}{
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\subsubsection[{FVSparseM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM} (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ size}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a7c14fc91b113dd18acba072ba1288553}
+\hypertarget{classFVSparseM_a0056e1e81f3b707ff99b988af48d0503}{
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\subsubsection[{FVSparseM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM} (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ nr, }
+\item[{size\_\-t}]{ nc}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a0056e1e81f3b707ff99b988af48d0503}
+\hypertarget{classFVSparseM_a4c75a856ea17c80c2c2c1ed799711f9d}{
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\index{FVSparseM@{FVSparseM}!FVSparseM@{FVSparseM}}
+\subsubsection[{FVSparseM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM} (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVSparseM}$<$ T\_\- $>$ \&}]{ m}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a4c75a856ea17c80c2c2c1ed799711f9d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFVSparseM_a53fdc14c5ce8e45b80846954c3cc0fbb}{
+\index{FVSparseM@{FVSparseM}!addValue@{addValue}}
+\index{addValue@{addValue}!FVSparseM@{FVSparseM}}
+\subsubsection[{addValue}]{\setlength{\rightskip}{0pt plus 5cm}void addValue (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i, }
+\item[{size\_\-t}]{ j, }
+\item[{const T\_\- \&}]{ val}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a53fdc14c5ce8e45b80846954c3cc0fbb}
+\hypertarget{classFVSparseM_a600073d563962412f8873bb598d52be7}{
+\index{FVSparseM@{FVSparseM}!getLength@{getLength}}
+\index{getLength@{getLength}!FVSparseM@{FVSparseM}}
+\subsubsection[{getLength}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getLength (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d2/d4d/classFVSparseM_a600073d563962412f8873bb598d52be7}
+\hypertarget{classFVSparseM_ae66137e8cb36be98d9d2bd139d4ac021}{
+\index{FVSparseM@{FVSparseM}!getNbColumns@{getNbColumns}}
+\index{getNbColumns@{getNbColumns}!FVSparseM@{FVSparseM}}
+\subsubsection[{getNbColumns}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbColumns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d2/d4d/classFVSparseM_ae66137e8cb36be98d9d2bd139d4ac021}
+\hypertarget{classFVSparseM_a33f9a9828a0dd36b3aac2b519e621247}{
+\index{FVSparseM@{FVSparseM}!getNbRows@{getNbRows}}
+\index{getNbRows@{getNbRows}!FVSparseM@{FVSparseM}}
+\subsubsection[{getNbRows}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t getNbRows (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d2/d4d/classFVSparseM_a33f9a9828a0dd36b3aac2b519e621247}
+\hypertarget{classFVSparseM_a89d9927485d8a33c508e8caf871ca117}{
+\index{FVSparseM@{FVSparseM}!getValue@{getValue}}
+\index{getValue@{getValue}!FVSparseM@{FVSparseM}}
+\subsubsection[{getValue}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- getValue (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i, }
+\item[{size\_\-t}]{ j}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a89d9927485d8a33c508e8caf871ca117}
+\hypertarget{classFVSparseM_aa8b4d864372618ec7e35dc7be2dc59ef}{
+\index{FVSparseM@{FVSparseM}!Mult@{Mult}}
+\index{Mult@{Mult}!FVSparseM@{FVSparseM}}
+\subsubsection[{Mult}]{\setlength{\rightskip}{0pt plus 5cm}void Mult (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVVect}$<$ T\_\- $>$ \&}]{ x, }
+\item[{{\bf FVVect}$<$ T\_\- $>$ \&}]{ y}
+\end{DoxyParamCaption}
+) const}}
+\label{d2/d4d/classFVSparseM_aa8b4d864372618ec7e35dc7be2dc59ef}
+\hypertarget{classFVSparseM_ab7ff4e84f06afbf9b1190381e4fabde2}{
+\index{FVSparseM@{FVSparseM}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!FVSparseM@{FVSparseM}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM}$<$ T\_\- $>$ \& operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{const T\_\- \&}]{ val}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_ab7ff4e84f06afbf9b1190381e4fabde2}
+\hypertarget{classFVSparseM_af82b4e06becaf94b9a98c445a0bcd2f8}{
+\index{FVSparseM@{FVSparseM}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!FVSparseM@{FVSparseM}}
+\subsubsection[{operator/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVSparseM}$<$ T\_\- $>$ \& operator/= (
+\begin{DoxyParamCaption}
+\item[{const T\_\- \&}]{ val}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_af82b4e06becaf94b9a98c445a0bcd2f8}
+\hypertarget{classFVSparseM_a572d8018b3c8e381d4a8c924bfae3bc6}{
+\index{FVSparseM@{FVSparseM}!resize@{resize}}
+\index{resize@{resize}!FVSparseM@{FVSparseM}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}void resize (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ size}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a572d8018b3c8e381d4a8c924bfae3bc6}
+\hypertarget{classFVSparseM_aa4d3517d2f731ae2943983293a5b1103}{
+\index{FVSparseM@{FVSparseM}!resize@{resize}}
+\index{resize@{resize}!FVSparseM@{FVSparseM}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}void resize (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ nr, }
+\item[{size\_\-t}]{ nc}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_aa4d3517d2f731ae2943983293a5b1103}
+\hypertarget{classFVSparseM_a8c644f60a185c582b8eaa259d7b65aea}{
+\index{FVSparseM@{FVSparseM}!resizeAndsetValue@{resizeAndsetValue}}
+\index{resizeAndsetValue@{resizeAndsetValue}!FVSparseM@{FVSparseM}}
+\subsubsection[{resizeAndsetValue}]{\setlength{\rightskip}{0pt plus 5cm}void resizeAndsetValue (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i, }
+\item[{size\_\-t}]{ j, }
+\item[{const T\_\- \&}]{ val}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a8c644f60a185c582b8eaa259d7b65aea}
+\hypertarget{classFVSparseM_a5145b2a41ccf168751d1dd9972859e32}{
+\index{FVSparseM@{FVSparseM}!setValue@{setValue}}
+\index{setValue@{setValue}!FVSparseM@{FVSparseM}}
+\subsubsection[{setValue}]{\setlength{\rightskip}{0pt plus 5cm}void setValue (
+\begin{DoxyParamCaption}
+\item[{size\_\-t}]{ i, }
+\item[{size\_\-t}]{ j, }
+\item[{const T\_\- \&}]{ val}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a5145b2a41ccf168751d1dd9972859e32}
+\hypertarget{classFVSparseM_a4b148f40a95444d5669406b918ad2f52}{
+\index{FVSparseM@{FVSparseM}!show@{show}}
+\index{show@{show}!FVSparseM@{FVSparseM}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void show (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/d4d/classFVSparseM_a4b148f40a95444d5669406b918ad2f52}
+\hypertarget{classFVSparseM_a18ce25ba57af55caad2dac42ae0ca2aa}{
+\index{FVSparseM@{FVSparseM}!TransMult@{TransMult}}
+\index{TransMult@{TransMult}!FVSparseM@{FVSparseM}}
+\subsubsection[{TransMult}]{\setlength{\rightskip}{0pt plus 5cm}void TransMult (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVVect}$<$ T\_\- $>$ \&}]{ x, }
+\item[{{\bf FVVect}$<$ T\_\- $>$ \&}]{ y}
+\end{DoxyParamCaption}
+) const}}
+\label{d2/d4d/classFVSparseM_a18ce25ba57af55caad2dac42ae0ca2aa}
+
+
+\subsection{Field Documentation}
+\hypertarget{classFVSparseM_aba6347ed10b77e06dd559a865724cfa6}{
+\index{FVSparseM@{FVSparseM}!a@{a}}
+\index{a@{a}!FVSparseM@{FVSparseM}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$T\_\-$>$ {\bf a}}}
+\label{d2/d4d/classFVSparseM_aba6347ed10b77e06dd559a865724cfa6}
+\hypertarget{classFVSparseM_a075a80b2189de3b24e0c89b98cf4ddb9}{
+\index{FVSparseM@{FVSparseM}!col@{col}}
+\index{col@{col}!FVSparseM@{FVSparseM}}
+\subsubsection[{col}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Tab\_\-index} $\ast$$>$ {\bf col}}}
+\label{d2/d4d/classFVSparseM_a075a80b2189de3b24e0c89b98cf4ddb9}
+\hypertarget{classFVSparseM_ae809d5359ac030c60a30a8f0b2294b82}{
+\index{FVSparseM@{FVSparseM}!length@{length}}
+\index{length@{length}!FVSparseM@{FVSparseM}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf length}}}
+\label{d2/d4d/classFVSparseM_ae809d5359ac030c60a30a8f0b2294b82}
+\hypertarget{classFVSparseM_a4451904bc3a87b7e94ba9967cfe5acc9}{
+\index{FVSparseM@{FVSparseM}!nb\_\-cols@{nb\_\-cols}}
+\index{nb\_\-cols@{nb\_\-cols}!FVSparseM@{FVSparseM}}
+\subsubsection[{nb\_\-cols}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf nb\_\-cols}}}
+\label{d2/d4d/classFVSparseM_a4451904bc3a87b7e94ba9967cfe5acc9}
+\hypertarget{classFVSparseM_a660778a5412448cf6b641e67d1d70011}{
+\index{FVSparseM@{FVSparseM}!nb\_\-rows@{nb\_\-rows}}
+\index{nb\_\-rows@{nb\_\-rows}!FVSparseM@{FVSparseM}}
+\subsubsection[{nb\_\-rows}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf nb\_\-rows}}}
+\label{d2/d4d/classFVSparseM_a660778a5412448cf6b641e67d1d70011}
+\hypertarget{classFVSparseM_ad5e348a06667f83ce7654e382e90ce57}{
+\index{FVSparseM@{FVSparseM}!row@{row}}
+\index{row@{row}!FVSparseM@{FVSparseM}}
+\subsubsection[{row}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Tab\_\-index} $\ast$$>$ {\bf row}}}
+\label{d2/d4d/classFVSparseM_ad5e348a06667f83ce7654e382e90ce57}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{FVSparseM_8h}{FVSparseM.h}\end{DoxyCompactItemize}

@@ -1,0 +1,149 @@
+\hypertarget{FVPoint4D_8h}{
+\section{include/FVPoint4D.h File Reference}
+\label{d8/db7/FVPoint4D_8h}\index{include/FVPoint4D.h@{include/FVPoint4D.h}}
+}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$iomanip$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include \char`\"{}FVLib\_\-config.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFVPoint4D}{FVPoint4D$<$ T\_\- $>$}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_a119c1712b4eb71c07fc24fd6bfbff5af}{operator+} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_ac6b004b8dfa17fe012693173b50b25b4}{operator+} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a, const T\_\- \&x)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_afad8b89dba53bab42c560c18e09d9e23}{operator-\/} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_a151375ed20757a61ef429284004d254f}{operator-\/} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a, const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_af77505bcda03fb0077e68b455b3ac6ab}{operator-\/} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a, const T\_\- \&x)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_adfce687ec7ab3981daef22f6b78cb8e7}{operator$\ast$} (const T\_\- \&a, const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_ad4504f1f627302952859f92d635a0123}{operator$\ast$} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b, const T\_\- \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\T\_\- \hyperlink{FVPoint4D_8h_af25c63ed5c57f09a71aab5b9d9c88b24}{operator$\ast$} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b, const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\\hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \hyperlink{FVPoint4D_8h_ad1f8485d201b176f606514882d6bed4d}{operator/} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&b, const T\_\- \&a)
+\item 
+{\footnotesize template$<$class T\_\- $>$ }\\std::ostream \& \hyperlink{FVPoint4D_8h_a76017c548cf1f538cbb2fceed0f82dbb}{operator$<$$<$} (std::ostream \&s, const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ T\_\- $>$ \&a)
+\item 
+double \hyperlink{FVPoint4D_8h_a77cdbb85146fec63ff0c306fcc0a03db}{Norm} (const \hyperlink{classFVPoint4D}{FVPoint4D}$<$ double $>$ \&u)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{FVPoint4D_8h_a77cdbb85146fec63ff0c306fcc0a03db}{
+\index{FVPoint4D.h@{FVPoint4D.h}!Norm@{Norm}}
+\index{Norm@{Norm}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{Norm}]{\setlength{\rightskip}{0pt plus 5cm}double Norm (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ double $>$ \&}]{ u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d8/db7/FVPoint4D_8h_a77cdbb85146fec63ff0c306fcc0a03db}
+\hypertarget{FVPoint4D_8h_adfce687ec7ab3981daef22f6b78cb8e7}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const T\_\- \&}]{ a, }
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_adfce687ec7ab3981daef22f6b78cb8e7}
+\hypertarget{FVPoint4D_8h_af25c63ed5c57f09a71aab5b9d9c88b24}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}T\_\- operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_af25c63ed5c57f09a71aab5b9d9c88b24}
+\hypertarget{FVPoint4D_8h_ad4504f1f627302952859f92d635a0123}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const T\_\- \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_ad4504f1f627302952859f92d635a0123}
+\hypertarget{FVPoint4D_8h_ac6b004b8dfa17fe012693173b50b25b4}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator+@{operator+}}
+\index{operator+@{operator+}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const T\_\- \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_ac6b004b8dfa17fe012693173b50b25b4}
+\hypertarget{FVPoint4D_8h_a119c1712b4eb71c07fc24fd6bfbff5af}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator+@{operator+}}
+\index{operator+@{operator+}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_a119c1712b4eb71c07fc24fd6bfbff5af}
+\hypertarget{FVPoint4D_8h_a151375ed20757a61ef429284004d254f}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_a151375ed20757a61ef429284004d254f}
+\hypertarget{FVPoint4D_8h_af77505bcda03fb0077e68b455b3ac6ab}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a, }
+\item[{const T\_\- \&}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_af77505bcda03fb0077e68b455b3ac6ab}
+\hypertarget{FVPoint4D_8h_afad8b89dba53bab42c560c18e09d9e23}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_afad8b89dba53bab42c560c18e09d9e23}
+\hypertarget{FVPoint4D_8h_ad1f8485d201b176f606514882d6bed4d}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator/@{operator/}}
+\index{operator/@{operator/}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FVPoint4D}$<$T\_\-$>$ operator/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ b, }
+\item[{const T\_\- \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_ad1f8485d201b176f606514882d6bed4d}
+\hypertarget{FVPoint4D_8h_a76017c548cf1f538cbb2fceed0f82dbb}{
+\index{FVPoint4D.h@{FVPoint4D.h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!FVPoint4D.h@{FVPoint4D.h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std::ostream \&}]{ s, }
+\item[{const {\bf FVPoint4D}$<$ T\_\- $>$ \&}]{ a}
+\end{DoxyParamCaption}
+)}}
+\label{d8/db7/FVPoint4D_8h_a76017c548cf1f538cbb2fceed0f82dbb}
