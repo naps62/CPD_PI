@@ -181,7 +181,7 @@ int main(int argc, char **argv) {
 		t += dt;
 
 		// anim save
-		if (t >= anim_next_step) {
+		if (t >= anim_next_step || 1==1) {
 			#ifdef _CUDA
 				polution.cuda_load();
 				flux.cuda_load();
