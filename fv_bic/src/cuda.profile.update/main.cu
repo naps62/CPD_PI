@@ -6,7 +6,7 @@ namespace profile {
 	tk::Stopwatch *s;
 	//PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 
-	#define COUNT 1
+	#define COUNT 2
 	long long up[COUNT];
 	long long count[COUNT];
 
