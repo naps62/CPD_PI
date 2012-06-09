@@ -39,9 +39,6 @@ namespace profile {
 
 #define PROFILE_COUNTER              profile::s
 #define PROFILE_INIT()               profile::init()
-#define PROFILE_RETRIEVE_PRE()       profile::pre()
-#define PROFILE_RETRIEVE_MAIN_LOOP() profile::main_loop()
-#define PROFILE_RETRIEVE_POS()       profile::pos()
 #define PROFILE_OUTPUT()             profile::output(cout)
 #define PROFILE_CLEANUP()            profile::cleanup()
 #define PROFILE_START() profile::s->start()
