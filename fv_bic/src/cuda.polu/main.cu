@@ -184,10 +184,10 @@ int main(int argc, char **argv) {
 		if (t >= anim_next_step || 1==1) {
 			#ifdef _CUDA
 				polution.cuda_load();
-				vs.cuda_load();
+				flux.cuda_load();
 			#endif
-			for(unsigned int i = 0; i < vs.size(); ++i)
-				cout << "flux[" << i << "] = " << vs[i] << endl;
+			for(unsigned int i = 0; i < flux.size(); ++i)
+				cout << "flux[" << i << "] = " << flux[i] << endl;
 			polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
 		}
