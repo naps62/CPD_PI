@@ -13,7 +13,7 @@ namespace profile {
 		s = new tk::Stopwatch();
 
 		for(unsigned int i = 0; i < COUNT; ++i)
-			cf[i] = count[i] = 0;
+			cf[i] = 0;
 	}
 
 	inline void output(std::ostream& out) {
