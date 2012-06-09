@@ -164,8 +164,7 @@ int main(int argc, char **argv) {
 	// main loop start
 	//
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {
-		cout << "iteration " << i << '\r';
-		
+			
 		PROFILE_START();
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 		PROFILE_STOP();
