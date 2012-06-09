@@ -8,17 +8,18 @@ namespace profile {
 
 	#define COUNT 2
 	long long cf[COUNT];
+	long long count[COUNT];
 
 	void init() {
 		s = new tk::Stopwatch();
 
 		for(unsigned int i = 0; i < COUNT; ++i)
-			cf[i] = 0;
+			cf[i] = count[i] = 0;
 	}
 
 	inline void output(std::ostream& out) {
 		for(unsigned int i = 0; i < COUNT; ++i) {
-			out << ((double)cf[i]);
+			out << ((double)cf[i]/(double)count[i]);
 			if (i != COUNT - 1)
 				out << ';';
 		}
@@ -30,11 +31,12 @@ namespace profile {
 	}
 
 	inline void time_cf(int x) {
-		cf[x] = s->last().microseconds();
+		cf[x] += s->last().microseconds();
+		count[x]++;
 	}
 }
 
-#define NUM_ITERATIONS  1000
+#define NUM_ITERATIONS  200
 
 #define PROFILE_COUNTER              profile::s
 #define PROFILE_INIT()               profile::init()
@@ -163,8 +165,7 @@ int main(int argc, char **argv) {
 	//
 	// main loop start
 	//
-	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {
-			
+	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {		
 		PROFILE_START();
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 		PROFILE_STOP();
