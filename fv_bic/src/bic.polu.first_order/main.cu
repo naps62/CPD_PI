@@ -255,7 +255,7 @@ int main(int argc, char **argv) {
 				cudaCheckError(ss.str());
 			}
 	
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), data.dirichlet);
+			//kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), data.dirichlet);
 	
 			_DEBUG {
 				stringstream ss;
