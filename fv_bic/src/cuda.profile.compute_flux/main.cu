@@ -8,7 +8,6 @@ namespace profile {
 
 	#define COUNT 2
 	long long cf[COUNT];
-	long long count[COUNT];
 
 	void init() {
 		s = new tk::Stopwatch();
@@ -19,7 +18,7 @@ namespace profile {
 
 	inline void output(std::ostream& out) {
 		for(unsigned int i = 0; i < COUNT; ++i) {
-			out << ((double)cf[i]/(double)count[i]);
+			out << ((double)cf[i]);
 			if (i != COUNT - 1)
 				out << ';';
 		}
@@ -32,11 +31,10 @@ namespace profile {
 
 	inline void time_cf(int x) {
 		cf[x] = s->last().microseconds();
-		count[x]++;
 	}
 }
 
-#define NUM_ITERATIONS  200
+#define NUM_ITERATIONS  1000
 
 #define PROFILE_COUNTER              profile::s
 #define PROFILE_INIT()               profile::init()
