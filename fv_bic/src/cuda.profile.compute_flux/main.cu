@@ -19,7 +19,6 @@ namespace profile {
 
 	inline void output(std::ostream& out) {
 		for(unsigned int i = 0; i < COUNT; ++i) {
-			count[i] = 1;
 			out << ((double)cf[i]/(double)count[i]);
 			if (i != COUNT - 1)
 				out << ';';
@@ -37,7 +36,7 @@ namespace profile {
 	}
 }
 
-#define NUM_ITERATIONS  200
+#define NUM_ITERATIONS  500
 
 #define PROFILE_COUNTER              profile::s
 #define PROFILE_INIT()               profile::init()
