@@ -122,6 +122,8 @@ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 	flux[edge] = res;
 }
 
+#define ALG_IF(cond, true_val, false_val) ((cond) * (true_val) + (!(cond)) * (false_val))
+
 /**
  * Optimization 2 - removed divergence in last condition
  */
@@ -149,7 +151,8 @@ void kernel_compute_flux3(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 	else
 		res *= p_right;*/
 	bool cond = (res >= 0);
-	res *= cond * p_left + (!cond) * p_right;
+	res *= ALG_IF(cond, p_left, p_right);
+	//res *= cond * p_left + (!cond) * p_right;
 
 	flux[edge] = res;
 }
@@ -163,7 +166,7 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 
 	if (edge >= mesh->num_edges) return;
 
-	double res = velocity[edge];
+	double v = velocity[edge];
 
 	unsigned int i_left  = mesh->edge_left_cells[edge];
 	unsigned int i_right = mesh->edge_right_cells[edge];
@@ -172,14 +175,10 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 	p_left = polution[i_left];
 
 	bool cond = (i_right != NO_RIGHT_CELL);
-	/*if (i_right != NO_RIGHT_CELL)
-		p_right = polution[i_right];
-	else
-		p_right = dc;*/
-	p_right = (cond) * polution[i_right] + (!cond) * dc;
+	p_right = ALG_IF(cond, polution[i_right], dc);
+	//p_right = (cond) * polution[i_right] + (!cond) * dc;
 
-	cond = (res >= 0);
-	res *= cond * p_left + (!cond) * p_right;
-
-	flux[edge] = res;
+	cond = (v >= 0);
+	flux[edge] = ALG_IF(cond, p_left, p_right);
+	//flux[edge] = v * (cond * p_left + (!cond) * p_right);
 }
