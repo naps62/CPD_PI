@@ -43,12 +43,15 @@ int gen_menu(Parameters data) {
 			<< " 2. half full  - f(x) = (x < 0.5) ? 1 : 0" << endl
 			<< " 3. triangle   - f(x) = (x < 0.5) ? 2x : -2x + 2" << endl
 			<< " 4. constant   - f(x) = 1" << endl
-			<< " 5. test data  - f(x,y) = 3x + 7y - 15" << endl;
+			<< " 5. test data  - f(x,y) = 3x + 7y - 15" << endl
+			<< " 6. double sin" << endl
+			<< " 7. four parts" << endl
+			<< " 8. circle" << endl;
 
 	int res;
 	cin >> res;
 	cout << "choose " << res << endl;
-	if (res < 1 && res > 5) {
+	if (res < 1 && res > 8) {
 		cout << "Invalid option!" << endl;
 		exit(-1);
 	}
@@ -79,6 +82,16 @@ void fill_polu(CFVMesh2D &mesh, CFVArray<double> &polu, int op) {
 			case 5:
 				polu[i] = 3.0 * x + 5 * y - 15;
 				break;
+			case 6:
+				polu[i] = sin(2 * M_PI * x) * sin(2 * M_PI * y);
+				break;
+			case 7:
+				if (x < 0.5 && y < 0.5) polu[i] = 1;
+				else polu[i] = 0;
+				break;
+			case 8:
+				if ((x-0.5)*(x-0.5) + (y-0.5)*(y-0.5) <= 0.2*0.2) polu[i] = 1;
+				else polu[i] = 0;
 		}
 	}
 }
