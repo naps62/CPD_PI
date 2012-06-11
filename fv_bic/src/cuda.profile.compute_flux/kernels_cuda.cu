@@ -126,7 +126,7 @@ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *veloci
  * Optimization 2 - removed divergence in last cycle
  */
 __global__
-void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
+void kernel_compute_flux3(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
 	unsigned int edge = blockIdx.x * blockDim.x + threadIdx.x;
 
 	if (edge >= mesh->num_edges) return;
