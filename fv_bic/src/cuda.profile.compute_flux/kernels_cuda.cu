@@ -148,7 +148,7 @@ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 		res *= p_left;
 	else
 		res *= p_right;*/
-	bool cond = (res >= 0)
+	bool cond = (res >= 0);
 	res *= cond * p_left + (!cond) * p_right;
 
 	flux[edge] = res;
