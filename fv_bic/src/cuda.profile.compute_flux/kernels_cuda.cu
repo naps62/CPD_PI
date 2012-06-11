@@ -200,7 +200,7 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 	//bool right_cond = (i_right != NO_RIGHT_CELL);
 	//p_right = ALG_IF(cond, polution[i_right], dc);
 
-	cond = (v >= 0);
+	bool cond = (v >= 0);
 	flux[edge] = v * ALG_IF(cond,
 							polution[ mesh->edge_left_cells[edge] ],
 							ALG_IF(right_cond,
