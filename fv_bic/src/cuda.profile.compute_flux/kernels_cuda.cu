@@ -121,3 +121,35 @@ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 
 	flux[edge] = res;
 }
+
+/**
+ * Optimization 2 - removed divergence in last cycle
+ */
+__global__
+void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
+	unsigned int edge = blockIdx.x * blockDim.x + threadIdx.x;
+
+	if (edge >= mesh->num_edges) return;
+
+	double res = velocity[edge];
+
+	unsigned int i_left  = mesh->edge_left_cells[edge];
+	unsigned int i_right = mesh->edge_right_cells[edge];
+
+	double p_left, p_right;
+	p_left = polution[i_left];
+
+	if (i_right != NO_RIGHT_CELL)
+		p_right = polution[i_right];
+	else
+		p_right = dc;
+
+	/*if (res >= 0)
+		res *= p_left;
+	else
+		res *= p_right;*/
+	bool cond = (res >= 0)
+	res *= cond * p_left + (!cond) * p_right;
+
+	flux[edge] = res;
+}
