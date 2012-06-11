@@ -184,7 +184,7 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
  * Optimization 4 - moved memory access to inside if
  */
 __global__
-void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
+void kernel_compute_flux5(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
 	unsigned int edge = blockIdx.x * blockDim.x + threadIdx.x;
 
 	if (edge >= mesh->num_edges) return;

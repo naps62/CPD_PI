@@ -63,6 +63,7 @@ __global__ void kernel_compute_flux1(CFVMesh2D_cuda *mesh, double *polution, dou
 __global__ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
 __global__ void kernel_compute_flux3(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
 __global__ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
+__global__ void kernel_compute_flux5(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
 
 /**
  * kernel_update
