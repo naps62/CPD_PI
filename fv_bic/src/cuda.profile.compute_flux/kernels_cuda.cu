@@ -176,10 +176,10 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 		p_right = polution[i_right];
 	else
 		p_right = dc;*/
-	double polution = (cond) * polution[i_right] + (!cond) * dc;
+	double pol = (cond) * polution[i_right] + (!cond) * dc;
 
 	//cond = (res >= 0);
-	res *= v * polution;
+	res *= pol;
 
 	flux[edge] = res;
 }
