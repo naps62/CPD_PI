@@ -192,18 +192,18 @@ void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 	double v = velocity[edge];
 
 	//unsigned int i_left  = mesh->edge_left_cells[edge];
-	//unsigned int i_right = mesh->edge_right_cells[edge];
+	unsigned int i_right = mesh->edge_right_cells[edge];
 
 	//double p_left, p_right;
 	//p_left = polution[i_left];
 
-	//bool right_cond = (i_right != NO_RIGHT_CELL);
+	bool right_cond = (i_right != NO_RIGHT_CELL);
 	//p_right = ALG_IF(cond, polution[i_right], dc);
 
 	bool cond = (v >= 0);
 	flux[edge] = v * ALG_IF(cond,
 							polution[ mesh->edge_left_cells[edge] ],
 							ALG_IF(right_cond,
-									polution[ mesh->edge_right_cells[edge] ],
+									polution[ i_right ],
 									dc));
 }
