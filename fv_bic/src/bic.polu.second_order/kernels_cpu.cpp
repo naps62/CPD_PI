@@ -279,6 +279,7 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 /* Return result of (A(x-x0) + B(y-y0)) portion of the linear system to compute the flux of an edge */
 double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned int edge, unsigned int cell, double t, double dt) {
 
+	// this part is just for the infinite simulation
 	if (mesh.edge_types[edge] == FV_EDGE_FAKE) {
 		// check if this edge is actually connected to this cell
 		bool correct = false;
@@ -409,19 +410,26 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFV
 
 /* For each cell, compute min(edgePsi) */
 void cpu_cellPsi(CFVMesh2D &mesh, CFVArray<double> &edgePsi, CFVArray<double> &cellPsi) {
-
+	//cout << endl;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double minPsi = 1;
-		for(unsigned int edge = 0; edge < mesh.cell_edges_count[cell]; ++edge) {
-			double current_edgePsi = edgePsi[ mesh.cell_edges.elem(edge, 0, cell) ];
-			cout << "edgePsi " << current_edgePsi << endl;
+		for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
+			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
+
+			double current_edgePsi = edgePsi[ edge ];
+			//cout << "edge " << edge << " edgePsi " << current_edgePsi << endl;
 
 			//cout << "edge " << mesh.cell_edges.elem(edge,0,cell) << " psi " << current_edgePsi << endl;
-			if (current_edgePsi < minPsi && mesh.edge_types[edge] != FV_EDGE_NEUMMAN)
+			if (current_edgePsi < minPsi && mesh.edge_types[edge] != FV_EDGE_NEUMMAN &&
+
+				// TODO this prevents horizontal edges from being used. not a pretty solution
+				mesh.vertex_coords.y[ mesh.edge_fst_vertex[edge] ] != mesh.vertex_coords.y[ mesh.edge_snd_vertex[edge] ]) {
 				minPsi = current_edgePsi;
+			}
+				
 		}
 		cellPsi[cell] = minPsi;
-		cout << "cellPsi " << minPsi << endl;
+		//cout << "cellPsi " << minPsi << endl << endl;
 	}
 }
 
@@ -472,7 +480,7 @@ void cpu_bound_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double
 
 		// compute final flux value, based on u_i, psi, u_ij, and edge velocity
 		//if (edge >= 100 && edge <= 200) cout << "flux[" << edge << "] = " << flux[edge] << endl;
-		cout << cell_orig << " psi = " << psi << endl;
+		//cout << cell_orig << " psi = " << psi << endl;
 		flux[edge] = v * (u_i + psi * delta_u_ij);
 		/*if (mesh.edge_types[edge] != FV_EDGE_NEUMMAN)
 			flux[edge] = sin(2*M_PI*mesh.edge_centroids.x[edge] - 2*M_PI*t);
