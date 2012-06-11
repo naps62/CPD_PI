@@ -19,6 +19,7 @@ namespace profile {
 
 	inline void output(std::ostream& out) {
 		for(unsigned int i = 0; i < COUNT; ++i) {
+			cout[i] = 1;
 			out << ((double)cf[i]/(double)count[i]);
 			if (i != COUNT - 1)
 				out << ';';
