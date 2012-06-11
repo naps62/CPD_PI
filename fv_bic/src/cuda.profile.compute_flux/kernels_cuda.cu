@@ -123,7 +123,7 @@ void kernel_compute_flux2(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 }
 
 /**
- * Optimization 2 - removed divergence in last cycle
+ * Optimization 2 - removed divergence in last condition
  */
 __global__
 void kernel_compute_flux3(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
@@ -150,6 +150,36 @@ void kernel_compute_flux3(CFVMesh2D_cuda *mesh, double *polution, double *veloci
 		res *= p_right;*/
 	bool cond = (res >= 0);
 	res *= cond * p_left + (!cond) * p_right;
+
+	flux[edge] = res;
+}
+
+/**
+ * Optimization 3 - removed divergence in first condition, and consequentelly avoided last condition
+ */
+__global__
+void kernel_compute_flux4(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc) {
+	unsigned int edge = blockIdx.x * blockDim.x + threadIdx.x;
+
+	if (edge >= mesh->num_edges) return;
+
+	double res = velocity[edge];
+
+	unsigned int i_left  = mesh->edge_left_cells[edge];
+	unsigned int i_right = mesh->edge_right_cells[edge];
+
+	double p_left, p_right;
+	p_left = polution[i_left];
+
+	bool cond = (i_right != NO_RIGHT_CELL);
+	/*if (i_right != NO_RIGHT_CELL)
+		p_right = polution[i_right];
+	else
+		p_right = dc;*/
+	double polution = (cond) * polution[i_right] + (!cond) * dc;
+
+	//cond = (res >= 0);
+	res *= v * polution;
 
 	flux[edge] = res;
 }
