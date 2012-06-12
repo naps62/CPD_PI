@@ -168,26 +168,31 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {		
 		PROFILE_START();
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(0);
 
 		PROFILE_START();
 		kernel_compute_flux2<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(1);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(2);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(3);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(4);
 	}

@@ -61,6 +61,10 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 	#endif
 
+	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
+		PROFILE_START();
+	#endif
+
 	// print cuda mode
 	#ifndef PROFILE
 		#ifdef _CUDA
@@ -171,6 +175,15 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 	#endif
 
+	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
+		#ifdef _CUDA
+			cudaDeviceSynchronize();
+		#endif
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_PRE();
+		PROFILE_START();
+	#endif
+
 	//
 	// main loop start
 	//
@@ -237,6 +250,15 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 	#endif
 
+	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
+		#ifdef _CUDA
+			cudaDeviceSynchronize();
+		#endif
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_MAIN_LOOP();
+		PROFILE_START();
+	#endif
+
 	// last anim save
 	#ifdef _CUDA
 		polution.cuda_load();
@@ -257,6 +279,12 @@ int main(int argc, char **argv) {
 
 	// PROFILE ZONE --- measure postprocessing time
 	#ifdef PROFILE_ZONES
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_POS();
+		PROFILE_OUTPUT();
+	#endif
+
+	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_POS();
 		PROFILE_OUTPUT();

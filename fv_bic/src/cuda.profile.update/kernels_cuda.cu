@@ -126,3 +126,44 @@ void kernel_update2(CFVMesh2D_cuda *mesh, double *polution, double *flux, double
 
 	polution[cell] = new_polution;
 }
+
+/**
+ * Optimization 2 -- remove divergence
+ */
+__global__
+void kernel_update3(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt) {
+
+	// thread id (cell index)
+	unsigned int cell = blockIdx.x * blockDim.x + threadIdx.x;
+
+	// check boundaries
+	if (cell >= mesh->num_cells) return;
+
+	// define start and end of neighbor edges
+	unsigned int edge_limit = mesh->cell_edges_count[cell];
+
+	// get current polution value for this cell
+	double new_polution	= polution[cell];
+
+	// for each edge of this cell
+	for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
+		unsigned int edge = mesh->cell_edges[edge_i][cell];
+		// if this cell is at the left of the edge
+
+		// amount of polution transfered through the edge
+		double aux = dt * flux[edge] *
+			mesh->edge_lengths[edge] /
+			mesh->cell_areas[cell];
+
+		// if this cell is on the left or the right of the edge
+		new_polution += aux * (2*(int)(mesh->edge_left_cells[edge] == cell) - 1);
+		//new_polution += (mesh->edge_left_cells[edge] == cell) * aux
+		/*if (mesh->edge_left_cells[edge] == cell) {
+			new_polution -= aux;
+		} else {
+			new_polution += aux;
+		}*/
+	}
+
+	polution[cell] = new_polution;
+}

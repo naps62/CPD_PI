@@ -6,7 +6,7 @@ namespace profile {
 	tk::Stopwatch *s;
 	//PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 
-	#define COUNT 2
+	#define COUNT 3
 	long long up[COUNT];
 	long long count[COUNT];
 
@@ -168,13 +168,21 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {		
 		PROFILE_START();
 		kernel_update1<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(0);
 
 		PROFILE_START();
 		kernel_update2<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(1);
+
+		PROFILE_START();
+		kernel_update3<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+		cudaDeviceSynchronize();
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_UP(2);
 	}
 
 	#ifdef _CUDA
