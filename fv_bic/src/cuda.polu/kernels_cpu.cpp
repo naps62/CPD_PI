@@ -75,6 +75,7 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 			unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
 
 			double var = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+			cout << var << endl;
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;
@@ -92,6 +93,7 @@ void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<doub
 			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
 
 			double var = dt * flux[edge] * length_area_ratio.elem(edge_i, 0, cell);
+			cout << var << endl;
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;
