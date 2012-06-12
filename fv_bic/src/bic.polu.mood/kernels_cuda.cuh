@@ -6,9 +6,13 @@
 using namespace FVL;
 
 
-void cudaSafe(cudaError_t error, const string msg);
+__host__ void cudaSafe(cudaError_t error, const string msg);
 
-void cudaCheckError(const string msg);
+__host__ void cudaCheckError(const string msg);
+
+__host__ double cpu_compute_mesh_parameter(CFVMesh2D &mesh);
+
+__host__ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
 
 /* Compute matA inverse */
 __global__

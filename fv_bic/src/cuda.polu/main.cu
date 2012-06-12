@@ -112,14 +112,15 @@ int main(int argc, char **argv) {
 		h = kernel_compute_mesh_parameter(mesh);
 
 		#ifdef OPTIM_LENGTH_AREA_RATIO
-			compute_length_area_ratio(mesh, length_area_ratio);
+			kernel_compute_length_area_ratio(mesh, length_area_ratio);
 		#endif
+
 	#else
 		cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
 		h = cpu_compute_mesh_parameter(mesh);
-
+		
 		#ifdef OPTIM_LENGTH_AREA_RATIO
-			kernel_compute_length_area_ratio(mesh, length_area_ratio);
+			cpu_compute_length_area_ratio(mesh, length_area_ratio);
 		#endif
 	#endif
 
@@ -202,6 +203,7 @@ int main(int argc, char **argv) {
 				cpu_update_optim(mesh, polution, flux, dt, length_area_ratio);
 			#else
 				cpu_update(mesh, polution, flux, dt);						// update
+			#endif
 		#endif
 		
 		t += dt;

@@ -88,10 +88,10 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt, CFVMat<double> &length_area_ratio) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
-		for(unsigned int e = 0; e < edge_limit; ++e) {
-			unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
+		for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
+			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
 
-			double var = dt * flux[edge] * length_area_ratio.elem(e, 0, cell);
+			double var = dt * flux[edge] * length_area_ratio.elem(edge_i, 0, cell);
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;

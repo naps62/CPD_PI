@@ -354,7 +354,7 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double
 		unsigned int cell_orig, cell_dest;
 		double u_i, u_j;
 
-		double partial_u_ij;
+		double partial_u_ij, partial_u_ji;
 		//double partial_u_ji, partial_u_ij;
 		//double u_ij, u_ji;
 
@@ -435,7 +435,7 @@ void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFV
 		double max = std::numeric_limits<double>::min();
 
 		for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
-			unsigned int edge = mesh.cell_edges.elem(edge, 0, cell);
+			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
 
 			unsigned int neighbor;
 
@@ -454,21 +454,21 @@ void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFV
 		}
 
 		double current = polution[cell];
-		invalidate_flux[cell] = (current < min || current > max)
-		}
+		invalidate_flux[cell] = (current < min || current > max);
 	}
 }
 
-void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<double> &invalidate_flux) {
+void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &velocity, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<double> &invalidate_flux) {
 
 	// for each cell that was invalidated
 	for(unsigned int cell = 0; cell < invalidate_flux.size(); ++cell) {
-		if (invalidate_cell[cell]) {
+		if (invalidate_flux[cell]) {
 
 			// calc edges flux based on
 			unsigned int edge_limit = mesh.cell_edges_count[cell];
 			for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
 				unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
+				unsigned int cell_orig;
 				double v = velocity[edge];
 				double u_ij/*, u_ji*/;
 
@@ -498,15 +498,16 @@ void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArr
 				}
 
 				oldflux[edge] = flux[edge];
-				flux[edge] = v * u_i;
+				flux[edge] = v * u_ij;
 			}
 		}
 	}
+}
 
-void cpu_fix_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
+void cpu_fix_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, double dt, CFVArray<double> &invalidate_flux) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		if (invalidate_cell[cell]) {
+		if (invalidate_flux[cell]) {
 
 			unsigned int edge_limit = mesh.cell_edges_count[cell];
 			for(unsigned int e = 0; e < edge_limit; ++e) {

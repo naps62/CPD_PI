@@ -104,9 +104,10 @@ Parameters read_parameters (string parameters_filename) {
 
 
 int main(int argc, char **argv) {
-#ifdef NO_CUDA
-	cout << "Running in NO_CUDA mode" << endl;
-#endif
+
+	#ifdef NO_CUDA
+		cout << "Running in NO_CUDA mode" << endl;
+	#endif
 
 	// var declaration
 	int i = 0;
@@ -207,8 +208,8 @@ int main(int argc, char **argv) {
 	bool finished = false;
 	double anim_next_step = data.anim_time;
 	cout << "dt= " << dt << endl;
-	while (!finished) {
 	//while(t <= data.final_time) {
+	while (!finished) {
 		cout << "time: " << t << "   iteration: " << i << '\r';
 		
 		if (t + dt > data.final_time) {
@@ -223,8 +224,8 @@ int main(int argc, char **argv) {
 			cpu_vecABC(mesh, matA, vecResult, vecABC);									// compute (a,b,c) vector
 			cpu_compute_flux(mesh, vs, vecABC, polution, flux, data.dirichlet, t,dt);	// compute flux
 			cpu_update(mesh, polution, flux, dt); 										// update
-			cpu_reset_oldflux(oldflux);
-			cpu_detect_polution_errors();
+			//cpu_reset_oldflux(oldflux);
+			//cpu_detect_polution_errors();
 		#else
 
 			//kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
@@ -255,18 +256,18 @@ int main(int argc, char **argv) {
 			}
 		#endif
 
-	t += dt;
+		t += dt;
 
-	if (t >= anim_next_step) {
-		#ifndef NO_CUDA
-		polution.cuda_get();
-		#endif
+		if (t >= anim_next_step) {
+			#ifndef NO_CUDA
+				polution.cuda_get();
+			#endif
 
-		polution_writer.append(polution, t, "polution");
-		anim_next_step += data.anim_time;
+			polution_writer.append(polution, t, "polution");
+			anim_next_step += data.anim_time;
+		}
+		++i;
 	}
-	++i;
-}
 
 	polution_writer.save();
 	polution_writer.close();

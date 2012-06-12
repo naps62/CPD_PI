@@ -52,6 +52,6 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<doub
  * \param dt
  */
 void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt);
-void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt, CFVMat<double> &length_area_ratio)
+void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt, CFVMat<double> &length_area_ratio);
 
 #endif // _H_KERNELS_CPU
