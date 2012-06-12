@@ -44,4 +44,21 @@ void cpu_update(
 		CFVArray<double> &polution,
 		CFVArray<double> &flux,
 		double dt);
+
+void cpu_reset_oldflux(CFVArray<double> &oldflux);
+
+void cpu_detect_polution_errors(
+		CFVMesh2D &mesh,
+		CFVArray<double> &polution,
+		CFVArray<double> &flux,
+		CFVArray<double> &oldflux,
+		CFVArray<double> &invalidate_flux);
+
+void cpu_fix_update(
+		CFVMesh2D &mesh,
+		CFVArray<double> &polution,
+		CFVArray<double> &flux,
+		CFVArray<double> &oldflux,
+		double dt);
+
 #endif // _H_KERNELS_CPU

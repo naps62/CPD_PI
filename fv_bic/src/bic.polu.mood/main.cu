@@ -128,6 +128,7 @@ int main(int argc, char **argv) {
 	FVL::CFVArray<double>    polution(mesh.num_cells);
 	FVL::CFVArray<double>    flux(mesh.num_edges);
 	FVL::CFVArray<double>    oldflux(mesh.num_edges);
+	FVL::CFVArray<bool>      invalidate_flux(mesh.num_cells);
 	FVL::CFVArray<double>    vs(mesh.num_edges);
 	FVL::CFVMat<double>      matA(3, 3, mesh.num_cells);
 	FVL::CFVMat<double>      vecABC(3, 1, mesh.num_cells);
@@ -159,6 +160,8 @@ int main(int argc, char **argv) {
 	mesh.cuda_malloc();
 	polution.cuda_malloc();
 	flux.cuda_malloc();
+	oldflux.cuda_malloc();
+	invalidate_flux.cuda_malloc();
 	vs.cuda_malloc();
 	matA.cuda_malloc();
 	vecABC.cuda_malloc();
