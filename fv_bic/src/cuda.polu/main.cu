@@ -90,6 +90,9 @@ int main(int argc, char **argv) {
 	FVL::CFVArray<double>    flux(mesh.num_edges);			// flux array
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);	// velocities by cell (to calc vs array)
 	FVL::CFVArray<double>    vs(mesh.num_edges);			// velocities by edge
+	#ifdef OPTIM_LENGTH_AREA_RATIO
+		FVL::CFVMat<double>      length_area_ratio(MAX_EDGES_PER_CELL, 1, mesh.num_cells);
+	#endif
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -107,9 +110,17 @@ int main(int argc, char **argv) {
 	#ifdef _CUDA
 		kernel_compute_edge_velocities(mesh, velocities, vs, v_max);
 		h = kernel_compute_mesh_parameter(mesh);
+
+		#ifdef OPTIM_LENGTH_AREA_RATIO
+			compute_length_area_ratio(mesh, length_area_ratio);
+		#endif
 	#else
 		cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
 		h = cpu_compute_mesh_parameter(mesh);
+
+		#ifdef OPTIM_LENGTH_AREA_RATIO
+			kernel_compute_length_area_ratio(mesh, length_area_ratio);
+		#endif
 	#endif
 
 	dt	= 1.0 / v_max * h;
@@ -121,6 +132,10 @@ int main(int argc, char **argv) {
 		flux.cuda_malloc();
 		vs.cuda_malloc();
 
+		#ifdef OPTIM_LENGTH_AREA_RATIO
+			length_area_ratio.cuda_malloc();
+		#endif
+
 		// data copy
 		cudaStream_t stream;
 		cudaStreamCreate(&stream);
@@ -128,6 +143,10 @@ int main(int argc, char **argv) {
 		mesh.cuda_save(stream);
 		polution.cuda_save(stream);
 		vs.cuda_save(stream);
+
+		#ifdef OPTIM_LENGTH_AREA_RATIO
+			length_area_ratio.cuda_save(stream);
+		#endif
 	
 		// block and grid sizes for each kernel
 		dim3 grid_flux(GRID_SIZE(mesh.num_edges, BLOCK_SIZE_FLUX), 1, 1);
@@ -171,11 +190,18 @@ int main(int argc, char **argv) {
 			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 			_DEBUG cudaCheckError(string("compute_flux"));
 	
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+			#ifdef OPTIM_LENGTH_AREA_RATIO
+				kernel_update_optim<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, length_area_ratio.cuda_get());
+			#else
+				kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+			#endif
 			_DEBUG cudaCheckError(string("update"));
 		#else
 			cpu_compute_flux(mesh, vs, polution, flux, data.dirichlet); // compute_flux
-			cpu_update(mesh, polution, flux, dt);						// update
+			#ifdef OPTIM_LENGTH_AREA_RATIO
+				cpu_update_optim(mesh, polution, flux, dt, length_area_ratio);
+			#else
+				cpu_update(mesh, polution, flux, dt);						// update
 		#endif
 		
 		t += dt;

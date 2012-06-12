@@ -25,6 +25,14 @@ double cpu_compute_mesh_parameter(CFVMesh2D &mesh);
 void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
 
 /**
+ * compute_length_area_ratio
+ *
+ * \param mesh
+ * \param length_area_ratio
+ */
+void cpu_compute_length_area_ratio(CFVMesh2D &mesh, CFVMat<double> &length_area_ratio);
+
+/**
  * cpu_compute_flux
  *
  * \param mesh
@@ -44,5 +52,6 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<doub
  * \param dt
  */
 void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt);
+void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt, CFVMat<double> &length_area_ratio)
 
 #endif // _H_KERNELS_CPU

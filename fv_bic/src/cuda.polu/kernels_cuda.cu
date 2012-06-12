@@ -124,6 +124,40 @@ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double 
 	polution[cell] = new_polution;
 }
 
+__global__
+void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio) {
+
+	// thread id (cell index)
+	unsigned int cell = blockIdx.x * blockDim.x + threadIdx.x;
+
+	// check boundaries
+	if (cell >= mesh->num_cells) return;
+
+	// define start and end of neighbor edges
+	unsigned int edge_limit = mesh->cell_edges_count[cell];
+
+	// get current polution value for this cell
+	double new_polution	= polution[cell];
+
+	// for each edge of this cell
+	for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
+		unsigned int edge = mesh->cell_edges[edge_i][cell];
+		// if this cell is at the left of the edge
+
+		// amount of polution transfered through the edge
+		double aux = dt * flux[edge] * length_area_ratio[edge_i][cell];
+
+		// if this cell is on the left or the right of the edge
+		if (mesh->edge_left_cells[edge] == cell) {
+			new_polution -= aux;
+		} else {
+			new_polution += aux;
+		}
+	}
+
+	polution[cell] = new_polution;
+}
+
 
 template<class T>
 struct SharedMemory {

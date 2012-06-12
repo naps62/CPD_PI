@@ -45,6 +45,14 @@ __host__ double kernel_compute_mesh_parameter(CFVMesh2D &mesh);
  */
 __host__ void kernel_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
 
+/**
+ * compute_length_area_ratio
+ *
+ * \param mesh
+ * \param length_area_ratio
+ */
+__host__ void kernel_compute_length_area_ratio(CFVMesh2D &mesh, CFVMat<double> &length_area_ratio);
+
 
 /*****************
  * CUDA kernels
@@ -70,6 +78,7 @@ __global__ void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, doub
  * \param dt
  */
 __global__ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
+__global__ void kernel_update_optim(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio);
 
 
 // Reduction of temporary velocities array

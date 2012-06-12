@@ -38,6 +38,18 @@ void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocitie
 	}
 }
 
+void cpu_compute_length_area_ratio(CFVMesh2D &mesh, CFVMat<double> &length_area_ratio) {
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+
+		unsigned int edge_limit = mesh.cell_edges_count[cell];
+		for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
+			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
+
+			length_area_ratio.elem(edge_i, 0, cell) = mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+		}
+	}
+}
+
 /* compute flux kernel */
 void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double> &polution,CFVArray<double> &flux, double dc) {
 
@@ -63,6 +75,23 @@ void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &f
 			unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
 
 			double var = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+
+			if (mesh.edge_left_cells[edge] == cell) {
+				polution[cell] -= var;
+			} else {
+				polution[cell] += var;
+			}
+		}
+	}
+}
+
+void cpu_update_optim(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt, CFVMat<double> &length_area_ratio) {
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+		unsigned int edge_limit = mesh.cell_edges_count[cell];
+		for(unsigned int e = 0; e < edge_limit; ++e) {
+			unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
+
+			double var = dt * flux[edge] * length_area_ratio.elem(e, 0, cell);
 
 			if (mesh.edge_left_cells[edge] == cell) {
 				polution[cell] -= var;
