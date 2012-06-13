@@ -68,6 +68,7 @@ __host__ void kernel_compute_length_area_ratio(CFVMesh2D &mesh, CFVMat<double> &
  * \param dc
  */
 __global__ void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
+__global__ void kernel_compute_flux_optim(CFVMesh2D_cuda *mesh, double *polution, double *velocity, double *flux, double dc);
 
 /**
  * kernel_update
@@ -78,8 +79,8 @@ __global__ void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, doub
  * \param dt
  */
 __global__ void kernel_update(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
+__global__ void kernel_update2(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio);
 __global__ void kernel_update_optim(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio);
-
 
 // Reduction of temporary velocities array
 template<class T, unsigned int blockSize, bool nIsPow2>

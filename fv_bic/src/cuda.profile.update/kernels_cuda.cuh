@@ -72,6 +72,9 @@ __global__ void kernel_compute_flux(CFVMesh2D_cuda *mesh, double *polution, doub
 __global__ void kernel_update1(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
 __global__ void kernel_update2(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
 __global__ void kernel_update3(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
+__global__ void kernel_update4(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt);
+__global__ void kernel_update5(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio);
+__global__ void kernel_update6(CFVMesh2D_cuda *mesh, double *polution, double *flux, double dt, double **length_area_ratio);
 
 
 // Reduction of temporary velocities array

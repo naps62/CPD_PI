@@ -6,7 +6,7 @@ namespace profile {
 	tk::Stopwatch *s;
 	//PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 
-	#define COUNT 3
+	#define COUNT 7
 	long long up[COUNT];
 	long long count[COUNT];
 
@@ -120,6 +120,7 @@ int main(int argc, char **argv) {
 	FVL::CFVArray<double>    flux(mesh.num_edges);			// flux array
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);	// velocities by cell (to calc vs array)
 	FVL::CFVArray<double>    vs(mesh.num_edges);			// velocities by edge
+	FVL::CFVMat<double> dummy(MAX_EDGES_PER_CELL, 1, mesh.num_cells);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -147,6 +148,7 @@ int main(int argc, char **argv) {
 		polution.cuda_malloc();
 		flux.cuda_malloc();
 		vs.cuda_malloc();
+		dummy.cuda_malloc();
 
 		// data copy
 		cudaStream_t stream;
@@ -157,8 +159,11 @@ int main(int argc, char **argv) {
 		vs.cuda_save(stream);
 	
 		// block and grid sizes for each kernel
-		dim3 grid_update(GRID_SIZE(mesh.num_cells, BLOCK_SIZE_UPDATE), 1, 1);
-		dim3 block_update(BLOCK_SIZE_UPDATE, 1, 1);
+		dim3 grid_update(GRID_SIZE(mesh.num_cells, 512), 1, 1);
+		dim3 block_update(512, 1, 1);
+
+		dim3 grid_update2(GRID_SIZE(mesh.num_cells, 768), 1, 1);
+		dim3 block_update2(768, 1, 1);
 	#endif
 
 	PROFILE_INIT();
@@ -183,6 +188,31 @@ int main(int argc, char **argv) {
 		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(2);
+
+		PROFILE_START();
+		kernel_update4<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
+		cudaDeviceSynchronize();
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_UP(3);
+
+		PROFILE_START();
+		kernel_update5<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
+		cudaDeviceSynchronize();
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_UP(4);
+
+		PROFILE_START();
+		kernel_update6<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
+		cudaDeviceSynchronize();
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_UP(5);
+
+		// same kernel, different block size
+		PROFILE_START();
+		kernel_update6<<< grid_update2, block_update2 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
+		cudaDeviceSynchronize();
+		PROFILE_STOP();
+		PROFILE_RETRIEVE_UP(6);
 	}
 
 	#ifdef _CUDA

@@ -10,7 +10,7 @@ CUDAD	=	/usr/local/cuda
 LIBS	=	fv cuda
 
 #	Compile mode
-MODE	=	DBG
+MODE	=	RLS
 
 #	C++ Compil[ator]
 CXX	=	nvcc
@@ -41,6 +41,10 @@ CXXFLAGS	+= -Xcompiler="$(XCOMPFLAGS)"
 
 #	Linker flags
 LDFLAGS	=	-L $(ROOTD)/lib
+
+ifeq ($(MODE),DBG)
+LDFLAGS += -G
+endif
 
 default: all
 

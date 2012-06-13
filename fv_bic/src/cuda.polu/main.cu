@@ -61,10 +61,6 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 	#endif
 
-	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
-		PROFILE_START();
-	#endif
-
 	// print cuda mode
 	#ifndef PROFILE
 		#ifdef _CUDA
@@ -175,15 +171,6 @@ int main(int argc, char **argv) {
 		PROFILE_START();
 	#endif
 
-	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
-		#ifdef _CUDA
-			cudaDeviceSynchronize();
-		#endif
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_PRE();
-		PROFILE_START();
-	#endif
-
 	//
 	// main loop start
 	//
@@ -201,15 +188,21 @@ int main(int argc, char **argv) {
 		}
 
 		#ifdef _CUDA
-			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-			_DEBUG cudaCheckError(string("compute_flux"));
-	
-			#ifdef OPTIM_LENGTH_AREA_RATIO
+			#ifdef OPTIM_KERNELS
+				kernel_compute_flux_optim<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 				kernel_update_optim<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, length_area_ratio.cuda_get());
+
+			#elif defined(OPTIM_LENGTH_AREA_RATIO)
+				kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
+				kernel_update2<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, length_area_ratio.cuda_get());
+
 			#else
+				kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
 				kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
 			#endif
-			_DEBUG cudaCheckError(string("update"));
+
+			_DEBUG cudaCheckError(string("kernels"));
+
 		#else
 			cpu_compute_flux(mesh, vs, polution, flux, data.dirichlet); // compute_flux
 			#ifdef OPTIM_LENGTH_AREA_RATIO
@@ -225,14 +218,8 @@ int main(int argc, char **argv) {
 		if (t >= anim_next_step) {
 			#ifdef _CUDA
 				polution.cuda_load();
-				//flux.cuda_load();
-				//mesh.edge_lengths.cuda_load();
-				//mesh.cell_areas.cuda_load();
 			#endif
-			//for(unsigned int i = 0; i < 50; ++i)
-				//cout << dt << " " << i << " " << polution[i] << endl;
-				//cout << "polution[" << i << "] = " << polution[i] << " " << "cell_area[" << i << " ] = " << mesh.cell_areas[i] << endl;
-
+			
 			polution_writer.append(polution, t, "polution");
 			anim_next_step += data.anim_time;
 		}
@@ -242,15 +229,6 @@ int main(int argc, char **argv) {
 
 	// PROFILE ZONES --- measure main loop time
 	#ifdef PROFILE_ZONES
-		#ifdef _CUDA
-			cudaDeviceSynchronize();
-		#endif
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_MAIN_LOOP();
-		PROFILE_START();
-	#endif
-
-	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
 		#ifdef _CUDA
 			cudaDeviceSynchronize();
 		#endif
@@ -279,12 +257,6 @@ int main(int argc, char **argv) {
 
 	// PROFILE ZONE --- measure postprocessing time
 	#ifdef PROFILE_ZONES
-		PROFILE_STOP();
-		PROFILE_RETRIEVE_POS();
-		PROFILE_OUTPUT();
-	#endif
-
-	#ifdef PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_POS();
 		PROFILE_OUTPUT();
