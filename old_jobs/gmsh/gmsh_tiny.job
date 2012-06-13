@@ -1,0 +1,35 @@
+#!/bin/sh
+#PBS -N gmsh_tiny
+#PBS -l nodes=1:r311:ppn=4
+#PBS -l walltime=20:00:00
+#PBS -m bea
+#PBS -e output/gmsh_tiny.err
+#PBS -o output/gmsh_tiny.out
+
+res=0.05
+name=foz.tiny
+workdir="input_samples/$name"
+input=foz.geo
+mesh=foz.msh
+xml=foz.xml
+output=$name.xml
+
+cd /home/cpd19808/fv_cuda/bin
+mkdir -p $workdir
+cp concentration_ini.xml param.xml foz.geo $workdir
+cd $workdir
+
+sed -i "s/^cl1\ =\ .*/cl1\ =\ $res;/" $input
+
+echo "Generating mesh..."
+gmsh $input -2
+
+echo "Converting to xml..."
+../../fvcm $mesh $xml
+
+echo "Generating velocity..."
+../../velocity
+
+echo "All done..."
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+#PBS -N mesh_gen_256x256
+#PBS -l nodes=1
+#PBS -l walltime=1:00:00
+#PBS -m bea
+#PBS -e mesh_gen_256x256.err
+#PBS -o mesh_gen_256x256.out
+
+dim=256
+workdir="input_samples/${dim}x${dim}"
+output="${dim}x${dim}.xml"
+
+cd /home/cpd19808/fv_cuda/bin
+mkdir -p $workdir
+cp msh_gen fvcd velocity param.xml concentration_ini.xml $workdir
+
+cd $workdir
+./msh_gen foz.xml $dim $dim 1 1
+./velocity
+mv foz.xml $output
+./fvcd $output velocity.xml velocity.msh -c
+exit 0

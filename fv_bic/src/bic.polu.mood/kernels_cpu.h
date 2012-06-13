@@ -52,7 +52,7 @@ void cpu_detect_polution_errors(
 		CFVArray<double> &polution,
 		CFVArray<double> &flux,
 		CFVArray<double> &oldflux,
-		CFVArray<double> &invalidate_flux);
+		CFVArray<bool> &invalidate_flux);
 
 void cpu_fix_polution_errors(
 		CFVMesh2D &mesh,
@@ -60,7 +60,7 @@ void cpu_fix_polution_errors(
 		CFVArray<double> &velocity,
 		CFVArray<double> &flux,
 		CFVArray<double> &oldflux,
-		CFVArray<double> &invalidate_flux);
+		CFVArray<bool> &invalidate_flux);
 
 void cpu_fix_update(
 		CFVMesh2D &mesh,
@@ -68,6 +68,6 @@ void cpu_fix_update(
 		CFVArray<double> &flux,
 		CFVArray<double> &oldflux,
 		double dt,
-		CFVArray<double> &invalidate_flux);
+		CFVArray<bool> &invalidate_flux);
 
 #endif // _H_KERNELS_CPU

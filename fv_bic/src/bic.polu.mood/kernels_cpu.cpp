@@ -120,7 +120,7 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 					y = mesh.cell_centroids.y[cell_j];
 					break;
 
-				// boundary edges (left_cell == i, there is no right edge, so a ghost cell needs to be used)
+				// boundary edges (left_cell == i, there is no right cell, so a ghost cell needs to be used)
 				case FV_EDGE_DIRICHLET:
 					cout << "this shouldnt happen" << endl;
 					break;
@@ -227,7 +227,7 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 			unsigned int cell_j;
 
 			switch (mesh.edge_types[edge]) {
-				// inner edges, both left and right cell can be assumed to exists
+				// inner edges, both left and right cell can be assumed to exist
 				case FV_EDGE:
 					// get right cell of this edge
 					cell_j = mesh.edge_right_cells[edge];
@@ -342,8 +342,8 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 	double x0 = mesh.cell_centroids.x[cell];
 	double y0 = mesh.cell_centroids.y[cell];
 
-	return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0);
-	//return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
+	//return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0);
+	return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
 }
 
 /* compute flux kernel */
@@ -428,7 +428,7 @@ void cpu_reset_oldflux(CFVArray<double> &oldflux) {
 		oldflux[i] = 0;
 }
 
-void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<double> &invalidate_flux) {
+void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<bool> &invalidate_flux) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double min = std::numeric_limits<double>::max();
@@ -458,10 +458,10 @@ void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFV
 	}
 }
 
-void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &velocity, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<double> &invalidate_flux) {
+void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &velocity, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<bool> &invalidate_flux) {
 
 	// for each cell that was invalidated
-	for(unsigned int cell = 0; cell < invalidate_flux.size(); ++cell) {
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		if (invalidate_flux[cell]) {
 
 			// calc edges flux based on
@@ -504,7 +504,7 @@ void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArr
 	}
 }
 
-void cpu_fix_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, double dt, CFVArray<double> &invalidate_flux) {
+void cpu_fix_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, double dt, CFVArray<bool> &invalidate_flux) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		if (invalidate_flux[cell]) {

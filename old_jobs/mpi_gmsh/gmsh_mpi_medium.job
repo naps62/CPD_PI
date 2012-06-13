@@ -1,0 +1,34 @@
+#!/bin/sh
+#PBS -N mpi_gmsh_medium
+#PBS -l nodes=1:r601:ppn24
+#PBS -l walltime=20:00:00
+#PBS -m bea
+#PBS -e output/mpi_gmsh_medium.err
+#PBS -o output/mpi_gmsh_medium.out
+
+res=0.0125
+name=medium
+workdir=samples/foz/$name
+input=$workdir/foz.geo
+mesh=$workdir/mesh.msh
+xml=$workdir/mesh.xml
+
+cd /home/cpd19808/fv_mpi
+mkdir -p $workdir
+cp samples/param.xml samples/foz.geo $workdir
+cd $workdir
+
+sed -i "s/^cl1\ =\ .*/cl1\ =\ $res;/" $input
+
+echo "Generating mesh..."
+gmsh $input -2 -o $mesh
+
+echo "Converting to xml..."
+mpi.fvcm $mesh $xml
+
+echo "Generating velocity..."
+mpi.velocity
+
+echo "All done..."
+
+exit 0
