@@ -346,6 +346,13 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 	return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
 }
 
+bool cpu_edge_horizontal(CFVMesh2D &mesh, int edge) {
+	unsigned int v1 = mesh.edge_fst_vertex[edge];
+	unsigned int v2 = mesh.edge_snd_vertex[edge];
+
+	return mesh.vertex_coords.y[v1] == mesh.vertex_coords.y[v2];
+}
+
 /* compute flux kernel */
 void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double> &vecABC, CFVArray<double> &polution,CFVArray<double> &partial_flux, double dc, double t, double dt) {
 
@@ -358,7 +365,6 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double
 		//double partial_u_ji, partial_u_ij;
 		//double u_ij, u_ji;
 
-				
 		switch (mesh.edge_types[edge]) {
 			case FV_EDGE:
 			case FV_EDGE_FAKE:
@@ -400,7 +406,10 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double
 				break;
 		}
 
-		partial_flux[edge]	= v * (u_i + partial_u_ij);
+		if (cpu_edge_horizontal(mesh, edge))
+			partial_flux[edge] = 0;
+		else
+			partial_flux[edge]	= v * (u_i + partial_u_ij);
 	}
 }
 
@@ -437,24 +446,32 @@ void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFV
 		for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
 			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
 
-			unsigned int neighbor;
+			if (mesh.edge_types[edge] != FV_EDGE_NEUMMAN) {
 
-			if (mesh.edge_left_cells[edge] == cell) {
-				neighbor = mesh.edge_right_cells[edge];
-			} else {
-				neighbor = mesh.edge_left_cells[edge];
-			}
+				unsigned int neighbor;
 
-			if (neighbor != NO_RIGHT_CELL) {
-				if (polution[neighbor] < min)
-					min = polution[neighbor];
-				else if (polution[neighbor] > max)
-					max = polution[neighbor];
+				if (mesh.edge_left_cells[edge] == cell) {
+					neighbor = mesh.edge_right_cells[edge];
+				} else {
+					neighbor = mesh.edge_left_cells[edge];
+				}
+
+				if (neighbor != NO_RIGHT_CELL) {
+					if (polution[neighbor] < min)
+						min = polution[neighbor];
+					else if (polution[neighbor] > max)
+						max = polution[neighbor];
+					else if (edge_i == 0) {
+						max = min = polution[neighbor];
+
+					}
+				} else cout << "AQUI!" << endl;
 			}
 		}
 
 		double current = polution[cell];
 		invalidate_flux[cell] = (current < min || current > max);
+		if (invalidate_flux[cell]) 	cout << "invalidate[" << cell << "]" << " " << min << " " << current << " " << max << endl;
 	}
 }
 

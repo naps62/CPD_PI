@@ -226,8 +226,8 @@ int main(int argc, char **argv) {
 			cpu_update(mesh, polution, flux, dt); 										// update
 			cpu_reset_oldflux(oldflux);
 			cpu_detect_polution_errors(mesh, polution, flux, oldflux, invalidate_flux);
-			cpu_fix_polution_errors(mesh, polution, vs, flux, oldflux, invalidate_flux);
-			cpu_fix_update(mesh, polution, flux, oldflux, dt, invalidate_flux);
+			//cpu_fix_polution_errors(mesh, polution, vs, flux, oldflux, invalidate_flux);
+			//cpu_fix_update(mesh, polution, flux, oldflux, dt, invalidate_flux);
 		#else
 
 			kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
