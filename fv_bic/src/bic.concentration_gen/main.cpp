@@ -108,10 +108,13 @@ int main(int argc, char **argv) {
 
 	double t = 0; string name("concentration");
 
+
 	int op = gen_menu(data);
 
 	CFVMesh2D mesh(data.mesh_file);
-	FVXMLWriter output(data.initial_file);
+
+	const char *str = data.initial_file.c_str();
+	FVXMLWriter output(data.initial_file, 1);
 
 	CFVArray<double> polu(mesh.num_cells);
 	fill_polu(mesh, polu, op);

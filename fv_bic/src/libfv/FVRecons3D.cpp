@@ -126,7 +126,7 @@ switch(type)
          S_global+=S;
          }
     return(sum/S_global);  
-    break;
+    //break;
     case FVCELL3D:
     ptr_c=((FVCell3D *)ptr);
     centroidC=ptr_c->centroid; 
@@ -160,7 +160,7 @@ switch(type)
     return(0); 
     //break;    
    }
-return(0);  
+//return(0);  
 }
 // Matrix associated to reconstruction without the conservative reference value 
 void FVRecons3D::doConservativeMatrix()
