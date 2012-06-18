@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
 	// read initial value, and copy it to current
 	input.getVec(initial, time, name);
-	for(unsigned int i = 0; i < size; ++i)
+	for(int i = 0; i < size; ++i)
 		current[i] = initial[i];
 
 	cout << "time\terror\terror2" << endl;
@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 		double error = numeric_limits<double>::min();
 		double error2 = numeric_limits<double>::min();
 
-		for(unsigned int i = 0; i < size; ++i) {
+		for(int i = 0; i < size; ++i) {
 			double error_i = abs(initial[i] - current[i]);
 			if (error_i > error)
 				error = error_i;

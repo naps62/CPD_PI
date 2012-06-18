@@ -1,8 +1,6 @@
 #ifndef RAPIDXML_PRINT_HPP_INCLUDED
 #define RAPIDXML_PRINT_HPP_INCLUDED
 
-#define _UNUSED(x) ((void)x)
-
 // Copyright (C) 2006, 2009 Marcin Kalicinski
 // Version 1.13
 // Revision $DateTime: 2009/05/13 01:46:17 $

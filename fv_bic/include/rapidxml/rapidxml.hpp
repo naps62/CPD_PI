@@ -1,7 +1,9 @@
 #ifndef RAPIDXML_HPP_INCLUDED
 #define RAPIDXML_HPP_INCLUDED
 
-#define _UNUSED(x) ((void)x)
+//#define _UNUSED(x) (if((x) == 0) {(x) = 1})
+
+#define _UNUSED(x) (void)x
 
 // Copyright (C) 2006, 2009 Marcin Kalicinski
 // Version 1.13

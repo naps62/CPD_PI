@@ -115,7 +115,7 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 					if (cell_j == i)
 						cell_j = mesh.edge_left_cells[edge];
 					
-					// get coords for this cell
+					// get coords for this x
 					x = mesh.cell_centroids.x[cell_j];
 					y = mesh.cell_centroids.y[cell_j];
 					break;
@@ -181,41 +181,17 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 	}
 }
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-/* Compute vecABC */
-void cpu_vecABC(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecABC) {
-
-	//cout << endl << endl;
-	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		// A
-		vecABC.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(0, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(0, 2, cell) * vecResult.elem(2, 0, cell);
-
-		// B
-		vecABC.elem(1, 0, cell) = matA.elem(1, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(1, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(1, 2, cell) * vecResult.elem(2, 0, cell);
-
-		// C
-		vecABC.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
-	}
-}
-
 /* Compute system polution coeficients for system solve */
-void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, double dc) {
+void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecR, double dc) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		double x0 = mesh.cell_centroids.x[cell];
 		double y0 = mesh.cell_centroids.y[cell];
 		double u = polution[cell];
 
 		// fill initial value of vector
-		vecResult.elem(0, 0, cell) = 0;
-		vecResult.elem(1, 0, cell) = 0;
-		vecResult.elem(2, 0, cell) = u;
+		vecR.elem(0, 0, cell) = 0;
+		vecR.elem(1, 0, cell) = 0;
+		vecR.elem(2, 0, cell) = u;
 
 		// for each neighbor cell, add to vector
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
@@ -292,22 +268,37 @@ void cpu_vecResult(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &
 			y -= y0;
 
 			// sum to current vec
-			vecResult.elem(0, 0, cell) += u * x;
-			vecResult.elem(1, 0, cell) += u * y;
-			vecResult.elem(2, 0, cell) += u;
-
-			/*cout << endl;
-			cout << "cell " << cell << endl;
-			for(int x = 0; x < 3; ++x) {
-				cout << "\t";
-				cout << setw(12) << vecResult.elem(x,0,cell) << endl;
-			}*/
+			vecR.elem(0, 0, cell) += u * x;
+			vecR.elem(1, 0, cell) += u * y;
+			vecR.elem(2, 0, cell) += u;
 		}
 	}
 }
 
+/* Compute vecABC */
+void cpu_compute_gradient(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecGrad) {
+
+	//cout << endl << endl;
+	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
+		// A
+		vecGrad.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(0, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(0, 2, cell) * vecResult.elem(2, 0, cell);
+
+		// B
+		vecGrad.elem(1, 0, cell) = matA.elem(1, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(1, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(1, 2, cell) * vecResult.elem(2, 0, cell);
+
+		// C
+		vecGrad.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecResult.elem(0, 0, cell)
+								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
+								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
+	}
+}
+
 /* Return result of (A(x-x0) + B(y-y0)) portion of the linear system to compute the flux of an edge */
-double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned int edge, unsigned int cell, double t, double dt) {
+double cpu_gradient_result(CFVMesh2D &mesh, CFVMat<double> &vecGradient, unsigned int edge, unsigned int cell, double t, double dt) {
 
 	// this part is just for the infinite simulation
 	if (mesh.edge_types[edge] == FV_EDGE_FAKE) {
@@ -342,196 +333,187 @@ double cpu_ABC_partial_result(CFVMesh2D &mesh, CFVMat<double> &vecABC, unsigned 
 	double x0 = mesh.cell_centroids.x[cell];
 	double y0 = mesh.cell_centroids.y[cell];
 
-	//return vecABC.elem(0, 0, cell) * (x - x0) + vecABC.elem(1, 0, cell) * (y - y0);
+	//return vecGradient.elem(0, 0, cell) * (x - x0) + vecGradient.elem(1, 0, cell) * (y - y0);
 	return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
 }
 
-bool cpu_edge_horizontal(CFVMesh2D &mesh, int edge) {
+/* Compute initial u vector */
+void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, CFVMat<double> &vecGradient, double t, double dt) {
+
+	unsigned int cell_i;
+	unsigned int cell_j;
+
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
+		cell_i = mesh.edge_left_cells[edge];
+		cell_j = mesh.edge_right_cells[edge];
+		recons.u_ij[edge] = polution[cell_i] + cpu_gradient_result(mesh, vecGradient, edge, cell_i, t, dt);
+
+		if (cell_j != NO_RIGHT_CELL) {
+			recons.u_ji[edge] = polution[cell_j] + cpu_gradient_result(mesh, vecGradient, edge, cell_j, t, dt);
+		}
+	}
+}
+
+void cpu_compute_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc) {
+
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge)
+		if (mesh.edge_right_cells[edge] == NO_RIGHT_CELL)
+			recons.u_ji[edge] = dc; // TODO is this correct?
+}
+
+
+/*bool cpu_edge_horizontal(CFVMesh2D &mesh, int edge) {
 	unsigned int v1 = mesh.edge_fst_vertex[edge];
 	unsigned int v2 = mesh.edge_snd_vertex[edge];
 
 	return mesh.vertex_coords.y[v1] == mesh.vertex_coords.y[v2];
-}
+}*/
 
-/* compute flux kernel */
-void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVMat<double> &vecABC, CFVArray<double> &polution,CFVArray<double> &partial_flux, double dc, double t, double dt) {
+void cpu_compute_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &velocity) {
 
-	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
 		double v = velocity[edge];
-		unsigned int cell_orig, cell_dest;
-		double u_i, u_j;
 
-		double partial_u_ij, partial_u_ji;
-		//double partial_u_ji, partial_u_ij;
-		//double u_ij, u_ji;
+		if (v >= 0)	recons.F_ij[edge] = v * recons.u_ij[edge];
+		else		recons.F_ij[edge] = v * recons.u_ji[edge];
 
-		switch (mesh.edge_types[edge]) {
-			case FV_EDGE:
-			case FV_EDGE_FAKE:
-				if (v >= 0) {
-					cell_orig = mesh.edge_left_cells[edge];
-					cell_dest = mesh.edge_right_cells[edge];
-				} else {
-					cell_orig = mesh.edge_right_cells[edge];
-					cell_dest = mesh.edge_left_cells[edge];
-				}
-
-				u_i = polution[cell_orig];
-				u_j = polution[cell_dest];
-
-				partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig, t,dt);
-				partial_u_ji = cpu_ABC_partial_result(mesh, vecABC, edge, cell_dest, t,dt);
-
-				break;
-
-			case FV_EDGE_DIRICHLET:
-				cell_orig = mesh.edge_left_cells[edge];
-				
-				u_i = polution[cell_orig];
-
-				// flux is exiting (positive velocity)
-				if (v > 0) {
-					u_j = 0;
-					partial_u_ij = cpu_ABC_partial_result(mesh, vecABC, edge, cell_orig, t,dt);
-				// flux is entering (negative velocity)
-				} else {
-					u_j = u_i;
-					u_i	= dc; 
-					partial_u_ij = 0;
-				}
-				break;
-
-			case FV_EDGE_NEUMMAN:
-				partial_u_ij = 0;
-				break;
-		}
-
-		if (cpu_edge_horizontal(mesh, edge))
-			partial_flux[edge] = 0;
-		else
-			partial_flux[edge]	= v * (u_i + partial_u_ij);
+		recons.F_ij_old[edge] = 0;
+		recons.edge_state[edge] = true;
 	}
 }
 
 /* update kernel */
-void cpu_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, double dt) {
+void cpu_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
 		for(unsigned int e = 0; e < edge_limit; ++e) {
 			unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
 
-			double var = dt * flux[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+			double var = dt * recons.F_ij[edge] * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
 
-			if (mesh.edge_left_cells[edge] == cell) {
+			if (mesh.edge_left_cells[edge] == cell)
 				polution[cell] -= var;
-			} else {
+			else
 				polution[cell] += var;
-			}
 		}
 	}
 }
 
-void cpu_reset_oldflux(CFVArray<double> &oldflux) {
-	for(unsigned int i = 0; i < oldflux.size(); ++i)
-		oldflux[i] = 0;
+/* invalidate an edge, and consequentely both of its neighbor cells */
+void cpu_invalidate_edge(CFVMesh2D &mesh, CFVRecons2D &recons, unsigned int edge) {
+	recons.edge_state[edge] = false;
+
+	unsigned int l = mesh.edge_left_cells[edge];
+	unsigned int r = mesh.edge_right_cells[edge];
+
+	recons.cell_state[l] = false;
+	if (r != NO_RIGHT_CELL) recons.cell_state[r];
 }
 
-void cpu_detect_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<bool> &invalidate_flux) {
+/* detect bad cells */
+bool cpu_bad_cell_detector(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution) {
 
-	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		double min = std::numeric_limits<double>::max();
-		double max = std::numeric_limits<double>::min();
+	bool result = false;
 
-		for(unsigned int edge_i = 0; edge_i < mesh.cell_edges_count[cell]; ++edge_i) {
-			unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
+	for(int cell = mesh.num_cells - 1; cell >= 0; --cell) {
+		double current = polution[cell];
+		double min;
+		double max;
+
+		int edge_start = mesh.cell_edges_count[cell] - 1;
+		for(int edge = edge_start; edge >= 0; --edge) {
 
 			if (mesh.edge_types[edge] != FV_EDGE_NEUMMAN) {
+				int neighbor = mesh.edge_left_cells[edge];
 
-				unsigned int neighbor;
-
-				if (mesh.edge_left_cells[edge] == cell) {
+				if (neighbor == cell)
 					neighbor = mesh.edge_right_cells[edge];
-				} else {
-					neighbor = mesh.edge_left_cells[edge];
-				}
 
 				if (neighbor != NO_RIGHT_CELL) {
-					if (polution[neighbor] < min)
-						min = polution[neighbor];
-					else if (polution[neighbor] > max)
-						max = polution[neighbor];
-					else if (edge_i == 0) {
-						max = min = polution[neighbor];
-
-					}
-				} else cout << "AQUI!" << endl;
-			}
-		}
-
-		double current = polution[cell];
-		invalidate_flux[cell] = (current < min || current > max);
-		if (invalidate_flux[cell]) 	cout << "invalidate[" << cell << "]" << " " << min << " " << current << " " << max << endl;
-	}
-}
-
-void cpu_fix_polution_errors(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &velocity, CFVArray<double> &flux, CFVArray<double> &oldflux, CFVArray<bool> &invalidate_flux) {
-
-	// for each cell that was invalidated
-	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		if (invalidate_flux[cell]) {
-
-			// calc edges flux based on
-			unsigned int edge_limit = mesh.cell_edges_count[cell];
-			for(unsigned int edge_i = 0; edge_i < edge_limit; ++edge_i) {
-				unsigned int edge = mesh.cell_edges.elem(edge_i, 0, cell);
-				unsigned int cell_orig;
-				double v = velocity[edge];
-				double u_ij/*, u_ji*/;
-
-				switch(mesh.edge_types[edge]) {
-					case FV_EDGE:
-					case FV_EDGE_FAKE:
-						if (v >= 0) {
-							cell_orig = mesh.edge_left_cells[edge];
-							//cell_dest = mesh.edge_right_cells[edge];
-						} else {
-							cell_orig = mesh.edge_right_cells[edge];
-							//cell_dest = mesh.edge_left_cells[edge];
-						}
-
-						u_ij = polution[cell_orig];
-						//u_ji = polution[cell_orig];
-						break;
-
-					case FV_EDGE_DIRICHLET:
-						cell_orig = mesh.edge_left_cells[edge];
-						u_ij = polution[cell_orig];
-						break;
-
-					case FV_EDGE_NEUMMAN:
-						u_ij = 0;
-						break;
+					double u = polution[neighbor];
+					if (u < min) 
+						min = u;
+					else if (u > max)
+						max = u;
+					else if (edge == edge_start)
+						min = max = u;
 				}
+			}
+		}
 
-				oldflux[edge] = flux[edge];
-				flux[edge] = v * u_ij;
+		// if current cell is invalid, declare all of its edges as invalid
+		recons.cell_state[cell] = (current >= min && current <= max);
+
+		if (recons.cell_state[cell] == false) {
+			result = true;
+			for(int edge = edge_start; edge >= 0; --edge) {
+				cpu_invalidate_edge(mesh, recons, edge);
+			}
+		}
+
+	}
+
+	return result;
+}
+
+void cpu_fix_u(CFVMesh2D &mesh,CFVRecons2D &recons, CFVArray<double> &polution) {
+
+	unsigned int cell_i;
+	unsigned int cell_j;
+
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
+		// if edge needs to be fixed
+		if (recons.edge_state[edge] == false) {
+			cell_i = mesh.edge_left_cells[edge];
+			cell_j = mesh.edge_right_cells[edge];
+
+			recons.u_ij[edge] = polution[cell_i];
+
+			if (cell_j != NO_RIGHT_CELL) {
+				recons.u_ji[edge] = polution[cell_j];
 			}
 		}
 	}
 }
 
-void cpu_fix_update(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &flux, CFVArray<double> &oldflux, double dt, CFVArray<bool> &invalidate_flux) {
+// TODO se a cpu_compute_border_u estiver correcta, esta nao é necessária, pois é redundante
+void cpu_fix_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc) {
+
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge)
+		if (recons.edge_state[edge] == false && mesh.edge_right_cells[edge] == NO_RIGHT_CELL)
+			recons.u_ji[edge] = dc;
+}
+
+void cpu_fix_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &velocity) {
+
+	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
+		recons.F_ij_old[edge] = recons.F_ij[edge];
+
+		if (recons.edge_state[edge] == false) {
+			double v = velocity[edge];
+
+			if (v >= 0)	recons.F_ij[edge] = v * recons.u_ij[edge];
+			else		recons.F_ij[edge] = v * recons.u_ji[edge];
+
+			recons.edge_state[edge] = true;
+		}
+	}
+}
+
+void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		if (invalidate_flux[cell]) {
+		if (recons.cell_state[cell] == false) {
 
 			unsigned int edge_limit = mesh.cell_edges_count[cell];
 			for(unsigned int e = 0; e < edge_limit; ++e) {
 				unsigned int edge = mesh.cell_edges.elem(e, 0, cell);
 
-				polution[cell] -= dt * (flux[edge] - oldflux[edge]) * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+				polution[cell] -= dt * (recons.F_ij[edge] - recons.F_ij_old[edge]) * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
 			}
+
+			recons.cell_state[cell] = true;
 		}
 	}
 }

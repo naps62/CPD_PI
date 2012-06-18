@@ -23,6 +23,7 @@
 #include "FVL/CFVPoints2D.h"
 #include "FVL/CFVMat.h"
 #include "FVL/CFVMesh2D.h"
+#include "FVL/CFVRecons2D.h"
 
 #endif // _CUDA_FVLIB
 

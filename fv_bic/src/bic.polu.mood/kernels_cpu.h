@@ -3,6 +3,7 @@
 
 #include "FVL/FVGlobal.h"
 #include "FVL/CFVMesh2D.h"
+#include "FVL/CFVRecons2D.h"
 #include "FVL/CFVArray.h"
 
 using namespace FVL;
@@ -13,61 +14,23 @@ double cpu_compute_mesh_parameter(CFVMesh2D &mesh);
 
 void cpu_compute_edge_velocities(CFVMesh2D &mesh, CFVPoints2D<double> &velocities, CFVArray<double> &vs, double &v_max);
 
-void cpu_reverseA(
-		CFVMesh2D &mesh,
-		CFVMat<double> &matA);
+void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA);
 
 /* compute system polution coeficients for system solve */
-void cpu_vecResult(
-		CFVMesh2D &mesh,
-		CFVArray<double> &polution,
-		CFVMat<double> &vecResult,
-		double dc);
+void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecResult, double dc);
 
 /* Compute vecABC */
-void cpu_vecABC(
-		CFVMesh2D &mesh,
-		CFVMat<double> &matA,
-		CFVMat<double> &vecResult,
-		CFVMat<double> &vecABC);
+void cpu_compute_gradient(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> &vecResult, CFVMat<double> &vecABC);
 
-void cpu_compute_flux(
-		CFVMesh2D &mesh,
-		CFVArray<double> &velocity,
-		CFVMat<double> &vecABC,
-		CFVArray<double> &polution,
-		CFVArray<double> &partial_flux,
-		double dc, double t,double dt);
-
-void cpu_update(
-		CFVMesh2D &mesh,
-		CFVArray<double> &polution,
-		CFVArray<double> &flux,
-		double dt);
-
-void cpu_reset_oldflux(CFVArray<double> &oldflux);
-
-void cpu_detect_polution_errors(
-		CFVMesh2D &mesh,
-		CFVArray<double> &polution,
-		CFVArray<double> &flux,
-		CFVArray<double> &oldflux,
-		CFVArray<bool> &invalidate_flux);
-
-void cpu_fix_polution_errors(
-		CFVMesh2D &mesh,
-		CFVArray<double> &polution,
-		CFVArray<double> &velocity,
-		CFVArray<double> &flux,
-		CFVArray<double> &oldflux,
-		CFVArray<bool> &invalidate_flux);
-
-void cpu_fix_update(
-		CFVMesh2D &mesh,
-		CFVArray<double> &polution,
-		CFVArray<double> &flux,
-		CFVArray<double> &oldflux,
-		double dt,
-		CFVArray<bool> &invalidate_flux);
+/* Compute initial u vectors */
+void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, CFVMat<double> &vecGradient, double t, double dt);
+void cpu_compute_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc);
+void cpu_compute_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &velocity);
+void cpu_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt);
+bool cpu_bad_cell_detector(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution);
+void cpu_fix_u(CFVMesh2D &mesh,CFVRecons2D &recons, CFVArray<double> &polution);
+void cpu_fix_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc);
+void cpu_fix_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &velocity);
+void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt);
 
 #endif // _H_KERNELS_CPU

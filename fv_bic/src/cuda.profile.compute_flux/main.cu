@@ -101,8 +101,7 @@ int main(int argc, char **argv) {
 	
 
 	// var declaration
-	int i = 0;
-	double h, t, dt, v_max = 0;
+	double /*h, */t, v_max = 0;
 	string name;
 
 	// read params
@@ -133,13 +132,13 @@ int main(int argc, char **argv) {
 	// TODO: Convert to CUDA
 	#ifdef _CUDA
 		kernel_compute_edge_velocities(mesh, velocities, vs, v_max);
-		h = kernel_compute_mesh_parameter(mesh);
+		/*h = */kernel_compute_mesh_parameter(mesh);
 	#else
 		cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
-		h = cpu_compute_mesh_parameter(mesh);
+		/*h = */cpu_compute_mesh_parameter(mesh);
 	#endif
 
-	dt	= 1.0 / v_max * h;
+	//dt	= 1.0 / v_max * h;
 
 	#ifdef _CUDA
 		// saves whole mesh to CUDA memory

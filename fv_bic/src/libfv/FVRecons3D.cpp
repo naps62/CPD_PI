@@ -89,7 +89,7 @@ switch(type)
     case FVVERTEX3D:
     P=((FVVertex3D *)ptr)->coord;
     return(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3));    
-    break;
+    //break;
     case FVEDGE3D:
     P1=((FVEdge3D *)ptr)->firstVertex->coord;
     P2=((FVEdge3D *)ptr)->secondVertex->coord; 
@@ -103,7 +103,7 @@ switch(type)
     P=GPEdge.x*P1+GPEdge.y*P2;
     sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2)*pow(P.z-_ref_point.z,(double)alpha3);    
     return(sum);
-    break;   
+    //break;   
     case FVFACE3D:
     ptr_f=((FVFace3D *)ptr);
     centroidF=ptr_f->centroid; 
@@ -154,11 +154,11 @@ switch(type)
             }
         } 
     return(sum/V_global);    
-    break;    
+    //break;    
     default:
     cout<<"WARNING: unknow geometrical entity in FVReconstruction3D"<<endl;    
     return(0); 
-    break;    
+    //break;    
    }
 return(0);  
 }

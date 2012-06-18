@@ -1,4 +1,8 @@
 #include "FVL/FVLib.h"
+#include "FVL/FVXMLWriter.h"
+#include "FVL/FVArray.h"
+#include "FVio.h"
+#include "FVL/FVParameters.h"
 using namespace std;
 
 #ifdef NO_CUDA
@@ -119,18 +123,17 @@ int main(int argc, char **argv) {
 		data = read_parameters(argv[1]);
 
 	// read mesh
-	FVL::CFVMesh2D		mesh(data.mesh_file);
-	FVL::CFVRecons2D	recons(mesh);
+	FVL::CFVMesh2D mesh(data.mesh_file);
 
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
 	FVL::CFVArray<double>    polution(mesh.num_cells);
-	//FVL::CFVArray<double>    flux(mesh.num_edges);
-	//FVL::CFVArray<double>    oldflux(mesh.num_edges);
-	//FVL::CFVArray<bool>      invalidate_flux(mesh.num_cells);
+	FVL::CFVArray<double>    flux(mesh.num_edges);
+	FVL::CFVArray<double>    oldflux(mesh.num_edges);
+	FVL::CFVArray<bool>      invalidate_flux(mesh.num_cells);
 	FVL::CFVArray<double>    vs(mesh.num_edges);
 	FVL::CFVMat<double>      matA(3, 3, mesh.num_cells);
-	FVL::CFVMat<double>      vecGradient(3, 1, mesh.num_cells);
-	FVL::CFVMat<double>      vecR(3, 1, mesh.num_cells);
+	FVL::CFVMat<double>      vecABC(3, 1, mesh.num_cells);
+	FVL::CFVMat<double>      vecResult(3, 1, mesh.num_cells);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
@@ -156,15 +159,14 @@ int main(int argc, char **argv) {
 	#ifndef NO_CUDA
 	// saves whole mesh to CUDA memory
 	mesh.cuda_malloc();
-	recons.cuda_malloc();
 	polution.cuda_malloc();
-	//flux.cuda_malloc();
-	//oldflux.cuda_malloc();
-	//invalidate_flux.cuda_malloc();
+	flux.cuda_malloc();
+	oldflux.cuda_malloc();
+	invalidate_flux.cuda_malloc();
 	vs.cuda_malloc();
 	matA.cuda_malloc();
-	vecGradient.cuda_malloc();
-	vecR.cuda_malloc();
+	vecABC.cuda_malloc();
+	vecResult.cuda_malloc();
 
 	// data copy
 	cudaStream_t stream;
@@ -216,24 +218,16 @@ int main(int argc, char **argv) {
 			finished = true;
 		}
 
-
 		// Cpu version
 		#ifdef NO_CUDA
-			cpu_compute_vecR(mesh, polution, vecR, data.dirichlet);						// compute system polution coeficients for system solve
-			cpu_compute_gradient(mesh, matA, vecR, vecGradient);						// compute (a,b,c) vector
-
-			cpu_compute_u(mesh, recons, polution, vecGradient, t, dt);
-			cpu_compute_border_u(mesh, recons, data.dirichlet);
-			cpu_compute_flux(mesh, recons, vs);
-			cpu_update(mesh, recons, polution, dt);
-
-			while(cpu_bad_cell_detector(mesh, recons, polution)) {
-				cpu_fix_u(mesh, recons, polution);
-				cpu_fix_border_u(mesh, recons, data.dirichlet);
-				cpu_fix_flux(mesh, recons, vs);
-				cpu_fix_update(mesh, recons, polution, dt);
-			};
-
+			cpu_vecResult(mesh, polution, vecResult, data.dirichlet);					// compute system polution coeficients for system solve
+			cpu_vecABC(mesh, matA, vecResult, vecABC);									// compute (a,b,c) vector
+			cpu_compute_flux(mesh, vs, vecABC, polution, flux, data.dirichlet, t,dt);	// compute flux
+			cpu_update(mesh, polution, flux, dt); 										// update
+			cpu_reset_oldflux(oldflux);
+			cpu_detect_polution_errors(mesh, polution, flux, oldflux, invalidate_flux);
+			//cpu_fix_polution_errors(mesh, polution, vs, flux, oldflux, invalidate_flux);
+			//cpu_fix_update(mesh, polution, flux, oldflux, dt, invalidate_flux);
 		#else
 
 			kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
@@ -265,11 +259,9 @@ int main(int argc, char **argv) {
 
 	#ifndef NO_CUDA
 	polution.cuda_free();
+	flux.cuda_free();
 	vs.cuda_free();
-	vecGradient.cuda_free();
-	vecR.cuda_free();
 	matA.cuda_free();
-	recons.cuda_free();
 	mesh.cuda_free();
 	#endif
 

@@ -10,7 +10,7 @@ CUDAD	=	/usr/local/cuda
 LIBS	=	fv cuda
 
 #	Compile mode
-MODE	=	RLS
+MODE	=	DBG
 
 #	C++ Compil[ator]
 CXX	=	nvcc
@@ -25,7 +25,7 @@ CXXFLAGS	=	-arch sm_20 -x cu
 CXXFLAGS	+=	 $(INC)
 
 HOST	= $(shell hostname)
-ifeq ($(HOST),naps62debian)
+ifeq ($(HOST),naps62-mint)
 CXXFLAGS	+=	-DNO_CUDA=1
 endif
 

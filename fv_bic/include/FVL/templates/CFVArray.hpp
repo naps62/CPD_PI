@@ -46,7 +46,7 @@ namespace FVL {
 
 	template<class T>
 		void CFVArray<T>::cuda_load(cudaStream_t stream) {
-			cudaMemcpy(this->arr, cuda_arr, sizeof(T) * this->arr_size, cudaMemcpyDeviceToHost);
+			cudaMemcpyAsync(this->arr, cuda_arr, sizeof(T) * this->arr_size, cudaMemcpyDeviceToHost, stream);
 		}
 }
 

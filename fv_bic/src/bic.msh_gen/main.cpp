@@ -88,16 +88,16 @@ int main(int argc, char **argv) {
 	double cX = strtod(argv[2], NULL);	
 	double cY = strtod(argv[3], NULL);
 	double vX = cX + 1;
-	double vY = cY + 1;
+	//double vY = cY + 1;
 
 	double cW = 1 / cX;
 
 	if (argc == 5)
 		cW = atoi(argv[4]) / cX;
 
-	unsigned int num_cells	= cX * cY;
-	unsigned int num_vertex	= vX * vY;
-	unsigned int num_edges  = num_vertex + num_cells;
+	//unsigned int num_cells	= cX * cY;
+	//unsigned int num_vertex	= vX * vY;
+	//unsigned int num_edges  = num_vertex + num_cells;
 	
 	ofstream		output(name.c_str());
 	stringstream 	vertex_stream;

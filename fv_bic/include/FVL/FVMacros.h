@@ -13,6 +13,16 @@
 #include <string>
 
 /************************************************
+ * CUDA
+ ***********************************************/
+
+#ifdef __CUDACC__
+	#define FV_CUDA_MEMBER __host__ __device__	///< Compiles a class member for both host and device when compiled with CUDA support
+#else
+	#define FV_CUDA_MEMBER
+#endif
+
+/************************************************
  * UTILITIES
  ***********************************************/
 

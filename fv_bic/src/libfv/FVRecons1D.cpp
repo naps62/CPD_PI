@@ -59,7 +59,7 @@ switch(type)
     case FVVERTEX1D:
     x1=((FVVertex1D *)ptr)->coord.x;
     return(pow(x1-_ref_point.x,(double)alpha));    
-    break;
+    //break;
     case FVCELL1D:
     x1=((FVCell1D *)ptr)->firstVertex->coord.x;
     x2=((FVCell1D *)ptr)->secondVertex->coord.x; 
@@ -73,13 +73,13 @@ switch(type)
     x=GP.x*x1+GP.y*x2;
     sum+=GPCell.getWeight(5,3)*pow(x-_ref_point.x,(double)alpha);
     return(sum);
-    break;     
+    //break;     
     default:
     cout<<"WARNING: unknow geometrical entity in FVReconstruction1D"<<endl;    
     return(0); 
-    break;     
+    //break;     
    }
-return(0);  
+//return(0);  
 }
 // Matrix associated to reconstruction with the conservative reference value 
 void FVRecons1D::doConservativeMatrix()
