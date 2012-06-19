@@ -60,4 +60,7 @@ namespace FVL {
 		this->clear();
 	}
 	
+	xml_node<> *FVXMLWriter::getRootNode() {
+		return root;
+	}
 }

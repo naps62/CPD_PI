@@ -82,6 +82,8 @@ namespace FVL {
 			 */
 			void close();
 
+			xml_node<> *getRootNode();
+
 
 			/************************************************
 			 * OUTPUT (methods will be added as needed)
@@ -89,6 +91,11 @@ namespace FVL {
 
 			// intended for output frame of an animation
 			template<class T> void append(CFVArray<T> &vec, double time=0.0, string name="noname");
+			 
+			/**
+			 * Auxiliary functions to allocate and append attributes
+			 */
+			template<class T> void add_attribute(xml_node<> *node, string name, T value);
 
 		private:
 
@@ -97,10 +104,6 @@ namespace FVL {
 			 */
 			void init();
 
-			/**
-			 * Auxiliary functions to allocate and append attributes
-			 */
-			template<class T> void add_attribute(xml_node<> *node, string name, T value);
 	};
 
 }

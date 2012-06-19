@@ -8,9 +8,11 @@
 #include "FVPoint2D.h"
 
 #include "rapidxml/rapidxml.hpp"
+#include "FVL/FVXMLWriter.h"
 #include "FVL/FVXMLReader.h"
 #include "FVL/FVErr.h"
 
+using namespace std;
 using namespace rapidxml;
 
 namespace FVL {
@@ -41,7 +43,61 @@ namespace FVL {
 	 * METHODS
 	 ***********************************************/
 	void FVMesh2D_SOA::save(string filename) {
+		FVXMLWriter writer(filename);
 
+		char *value_str;
+
+		xml_node<> *mesh   = writer.allocate_node(
+									node_element,
+									writer.allocate_string("MESH"));
+		xml_node<> *vertex = writer.allocate_node(node_element, writer.allocate_string("VERTEX"));
+		xml_node<> *edge   = writer.allocate_node(node_element, writer.allocate_string("EDGE"));
+		xml_node<> *cell   = writer.allocate_node(node_element, writer.allocate_string("CELL"));
+
+		writer.add_attribute<unsigned int>(mesh, string("dim"), 2);
+		writer.add_attribute<string>(mesh, string("name"), string("fvcm convertor"));
+
+		// vertex data
+		writer.add_attribute<unsigned int>(vertex, string("nbvertex"), this->num_vertex);
+		stringstream vertex_stream;
+		vertex_stream << endl;
+		for(unsigned int i = 0; i < this->num_vertex; ++i)
+			vertex_stream << (i + 1) << "\t" << 0 << "\t" << this->vertex_coords.x[i] << "\t" << this->vertex_coords.y[i] << endl;
+
+		value_str = writer.allocate_string(vertex_stream.str().c_str());
+		vertex->append_node(writer.allocate_node(node_data, NULL, value_str));
+
+		// edge data
+		writer.add_attribute<unsigned int>(edge, string("nbedge"), this->num_edges);
+		stringstream edge_stream;
+		edge_stream << endl;
+		for(unsigned int i = 0; i < this->num_edges; ++i)
+			edge_stream << (i + 1) << "\t" << this->edge_types[i] << "\t" << 2 << "\t" << (this->edge_fst_vertex[i] + 1) << "\t" << (this->edge_snd_vertex[i] + 1) << endl;
+
+		value_str = writer.allocate_string(edge_stream.str().c_str());
+		edge->append_node(writer.allocate_node(node_data, NULL, value_str));
+
+		// cell data
+		writer.add_attribute<unsigned int>(cell, string("nbcell"), this->num_cells);
+		stringstream cell_stream;
+		cell_stream << endl;
+		for(unsigned int i = 0; i < this->num_cells; ++i) {
+			cell_stream << (i + 1) << "\t" << 0 << "\t" << this->cell_edges_count[i];
+			for(unsigned int edge_i = 0; edge_i < this->cell_edges_count[i]; ++edge_i)
+				cell_stream << "\t" << (this->cell_edges.elem(edge_i, 0, i) + 1);
+			cell_stream << endl;
+		}
+
+		value_str = writer.allocate_string(cell_stream.str().c_str());
+		cell->append_node(writer.allocate_node(node_data, NULL, value_str));
+
+		mesh->append_node(vertex);
+		mesh->append_node(edge);
+		mesh->append_node(cell);
+		writer.getRootNode()->append_node(mesh);
+
+		writer.save();
+		writer.close();
 	}
 
 	/************************************************

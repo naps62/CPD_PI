@@ -1,6 +1,7 @@
-#include "FVL/FVMesh2D.h"
+#include "FVL/FVMesh2D_SOA.h"
 #include "FVL/FVParameters.h"
 using namespace std;
+using namespace FVL;
 
 /**
  * Parameters struct passed via xml file
@@ -34,7 +35,10 @@ struct Parameters {
 };
 
 void swap_cell_edge_reference(FVMesh2D_SOA &mesh, int cell, int l, int r) {
-	for(unsigned int edge_i = mesh.cell_edges_count[cell] - 1; edge_i >= 0; --edge_i) {
+	if (cell == NO_RIGHT_CELL)
+		return;
+
+	for(int edge_i = mesh.cell_edges_count[cell] - 1; edge_i >= 0; --edge_i) {
 		if (mesh.cell_edges.elem(edge_i, 0, cell) == l) {
 			mesh.cell_edges.elem(edge_i, 0, cell) = r;
 			return;
@@ -42,7 +46,7 @@ void swap_cell_edge_reference(FVMesh2D_SOA &mesh, int cell, int l, int r) {
 	}
 }
 
-template<class T> void swap(T &x, T &y) {
+template<class T> void _swap(T &x, T &y) {
 	T tmp = x;
 	x = y;
 	y = tmp;
@@ -55,13 +59,20 @@ void swap_edges(FVMesh2D_SOA &mesh, int l, int r) {
 	swap_cell_edge_reference(mesh, mesh.edge_left_cells[r],  r, l);
 	swap_cell_edge_reference(mesh, mesh.edge_right_cells[r], r, l);
 
-	swap(mesh.edge_fst_vertex[l],  mesh.edge_fst_vertex[r]);
-	swap(mesh.edge_snd_vertex[l],  mesh.edge_snd_vertex[r]);
-	swap(mesh.edge_left_cells[l],  mesh.edge_left_cells[r]);
-	swap(mesh.edge_right_cells[l], mesh.edge_right_cells[r]);
+	_swap<unsigned int>(mesh.edge_fst_vertex[l],  mesh.edge_fst_vertex[r]);
+	_swap<unsigned int>(mesh.edge_snd_vertex[l],  mesh.edge_snd_vertex[r]);
+	_swap<unsigned int>(mesh.edge_left_cells[l],  mesh.edge_left_cells[r]);
+	_swap<unsigned int>(mesh.edge_right_cells[l], mesh.edge_right_cells[r]);
 }
 
 int main(int argc, char **argv) {
+	string param_filename;
+	if (argc != 2) {
+		param_filename = "param.xml";
+	} else
+		param_filename = argv[1];
+
+	Parameters data(param_filename);
 	
 	// read mesh
 	FVL::FVMesh2D_SOA mesh(data.mesh_file);
@@ -78,5 +89,6 @@ int main(int argc, char **argv) {
 
 		swap_edges(mesh, l, r);
 	}
-}
 
+	mesh.save("mesh.ordered.xml");
+}
