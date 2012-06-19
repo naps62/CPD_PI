@@ -62,7 +62,6 @@ namespace FVL {
 			 * \param filename The output file
 			 */
 			FVXMLWriter(string &file);
-			FVXMLWriter(string &file, int x);
 
 			/**
 			 * Binds a file to the Writer

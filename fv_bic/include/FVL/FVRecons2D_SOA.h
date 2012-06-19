@@ -36,6 +36,7 @@ namespace FVL {
 			CFVArray<double> F_ij_old;	///< previous computed flux
 			CFVArray<bool> cell_state;	///< current state of each cell
 			CFVArray<bool> edge_state;	///< current state of each edge
+			CFVArray<unsigned int> degree;
 
 
 			/************************************************

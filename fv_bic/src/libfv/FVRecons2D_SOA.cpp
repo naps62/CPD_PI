@@ -38,6 +38,7 @@ namespace FVL {
 		F_ij_old	= CFVArray<double>(edges);
 		edge_state 	= CFVArray<bool>(edges);
 		cell_state 	= CFVArray<bool>(cells);
+		degree		= CFVArray<unsigned int>(cells);
 	}
 }
 

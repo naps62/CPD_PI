@@ -40,6 +40,7 @@ namespace FVL {
 			tmp_cuda_recons.F_ij_old = F_ij_old.cuda_malloc();
 			tmp_cuda_recons.cell_state = cell_state.cuda_malloc();
 			tmp_cuda_recons.edge_state = edge_state.cuda_malloc();
+			tmp_cuda_recons.degree = degree.cuda_malloc();
 
 			// CFVRecons2D_cuda allocation
 			cudaMalloc(&cuda_recons, sizeof(CFVRecons2D_cuda));

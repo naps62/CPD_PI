@@ -28,11 +28,6 @@ namespace FVL {
 		this->open(file);
 	}
 
-	FVXMLWriter::FVXMLWriter(string &file) {
-		opened = false;
-		this->open(file);
-	}
-
 	void FVXMLWriter::open(string &file) {
 		if (opened)
 			return;

@@ -46,6 +46,7 @@ namespace FVL {
 		double *F_ij_old;
 		bool *cell_state;
 		bool *edge_state;
+		unsigned int *degree;
 	};
 
 	/**

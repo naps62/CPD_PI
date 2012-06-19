@@ -43,7 +43,7 @@ int gen_menu(Parameters data) {
 			<< " 2. half full  - f(x) = (x < 0.5) ? 1 : 0" << endl
 			<< " 3. triangle   - f(x) = (x < 0.5) ? 2x : -2x + 2" << endl
 			<< " 4. constant   - f(x) = 1" << endl
-			<< " 5. test data  - f(x,y) = 3x + 7y - 15" << endl
+			<< " 5. test data  - f(x,y) = 2x - 3y + 1" << endl
 			<< " 6. double sin" << endl
 			<< " 7. four parts" << endl
 			<< " 8. circle" << endl;
@@ -80,7 +80,8 @@ void fill_polu(CFVMesh2D &mesh, CFVArray<double> &polu, int op) {
 				polu[i] = 1.0;
 				break;
 			case 5:
-				polu[i] = 3.0 * x + 5 * y - 15;
+				polu[i] = 2.0 * x - 3 * y + 1;
+				//polu[i] = y;
 				break;
 			case 6:
 				polu[i] = sin(2 * M_PI * x) * sin(2 * M_PI * y);
@@ -113,8 +114,7 @@ int main(int argc, char **argv) {
 
 	CFVMesh2D mesh(data.mesh_file);
 
-	const char *str = data.initial_file.c_str();
-	FVXMLWriter output(data.initial_file, 1);
+	FVXMLWriter output(data.initial_file);
 
 	CFVArray<double> polu(mesh.num_cells);
 	fill_polu(mesh, polu, op);

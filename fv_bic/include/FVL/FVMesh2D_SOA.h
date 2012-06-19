@@ -89,6 +89,17 @@ namespace FVL {
 			 */
 			FVMesh2D_SOA(const string &filename);
 
+			/************************************************
+			 * METHODS
+			 ***********************************************/
+
+			/**
+			 * Save to file
+			 *
+			 * \param filename Filename to save the mesh
+			 */
+			void save(string filename);
+
 		private:
 
 			/************************************************
