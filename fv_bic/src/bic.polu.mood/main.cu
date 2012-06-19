@@ -204,8 +204,8 @@ int main(int argc, char **argv) {
 	#ifdef NO_CUDA
 		cpu_reverseA(mesh, matA);
 	#else
-		kernel_compute_reverseA<<< grid_matA, block_matA >>>(mesh.cuda_get(), matA.cuda_get());
-		_D(cudaCheckError("cuda[compute_reverseA]"));
+		//kernel_compute_reverseA<<< grid_matA, block_matA >>>(mesh.cuda_get(), matA.cuda_get());
+		//_D(cudaCheckError("cuda[compute_reverseA]"));
 	#endif
 
 	bool finished = false;
