@@ -33,9 +33,9 @@ namespace FVL {
 			unsigned int num_vertex;				///< total number of vertex
 			CFVPoints2D<double> vertex_coords;		///< coords for each vertex
 			/// \todo finish this
-			CFVArray<double> vertex_cells_count;	///< number of cells adjacent to each vertex TODO
-			CFVArray<double> vertex_cells_index;	///< index of list of cells for each vertex TODO
-			CFVArray<double> vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
+			//CFVArray<double> vertex_cells_count;	///< number of cells adjacent to each vertex TODO
+			//CFVArray<double> vertex_cells_index;	///< index of list of cells for each vertex TODO
+			//CFVArray<double> vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
 
 			// EDGE INFO
 			unsigned int num_edges;					///< total number of edges
@@ -57,7 +57,7 @@ namespace FVL {
 			CFVArray<unsigned int> cell_edges_count;///< number of edges of each cell (to index cell_edges)
 			CFVMat<unsigned int> cell_edges;		///< index of edges for each cell (CFVMat(MAX_EDGES_PER_CELL, 1, num_cells)
 			CFVMat<double> cell_edges_normal;		///< distance of each cell to each edge (CFVMat(MAX_EDGES_PER_CELL, 2, num_cells)
-			CFVMat<unsigned int> cell_vertexes;		///< index of cells for each vertex (CFVMat(MAX_VERTEX_PER_CELL, 1, num_cells)
+			//CFVMat<unsigned int> cell_vertexes;		///< index of cells for each vertex (CFVMat(MAX_VERTEX_PER_CELL, 1, num_cells)
 
 
 			/************************************************

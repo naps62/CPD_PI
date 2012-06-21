@@ -59,6 +59,9 @@ void swap_edges(FVMesh2D_SOA &mesh, int l, int r) {
 	swap_cell_edge_reference(mesh, mesh.edge_left_cells[r],  r, l);
 	swap_cell_edge_reference(mesh, mesh.edge_right_cells[r], r, l);
 
+	_swap<unsigned int>(mesh.edge_left_cells[l], mesh.edge_left_cells[r]);
+	_swap<unsigned int>(mesh.edge_right_cells[l], mesh.edge_right_cells[r]);
+
 	_swap<unsigned int>(mesh.edge_fst_vertex[l],  mesh.edge_fst_vertex[r]);
 	_swap<unsigned int>(mesh.edge_snd_vertex[l],  mesh.edge_snd_vertex[r]);
 	_swap<unsigned int>(mesh.edge_left_cells[l],  mesh.edge_left_cells[r]);

@@ -218,8 +218,10 @@ namespace FVL {
 			int v = 0;
 			set<unsigned int>::iterator it;
 			for(it = tmp_cell_vertexes.begin(); it != tmp_cell_vertexes.end(); ++it, ++v) {
+				cout << i << " " << v << *it << endl;
 				cell_vertexes.elem(v, 0, i) = *it;
 			}
+			cout << endl;
 			for(unsigned int v = 0; v < cell_edges_count[i]; ++v) {
 			}
 		}

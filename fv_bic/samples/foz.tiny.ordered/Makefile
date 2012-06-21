@@ -1,9 +1,9 @@
-ROOTD=..
+ROOTD=../..
 
 include $(ROOTD)/conf/config.mk
 
 all:
-	cd ..; $_
+	cd ../..; $_
 
 clean:
-	cd ..; $_ clean
+	cd ../..; $_ clean
