@@ -46,9 +46,9 @@ namespace FVL {
 
 
 		double *vertex_coords[2];		///< coords for each vertex
-		double *vertex_cells_count;		///< number of cells adjacent to each vertex TODO
-		double *vertex_cells_index;		///< index of list of cells for each vertex TODO
-		double *vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
+		//double *vertex_cells_count;		///< number of cells adjacent to each vertex TODO
+		//double *vertex_cells_index;		///< index of list of cells for each vertex TODO
+		//double *vertex_cells;			///< list of all adjacent cells for each vertex. Indexed by vertex_cells_count and vertex_cells_index TODO
 
 		int *edge_types;				///< type associated with each edge
 		double *edge_normals[2];		///< normals for each edge
@@ -66,7 +66,7 @@ namespace FVL {
 		unsigned int *cell_edges_count;	///< number of edges for each cell (to index cell_edges)
 		unsigned int **cell_edges;		///< index of edges for each cell (unsigned int [MAX_EDGES_PER_CELL][num_cells])
 		double **cell_edges_normal;		///< distance of each cell to each edge (double [2*MAX_EDGES_PER_CELL][num_cells])
-		unsigned int **cell_vertexes;	///< index of vertexes for each cell (unsigned int [MAX_VERTEX_PER_CELL][num_cells])
+		//unsigned int **cell_vertexes;	///< index of vertexes for each cell (unsigned int [MAX_VERTEX_PER_CELL][num_cells])
 	};
 
 	/**
