@@ -12,7 +12,8 @@ DOCS	=	abstract	\
 			slides.naps	\
 			slides.pfac	\
 			slides.april	\
-			slides.may
+			slides.may	\
+			report.final
 
 .PHONY: clean
 
@@ -27,7 +28,7 @@ DOCS	=	abstract	\
 	$(BIBBLD)
 	$(PDFBLD)
 
-default:	report.may
+default:	report.final.pdf
 
 all: $(DOCS)
 
