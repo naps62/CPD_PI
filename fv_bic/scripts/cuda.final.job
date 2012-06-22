@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+#PBS -V
+#PBS -N cuda.profile.all
+#PBS -l nodes=1:r511:ppn=24
+#PBS -l walltime=2:00:00
+#PBS -m bea
+#PBS -e output/cuda.final.err
+#PBS -o output/cuda.final.out
+
+#
+# pre-process - clean and recompile project
+#
+echo "recompiling project"
+prog_dir=~/fv_bic/
+cd $prog_dir
+
+echo "   - loading cuda module"
+module load cuda
+echo "   - cleaning"
+make clean
+echo "   - compiling"
+make MODE=RLS
+echo "   DONE"
+echo ""
+
+#
+# running jobs
+#
+work_dir=~/input/
+cd $work_dir
+
+out_dir=~/fv_bic/job_results/
+mkdir -p out_dir
+
+cases=("01_tiny" "02_small" "03_medium" "04_big" "05_huge")
+tests=("compute_flux" "update" "zones" "zones_optim1_length_area_ratio" "zones_optim2_optimal_kernels")
+
+runs=10
+
+function test_case {
+	# get test name
+	NAME=$1
+
+	cd $NAME
+
+	# for each test
+	for test in ${tests[*]}; do
+		echo -n "   cuda.profile.$test..."
+
+		# create output file
+		out_file=$out_dir/$test
+		out_file=$test
+		rm -f out_file
+
+		# run test 10 times
+		for i in `seq 1 $runs`; do
+			cuda.profile.$test >> $out_file
+		done
+		echo " done!"
+	done
+
+	cd ..
+}
+
+# for each test case, run all programs
+for case in ${cases[*]}; do
+	echo "$case"
+	test_case $case
+	echo "   DONE"
+done
