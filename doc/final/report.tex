@@ -662,17 +662,19 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \section{Introduction}
 \section{Case Study}
 \todo[inline]{Explain what the program is meant for}
+
 \subsection{Algorithm}
 \todo[inline]{Explain the algorithm}
 \todo[inline]{Mention it is a stencil}
 \subsection{Parallelism Oportunities}
 \todo[inline]{Explain what can be executed in parallel}
 \todo[inline]{Mention this is a heartbeat}
+
 \section{Sequential}
 \subsection{Original}
 \todo[inline]{Explain the original sequential implementation}
 \subsubsection{Simplifications}
-\todo[inline]{Animation and flux calculation are out}
+\todo[inline]{Animation and velocity calculation are out}
 \subsection{Optimized}
 \todo[inline]{Explain why arrays of pointers are bad}
 \subsubsection{AOS}
@@ -680,43 +682,52 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \subsubsection{SOA}
 \todo[inline]{Explain the SOA structures and why they should be better than SOA}
 \subsection{Parallelization}
-\todo[inline]{Describe dependencies and the adaptations required to remove them}
+\todo[inline]{Describe dependencies and the adaptations required to remove them (reversing the update iteration from edges to cells)}
+
 \section{Shared Memory}
 \todo[inline]{Describe the OpenMP implementations}
 \subsection{Load Balance}
 \todo[inline]{Describe the static scheduling with OpenMP and explain that all the iterations make the same operations in every function}
 \subsection{Limitations}
 \todo[inline]{Describe the locality problems}
+
 \section{Distributed Memory}
 \todo[inline]{Describe the MPI implementation}
 \subsection{Load Balance}
 \todo[inline]{Describe how the mesh was partitioned}
 \subsection{Limitations}
 \todo[inline]{Explain how communication may be a problem, despite of locality issues being favored (smaller pieces of mesh)}
+
 \section{GPU}
 \todo[inline]{Describe the CUDA implementation}
 \subsection{Load Balance}
 \todo[inline]{Explain how the workload is assigned to each thread}
-\subsection{Limitations}
+\subsection{Optimizations}
+\todo[inline]{Explain source code optimizations, and their impact on performace}
 \todo[inline]{Explain how the branches are simple but may still cause warps to diverge and whatever more}
+\subsection{Mesh ordering impact}
+\todo[inline]{Explain how better ordering of cells/edges should, theoretically, be useful to increase coalesced memory accesses}
+\todo[inline]{Talk about the simple optimization attempt (mesh reorder) and its poor (maybe null?) impact on performance}
 
 \section{Experiment}
 \subsection{Environmental Setup}
 \todo[inline]{Describe the hex nodes}
 \todo[inline]{Add a roofline for each type of nodes described}
 \todo[inline]{Calculate Amdahl's Law for each hardware group}
-\todo[inline]{No problem in sending this to an appendix}
+\todo[inline]{No problem in sending this to an appendix -> and it should}
 \subsection{Methodology}
 \todo[inline]{Explain the hows and whys of the latest methodology}
 \todo[inline]{Add the methodologies from all the phases which were not retested}
-\todo[inline]{No problem in sending this to an appendix}
+\todo[inline]{No problem in sending this to an appendix -> and it should}
 \subsection{Results}
 \todo[inline]{Only describe the results, a.k.a. translate every chart to words}
 \subsection{Analysis}
 \todo[inline]{Interpret every chart. Say what each means, what can be concluded from it}
 \todo[inline]{Merge this subsection with the results if time is of the essence}
+
 \section{Conclusion}
-\todo[inline]{Sum all this shit up}
+\todo[inline]{Sum all this shit up.}
+\todo[inline]{Or in my own words: Sum the fuck out of this shit}
 
 
 
