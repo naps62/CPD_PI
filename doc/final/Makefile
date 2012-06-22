@@ -27,7 +27,11 @@ DOCS	=	report
 %: %.pdf
 	$(PDFOPN) $<
 
+ifeq ($$(UNAME),Darwin)
 default: report.pdf
+else
+default: report
+endif
 
 all: $(DOCS)
 

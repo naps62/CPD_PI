@@ -662,6 +662,7 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \section{Introduction}
 \section{Case Study}
 \todo[inline]{Explain what the program is meant for}
+%\input{tex/01_intro}
 
 \subsection{Algorithm}
 \todo[inline]{Explain the algorithm}
@@ -690,24 +691,25 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \todo[inline]{Describe the static scheduling with OpenMP and explain that all the iterations make the same operations in every function}
 \subsection{Limitations}
 \todo[inline]{Describe the locality problems}
+\todo[inline]{Opportunity to show here that cute image that displays locality of the mesh}
 
 \section{Distributed Memory}
-\todo[inline]{Describe the MPI implementation}
+\todo[inline,color=green!40]{Describe the MPI implementation}
 \subsection{Load Balance}
-\todo[inline]{Describe how the mesh was partitioned}
+\todo[inline,color=green!40]{Describe how the mesh was partitioned}
 \subsection{Limitations}
-\todo[inline]{Explain how communication may be a problem, despite of locality issues being favored (smaller pieces of mesh)}
+\todo[inline,color=green!40]{Explain how communication may be a problem, despite of locality issues being favored (smaller pieces of mesh)}
 
 \section{GPU}
-\todo[inline]{Describe the CUDA implementation}
+\todo[inline,color=green!40]{Describe the CUDA implementation}
 \subsection{Load Balance}
-\todo[inline]{Explain how the workload is assigned to each thread}
+\todo[inline,color=green!40]{Explain how the workload is assigned to each thread}
 \subsection{Optimizations}
-\todo[inline]{Explain source code optimizations, and their impact on performace}
-\todo[inline]{Explain how the branches are simple but may still cause warps to diverge and whatever more}
+\todo[inline,color=green!40]{Explain source code optimizations, and their impact on performace}
+\todo[inline,color=green!40]{Explain how the branches are simple but may still cause warps to diverge and whatever more}
 \subsection{Mesh ordering impact}
-\todo[inline]{Explain how better ordering of cells/edges should, theoretically, be useful to increase coalesced memory accesses}
-\todo[inline]{Talk about the simple optimization attempt (mesh reorder) and its poor (maybe null?) impact on performance}
+\todo[inline,color=green!40]{Explain how better ordering of cells/edges should, theoretically, be useful to increase coalesced memory accesses}
+\todo[inline,color=green!40]{Talk about the simple optimization attempt (mesh reorder) and its poor (maybe null?) impact on performance}
 
 \section{Experiment}
 \subsection{Environmental Setup}
@@ -727,7 +729,7 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 
 \section{Conclusion}
 \todo[inline]{Sum all this shit up.}
-\todo[inline]{Or in my own words: Sum the fuck out of this shit}
+\todo[inline,color=green!40]{Or in my own words: Sum the fuck out of this shit}
 
 
 
