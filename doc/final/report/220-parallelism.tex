@@ -2,7 +2,8 @@
 \todo[inline]{Explain what can be executed in parallel}
 \todo[inline]{Mention this is a heartbeat}
 
-During the main loop of the program both core functions, \computeflux and \update, depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to compute flux for the next iteration. This creates two implicit synchronization points in the main loop, and is a consequence of the heartbeat characteristics of the problem.
+During the main loop of this program both core functions, \computeflux and \update, depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to correctly compute the flux for the next iteration. This creates two implicit synchronization points in the main loop, and is a consequence of the heartbeat characteristics of the problem.
 
-This allows both functions to be looked at as individual tasks, that may be subject to different parallelization approaches.
-Both functions perform calculations using the entire mesh
+This allows both functions to be looked at as individual tasks, that may be subject to different parallelization approaches. Both functions perform calculations using the entire mesh, but they differ in the element used: while \computeflux iterates over edges, \update iterates over cells.
+
+\todo[inline,color=green!40]{Ainda tentei acabar eu isto mas não sei bem onde querias ir com este texto, por isso acaba tu. Pode ser útil um parágrafo a explicar que nos algoritmos de stencil é comum deixar-se que diferentes partes da mesh estejam em diferentes iterações por só terem dependência local, mas que no nosso caso por ser um heartbeat isto não é de todo trivial de implementar.}

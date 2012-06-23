@@ -1,0 +1,10 @@
+\subsubsection{SOA}
+% \todo[inline]{Explain the SOA structures and why they should be better than SOA}
+
+While the AOS approach completely removes the need for dereference, using a \textit{Struct-Of-Arrays} (SOA) approach can be more efficient.
+
+One of the problems with the AOS approach is that when the core functions iterate over one of the arrays, cache lines are being filled with the complete structure of these elements. Yet, neither of the core functions utilizes all the data in that structure, which translates in useless data occupying the cache. This hurts spatial locality\footnote{If a data element is required, it is highly probable adjacent elements will also be required in the near future.}, greatly increasing the chances of accessing a mesh element translating into a RAM access.
+
+The SOA approach solves this problem by placing the data of each element in distinct. As an example, a single array is created to hold the polution level of all the cells. Each data piece is placed in a different array.
+
+This approach allows the core functions to load only the data required for their compuations. The cache lines are now filled only with useful data, and the pieces which are required by the other functions will only be loaded when needed.
