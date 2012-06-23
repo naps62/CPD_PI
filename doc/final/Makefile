@@ -12,7 +12,16 @@ endif
 
 DOCS	=	report
 
-.PHONY: clean
+.PHONY: clean view
+
+ifeq ($(UNAME),Darwin)
+default: report.pdf
+else
+default: report view
+endif
+
+view:
+	$(PDFOPN) $(DOCS).pdf
 
 %.aux: %.tex
 	$(PDFBLD)
@@ -25,13 +34,11 @@ DOCS	=	report
 	$(PDFBLD)
 
 %: %.pdf
-	$(PDFOPN) $<
+	
 
-ifeq ($(UNAME),Darwin)
-default: report.pdf
-else
-default: report
-endif
+report.pdf: report/100-intro.tex
+report.pdf: report/200-case.tex
+
 
 all: $(DOCS)
 

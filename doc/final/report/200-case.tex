@@ -1,4 +1,8 @@
 \section{Case Study}
 \todo[inline]{Explain what the program is meant for}
 
-The application analyzed in this document calculates 
+The application analyzed in this document computes, called here \texttt{polu}, computes the flux of a material (e.g. a pollutant) through a bidimensional surface. This surface is described as a mesh, composed mainly of edges and cells. \texttt{Polu} is implemented on top of a library called FVL (Finite Volume Library) which aims to provide classes to deal the general requirements of programs dealing with finite volume methods, like \texttt{polu}. Specifically, all the input and output and mesh data management is implemented by FVL. Part of the work to 
+
+\input{report/210-algorithm}
+\input{report/220-parallelism}
+

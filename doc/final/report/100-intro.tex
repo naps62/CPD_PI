@@ -1,0 +1,20 @@
+\section{Introduction}
+\label{sec:intro}
+
+This document describes an incremental work where the \texttt{polu} application, which computes the propagation of a pollutant in a two dimensional environment, was studied in order to find possibilities of optimization and/or parallelization.
+
+The original \texttt{polu} application works like a heartbeat algorithm with no communication (since it is executed in a single computation node). The algorithm used by the application sees the environment as a discrete mesh (represented by its cells and edges) and loops until the specified time interval is reached. At each iteration of this main loop, the algorithm performs two main steps:
+
+\begin{description}[\IEEEsetlabelwidth{Pollution Update}\IEEEusemathlabelsep]
+	\item[Flux Computation] Based on current pollution values for each cell, the flux for each edge is calculated (performed by the \texttt{compute\_flux} function)
+	\item[Pollution Update] Using the previously calculated flux values, the pollution for each cell is updated (performed by the \texttt{update} function)
+\end{description}
+
+Several changes were performed in the original code, which are fully described in this document. Those changes vary in nature, from simple or low-level code optimization, to higher-level algorithmic changes, in order to allow parallelization and/or improve performance. The data structures used also suffered large changes (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures} at first, and also to \textit{Structure-of-Arrays}. This changes removed excessive dereferencing caused by deep chains of pointers in the original strucutres, effectively reducing memory accesses and improving locality.
+
+The several phases that composed this project reflect on the multiple approaches and variety of results presented here. In general, the goal is to study the performance impact, advantages and difficulties of different programming paradigms, applied to the \texttt{polu} application. 
+
+
+\todo[inline]{O paragrafo aqui a explicar o que é falado no relatorio}
+
+After the initial analysis of initial sequential code, a shared-memory parallel implementation, using OpenMP \todo{ref sec:omp}, a distributed-memory implementation, with the \textit{Message Passing Interface} (MPI) \todo{ref sec:mpi}, and a GPU implementation (using CUDA) \todo{ref sec:cuda} were implemented and profiled.
