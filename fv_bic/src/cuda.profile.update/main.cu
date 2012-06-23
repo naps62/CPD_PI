@@ -1,14 +1,17 @@
 #include <iostream>
 using namespace std;
 #include <tk/stopwatch.hpp>
+#include <cuda_runtime.h>
 
 namespace profile {
 	tk::Stopwatch *s;
 	//PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 
 	#define COUNT 7
-	long long up[COUNT];
-	long long count[COUNT];
+	float up[COUNT];
+	int count[COUNT];
+
+	cudaEvent_t start_t, stop_t;
 
 	void init() {
 		s = new tk::Stopwatch();
@@ -31,8 +34,20 @@ namespace profile {
 	}
 
 	inline void time_up(int x) {
-		up[x] += s->last().microseconds();
+		//up[x] += s->last().microseconds();
+		float elapsed
+		cudaEventElapsedTime(&elapsed, start_t, stop_t);
+		up[x] += elapsed;
 		count[x]++;
+	}
+
+	inline void cuda_start() {
+		cudaEventRecord(start_t);
+	}
+
+	inline void cuda_stop() {
+		cudaEventRecord(stop_t);
+		cudaEventSynchronize(stop_t);
 	}
 }
 
@@ -42,8 +57,8 @@ namespace profile {
 #define PROFILE_INIT()               profile::init()
 #define PROFILE_OUTPUT()             profile::output(cout)
 #define PROFILE_CLEANUP()            profile::cleanup()
-#define PROFILE_START() profile::s->start()
-#define PROFILE_STOP()  profile::s->stop()
+#define PROFILE_START() profile::cuda_start()
+#define PROFILE_STOP()  profile::cuda_stop()
 
 #define PROFILE_RETRIEVE_UP(x) profile::time_up(x)
 
@@ -173,44 +188,37 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {		
 		PROFILE_START();
 		kernel_update1<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(0);
 
 		PROFILE_START();
 		kernel_update2<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(1);
 
 		PROFILE_START();
 		kernel_update3<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(2);
 
 		PROFILE_START();
 		kernel_update4<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(3);
 
 		PROFILE_START();
 		kernel_update5<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(4);
 
 		PROFILE_START();
 		kernel_update6<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(5);
 
 		// same kernel, different block size
 		PROFILE_START();
 		kernel_update6<<< grid_update2, block_update2 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt, dummy.cuda_get());
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_UP(6);
 	}
