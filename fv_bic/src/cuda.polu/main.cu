@@ -174,7 +174,11 @@ int main(int argc, char **argv) {
 	//
 	// main loop start
 	//
+	#ifdef PROFILE_ITERATION_CAP
+	for(unsigned int iter = 0; iter < MAX_ITERATIONS; ++iter) {
+	#else
 	while (!finished) {
+	#endif
 		#ifndef PROFILE
 			cout << "time: " << t << "   iteration: " << i << "\r";
 		#endif

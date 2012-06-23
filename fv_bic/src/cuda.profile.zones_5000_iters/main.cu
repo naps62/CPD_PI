@@ -52,7 +52,8 @@ namespace profile {
 #define PROFILE_START() profile::s->start()
 #define PROFILE_STOP()  profile::s->stop()
 
-#define PROFILE_ZONES_OPTIM_LENGTH_AREA_RATIO
-#define OPTIM_LENGTH_AREA_RATIO
+#define PROFILE_ZONES
+#define PROFILE_ITERATION_CAP
+#define MAX_ITERATIONS 5000
 
 #include "../cuda.profile/main.cu"
