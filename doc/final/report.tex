@@ -423,7 +423,7 @@
 
 
 
-
+\usepackage[utf8x]{inputenc}
 \usepackage{todonotes}
 
 
@@ -467,10 +467,14 @@
 % received ..."  text while in non-compsoc journals this is reversed. Sigh.
 
 \author{Miguel~Palhas,~\IEEEmembership{pg19808,~MEI}
-        and~Pedro Costa,~\IEEEmembership{pg19830, MEI}%
+        , Pedro~Costa,~\IEEEmembership{pg19830,~MEI}
+        and Stéphane~Clain,~\IEEEmembership{co-Advisor}%
   \IEEEcompsocitemizethanks{%
     \IEEEcompsocthanksitem{M. Palhas and P. Costa are with the Department of Informatics at University of Minho, Braga, Portugal\protect\\%
       E-mail: \texttt{pg\{19808,19830\}@alunos.uminho.pt}
+    }
+    \IEEEcompsocthanksitem{Professor Doctor Stéphane Clain is with the Department of Mathematics and Applications at University of Minho, Braga, Portugal\protect\\%
+      E-mail: \texttt{clain@math.uminho.pt}
     }
   }
 }
@@ -660,8 +664,7 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 
 
 \section{Introduction}
-\section{Case Study}
-\todo[inline]{Explain what the program is meant for}
+\input{report/200-case}
 %\input{tex/01_intro}
 
 \subsection{Algorithm}
