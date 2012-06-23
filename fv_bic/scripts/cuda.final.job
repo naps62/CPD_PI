@@ -5,8 +5,8 @@
 #PBS -l nodes=1:r511:ppn=24
 #PBS -l walltime=2:00:00
 #PBS -m bea
-#PBS -e output/cuda.final.err
-#PBS -o output/cuda.final.out
+#PBS -e /home/cpd19808/jobs_output/cuda.final.err
+#PBS -o /home/cpd19808/jobs_output/cuda.final.out
 
 #
 # pre-process - clean and recompile project
@@ -16,27 +16,27 @@ prog_dir=~/fv_bic/
 cd $prog_dir
 
 echo "   - loading cuda module"
-module load cuda
 echo "   - cleaning"
-make clean
+#make clean
 echo "   - compiling"
-make MODE=RLS
+#make MODE=RLS
 echo "   DONE"
 echo ""
+
+cases=("01_tiny") #"02_small" "03_medium" "04_big" "05_huge")
+tests=("compute_flux" "update" "zones" "zones_optim1_length_area_ratio" "zones_optim2_optimal_kernels" "zones_5000_iters" "zones_5000_iters_optim")
 
 #
 # running jobs
 #
-work_dir=~/input
+work_dir=~/inputs
 cd $work_dir
 
 out_dir=~/fv_bic/job_results
 mkdir -p $out_dir
 
-cases=("01_tiny" "02_small" "03_medium" "04_big" "05_huge")
-tests=("compute_flux" "update" "zones" "zones_optim1_length_area_ratio" "zones_optim2_optimal_kernels")
 
-runs=10
+runs=5
 
 function test_case {
 	# get test name
@@ -44,13 +44,17 @@ function test_case {
 
 	cd $NAME
 
+	test_out_dir=$out_dir/$NAME
+	rm -rf $test_out_dir
+	mkdir -p $test_out_dir
+
 	# for each test
 	for test in ${tests[*]}; do
 		echo -n "   cuda.profile.$test..."
 
 		# create output file
-		out_file=$out_dir/$test
-		rm -f $out_file
+		out_file=$test_out_dir/$test
+		touch $out_file
 
 		# run test 10 times
 		for i in `seq 1 $runs`; do
