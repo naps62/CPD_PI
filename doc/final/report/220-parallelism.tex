@@ -2,7 +2,10 @@
 \todo[inline]{Explain what can be executed in parallel}
 \todo[inline]{Mention this is a heartbeat}
 
-During the main loop of the program both core functions, \computeflux and \update, depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to compute flux for the next iteration. This creates two implicit synchronization points in the main loop, and is a consequence of the heartbeat characteristics of the problem.
+During the main loop of this program both core functions, \computeflux and \update, depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to correctly compute the flux for the next iteration. This creates two implicit synchronization points in the main loop, and is a consequence of the heartbeat characteristics of the problem.
 
-This allows both functions to be looked at as individual tasks, that may be subject to different parallelization approaches.
-Both functions perform calculations using the entire mesh
+This allows both functions to be looked at as individual tasks, that may be subject to different parallelization approaches. Both functions perform calculations using the entire mesh, but they differ in the element used: while \computeflux iterates over edges, \update iterates over cells.
+
+\todo[inline,color=green!40]{Ainda tentei acabar eu isto mas não sei bem onde querias ir com este texto, por isso acaba tu. O parágrafo seguinte pode ser útil por explicar como é que os stencils são paralelizados normalmente, o que não é de todo trivial com um heartbeat como o nosso.}
+
+Typical stencil computations seek parallelism by allowing different parts of the domain to be computed first. Since each element in the mesh at a given iteration $i$ depends on the surrounding elements at a previous iteration $i-1$, the iteration $i$ of the surrounding elements may be computed at the same time as the iteration $i+1$ of the current element is computed.
