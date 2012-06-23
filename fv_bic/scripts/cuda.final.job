@@ -2,7 +2,7 @@
 #
 #PBS -V
 #PBS -N cuda.profile.all
-#PBS -l nodes=1:r511:ppn=24
+#PBS -l nodes=1:r611:ppn=24
 #PBS -l walltime=2:00:00
 #PBS -m bea
 #PBS -e /home/cpd19808/jobs_output/cuda.final.err
@@ -17,13 +17,13 @@ cd $prog_dir
 
 echo "   - loading cuda module"
 echo "   - cleaning"
-#make clean
+make clean
 echo "   - compiling"
-#make MODE=RLS
+make MODE=RLS
 echo "   DONE"
 echo ""
 
-cases=("01_tiny") #"02_small" "03_medium" "04_big" "05_huge")
+cases=("01_tiny" "02_small" "03_medium" "04_big" "05_huge")
 tests=("compute_flux" "update" "zones" "zones_optim1_length_area_ratio" "zones_optim2_optimal_kernels" "zones_5000_iters" "zones_5000_iters_optim")
 
 #
