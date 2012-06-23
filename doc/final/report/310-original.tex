@@ -8,7 +8,9 @@ In this original version, the \computeflux function iterates over each edge, and
 
 The velocity vector in the edge is computed based on the velocity of both cells and the normal of the edge. This final velocity also gives information about the direction of the flux. A positive velocity makes the pollution flow from left to right, and the inverse happens with a negative velocity. \Cref{alg:flux} illustrates this behavious.
 
-\begin{figure}[!htp]
+
+
+\begin{algorithm}[!htp]
 	\begin{algorithmic}
 		\ForAll {$edge \in Edges$}
 
@@ -34,13 +36,13 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 
 	\caption{Pseudocode for the original \computeflux function}
 	\label{alg:flux}
-\end{figure}
+\end{algorithm}
 
 This function also returns the elapsed time, which is computed with the maximum absolute value of the computed edge velocities, and is used at the end of the iteration to keep track of the total elapsed time.
 
 The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area. This is described in \cref{alg:update}.
 
-\begin{figure}[!htp]
+\begin{algorithm}[!htp]
 	\begin{algorithmic}
 		\ForAll {$cell \in Cells$}
 			\ForAll {$edge \in Edges_{cell}$}
@@ -52,7 +54,7 @@ The original \update function also iterates over each edge. The contribution of 
 
 	\caption{Pseudocode for the original \update function}
 	\label{alg:update}
-\end{figure}
+\end{algorithm}
 
 There is also the possibility to output the current state of the mesh after every $X$ of iterations, where $X$ is a parameter provided at runtime. This feature allows the output to contain not only the final state of the system byt all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
 
