@@ -1,9 +1,9 @@
 \section{Introduction}
 \label{sec:intro}
 
-This document describes an incremental work where the \texttt{polu} application, which computes the propagation of a pollutant in a two dimensional environment, was studied in order to find possibilities of optimization and/or parallelization.
+This document describes an incremental work where the \polu application, which computes the propagation of a pollutant in a two dimensional environment, was studied in order to find possibilities of optimization and/or parallelization.
 
-The \texttt{polu} application is built on top of the Finite Volume Library (FVL) which is also a focus of study in this document, as a large part of the logic and data structures are implemented on it, rather than on the application itself. In this context, both of them are considered as a whole case study.
+The \polu application is built on top of the Finite Volume Library (FVL) which is also a focus of study in this document, as a large part of the logic and data structures are implemented on it, rather than on the application itself. In this context, both of them are considered as a whole case study.
 
 Several changes were performed in the original code, which are fully described in this document. Those changes vary in nature, from simple or low-level code optimization, to higher-level algorithmic changes, in order to allow parallelization and/or improve performance. The data structures used also suffered large changes (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures} at first, and also to \textit{Structure-of-Arrays}. This changes removed excessive dereferencing caused by deep chains of pointers in the original strucutres, effectively reducing memory accesses and improving locality.
 
