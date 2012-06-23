@@ -1,0 +1,2 @@
+report.pdf:
+	@cd ..; $(MAKE) $@
