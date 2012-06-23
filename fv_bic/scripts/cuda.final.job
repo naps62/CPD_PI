@@ -27,11 +27,11 @@ echo ""
 #
 # running jobs
 #
-work_dir=~/input/
+work_dir=~/input
 cd $work_dir
 
-out_dir=~/fv_bic/job_results/
-mkdir -p out_dir
+out_dir=~/fv_bic/job_results
+mkdir -p $out_dir
 
 cases=("01_tiny" "02_small" "03_medium" "04_big" "05_huge")
 tests=("compute_flux" "update" "zones" "zones_optim1_length_area_ratio" "zones_optim2_optimal_kernels")
@@ -50,8 +50,7 @@ function test_case {
 
 		# create output file
 		out_file=$out_dir/$test
-		out_file=$test
-		rm -f out_file
+		rm -f $out_file
 
 		# run test 10 times
 		for i in `seq 1 $runs`; do
