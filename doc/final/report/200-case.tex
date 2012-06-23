@@ -1,7 +1,14 @@
 \section{Case Study}
 \todo[inline]{Explain what the program is meant for}
 
-The application analyzed in this document computes, called here \texttt{polu}, computes the flux of a material (e.g. a pollutant) through a bidimensional surface. This surface is described as a mesh, composed mainly of edges and cells. \texttt{Polu} is implemented on top of a library called FVL (Finite Volume Library) which aims to provide classes to deal the general requirements of programs dealing with finite volume methods, like \texttt{polu}. Specifically, all the input and output and mesh data management is implemented by FVL. Part of the work to 
+The application analyzed in this document computes, called here \texttt{polu}, computes the flux of a material (e.g. a pollutant) through a bidimensional surface. This surface is described as a mesh, composed mainly of edges and cells. The input is given by a 
+
+The original \texttt{polu} application works like a heartbeat algorithm with no communication (since it is executed in a single computation node). The algorithm used by the application sees the environment as a discrete mesh (represented by its cells and edges) and loops until the specified time interval is reached. At each iteration of this main loop, the algorithm performs two main steps:
+
+\begin{description}[\IEEEsetlabelwidth{Pollution Update}\IEEEusemathlabelsep]
+	\item[Flux Computation] Based on current pollution values for each cell, the flux for each edge is calculated (performed by the \texttt{compute\_flux} function)
+	\item[Pollution Update] Using the previously calculated flux values, the pollution for each cell is updated (performed by the \texttt{update} function)
+\end{description}
 
 \input{report/210-algorithm}
 \input{report/220-parallelism}
