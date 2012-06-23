@@ -40,6 +40,9 @@ report.pdf: report/100-intro.tex
 report.pdf: report/200-case.tex
 
 
+report.aux: report/200-case.tex
+report.aux: report/210-algorithm.tex
+
 all: $(DOCS)
 
 clean:
