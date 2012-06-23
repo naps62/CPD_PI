@@ -18,6 +18,9 @@ namespace profile {
 
 		for(unsigned int i = 0; i < COUNT; ++i)
 			up[i] = count[i] = 0;
+
+		cudaEventCreate(&start_t);
+		cudaEventCreate(&stop_t);
 	}
 
 	inline void output(std::ostream& out) {
@@ -31,6 +34,9 @@ namespace profile {
 
 	void cleanup() {
 		delete s;
+
+		cudaEventDestroy(start_t);
+		cudaEventDestroy(stop_t);
 	}
 
 	inline void time_up(int x) {

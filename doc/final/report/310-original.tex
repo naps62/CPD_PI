@@ -4,10 +4,37 @@
 
 The original \polu program was implemented using structures as \textit{Arrays-Of-Pointers} (AOP). While this allows for an easier development and better code readability, the deep levels of dereferencing imply an increased number of memory accesses, which aggravate the effects of any memory bottlenecks.
 
-In this original version, the \computeflux function iterates over each edge, and loads the polution levels and velocity vectors of the cells it connects. The velocity vector in the edge is computed the average of velocity in both cells multiplied by the edge's normal. The flux to be transfered through the edge is computed as the computed velocity multiplied by the source cell's polution (right cell if the velocity is negative, left cell otherwise). This function returns the elapsed time for this iteration (so the problem is able to progress in the domain of time), which is computed as the inverse of the maximum absolute value of the computed velocities.
+In this original version, the \computeflux function iterates over each edge, and loads the pollution levels and velocity vectors of the cells it connects. The velocity vector in the edge is computed the average of velocity in both cells multiplied by the edge's normal. The flux to be transfered through the edge is computed as the computed velocity multiplied by the source cell's polution (right cell if the velocity is negative, left cell otherwise). This function returns the elapsed time for this iteration (so the problem is able to progress in the domain of time), which is computed as the inverse of the maximum absolute value of the computed velocities.
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\ForAll {$edge \in Edges$}
+
+
+				$flux_{edge} += v_{edge}$
+		\EndFor
+	\end{algorithmic}
+
+	\caption{Pseudocode for the original \computeflux function}
+	\label{alg:update}
+\end{algorithm}
 
 The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area.
 
-At the end of each main loop iteration, an output operation is performed to save the current state of the mesh. This feature allows the output file to contain not only the final state of the system but all the intermediary states which allow an animation showing the entire simulation to be created.
+\begin{algorithm}
+	\begin{algorithmic}
+		\ForAll {$cell \in Cells$}
+			\ForAll {$edge \in Edges_{cell}$}
+
+				$pollution_{cell} += \Delta{t} \times flux_{edge} \times \frac{L_{edge}}{A_{cell}}$
+			\EndFor
+		\EndFor
+	\end{algorithmic}
+
+	\caption{Pseudocode for the original \update function}
+	\label{alg:update}
+\end{algorithm}
+
+There is also the possibility to output the current state of the mesh after every $X$ of iterations, where $X$ is a parameter provided at runtime. This feature allows the output to contain not only the final state of the system byt all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
 
 \input{report/311-simplifications}

@@ -427,11 +427,16 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{cleveref}
+\usepackage[cmex10]{amsmath}
+\usepackage{algpseudocode}
+\usepackage[plain]{algorithm}
+%\usepackage[plain]{algorithmicx}
 
 \usepackage{xspace}
 \newcommand{\computeflux}{\texttt{compute\_flux}\xspace}
 \newcommand{\update}{\texttt{update}\xspace}
 \newcommand{\polu}{\texttt{polu}\xspace}
+\newcommand{\dirichlet}{\textit{Dirichlet}\xspace}
 
 
 
@@ -664,11 +669,8 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 
 
 
-% introduction
-\input{report/100-intro}
-
-% test case
-\input{report/200-case}
+%\input{report/100-intro}
+%\input{report/200-case}
 \input{report/300-sequential}
 
 \section{Shared Memory}

@@ -34,6 +34,9 @@ namespace profile {
 
 	void cleanup() {
 		delete s;
+		
+		cudaEventDestroy(start_t);
+		cudaEventDestroy(stop_t);
 	}
 
 	inline void time_cf(int x) {
