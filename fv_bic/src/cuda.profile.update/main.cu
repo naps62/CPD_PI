@@ -35,7 +35,7 @@ namespace profile {
 
 	inline void time_up(int x) {
 		//up[x] += s->last().microseconds();
-		float elapsed
+		float elapsed;
 		cudaEventElapsedTime(&elapsed, start_t, stop_t);
 		up[x] += elapsed;
 		count[x]++;
