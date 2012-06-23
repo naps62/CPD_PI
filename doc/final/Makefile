@@ -42,6 +42,10 @@ report.pdf: report/200-case.tex
 
 report.aux: report/200-case.tex
 report.aux: report/210-algorithm.tex
+report.aux: report/220-parallelism.tex
+report.aux: report/300-sequential.tex
+report.aux: report/310-original.tex
+report.aux: report/311-simplifications.tex
 
 all: $(DOCS)
 

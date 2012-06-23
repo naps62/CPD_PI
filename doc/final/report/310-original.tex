@@ -1,0 +1,13 @@
+\subsection{Original}
+\label{sec:original}
+\todo[inline,color=blue!40]{Add some algebra to the core functions text. Hard to keep track with only text.}
+
+The original \polu program was implemented using structures as \textit{Arrays-Of-Pointers} (AOP). While this allows for an easier development and better code readability, the deep levels of dereferencing imply an increased number of memory accesses, which aggravate the effects of any memory bottlenecks.
+
+In this original version, the \computeflux function iterates over each edge, and loads the polution levels and velocity vectors of the cells it connects. The velocity vector in the edge is computed the average of velocity in both cells multiplied by the edge's normal. The flux to be transfered through the edge is computed as the computed velocity multiplied by the source cell's polution (right cell if the velocity is negative, left cell otherwise). This function returns the elapsed time for this iteration (so the problem is able to progress in the domain of time), which is computed as the inverse of the maximum absolute value of the computed velocities.
+
+The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area.
+
+At the end of each main loop iteration, an output operation is performed to save the current state of the mesh. This feature allows the output file to contain not only the final state of the system but all the intermediary states which allow an animation showing the entire simulation to be created.
+
+\input{report/311-simplifications}

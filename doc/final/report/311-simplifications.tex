@@ -1,0 +1,8 @@
+\subsubsection{Simplifications}
+\todo[inline]{Animation and velocity calculation are out}
+
+Two important simplifications were initially performed in the original version, before any other adaptation or rewrite of the code.
+
+The first simplification meant removing the output operation at the end of each main loop iteration, thus removing the animation feature. While this feature is interesting to analyze how the system evolved, input/output operations are very slow when compared to computation operations. Since the main goal of this document is to study ways to improve the performance of the \polu application, this feature may be discarded.
+
+The second major simplification focus on the \computeflux function. Since the every cell's velocity vector remains constant throughout the entire program's execution, the same values will be computed for the velocity in each edge and for the elapsed time. While this computation is important in a more dynamic application where velocity vectors are also updated, such is not the case for this algorithm. Therefore, it is possible to remove these two computational steps from the core function to the preprocessing stage, thus globally improving the program's performance.
