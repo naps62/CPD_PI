@@ -1,20 +1,26 @@
 #include <iostream>
 using namespace std;
 #include <tk/stopwatch.hpp>
+#include <cuda_runtime.h>
 
 namespace profile {
 	tk::Stopwatch *s;
 	//PROFILE_COUNTER_CLASS * PROFILE_COUNTER_NAME;
 
 	#define COUNT 5
-	long long cf[COUNT];
-	long long count[COUNT];
+	double cf[COUNT];
+	int count[COUNT];
+
+	cudaEvent_t start_t, stop_t;
 
 	void init() {
 		s = new tk::Stopwatch();
 
 		for(unsigned int i = 0; i < COUNT; ++i)
 			cf[i] = count[i] = 0;
+
+		cudaEventCreate(&start_t);
+		cudaEventCreate(&stop_t);
 	}
 
 	inline void output(std::ostream& out) {
@@ -31,8 +37,21 @@ namespace profile {
 	}
 
 	inline void time_cf(int x) {
-		cf[x] += s->last().microseconds();
+		//cf[x] += s->last().microseconds();
+		float elapsed
+		cudaEventElapsedTime(&elapsed, start_t, stop_t);
+		cf[x] += elapsed;
 		count[x]++;
+	}
+
+
+	inline void cuda_start() {
+		cudaEventRecord(start_t);
+	}
+
+	inline void cuda_stop() {
+		cudaEventRecord(stop_t);
+		cudaEventSynchronize(stop_t);
 	}
 }
 
@@ -42,8 +61,8 @@ namespace profile {
 #define PROFILE_INIT()               profile::init()
 #define PROFILE_OUTPUT()             profile::output(cout)
 #define PROFILE_CLEANUP()            profile::cleanup()
-#define PROFILE_START() profile::s->start()
-#define PROFILE_STOP()  profile::s->stop()
+#define PROFILE_START() profile::cuda_start()
+#define PROFILE_STOP()  profile::cuda_stop()
 
 #define PROFILE_RETRIEVE_CF(x) profile::time_cf(x)
 
@@ -167,31 +186,26 @@ int main(int argc, char **argv) {
 	for(unsigned int i = 0; i < NUM_ITERATIONS; ++i) {		
 		PROFILE_START();
 		kernel_compute_flux1<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(0);
 
 		PROFILE_START();
 		kernel_compute_flux2<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(1);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(2);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(3);
 
 		PROFILE_START();
 		kernel_compute_flux3<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), data.dirichlet);
-		cudaDeviceSynchronize();
 		PROFILE_STOP();
 		PROFILE_RETRIEVE_CF(4);
 	}

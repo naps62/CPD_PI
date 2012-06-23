@@ -423,12 +423,15 @@
 
 
 
-
+\usepackage[utf8x]{inputenc}
 \usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage{cleveref}
 
-
-
-
+\usepackage{xspace}
+\newcommand{\computeflux}{\texttt{compute\_flux}\xspace}
+\newcommand{\update}{\texttt{update}\xspace}
+\newcommand{\polu}{\texttt{polu}\xspace}
 
 
 
@@ -467,10 +470,14 @@
 % received ..."  text while in non-compsoc journals this is reversed. Sigh.
 
 \author{Miguel~Palhas,~\IEEEmembership{pg19808,~MEI}
-        and~Pedro Costa,~\IEEEmembership{pg19830, MEI}%
+        , Pedro~Costa,~\IEEEmembership{pg19830,~MEI}
+        and Stéphane~Clain,~\IEEEmembership{co-Advisor}%
   \IEEEcompsocitemizethanks{%
     \IEEEcompsocthanksitem{M. Palhas and P. Costa are with the Department of Informatics at University of Minho, Braga, Portugal\protect\\%
       E-mail: \texttt{pg\{19808,19830\}@alunos.uminho.pt}
+    }
+    \IEEEcompsocthanksitem{Professor Doctor Stéphane Clain is with the Department of Mathematics and Applications at University of Minho, Braga, Portugal\protect\\%
+      E-mail: \texttt{clain@math.uminho.pt}
     }
   }
 }
@@ -657,33 +664,12 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 
 
 
+% introduction
+\input{report/100-intro}
 
-
-\section{Introduction}
-\section{Case Study}
-\todo[inline]{Explain what the program is meant for}
-%\input{tex/01_intro}
-
-\subsection{Algorithm}
-\todo[inline]{Explain the algorithm}
-\todo[inline]{Mention it is a stencil}
-\subsection{Parallelism Oportunities}
-\todo[inline]{Explain what can be executed in parallel}
-\todo[inline]{Mention this is a heartbeat}
-
-\section{Sequential}
-\subsection{Original}
-\todo[inline]{Explain the original sequential implementation}
-\subsubsection{Simplifications}
-\todo[inline]{Animation and velocity calculation are out}
-\subsection{Optimized}
-\todo[inline]{Explain why arrays of pointers are bad}
-\subsubsection{AOS}
-\todo[inline]{Explain the AOS structures and why they should be better than AOP}
-\subsubsection{SOA}
-\todo[inline]{Explain the SOA structures and why they should be better than SOA}
-\subsection{Parallelization}
-\todo[inline]{Describe dependencies and the adaptations required to remove them (reversing the update iteration from edges to cells)}
+% test case
+\input{report/200-case}
+\input{report/300-sequential}
 
 \section{Shared Memory}
 \todo[inline]{Describe the OpenMP implementations}

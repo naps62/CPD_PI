@@ -1,0 +1,6 @@
+\subsubsection{AOS}
+% \todo[inline]{Explain the AOS structures and why they should be better than AOP}
+
+The first implemented alternative to AOP was the \textit{Arrays-Of-Structs} approach. Instead of using pointers, structures were created for cells and edges. Each cell's structure contains its polution level, velocity vector, area, number of edges and an array holding the index of each of its edges. On the other hand, each edge's structure holds its computed flux, its length and the indexes of its adjacent cells.
+
+Note that the dereferencing levels are completely eliminated, yet using indexes allows any element to hold the identifier which allows direct access to the other elements it needs to interact with, as long as all the data objects are stored in arrays. The maximum representable index is used as the equivalent to \texttt{NULL} pointers (applied, for example, to the right cell of a border edge).
