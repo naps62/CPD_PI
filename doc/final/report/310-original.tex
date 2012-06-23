@@ -4,24 +4,43 @@
 
 The original \polu program was implemented using structures as \textit{Arrays-Of-Pointers} (AOP). While this allows for an easier development and better code readability, the deep levels of dereferencing imply an increased number of memory accesses, which aggravate the effects of any memory bottlenecks.
 
-In this original version, the \computeflux function iterates over each edge, and loads the pollution levels and velocity vectors of the cells it connects. The velocity vector in the edge is computed the average of velocity in both cells multiplied by the edge's normal. The flux to be transfered through the edge is computed as the computed velocity multiplied by the source cell's polution (right cell if the velocity is negative, left cell otherwise). This function returns the elapsed time for this iteration (so the problem is able to progress in the domain of time), which is computed as the inverse of the maximum absolute value of the computed velocities.
+In this original version, the \computeflux function iterates over each edge, and loads the pollution levels and velocity vectors of the cells it connects. For edges in the border of the mesh, a convention is followed, indicating that the non existing cell is alwasy the right one (cells are refered to as left and right cells of a given edge). When the right cell doesn't exist, the \dirichlet condition is used as the value for that border.
 
-\begin{algorithm}
+The velocity vector in the edge is computed based on the velocity of both cells and the normal of the edge. This final velocity also gives information about the direction of the flux. A positive velocity makes the pollution flow from left to right, and the inverse happens with a negative velocity. \Cref{alg:flux} illustrates this behavious.
+
+\begin{figure}[!htp]
 	\begin{algorithmic}
 		\ForAll {$edge \in Edges$}
 
+			$i     \gets left\_cells_{edge}$
 
-				$flux_{edge} += v_{edge}$
+			$j     \gets rigth\_cells_{edge}$
+
+			$u_{i} \gets pollution_{i}$
+
+			\If {$\exists Cells_{j}$}
+
+				$u_{j} \gets pollution_{j}$
+			\Else
+
+				$u_{j} \gets \dirichlet$
+			\EndIf
+
+			\todo[inline]{falta aqui o calculo da velocidade da edge. Neste momento isto corresponde á compute\_flux depois das optimizações}
+
+			$flux_{edge} += u_{i} \cdot [v_{edge}]^{+} + u_{j} \cdot [v_{edge}]^{-}$
 		\EndFor
 	\end{algorithmic}
 
 	\caption{Pseudocode for the original \computeflux function}
-	\label{alg:update}
-\end{algorithm}
+	\label{alg:flux}
+\end{figure}
 
-The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area.
+This function also returns the elapsed time, which is computed with the maximum absolute value of the computed edge velocities, and is used at the end of the iteration to keep track of the total elapsed time.
 
-\begin{algorithm}
+The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area. This is described in \cref{alg:update}.
+
+\begin{figure}[!htp]
 	\begin{algorithmic}
 		\ForAll {$cell \in Cells$}
 			\ForAll {$edge \in Edges_{cell}$}
@@ -33,7 +52,7 @@ The original \update function also iterates over each edge. The contribution of 
 
 	\caption{Pseudocode for the original \update function}
 	\label{alg:update}
-\end{algorithm}
+\end{figure}
 
 There is also the possibility to output the current state of the mesh after every $X$ of iterations, where $X$ is a parameter provided at runtime. This feature allows the output to contain not only the final state of the system byt all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
 
