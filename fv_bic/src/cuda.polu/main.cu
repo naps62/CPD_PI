@@ -14,8 +14,8 @@ using namespace std;
 	#include "kernels_cuda.cuh"
 #endif
 
-#define BLOCK_SIZE_FLUX				512
-#define BLOCK_SIZE_UPDATE			512
+#define BLOCK_SIZE_FLUX				768
+#define BLOCK_SIZE_UPDATE			768
 #define GRID_SIZE(elems, threads)	((int) std::ceil((double)elems/threads))
 
 #define _CUDA_ONLY      if (_CUDA)
