@@ -38,7 +38,7 @@ namespace profile {
 
 	inline void time_cf(int x) {
 		//cf[x] += s->last().microseconds();
-		float elapsed
+		float elapsed;
 		cudaEventElapsedTime(&elapsed, start_t, stop_t);
 		cf[x] += elapsed;
 		count[x]++;
