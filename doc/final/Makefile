@@ -53,6 +53,10 @@ report.aux: report/330-parallelization.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex
+report.aux: report/500-distributed.tex
+report.aux: report/510-partitioning.tex
+report.aux: report/520-communication.tex
+report.aux: report/530-load-balance.tex
 
 all: $(DOCS)
 
