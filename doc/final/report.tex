@@ -420,16 +420,13 @@
 
 
 
-
-
-
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage[cmex10]{amsmath}
 \usepackage{algpseudocode}
-%\usepackage{algorithmicx}
+\usepackage{algorithmicx}
 \usepackage{algorithm}
 
 \usepackage{graphicx}
@@ -445,7 +442,23 @@
 \newcommand{\dirichlet}{\textit{Dirichlet}\xspace}
 
 
+\newsavebox{\ieeealgbox}
+\newenvironment{alg}
+  {
+   \begin{lrbox}{\ieeealgbox}
+   \begin{minipage}{\dimexpr\columnwidth-2\fboxsep-2\fboxrule}
+   \hrulefill
+   \begin{algorithmic}
+  }
+  {
+   \end{algorithmic}
+   \hrulefill
+   \end{minipage}\end{lrbox}\noindent\mbox{\usebox{\ieeealgbox}}
+  }
 
+
+
+%\bibliography{../references.bib}
 
 
 % correct bad hyphenation here
@@ -875,6 +888,7 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 % % argument is your BibTeX string definitions and bibliography database(s)
 %\bibliography{../IEEE/IEEEabrv,../references}
 \bibliography{../references}
+%\printbibliography
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references

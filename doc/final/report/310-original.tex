@@ -1,6 +1,6 @@
 \subsection{Original}
 \label{sec:310}
-\todo[inline,color=blue!40]{Add some algebra to the core functions text. Hard to keep track with only text.}
+%\todo[inline,color=blue!40]{Add some algebra to the core functions text. Hard to keep track with only text.}
 
 The original \polu program was implemented using structures as \textit{Arrays-Of-Pointers} (AOP). While this allows for an easier development and better code readability, the deep levels of dereferencing imply an increased number of memory accesses, which aggravate the effects of any memory bottlenecks.
 
@@ -10,8 +10,8 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 
 
 
-\begin{algorithm}[!htp]
-	\begin{algorithmic}
+\begin{figure}[!htp]
+	\begin{alg}
 		\ForAll {$edge \in Edges$}
 
 			$l     \gets left\_cells_{edge}$
@@ -32,18 +32,18 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 
 			$flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
-	\end{algorithmic}
+	\end{alg}
 
 	\caption{Pseudocode for the original \computeflux function}
 	\label{alg:flux}
-\end{algorithm}
+\end{figure}
 
 This function also returns the elapsed time, which is computed with the maximum absolute value of the computed edge velocities, and is used at the end of the iteration to keep track of the total elapsed time.
 
 The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area. This is described in \cref{alg:update}.
 
-\begin{algorithm}[!htp]
-	\begin{algorithmic}
+\begin{figure}[!htp]
+	\begin{alg}
 		\ForAll {$edge \in Edges$}
 
 			$\Delta{u} \gets \Delta{t} \cdot flux_{edge} \cdot L_{edge}$
@@ -59,11 +59,11 @@ The original \update function also iterates over each edge. The contribution of 
 				$pollution_{r} \gets \frac{\Delta{u}}{A_{r}}$
 			\EndIf
 		\EndFor
-	\end{algorithmic}
+	\end{alg}
 
 	\caption{Original \update function}
 	\label{alg:update}
-\end{algorithm}
+\end{figure}
 
 
 
