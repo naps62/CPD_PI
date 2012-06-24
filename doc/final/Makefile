@@ -53,13 +53,18 @@ report.aux: report/330-parallelization.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex
-report.aux: report/500-distributed.tex
+report.aux: report/500-mpi.tex
 report.aux: report/510-partitioning.tex
 report.aux: report/520-communication.tex
 report.aux: report/530-load-balance.tex
+report.aux: report/600-cuda.tex
+report.aux: report/610-load-balance.tex
+report.aux: report/620-optimizations.tex
+report.aux: report/630-mesh-reorder.tex
 
 all: $(DOCS)
 
 clean:
 	$(RM) *.log *.aux *.toc *.out *.blg *.bbl *.nav *.snm *.synctex.gz
 	$(RM) $(DOCS:%=%.pdf)
+

@@ -7,4 +7,18 @@ As explained in \cref{sec:220}, the heartbeat nature of the algorithm prevents e
 
 \computeflux has only one dependency, in the computation of the elapsed time, which is removed simply by accepting the second simplification described in \cref{sec:311}. While this simplification is assumed in the final implementations, this dependency was properly studied in early stages of this project. Since the computation of the elapsed time is based in a maximum operation, it is possible to replace this dependency with a reduction \todo[color=blue!40]{Maybe add here a footnote to explain reductions} after the computation of the fluxes, thus removing the dependency and maintaining the correctness of the program.
 
-On the other hand, the \update function has a dependency which may not be neglected because of a simplification. As described in \cref{sec:310}, the original implementation of \update iterates over the edges. While this may favor locality after executing \computeflux, it creates a race condition when each edges adds its own contribution to the cell's value. This dependency can be removed by changing how \update iterates over the mesh. By iterating over the cells instead of the edges, the race condition disappears since only one write operation per cell is performed.
+On the other hand, the \update function has a dependency which may not be neglected because of a simplification. As described in \cref{sec:310}, the original implementation of \update iterates over the edges. While this may favor locality after executing \computeflux, it creates a race condition when each edges adds its own contribution to the cell's value. This dependency can be removed by changing how \update iterates over the mesh. By iterating over the cells instead of the edges, the race condition disappears since only one write operation per cell is performed, as shown in \cref{alg:update2}
+
+\begin{algorithm}[!htp]
+	\begin{algorithmic}
+		\ForAll {$cell \in Cells$}
+			\ForAll {$edge \in Edges_{cell}$}
+
+				$pollution_{cell} += \Delta{t} \times flux_{edge} \times \frac{L_{edge}}{A_{cell}}$
+			\EndFor
+		\EndFor
+	\end{algorithmic}
+
+	\caption{New \update function, now iterating over cells instead of edges}
+	\label{alg:update2}
+\end{algorithm}
