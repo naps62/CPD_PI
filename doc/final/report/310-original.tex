@@ -14,23 +14,23 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 	\begin{algorithmic}
 		\ForAll {$edge \in Edges$}
 
-			$i     \gets left\_cells_{edge}$
+			$l     \gets left\_cells_{edge}$
 
-			$j     \gets rigth\_cells_{edge}$
+			$r     \gets rigth\_cells_{edge}$
 
-			$u_{i} \gets pollution_{i}$
+			$u_{l} \gets pollution_{l}$
 
-			\If {$\exists Cells_{j}$}
+			\If {$\exists Cells_{r}$}
 
-				$u_{j} \gets pollution_{j}$
+				$u_{r} \gets pollution_{r}$
 			\Else
 
-				$u_{j} \gets \dirichlet$
+				$u_{r} \gets \dirichlet$
 			\EndIf
 
 			\todo[inline]{falta aqui o calculo da velocidade da edge. Neste momento isto corresponde á compute\_flux depois das optimizações}
 
-			$flux_{edge} += u_{i} \cdot [v_{edge}]^{+} + u_{j} \cdot [v_{edge}]^{-}$
+			$flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
 	\end{algorithmic}
 
@@ -44,17 +44,28 @@ The original \update function also iterates over each edge. The contribution of 
 
 \begin{algorithm}[!htp]
 	\begin{algorithmic}
-		\ForAll {$cell \in Cells$}
-			\ForAll {$edge \in Edges_{cell}$}
+		\ForAll {$edge \in Edges$}
 
-				$pollution_{cell} += \Delta{t} \times flux_{edge} \times \frac{L_{edge}}{A_{cell}}$
-			\EndFor
+			$\Delta{u} \gets \Delta{t} \cdot flux_{edge} \cdot L_{edge}$
+
+			$l \gets left\_cells_{edge}$
+
+			$r \gets right\_cells_{edge}$
+
+			$pollution_{l} -= \frac{\Delta{u}}{A_{l}}$
+
+			\If {$\exists Cells_{r}$}
+
+				$pollution_{r} \gets \frac{\Delta{u}}{A_{r}}$
+			\EndIf
 		\EndFor
 	\end{algorithmic}
 
-	\caption{Pseudocode for the original \update function}
+	\caption{Original \update function}
 	\label{alg:update}
 \end{algorithm}
+
+
 
 There is also the possibility to output the current state of the mesh after every $X$ of iterations, where $X$ is a parameter provided at runtime. This feature allows the output to contain not only the final state of the system byt all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
 

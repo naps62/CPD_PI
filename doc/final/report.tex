@@ -670,11 +670,6 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 % \subsubsection{Subsubsection Heading Here}
 % Subsubsection text here.
 
-
-
-
-
-
 \input{report/100-intro}
 \input{report/200-case}
 \input{report/300-sequential}
@@ -687,18 +682,8 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \todo[inline]{Describe the locality problems}
 \todo[inline]{Opportunity to show here that cute image that displays locality of the mesh}
 
-\input{report/500-distributed}
-
-\section{GPU}
-\todo[inline,color=green!40]{Describe the CUDA implementation}
-\subsection{Load Balance}
-\todo[inline,color=green!40]{Explain how the workload is assigned to each thread}
-\subsection{Optimizations}
-\todo[inline,color=green!40]{Explain source code optimizations, and their impact on performace}
-\todo[inline,color=green!40]{Explain how the branches are simple but may still cause warps to diverge and whatever more}
-\subsection{Mesh ordering impact}
-\todo[inline,color=green!40]{Explain how better ordering of cells/edges should, theoretically, be useful to increase coalesced memory accesses}
-\todo[inline,color=green!40]{Talk about the simple optimization attempt (mesh reorder) and its poor (maybe null?) impact on performance}
+\input{report/500-mpi}
+\input{report/600-cuda}
 
 \section{Experiment}
 \subsection{Environmental Setup}
