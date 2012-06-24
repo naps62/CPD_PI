@@ -1,0 +1,8 @@
+\subsection{Load Balance}
+\label{subsec:mpi:load}
+
+\todo[inline,color=green!40]{Describe how the mesh was partitioned}
+
+With the naive partitioning strategy used, load balance becomes a problem. The computation itself is actually well balanced, since it is assured that every partition has the same amount of cells (differing at most by one). The problem is in the border between those partitions. With the division by the $x$ coordinate being used, it becomes obvious that the size of the border between partitions becomes extremely dependant on the format of the mesh itself. Other approaches, already mentioned in \cref{subsubsec:mpi:partitioning:research} attempt to deal with this, and produce partitions that minimize the size of the border.
+
+The drawback of not controlling border sizes comes at the communcation step. Not only could there be different partitioning solutions that could minimize the border, thus minimizing the amount of data transfered, it can also happen that different partitions have very different border sizes, compromising communication balance.

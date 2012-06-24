@@ -6,7 +6,7 @@ The code consists on a preparation stage, where all the required elements are lo
 
 Operations performed in the preparation stage are highly dependent on the implementation being described, as most will require some elements to be properly organized or some values to be previously computed. Common operations, such as loading the necessary data from the described files are constant to every implementation, but may still differ in the structures used to store the data.
 
-A single execution of the two computation stages together form a step in the iterative method behind this application. These stages, also referred in this document as core functions, are the \computeflux and \update functions.
+A single execution of the two computation stages together form a step in the iterative method behind this application. These stages, also referred in this document as core functions, or kernels, are the \computeflux and \update functions.
 
 In \computeflux, all the edges in the mesh are analyzed, and the flux of pollution to be transfered across that edge is computed, based on the polution level and the velocity vectors of the cells it connects. A preconfigured value is used as the \dirichlet condition\footnote{The \dirichlet condition is a type of boundary condition used to specify a value taken by the solution in the border of the domain. In the \polu application, this value is constant throughout the execution}, which replaces the polution level of a second cell for the edges in the border of the mesh.
 
