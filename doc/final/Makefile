@@ -49,6 +49,7 @@ report.aux: report/311-simplifications.tex
 report.aux: report/320-optimized.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
+report.aux: report/330-parallelization.tex
 report.aux: report/500-distributed.tex
 report.aux: report/510-partitioning.tex
 report.aux: report/520-communication.tex
