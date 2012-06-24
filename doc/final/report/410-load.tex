@@ -1,0 +1,6 @@
+\subsection{Load Balance}
+% \todo[inline]{Describe the static scheduling with OpenMP and explain that all the iterations make the same operations in every function}
+
+Both core functions are mostly homogeneous in its parallel implementation. In \computeflux, the two branches perform the same amount of operations whether they are followed or not. In \update, the heaviest part of the workload is constant (products and divisions), and it only differs in the number of edges contributing to the edge. While this value may cause the function to become heterogeneous, this is highly dependent on the mesh used (the test case used in \cref{sec:700} has 3 edges in every cell).
+
+By default, the OpenMP interface uses static scheduling, where iterations are assigned to threads in a \textit{round-robin} pattern. Since the number of edges and cells is a constant throughout the entire execution, this guarantees the best load balancing among threads.
