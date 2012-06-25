@@ -23,15 +23,17 @@ namespace FVL {
 		opened = false;
 	}
 
-	FVXMLWriter::FVXMLWriter(string filename) {
-		this->open(filename);
+	FVXMLWriter::FVXMLWriter(string &file) {
+		opened = false;
+		this->open(file);
 	}
 
-	void FVXMLWriter::open(string filename) {
+	void FVXMLWriter::open(string &file) {
 		if (opened)
 			return;
 
-		this->filename = filename;
+		this->filename = file;
+		opened = true;
 		init();
 	}
 
@@ -58,4 +60,7 @@ namespace FVL {
 		this->clear();
 	}
 	
+	xml_node<> *FVXMLWriter::getRootNode() {
+		return root;
+	}
 }

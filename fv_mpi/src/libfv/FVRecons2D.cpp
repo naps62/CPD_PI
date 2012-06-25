@@ -78,7 +78,7 @@ switch(type)
     case FVVERTEX2D:
     P=((FVVertex2D *)ptr)->coord;
     return(pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2));    
-    break;
+    //break;
     case FVEDGE2D:
     P1=((FVEdge2D *)ptr)->firstVertex->coord;
     P2=((FVEdge2D *)ptr)->secondVertex->coord; 
@@ -92,7 +92,7 @@ switch(type)
     P=GPEdge.x*P1+GPEdge.y*P2;
     sum+=G1D.getWeight(5,3)*pow(P.x-_ref_point.x,(double)alpha1)*pow(P.y-_ref_point.y,(double)alpha2);    
     return(sum); 
-    break; 
+    //break; 
     //
     case FVCELL2D:
     ptr_c=((FVCell2D *)ptr);
@@ -116,13 +116,13 @@ switch(type)
          S_global+=S;
          }
     return(sum/S_global);     
-    break;
+    //break;
     default:
     cout<<"WARNING: unknown geometrical entity in FVReconstruction2D, found"<<type<<endl;    
     return(0); 
-    break;    
+    //break;    
    }
-return(0);  
+//return(0);  
 }
 // Matrix associated to reconstruction with the conservative reference value 
 void FVRecons2D::doConservativeMatrix()

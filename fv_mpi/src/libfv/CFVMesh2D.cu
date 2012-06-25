@@ -26,7 +26,8 @@ namespace FVL {
 	}
 
 	CFVMesh2D::~CFVMesh2D() {
-		cuda_free();
+		if (cuda_is_alloc())
+			cuda_free();
 	}
 
 	/************************************************
@@ -52,9 +53,9 @@ namespace FVL {
 
 			tmp_cuda_mesh.vertex_coords[0]		= vertex_coords.x.cuda_malloc();
 			tmp_cuda_mesh.vertex_coords[1]		= vertex_coords.y.cuda_malloc();
-			tmp_cuda_mesh.vertex_cells_count	= vertex_cells_count.cuda_malloc();
-			tmp_cuda_mesh.vertex_cells_index	= vertex_cells_index.cuda_malloc();
-			tmp_cuda_mesh.vertex_cells			= vertex_cells.cuda_malloc();
+			//tmp_cuda_mesh.vertex_cells_count	= vertex_cells_count.cuda_malloc();
+			//tmp_cuda_mesh.vertex_cells_index	= vertex_cells_index.cuda_malloc();
+			//tmp_cuda_mesh.vertex_cells			= vertex_cells.cuda_malloc();
 
 			// edge info
 			tmp_cuda_mesh.edge_types		= edge_types.cuda_malloc();
@@ -77,7 +78,7 @@ namespace FVL {
 			tmp_cuda_mesh.cell_edges_count	= cell_edges_count.cuda_malloc();
 			tmp_cuda_mesh.cell_edges		= cell_edges.cuda_malloc();
 			tmp_cuda_mesh.cell_edges_normal	= cell_edges_normal.cuda_malloc();
-			tmp_cuda_mesh.cell_vertexes		= cell_vertexes.cuda_malloc();
+			//tmp_cuda_mesh.cell_vertexes		= cell_vertexes.cuda_malloc();
 
 			// CFVMesh2D_cuda allocation
 			cudaMalloc(&cuda_mesh, sizeof(CFVMesh2D_cuda));
@@ -90,9 +91,9 @@ namespace FVL {
 	void CFVMesh2D::cuda_save(cudaStream_t stream) {
 		vertex_coords.x.cuda_save(stream);
 		vertex_coords.y.cuda_save(stream);
-		vertex_cells_count.cuda_save(stream);
-		vertex_cells_index.cuda_save(stream);
-		vertex_cells.cuda_save(stream);
+		//vertex_cells_count.cuda_save(stream);
+		//vertex_cells_index.cuda_save(stream);
+		//vertex_cells.cuda_save(stream);
 
 		edge_normals.x.cuda_save(stream);
 		edge_normals.y.cuda_save(stream);
@@ -111,16 +112,16 @@ namespace FVL {
 		cell_edges_count.cuda_save(stream);
 		cell_edges.cuda_save(stream);
 		cell_edges_normal.cuda_save(stream);
-		cell_vertexes.cuda_save(stream);
+		//cell_vertexes.cuda_save(stream);
 	}
 
 	void CFVMesh2D::cuda_free() {
 		// vertex info
 		vertex_coords.x.cuda_free();
 		vertex_coords.y.cuda_free();
-		vertex_cells_count.cuda_free();
-		vertex_cells_index.cuda_free();
-		vertex_cells.cuda_free();
+		//vertex_cells_count.cuda_free();
+		//vertex_cells_index.cuda_free();
+		//vertex_cells.cuda_free();
 
 		// edge info
 		edge_types.cuda_free();
@@ -143,7 +144,7 @@ namespace FVL {
 		cell_edges_count.cuda_free();
 		cell_edges.cuda_free();
 		cell_edges_normal.cuda_free();
-		cell_vertexes.cuda_free();
+		//cell_vertexes.cuda_free();
 
 		cudaFree(cuda_mesh);
 	}
