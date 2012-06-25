@@ -13,26 +13,17 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 \begin{figure}[!htp]
 	\begin{alg}
 		\ForAll {$edge \in Edges$}
-
-			$l     \gets left\_cells_{edge}$
-
-			$r     \gets rigth\_cells_{edge}$
-
-			$u_{l} \gets pollution_{l}$
-
+			\State $l     \gets left\_cells_{edge}$
+			\State $r     \gets rigth\_cells_{edge}$
+			\State $u_{l} \gets pollution_{l}$
 			\If {$\exists Cells_{r}$}
-
-				$u_{r} \gets pollution_{r}$
+				\State $u_{r} \gets pollution_{r}$
 			\Else
-
-				$u_{r} \gets \dirichlet$ 
+				\State $u_{r} \gets \dirichlet$ 
 			\EndIf
-			
-			$v_{edge} \gets (v_{l} + v_{r}) / 2 \cdot normal_{edge}$
-
-			$v_{max} \gets max(v_{max}, v_{edge})$
-
-			$flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
+			\State $v_{edge} \gets (v_{l} + v_{r}) / 2 \cdot normal_{edge}$
+			\State $v_{max} \gets max(v_{max}, v_{edge})$
+			\State $flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
 	\end{alg}
 
@@ -47,18 +38,12 @@ The original \update function also iterates over each edge. The contribution of 
 \begin{figure}[!htp]
 	\begin{alg}
 		\ForAll {$edge \in Edges$}
-
-			$\Delta{u} \gets \Delta{t} \cdot flux_{edge} \cdot L_{edge}$
-
-			$l \gets left\_cells_{edge}$
-
-			$r \gets right\_cells_{edge}$
-
-			$pollution_{l} -= \frac{\Delta{u}}{A_{l}}$
-
+			\State $\Delta{u} \gets \Delta{t} \cdot flux_{edge} \cdot L_{edge}$
+			\State $l \gets left\_cells_{edge}$
+			\State $r \gets right\_cells_{edge}$
+			\State $pollution_{l} -= \frac{\Delta{u}}{A_{l}}$
 			\If {$\exists Cells_{r}$}
-
-				$pollution_{r} \gets \frac{\Delta{u}}{A_{r}}$
+				\State $pollution_{r} \gets \frac{\Delta{u}}{A_{r}}$
 			\EndIf
 		\EndFor
 	\end{alg}

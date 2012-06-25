@@ -13,8 +13,7 @@ On the other hand, the \update function has a dependency which may not be neglec
 	\begin{alg}
 		\ForAll {$cell \in Cells$}
 			\ForAll {$edge \in Edges_{cell}$}
-
-				$pollution_{cell} += \Delta{t} \times flux_{edge} \times \frac{L_{edge}}{A_{cell}}$
+				\State $pollution_{cell} += \Delta{t} \times flux_{edge} \times \frac{L_{edge}}{A_{cell}}$
 			\EndFor
 		\EndFor
 	\end{alg}

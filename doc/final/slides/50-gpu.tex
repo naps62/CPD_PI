@@ -5,8 +5,7 @@
 %
 % IMPLEMENTATION
 %
-\begin{frame}
-	\frametitle{GPU}
+\frame{\frametitle{GPU}
 
 	\begin{block}{Implementation}
 		\begin{itemize}\itemsep=20pt
@@ -29,13 +28,27 @@
 			\end{itemize}
 		\end{itemize}
 	\end{block}
-\end{frame}
+}
 
-\begin{frame}
-	\begin{block}{Implementation}
-	\end{block}
+\frame{\frametitle{GPU}
 	\begin{block}{Load Balance}
+		\begin{itemize}\itemsep=20pt
+			\item workload of both kernels is homogeneous
+			\pause
+			\begin{itemize}
+				\item[] (exception: for \update kernel, if number of edges per cell differs)
+			\end{itemize}
+			\pause
+
+
+			\item Memory accesses are the main issue
+			\pause
+			\begin{itemize}
+				\item[-] \computeflux will not access cells in order
+				\item[-] Same problem for \update when accessing edges
+			\end{itemize}
+
+		\end{itemize}
 	\end{block}
-	\begin{block}{Limitations}
-	\end{block}
-\end{frame}
+}
+
