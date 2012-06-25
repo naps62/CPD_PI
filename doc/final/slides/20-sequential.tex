@@ -1,22 +1,54 @@
 \section{Sequential}
 
+\subsection{Original}
 \begin{frame}
+	\frametitle{Original implementation}
 	\begin{itemize}
+		\item \textbf{\itshape Arrays-of-Pointers};
+		\item Prepared for \textbf{dynamic cell velocities}\ \textit{(not implemented)};
+		\item Animated simulation;
+	\end{itemize}
+
+	\begin{columns}
+		\smaller
+		\column{.45\textwidth}
+		\begin{block}{\computeflux}
+			For all \textbf{edges}
+			\begin{enumerate}
+				\item Read adjacent cell data;	
+				\item 
+			\end{enumerate}
+		\end{block}
+
+		\column{.45\textwidth}
+		\begin{block}{\update}
+		\end{block}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Original implementation}
+	\begin{itemize}
+		\vfill
 		\item Initially implemented as \textbf{\itshape Arrays-of-Pointers};
+		\vfill
 		\item Accepted simplifications:
 		\begin{itemize}
 			\item Animation not required for program correctness;
 			\item Constant velocity vectors;
 		\end{itemize}
+		\vfill
 		\item Optimizations performed:
 		\begin{itemize}
 			\item \textbf{\itshape Arrays-Of-Structs};
 			\item \textbf{\itshape Structs-Of-Arrays};
 		\end{itemize}
+		\vfill
 		\item Dependencies:
 		\begin{description}
-			\item[\computeflux\hfill] $\Delta t$;
-			\item[\update\hfill] Race condition adding edge contributions;
+			\item [\computeflux\hfill] \ \\$\Delta t$;
+			\item [\update\hfill] \ \\Race condition adding edge contributions;
 		\end{description}
+		\vfill
 	\end{itemize}
 \end{frame}

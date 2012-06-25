@@ -6,6 +6,10 @@
 \usepackage[english]{babel}
 \usepackage{epstopdf}
 
+\usepackage{subfig}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
 \usepackage{relsize}%	relative font sizes
 \usepackage{multicol}
 \usepackage{todonotes}
@@ -16,6 +20,20 @@
 \newcommand{\dirichlet}{\textit{Dirichlet}\xspace}
 
 \graphicspath{{images/}}
+
+\newsavebox{\ieeealgbox}
+\newenvironment{alg}
+  {
+   \begin{lrbox}{\ieeealgbox}
+   \begin{minipage}{\dimexpr\columnwidth-2\fboxsep-2\fboxrule}
+   \hrulefill
+   \begin{algorithmic}
+  }
+  {
+   \end{algorithmic}
+   \hrulefill
+   \end{minipage}\end{lrbox}\noindent\mbox{\usebox{\ieeealgbox}}
+  }
 
 
 %	presentation info
