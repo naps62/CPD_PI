@@ -1,7 +1,7 @@
 ROOTD	=	.
 include $(ROOTD)/conf/config.mk
 
-.PHONY:	doc test-soa test-aos
+.PHONY:	doc test
 
 %:
 	@echo "<<==::    $@    ::==>>"
@@ -11,8 +11,8 @@ include $(ROOTD)/conf/config.mk
 	@echo ">>>>> $(OBJD)"
 	@cd $(OBJD); $_ $@
 	@echo "<<<<< $(OBJD)"
-all:
-	$_ $@
+
+all: objs libs bins
 
 doc:
 	doxygen conf/Doxyfile
@@ -22,49 +22,16 @@ objs:
 	@cd $(SRCD); $_
 	@echo "<<<<< $(SRCD)"
 
-test-soa:	\
-	libfv	\
-	libpapipcc	\
-	polu.soa.brins	\
-	polu.soa.btm	\
-	polu.soa.fnctime	\
-	polu.soa.fpins	\
-	polu.soa.l1ca	\
-	polu.soa.l2dca	\
-	polu.soa.l2ica	\
-	polu.soa.l2tca	\
-	polu.soa.l1dcm	\
-	polu.soa.l1icm	\
-	polu.soa.l1tcm	\
-	polu.soa.l2cm	\
-	polu.soa.ldins	\
-	polu.soa.srins	\
-	polu.soa.totins	\
-	polu.soa.tottime	\
-	polu.soa.vecins	\
-	polu.soa.omp.fnctime	\
-	polu.soa.omp.tottime
+libs bins:
+	@echo ">>>>> $(OBJD)";
+	@cd "$(SRCD)"; $_ $@;
+	@echo "<<<<< $(OBJD)";
 
-test-aos:	\
-	libfv	\
-	libfvcpu	\
-	libpapipcc	\
-	polu.aos.brins	\
-	polu.aos.btm	\
-	polu.aos.fnctime	\
-	polu.aos.fpins	\
-	polu.aos.l1ca	\
-	polu.aos.l2dca	\
-	polu.aos.l2ica	\
-	polu.aos.l2tca	\
-	polu.aos.l1dcm	\
-	polu.aos.l1icm	\
-	polu.aos.l1tcm	\
-	polu.aos.l2cm	\
-	polu.aos.ldins	\
-	polu.aos.srins	\
-	polu.aos.totins	\
-	polu.aos.tottime	\
-	polu.aos.vecins	\
-	polu.aos.omp.fnctime	\
-	polu.aos.omp.tottime
+test:\
+	libfv\
+	libfvcpu\
+	polu.original.fnctime\
+	polu.aos.fnctime\
+	polu.aos.omp.fnctime\
+	polu.soa.fnctime\
+	polu.soa.omp.fnctime

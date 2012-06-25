@@ -1,26 +1,25 @@
 #!/bin/bash
 #
-#	SeARCH Job Script
-#
-#PBS -l nodes=1:r201:ppn=4
-#PBS -l walltime=2:00:00
-#
+#PBS -l walltime=3:00:00
 #PBS -M pdrcosta90@gmail.com
 #PBS -m bea
-#PBS -e data/out/pbs.err
-#PBS -o data/out/pbs.out
 #
-declare -a CASES;
-declare -a MEASURES;
 
-CASE="huge"
-EXEC="polu.soa"
-TIMER="tottime"
-RUNS=10
+if [ ! "$RUNS" ]; then RUNS="1"; fi;
 
 cd "$PBS_O_WORKDIR";
 
-for (( i = 0 ; i < $RUNS ; ++i ));
+R="1";
+while [ "$R" -le "$RUNS" ];
 do
-	bin/${EXEC}.${TIMER} data/xml/${CASE}.param.xml;
+	echo -en "\t${R}..." 1>&2;
+	if [ "$THREADS" ];
+	then
+		$EXEC "data/xml/huge.param.xml" "$THREADS";
+	else
+		echo "$PWD";
+		$EXEC "data/xml/huge.param.xml";
+	fi;
+	echo "DONE" 1>&2;
+	R=$(( $R + 1 ));
 done;

@@ -3,8 +3,8 @@
 
 #include <tk/stopwatch-inl.hpp>
 
-#define PROFILE_LIMITED 1000
-#define PROFILE_WARMUP   100
+#define PROFILE_LIMITED 5000
+//#define PROFILE_WARMUP   100
 
 #define PROFILE_COUNTER_CLASS tk::Stopwatch
 #define PROFILE_COUNTER_NAME  s

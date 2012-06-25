@@ -145,8 +145,8 @@ void compute_flux(
 #ifdef	TIME_FUNCTIONS
 	times.functions.compute_flux.timer.stop();
 	{
-		Time partial = times.functions.compute_flux.timer.partial();
-		double miliseconds = partial.miliseconds();
+		Time last = times.functions.compute_flux.timer.last();
+		double miliseconds = last.miliseconds();
 		times.functions.compute_flux.miliseconds.min =
 			( miliseconds < times.functions.compute_flux.miliseconds.min )
 			? miliseconds
@@ -198,8 +198,8 @@ void update(
 #ifdef	TIME_FUNCTIONS
 	times.functions.update.timer.stop();
 	{
-		Time partial = times.functions.update.timer.partial();
-		double miliseconds = partial.miliseconds();
+		Time last = times.functions.update.timer.last();
+		double miliseconds = last.miliseconds();
 		times.functions.update.miliseconds.min =
 			( miliseconds < times.functions.update.miliseconds.min )
 			? miliseconds
@@ -384,8 +384,8 @@ int main(int argc, char *argv[])
 #ifdef	TIME_ITERATION
 		times.iteration.timer.stop();
 		{
-			Time partial = times.iteration.timer.partial();
-			double miliseconds = partial.miliseconds();
+			Time last = times.iteration.timer.last();
+			double miliseconds = last.miliseconds();
 			times.iteration.miliseconds.min =
 				( miliseconds < times.iteration.miliseconds.min )
 				? miliseconds
