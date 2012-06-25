@@ -1,0 +1,22 @@
+\section{Sequential}
+
+\begin{frame}
+	\begin{itemize}
+		\item Initially implemented as \textbf{\itshape Arrays-of-Pointers};
+		\item Accepted simplifications:
+		\begin{itemize}
+			\item Animation not required for program correctness;
+			\item Constant velocity vectors;
+		\end{itemize}
+		\item Optimizations performed:
+		\begin{itemize}
+			\item \textbf{\itshape Arrays-Of-Structs};
+			\item \textbf{\itshape Structs-Of-Arrays};
+		\end{itemize}
+		\item Dependencies:
+		\begin{description}
+			\item[\computeflux] $\Delta t$;
+			\item[\update] Race condition adding edge contributions;
+		\end{description}
+	\end{itemize}
+\end{frame}

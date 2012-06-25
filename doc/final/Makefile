@@ -15,7 +15,7 @@ DOCS	=	report
 .PHONY: clean view
 
 ifeq ($(UNAME),Darwin)
-default: report.pdf
+default: slides.pdf
 else
 default: report view
 endif
@@ -61,6 +61,12 @@ report.aux: report/600-cuda.tex
 report.aux: report/610-load-balance.tex
 report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
+
+slides.aux: slides/10-case.tex
+slides.aux: slides/20-sequential.tex
+slides.aux: slides/30-shared.tex
+slides.aux: slides/40-distributed.tex
+slides.aux: slides/50-gpu.tex
 
 all: $(DOCS)
 
