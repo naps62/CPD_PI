@@ -8,7 +8,7 @@ In order to distribute processing payload across each process, the input mesh, a
 
 Mesh partitioning is currently an actively researched topic, with some projects and libraries begin already available that help with the understanding of how a mesh (or more generically, a graph) can be partitioned in ways to optimize certain aspects like load balancing, communication balancing or partitioning overhead. For instance, in \cite{metis}, a library called \texttt{Metis} is presented whose purpose is precisely this problem. Other works found for this topic included \cite{gilbert1995, walshaw2000}.
 
-However, given the time constraints of this project, and since the priority was to have a functional algorithm rather than an optimal one, it was decided not to attempt an approach involving \texttt{Metis} or any other researched work. Actually, the method used to partition the mesh is quite naive, as shown in \cref{subsubsec:mpi:part_method}.
+However, given the time constraints of this project, and since the priority was to have a functional algorithm rather than an optimal one, it was decided not to attempt an approach involving \texttt{Metis} or any other researched work. Actually, the method used to partition the mesh is quite naive, as shown in \cref{subsubsec:mpi:partitioning:method}.
 
 \subsubsection{Partitioning Methodology}
 \label{subsubsec:mpi:partitioning:method}

@@ -12,24 +12,17 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 
 \begin{figure}[!htp]
 	\begin{alg}
-		\ForAll {$edge \in Edges$}
-
-			$l     \gets left\_cells_{edge}$
-
-			$r     \gets rigth\_cells_{edge}$
-
-			$u_{l} \gets pollution_{l}$
-
-			\If {$\exists Cells_{r}$}
-
+		\ForAll {$edge \in Edges$}				\\
+			$l     \gets left\_cells_{edge}$ 	\\
+			$r     \gets rigth\_cells_{edge}$ 	\\
+			$u_{l} \gets pollution_{l}$ 		
+			\If {$\exists Cells_{r}$} 			\\
 				$u_{r} \gets pollution_{r}$
-			\Else
-
-				$u_{r} \gets \dirichlet$
-			\EndIf
-
-			\todo[inline]{falta aqui o calculo da velocidade da edge. Neste momento isto corresponde á compute\_flux depois das optimizações}
-
+			\Else 								\\
+				$u_{r} \gets \dirichlet$ 
+			\EndIf 	 							\\
+			$v_{edge} \gets (v_{l} + v_{r}) / 2 \cdot normal_{edge}$ 					\\
+			$v_{max} \gets max(v_{max}, v_{edge})$ 										\\
 			$flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
 	\end{alg}
