@@ -62,8 +62,8 @@ report.aux: report/630-mesh-reorder.tex
 slides: slides.pdf
 	$(PDFOPN) $<
 
-# slides.pdf: slides.tex
-# 	$(PDFTEX) $< > /dev/null
+slides.pdf: slides.tex
+	$(PDFTEX) $< > /dev/null
 
 slides.pdf: slides/10-case.tex
 slides.pdf: slides/20-sequential.tex
