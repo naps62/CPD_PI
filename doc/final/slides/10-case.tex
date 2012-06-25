@@ -4,29 +4,11 @@
 	\frametitle{\polu}
 	\begin{figure}
 		\centering
-		\begin{columns}
-			\column{0.75\textwidth}
-				\includegraphics[width=\textwidth]{images/foz_msh.png}
-				\pause
-
-			\column{0.25\textwidth}
-				\subfloat[\computeflux]{\includegraphics[width=\textwidth]{computeflux.png}}
-				\vfill
-				\subfloat[\update]{\includegraphics[width=\textwidth]{update.png}}
-				\vfill
-		\end{columns}
+			\includegraphics[width=.6\textwidth]{images/foz_msh.png}
 	\end{figure}
-\end{frame}
 
-\begin{frame}
-	\frametitle{Algorithm}
-
-	\begin{algorithmic}
-		\State $load\_input$
-		\State $preprocessing$
-		\While {$t \leq max_{t}$}
-			\State $compute\_flux$
-			\State $update$
-		\EndWhile
-	\end{algorithmic}
+	\begin{description}
+		\item [\computeflux] computes the flux transfered through the edges;
+		\item [\update] uses the compute fluxes to update the value in each cell;
+	\end{description}
 \end{frame}
