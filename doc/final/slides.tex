@@ -6,29 +6,26 @@
 \usepackage[english]{babel}
 \usepackage{epstopdf}
 
-%\usepackage{multirow}%	multirow
-%\usepackage[retainorgcmds]{IEEEtrantools}%	IEEEeqnarray
-%\usepackage{mathabx}%	convolution symbol
 \usepackage{relsize}%	relative font sizes
-%\usepackage{listings}
-%\usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{todonotes}
-%\usepackage{enumitem}
+\usepackage{xspace}
+\newcommand{\computeflux}{\texttt{compute\_flux}\xspace}
+\newcommand{\update}{\texttt{update}\xspace}
+\newcommand{\polu}{\texttt{polu}\xspace}
+\newcommand{\dirichlet}{\textit{Dirichlet}\xspace}
 
 \graphicspath{{images/}}
 
 
 %	presentation info
-\title{A finite volume case study}
+\title{A Finite Volume Case Study From An Industrial Application}
 
-\subtitle{MPI: Implementation and Analysis}
-
-\author{M. Palhas \and P. Costa}
+\author[M. Palhas \and P. Costa]{Miguel~Palhas \and Pedro~Costa}
 
 \institute[19808 \and 19830]{
-	University of Minho\\
-	Department of Informatics
+	Department of Informatics\\
+	University of Minho
 }
 
 \date{Braga, June 2012}
@@ -37,40 +34,25 @@
 %	beamer options
 \usetheme{CambridgeUS}
 
-\newcommand{\executeiffilenewer}[3]{%
-	\ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
-	{\pdffilemoddate{#2}}>0%
-	{\immediate\write18{#3}}\fi%
-}
-\newcommand{\includesvg}[1]{%
-	\executeiffilenewer{#1.svg}{#1.pdf}
-		{inkscape -z -D --file=#1.svg --export-pdf=#1.pdf --export-latex}%
-	\input{#1.pdf_tex}%
-}
-
-
 \begin{document}%	begin presentation
+
+\frame[plain]{\titlepage}
+
+\frame{\frametitle{Index}\tableofcontents}
+
+\input{slides/10-case}
+\input{slides/20-sequential}
+\input{slides/30-shared}
+\input{slides/40-distributed}
+\input{slides/50-gpu}
+% \input{slides/60-experiment}
+% \input{slides/70-conclusion}
 
 \begin{frame}[plain]
 	\titlepage
+	\begin{center}
+		\Huge\bfseries - ? -
+	\end{center}
 \end{frame}
-
-\begin{frame}
-	\frametitle{Index}
-	\tableofcontents
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Test Image}
-
-	\begin{figure}
-		\centering
-		\def\svgwidth{0.5\columnwidth}
-		%\includesvg{images/graph_cuda_loop_5000.svg}
-		\input{images/graph_cuda_loop_5000.pdf_tex}
-	\end{figure}
-\end{frame}
-
 
 \end{document}%	end presentation

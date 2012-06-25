@@ -1,0 +1,2 @@
+slides.pdf:
+	@cd ..; $(MAKE) $@
