@@ -70,6 +70,7 @@ slides.pdf: slides/20-sequential.tex
 slides.pdf: slides/30-shared.tex
 slides.pdf: slides/40-distributed.tex
 slides.pdf: slides/50-gpu.tex
+slides.pdf: slides/60-experiment.tex
 
 all: $(DOCS)
 
