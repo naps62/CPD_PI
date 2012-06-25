@@ -1,0 +1,76 @@
+\documentclass{beamer}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{epstopdf}
+
+%\usepackage{multirow}%	multirow
+%\usepackage[retainorgcmds]{IEEEtrantools}%	IEEEeqnarray
+%\usepackage{mathabx}%	convolution symbol
+\usepackage{relsize}%	relative font sizes
+%\usepackage{listings}
+%\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{todonotes}
+%\usepackage{enumitem}
+
+\graphicspath{{images/}}
+
+
+%	presentation info
+\title{A finite volume case study}
+
+\subtitle{MPI: Implementation and Analysis}
+
+\author{M. Palhas \and P. Costa}
+
+\institute[19808 \and 19830]{
+	University of Minho\\
+	Department of Informatics
+}
+
+\date{Braga, June 2012}
+
+
+%	beamer options
+\usetheme{CambridgeUS}
+
+\newcommand{\executeiffilenewer}[3]{%
+	\ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+	{\pdffilemoddate{#2}}>0%
+	{\immediate\write18{#3}}\fi%
+}
+\newcommand{\includesvg}[1]{%
+	\executeiffilenewer{#1.svg}{#1.pdf}
+		{inkscape -z -D --file=#1.svg --export-pdf=#1.pdf --export-latex}%
+	\input{#1.pdf_tex}%
+}
+
+
+\begin{document}%	begin presentation
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Index}
+	\tableofcontents
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Test Image}
+
+	\begin{figure}
+		\centering
+		\def\svgwidth{0.5\columnwidth}
+		%\includesvg{images/graph_cuda_loop_5000.svg}
+		\input{images/graph_cuda_loop_5000.pdf_tex}
+	\end{figure}
+\end{frame}
+
+
+\end{document}%	end presentation
