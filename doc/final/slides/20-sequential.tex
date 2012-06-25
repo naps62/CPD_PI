@@ -27,13 +27,10 @@
 		\column{.45\textwidth}
 		\begin{block}{\update}
 			\smaller
-			For all \textbf{cells}:
+			For all \textbf{edges}:
 			\begin{enumerate}
-				\item For all of its \textbf{edges}:
-				\begin{itemize}\smaller
-					\item Subtract flux from left cell;
-					\item Add flux to right cell;
-				\end{itemize}
+				\item Subtract flux from left cell;
+				\item Add flux to right cell;
 			\end{enumerate}
 		\end{block}
 	\end{columns}
@@ -140,42 +137,50 @@
 
 
 
-\subsection{Dependencies}
 \begin{frame}
-	\frametitle{\computeflux}
-	\begin{columns}
-		\column{0.45\textwidth}
-			\begin{itemize}
-				\item $\Delta t$ requires $\mathrm{max}(v)$;
-			\end{itemize}
+	\frametitle{Dependencies}
+	\begin{block}{\computeflux}
+		\begin{columns}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item $\Delta t$ requires $\mathrm{max}(v)$;
+				\end{itemize}
 
-		\column{0.05\textwidth}
-			\larger
-			$\Rightarrow$
+			\column{0.05\textwidth}
+				\larger
+				$\Rightarrow$
 
-		\column{0.45\textwidth}
-			\begin{itemize}
-				\item [+] Reduction;
-				\item [+] Cell velocities are \textbf{constant};
-			\end{itemize}
-	\end{columns}
-\end{frame}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item [+] Reduction;
+					\item [+] Cell velocities are \textbf{constant};
+				\end{itemize}
+		\end{columns}
+	\end{block}
 
-\begin{frame}
-	\frametitle{\update}
-	\begin{columns}
-		\column{0.45\textwidth}
-			\begin{itemize}
-				\item Race condition;
-			\end{itemize}
+	\begin{block}{\update}
+		\begin{columns}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item Race condition;
+				\end{itemize}
+				\begin{figure}
+					\centering
+					\includegraphics[width=.5\textwidth]{edge.png}
+				\end{figure}
 
-		\column{0.05\textwidth}
-			\larger
-			$\Rightarrow$
+			\column{0.05\textwidth}
+				\larger
+				$\Rightarrow$
 
-		\column{0.45\textwidth}
-			\begin{itemize}
-				\item [+] Iterate over cells;
-			\end{itemize}
-	\end{columns}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item [+] Iterate over cells;
+				\end{itemize}
+				\begin{figure}
+					\centering
+					\includegraphics[width=.7\textwidth]{cell.png}
+				\end{figure}
+		\end{columns}
+	\end{block}
 \end{frame}
