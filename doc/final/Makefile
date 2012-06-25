@@ -5,14 +5,14 @@ BIBTEX	=	bibtex
 BIBBLD	=	-$(BIBTEX) $(*F) > /dev/null
 
 ifeq ($(UNAME),Darwin)
-PDFOPN	=	open -a /Applications/Preview.app
+PDFOPN	=	open -a /Applications/Adobe\ Reader.app
 else
 PDFOPN	=	xdg-open
 endif
 
-DOCS	=	report
+DOCS	=	report slides
 
-.PHONY: clean view
+.PHONY: clean view slides report
 
 ifeq ($(UNAME),Darwin)
 default: slides.pdf
@@ -33,14 +33,10 @@ view:
 	$(BIBBLD)
 	$(PDFBLD)
 
-%: %.pdf
+report: report.pdf
 	$(PDFOPN) $<
-	
 
-report.pdf: report/100-intro.tex
-report.pdf: report/200-case.tex
-
-
+report.aux: report/100-intro.tex
 report.aux: report/200-case.tex
 report.aux: report/210-algorithm.tex
 report.aux: report/220-parallelism.tex
@@ -63,11 +59,17 @@ report.aux: report/610-load-balance.tex
 report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
 
-slides.aux: slides/10-case.tex
-slides.aux: slides/20-sequential.tex
-slides.aux: slides/30-shared.tex
-slides.aux: slides/40-distributed.tex
-slides.aux: slides/50-gpu.tex
+slides: slides.pdf
+	$(PDFOPN) $<
+
+slides.pdf:
+	$(PDFBLD)
+
+slides.pdf: slides/10-case.tex
+slides.pdf: slides/20-sequential.tex
+slides.pdf: slides/30-shared.tex
+slides.pdf: slides/40-distributed.tex
+slides.pdf: slides/50-gpu.tex
 
 all: $(DOCS)
 
