@@ -2,6 +2,35 @@
 
 \frame{\frametitle{Index}\tableofcontents[currentsection]}
 
+%
+% IMPLEMENTATION
+%
+\begin{frame}
+	\frametitle{GPU}
+
+	\begin{block}{Implementation}
+		\begin{itemize}\itemsep=20pt
+			\item \textit{Struct-of-Arrays}
+			\pause
+
+			\item \texttt{compute\_flux} and \texttt{update} directly converted to CUDA Kernels
+			\begin{itemize}
+				\item[-] Each iteration mapped to one CUDA Thread
+			\end{itemize}
+			\pause
+
+			\item One aditional \texttt{reduction} kernel (later removed)
+			\pause
+
+			\item Data transfers only happen before the main loop
+			\pause
+			\begin{itemize}
+				\item[] (exception: animation output, which is removed)
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
 \begin{frame}
 	\begin{block}{Implementation}
 	\end{block}

@@ -34,6 +34,7 @@ view:
 	$(PDFBLD)
 
 %: %.pdf
+	$(PDFOPN) $<
 	
 
 report.pdf: report/100-intro.tex
