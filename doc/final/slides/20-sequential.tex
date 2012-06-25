@@ -49,25 +49,22 @@
 			\smaller
 			\begin{tabular}{|c|c|}
 				\hline
-				\multirow{5}{*}{$S_{1}$} & $e_{1}$\\
+				\multirow{4}{*}{$S_{1}$} & $e_{1}$\\
 				\cline{2-2}
 				& $e_{2}$\\
 				\cline{2-2}
 				& $e_{3}$\\
 				\cline{2-2}
-				& $e_{4}$\\
-				\cline{2-2}
-				& $e_{5}$\\
+				& \ldots\\
 				\hline
-				\multirow{5}{*}{$S_{2}$} & $e_{1}$\\
+				\multirow{4}{*}{$S_{2}$} & $e_{1}$\\
 				\cline{2-2}
 				& $e_{2}$\\
 				\cline{2-2}
 				& $e_{3}$\\
 				\cline{2-2}
-				& $e_{4}$\\
-				\cline{2-2}
-				& $e_{5}$\\
+				& \ldots\\
+
 				\hline
 				\multirow{5}{*}{$S_{3}$} & $e_{1}$\\
 				\cline{2-2}
@@ -75,9 +72,7 @@
 				\cline{2-2}
 				& $e_{3}$\\
 				\cline{2-2}
-				& $e_{4}$\\
-				\cline{2-2}
-				& $e_{5}$\\
+				& \dots\\
 				\hline
 				\multicolumn{2}{|c|}{\ldots}
 			\end{tabular}
@@ -89,8 +84,8 @@
 
 		\column{0.4\textwidth}
 			\centering
-			\textbf{\itshape Struct-Of-Arrays}
-			\medskip
+			\textbf{\itshape Structs-Of-Arrays}
+
 			\smaller
 			\begin{table}
 				\captionsetup[subfloat]{position=top,labelformat=empty}
@@ -130,30 +125,7 @@
 					\ldots
 				\end{tabular}%
 				}\;
-				\subfloat[$e_{4}$]{%
-				\begin{tabular}{|c|}
-					\hline
-					$S_{1}$\\
-					\hline
-					$S_{2}$\\
-					\hline
-					$S_{3}$\\
-					\hline
-					\ldots
-				\end{tabular}%
-				}\;
-				\subfloat[$e_{5}$]{%
-				\begin{tabular}{|c|}
-					\hline
-					$S_{1}$\\
-					\hline
-					$S_{2}$\\
-					\hline
-					$S_{3}$\\
-					\hline
-					\ldots
-				\end{tabular}%
-				}
+				\subfloat[\ldots]{}
 			\end{table}
 			\larger
 
@@ -164,29 +136,44 @@
 	\end{columns}
 \end{frame}
 
-% \begin{frame}
-% 	\frametitle{Original implementation}
-% 	\begin{itemize}
-% 		\vfill
-% 		\item Initially implemented as \textbf{\itshape Arrays-of-Pointers};
-% 		\vfill
-% 		\item Accepted simplifications:
-% 		\begin{itemize}
-% 			\item Animation not required for program correctness;
-% 			\item Constant velocity vectors;
-% 		\end{itemize}
-% 		\vfill
-% 		\item Optimizations performed:
-% 		\begin{itemize}
-% 			\item \textbf{\itshape Arrays-Of-Structs};
-% 			\item \textbf{\itshape Structs-Of-Arrays};
-% 		\end{itemize}
-% 		\vfill
-% 		\item Dependencies:
-% 		\begin{description}
-% 			\item [\computeflux\hfill] \ \\$\Delta t$;
-% 			\item [\update\hfill] \ \\Race condition adding edge contributions;
-% 		\end{description}
-% 		\vfill
-% 	\end{itemize}
-% \end{frame}
+
+
+\subsection{Dependencies}
+\begin{frame}
+	\frametitle{\computeflux}
+	\begin{columns}
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item $\Delta t$ requires $\mathrm{max}(v)$;
+			\end{itemize}
+
+		\column{0.05\textwidth}
+			\larger
+			$\Rightarrow$
+
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item [+] Reduction;
+				\item [+] Cell velocities are \textbf{constant};
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\update}
+	\begin{columns}
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item Race condition;
+			\end{itemize}
+
+		\column{0.05\textwidth}
+			\larger
+			$\Rightarrow$
+
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item [+] Iterate over cells;
+			\end{itemize}
+	\end{columns}
+\end{frame}
