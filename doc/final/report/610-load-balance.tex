@@ -1,4 +1,6 @@
 \subsection{Load Balance}
 \label{subsec:cuda:load}
 
-\todo[inline,color=green!40]{Explain how the workload is assigned to each thread}
+The nature of the algorithm allows for an easy and effective load balancing strategy. In CPU implementations, \computeflux iterates over all edges, and \update over all cells, and the workload of each iteration is homogeneous and free of dependencies, as already shown in \cref{subsec:omp:load}. So the balancing strategy can consist, for both kernels, in simply assigning one iteration to one CUDA thread. In \computeflux, one CUDA thread will be responsible for computing the flux for a specific edge, while in \update, one CUDA thread will update the pollution of a specific cell.
+
+In order to use the ideal block size was for each kernel, CUDA Occupancy Calculator \cite{cuda_documentation} was used, having in consideration the CUDA Capability of the device used (see \cref{sec:env}) and the amount of registers and memory used by each kernel, which is accessible via nvcc. Using the block size recommended by the CUDA Occupancy Calculator does not guarantee better performance, and may actually result in unwanted behavior, such as register spilling, or greater branch divergente, experiments were made with different block sizes to detect which provided better results.

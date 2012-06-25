@@ -1,0 +1,35 @@
+\subsection{Optimizations}
+\label{subsec:cuda:load}
+
+One of the first optimizations done comes from a simplification already explained in \todo[inline]{Onde é que explicas que a reduction pode ser feita fora do loop?}. The initial implementation, like the CPU versions, relied on a reduction to compute the maximum velocity after each iteration. The reduction used was based on the most optimized implementation provided in the NVidia samples, and is, according to the author, one of the most optimized CUDA reductions.
+
+But the simplification of moving the maximum velocity computation to outside of the loop didn't rely only on the reduction, as that was only the final step of the computation. There was also added workload to the \computeflux kernel, which had to compute the velocity in each CUDA thread. More than the amount of operations, this had a considerable impact on the amount of registers used by the kernel, and it was noted that after its removal, there was also some improvements in \computeflux, and consequentely, in the main loop. This can be seen in \cref{fig:time_computeflux}.
+
+\subsubsection{Second Phase}
+\label{subsubsec:cuda:load:second}
+
+On the second phase of the development of a CUDA implementation, more attention was given to the individual performance of the kernels. A lot of experiments were done with different kernel implementations, in order to test different approaches to eliminate memory accesses, and reduce or eliminate divergent branches.
+
+While this provided small improvements to kernel execution time, consequentely decreasing the main loop time considerably, the better speedup was achieved after a division operation was removed from the \update, which computed a ratio between the length of an edge and the area of a cell. This was achieved by precomputing a matrix with the value of the ratio prior to the main loop. This required a considerable  amount of additional memory to be used on the GPU, but since the problem is not bound by total size (biggest test case used consisted of less than 100MB) and division operations are very costly to a GPU, this showed large improvements for the \update kernel, as shown in \cref{fig:time_update}
+
+\begin{figure}[!htp]
+	\begin{subfigure}[b]{\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{graph_compute_flux}
+		\caption{\computeflux}
+		\label{fig:time_computeflux}
+	\end{subfigure}
+	\begin{subfigure}[b]{\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{graph_update}
+		\caption{\update}
+		\label{fig:time_update}
+	\end{subfigure}
+
+	\caption{Indivudual kernel speedups. Times are the average for a single kernel call}
+	\label{fig:time_kernles}
+\end{figure}
+
+Times shown in \cref{fig:time_kernels} were measured using the CUDA Events API, which allows measurements of GPU events, excluding the callback overhead of issuing a kernel call. That, along with the fact that both kernels have considerably short and simple code, explains the low times, even for the initial versions. Even so, the removal of the division operation, along with other smaller tweaks, allowed the execution time of the \update kernel to be almost halved.
+
+Since CUDA Events API only measures events with a precision of 0.5 ms \cite{cuda_library_documentation}, and the execution time is small, no immediate changes can be seen between some of the versions. However, since later kernels are the result of aggregating most optimizations from previous versions, intermediate results are still shown.

@@ -33,7 +33,5 @@ he algorithm created to partition the mesh works by dividing it in slices by the
 	\label{fig:partitioning}
 \end{figure}
 
-
-
 With this partitioning method, communication is also greatly simplified, as it is guaranteed that every partition will have a left and a right neighbor. It is also assumed that the width of the global mesh is big enough so that there are never processes with 0 cells assigned, which would break communication. Since a common mesh usually contains at least thousands of cells, this should not be an issue.
 On the other hand, the partitioning and assignement of the cells is done sequentially, and will increase preparation time.

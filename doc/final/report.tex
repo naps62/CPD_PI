@@ -427,18 +427,32 @@
 \usepackage{algpseudocode}
 \usepackage{algorithmicx}
 \usepackage{algorithm}
-
+\usepackage{epstopdf}
 \usepackage{graphicx}
 % declare the path(s) where your graphic files are
 \graphicspath{{images/}}
 \usepackage{caption}
 \usepackage{subcaption}
 
+
 \usepackage{xspace}
 \newcommand{\computeflux}{\texttt{compute\_flux}\xspace}
 \newcommand{\update}{\texttt{update}\xspace}
 \newcommand{\polu}{\texttt{polu}\xspace}
 \newcommand{\dirichlet}{\textit{Dirichlet}\xspace}
+
+\newcommand{\executeiffilenewer}[3]{%
+	\ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+	{\pdffilemoddate{#2}}>0%
+	{\immediate\write18{#3}}\fi%
+}
+\newcommand{\includesvg}[1]{%
+	\executeiffilenewer{#1.svg}{#1.pdf}
+		{inkscape -z -D --file=#1.svg --export-pdf=#1.pdf --export-latex}%
+	\input{#1.pdf_tex}%
+}
+
+\pdfoptionpdfminorversion=5
 
 
 \newsavebox{\ieeealgbox}
