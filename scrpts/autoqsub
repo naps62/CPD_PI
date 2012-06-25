@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT="$1";
+EXEC="$2";
+THREADS="$3";
+RUNS="$4";
+
+qsub\
+	-e "data/out/${EXEC}.err"\
+	-l nodes="1:hex:f2.66:ppn=24"\
+	-o "data/out/${EXEC}.out"\
+	-N "${EXEC}"\
+	-v "EXEC=\"${EXEC}\",THREADS=\"${THREADS}\",RUNS=\"${RUNS}\""\
+	"$SCRIPT";
+
