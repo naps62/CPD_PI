@@ -8,50 +8,101 @@
 \frame{\frametitle{GPU}
 
 	\begin{block}{Implementation}
-		\begin{itemize}\itemsep=20pt
+		\begin{itemize}
 			\item \textit{Struct-of-Arrays}
 			\pause
 
 			\item \texttt{compute\_flux} and \texttt{update} directly converted to CUDA Kernels
 			\begin{itemize}
-				\item[-] Each iteration mapped to one CUDA Thread
+				\item[-] Each iteration translates to one CUDA Thread
 			\end{itemize}
 			\pause
 
-			\item One aditional \texttt{reduction} kernel (later removed)
+			\item One additional \texttt{reduction} kernel (later removed)
 			\pause
 
 			\item Data transfers only happen before the main loop
 			\pause
 			\begin{itemize}
-				\item[] (exception: animation output, which is removed)
+				\item[] (exception: animation output, which is disabled)
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+	\pause
+
+
+	\begin{block}{Load Balance}
+		\pause
+		\begin{itemize}
+			\item workload of both kernels is homogeneous
+			\pause
+			\begin{itemize}
+				\item[] (exception: \update, if number of edges per cell differs)
 			\end{itemize}
 		\end{itemize}
 	\end{block}
 }
 
 \frame{\frametitle{GPU}
-	\begin{block}{Load Balance}
-		\begin{itemize}\itemsep=20pt
-			\item workload of both kernels is homogeneous
-			\pause
+	\begin{block}{Optimizations}
+		Several versions tested, each with new tweaks
+		\begin{itemize}
+			\item Temporary variables and avoidance of memory accesses
+			\item Divergence avoidance
+			\item A division in \update was replaced by pre-computed values
 			\begin{itemize}
-				\item[] (exception: for \update kernel, if number of edges per cell differs)
+				\item[] More memory required, but divisions are not GPU-friendly
 			\end{itemize}
-			\pause
 		\end{itemize}
 	\end{block}
 
+	\begin{block}{Global kernel speedups}
+		\begin{table}
+			\begin{tabular}{c|cc|c}
+							&	Initial	&	Optimal	&	Speedup	\\ \hline
+			\computeflux	&	0.72	&	0.7		&	\textbf{1.03}	\\
+			\update			&	3.60	&	1.96	&	\textbf{1.84}	\\ \hline
+			\end{tabular}
+			\caption{Comparison of first and last kernel implementations. Times are in milliseconds}
+		\end{table}
+	\end{block}
+}
+
+\frame{\frametitle{GPU}
+
 	\begin{block}{Limitations}
-		\begin{itemize}
+		\begin{itemize}\itemsep=20pt
 			\item Memory accesses are the main issue
-			\pause
 			\begin{itemize}
 				\item[-] \computeflux will not access cells in order
 				\item[-] Same problem for \update when accessing edges
 			\end{itemize}
 
+			\item Locality issues
+			\begin{itemize}
+				\item[-] largely due to unorganized \texttt{gmsh} output
+			\end{itemize}
+
 		\end{itemize}
 	\end{block}
 }
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{gmsh} locality issues}
+
+	Pollution values initialized with:
+	\begin{center}
+		\begin{verbatim}
+			pollution[cell_index] = cell_index
+		\end{verbatim}
+	\end{center}
+	\pause
+
+	Closer colors indicate closer cells in memory:
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\textwidth]{locality_big}
+	\end{figure}
+\end{frame}
 
