@@ -10,19 +10,15 @@
 	\begin{block}{Implementation}
 		\begin{itemize}
 			\item \textit{Struct-of-Arrays}
-			\pause
 
 			\item \texttt{compute\_flux} and \texttt{update} directly converted to CUDA Kernels
 			\begin{itemize}
 				\item[-] Each iteration translates to one CUDA Thread
 			\end{itemize}
-			\pause
 
 			\item One additional \texttt{reduction} kernel (later removed)
-			\pause
 
 			\item Data transfers only happen before the main loop
-			\pause
 			\begin{itemize}
 				\item[] (exception: animation output, which is disabled)
 			\end{itemize}
@@ -32,10 +28,8 @@
 
 
 	\begin{block}{Load Balance}
-		\pause
 		\begin{itemize}
 			\item workload of both kernels is homogeneous
-			\pause
 			\begin{itemize}
 				\item[] (exception: \update, if number of edges per cell differs)
 			\end{itemize}
@@ -55,6 +49,7 @@
 			\end{itemize}
 		\end{itemize}
 	\end{block}
+	\pause
 
 	\begin{block}{Global kernel speedups}
 		\begin{table}
@@ -92,6 +87,7 @@
 				\item[-] \computeflux will not access cells in order
 				\item[-] Same problem for \update when accessing edges
 			\end{itemize}
+			\pause
 
 			\item Locality issues
 			\begin{itemize}
