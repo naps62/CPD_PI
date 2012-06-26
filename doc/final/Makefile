@@ -17,7 +17,7 @@ DOCS	=	report slides
 ifeq ($(UNAME),Darwin)
 default: slides.pdf
 else
-default: report view
+default: report
 endif
 
 view:
