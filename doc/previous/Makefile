@@ -64,6 +64,9 @@ slides.naps:	slides.naps.pdf
 slides.pfac:	slides.pfac.pdf
 	$(PDFOPN) $<
 
+slides.march:	slides.march.pdf
+	$(PDFOPN) $<
+
 slides.april:	slides.april.pdf
 	$(PDFOPN) $<
 

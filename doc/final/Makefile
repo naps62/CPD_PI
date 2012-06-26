@@ -71,6 +71,7 @@ slides.pdf: slides/30-shared.tex
 slides.pdf: slides/40-distributed.tex
 slides.pdf: slides/50-gpu.tex
 slides.pdf: slides/60-finalresults.tex
+slides.pdf: slides/90-conclusion.tex
 
 all: $(DOCS)
 
