@@ -27,7 +27,9 @@
 #include "FVL/FVParameters.h"
 
 #ifndef NO_CUDA
+#ifdef __CUDACC__
 #include "FVL/CFVLib.h"
+#endif
 #endif
 
 #endif // _H_FVLIB
