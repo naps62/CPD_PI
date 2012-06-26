@@ -1,4 +1,4 @@
-\frametitle{\texttt{gmsh} locality issues}
+\frametitle {\texttt{gmsh} locality issues}
 
 Pollution values initialized with:
 \begin{center}

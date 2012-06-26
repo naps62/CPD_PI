@@ -4,29 +4,29 @@
 	\frametitle{Conclusions}
 
 	\begin{itemize}
-		\item Sequential implementation
+		\item Sequential implementation:
 		\begin{itemize}
-			\item \textbf{\itshape Structs-Of-Arrays} is the best approach;
-			\item Limited by memory;
+			\item[-] \textbf{\itshape Struct-Of-Arrays} is the best approach;
+			\item[-] Limited by memory;
 		\end{itemize}
 		\item Shared Memory:
 		\begin{itemize}
-			\item Best results with 12 cores and no HyperThreading;
-			\item Still does not scale very well (~40\%);
-			\item Limited by memory;
+			\item[-] Best results when not using Hyper-Threading;
+			\item[-] Still does not scale very well (~40\%);
+			\item[-] Limited by memory;
 		\end{itemize}
-		\item Distributed Memory;
+		\item Distributed Memory:
 		\begin{itemize}
-			\item Best results using the 2 full nodes;
-			\item Less processes are hurt by large partitions;
-			\item More processes are hurt by lack of hardware support;
-			\item Also does not scale very well;
-			\item Limited by memory;
+			\item[-] Best results using the 2 full nodes;
+			\item[-] Less processes are hurt by large partitions;
+			\item[-] More processes are hurt by lack of hardware support;
+			\item[-] Also does not scale very well;
+			\item[-] Limited by memory;
 		\end{itemize}
 		\item GPU:
 		\begin{itemize}
-			\item Best results of all implementations;
-			\item Limited by the bad locality of the mesh;
+			\item[-] Best results of all implementations;
+			\item[-] Limited mostly by the bad locality of the mesh;
 		\end{itemize}
 	\end{itemize}
 \end{frame}
