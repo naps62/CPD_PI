@@ -1,7 +1,7 @@
 \subsection{Optimizations}
 \label{subsec:cuda:load}
 
-One of the first optimizations done comes from a simplification already explained in \todo[inline]{Onde é que explicas que a reduction pode ser feita fora do loop?}. The initial implementation, like the CPU versions, relied on a reduction to compute the maximum velocity after each iteration. The reduction used was based on the most optimized implementation provided in the NVidia samples, and is, according to the author, one of the most optimized CUDA reductions.
+One of the first optimizations done comes from a simplification already explained in \cref{sec:311}. The initial implementation, like the CPU versions, relied on a reduction to compute the maximum velocity after each iteration. The reduction used was based on the most optimized implementation provided in the NVidia samples, and is, according to the author, one of the most optimized CUDA reductions.
 
 But the simplification of moving the maximum velocity computation to outside of the loop didn't rely only on the reduction, as that was only the final step of the computation. There was also added workload to the \computeflux kernel, which had to compute the velocity in each CUDA thread. More than the amount of operations, this had a considerable impact on the amount of registers used by the kernel, and it was noted that after its removal, there was also some improvements in \computeflux, and consequentely, in the main loop.
 

@@ -54,10 +54,12 @@ report.aux: report/500-mpi.tex
 report.aux: report/510-partitioning.tex
 report.aux: report/520-communication.tex
 report.aux: report/530-load-balance.tex
+report.aux: report/540-results.tex
 report.aux: report/600-cuda.tex
 report.aux: report/610-load-balance.tex
 report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
+report.aux: report/640-results.tex
 
 slides: slides.pdf
 	$(PDFOPN) $<
