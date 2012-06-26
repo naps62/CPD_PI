@@ -12,7 +12,7 @@
 		\begin{enumerate}
 			\item Divide the mesh into $P$ partitions;
 			\item Achieve good balance between partition sizes;
-			\item Keep neighbourhood information;
+			\item Keep neighborhood information;
 			\item Minimize border between them, without compromising (2).
 			\item Low partitioning overhead
 		\end{enumerate}
@@ -28,7 +28,7 @@
 	Division of the mesh based only on $x$ coordinate of cells:
 	\begin{enumerate}
 		\item Create ordered set of cells (key is $x$ coord)
-		\item Sequentially assing $N/P$ cells to each process.
+		\item Sequentially assign $N/P$ cells to each process.
 	\end{enumerate}
 
 	\begin{multicols}{2}
@@ -61,7 +61,7 @@
 
 			\item Only 2 processes per node use the network
 			\begin{itemize}
-				\item Assuming best process asignement is used
+				\item Assuming best process assignment is used
 			\end{itemize}
 		\end{itemize}
 	\end{block}
@@ -73,7 +73,7 @@
 	\begin{block}{Advantages}
 		\begin{enumerate}\itemsep=10pt
 			\item Simple concept and implementation
-			\item Each partition has a left and a right neighbour
+			\item Each partition has a left and a right neighbor
 			\begin{itemize}
 				\item[-] Communication in two steps only
 			\end{itemize}
