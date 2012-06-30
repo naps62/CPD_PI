@@ -7,4 +7,4 @@ Memory accesses in a GPU are more efficient when the data being accessed at the 
 
 A simple approach was taken to attempt minimizing this problem, which consisted on preprocessing the mesh, moving all cells in the border to the beginning of the structure. The idea was not to increase locality, since the border is only a small subset of the entire mesh, but to attempt more regular accesses in \computeflux, as well as avoiding the divergent branch for border cells. With all border cells being sequential, then only a single warp should diverge on the branch that depends on that.
 
-This solution showed no visible improvements, probably due to the already extremely low kernel execution times, which become bottlenecked by the kernel callback overhead.
+This solution showed no visible improvements, probably due to the already extremely low kernel execution times, which become bottlenecked by the kernel callback overhead. 
