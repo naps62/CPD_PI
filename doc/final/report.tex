@@ -2,7 +2,12 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{todonotes}
-\usepackage{hyperref}
+\newcommand{\todonaps}[1]{\todo[inline,color=green!40]{#1}}
+\newcommand{\todopfac}[1]{\todo[inline,color=red!40]{#1}}
+\newcommand{\todoextra}[1]{\todo[inline,color=blue!40]{#1}}
+\newcommand{\todorev}[1]{\todo[inline,color=gray!60]{#1}}
+
+\usepackage[colorlinks=true]{hyperref}
 \usepackage{cleveref}
 \usepackage[cmex10]{amsmath}
 \usepackage{algpseudocode}
@@ -12,6 +17,10 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
+% \usepackage{subfig}
+% \usepackage[style=ieee, backend=biber, bibencoding=utf8]{biblatex}
+% \addbibresource{../bib/strings.bib}
+% \addbibresource{../bib/manuals.bib}
 
 % declare the path(s) where your graphic files are
 \graphicspath{{images/}}
@@ -72,33 +81,7 @@
 %\IEEEspecialpapernotice{(Invited Paper)}
 
 
-%
-% ABSTRACT
-%
-% for Computer Society papers, we must declare the abstract and index terms
-% PRIOR to the title within the \IEEEcompsoctitleabstractindextext IEEEtran
-% command as these need to go into the title area created by \maketitle.
-\IEEEcompsoctitleabstractindextext{%
-\begin{abstract}
-%\boldmath
-\todo[inline]{This template is quite acceptable for a paper, but IMO it is unfit for a technical/scientific report for a class. SCREW YOU}
-\todo[inline]{When the first cite is placed, replace the bibliography with the proper mechanism. WHY?}
-
-
-\end{abstract}
-% IEEEtran.cls defaults to using nonbold math in the Abstract.
-% This preserves the distinction between vectors and scalars. However,
-% if the journal you are submitting to favors bold math in the abstract,
-% then you can use LaTeX's standard command \boldmath at the very start
-% of the abstract to achieve this. Many IEEE journals frown on math
-% in the abstract anyway. In particular, the Computer Society does
-% not want either math or citations to appear in the abstract.
-
-% Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-Computer Society, IEEEtran, journal, \LaTeX, paper, template.
-\end{IEEEkeywords}
-}
+\input{report/000-abstract}
 
 
 % make the title area
@@ -114,16 +97,16 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \input{report/400-shared}
 \input{report/500-mpi}
 \input{report/600-cuda}
+\input{report/700-finalresults}
+\input{report/900-conclusion}
 
-\section{Experiment}
-\subsection{Results}
-\todo[inline]{Only describe the results, a.k.a. translate every chart to words}
-\subsection{Analysis}
-\todo[inline]{Interpret every chart. Say what each means, what can be concluded from it}
-\todo[inline]{Merge this subsection with the results if time is of the essence}
+%
+% BIBLIOGRAPHY
+%
+\bibliographystyle{IEEEtran}
+\bibliography{../bib/strings,../bib/articles,../bib/inproceedings,../bib/manuals,../bib/misc,../bib/techreports}
 
-\input{report/800-conclusion}
-
+% \printbibliography
 
 %
 % APPENDIXES
@@ -133,12 +116,7 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 \input{report/A00-env}
 \input{report/B00-method}
 
-%
-% BIBLIOGRAPHY
-%
-\nocite*
-\bibliographystyle{IEEEtran}
-\bibliography{../references}
+
 
 \end{document}
 
