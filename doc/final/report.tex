@@ -45,6 +45,17 @@
    \end{minipage}\end{lrbox}\noindent\mbox{\usebox{\ieeealgbox}}
   }
 
+% Add "Appendix" to the appendices titles, but not to the references
+\usepackage{ifthen}
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
+
 
 % correct bad hyphenation here
 %\hyphenation{op-tical net-works semi-conduc-tor}

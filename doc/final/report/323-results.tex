@@ -1,1 +1,16 @@
 \subsubsection{Results}
+
+\todorev{Written on Sat, June 30 at 21:40 by pfac}
+
+To evaluate the impact of the optimizations presented in \cref{sec:321,sec:322}, performance tests were performed with the original and optimized versions.
+\Cref{sec:env,sec:method} describe the environmental setup and methodology for the tests performed, respectively.
+
+\Cref{fig:seq:results} shows the results obtained for the three sequential versions.
+Both optimized versions show a clear improvement just by not using the several dereference levels. Also, the results show a clear improvement by using SOA over AOS, proving the effectiveness of the optimization.
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=\columnwidth]{images/graph_comparison_seq.eps}
+	\caption{Speedup results for the three sequential versions, compared with the original version.}
+	\label{fig:seq:results}
+\end{figure}

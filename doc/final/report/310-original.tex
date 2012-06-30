@@ -34,11 +34,12 @@ This function also returns the elapsed time, which is computed with the maximum 
 			\Else
 				\State $u_{r} \gets \dirichlet$ 
 			\EndIf
-			\State $v_{edge} \gets (v_{l} + v_{r}) / 2 \cdot normal_{edge}$
+			\State $v_{edge} \gets \dfrac{\vec{v}_{l} + \vec{v}_{r}}{2} \cdot \vec{n}_{edge}$
 			\State $v_{max} \gets \mathrm{max}(v_{max}, v_{edge})$
 			\State $flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
 		\State $\Delta t \gets |v_{max}|^{-1}$
+		\State \Return $\Delta t$
 	\end{alg}
 
 	\caption{Pseudocode for the original \computeflux function.}

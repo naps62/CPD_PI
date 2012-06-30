@@ -47,6 +47,7 @@ report.aux: report/311-simplifications.tex
 report.aux: report/320-optimized.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
+report.aux: report/323-results.tex
 report.aux: report/330-dependencies.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
