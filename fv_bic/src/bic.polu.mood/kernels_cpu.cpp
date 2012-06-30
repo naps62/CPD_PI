@@ -342,8 +342,8 @@ double cpu_gradient_result(CFVMesh2D &mesh, CFVMat<double> &vecGradient, unsigne
 	//cout << y0 << " grad b " << vecGradient.elem(1,0,cell) << " " << (vecGradient.elem(1,0,cell) - 2*M_PI*cos(2*M_PI*(y0))*sin(2*M_PI*x0)) << endl;
 	//cout << endl;
 
-	//return vecGradient.elem(0, 0, cell) * (x - x0) + vecGradient.elem(1, 0, cell) * (y - y0);
-	return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
+	return vecGradient.elem(0, 0, cell) * (x - x0) + vecGradient.elem(1, 0, cell) * (y - y0);
+	//return 2*M_PI*cos(2*M_PI*x0 - 2*M_PI*(t+dt/2))*(x-x0);
 }
 
 /* Compute initial u vector */
@@ -541,7 +541,7 @@ void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polu
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		if (recons.cell_state[cell] == false) {
 			
-double initial = polution[cell];
+			double initial = polution[cell];
 			unsigned int edge_limit = mesh.cell_edges_count[cell];
 			double var = 0;
 			for(unsigned int e = 0; e < edge_limit; ++e) {

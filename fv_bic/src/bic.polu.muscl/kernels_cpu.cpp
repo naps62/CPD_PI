@@ -296,7 +296,7 @@ void cpu_compute_gradient(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> 
 								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
 
 		// TODO
-		vecGrad.elem(1, 0, cell) = vecGrad.elem(1, 0, cell) * 2;
+		//dvecGrad.elem(1, 0, cell) = vecGrad.elem(1, 0, cell) * 2;
 	}
 }
 
@@ -445,8 +445,8 @@ void cpu_cellPsi(CFVMesh2D &mesh, CFVArray<double> &edgePsi, CFVArray<double> &c
 				
 		}
 		cellPsi[cell] = minPsi;
-		//cout << "cellPsi " << minPsi << endl << endl;
-		//cellPsi[cell] = 0;
+		
+		//cellPsi[cell] = 1;
 	}
 }
 
@@ -459,13 +459,14 @@ void cpu_bound_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polutio
 	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
 		cell_i = mesh.edge_left_cells[edge];
 		cell_j = mesh.edge_right_cells[edge];
-
+		//cout << "cellPsi " << cell_i << " " << cellPsi[cell_i];
 		recons.u_ij[edge] = polution[cell_i] + cellPsi[cell_i] * cpu_gradient_result(mesh, vecGradient, edge, cell_i, t, dt);
 
 		if (cell_j != NO_RIGHT_CELL) {
+			//cout << " " << cell_j << " " << cellPsi[cell_j];
 			recons.u_ji[edge] = polution[cell_j] + cellPsi[cell_j] * cpu_gradient_result(mesh, vecGradient, edge, cell_j, t, dt);
 		}
-		break;
+		//cout << endl;
 	}
 }
 
