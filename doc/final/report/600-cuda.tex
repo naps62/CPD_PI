@@ -1,7 +1,10 @@
 \section{GPU}
 \label{sec:cuda}
 
-The development of a GPU implementation of \polu was divided into two phases. The initial implementation consisted only on getting a working implementation, with basic, somewhat naive kernels implemented to move \computeflux and \update computations to the GPU. After a comparison with the other implementation done at that point, it was decided to invest more time in the CUDA version. Not only was its execution time much better than other implementations, since it was still a naive implementation, it was most likely to still have room for improvements.
+The development of a GPU implementation of \polu was divided into two phases.
+The initial implementation consisted only on getting a working implementation, with basic, somewhat naive kernels implemented to move \computeflux and \update computations to the GPU.
+After a comparison with the other implementation done at that point, it was decided to invest more time in the CUDA version.
+Not only was its execution time much better than other implementations, since it was still a naive implementation it was most likely to still have room for improvements.
 
 \input{report/610-load-balance}
 \input{report/620-optimizations}

@@ -1,7 +1,12 @@
 \section{Distributed Memory}
 \label{sec:mpi}
 
-For a distributed memory implementation, The \textit{Message Passing Interface} (MPI) was used. With the sequential code having already suffered some changes and optimizations, the main problem consisted in the partitioning of the mesh. The obvious approach is one where each processor is assigned to a subset of the entire mesh, and is responsible for the application of both kernels to its subset. Communication is also required between each main loop iteration, since each process will require access to the values in the border of its subset, in order to compute its own values.
+\todorev{Last revised on Sat, June 30 at 23:25 at pfac}
+
+For a distributed memory implementation, the \textit{Message Passing Interface} (MPI) was used.
+With the sequential code having already suffered some changes and optimizations, the main problem consisted in the partitioning of the mesh.
+The obvious approach is one where each processor is assigned to a subset of the entire mesh, and is responsible for the application of both kernels to its subset.
+Communication is also required between each main loop iteration, since each process will require access to the values in the border of its subset, in order to compute its own values.
 
 \input{report/510-partitioning}
 \input{report/520-communication}

@@ -1,13 +1,20 @@
 \subsection{Communication Analysis}
 \label{subsec:mpi:comm}
 
-When computing the flux for a given edge, the pollution values of both adjacent cells are required. Until now, only one divergent case existed, when the edge was in the border of the mesh. With the addition of partitioning, a new divergence is created, when the edge is not in the border of the global mesh, but in the border of the local partition, meaning that one of its adjacent cells was assigned to a different partition.
+\todorev{Last revised on Sat, June 30 at 23:12 by pfac}
+
+When computing the flux for a given edge, the pollution values of both adjacent cells are required.
+Until now, only one divergent case existed, when the edge was in the border of the mesh.
+With the addition of partitioning, a new divergence is created, when the edge is not in the border of the global mesh, but in the border of the local partition, meaning that one of its adjacent cells was assigned to a different partition.
 
 A communication step is required at this point, so that each edge in the local border (the border that connects to another partition, not the global mesh border) receives the corresponding values from the neighbor partition 
 
 This communication step was introduced at the beginning of the main loop, and consists of two smaller steps, one for left communication, and one for right communication.
-Each iteration, every process starts by communicating the left border values, which were previously indexed in the preparation stage, to its left neighbor. Asynchronously with that task, it receives an equivalent message from the right neighbor, which is also at the same step. After both tasks, the direction of communication is reversed, and the right border values are sent to the right neighbor of each partition.
+In each iteration, every process starts by communicating the left border values, which were previously indexed in the preparation stage, to its left neighbor.
+Asynchronously with that task, it receives an equivalent message from the right neighbor, which is also at the same step.
+After both tasks, the direction of communication is reversed, and the right border values are sent to the right neighbor of each partition.
 
-Only after all communication is done for this process can it continue to the main kernels of the loop. This introduces a large overhead, as it will most likely require a network transfer if the neighbor partition is located in a different machine. This overhead may become a huge bottleneck for the loop, especially for smaller inputs, where the time spent in the kernels is small enough to make the partitioning and communication occupy a large percentage of the program.
+Only after all communication is done for this process is it able to proceed to the main kernels of the loop. This introduces a large overhead, as it will most likely require a network transfer if the neighbor partition is located in a different machine.
+This overhead may become a huge bottleneck for the loop, especially for smaller inputs, where the time spent in the kernels is small enough to make the partitioning and communication occupy a large percentage of the program.
 
-An alternative could consist in making the communication an asynchronous task, allowing the flux for inner edges to be computed while the communication is taking place, since they don't depend on the values to be received. Again, due to time constraints, it was not possible to better analyse this solution.
+An alternative could consist in dividing the communication into two asynchronous tasks, allowing the flux for inner edges to be computed while the communication is taking place, since they don't depend on the values to be received. Again, due to time constraints, it was not possible to analyze this solution further.

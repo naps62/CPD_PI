@@ -1,9 +1,11 @@
 \section{Shared Memory}
 \label{sec:omp}
 
+\todorev{Last revised on Sat, June 30 at 22:15 by pfac}
+
 A shared memory parallel version of \polu was implemented using the OpenMP interface. The main feature about this API is that the program itself remains almost equal to the sequential version, requiring only the addition of the necessary directives and the adaptation of the code to remove dependencies.
 
-Both core functions were parallelized adding a \texttt{parallel for} directive to the internal loops. The number of threads issued in each parallel zone is given as the second argument of the program, and defaults to the maximum number of threads supported by the hardware in the absence of the argument.
+Both core functions were parallelized just by adding a \texttt{parallel for} directive to the internal loops. The number of threads issued in each parallel zone is given as the second argument of the program, and defaults to the maximum number of threads supported by the hardware in the absence of the argument.
 
 \input{report/410-load}
 \input{report/420-limitations}
