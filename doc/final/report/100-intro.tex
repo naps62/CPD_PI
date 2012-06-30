@@ -1,15 +1,26 @@
 \section{Introduction}
-\label{sec:intro}
 
-This document describes an incremental work where the \polu application, which computes the propagation of a pollutant in a two dimensional environment, was studied in order to find possibilities of optimization and/or parallelization.
+\todopfac{A introdução vou deixar para o fim, para perceber exactamente o que é que tem de ser introduzido antes do conteúdo do relatório.
 
-The \polu application is built on top of the Finite Volume Library (FVL) which is also a focus of study in this document, as a large part of the logic and data structures are implemented on it, rather than on the application itself. In this context, both of them are considered as a whole case study.
+Razões para eu ter comentado o que já tava escrito:
 
-Several changes were performed in the original code, which are fully described in this document. Those changes vary in nature, from simple or low-level code optimization, to higher-level algorithmic changes, in order to allow parallelization and/or improve performance. The data structures used also suffered large changes (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures} at first, and also to \textit{Structure-of-Arrays}. This changes removed excessive dereferencing caused by deep chains of pointers in the original strucutres, effectively reducing memory accesses and improving locality.
+* Tinha explicações que se repetem mais tarde em secção própria;
 
-The several phases that composed this project reflect on the multiple approaches and variety of results presented here. In general, the goal is to study the performance impact, advantages and difficulties of different programming paradigms, applied to the \texttt{polu} application. 
+* Parte parecia que devia estar na conclusão (estava a resumir o que foi feito);
+
+* Diferentes tempos verbais, ficava confuso.
+}
+% \label{sec:intro}
+
+% This document describes an incremental work where the \polu application, which computes the propagation of a pollutant in a two dimensional environment, was studied in order to find possibilities of optimization and parallelization.
+
+% The \polu application is built on top of the Finite Volume Library (FVL) which is also a focus of study in this document, as a large part of the logic and data structures are implemented on it, rather than on the application itself. In this context, both of them are considered as the whole case study.
+
+% Several changes were performed in the original code, which are fully described in this document. Those changes vary in nature, from simple or low-level code optimization, to higher-level algorithmic changes, in order to allow parallelization and/or improve performance. The data structures used also suffered large changes (originally implemented as \textit{Arrays-of-Pointers}) to \textit{Arrays-of-Structures} at first, and also to \textit{Structure-of-Arrays}. This changes removed excessive dereferencing caused by deep chains of pointers in the original strucutres, effectively reducing memory accesses and improving locality.
+
+% The several phases that composed this project reflect on the multiple approaches and variety of results presented here. In general, the goal is to study the performance impact, advantages and difficulties of different programming paradigms, applied to the \texttt{polu} application. 
 
 
-\todo[inline]{O paragrafo aqui a explicar o que é falado no relatorio}
+% \todo[inline]{O paragrafo aqui a explicar o que é falado no relatorio}
 
-After the initial analysis of initial sequential code, a shared-memory parallel implementation, using OpenMP \todo{ref sec:omp}, a distributed-memory implementation, with the \textit{Message Passing Interface} (MPI) \cref{sec:mpi} and a GPU implementation using CUDA \cref{sec:cuda} were implemented and profiled.
+% After the initial analysis of initial sequential code, a shared-memory parallel implementation, using OpenMP \todo{ref sec:omp}, a distributed-memory implementation, with the \textit{Message Passing Interface} (MPI) \cref{sec:mpi} and a GPU implementation using CUDA \cref{sec:cuda} were implemented and profiled.

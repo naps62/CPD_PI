@@ -15,7 +15,7 @@ DOCS	=	report slides
 .PHONY: clean view slides report
 
 ifeq ($(UNAME),Darwin)
-default: slides.pdf
+default: report.pdf
 else
 default: report
 endif
@@ -36,17 +36,18 @@ view:
 report: report.pdf
 	$(PDFOPN) $<
 
+report.aux: report/000-abstract.tex
 report.aux: report/100-intro.tex
 report.aux: report/200-case.tex
 report.aux: report/210-algorithm.tex
-report.aux: report/220-parallelism.tex
+report.aux: report/220-oportunities.tex
 report.aux: report/300-sequential.tex
 report.aux: report/310-original.tex
 report.aux: report/311-simplifications.tex
 report.aux: report/320-optimized.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
-report.aux: report/330-parallelization.tex
+report.aux: report/330-dependencies.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex
@@ -60,6 +61,13 @@ report.aux: report/610-load-balance.tex
 report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
 report.aux: report/640-results.tex
+
+report.bbl: ../bib/articles.bib
+report.bbl: ../bib/inproceedings.bib
+report.bbl: ../bib/manuals.bib
+report.bbl: ../bib/misc.bib
+report.bbl: ../bib/strings.bib
+report.bbl: ../bib/techreports.bib
 
 slides: slides.pdf
 	$(PDFOPN) $<

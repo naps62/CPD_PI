@@ -1,4 +1,9 @@
 \subsubsection{AOS}
-% \todo[inline]{Explain the AOS structures and why they should be better than AOP}
 
-The first implemented alternative to AOP was the \textit{Arrays-Of-Structs} approach. Instead of using pointers, structures were created for cells and edges, containing all the data about each. Where pointers existed to link an edge to the adjacent cells, or a cell to its edges, an index is placed. While the dereferencing levels are completely eliminated, using indexes allows any element to hold identifiers which allows direct access to the other elements it needs to interact with, as long as all the data objects are stored in arrays. The maximum representable index is used as the equivalent to \texttt{NULL} pointers (applied, for example, to the right cell of a border edge).
+\todorev{Last revised on Sat, June 30 at 15:36 by pfac}
+
+The first implemented alternative to AOP was the \textit{Arrays-Of-Structs} approach.
+Instead of using pointers, structures were created for cells and edges, containing all the data related to each.
+Where pointers previously existed to link an edge to the adjacent cells, or a cell to its edges, an index is placed.
+While the dereferencing levels are completely eliminated, using indexes provides any element with identifiers which allows direct access to the other elements it needs to interact with, as long as all the data objects are stored in arrays.
+The maximum representable index is used as the equivalent to \texttt{NULL} pointers (applied, for example, as the identifier for the ``right'' cell of a border edge).

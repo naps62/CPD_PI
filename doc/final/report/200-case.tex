@@ -1,14 +1,15 @@
 \section{Case Study}
 
-The application analyzed in this document, called here \polu, computes the flux of a material (e.g. a pollutant) through a bidimensional surface. This surface is described as a mesh, composed mainly of edges and cells. The input is given in the form of XML files, and in total consists of:
+\todorev{Last revised Wed, June 27 at 20:12 by pfac}
 
+The application analyzed in this document, here called \polu, computes the spread of a material (e.g. a pollutant) in a bidimensional surface through the course of time. This surface is discretly represented as a mesh, composed mainly of edges and cells. The input is given in the form of XML files, passed as arguments:
 \begin{itemize}
 	\item Mesh description;
 	\item Velocity vector for each cell;
 	\item Initial pollution values of each cell.
 \end{itemize}
 
-Both the input and the output of the program can be converted to the \texttt{msh} format, compatible with the \texttt{gmsh} mesh generator, for data visualization. This is done using conversion programs, also written using the FVL library, which handle the conversion between the XML schema used by the library, and the mesh format specification of \texttt{gmsh}\cite{gmsh}.
+Both the input and the output of the program can be converted to the \texttt{msh} format, compatible with the \texttt{gmsh} mesh generator, for data visualization. This is done using conversion programs, also written using the FVL library, which handle the conversion between the XML schema used by the library, and the mesh format specification of \texttt{gmsh} \cite{gmsh}.
 
 \input{report/210-algorithm}
-\input{report/220-parallelism}
+\input{report/220-oportunities}

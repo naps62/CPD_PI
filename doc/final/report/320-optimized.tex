@@ -1,8 +1,13 @@
 \subsection{Optimized}
 
-While optimizing the sequential code may be important to eliminate possible bottlenecks created by inefficient memory access patterns or poorly written code, most of the optimization work was kept for after the parallelization, as early optimizations might have difficulted parallel implementations. As such, the focus of optimization in the sequential implementation of \polu was on the structures used. As previously stated, the original implementation relied on an AOP approach, but the excessively deep chains of pointers translate into more memory accesses, and consecutively worse performance.
+\todorev{Last revised on Sat, June 30 at 15:33 by pfac}
 
-The next two sections describe the two alternative approaches and explain how these can improve the application's performance.
+While optimizing the sequential code may be important to eliminate possible bottlenecks created by inefficient memory access patterns or poorly written code, most of the optimization work was kept for after the parallelization, as early optimizations might have difficulted parallel implementations.
+As such, the focus of optimization in the sequential implementation of \polu was on the structures used, which were trivially found to be very inefficient.
+
+As previously stated, the original implementation relied on an AOP approach, but the excessively deep chains of pointers translate into more memory accesses, and consecutively worse performance.
+
+The next two sections describe the two alternative approaches and explain how these improved the application's performance.
 
 \input{report/321-aos}
 \input{report/322-soa}
