@@ -40,14 +40,14 @@ report.aux: report/000-abstract.tex
 report.aux: report/100-intro.tex
 report.aux: report/200-case.tex
 report.aux: report/210-algorithm.tex
-report.aux: report/220-parallelism.tex
+report.aux: report/220-oportunities.tex
 report.aux: report/300-sequential.tex
 report.aux: report/310-original.tex
 report.aux: report/311-simplifications.tex
 report.aux: report/320-optimized.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
-report.aux: report/330-parallelization.tex
+report.aux: report/330-dependencies.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex

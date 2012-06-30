@@ -1,9 +1,14 @@
 \subsubsection{Simplifications}
 \label{sec:311}
-% \todo[inline]{Animation and velocity calculation are out}
+
+\todorev{Last revised on Sat, June 30 at 15:30 by pfac}
 
 Two important simplifications were performed in the original version, before any other adaptation or rewrite of the code.
 
-The first simplification was the supression of the output operation at the end of each main loop iteration, thus removing the animation feature. While this feature is interesting to analyze how the system evolved, input/output operations are slow and dependant on system calls. Since the main goal of this document is to study ways to improve the performance of the \polu application, this feature would introduce a large overhead, preventing possible optimizable points from being identified correctly.
+The first simplification was the supression of the output operation at the end of each main loop iteration, thus removing the animation feature. While this feature is interesting to analyze how the system evolves during the simulation, input/output operations are slow and dependant on system calls.
+Since the main goal of this document is to study ways to improve the performance of the \polu application, this feature would introduce a large overhead, preventing possible optimizable points from being identified correctly.
 
-The second major simplification focus on the \computeflux function. Since the velocity vector of every cell remains constant throughout the entire program, the same values will be computed for the velocity in each edge, and consequentely, for the elapsed time. While this computation is important in a more dynamic application where velocity vectors are not constant, such is not the case for this algorithm. Therefore, it is possible to remove these two computational steps from the core function to the preprocessing stage, improving global performance.
+The second major simplification focused on the \computeflux function.
+Since the velocity vector of every cell remains constant throughout the entire program, the same values will be computed for the velocity in each edge, and, consequentely, for the elapsed time.
+While this computation is important in a more dynamic application where velocity vectors are not constant, such is not the case for this algorithm, as no function is implemented to change these vectors.
+Therefore, it is possible to remove these two computational steps ($v_{\mathrm{max}}$ and $\Delta t$) from the core function to the preprocessing stage, improving global performance.

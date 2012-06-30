@@ -1,14 +1,27 @@
 \subsection{Original}
 \label{sec:310}
-%\todo[inline,color=blue!40]{Add some algebra to the core functions text. Hard to keep track with only text.}
+
+\todorev{Last revised and changed on Sat, June 30 at 15:24 by pfac}
 
 The original \polu program was implemented using structures as \textit{Arrays-Of-Pointers} (AOP). While this allows for an easier development and better code readability, the deep levels of dereferencing imply an increased number of memory accesses, which aggravate the effects of any memory bottlenecks.
 
-In this original version, the \computeflux function iterates over each edge, and loads the pollution levels and velocity vectors of the cells it connects. For edges in the border of the mesh, a convention is followed, indicating that the non existing cell is alwasy the right one (cells are refered to as left and right cells of a given edge). When the right cell doesn't exist, the \dirichlet condition is used as the value for that border.
+In this original version, the \computeflux function (see \cref{alg:flux}) iterates over each edge, and loads the pollution levels and velocity vectors of the cells it connects.
+% For edges in the border of the mesh, a convention is followed, indicating that the non existing cell is always the right one (cells are refered to as left and right cells of a given edge). When the right cell does not exist, the \dirichlet condition is used as the value for that border.
+A convention is followed (see \cref{fig:edge}), indicating that an edge always has a cell on its ``left'', and that the normal of the edge always points to its ``right'' cell. For the edges in the border of the mesh, the ``right'' cell does not exist. In this case, the \dirichlet condition is used as a the polution value in that hypothetical cell.
 
-The velocity vector in the edge is computed based on the velocity of both cells and the normal of the edge. This final velocity also gives information about the direction of the flux. A positive velocity makes the pollution flow from left to right, and the inverse happens with a negative velocity. \Cref{alg:flux} illustrates this behavious.
+\begin{figure}
+	\centering
+	\includegraphics[width=.5\columnwidth]{images/edge-normal.png}
+	\caption[An edge]{An edge. Every cell has at least one adjacent ``left'' cell. Border edges do not have a ``right'' cell. Edge normals always point to the ``right''.}
+	\label{fig:edge}
+\end{figure}
 
+The value for the velocity in the edge is computed based on the velocity vectors of both adjacent cells and the normal of the edge.
+The edges in the border assume for the hypothetical ``right'' cell a velocity equal to the ``left'' cell, which results in null flux.
+Despite not being a vector, this computed velocity gives information about the direction of the flux:
+a positive value represents the pollution flow from left to right; the inverse happens with a negative velocity.
 
+This function also returns the elapsed time, which is computed with the maximum absolute value of the computed edge velocities, and is used at the end of the iteration to keep track of the total elapsed time.
 
 \begin{figure}[!htp]
 	\begin{alg}
@@ -22,18 +35,19 @@ The velocity vector in the edge is computed based on the velocity of both cells 
 				\State $u_{r} \gets \dirichlet$ 
 			\EndIf
 			\State $v_{edge} \gets (v_{l} + v_{r}) / 2 \cdot normal_{edge}$
-			\State $v_{max} \gets max(v_{max}, v_{edge})$
+			\State $v_{max} \gets \mathrm{max}(v_{max}, v_{edge})$
 			\State $flux_{edge} += u_{l} \cdot [v_{edge}]^{+} + u_{r} \cdot [v_{edge}]^{-}$
 		\EndFor
+		\State $\Delta t \gets |v_{max}|^{-1}$
 	\end{alg}
 
-	\caption{Pseudocode for the original \computeflux function}
+	\caption{Pseudocode for the original \computeflux function.}
 	\label{alg:flux}
 \end{figure}
 
-This function also returns the elapsed time, which is computed with the maximum absolute value of the computed edge velocities, and is used at the end of the iteration to keep track of the total elapsed time.
-
-The original \update function also iterates over each edge. The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area. This is described in \cref{alg:update}.
+The original \update function also iterates over each edge.
+The contribution of each edge to the cells final value is computed as the product between the elapsed time, the computed flux and the ratio between the edge's length and the cell's area.
+This is illustrated in \cref{alg:update}.
 
 \begin{figure}[!htp]
 	\begin{alg}
@@ -48,12 +62,11 @@ The original \update function also iterates over each edge. The contribution of 
 		\EndFor
 	\end{alg}
 
-	\caption{Original \update function}
+	\caption{Pseudocode for the original \update function.}
 	\label{alg:update}
 \end{figure}
 
-
-
-There is also the possibility to output the current state of the mesh after every $X$ of iterations, where $X$ is a parameter provided at runtime. This feature allows the output to contain not only the final state of the system byt all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
+In this original implementation, there is also the possibility to output the current state of the mesh after every $X$ iterations, where $X$ is a parameter provided in the configuration file loaded at runtime.
+This feature allows the output to contain not only the final state of the system but all the intermediary states, allowing  an animation to be shown using \texttt{gmsh}.
 
 \input{report/311-simplifications}

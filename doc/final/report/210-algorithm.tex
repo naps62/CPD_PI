@@ -1,6 +1,8 @@
 \subsection{Algorithm}
 \label{sec:210}
+
 \todorev{Last revised Wed, June 27 at 20:14 by pfac}
+
 The algorithm used by this application is a first order finite volume method. This means that each mesh element only communicates directly with its first level neighbors in the mesh, which makes this a typical case of a stencil computation \cite{mitlab3}. In terms of performance, being a stencil algorithm implies that the operational intensity will most likely remain constant with larger problem sizes \cite{williams2008,parlab2008}. On the other hand, the low order allows for a greater locality of the calculations, and favors parallelization.
 
 The code consists on a preparation stage, where all the required elements are loaded and prepared, and two computation stages, which compose the main loop.
