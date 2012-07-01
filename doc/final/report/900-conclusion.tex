@@ -5,3 +5,11 @@
 \todo[inline,color=green!40]{Or in my own words: Sum the fuck out of this shit}
 \todopfac{Mencionar localidade como trabalho futuro.}
 \todo[inline]{Referir que apesar dos speedups de CUDA não serem tão melhores que os outros como se esperava, isso pode dever-se ao facto de que não nos foi possivel gerar um input grande o suficiente para tirar o maximo partido do hardware do GPU}
+
+In this report, the analysis of the \polu application and the successive attempts to optimize and parallelize it were presented.
+
+The original implementation presented several performance problems, the most troubling being the structures implemented as \aop. It also presented features which were not fully implemented or not targeted for improving the results of the computation. These features were removed. The main optimizations performed in the sequential implementation involved changing how the structutes were implemented to \aos, and then to \soa, which achieved the best results (almost 10 times faster).
+Dependencies existed in the original code, which were removed along with the discarded features and some code adaptations.
+
+Several approaches to parallelism were described. The first implementation, shared memory, used the OpenMP interface to parallelize the two core functions. It achieved a nearly perfect load balance but remained, just like the sequential version, highly limited by the lack of locality in the mesh structure. The \soa version also achieved the best results with this implementation
+
