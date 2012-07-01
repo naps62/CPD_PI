@@ -41,3 +41,4 @@ Lib.err
 fv_bic/doc/doxygen
 *.ods#
 *-eps-converted-to.pdf
+*.fdb_latexmk
