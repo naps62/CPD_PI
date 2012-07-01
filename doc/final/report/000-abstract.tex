@@ -6,10 +6,8 @@
 % command as these need to go into the title area created by \maketitle.
 \IEEEcompsoctitleabstractindextext{%
 \begin{abstract}
-%\boldmath
-\todo[inline]{This template is quite acceptable for a paper, but IMO it is unfit for a technical/scientific report for a class. SCREW YOU. A tua prima!}
-
-
+This report presents the analysis, optimization and parallelization of \polu, an application which computes the spread of a material in a bidimensional mesh. Three parallel approaches were designed: shared memory using OpenMP; distributed memory using MPI; and a GPU version using CUDA.
+All the implementations obtained speedups, but the scalability was found to be only relevant with OpenMP and CUDA. Despite the efforts to optimize it, all the implementations presented locality problems. The best results were achieved with the CUDA implementation. Better speedups are expected with a larger test case, but such could not be generated for this project.
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,

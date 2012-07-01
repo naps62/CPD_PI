@@ -46,7 +46,7 @@ Further detail regarding this GPU module can be found in \cref{tab:tesla:m2070}.
 			Bandwidth: & 148 GB/s\\
 			\hline
 		\end{tabular}
-		\caption[SeARCH Group Hex GPU computing module hardware description]{SeARCH Group Hex GPU computing module hardware description. See \cite{teslaM2070} for further detail about this processor.}
+		\caption[SeARCH Group Hex GPU computing module hardware description]{SeARCH Group Hex GPU computing module hardware description. See \cite{teslaM2070} for further detail about this GPU.}
 		\label{tab:tesla:m2070}
 	\end{center}
 \end{table}
@@ -56,3 +56,24 @@ While this roofline should refer to the SeARCH Group Hex, this being the environ
 Build the roofline for the Group Hex nodes, which meant rerunning tests with the \texttt{PAPI} library, was not possible in this stage due to time constrictions.
 Attempts were made in previous project stages, but the STREAM benchmark\footnote{\url{http://www.cs.virginia.edu/stream/}} returned less memory bandwidth than in Group 201, which is not true.
 Later analysis showed the problem was in the fact that such benchmark must not be run in Group Hex nodes using all the supported parallelism (6 threads, instead of 24, achieved around 15 GB/s).
+
+SeARCH Group 201 is composed by nodes with two dual-core processors and 4 GB of RAM. Further detail regarding these nodes can be found in \cref{tab:group201}.
+
+\begin{table}[!htp]
+	\begin{tabular}{ll}
+		\hline
+		Processors per node: & 2	\\
+		Processor model: & Intel\textregistered Xeon\textregistered E5130\\
+		Cores per processor: & 2	\\
+		Threads per core: & 1	\\
+		Clock frequency: & 2.00 GHz	\\
+		\hline
+		L1 cache: & 32 KB + 32 KB per core	\\
+		L2 cache: & 4 MB shared	\\
+		L3 cache: & N/A	\\
+		RAM: & 4 GB	\\
+		\hline
+	\end{tabular}
+	\caption[SeARCH Group 201 hardware description]{SeARCH Group 201 hardware description. See \cite{xeon5100} for further detail about this processor.}
+	\label{tab:group201}
+\end{table}
