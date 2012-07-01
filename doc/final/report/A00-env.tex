@@ -1,7 +1,7 @@
 \section{Environmental Setup}
 \label[appendix]{sec:env}
 
-\todorev{Written on Sun, July 1 at 12:28 by pfac}
+\todorev{Written on Sun, July 1 at 17:33 by pfac}
 
 The tests described in this document were performed using a very specific subset of nodes from the SeARCH\footnote{\url{http://search.di.uminho.pt}}, here referred as SeARCH Group Hex.
 
@@ -50,3 +50,9 @@ Further detail regarding this GPU module can be found in \cref{tab:m2070}.
 		\label{tab:grouphex}
 	\end{center}
 \end{table}
+
+Results obtained in a second type of nodes are shown in this document only to present a roofline.
+While this roofline should refer to the SeARCH Group Hex, this being the environment used for comparison, in previous stage of this project the \texttt{PAPI} library could only be used in a very specific node of SeARCH Group 201.
+Build the roofline for the Group Hex nodes, which meant rerunning tests with the \texttt{PAPI} library, was not possible in this stage due to time constrictions.
+Attempts were made in previous project stages, but the STREAM benchmark\footnote{\url{http://www.cs.virginia.edu/stream/}} returned less memory bandwidth than in Group 201, which is not true.
+Later analysis showed the problem was in the fact that such benchmark must not be run in Group Hex nodes using all the supported parallelism (6 threads, instead of 24, achieved around 15 GB/s).

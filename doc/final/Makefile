@@ -48,7 +48,8 @@ report.aux: report/320-optimized.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
 report.aux: report/323-results.tex
-report.aux: report/330-dependencies.tex
+report.aux: report/330-limitations.tex
+report.aux: report/340-dependencies.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex
@@ -62,6 +63,9 @@ report.aux: report/610-load-balance.tex
 report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
 report.aux: report/640-results.tex
+report.aux: report/A00-env.tex
+report.aux: report/B00-method.tex
+report.aux: report/C00-roofline.tex
 
 report.bbl: ../bib/articles.bib
 report.bbl: ../bib/inproceedings.bib
