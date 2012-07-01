@@ -16,5 +16,5 @@ The best results were clearly obtained with the massively parallel implementatio
 Yet, this happens probably to the lack of a test case big enough to take advantage of all the hardware resources in the GPU, which was not possible to generate.
 
 The distributed memory implementation achieved a speedup which is nearly half the other two versions.
-While this implementation was not target of so many optimizations as the other two versions, it faces the same locality problems (although these are softened because the mesh is now divided among the computational nodes) and adds the comunication overhead.
+While this implementation was not subject to as many optimization work as the other two versions, it faces the same locality problems (although these are softened because the mesh is now divided among the computational nodes) and adds the comunication overhead.
 This overhead easily becomes the bottleneck of this implementation, specially when using many computational nodes with only a few processors.

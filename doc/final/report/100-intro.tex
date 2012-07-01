@@ -17,14 +17,14 @@ Razões para eu ter comentado o que já tava escrito:
 This document describes an incremental work where the \polu application is studied with the goal of improving its performance. The program uses a Finite Volume method to simulate the spread of a material in a 2D surface.
 
 % Motivação & Objectivos
-The goal of this project is to study diferent approaches to parallelize the execution of \polu. Three diferent parallel implementations are intended: the first in a shared memory paradigm; the second using a distributed memory approach; and a third implementation using a massively parallel architecture using CUDA in a GPU.
+The goal of this project is to study diferent approaches to parallelize \polu. Three diferent parallel implementations are used: the first using shared memory; the second using distributed memory; and a third implementation using a GPU for a massively parallel approach.
 
 % Contextualização (continuação)
 A total of four different stages of development contributed for the results shown in this document.
 In the first stage, the original implementation was deeply optimized and analyzed to allow parallelism, and two versions were implemented using shared memory and CUDA.
 The second stage evolved the shared memory version by further optimizing the sequential version and parallelizing it.
 A third stage focused in developping a naive but functional distributed memory implementation, with almost no optimizations.
-Based on the results of the previous stages, the final stage was set to focus in an improved massively parallel version.
+Based on the results of the previous stages, the final stage was set to focus in improving the initial CUDA version.
 
 In this final document, the previous stages are summarized according to the implementations developped. \Cref{sec:case} describes the case study and the analysis which allowed to identify the parallelism opportunities in the algorithm. The sequential versions implemented, from the original code to the best optimization achieved are discussed in \cref{sec:seq}. \Cref{sec:omp,sec:mpi,sec:cuda} describe the approach, load balance and limitations of the shared memory, distributed memory and massively parallel implementations, respectively.
 Final comparative results are shown in \cref{sec:finalresults} and a project conclusion is presented in \cref{sec:conclusion}.
