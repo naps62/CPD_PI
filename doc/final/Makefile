@@ -64,6 +64,7 @@ report.aux: report/620-optimizations.tex
 report.aux: report/630-mesh-reorder.tex
 report.aux: report/640-results.tex
 report.aux: report/700-finalresults.tex
+report.aux: report/900-conclusion.tex
 report.aux: report/A00-env.tex
 report.aux: report/B00-method.tex
 report.aux: report/C00-roofline.tex
