@@ -1,6 +1,52 @@
 \section{Environmental Setup}
 \label[appendix]{sec:env}
 
-\todo[inline]{Describe the hex nodes}
-\todo[inline]{Add a roofline for each type of nodes described}
-\todo[inline]{Calculate Amdahl's Law for each hardware group}
+\todorev{Written on Sun, July 1 at 12:28 by pfac}
+
+The tests described in this document were performed using a very specific subset of nodes from the SeARCH\footnote{\url{http://search.di.uminho.pt}}, here referred as SeARCH Group Hex.
+
+Nodes in SeARCH Group Hex have two hex-core processors (with \intel HyperThreading technology) and 12 to 48 GB of RAM.Further detail regarding the hardware of these nodes can be found in \cref{tab:grouphex}.
+
+These nodes were used for every test performed in this document.
+Sequential, shared memory and GPU tests relied used only one node, where tests for distributed memory used two distinct nodes. Inside this group, tests were only limited to the subset with the highest processor clock frequency, not making any distiction between the nodes.
+The only exceptions are the GPU tests which used a very specific node with a Tesla M2070 GPU computing module.
+Further detail regarding this GPU module can be found in \cref{tab:m2070}.
+
+\begin{table}[!htp]
+	\begin{center}
+		\begin{tabular}{lc}
+			\hline
+			Processors per node: & 2	\\
+			Processor model: & \intel\xeon X5650\\
+			Cores per processor: & 6	\\
+			Threads per core: & 2	\\
+			Clock frequency: & 2.66 GHz	\\
+			\hline
+			L1 cache: & 32 KB + 32 KB per core	\\
+			L2 cache: & 256 KB per core	\\
+			L3 cache: & 12 MB shared	\\
+			RAM: & 12 to 48 GB	\\
+			\hline
+		\end{tabular}
+		\caption[SeARCH Group Hex hardware description]{SeARCH Group Hex hardware description. See \cite{xeon5600} for further detail about this processor.}
+		\label{tab:grouphex}
+	\end{center}
+\end{table}
+
+\begin{table}[!htp]
+	\begin{center}
+		\begin{tabular}{lc}
+			\hline
+			GPUs per node: & 1	\\
+			Model: & \tesla M2070\\
+			CUDA cores: & 448	\\
+			Peak (double): & 515 Gflops	\\
+			\hline
+			Dedicated Memory: & 6 GB	\\
+			Bandwidth: & 148 GB/s\\
+			\hline
+		\end{tabular}
+		\caption[SeARCH Group Hex GPU computing module hardware description]{SeARCH Group Hex GPU computing module hardware description. See \cite{teslaM2070} for further detail about this processor.}
+		\label{tab:grouphex}
+	\end{center}
+\end{table}

@@ -1,6 +1,15 @@
 \section{Experiment Methodology}
 \label[appendix]{sec:method}
 
-\todo[inline]{Explain the hows and whys of the latest methodology}
-\todo[inline]{Add the methodologies from all the phases which were not retested}
-\todo[inline]{No problem in sending this to an appendix -> and it should}
+\todorev{Written on Sun, July 1 at 13:24 by pfac}
+
+All the tests performed in this document were performed considering only the core functions of \polu's main loop.
+Preprocessing stage and any cleanup operations were neglected, as their impact on the execution time significantly decreases as the time of simulation is extended.
+
+Each test represents a total of 10 executions limited to 5000 iterations, where the final value is accepted to be the median, thus avoiding the influence of uncommon peak results.
+
+This document shows only the results for the largest test case, which has a size of 62 MB.
+While the generator used in this project (\texttt{gmsh}) is able to generate meshes with thiner granularity, thus increasing its computational load, the conversion tool provided with \polu is too complex to convert the generated mesh in usable time.
+
+During the development of this project several tests were performed, with a special attention to some detailed measurements using the \texttt{PAPI}\footnote{\url{http://icl.cs.utk.edu/papi/}} library to use the available hardware counters.
+Yet, in this final stage, such results are not shown and focus is given only to final speedups.
