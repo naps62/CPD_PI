@@ -44,7 +44,7 @@ report.aux: report/220-oportunities.tex
 report.aux: report/300-sequential.tex
 report.aux: report/310-original.tex
 report.aux: report/311-simplifications.tex
-report.aux: report/320-optimized.tex
+report.aux: report/320-optimizations.tex
 report.aux: report/321-aos.tex
 report.aux: report/322-soa.tex
 report.aux: report/323-results.tex
@@ -53,6 +53,7 @@ report.aux: report/340-dependencies.tex
 report.aux: report/400-shared.tex
 report.aux: report/410-load.tex
 report.aux: report/420-limitations.tex
+report.aux: report/430-results.tex
 report.aux: report/500-mpi.tex
 report.aux: report/510-partitioning.tex
 report.aux: report/520-communication.tex
