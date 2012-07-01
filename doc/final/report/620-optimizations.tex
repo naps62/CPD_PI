@@ -7,10 +7,10 @@ One of the first optimizations performed comes from a simplification already exp
 The initial implementation, like the CPU versions, relied on a reduction to compute the maximum velocity after each iteration.
 The reduction used was based on the most optimized implementation provided in the NVidia samples, and is, according to the author, one of the most optimized CUDA reductions.
 
-But the simplification of moving the maximum velocity computation to outside of the loop didn't rely only on the reduction, as that was only the final step of the computation.
-There was also added workload to the \computeflux kernel, which had to compute the velocity in each CUDA thread. More than the amount of operations, this had a considerable impact on the amount of registers used by the kernel, and it was noted that after its removal, there was also some improvements in \computeflux, and consequentely, in the main loop.
+But the simplification of moving the maximum velocity computation to preprocessing stage did not rely only on the reduction, as that was only the final step of the computation.
+There was also added workload to the \computeflux kernel, which had to compute the velocity for each edge. More than the amount of operations, this had a considerable impact on the amount of registers used by the kernel, allowing for more threads to be spawned without having register spilling, and it was noted that after its removal.
 
-\todonaps{Honestamente que não percebi a primeira frase, nem percebi completamente o sentido deste parágrafo. Acho que precisa de ser reescrito.
+\todonaps{(FIXED. o sentido deste paragrafo era explicar que a remoçao da redução, que já era feita num kernel á parte, acaba por optimizar indirectamente a compute\_flux, que agora já não precisa de calcular as velocidades) Honestamente que não percebi a primeira frase, nem percebi completamente o sentido deste parágrafo. Acho que precisa de ser reescrito.
 
 Quanto ao que foi efectivamente escrito, ``outside the main loop'' pode ser substituido por preprocessing stage (não literalmente ofc, mas tu percebes). E cuidado com o didn't na primeira frase.}
 
