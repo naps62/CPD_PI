@@ -9,4 +9,4 @@ So the balancing strategy can consist, for both kernels, in simply assigning one
 In \computeflux, one CUDA thread will be responsible for computing the flux for a specific edge, while in \update, one CUDA thread will update the pollution of a specific cell.
 
 In order to use the ideal block size for each kernel, the CUDA Occupancy Calculator \cite{cuda_documentation} was used, having in consideration the CUDA Capability of the device used (see \cref{sec:env}) and the amount of registers and memory used by each kernel, which is accessible via nvcc.
-Using the block size recommended by the CUDA Occupancy Calculator does not guarantee better performance, and may actually result in unwanted behavior, such as register spilling, or greater branch divergente. Experiments were made with different block sizes to detect which provided better results.
+Using the block size recommended by the CUDA Occupancy Calculator does not guarantee better performance, and may actually result in unwanted behavior, such as register spilling, or greater branch divergent. Experiments were made with different block sizes to detect which provided better results.

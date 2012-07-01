@@ -4,7 +4,7 @@
 \todorev{Last revised (with minor changes) on Sat, June 30 at 23:03 by pfac}
 
 In order to distribute processing payload across each process, the input mesh, and all of the data associated with it, needs to be split into partitions.
-A mesh partitioning algorithm is required. This algorithm must generate $P$ disjoined partitions (where $P$ is the number of processes), each to be assigned to a different process.
+A mesh partitioning algorithm is required. This algorithm must generate $P$ disjointed partitions (where $P$ is the number of processes), each to be assigned to a different process.
 Some additional data is also required for each partition, so that information about how each partition connects to the others is kept, to allow communication to be done correctly.
 
 \subsubsection{Research in Mesh Partitioning}
@@ -44,4 +44,4 @@ By ordering the cells based on their horizontal coordinate, they are sequentiall
 With this partitioning method, communication is also greatly simplified, as it is guaranteed that every partition will have a left and a right neighbor.
 It is also assumed that the width of the global mesh is big enough so that there are never processes with no cells assigned, which would break communication.
 Since a common mesh usually contains at least thousands of cells, this should not be an issue.
-The partitioning and assignement of the cells is done sequentially, thus it will increase preparation time.
+The partitioning and assignment of the cells is done sequentially, thus it will increase preparation time.

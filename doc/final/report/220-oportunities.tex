@@ -1,13 +1,13 @@
-\subsection{Parallelism Oportunities}
+\subsection{Parallelism Opportunities}
 \label{sec:220}
 
 \todorev{Last revised and changed on Wed, June 27 at 20:14 by pfac}
 
-A typical approach to parallelism in stencil algorithms is based on the premiss that a given point of the domain can be computed once the surrounding points (its dependencies) are ready.
-Due to this being a first order algorithm, these dependencies are extremelly local (computations for a cell depend only on the immediatelly adjacent edges, and vice-versa).
+A typical approach to parallelism in stencil algorithms is based on the premise that a given point of the domain can be computed once the surrounding points (its dependencies) are ready.
+Due to this being a first order algorithm, these dependencies are extremely local (computations for a cell depend only on the immediately adjacent edges, and vice-versa).
 
-Theorectically, this should the basis for the parallelism strategy: mesh subsets can be computed once their directly connected elements are up-to-date, even though other unrelated mesh subsets would possibly be in an older state.
+Theoretically, this should the basis for the parallelism strategy: mesh subsets can be computed once their directly connected elements are up-to-date, even though other unrelated mesh subsets would possibly be in an older state.
 However, such an approach also adds a higher degree of complexity, and involves deep changes to the underlying algorithm.
 As the purpose of this document is not to study a better alternative algorithm to solve the problem \polu is aimed at, this approach was not followed.
 
-Instead of the typical strategy, each core function can be analyzed as an independent tast. During \polu's main loop both \computeflux and \update depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to correctly compute the flux for the next iteration. This creates two implicit synchronization points in the main loop and is a consequence of the heartbeat characteristics of the problem. Yet, both functions may be completely executed in parallel, performing the required computations for each internally iterated mesh element.
+Instead of the typical strategy, each core function can be analyzed as an independent task. During \polu's main loop both \computeflux and \update depend on each other to perform their tasks. \update requires flux from all edges to be previously computed in \computeflux, which in turn requires that all pollution values are up-to-date to correctly compute the flux for the next iteration. This creates two implicit synchronization points in the main loop and is a consequence of the heartbeat characteristics of the problem. Yet, both functions may be completely executed in parallel, performing the required computations for each internally iterated mesh element.
