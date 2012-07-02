@@ -5,7 +5,7 @@
 
 Since GPUs rely heavily on memory organization, it comes as no surprise that the issues stated at \cref{sec:omp:limitations}, and shown in \cref{fig:locality} become even more relevant.
 
-Memory accesses in a GPU are more efficient when the data being accessed at the same time is contiguous in memory, allowing for a single, coalesced memory request to be issued. The lack of locality provided by \texttt{gmsh} output, as well as the irregular memory access pattern from each kernel difficults this task.
+Memory accesses in a GPU are more efficient when the data being accessed at the same time is contiguous in memory, allowing for a single, coalesced memory request to be issued. The lack of locality provided by \texttt{gmsh} output, as well as the irregular memory access pattern from each kernel complicates this task.
 
 A simple approach was taken to attempt minimizing this problem, which consisted on preprocessing the mesh, moving all cells in the border to the beginning of the structure.
 The idea was not to increase locality, since the border is only a small subset of the entire mesh, but to attempt more regular accesses in \computeflux, as well as avoiding the divergent branch for border cells.

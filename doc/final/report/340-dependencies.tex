@@ -15,7 +15,7 @@ Since the computation of $\Delta t$ is based in a maximum operation, it is possi
 On the other hand, the \update function has a dependency which may not be neglected because of a simplification.
 As described in \cref{sec:310}, the original implementation of \update iterates over the edges.
 While this may favor locality after executing \computeflux, it creates a race condition when each edges adds its own contribution to the cell's value.
-This dependency can be removed by changing how \update iterates over the mesh. By iterating over the cells instead of the edges, the race condition disappears since only one write operation per cell is performed, as shown in \cref{alg:update2}.
+This dependency can be removed by changing how \update iterates over the mesh. By iterating over the cells instead of the edges, the race condition disappears since only one write operation per cell is performed, as shown in \cref{alg:update}.
 
 \begin{figure}[!htp]
 	\begin{alg}

@@ -9,7 +9,7 @@ One of the problems with the AOS approach is that when the core functions iterat
 Yet, neither of the core functions utilizes all the data in that structure, which translates in useless data occupying the cache.
 This hurts spatial locality\footnote{If a data element is required, adjacent elements will likely be required in the near future.}, greatly increasing the chances of accessing a mesh element translating into a RAM access.
 
-The SOA approach solves this problem by placing each piece of the elements data in a distinct array. As an example, a single array is created to hold the polution level of all the cells.
+The SOA approach solves this problem by placing each piece of the elements data in a distinct array. As an example, a single array is created to hold the pollution level of all the cells.
 The same applies, for example, with the flux of all the edges.
 
 This approach allows the core functions to load only the data required for their computations.
