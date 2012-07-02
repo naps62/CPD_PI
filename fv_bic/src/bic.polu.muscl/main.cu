@@ -128,9 +128,9 @@ int main(int argc, char **argv) {
 	//FVL::CFVArray<double>    oldflux(mesh.num_edges);
 	//FVL::CFVArray<bool>      invalidate_flux(mesh.num_cells);
 	FVL::CFVArray<double>    vs(mesh.num_edges);
-	FVL::CFVMat<double>      matA(3, 3, mesh.num_cells);
-	FVL::CFVMat<double>      vecGradient(3, 1, mesh.num_cells);
-	FVL::CFVMat<double>      vecR(3, 1, mesh.num_cells);
+	FVL::CFVMat<double>      matA(2, 2, mesh.num_cells);
+	FVL::CFVMat<double>      vecGradient(2, 1, mesh.num_cells);
+	FVL::CFVMat<double>      vecR(2, 1, mesh.num_cells);
 	FVL::CFVArray<double> edgePsi(mesh.num_edges);
 	FVL::CFVArray<double> cellPsi(mesh.num_cells);
 

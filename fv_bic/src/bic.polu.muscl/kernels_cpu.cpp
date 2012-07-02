@@ -81,20 +81,14 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 	
 	for(unsigned int i = 0; i < mesh.num_cells; ++i) {
 		// centroid for current cell
-		double x0 = mesh.cell_centroids.x[i];
-		double y0 = mesh.cell_centroids.y[i];
+		double x_i = mesh.cell_centroids.x[i];
+		double y_i = mesh.cell_centroids.y[i];
 
 		matA.elem(0, 0, i) = 0;
 		matA.elem(0, 1, i) = 0;
-		matA.elem(0, 2, i) = 0;
 
 		matA.elem(1, 0, i) = 0;
 		matA.elem(1, 1, i) = 0;
-		matA.elem(1, 2, i) = 0;
-
-		matA.elem(2, 0, i) = 0;
-		matA.elem(2, 1, i) = 0;
-		matA.elem(2, 2, i) = mesh.cell_edges_count[i] + 1;
 
 		// for each edge
 		unsigned int edge_limit = mesh.cell_edges_count[i];
@@ -102,7 +96,7 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 			
 			// get current edge
 			unsigned int edge = mesh.cell_edges.elem(j, 0, i);
-			double x, y;
+			double x_j, y_j;
 			unsigned int cell_j;
 
 			switch (mesh.edge_types[edge]) {
@@ -116,8 +110,8 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 						cell_j = mesh.edge_left_cells[edge];
 					
 					// get coords for this x
-					x = mesh.cell_centroids.x[cell_j];
-					y = mesh.cell_centroids.y[cell_j];
+					x_j = mesh.cell_centroids.x[cell_j];
+					y_j = mesh.cell_centroids.y[cell_j];
 					break;
 
 				// boundary edges (left_cell == i, there is no right cell, so a ghost cell needs to be used)
@@ -127,71 +121,51 @@ void cpu_reverseA(CFVMesh2D &mesh, CFVMat<double> &matA) {
 				case FV_EDGE_FAKE:
 				case FV_EDGE_NEUMMAN:
 					// get coords of current cell i, and compute ghost coords
-					x = x0;
-					y = y0;
-					cpu_ghost_coords(mesh, edge, x, y);
+					x_j = x_i;
+					y_j = y_i;
+					cpu_ghost_coords(mesh, edge, x_j, y_j);
 					break;
 			}
 
 			// system normalization, to place all numbers on the same scale (avoid precision problems with too big numbers against small numbers)
-			x -= x0;
-			y -= y0;
+			double x = x_j - x_i;
+			double y = y_j - y_i;
 
 			// sum to each matrix elem
 			matA.elem(0, 0, i) += x * x;
 			matA.elem(0, 1, i) += x * y;
-			matA.elem(0, 2, i) += x;
-
 			matA.elem(1, 0, i) += x * y;
 			matA.elem(1, 1, i) += y * y;
-			matA.elem(1, 2, i) += y;
-
-			matA.elem(2, 0, i) += x;
-			matA.elem(2, 1, i) += y;
 		}
 
 		// A computed, now to the reverse
 		
 		// determinant
-		double det = matA.elem(0, 0, i) *	(matA.elem(1, 1, i) * matA.elem(2, 2, i) -
-											 matA.elem(1, 2, i) * matA.elem(2, 1, i))
-					- matA.elem(1, 0, i) *	(matA.elem(0, 1, i) * matA.elem(2, 2, i) -
-											 matA.elem(0, 2, i) * matA.elem(2, 1, i))
-					+ matA.elem(2, 0, i) *	(matA.elem(0, 1, i) * matA.elem(1, 2, i) -
-											 matA.elem(0, 2, i) * matA.elem(1, 1, i));
+		double invDet = 1.0 / (matA.elem(0, 0, i) * matA.elem(1, 1, i) - matA.elem(1, 0, i) * matA.elem(0, 1, i));
 
-		double invDet = 1.0 / det;
 
-		double tmpA[3][3];
-		for(unsigned int x = 0; x < 3; ++x)
-			for(unsigned int y = 0; y < 3; ++y)
+		double tmpA[2][2];
+		for(unsigned int x = 0; x < 2; ++x)
+			for(unsigned int y = 0; y < 2; ++y)
 				tmpA[x][y] = matA.elem(x, y, i);
 
-		matA.elem(0, 0, i) =   (tmpA[1][1] * tmpA[2][2] - tmpA[1][2] * tmpA[2][1]) * invDet;
-		matA.elem(0, 1, i) = - (tmpA[1][0] * tmpA[2][2] - tmpA[1][2] * tmpA[2][0]) * invDet;
-		matA.elem(0, 2, i) =   (tmpA[1][0] * tmpA[2][1] - tmpA[1][1] * tmpA[2][0]) * invDet;
-
-		matA.elem(1, 0, i) = - (tmpA[0][1] * tmpA[2][2] - tmpA[0][2] * tmpA[2][1]) * invDet;
-		matA.elem(1, 1, i) =   (tmpA[0][0] * tmpA[2][2] - tmpA[0][2] * tmpA[2][0]) * invDet;
-		matA.elem(1, 2, i) = - (tmpA[0][0] * tmpA[2][1] - tmpA[0][1] * tmpA[2][0]) * invDet;
-
-		matA.elem(2, 0, i) =   (tmpA[0][1] * tmpA[1][2] - tmpA[0][2] * tmpA[1][1]) * invDet;
-		matA.elem(2, 1, i) = - (tmpA[0][0] * tmpA[1][2] - tmpA[0][2] * tmpA[1][0]) * invDet;
-		matA.elem(2, 2, i) =   (tmpA[0][0] * tmpA[1][1] - tmpA[0][1] * tmpA[1][0]) * invDet;
+		matA.elem(0, 0, i) =   invDet * tmpA[1][1];
+		matA.elem(0, 1, i) = - invDet * tmpA[0][1];
+		matA.elem(1, 0, i) = - invDet * tmpA[1][0];
+		matA.elem(1, 1, i) =   invDet * tmpA[0][0];
 	}
 }
 
 /* Compute system polution coeficients for system solve */
 void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double> &vecR, double dc) {
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		double x0 = mesh.cell_centroids.x[cell];
-		double y0 = mesh.cell_centroids.y[cell];
-		double u = polution[cell];
+		double x_i = mesh.cell_centroids.x[cell];
+		double y_i = mesh.cell_centroids.y[cell];
+		double u_i = polution[cell];
 
 		// fill initial value of vector
 		vecR.elem(0, 0, cell) = 0;
 		vecR.elem(1, 0, cell) = 0;
-		vecR.elem(2, 0, cell) = u;
 
 		// for each neighbor cell, add to vector
 		unsigned int edge_limit = mesh.cell_edges_count[cell];
@@ -199,7 +173,7 @@ void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double
 
 			// get edge
 			unsigned int edge = mesh.cell_edges.elem(j, 0, cell);
-			double x, y, u;
+			double x_j, y_j, u_j;
 			unsigned int cell_j;
 
 			switch (mesh.edge_types[edge]) {
@@ -213,9 +187,9 @@ void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double
 						cell_j = mesh.edge_left_cells[edge];
 					
 					// get coords for this cell
-					x = mesh.cell_centroids.x[cell_j];
-					y = mesh.cell_centroids.y[cell_j];
-					u = polution[cell_j];
+					x_j = mesh.cell_centroids.x[cell_j];
+					y_j = mesh.cell_centroids.y[cell_j];
+					u_j = polution[cell_j];
 					break;
 
 				case FV_EDGE_FAKE:
@@ -227,10 +201,10 @@ void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double
 						cell_j = mesh.edge_left_cells[edge];
 					
 					// get coords for this cell
-					x = x0;
-					y = y0;
-					cpu_ghost_coords(mesh, edge, x, y);
-					u = polution[cell_j];
+					x_j = x_i;
+					y_j = y_i;
+					cpu_ghost_coords(mesh, edge, x_j, y_j);
+					u_j = polution[cell_j];
 					break;
 
 
@@ -240,12 +214,12 @@ void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double
 					cell_j = mesh.edge_left_cells[edge];
 
 					// get coords of current cell i, and compute ghost coords
-					x = x0;
-					y = y0;
-					cpu_ghost_coords(mesh, edge, x, y);
+					x_j = x_i;
+					y_j = y_i;
+					cpu_ghost_coords(mesh, edge, x_j, y_j);
 
 					// polution in this point is equal to the dirichlet condition (unless velocity is positive)
-					u = dc;
+					u_j = dc;
 
 					break;
 
@@ -254,23 +228,18 @@ void cpu_compute_vecR(CFVMesh2D &mesh, CFVArray<double> &polution, CFVMat<double
 					cell_j = mesh.edge_left_cells[edge];
 
 					// get coords of current cell i, and compute ghost coords
-					x = x0;
-					y = y0;
-					cpu_ghost_coords(mesh, edge, x, y);
+					x_j = x_i;
+					y_j = y_i;
+					cpu_ghost_coords(mesh, edge, x_j, y_j);
 
 					// polution in this ghost cell is equal to the current cell (neumman condition)
-					u = polution[cell_j]; //u = 0; // TODO sera que deveria ser 0 aqui?
+					u_j = polution[cell_j]; //u = 0; // TODO sera que deveria ser 0 aqui?
 					break;
 			}
 
-			// system normalization, to place all numbers on the same scale (avoid precision problems with too big numbers against small numbers)
-			x -= x0;
-			y -= y0;
-
 			// sum to current vec
-			vecR.elem(0, 0, cell) += u * x;
-			vecR.elem(1, 0, cell) += u * y;
-			vecR.elem(2, 0, cell) += u;
+			vecR.elem(0, 0, cell) += (u_j - u_i) * (x_j - x_i);
+			vecR.elem(1, 0, cell) += (u_j - u_i) * (y_j - y_i);
 		}
 	}
 }
@@ -282,21 +251,14 @@ void cpu_compute_gradient(CFVMesh2D &mesh, CFVMat<double> &matA, CFVMat<double> 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		// A
 		vecGrad.elem(0, 0, cell) = matA.elem(0, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(0, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(0, 2, cell) * vecResult.elem(2, 0, cell);
+								 + matA.elem(0, 1, cell) * vecResult.elem(1, 0, cell);
 
 		// B
 		vecGrad.elem(1, 0, cell) = matA.elem(1, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(1, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(1, 2, cell) * vecResult.elem(2, 0, cell);
-
-		// C
-		vecGrad.elem(2, 0, cell) = matA.elem(2, 0, cell) * vecResult.elem(0, 0, cell)
-								+ matA.elem(2, 1, cell) * vecResult.elem(1, 0, cell)
-								+ matA.elem(2, 2, cell) * vecResult.elem(2, 0, cell);
+								 + matA.elem(1, 1, cell) * vecResult.elem(1, 0, cell);
 
 		// TODO
-		//dvecGrad.elem(1, 0, cell) = vecGrad.elem(1, 0, cell) * 2;
+		//vecGrad.elem(1, 0, cell) = vecGrad.elem(1, 0, cell) * 2;
 	}
 }
 

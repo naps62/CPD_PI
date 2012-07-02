@@ -124,22 +124,20 @@ int main(int argc, char **argv) {
 
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
 	FVL::CFVArray<double>    polution(mesh.num_cells);
-	FVL::CFVArray<double> 	 candidate_polution(mesh.num_cells);
 	//FVL::CFVArray<double>    flux(mesh.num_edges);
 	//FVL::CFVArray<double>    oldflux(mesh.num_edges);
 	//FVL::CFVArray<bool>      invalidate_flux(mesh.num_cells);
 	FVL::CFVArray<double>    vs(mesh.num_edges);
-	FVL::CFVMat<double>      matA(2, 2, mesh.num_cells);
-	FVL::CFVMat<double>      vecGradient(2, 1, mesh.num_cells);
-	FVL::CFVMat<double>      vecR(2, 1, mesh.num_cells);
+	FVL::CFVMat<double>      matA(3, 3, mesh.num_cells);
+	FVL::CFVMat<double>      vecGradient(3, 1, mesh.num_cells);
+	FVL::CFVMat<double>      vecR(3, 1, mesh.num_cells);
+	FVL::CFVArray<double> edgePsi(mesh.num_edges);
+	FVL::CFVArray<double> cellPsi(mesh.num_cells);
 
 	// read other input files
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
 	FVL::FVXMLReader polu_ini_reader(data.initial_file);
-	polu_ini_reader.getVec(candidate_polution, t, name);
-	for(unsigned int x = 0; x < polution.size(); ++x)
-				polution[x] = candidate_polution[x];
-
+	polu_ini_reader.getVec(polution, t, name);
 	velocity_reader.getPoints2D(velocities, t, name);
 	polu_ini_reader.close();
 	velocity_reader.close();
@@ -170,6 +168,8 @@ int main(int argc, char **argv) {
 	matA.cuda_malloc();
 	vecGradient.cuda_malloc();
 	vecR.cuda_malloc();
+	edgePsi.cuda_malloc();
+	cellPsi.cuda_malloc();
 
 	// data copy
 	cudaStream_t stream;
@@ -225,24 +225,16 @@ int main(int argc, char **argv) {
 		// Cpu version
 		#ifdef NO_CUDA
 			
-
 			cpu_compute_vecR(mesh, polution, vecR, data.dirichlet);						// compute system polution coeficients for system solve
 			cpu_compute_gradient(mesh, matA, vecR, vecGradient);						// compute (a,b,c) vector
-
 			cpu_compute_u(mesh, recons, polution, vecGradient, t, dt);
 			cpu_compute_border_u(mesh, recons, data.dirichlet);
-			cpu_compute_flux(mesh, recons, vs);
-			cpu_update(mesh, recons, candidate_polution, dt);
 
-			while(cpu_bad_cell_detector(mesh, recons, candidate_polution)) {
-				cpu_fix_u(mesh, recons, polution);
-				cpu_fix_border_u(mesh, recons, data.dirichlet);
-				cpu_fix_flux(mesh, recons, vs);
-				cpu_fix_update(mesh, recons, candidate_polution, dt);
-			};
-
-			for(unsigned int x = 0; x < polution.size(); ++x)
-				polution[x] = candidate_polution[x];
+			cpu_compute_unbounded_flux(mesh, recons, vs, polution, edgePsi, data.dirichlet);	// compute flux
+			cpu_cellPsi(mesh, edgePsi, cellPsi);													// compute Psi bounder for each cell
+			cpu_bound_u(mesh, recons, polution, vecGradient, cellPsi, t, dt);
+			cpu_bound_flux(mesh, recons, vs, polution, data.dirichlet); 						// bound previously calculated flux using psi values
+			cpu_update(mesh, recons, polution, dt); 
 
 		#else
 
