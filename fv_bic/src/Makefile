@@ -3,8 +3,10 @@ ROOTD	=	..
 include $(ROOTD)/conf/config.mk
 
 DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d)
-NO_DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d -name "old*")
-DIRS	:=	$(filter-out $(NO_DIRS), $(DIRS))
+OLD_DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d -name "old*")
+IGN_DIRS	=	$(shell find . -mindepth 1 -maxdepth 1 -type d -name "ign*")
+DIRS	:=	$(filter-out $(OLD_DIRS), $(DIRS))
+DIRS	:=	$(filter-out $(IGN_DIRS), $(DIRS))
 
 .PHONY:	all $(DIRS)
 
