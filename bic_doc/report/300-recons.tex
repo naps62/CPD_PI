@@ -1,4 +1,12 @@
-\section{Polinomial Reconstruction}
+\section{Polynomial Reconstruction}
 \label{sec:300}
 
-\todosec{Explicar a reconstrução polinomial}
+The first step towards a second order scheme was to implement linear reconstruction of the mesh. For this reconstruction, we seek a polynomial function of degree 1 that minimizes the function $E(\hat{u})_i$, given by:
+
+$$E(\hat{u})_i = \sum_{j \in \underline{v}(i)} [\hat{u}_i(B_j) - u_i]^2 $$
+
+where $\hat{u}$ is the approximation of $u$ on the cell $i$.
+
+To achieve this, the approximation $\hat{u}$ can be given by the equation:
+
+$$ \hat{u}_i(x) = u_i + \left( \begin{array}{c}a_i \\ b_i \end{array}\right) (B_ix)$$

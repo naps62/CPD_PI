@@ -3,20 +3,20 @@
 \usepackage[utf8]{inputenc}
 \usepackage{todonotes}
 
-\usepackage[paper=a4paper,top=2cm,left=1.5cm,right=1.5cm,bottom=2cm,foot=1cm]{geometry}
+\usepackage[paper=a4paper,top=2cm,left=1.9cm,right=1.9cm]{geometry}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black]{hyperref}
 \usepackage{cleveref}
 \usepackage{relsize}% relative font sizes
 \usepackage[cmex10]{amsmath}
-\usepackage{algpseudocode}
-\usepackage{algorithmicx}
 \usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{epstopdf}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{indentfirst}
 \usepackage{datetime}
+\usepackage[retainorgcmds]{IEEEtrantools}
 
 % declare the path(s) where your graphic files are
 \graphicspath{{images/}}
@@ -55,6 +55,11 @@
 
 \newcommand{\todosec}{\todo[inline,color=black!20]}
 
+\newcommand{\sumneighbors}{\ensuremath{\sum_{j \in \underline{v}(i)}}}
+\newcommand{\matA}{\ensuremath{\left( \begin{array}{cc} A_{11} & A_{12} \\ A_{21} & A_{22} \\ \end{array} \right)}}
+\newcommand{\vecGrad}{\ensuremath{\left( \begin{array}{c} b \\ c \\ \end{array} \right)}}
+\newcommand{\vecR}{\ensuremath{\left( \begin{array}{c} r_1 \\ r_2 \\ \end{array} \right)}}
+
 %
 % DOCUMENT
 %
@@ -69,6 +74,7 @@
 \input{report/300-recons}
 \input{report/400-second-order}
 \input{report/500-results}
+\input{report/600-cuda}
 \input{report/900-conclusions}
 
 %

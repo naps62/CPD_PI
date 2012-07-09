@@ -9,6 +9,6 @@ bool cpu_bad_cell_detector(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double
 void cpu_fix_u(CFVMesh2D &mesh,CFVRecons2D &recons, CFVArray<double> &polution);
 void cpu_fix_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc);
 void cpu_fix_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &velocity);
-void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt);
+void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &candidate_polution, CFVArray<double> &polution, double dt);
 
 #endif // _H_KERNELS_CPU

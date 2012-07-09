@@ -1,0 +1,19 @@
+\subsection{MOOD Scheme}
+\label{sec:420}
+
+Multi-dimensional Optimal Order Detection (or MOOD) method, operates on a \textit{a posteriori} approach, as oposed to the \textit{a priori} approach from more classical methods like MUSCL.
+An initial, unlimited polynomial reconstruction is calculated, building a candidate solution $u^{\star}$. Each cell of the domain is initialized with a reconstruction of a higher polynomial degree, in this case $d=1$.
+
+The solution is then checked for problems by a detector function. The detector checks the following condition for every cell:
+
+$$ \min_{j \in \underline{v}(i)}(u_i, u_j) \le u_i^{\star} \le \max_{j \in \underline{v}(i)}(u_i, u_j) $$
+
+ 
+When a cell does not meet the required condition it is considered invalid. The polynomial degree for the reconstruction on that cell is decreased, which in this case corresponds to $d=0$, falling to the first-order scheme for that point of the domain.
+ hen the entire candidate solution has no errors detected, the time step is complete, with
+
+$$ u = u^{\star} $$
+
+The initial steps of the MOOD implementation are equivalent to the previous version, since they are independent of the limitation strategy. However, the philosophy of both approaches is different. While MUSCL, being an \textit{a priori} method, attempts to predict errors and add a limiter to the polynomial reconstruction, preventing them from happening, MOOD lets those errors happen, and then looks for them, rebuilding the reconstruction for the problematic points.
+
+From an implementational point of view, this is also a very different strategy, since it involves an inner loop to iterate over the candidate solution, until no more errors are detected. Also, since the problematic points can, and usually will be only a small percentage of the entire domain, it might become more difficult to achieve an efficient parallelization strategy for this method, when compared to the straightforward approach on the previous method.

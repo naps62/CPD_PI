@@ -1,0 +1,9 @@
+\section{CUDA Implementation}
+\label{sec:600}
+
+\todosec{CUDA implementation}
+Part of the work of this project was to study the parallelization methods and issues of finite volume schemes in a massively parallel architecture, specifically a GPU, using CUDA as the development technology. Some considerations can be made about the parallelization of each of the schemes presented.
+
+The first-order scheme is the simpler one, with each value of the solution at the end of each iteration being computed based only on the strictly adjacent elements of the mesh. As a result, it should come as no surprise that it was also the one that showed better performance. The higher locality gained from only using adjacent values for each edge allows for much greater locality and less memory overhead than the second-order counterparts.
+
+As for the second-order schemes, before any actual measurements were done, it was expected that the MUSCL would provide a greater occupancy of the GPU, which does not necessarily mean its execution time would be better. The MOOD method spends a significant portion of its time fixing errors on the detected cells. Since these cells usually represent a very small percentage of the entire domain, this means that most of the computational units will be idle, or doing useless work. In MUSCL, this is not the case, as for every interface there is a strict process of building the initial reconstruction, computing the $\Phi$ limiter for that interface, and then limit the reconstruction.

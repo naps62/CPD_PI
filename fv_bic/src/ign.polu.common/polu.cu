@@ -255,7 +255,7 @@ int main(int argc, char **argv) {
 				cpu_fix_u(mesh, recons, polution);
 				cpu_fix_border_u(mesh, recons, data.dirichlet);
 				cpu_fix_flux(mesh, recons, vs);
-				cpu_fix_update(mesh, recons, candidate_polution, dt);
+				cpu_fix_update(mesh, recons, candidate_polution, polution, dt);
 			};
 
 			for(unsigned int x = 0; x < polution.size(); ++x)

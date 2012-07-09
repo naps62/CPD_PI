@@ -1,0 +1,27 @@
+\subsection{MUSCL Scheme}
+\label{sec:410}
+
+The initial method used for a second-order scheme was a class \textit{a priori} approach, named Monotone Upstream-centered Schemes for Conservation Laws (or MUSCL). This approach means that the scheme will attempt to prevent errors, by limiting the reconstruction so no errors occur.
+
+The limitation is done by applying a limiter value $\Phi$ to the reconstruction. An initial reconstruction is done with $\Phi = 1$ (no limitation):
+
+$$
+u_{ij}^{*} = u_i + \Delta u_{ij} B_i M_{ij}
+$$
+
+From this reconstruction, the value for the limiter $\Phi$ is estimated with the following function:
+
+$$
+\Phi_i = \left\{
+	\begin{array}{l l}
+		0, & \: (u_{ij}^{\star} - u_i) (u_j - u_i) \le 0\\
+		0, & \: (u_j - u_{ji}^*) (u_j - u_i) \le 0\\
+		min(1, \frac{u_{ij}^{\star} - u_i}{u_j - u_i}, \frac{u_j - u_{ji}^{\star}}{u_j - u_i}), & \: \text{otherwise}
+	\end{array}\right.
+$$
+
+And a final reconstruction is given by:
+
+$$
+u_{ij} = u_i + \Phi_i \Delta u_{ij} B_i M_{ij}
+$$

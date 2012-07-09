@@ -151,22 +151,23 @@ void cpu_fix_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &veloci
 		recons.F_ij_old[edge] = recons.F_ij[edge];
 
 //		if (recons.edge_state[edge] == false) {
-			double v = velocity[edge];
+		double v = velocity[edge];
 
-			if (v >= 0)	recons.F_ij[edge] = v * recons.u_ij[edge];
-			else		   recons.F_ij[edge] = v * recons.u_ji[edge];
+		if (v >= 0)	recons.F_ij[edge] = v * recons.u_ij[edge];
+		else		   recons.F_ij[edge] = v * recons.u_ji[edge];
 
 //			recons.edge_state[edge] = true;
 //		}
 	}
 }
 
-void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, double dt) {
+void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &candidate_polution, CFVArray<double> &polution, double dt) {
 
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
 		if (recons.cell_state[cell] == false) {
 			
 			//double initial = polution[cell];
+			candidate_polution[cell] = polution[cell];
 			unsigned int edge_limit = mesh.cell_edges_count[cell];
 			double var = 0;
 			for(unsigned int e = 0; e < edge_limit; ++e) {
@@ -176,13 +177,13 @@ void cpu_fix_update(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polu
 			
 				//cout << edge << " flux: old " << recons.F_ij_old[edge] << " new " << recons.F_ij[edge] << endl;
 				//cout << cell << " pol: from " << polution[cell] << " to ";
-				var = dt * (recons.F_ij[edge] - recons.F_ij_old[edge]) * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
+				var = dt * (recons.F_ij[edge]/* - recons.F_ij_old[edge]*/) * mesh.edge_lengths[edge] / mesh.cell_areas[cell];
 				//cout << polution[cell] << endl;
 
 				if (mesh.edge_left_cells[edge] == cell)
-					polution[cell] -= var;
+					candidate_polution[cell] -= var;
 				else
-					polution[cell] += var;
+					candidate_polution[cell] += var;
 			}
 
 			//cout << cell << " from " << initial <<  " to " << polution[cell] << endl << endl;

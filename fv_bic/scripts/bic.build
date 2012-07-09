@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PROG="$1"
+
+rm -f bin/bic.polu.$PROG
+rm -f obj/bic.polu.$PROG/*.o
+(cd src && make bic.polu.$PROG)
+(cd obj && make bic.polu.$PROG)

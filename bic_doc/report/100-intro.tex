@@ -1,4 +1,14 @@
 \section{Introduction}
 \label{sec:100}
 
-\todosec{INTRODUÇÃO. explicar em que consiste o doc}
+The work presented here started from an implementation of a first order finite volume method applied to a bidimensional environment. The environment is represented as a 2D mesh, and contains a velocity field $\vec{V}(x, y)$ which is kept constant throughout the entire computation. For simplification purposes, the velocity field has only one direction:
+
+$$V = \left( \begin{array}{c} 1 \\ 0 \end{array} \right) $$
+
+The method solves the periodic condition given as:
+
+$$ \partial + u + dir(V_u) = 0 $$
+
+The case study and application of this method is to compute the distribution of a pollutant in a surface, and its distribution as time passes.
+
+The report is organized as follows. \Cref{sec:200} explains the first order method initially used. \Cref{sec:300} details how the linear reconstruction is performed on the second order methods, which are described in \Cref{sec:400}. Numerical and efficiency results are presented in \cref{sec:500} and finally \cref{sec:900} gathers some conclusions obtained from the work.

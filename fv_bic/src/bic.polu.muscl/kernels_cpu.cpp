@@ -8,8 +8,10 @@ double cpu_edgePsi(double u_i, double u_j, double u_ij, double u_ji) {
 	double j_minus_ji   = u_j   - u_ji;
 	double j_minus_i	= u_j	- u_i;
 	
-	if (ij_minus_i * j_minus_i <= 0 || j_minus_ji * j_minus_i <= 0) {
+	if (ij_minus_i * j_minus_i < 0 || j_minus_ji * j_minus_i < 0) {
 		return 0;
+	} else if (ij_minus_i * j_minus_i < 1e-8 || j_minus_ji * j_minus_i < 1e-8) {
+		return 1;
 	} else {
 		//cout << "_min(1, " << j_minus_i << " / " << ij_minus_i << ")" << endl;
 		//cout << (ij_minus_i) << " " << j_minus_i << " " << ij_minus_i / j_minus_i <<  endl;
@@ -24,7 +26,7 @@ void cpu_compute_unbounded_flux(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<d
 		double v = vs[edge];
 
 		if (v >= 0)	recons.F_ij[edge] = v * recons.u_ij[edge];
-		else		recons.F_ij[edge] = v * recons.u_ji[edge];
+		else		   recons.F_ij[edge] = v * recons.u_ji[edge];
 
 		unsigned int l, r;
 		l = mesh.edge_left_cells[edge];

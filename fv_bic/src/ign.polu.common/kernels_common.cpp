@@ -320,16 +320,38 @@ void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polut
 
 	unsigned int cell_i;
 	unsigned int cell_j;
-
+	//cout << "t=" << t << " dt=" << dt << endl;
 	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
 		cell_i = mesh.edge_left_cells[edge];
 		cell_j = mesh.edge_right_cells[edge];
+
+
 		recons.u_ij[edge] = polution[cell_i] + cpu_gradient_result(mesh, vecGradient, edge, cell_i, t, dt);
+		//cout << "edge[" << setprecision(5) << setw(3) << edge << "]: ";
+
+
+		//double x1 = mesh.vertex_coords.x[ mesh.edge_fst_vertex[edge] ];
+		//double x2 = mesh.vertex_coords.x[ mesh.edge_snd_vertex[edge] ];
+		//cout << " " << ((x1 == x2) ? "vert" : "hori");
+
+		//cout << setprecision(5) << setw(10) << polution[cell_i] << " "
+		//     << setprecision(5) << setw(10) << recons.u_ij[edge];
+
+
+		//double x = mesh.edge_centroids.x[edge];
+		//double y = mesh.edge_centroids.y[edge];
+		//double exact = sin(2 * M_PI * x) * sin(2 * M_PI * y);
+		//cout << " " << setprecision(5) << setw(10) << exact;
 
 		if (cell_j != NO_RIGHT_CELL) {
 			recons.u_ji[edge] = polution[cell_j] + cpu_gradient_result(mesh, vecGradient, edge, cell_j, t, dt);
+			//cout << " "
+			//     << setprecision(5) << setw(10) << recons.u_ji[edge] << " "
+			//     << setprecision(5) << setw(10) << polution[cell_j];
 		}
+		//cout << endl;
 	}
+	//cout << endl;
 }
 
 void cpu_compute_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc) {
@@ -337,8 +359,8 @@ void cpu_compute_border_u(CFVMesh2D &mesh, CFVRecons2D &recons, double dc) {
 	for(int edge = mesh.num_edges - 1; edge >= 0; --edge) {
 		// TODO is this correct?
 		switch(mesh.edge_types[edge]) {
-			case FV_EDGE_DIRICHLET:	recons.u_ji[edge] = 0;  break;
-			case FV_EDGE_NEUMMAN:	recons.u_ji[edge] = dc; break;
+			case FV_EDGE_DIRICHLET:	recons.u_ji[edge] = dc;  break;
+			case FV_EDGE_NEUMMAN:	recons.u_ji[edge] = 0;   break;
 		}
 	}
 		//if (mesh.edge_right_cells[edge] == NO_RIGHT_CELL)
