@@ -3,7 +3,13 @@
 
 \todosec{Introduzir os esquemas de 2ª ordem}
 
-\input{formulas/second-order-flux}
+For a second order scheme to implemented, instead of using the average values for each cell to compute the flux through an interface, the polynomial reconstruction is used to estimate the average value along the edge. We call $u_{ij}$ to the estimation of the edge value using the reconstruction from cell $i$, and $u_{ji}$ to the value using the reconstruction from cell $j$. The new flux equation is given by:
+
+$$
+F(u_{ij}, u_{ji}, n_{ij}) = [V_{n_{ij}}]^{+}u_{ij} + [V_{n_{ij}}]^{-}u_{ji}
+$$
+
+Two different versions were developed of a second order scheme, different mostly on the limitation strategy used to limit the reconstruction, and lead to more accurate solutions in cases of slopes or sharp discontinuities.
 
 \input{report/410-muscl}
 \input{report/420-mood}

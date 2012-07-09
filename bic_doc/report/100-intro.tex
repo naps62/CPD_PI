@@ -1,13 +1,9 @@
 \section{Introduction}
 \label{sec:100}
 
-The work presented here started from an implementation of a first order finite volume method applied to a bidimensional environment. The environment is represented as a 2D mesh, and contains a velocity field $\vec{V}(x, y)$ which is kept constant throughout the entire computation. For simplification purposes, the velocity field has only one direction:
+The work presented started with an implementation of a first order finite volume method applied to a bidimensional domain. The domain is represented as a 2D mesh, composed of cells connected by their interfaces, and contains a velocity field $\vec{V}(x, y)$ to control the direction of propagation. This velocity field is kept constant throughout the entire computation. For simplification purposes, it has only one direction:
 
 $$V = \left( \begin{array}{c} 1 \\ 0 \end{array} \right) $$
-
-The method solves the periodic condition given as:
-
-$$ \partial + u + dir(V_u) = 0 $$
 
 The case study and application of this method is to compute the distribution of a pollutant in a surface, and its distribution as time passes.
 

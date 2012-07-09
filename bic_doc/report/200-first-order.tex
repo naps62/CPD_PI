@@ -3,7 +3,7 @@
 
 The initial approach consisted on a first order scheme that solves the problem.
 
-$$ \int_{K_i} \partial{t} u + dir(V_u) = 0 $$
+$$ \int_{K_i} \partial{t} u + dir(V_{n_{ij}})u = 0 $$
 
 Let $K_i$ and $K_j$ be two neighbor cells of the system, and $e_{ij}$ the interface between them. In a first step, the method computes the flux passing from $K_i$ to $K_j$, based on the current average values for each cell, and the velocity field $\vec{V}$. The flux is computed for each edge using the immediate neighbor information. The first-order finite volume scheme used is as follows:
 
@@ -11,7 +11,7 @@ $$ u_i^{n+1} = u_i^n - \Delta{t} \sum_{j \in \underline{v}(i)} {|e_{ij}| \over |
 
 Where the flux calculation for each interface is:
 
-$$ F(u_i^n, u_j^n, n_{ij}) = [V_{n}]^{+}u_i^n + [V_{n}]^{-}u_j^n $$
+$$ F(u_i^n, u_j^n, n_{ij}) = [V_{n_{ij}}]^{+}u_i^n + [V_{n_{ij}}]^{-}u_j^n $$
 
 The implemented method works on a bidimensional mesh based on some assumptions. One of the assumptions is that edges should always have at least on adjacent cell, and that cell will be refered to as the left cell. The other cell, called the right cell, may not exist, which is the case for the edges on the border of the domain. On those cases, it is assumed:
 

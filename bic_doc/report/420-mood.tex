@@ -6,7 +6,7 @@ An initial, unlimited polynomial reconstruction is calculated, building a candid
 
 The solution is then checked for problems by a detector function. The detector checks the following condition for every cell:
 
-$$ \min_{j \in \underline{v}(i)}(u_i, u_j) \le u_i^{\star} \le \max_{j \in \underline{v}(i)}(u_i, u_j) $$
+$$ \min_{j \in \underline{v}(i)}(u_i^{\star}, u_j) \le u_i^{\star} \le \max_{j \in \underline{v}(i)}(u_i^{\star}, u_j) $$
 
  
 When a cell does not meet the required condition it is considered invalid. The polynomial degree for the reconstruction on that cell is decreased, which in this case corresponds to $d=0$, falling to the first-order scheme for that point of the domain.
