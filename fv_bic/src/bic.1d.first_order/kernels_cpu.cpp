@@ -14,6 +14,9 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<doub
 			flux[edge] = v * polu_left;
 		else
 			flux[edge] = v * polu_right;
+
+
+		// cout << "recons F_ij " << edge << " " << v<< flux[edge] << endl;
 	};
 }
 

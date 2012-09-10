@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
 
 		// Vertical edges
 		for(x = 0; x <= cX; ++x) {
-			int edge_type = (x == 0 || x == cX) ? 3 : 0;
+			int edge_type = (x == 0 || x == cX) ? 1 : 0;
 			unsigned int v1 = vX * y + x + 1;
 			unsigned int v2 = v1 + vX;
 			EDGE(edge_type, v1, v2);

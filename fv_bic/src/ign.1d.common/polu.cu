@@ -73,6 +73,7 @@ void prepare_mesh_test_data(CFVMesh2D &mesh, CFVArray<double> &polution) {
 		mesh.edge_types[r] = FV_EDGE_FAKE;
 
 		/* link both edges */
+		cout << "linking " << l << " with " << r << endl; 
 		mesh.edge_right_cells[l] = mesh.edge_left_cells[l];
 		mesh.edge_left_cells[l]  = mesh.edge_left_cells[r];
 
@@ -169,7 +170,6 @@ int main(int argc, char **argv) {
 	vs.cuda_save(stream);
 	vecA.cuda_save(stream);
 	
-
 	// sizes of each kernel
 	// TODO: mudar BLOCK_SIZE_FLUX para MAT_A
 	dim3 block_s(BLOCK_SIZE, 1, 1);
@@ -196,7 +196,7 @@ int main(int argc, char **argv) {
 		#ifdef NO_CUDA
 			cpu_compute_a(mesh, polution, vecA);
 			cpu_compute_u(mesh, recons, polution, vecA);
-			cpu_compute_flux(mesh, polution, recons);
+			cpu_compute_flux(mesh, vs, recons);
 			cpu_update(mesh, recons, polution, dt);
 		#else
 			/*kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);

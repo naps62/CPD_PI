@@ -2,14 +2,14 @@
 
 #include "../ign.1d.common/kernels_common.cpp"
 
-void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &vs, CFVRecons2D &recons) {
+void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVRecons2D &recons) {
 
 	for(uint edge = 0; edge < mesh.num_edges; ++edge) {
 		// ignore border edges
 		if (mesh.edge_right_cells[edge] == NO_RIGHT_CELL)
 			continue;
 
-		double v = vs[edge];
+		double v = velocity[edge];
 		double polu_left, polu_right;
 
 		polu_left  = recons.u_ij[edge];
@@ -20,6 +20,8 @@ void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &vs, CFVRecons2D &recons
 		} else {
 			recons.F_ij[edge] = v * polu_right;
 		}
+
+		// cout << "recons F_ij " << edge << " "<< v << " " << recons.F_ij[edge] << endl;
 	}
 }
 

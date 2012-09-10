@@ -97,6 +97,8 @@ void cpu_compute_a(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double>
 
 		// compute A value
 		vecA[cell] = (polution[left] - polution[right]) / dist;
+
+		// cout << "vecA " << cell << " " << vecA[cell] << endl;
 	}
 }
 
@@ -116,5 +118,7 @@ void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polut
 
 		recons.u_ij[edge] = polution[left]  + vecA[left]  * mesh.cell_areas[left]  / 2;
 		recons.u_ji[edge] = polution[right] + vecA[right] * mesh.cell_areas[right] / 2;
+
+		// cout << "recons ij " << edge << " " << recons.u_ij[edge] << "\t\t\t" << recons.u_ji[edge] << endl;
 	}
 }
