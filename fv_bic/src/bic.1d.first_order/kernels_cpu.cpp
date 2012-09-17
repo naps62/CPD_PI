@@ -4,11 +4,15 @@
 void cpu_compute_flux(CFVMesh2D &mesh, CFVArray<double> &velocity, CFVArray<double> &polution, CFVArray<double> &flux, double dc) {
 
 	for(unsigned int edge = 0; edge < mesh.num_edges; ++edge) {
+
+		if (mesh.edge_right_cells[edge] == NO_RIGHT_CELL)
+			continue;
+
 		double v = velocity[edge];
 		double polu_left, polu_right;
 		
-		polu_left	= polution[ mesh.edge_left_cells[edge] ];
-		polu_right	= (mesh.edge_right_cells[edge] == NO_RIGHT_CELL) ? dc : polution[ mesh.edge_right_cells[edge] ];
+		polu_left	 = polution[ mesh.edge_left_cells[edge] ];
+		polu_right = polution[ mesh.edge_right_cells[edge] ];
 
 		if (v >= 0)
 			flux[edge] = v * polu_left;

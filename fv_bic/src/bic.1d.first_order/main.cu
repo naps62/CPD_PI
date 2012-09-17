@@ -249,8 +249,8 @@ int main(int argc, char **argv) {
 			/* update */
 			cpu_update(mesh, polution, flux, dt);
 
-			for(uint i = 0; i < 20; ++i)
-				cout << flux[i] << endl;
+			// for(uint i = 0; i < 20; ++i)
+			// 	cout << flux[i] << endl;
 
 
 		#else

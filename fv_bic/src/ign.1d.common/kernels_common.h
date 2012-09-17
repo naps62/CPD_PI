@@ -18,6 +18,5 @@ double _max(double x, double y);
 
 
 void cpu_compute_a(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double> &vecA);
-void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, CFVArray<double> &vecA);
 
 #endif // _H_KERNELS_COMMON_

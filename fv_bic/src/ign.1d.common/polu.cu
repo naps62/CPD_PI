@@ -128,7 +128,11 @@ int main(int argc, char **argv) {
 	FVL::CFVPoints2D<double> velocities(mesh.num_cells);
 	FVL::CFVArray<double>    polution(mesh.num_cells);
 	FVL::CFVArray<double>    vs(mesh.num_edges);
+#if defined(_SECOND_ORDER)
 	FVL::CFVArray<double>    vecA(mesh.num_cells);
+#elif defined(_MUSCL)
+	FVL::CFVArray<double>    p(mesh.num_cells);
+#endif
 
 
 	// read other input files
@@ -191,7 +195,7 @@ int main(int argc, char **argv) {
 			finished = true;
 		}
 
-#if defined(_MUSCL)
+#if defined(_SECOND_ORDER)
 		// Cpu version
 		#ifdef NO_CUDA
 			cpu_compute_a(mesh, polution, vecA);
@@ -199,43 +203,24 @@ int main(int argc, char **argv) {
 			cpu_compute_flux(mesh, vs, recons);
 			cpu_update(mesh, recons, polution, dt);
 		#else
-			/*kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
-			kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(mesh, matA.cuda_get(), vecResult.cuda_get(), vecABC.cuda_get());
-			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet, t, dt);
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-			kernel_reset_oldflux<<< 512, 512 >>>(oldflux.cuda_get());
-			kernel_detect_polution_errors<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), invalidate_flux.cuda_get())
-			kernel_fix_polution_errors<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), invalidate_flux.cuda_get());
-			kernel_fix_update<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), dt, invalidate_flux.cuda_get());*/
+			// TODO
 		#endif
+
+#elif defined(_MUSCL)
+		#ifdef NO_CUDA
+			cpu_compute_p(mesh, polution, p);
+			cpu_compute_u(mesh, recons, polution, p);
+			cpu_compute_flux(mesh, vs, recons);
+			cpu_update(mesh, recons, polution, dt);
+		#else
+			// TODO
+		#endif
+			
 #elif defined(_MOOD)
 		#ifdef NO_CUDA
-			/*cpu_compute_vecR(mesh, polution, vecR, data.dirichlet);						// compute system polution coeficients for system solve
-			cpu_compute_gradient(mesh, matA, vecR, vecGradient);						// compute (a,b,c) vector
-			cpu_compute_u(mesh, recons, polution, vecGradient, t, dt);
-			cpu_compute_border_u(mesh, recons, data.dirichlet);
-			cpu_compute_flux(mesh, recons, vs);
-			cpu_update(mesh, recons, candidate_polution, dt);
-
-			while(cpu_bad_cell_detector(mesh, recons, candidate_polution)) {
-				cpu_fix_u(mesh, recons, polution);
-				cpu_fix_border_u(mesh, recons, data.dirichlet);
-				cpu_fix_flux(mesh, recons, vs);
-				cpu_fix_update(mesh, recons, candidate_polution, polution, dt);
-			};
-
-			for(unsigned int x = 0; x < polution.size(); ++x)
-				polution[x] = candidate_polution[x];*/
-
+			// TODO
 		#else
-			/*kernel_compute_vecResult<<< grid_vecResult, block_vecResult >>>(mesh.cuda_get(), polution.cuda_get(), vecResult.cuda_get(), data.dirichlet);
-			kernel_compute_vecABC<<< grid_vecABC, block_vecABC >>>(mesh, matA.cuda_get(), vecResult.cuda_get(), vecABC.cuda_get());
-			kernel_compute_flux<<< grid_flux, block_flux >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), vecABC.cuda_get(), flux.cuda_get(), data.dirichlet, t, dt);
-			kernel_update<<< grid_update, block_update >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), dt);
-			kernel_reset_oldflux<<< 512, 512 >>>(oldflux.cuda_get());
-			kernel_detect_polution_errors<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), invalidate_flux.cuda_get())
-			kernel_fix_polution_errors<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), vs.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), invalidate_flux.cuda_get());
-			kernel_fix_update<<< 512, 512 >>>(mesh.cuda_get(), polution.cuda_get(), flux.cuda_get(), oldflux.cuda_get(), dt, invalidate_flux.cuda_get());*/
+			// TODO
 		#endif
 #endif
 

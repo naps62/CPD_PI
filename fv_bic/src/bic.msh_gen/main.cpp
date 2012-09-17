@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 		// Next line of vertex (first and last are tagged as edge vertexes
 		//int edge_type = (y == cY - 1) ? 2 : 0;
 		for(x = 0; x < vX; ++x) {
-			VERTEX(x * cW, (y+1) * cW);
+			VERTEX(x * cW, (y+1)/* * cW*/);
 		}
 
 		// Vertical edges
