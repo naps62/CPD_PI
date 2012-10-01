@@ -45,7 +45,7 @@ void cpu_compute_p(CFVMesh2D &mesh, CFVArray<double> &polution, CFVArray<double>
 }
 
 /* Compute initial u vector */
-void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, CFVArray<double> &p) {
+void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polution, CFVArray<double> &p, double CFL) {
 
 	unsigned int left;
 	unsigned int right;
@@ -57,8 +57,8 @@ void cpu_compute_u(CFVMesh2D &mesh, CFVRecons2D &recons, CFVArray<double> &polut
 		left  = mesh.edge_left_cells[edge];
 		right = mesh.edge_right_cells[edge];
 
-		recons.u_ij[edge] = polution[left]  + p[left]  * mesh.cell_areas[left]  / 4; // TODO isto devia ser 2. de onde vem o factor?
-		recons.u_ji[edge] = polution[right] - p[right] * mesh.cell_areas[right] / 4;
+		recons.u_ij[edge] = polution[left]  + p[left]  * mesh.cell_areas[left]  * 0.5 * (1 - CFL);
+		recons.u_ji[edge] = polution[right] - p[right] * mesh.cell_areas[right] * 0.5 * (1 - CFL);
 		//cout << "area: " << mesh.cell_areas[left] << endl;
 
 		// cout << "recons ij " << edge << " " << recons.u_ij[edge] << "\t\t\t" << recons.u_ji[edge] << endl;

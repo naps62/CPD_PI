@@ -154,6 +154,7 @@ int main(int argc, char **argv) {
 	// TODO: Convert to CUDA
 	cpu_compute_edge_velocities(mesh, velocities, vs, v_max);
 	h = cpu_compute_mesh_parameter(mesh);
+	cout << "h" << h << endl;
 	dt	= data.CFL / v_max * h;
 
 	#ifndef NO_CUDA
@@ -199,7 +200,7 @@ int main(int argc, char **argv) {
 		// Cpu version
 		#ifdef NO_CUDA
 			cpu_compute_a(mesh, polution, vecA);
-			cpu_compute_u(mesh, recons, polution, vecA);
+			cpu_compute_u(mesh, recons, polution, vecA, data.CFL);
 			cpu_compute_flux(mesh, vs, recons);
 			cpu_update(mesh, recons, polution, dt);
 		#else
@@ -209,7 +210,7 @@ int main(int argc, char **argv) {
 #elif defined(_MUSCL)
 		#ifdef NO_CUDA
 			cpu_compute_p(mesh, polution, p);
-			cpu_compute_u(mesh, recons, polution, p);
+			cpu_compute_u(mesh, recons, polution, p, data.CFL);
 			cpu_compute_flux(mesh, vs, recons);
 			cpu_update(mesh, recons, polution, dt);
 		#else

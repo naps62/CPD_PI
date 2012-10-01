@@ -2,20 +2,16 @@
 
 // TODO: convert to cuda
 double cpu_compute_mesh_parameter(CFVMesh2D &mesh) {
-	double h;
-	double S;
+	double h = 1e20;
 
-	h = 1.e20;
 	for(unsigned int cell = 0; cell < mesh.num_cells; ++cell) {
-		S = mesh.cell_areas[cell];
-
 		for(unsigned int edge = 0; edge < mesh.cell_edges_count[cell]; ++edge) {
 			double length = mesh.edge_lengths[edge];
-			if (h * length > S)
-				h = S / length;
+			if (h > length)
+				h = length;
 		}
 	}
-
+	cout << h << endl;
 	return h;
 }
 
