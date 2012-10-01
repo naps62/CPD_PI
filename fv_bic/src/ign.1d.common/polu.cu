@@ -132,6 +132,9 @@ int main(int argc, char **argv) {
 	FVL::CFVArray<double>    vecA(mesh.num_cells);
 #elif defined(_MUSCL)
 	FVL::CFVArray<double>    p(mesh.num_cells);
+#elif defined (_MOOD)
+	FVL::CFVArray<double>    p(mesh.num_cells);
+	FVL::CFVArray<double>    candidate(mesh.num_cells);
 #endif
 
 
@@ -139,6 +142,10 @@ int main(int argc, char **argv) {
 	FVL::FVXMLReader velocity_reader(data.velocity_file);
 	FVL::FVXMLReader polu_ini_reader(data.initial_file);
 	polu_ini_reader.getVec(polution, t, name);
+#ifdef _MOOD
+	for(uint i = 0; i < polution.size(); ++i)
+		candidate[i] = polution[i];
+#endif
 	velocity_reader.getPoints2D(velocities, t, name);
 	polu_ini_reader.close();
 	velocity_reader.close();
@@ -219,7 +226,24 @@ int main(int argc, char **argv) {
 			
 #elif defined(_MOOD)
 		#ifdef NO_CUDA
-			// TODO
+			
+			// reset degree
+			for(uint c = 0; c < polution.size(); ++c)
+				recons.degree[c] = 1;
+
+			bool finished = false;
+			while(!finished) {
+				cpu_compute_p(mesh, polution, p);
+				cpu_compute_u(mesh, recons, polution, p, data.CFL);
+				cpu_compute_flux(mesh, vs, recons);
+				cpu_update(mesh, recons, candidate, dt);
+
+				if (cpu_mood_detector(mesh, recons, polution, candidate))
+					finished = true;
+			}
+
+			for(uint c = 0; c < polution.size(); ++c)
+				polution[c] = candidate[c];
 		#else
 			// TODO
 		#endif
