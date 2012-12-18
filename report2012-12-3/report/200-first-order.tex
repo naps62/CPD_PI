@@ -1,0 +1,116 @@
+\section{First-order scheme}
+\label{sec:200}
+We shortly present the prototype problem we shall deal with and introduce the main notations of the document.
+In particular we give the discretization of the first-order method both for the one- and the two-dimensional
+situation.
+\subsection{The advection problem}
+Let denote by $\Omega$ a bounded polynomial domain and $V(X)=(u(x,y),v(x,y))$ a given constant in time
+velocity vector defined on the domain. 
+We state that $\partial \Omega$ is the boundary, $n$ the outer normal vector and 
+$$
+\Gamma^-=\{x\in\partial \Omega, V(X).n(X)<0 \}
+$$ 
+the part corresponding to the inflow interface (where the fluid go into the domain)
+while we denote by $\Gamma^+=\partial \Omega \setminus \Gamma^-$ the outflow interface (see figure \ref{domain}).
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=4cm,clip=true,viewport=80 600 440 800]{domain.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{domain} \footnotesize Representation and notations for the two-dimensional domain.
+$\Gamma^-$ and $\Gamma^+$ stand for the inflow and the outflow interfaces respectively.}
+\end{figure}
+
+
+
+The mathematical
+model of the transport of a mass fraction $\phi$ of pollutant is given by
+\begin{eqnarray}
+\partial_t \phi+\nabla.(V\phi)&=&f\\
+\phi(t=0,.)=\phi^0, & & \phi(t,x)_{|\Gamma^-}=\phi_d(t,x)
+\end{eqnarray}
+where $\phi^0$ is the initial condition and $\phi_d$ is the boundary condition for the inflow interface.
+\subsection{Mesh and discretization}
+Let us denote by $\mathcal M$ a mesh constituted of cells $K$. For a generic cell $K_i$, we denote by
+$\nu(i)$ the index set of the adjacent cells and denote by $e_{ij}=K_i\cap K_j$, $j\in \nu(i)$  
+the common interface. For edges situated on the boundary, we adopt the notation $e_{i0}$.
+Furthermore $n_{ij}$ represents the normal vector on the interface going from $K_i$ into $K_j$
+(see figure \ref{cell}). 
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=5cm,height=5cm,clip=true,viewport=80 0 360 400]{geometrie.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{cell} \footnotesize Notations for cells and interfaces.}
+\end{figure}
+To design the first-order finite volume scheme we integrate equation on a generic cell which provide
+$$
+\int_{K_i}\partial_t \phi+\int_{K_i}\nabla.(V\phi)=\int_{K_i} f
+$$
+Using the divergence theorem, one has
+$$
+\frac{d}{dt}\int_{K_i} \phi=\sum_{j\in\nu(i)} \int_{e_{ij}} \phi V.n_{ij}=\int_{K_i} f.
+$$
+For a given time $t^n$, we introduce the following approximations
+$$
+\phi_i^n\approx \frac{1}{|K_i|} \int_{K_i} \phi(t^n,.), \quad
+\mathcal F_{ij}\approx\frac{1}{|e_{ij}|}\int_{e_{ij}}  \phi(t^n,.) V.n_{ij}ds
+$$
+where $|K_i|$ and $|e_{ij}|$ represent the respective measure of the geometrical entities.
+To solve the differential equation, we employ the simple Euler forward scheme build on an 
+uniform time subdivision $(t^n)_{n\in\mathbb N_0}$ with constant time parameter $\Delta t$.
+At last we get
+$$
+\phi_i^{n+1}=\phi_i^{n}-\Delta t \sum_{j\in\nu(i)} \frac{|e_{ij}|}{|K_i|}\mathcal F_{ij} +f_i
+$$
+where $f_i$ stand for the mean value of the source term $f$ on cell $K_i$.
+
+To provide an explicit scheme, one has to define an expression for the flux. We adopt the traditional
+upwind flux, namely
+$$
+\mathcal F_{ij}= F(\phi_i^n, \phi_j^n, n_{ij}) = [V_{n_{ij}}]^{+}\phi_i^n + [V_{n_{ij}}]^{-}\phi_j^n 
+$$
+where $[\alpha]^+$ and $[\alpha]^-$ are the positive and negative part of any number $\alpha$ respectively.
+The scheme then turns
+$$ 
+\phi_i^{n+1} = \phi_i^n - \Delta{t} \sum_{j \in \nu(i)} {|e_{ij}| \over |K_i|} F(\phi_i^n, \phi_j^n, n_{ij}) 
+$$
+Note that for an edge $e_{i0}$ situated on the inflow boundary we substitute 
+$\phi^n_j$ with $\phi_d(t^n,M_{i0})$
+where $M_{i0}$ is the midpoint of the edge. On the other hand, for edges situated on the outflow interface
+$\partial \Omega \setminus \Gamma^-$, the value of $\phi^n_j$ is not used so no boundary condition
+are require for that specific situation.
+
+\subsection{The 1D discretization}
+Since we shall also deal with one-dimensional geometries, we propose a specific version when the domain
+is just a segment and $K_i=[x_{i-1/2},x_{i+1/2}]$ the cell of center $c_i$, with $i=1,...,I$ (see figure 
+\ref{mesh1D}).
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=2cm%,clip=true,viewport=80 0 360 400
+]{MeshNotation.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{mesh1D} \footnotesize The one-dimensional mesh: cells and interfaces.} 
+\end{figure}
+The velocity is reduce to component $u(x)$ and we introduce the finite volume scheme
+$$
+\phi_i^{n+1}=\phi_i^{n}-\frac{\Delta t}{\Delta x}\Big \{
+F(\phi^n_{i},\phi^n_{i+1})-F(\phi^n_{i-1},\phi^n_{i} \Big \}
+$$
+with $\Delta x$ the mesh parameter and the flux function at interface $x_{i+1/2}$ defined by
+$$
+F(\alpha,\beta)=[u(x_{i+1/2})]^+\alpha+[u(x_{i+1/2})]^-\beta.
+$$
+\subsection{The time scheme}
+In both cases, one time step is performed as an operator on the sequence $\Phi^n=(\phi^n_i)_i$
+then we define the operator $\Phi \to \mathcal H(\Phi)$ such that we rewrite the forward Euler step as
+$$
+\Phi^{n+1}=\mathcal H(\Phi^n,\Delta t).
+$$
+To provide a second order scheme in time, a classical method is the second-order Runge Kuta method
+where we evaluate then $\Phi^{n,1}=\mathcal H(\Phi^n,\Delta t)$, 
+$\Phi^{n,2}=\mathcal H(\Phi^{n,1},\Delta t)$ and take $\Phi^{n+1}=\frac{1}{2}(\Phi^{n,2}+\Phi^n)$.

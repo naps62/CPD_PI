@@ -1,0 +1,62 @@
+\subsection{MOOD method}
+\label{sec:420}
+
+Multi-dimensional Optimal Order Detection (or MOOD) method, operates on a \textit{a posteriori} approach, different to the \textit{a priori} approach as the MUSCL method. Assume that we know a solution
+$\Phi=(\phi^n_i)$ for a given time $t^n$, then we determine the reconstructed linear functions
+$\widehat \phi_i$ on each cell and associate the cell polynomial degree $d_i=1$. 
+
+A candidate solution $u^{\star}$ is then computed using the reconstructed values
+$$
+u_{ij}^n=\widehat \phi^n_i(M_{ij}),\quad u_{ji}^n=\widehat \phi^n_j(M_{ij}).
+$$ 
+Note that for the moment no limiting procedure has been applied and the candidate solution may not
+satisfy the Discrete Maximum Principle (DMP)(\ref{eq:MP_criterion}).
+
+The MOOD method consists in reducing the polynomial degree for the cell $i$ where the DMP condition
+is not fulfilled:
+
+$\bullet$  set $d_i=0$ if DMP is not satisfied.
+
+With this new configuration, we recompute the Edge Polynomial Degree $d_{ij}=\min(d_i,d_j)$
+for each interface $e_{ij}$ and re-evaluated the reconstructed value at interfaces where $d_{ij}=0$
+setting
+$$
+\phi_{ij}=\phi_i,\quad \phi_{ji}=\phi_j
+$$
+leading to the first-order scheme. To sum-up, if one denote by 
+$$
+\widehat \phi(x,d)=\left \{ 
+\begin{array}{ll}
+\widehat \phi_i(x) &\text{ if } d=1,\\
+\phi_i &\text{ if } d=0,
+\end{array}
+\right .
+$$
+the algorithm writes.
+\begin{enumerate}
+\item initialize $d_i=1$ and compute the polynomial reconstructions
+\item compute $d_{ij}==\min(d_i,d_j)$ and the reconstructed values
+$$
+\phi_{ij}^n=\widehat \phi^n_i(M_{ij},d_{ij}),\quad \phi_{ji}^n=\widehat \phi^n_j(M_{ij},d_{ij}).
+$$
+\item compute the candidate solution $\Phi^\star=(\phi^\star_i)$
+\item check the DMP detector
+$$ \min_{j \in \underline{v}(i)}(\phi_i^{n}, \phi^n_j) \leq \phi_i^{\star} \leq 
+\max_{j \in \underline{v}(i)}(\phi_i^{n}, \phi^n_j) 
+$$
+if not satisfy set $d_i=0$.
+\item {\bf If} all the cell satisfy the DMP test {\bf then} $\Phi^{n+1}=\Phi^\star$ {\bf else} goto to step 2.
+\end{enumerate} 
+We would like to mention several remark:\\
+(1) In fact, we only have to recompute the interface where the $d_i$ has been changed and 
+to update only the cells where the flux has been modified. It saves a lot of computational resources
+to just update the necessary cured cells.\\
+(2) It is proved that the iterative loop converge within a finite (and usually small) 
+number of iterations. After two or three cycles the candidate solution is the good one.\\
+(3) The procedure is adapted to the one-dimensional case substituting $d_{ij}$ with
+ $d_{i-1/2}=\min(d_i,d_{i-1})$ and $d_{i+1/2}=\min(d_i,d_{i+1})$.
+
+
+The initial steps of the MOOD implementation are equivalent to the previous version, since they are independent of the limitation strategy. However, the philosophy of both approaches is different. While MUSCL, being an \textit{a priori} method, attempts to predict errors and add a limiter to the polynomial reconstruction, preventing them from happening, MOOD lets those errors happen, and then looks for them, rebuilding the reconstruction for the problematic points.
+
+From an implementation point of view, this is also a very different strategy, since it involves an inner loop to iterate over the candidate solution, until no more errors are detected. Also, since the problematic points can, and usually will be only a small percentage of the entire domain, it might become more difficult to achieve an efficient parallelization strategy for this method, when compared to the straightforward approach on the previous method.

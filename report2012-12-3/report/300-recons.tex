@@ -1,0 +1,49 @@
+\section{Polynomial Reconstruction}
+\label{sec:300}
+Polynomial reconstruction is an important building-block to achieve high-order accuracy. We just present the situation for a one-degree reconstruction for the sake of simplicity. Let us consider
+a generic cell $K_i$, assume that me known an approximation of the mean values $\phi_i$ and
+$\phi_j$, $j\in\nu(i)$. We seek a linear function of type
+$$ 
+\widehat{\phi}_i(X) = \phi_i + \sigma(B_iX)=
+\phi_i + \left( \begin{array}{c}a_i \\ b_i \end{array}\right) (B_iX)
+$$
+where $B_i$ stand for the centroid of cell $K_i$. To fix vector $\sigma_i=(a_i,b_i)$ 
+we introduce the functional 
+$$
+E(a_i,b_i) = \sum_{j \in \underline{v}(i)} [\widehat{\phi}_i(B_j) - \phi_j]^2 
+$$
+and we state that the coefficients $\widehat a_i,\widehat b_i$ of vector $\widehat \sigma_i$ 
+are those which corresponds to the minimum of 
+functional $E(a_i,b_i)$.
+This provide a least square problem we cast in the matricial form
+\begin{eqnarray*}
+& &\sum_{j\in\nu(i)} \left [\begin{array}{cc}
+(B_iB_j)^2_x &  (B_iB_j)_x(B_iB_j)_y \\
+(B_iB_j)_x(B_iB_j)_y &\ (B_iB_j)^2_y 
+\end{array}\right ]
+\left( \begin{array}{c}
+\widehat a_i \\ \widehat b_i 
+\end{array}\right)\\
+& &=
+\sum_{j\in\nu(i)} \left( \begin{array}{c}
+(\phi_j-\phi_i)(B_iB_j)_x\\
+ (\phi_j-\phi_i)(B_iB_j)_y
+\end{array}\right).
+\end{eqnarray*}
+Note that the approximation is exact when  function $\phi$ is linear.
+
+For the one-dimensional case, we slightly modify the reconstruction process introducing several 
+type of slope. Since we only deal with periodic condition the fictitious cell $I+1$ corresponds
+to cell $1$ while the fictitious cell $0$ corresponds to cell $I$. Assume that mean values
+$\phi_i$, $i=1,...,N$ are known, the we consider following the slopes
+$$
+\widehat \sigma_{i+1/2}=\frac{\phi_{i+1}-\phi_i}{\Delta x}, \quad 
+\widehat \sigma_i=\frac{\phi_{i+1}-\phi_{i-1}}{2\Delta x}
+$$
+Now for a given slope $\sigma_i$, we introduce the local linear reconstruction as
+$$
+\widehat \phi_i(x)=\phi_i+\sigma_i(x-c_i)
+$$
+where the slope $\sigma_i$ will be determine in function of  $\widehat \sigma_{i-1/2}$,
+$\widehat \sigma_{i}$ and $\widehat \sigma_{i+1/2}$.
+Note that the reconstruction is exact when $\phi$ is a linear function.

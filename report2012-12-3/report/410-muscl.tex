@@ -1,0 +1,61 @@
+\subsection{MUSCL method}
+\label{sec:410}
+The MUSCL method is based on a local limitation of the slope to provide stability.
+Actually, maximum principle is the main criterion and write
+\begin{equation}
+\min_{j\in \nu(i)}(\phi^n_i,\phi_j)\leq u^{n+1}_i \leq \max_{j\in \nu(i)}(\phi^n_i,\phi_j).
+\label{eq:MP_criterion}
+\end{equation}
+To achieve such a property, we multiply the reconstructed slope $\widehat \sigma_i$ by a
+coefficient $\chi_i\in[0,1]$ such that with the new slope $\sigma_i=\chi_i\widehat \sigma_i$
+the update solution $\phi^{n+1}_i$ satisfies the restriction (\ref{eq:MP_criterion}).\\
+There exists a lot of method to determine the limiter but we propose the one introduce
+by Barth and Jepherson. To this end, let denote 
+$$
+\widehat \phi_{ij}=\phi_i+\widehat \sigma_i B_iM_{ij}
+$$
+where $M_{ij}$ is the midpoint of edge $e_{ij}$. In a first step, 
+for any cell $K_i$ and $j\in\nu(i)$, we evaluate the quantity
+$$
+\chi_{ij} = \left\{\begin{array}{l l}
+\frac{\max(\phi_j,\phi_i)-\phi_i}{\phi_{ij}-\phi_i} & \textrm{ if } \phi_{ij}> \max(\phi_j,\phi_i) \\
+\frac{\min(\phi_j,\phi_i)-\phi_i}{\phi_{ij}-\phi_i}  &\textrm{ if } \phi_{ij} <\min(\phi_j,\phi_i) \\
+1 & \text{otherwise}
+\end{array}\right.
+$$
+Then we define 
+$$
+\chi_i=\min_{j\in\nu(i)} \chi_{ij}
+$$
+and the reconstructed values by
+$$
+u_{ij} = u_i + \chi_i\widehat \sigma_i  B_i M_{ij}
+$$
+
+
+For the one-dimensional situation, we use the limiter operator such as the minmod function
+setting
+$$
+\chi_i=(\phi_{i+1}-\phi_{i})\text{minmod}\left (\frac{\phi_{i}-\phi_{i-1}}{\phi_{i+1}-\phi_{i}}\right ) 
+$$
+with minmod$(\alpha)=0$ if $\alpha<0$;  minmod$(\alpha)=1$ if $\alpha>1$ and minmod$(\alpha)=\alpha$
+otherwise.
+We then compute the reconstructed values with
+$$
+\phi_{i-1/2}^{n,+}=\phi_i^n-\chi_i^n \widehat \sigma_i^n \frac{\Delta x}{2},\quad
+\phi_{i+1/2}^{n,-}=\phi_i^n+\chi_i^n \widehat \sigma_i^n \frac{\Delta x}{2}
+$$
+The algorithm for a one forward Euler step is
+\begin{enumerate}
+\item mean values $(\phi^n_i)$ are known.
+\item compute the slope $\sigma_i$
+\item compute the limiter $\chi_i$
+\item compute the reconstructed values
+\item compute the flux
+\item time update 
+\end{enumerate}
+One has to perform two time the procedure when using the RK2 technique to provide
+second-order in time.\\
+{\it Remark.} The scheme is {\it a priori} because the limiting procedure has been performed before
+the update.  
+ 

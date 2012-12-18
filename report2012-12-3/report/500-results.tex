@@ -1,0 +1,75 @@
+\section{Numerical Results}
+\label{sec:500}
+We tested the two methods in the context of the one-dimnesional geometry where we deal with two representative situations:
+the transport of a very smooth function  and a discontinuous function. We focus the analyse on two particular points:
+the accuracy of the methods for smooth solution and the stability of the methods for rough solution.
+We assume that the velocity is $u=1$ and prescribe periodic boundary condition. The mesh is a uniform $I+1$ points
+subdivision with space parameter $\Delta x=\frac{1}{I}$. Time step $\Delta t$ is controled by the CFL condition and we 
+shall set $\Delta t=0.6 \Delta x$.
+In the sequel, $S1$ is the first-order scheme while $S2MUCL$ and $S2MOOM$ are the second-order scheme with the MUSCL and 
+the MOOD limiting strategies respectively.
+\subsection{The smooth case}
+The initial solution is the simple sine function $\phi^0(x)=\sin(2\pi x)$ we transport at velocity $u=1$.
+We plot in figure (\ref{fig_sine}) the exact solution and the approximations using he the MUSCL and the MOOD method
+after a complete revolution. Clearly, the MOOD method provides the best approximation and manage to reduce
+the diffusiove effect of the FV scheme. We report in figure (\ref{fig_conv1}-\ref{fig_convinfty}) the $L^1$ and $L^\infty$
+convergence curve and we get an effective second-order convergence. We remark that the MOOD technique gives a smaller
+error but the convergence rates are indentical in the two cases.
+We do not provide the table convergence data since the curves are really straighforward. 
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=5cm, clip=true,viewport=80 200 600 580
+]{figure_sin.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{fig_sine} \footnotesize Numerical solutions at $t=1.0$ s for the sine function: 
+exact solution in red, muscl method in green, mood method in blue.}
+\end{figure}
+
+
+\begin{figure}[t]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=4cm, clip=true,viewport=80 200 600 580
+]{curve1.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{fig_conv1}  \footnotesize $L^1$ error convergen using the log-log scale: muscl method in green, mood method in blue.
+We observe an effective second-order convergence.}
+\end{figure}
+
+\begin{figure}[t]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=4cm, clip=true,viewport=80 200 600 580
+]{curve0.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{fig_convinfty}  \footnotesize $L^\infty$ error convergen using the log-log scale: 
+muscl method in green, mood method in blue.
+We observe an effective second-order convergence.}
+\end{figure}
+
+\subsection{The rough case}
+The initial solution is the Heaviside function centered at $1/2$ given by $\phi^0(x)=H(x-1/2)$ 
+we transport at velocity $u=1$.
+We plot in figure (\ref{fig_heavi}) the exact solution and the approximations using he the MUSCL and the MOOD method
+after a complete revolution. One more time, the MOOD method provides the best approximation and manage to reduce
+the diffusiove effect of the FV scheme in the vicinity of the discontinuity.
+We do not provide any convergence curve since we deal with a discontinuous function. Nevertheless, we have check a 
+half-order convergence in norm $L^1$ which characterize the convergence rate for a discontinuous solution.
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=7cm,height=5cm, clip=true,viewport=80 200 600 580
+]{figure_heavi.pdf}
+\end{tabular}
+\end{center}
+\caption{\label{fig_heavi} Numerical solutions at $t=1.0$ s for the step function: 
+exact solution in red, muscl method in green, mood method in blue.}
+\end{figure}
+
+
+
+

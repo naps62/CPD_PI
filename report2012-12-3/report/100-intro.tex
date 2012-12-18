@@ -1,0 +1,23 @@
+\section{Introduction}
+\label{sec:100}
+Finite volume method is a powerful technique to compute numerical approximations for partial differential equations
+such as hyperbolic systems or scalar problems. A popular and important example is the transport equation 
+where a wide range of applications exist, for instance, pollution advection or neutronic transport.
+Unfortunately, the original finite volume method suffers of an important defect since it produces a large amount 
+of numerical diffusion and the numerical approximations are at most first-order accurate. 
+To prevent such an over-diffusive effect, extensions of the method have been proposed since the seventies, 
+based, in one hand, on a local linear reconstruction to improve the accuracy, and on the other hand,
+equipped with a nonlinear limiting procedure to guarantee the method stability. Recently, Clain and al. \cite{CLD}
+proposed a new limiting technique based on a {\it a posteriori} analysis which allows a simpler implementation and 
+ensures the physical admissibility of the approximation.
+The goal of the present work is first to elaborate and implement the new numerical technique for the one-dimensional
+situation  considering the simple transport problem. Then a comparison with the traditional MUSCL will be carried
+out. In a second stage we shall consider an implementation of a first-order finite volume method and develop
+a GPU version based on the CUDA library. Performance of the new implementation will also be studied.
+
+
+The report is organized as follows. \Cref{sec:200} explains the first order method initially used. 
+\Cref{sec:300} details how the linear reconstruction is performed on the second order methods, 
+which are described in \cref{sec:400}. Numerical and efficiency results are presented in \cref{sec:500} 
+and finally \cref{sec:900} gathers some conclusions obtained from the work.
+

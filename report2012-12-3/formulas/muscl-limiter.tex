@@ -1,0 +1,22 @@
+\todosec{Esta equação tem que ser actualizada:}
+
+$$
+\Phi_i = \left\{
+	\begin{array}{l l}
+		0, & \quad (u_{ij}^* u_i) (u_j - u_i) \le 0 \\
+		min(1, \frac{u_j - u_i}{u_{ij}^* - u_i}), & \quad \text{otherwise}
+	\end{array}\right.
+$$
+
+
+%	double ij_minus_i	= u_ij	- u_i;
+%	double j_minus_ji   = u_j   - u_ji;
+%	double j_minus_i	= u_j	- u_i;
+	
+%	if (ij_minus_i * j_minus_i <= 0 || j_minus_ji * j_minus_i <= 0) {
+%		return 0;
+%	} else {
+%		//cout << "_min(1, " << j_minus_i << " / " << ij_minus_i << ")" << endl;
+%		//cout << (ij_minus_i) << " " << j_minus_i << " " << ij_minus_i / j_minus_i <<  endl;
+%		return _min(1, _min(ij_minus_i / j_minus_i, j_minus_ji / j_minus_i));
+%	}

@@ -1,0 +1,30 @@
+\section{Second-order schemes}
+\label{sec:400}
+
+Second-order scheme are achieved using the reconstruction process equipped with a limiting procedure
+to ensure the stability of the solution. For two-dimensional domain, the generic scheme writes
+$$
+\phi_i^{n+1} = \phi_i^n - \Delta{t} \sum_{j \in \nu(i)} {|e_{ij}| \over |K_i|} 
+F(\phi_{ij}^n, \phi_{ji}^n, n_{ij}) 
+$$
+where $\phi_{ij}^n$ and $\phi_{ji}^n$ represent more accurate representation of $\phi$ on both
+side of the interface $e_{ij}$.\\
+Unfortunately, the choice $(a_i,b_i)=(\widehat a_i,\widehat b_i)$ is only correct when dealing
+with smooth solution but in the vicinity of a discontinuity, the Gibbs phenomena occurs
+and generate spurious solutions. To this end a nonlinear procedure is mandatory to guarantee
+the stability of the method. 
+Two different strategies can be considered : a {\it a priori} strategy (MUSCL method)
+where the limiting procedure is performed before the the update; or a {\it a posteriori} strategy 
+(MOOD method) where a candidate solution is computed and modified to provide the stability.
+
+For one-dimensional problem, the scheme is very similar and writes
+$$
+\phi_i^{n+1}=\phi_i^{n}-\frac{\Delta t}{\Delta x}\Big \{
+F(\phi^{n,-}_{i+1/2},\phi^{n,+}_{i+1/2})-F(\phi^{n,-}_{i-1/2},\phi^{n,+}_{i-1/2} \Big \}
+$$
+where $\phi^{n,-}_{i+1/2}$ and $\phi^{n,+}_{i+1/2}$ represent more accurate approximations
+on both side of interface $x_{i+1/2}$.
+As mention in the previous section, high-order in time is guarantee with the RK2 scheme both for the
+one- and the two-dimensional case.
+\input{report/410-muscl}
+\input{report/420-mood}
